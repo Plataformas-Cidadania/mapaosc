@@ -23,5 +23,5 @@ public class Map implements EntryPoint {
 		menu.init();
 		search.init();
 	}
-// TESTANDO
+
 }
