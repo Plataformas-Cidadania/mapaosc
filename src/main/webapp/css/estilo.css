@@ -3074,4 +3074,6 @@ div.infographicContainer{
 	padding: 30px 35px 10px 0px;
 }
 
-
+.institucional .wrapper ul li {
+	line-height: 2em;
+}
