@@ -3077,3 +3077,48 @@ div.infographicContainer{
 .institucional .wrapper ul li {
 	line-height: 2em;
 }
+
+#mapa_navegacao span a {
+	display:block;
+}
+
+#mapa_navegacao h4 a {
+	float: right;
+}
+
+#mapa_navegacao h4 span a {
+	float: none;
+}
+
+#mapa_navegacao .tabbody em {
+	background-image: none !important;
+	-moz-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -ms-transform: rotate(0deg); 
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    float: right;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    /*border-color: transparent #1F3D93 transparent transparent;*/
+    border-color: transparent #000 transparent transparent;
+    width: 15px;
+    height: 20px;
+    padding: 0px;
+    margin: 4px;
+}
+
+#mapa_navegacao .tabbody a:hover em {
+	border-color: transparent #1F3D93 transparent transparent;
+}
+
+#mapa_navegacao .tabbody em.dados_abertos {
+    -ms-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
