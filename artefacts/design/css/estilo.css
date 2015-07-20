@@ -696,7 +696,7 @@ border-radius:7px;
 position:absolute;
 left:500px;
 top:100px;
-width:350px;
+width:500px;
 min-height:200px;
 }
 
@@ -710,6 +710,8 @@ font-size:1.2em;
 text-transform:uppercase;
 width:100%;
 cursor:default;
+max-width: 500px;
+padding-right: 100px !important;
 }
 
 .mapa_organizacao h3 {
@@ -1968,7 +1970,7 @@ margin-top:10px;
 
 #mapa.organizacao div.projetos hr {
 border:1px dashed #5353A0;
-margin:20px 10px;
+margin:5px 5px;
 }
 
 #mapa.organizacao div.projetos > div.projeto {
@@ -1976,23 +1978,15 @@ margin:5px;
 }
 
 #mapa.organizacao div.projetos div div {
-background-color:#FFF;
-border-radius:5px 5px 0 0;
-}
-
-#mapa.organizacao div.projetos div div div {
-float:left;
-width:100%;
-vertical-align:top;
-padding-bottom:10px;
+    background-color:#FFF;
 }
 
 #mapa.organizacao div.projetos div.col1,#mapa.organizacao div.projetos div.col2 {
-width:15%;
+width:18%;
 }
 
 #mapa.organizacao div.projetos div.col3 {
-width:18%;
+width:12%;
 }
 
 #mapa.organizacao div.projetos div.col4,#mapa.organizacao div.projetos div.col5 {
@@ -2430,4 +2424,143 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 #info03_1 li:first-child {
     background-color: #888888;
     width: 150px;
+}
+
+.collapsable {
+}
+
+.collapsed .collapse-hidden {
+    height:0px !important;
+    margin:0px;
+    padding:0px;
+}
+
+.collapse-hidden {
+    overflow: hidden;
+    height: 100%;
+    -webkit-transition: height 0.6s; 
+    -moz-transition: height 0.6s; 
+    -ms-transition: height 0.6s; 
+    transition: height 0.6s;
+}
+
+.collapse-button {
+    width: 30px;
+    height: 35px;
+    float:right;
+    margin: 0px !important;
+    padding-top: 7px;
+    padding-right: 10px;
+}
+
+.collapse-button div {
+    -moz-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); /* Safari */
+    transform: rotate(-90deg);
+    float: right;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #1F3D93 transparent transparent;
+
+}  
+
+.collapse-button div:hover {
+    background-color: transparent !important;
+}
+
+.collapse-button.negativo div {
+    border-color: transparent white transparent transparent;
+}
+
+.collapsed .collapse-button div {
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg); /* Safari */
+    transform: rotate(0deg);
+}
+
+.mapa_organizacao.clearfix h5 {
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.mapa_organizacao.clearfix div > button#org_detalhes, .mapa_organizacao.clearfix div > button#org_recomendar {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.mapa_organizacao .coluna2 {
+    border: none;
+}
+
+.mapa_organizacao .coluna1 {
+    border-right: 1px solid #aaa;
+}
+
+.linha div {
+    float: left;
+    padding-bottom: 10px;
+}
+
+.linha p {
+    text-align: left;
+    padding: 5px;   
+}
+
+.col1_2 {
+    width: 50%;
+}
+
+.col1_3 {
+    width: 33%;
+}
+
+.col1_4 {
+    width: 25%;
+}
+
+.col1_5 {
+    width: 20%;
+}
+
+.col1_6 {
+    width: 16.66%;
+}
+
+.projeto_header {
+    padding-top: 1px;
+    margin-bottom: 0px;
+    border-radius: 5px 5px 0 0;
+}
+
+.projeto_header span {
+    line-height: 20px;
+}
+
+.projeto_body {
+    margin-top: 0px;
+    padding-bottom: 3px;
+    border-radius:0px 0px 5px 5px;
+}
+
+.clear_both {
+    clear: both;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.projeto_header .status {
+    float: right;
+}
+
+.adicionar {
+    float: right;
+    margin-top: 3px;
+    margin-right: 4px;
 }

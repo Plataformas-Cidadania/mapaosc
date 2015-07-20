@@ -20,6 +20,12 @@
 			return false;
 		});
 
+		$('.collapse-click').click(function() 
+			{ 
+				$(this).closest('.collapsable').toggleClass('collapsed') 
+			}
+		);
+
 		$('.organizacao span').text($('.organizacao span').text().substring(0,90)+'...');
 
 		/* Tabs no menu expansivel */
