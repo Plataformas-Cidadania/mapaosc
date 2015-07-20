@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Portal das Organizações da Sociedade Civil - Página inicial</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+	<![endif]-->
+	
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">document.documentElement.className += " js";</script>
+
+
+</head>
+
+<body>
+
+	
+
+	<div id="main">
+		<div id="barra-brasil">
+		<div class="barra">
+			<ul>
+				<li><a href="http://www.acessoainformacao.gov.br" class="ai" title="Acesso à informação">Acesso à informação</a></li>
+				<li><a href="http://www.brasil.gov.br" class="brasilgov" title="Portal de Estado do Brasil">Portal de Estado do Brasil</a></li>
+			</ul>
+		</div>
+	</div>
+
+		<div id="topo">
+			<div id="topo_acessibilidade">
+				<ul id="nav1">
+					<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+					<li>Ir para o <a href="#mapa_expandir" accesskey="2">Menu 2</a></li>					
+					<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+				</ul>
+				<ul id="nav2">
+					<li><a href="#">Acessibilidade</a></li>
+					<li><a href="#rodape">Mapa do site</a></li>
+					<li id="contraste">Contraste
+						<a id="contraste_normal" href="#"><img src="imagens/09_contraste1.png" alt="Contraste normal" width="13" height="14" /></a>
+						<a id="alto_contraste" href="#"><img src="imagens/10_contraste2.png" alt="Alto contraste" width="13" height="14" /></a></li>
+						<li>Tamanho do texto
+							<a href="#" title="Aumentar fonte" class="inc-font">A+</a>
+							<a href="#" title="Fonte padrão" class="res-font">A</a>
+							<a href="#" title="Diminuir fonte" class="dec-font">A-</a></li>
+						</ul>
+					</div>
+
+					<div id="topo_links">
+						<a href="sobre.html" id="sobre">Sobre o portal</a>
+						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
+					</div>
+
+					<div id="topo_acesso" class="deslogado">
+						<form name="Acesso">
+							<label for="email" class="esconder">Email</label>
+							<input type="text" name="email" id="email" placeholder="Email"  />
+							<label for="senha" class="esconder">Senha</label>
+							<input type="password" name="senha" id="senha" placeholder="Senha"  />
+							<div>
+								<a href="esqueci_senha.html" class="box_frame">Esqueci a senha</a>
+								<a href="cadastro.html">Registrar-se</a>  
+							</div>
+							<input type="submit" name="entrar" id="entrar" value="Entrar" onclick="$('#topo_acesso.deslogado').hide(); $('#topo_acesso.logado').show();" />  <!--- JS adicionado para simular o acesso. Remover -->
+						</form>
+					</div>
+
+					<div id="topo_acesso" class="logado">
+						<div class="clearfix">
+							<ul>
+								<li><h2>Carlos Silva</h2></li>
+								<li><a href="#">Configurações</a></li>
+							</ul>
+
+							<a href="#"><img src="imagens/usuario.jpg" alt="Sua imagem de perfil" /></a>
+						</div>
+						
+						<input type="submit" name="sair" id="sair" value="Sair" onclick="$('#topo_acesso.logado').hide(); $('#topo_acesso.deslogado').show();" /> <!--- JS adicionado para simular o acesso. Remover -->
+					</div>
+
+					<a href="index.html">
+						<img class="normal" id="logo" src="imagens/logo.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial"  title="Ir para página inicial" />
+						<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+					</a>
+				</div>
+
+		<div id="mapa" class="infograficos">
+			<h1><em>&nbsp;</em> Infográficos</h1>
+
+			<div id="mapa_expandir">
+					<button class="tip_menu" type="button" name="Expandir menu" id="expandir">
+						<img id="fechar_menu" src="imagens/15_reduzir.png" alt="Fechar menu" />
+						<img id="expandir_menu" src="imagens/15_expandir.png" alt="Expandir menu" />
+					</button>
+
+
+					<div class="tabs infograficos clearfix">
+						<ul class="clearfix tabs-list tabamount2">
+							<li id="accessibletabsnavigation0-0" class="first">
+								<a href="index.html" id="tab_mapa">Mapa</a>
+							</li>
+							<li id="accessibletabsnavigation0-1" class="last current">
+								<a href="#" id="tab_indicadores"><span class="current-info">aba atual: </span>Infográficos</a>
+							</li>
+						</ul>
+						<div class="content">
+					        <h2 id="accessibletabscontent0-0" class="tabhead" tabindex="-1">Mapa</h2>
+					        <div id="mapa_navegacao" style="height: 280px;">
+						        <div id="regiao" class="tabbody" style="display: none;">
+						        	
+								</div>
+
+								<h2 id="accessibletabscontent0-1" class="tabhead" tabindex="-1">Infográficos</h2>
+						        <div class="tabbody infograficos" style="display: block;">
+						        	Selecione o infográfico.
+						            	<h4><a href="info01.html">OSCs em Números</a></h4>
+						            	<h4><a href="info02.html">OSCs e os Recursos</a></h4>
+						            	<h4><a href="info03.html">OSCs Natureza jurídica/Faixas de vínculos</a></h4>
+						        </div> 
+
+						        
+					    	</div>
+				    	</div>
+					</div>
+
+
+			</div>
+
+			<div id="infograficos">
+				<h2>OSCs e os recursos</h2>
+
+				<div>
+					<div>
+						<h3>Cerca de <strong>11 mil</strong> OSCs</h3>
+						<img src="infograficos/recursos/infografico_7.png" width="332" height="292" />
+					</div>
+
+					<div>
+						<h3>OSCs por faixas de vínculos formais</h3>
+						<img src="infograficos/recursos/infografico_8.svg" width="332" height="292" />
+					</div>
+				</div>
+
+				<div>
+					<div>
+						<h3>Títulos e certificações</h3>
+						<img src="infograficos/recursos/infografico_5.svg" width="332" height="292" />
+					</div>
+
+					<div>
+						<h3>Instituições por <strong>Natureza Jurídica</strong> (%)</h3>
+
+						<img src="infograficos/recursos/infografico_6.svg" width="332" height="292" />
+					</div>
+				</div>
+
+				<div>
+					<div>
+						<h3>SICONV</h3>
+						<img src="infograficos/recursos/infografico_3.svg" width="332" height="292" />
+					</div>
+
+					<div>
+						<h3>Leis de incentivo e FINEP</h3>
+						<img src="infograficos/recursos/infografico_4.svg" width="332" height="291" />
+					</div>
+				</div>
+
+				
+
+    		</div>
+
+
+		</div>
+
+		<div id="rodape" class="clearfix">
+			<div class="clearfix">
+				<div class="celula01">
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Portal das Organizações da Sociedade Civil &copy; 2013</h2>
+							<a href="beta.html" class="beta">Versão BETA?</a>
+						</div>
+				<div class="celula02">
+					<span>Apoio</span>
+					<img class="normal" src="imagens/logo_fgv.png" alt="FGV Projetos" />
+					<img class="contraste" src="imagens/contraste/logo_fgv.png" alt="FGV Projetos" />
+				</div>
+				<div class="celula03">
+					<span>Realização</span>
+					<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+					<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+				</div>
+			</div>
+		</div>
+
+		<div id="footer" class="clearfix">
+			<div id="doormat-container" class="columns-4 clearfix">
+		  <div class="doormatColumn column-0">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">O Portal</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">OSCs em números</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Dúvidas Frequentes</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">MROSC</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Análise sobre Parcerias com a União</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Editais Públicos</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Capacitações</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Biblioteca Virtual</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Legislação</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Links relacionados</a>
+		        
+		      </dd>
+		      
+		    </dl></div>
+		  
+		  <div class="doormatColumn column-1">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">Contato</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Lorem Ipsum</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Dolor sit amet</a>
+		        
+		      </dd>
+		      
+		    </dl></div>
+		  <div class="doormatColumn column-2">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">Redes sociais</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Facebook</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Twitter</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">YouTube</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Flickr</a>
+		        
+		      </dd>
+		    </dl></div>
+
+		    <div class="doormatColumn column-3">
+		    	<dl class="doormatSection">
+		    		<dt class="doormatSectionHeader">Mapa do site</dt>
+		    		<dd></dd> 
+		    	</dl>
+		    </div>
+
+		    <div class="doormatColumn column-4">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">RSS</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">O que é RSS?</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Assine nosso RSS</a>
+		        
+		      </dd>
+		    </dl></div>
+		
+		</div>
+
+		
+		    
+		    <div class="footer-logos">
+		        <div>
+		            <a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+		            <a href="http://www.brasil.gov.br/" class="logo-brasil"><img src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+		        </div>
+		    </div>
+		</div>
+
+	</div>
+
+
+	
+	<script type="text/javascript" src="js/acessibilidade.js"></script>
+	<script type="text/javascript" src="js/jquery.tabs.js"></script>
+	<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+	<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+
+	<script>
+		$(document).scroll(function() {
+		    checkOffset();
+		});
+
+		function checkOffset() {
+		    if($('#mapa_expandir').offset().top + $('#mapa_expandir').height() >= $('#rodape').offset().top - 10)
+		        $('#mapa_expandir').css('position', 'absolute');
+		    if($(document).scrollTop() + window.innerHeight < $('#rodape').offset().top)
+		        $('#mapa_expandir').css('position', 'fixed'); // restore when you scroll up
+		}
+	</script>
+
+
+
+</body>
+
+</html>

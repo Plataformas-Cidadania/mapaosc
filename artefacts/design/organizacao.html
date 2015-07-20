@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Portal das Organizações da Sociedade Civil - NOME DA ORGANIZAÇÃO</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+	<![endif]-->
+	
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">document.documentElement.className += " js";</script>
+
+
+</head>
+
+<body>
+
+	<div id="main">
+		<div id="barra-brasil">
+			<div class="barra">
+				<ul>
+					<li><a href="http://www.acessoainformacao.gov.br" class="ai" title="Acesso à informação">Acesso à informação</a></li>
+					<li><a href="http://www.brasil.gov.br" class="brasilgov" title="Portal de Estado do Brasil">Portal de Estado do Brasil</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="topo">
+			<div id="topo_acessibilidade">
+				<ul id="nav1">
+					<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+					<li>Ir para o <a href="#topo_links" accesskey="2">Menu 2</a></li>					
+					<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+				</ul>
+				<ul id="nav2">
+					<li><a href="#">Acessibilidade</a></li>
+					<li><a href="#">Mapa do site</a></li>
+					<li id="contraste">Contraste
+						<a id="contraste_normal" href="#"><img src="imagens/09_contraste1.png" alt="Contraste normal" width="13" height="14" /></a>
+						<a id="alto_contraste" href="#"><img src="imagens/10_contraste2.png" alt="Alto contraste" width="13" height="14" /></a></li>
+						<li>Tamanho do texto
+							<a href="#" title="Aumentar fonte" class="inc-font">A+</a>
+							<a href="#" title="Fonte padrão" class="res-font">A</a>
+							<a href="#" title="Diminuir fonte" class="dec-font">A-</a></li>
+						</ul>
+					</div>
+
+					<div id="topo_links">
+						<a href="sobre.html" id="sobre">Sobre o portal</a>
+						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
+					</div>
+
+					<div id="topo_acesso" class="deslogado">
+						<form name="Acesso">
+							<label for="email" class="esconder">Email</label>
+							<input type="text" name="email" id="email" placeholder="Email"  />
+							<label for="senha" class="esconder">Senha</label>
+							<input type="password" name="senha" id="senha" placeholder="Senha"  />
+							<div>
+								<a href="esqueci_senha.html" class="box_frame">Esqueci a senha</a>
+								<a href="cadastro.html">Registrar-se</a>  
+							</div>
+							<input type="submit" name="entrar" id="entrar" value="Entrar" onclick="$('#topo_acesso.deslogado').hide(); $('#topo_acesso.logado').show();" />  <!--- JS adicionado para simular o acesso. Remover -->
+						</form>
+					</div>
+
+					<div id="topo_acesso" class="logado">
+						<div class="clearfix">
+							<ul>
+								<li><h2>Carlos Silva</h2></li>
+								<li><a href="#">Configurações</a></li>
+							</ul>
+
+							<a href="#"><img src="imagens/usuario.jpg" alt="Sua imagem de perfil" /></a>
+						</div>
+						
+						<input type="submit" name="sair" id="sair" value="Sair" onclick="$('#topo_acesso.logado').hide(); $('#topo_acesso.deslogado').show();" /> <!--- JS adicionado para simular o acesso. Remover -->
+					</div>
+
+					<a href="index.html">
+						<img class="normal" id="logo" src="imagens/logo.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial"  title="Ir para página inicial" />
+						<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+					</a>
+				</div>
+
+				<div id="mapa" class="organizacao formulario">
+
+					<form id="entidade_edicao" name="entidade_edicao" method="post">
+
+						<div class="titulo">
+							<h1><em>&nbsp;</em> Fundação São Paulo</h1>
+							<div class="botoes"><a href="exportar.html" class="exportar box_exportar">Exportar</a></div>
+						</div>
+
+						<div class="container">
+
+							<div class="social">
+								<div class="imagem">
+									<button type="button" class="carregar">Carregar</button>
+									<img src="imagens/org_imagem.jpg" alt="Fundação São Paulo" width="160" height="160" />
+								</div>
+
+								<div class="redes">
+									<button type="button" id="b-google" name="redes" value="false" title="Google" class="tooltip"></button>
+									<button type="button" id="b-facebook" name="redes" value="false" title="Facebook" class="tooltip"></button>
+									<button type="button" id="b-linkedin" name="redes" value="false" title="LinkedIn" class="tooltip"></button>
+									<button type="button" id="b-twitter" name="redes" value="false" title="Twitter" class="tooltip"></button>
+								</div>
+
+								<a href="como_participar.html" class="participar box">Como participar</a>
+
+								<div class="recomendacoes">
+									<span title="1200 recomendações" class="tooltip">1200</span>
+								</div>
+
+								<button type="button" class="recomendar">Recomendar</button>
+
+								<div class="classificacao">
+									<h3>Classificação</h3>
+									<ul class="dados">
+										<li class="fasfil"><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Educação e pesquisa</a></li>
+										<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Faculdade</a></li>
+									</ul>
+
+									<div>
+										<input type="text" name="tag" id="tag" placeholder="Adicionar nova tag..." />
+										<button type="button" class="adicionar">Adicionar</button>
+									</div>
+									
+								</div>
+
+								<div class="tags">
+									<img src="imagens/tags.jpg" alt="Nuvem de tags" />
+								</div>
+
+							</div>
+
+							
+
+							<div class="tabela">
+								<div class="dados">
+									<h2>Dados gerais</h2>
+									<div class="gerais">
+										
+										<fieldset>
+											<p>
+												<strong>CNPJ:</strong>
+
+												<input type="text" name="ecnpj" id="ecnpj" value="86.795.176/0001-00" />
+
+												
+											</p>
+											<p>
+												<strong>Endereço:</strong>
+												<input type="text" name="eendereco" id="eendereco" value="Abcd" />
+											</p>
+											<p>
+												<strong>Localização:</strong>
+												<span>Lat</span>
+												<input class="local" type="text" name="elat" id="elat" value="132323" />
+												<span>Long</span>
+												<input class="local" type="text" name="elong" id="elong" value="2444" />
+											</p>
+											<p>
+												<strong>Atividade econômica:</strong>
+												<input type="text" name="eatividade" id="eatividade" value="Abcd" />
+											</p>
+
+											<p>
+												<strong>Descrição:</strong>
+												<textarea name="edesc" id="edesc">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
+											</p>
+											<p>
+												<strong>Fundada em:</strong>
+												<input type="text" name="efundacao" id="efundacao" value="1945" />
+											</p>
+
+											<p>
+												<strong>Site:</strong>
+												<input type="text" name="esite" id="esite" value="www" />
+											</p>
+
+											<p>
+												<strong>E-mail:</strong>
+												<input type="text" name="eemail_org" id="eemail_org" value="fundacao@gmail.com" />
+											</p>
+
+											<p>
+												<strong>Público-alvo:</strong>
+												<input type="text" name="epublico" id="epublico" value="Lorem" />
+											</p>
+											
+											<div>
+												<strong>Participação social:</strong>
+												<ul class="participacao">
+													<li>
+														<select>
+															<option value="CONJUVE" selected>CONJUVE</option>
+															<option value="CONAJE">CONAJE</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+													</li>
+													<li>
+														<select>
+															<option value="CONJUVE">CONJUVE</option>
+															<option value="CONAJE" selected>CONAJE</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+													</li>
+													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
+												</ul>
+											</div>
+											
+											<div>
+												<strong>Fonte de recursos:</strong>
+												<ul class="recursos">
+													<li>
+														<select name="erecursos">
+															<option value="privada" selected>Privada</option>
+															<option value="doacao">Doação</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+													</li>
+													<li>
+														<select name="erecursos">
+															<option value="privada">Privada</option>
+															<option value="doacao" selected>Doação</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+													</li>
+													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
+												</ul>
+											</div>
+										</fieldset>
+
+									</div>
+									<h2>Relações de trabalho</h2>
+									<div class="relacoes">
+										<fieldset>
+											<p>
+												<strong>Funcionários:</strong>
+												<input type="text" name="efuncionarios" id="efuncionarios" value="10" />
+											</p>
+											<p>
+												<strong>Prestadores de serviço:</strong>
+												<input type="text" name="eprestadores" id="eprestadores" value="15" />
+											</p>
+											<p>
+												<strong>Voluntários:</strong>
+												<input type="text" name="evoluntarios" id="evoluntarios" value="01" />
+											</p>
+										</fieldset>
+									</div>
+									<h2>Recursos públicos</h2>
+									<fieldset>
+										<div class="recursos">
+											<p>
+												<strong>Número de parcerias:</strong>
+												<input type="text" name="nparcerias" id="nparcerias" value="10" />
+											</p>
+											<p>
+												<strong>Valor total das parcerias:</strong>
+												<span>R$</span>
+												<input type="text" name="vparcerias" id="vparcerias" value="243434343" />
+											</p>
+											<div>
+												<strong>Status de habilitação:</strong>
+												<select name="ehabilitacao">
+													<option value="sim">Habilitada</option>
+													<option value="nao" selected>Não habilitada</option>
+												</select>
+											</div>
+											<p>
+												<strong>Quantidade de propostas:</strong>
+												<input type="text" name="eqtd" id="eqtd" value="10" />
+											</p>
+										</div>
+									</fieldset>					
+								</div>
+
+								<div class="docs">
+									<h2>Últimas atualizações <a href="atualizacoes.html" class="box">Ver todas</a></h2>
+									<div>
+										<ul>
+											<li>Recebeu <a href="#">10 novas recomendações</a> <em class="data">6 set 2013</em></li>
+											<li>Adicionou o projeto <a href="#">Lorem Ipsum dolor sit amet</a> <em class="data">5 set 2013</em></li>
+											<li>Recebeu <a href="#">50 novas recomendações</a><em class="data">20 jul 2013</em></li>
+										</ul>
+									</div>
+
+									<h2>Últimos documentos <a href="documentos.html" class="box">Ver todos</a></h2>
+									<div class="documentos">
+										<ul class="dados">
+											<li class="incluidos">(100% incluídos)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Estatuto</a> (2,4 MB)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Quadro de dirigentes</a> (210 KB)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Convênios</a> (1,3 MB)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Prestação de contas</a> (940 KB)</li>
+											<li class="fonte"><em>Fonte:</em> SICONV</li>
+										</ul>
+										<button type="button" class="carregar">Carregar</button>
+									</div>
+
+									<h2>Certificados federais <a href="certificados.html" class="box">Ver todos</a></h2>
+									<div>
+										<ul class="dados checklist">
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">OCIP</a></li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">UPF</a></li>
+											<li class="fonte"><em>Fonte:</em> SICONV</li>
+										</ul>
+										<button type="button" class="adicionar">Adicionar</button>
+									</div>
+
+									<h2>Resultados alcançados <a href="#">Ver todos</a></h2>
+									<div class="resultados">
+										<ul class="dados">
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> Conquistou o Prêmio XYZOD de Lorem 2012</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> Esteve no Congresso XIAYQN 2012 e lorem ipsum dolor.</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> Esteve no Congresso XIAYQN 2012 e lorem ipsum dolor.</li>
+										</ul>
+										<button type="button" class="adicionar">Adicionar</button>
+									</div>
+									
+								</div>
+
+								<div class="projetos">
+									<div class="titulo">
+										<h2>Projetos</h2>
+										<button type="button" class="adicionar">Adicionar</button>
+									</div>
+
+									<div class="clearfix projeto">
+										<div>
+											<div class="col1">
+												<strong class="separador left-radius">Data de início</strong>
+												<input type="text" name="data_inicio" id="data_inicio1" value="12/07/1998" class="data" data-mask="00/00/0000" />
+											</div>
+
+											<div class="col2">
+												<strong class="separador">Data de término</strong>
+												<input type="text" name="data_termino" id="data_termino1" value="12/07/1998" class="data" data-mask="00/00/0000" />
+											</div>
+
+											<div class="col3">
+												<strong class="separador">Nome</strong>
+												<textarea name="projeto_nome" id="projeto_nome1">Lorem ipsum dolor sit, consectetur adipiscing.</textarea>
+											</div>
+
+											<div class="col4">
+												<strong class="separador">Objeto</strong>
+												<textarea name="objeto" id="objeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+											</div>
+
+											<div class="col5">
+												<strong class="right-radius">Descrição</strong>
+												<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+											</div>
+										</div>
+
+										<div class="clearfix">
+											<div class="col1">
+												<strong class="left-radius">Valor obtido</strong>
+												<input type="text" name="valor_obtido" id="valor_obtido1" value="R$1.000.000,00" />
+											</div>
+
+											<div class="col2">
+												<strong class="separador">Valor planejado</strong>
+												<input type="text" name="valor_planejado" id="valor_planejado1" value="R$1.000.000,00" />
+											</div>
+
+											<div class="col3">
+												<strong class="separador">Fonte de recurso</strong>
+												<textarea name="fonte" id="fonte1">Privado</textarea>
+											</div>
+
+											<div class="col4">
+												<strong class="separador">Financiadores</strong>
+												<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+											</div>
+
+											<div class="col5">
+												<strong class="right-radius">Status do projeto</strong>
+												<textarea name="status" id="status1">Cancelado</textarea>
+											</div>
+										</div>
+										
+										<div>
+											<strong class="radius">Resultados obtidos</strong>
+											<textarea name="resultado" id="resultado1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+										</div>
+										
+										<div class="botoes">
+											<button type="button" class="excluir">Excluir</button>
+										</div>
+
+										<hr />
+									</div>
+									
+									
+
+									<div class="clearfix projeto">
+										
+										<div>
+											<div class="col1">
+												<strong class="separador left-radius">Data de início</strong>
+												<input type="text" name="data_inicio" id="data_inicio2" value="12/7/1998" />
+											</div>
+
+											<div class="col2">
+												<strong class="separador">Data de término</strong>
+												<input type="text" name="data_termino" id="data_termino2" value="12/7/1998" />
+											</div>
+
+											<div class="col3">
+												<strong class="separador">Nome</strong>
+												<textarea name="projeto_nome" id="projeto_nome2">Lorem ipsum dolor sit, consectetur adipiscing.</textarea>
+											</div>
+
+											<div class="col4">
+												<strong class="separador">Objeto</strong>
+												<textarea name="objeto" id="objeto2">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+											</div>
+
+											<div class="col5">
+												<strong class="right-radius">Descrição</strong>
+												<textarea name="descprojeto" id="descprojeto2">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+											</div>
+										</div>
+
+										<div class="clearfix">
+											<div class="col1">
+												<strong class="left-radius">Valor obtido</strong>
+												<input type="text" name="valor_obtido" id="valor_obtido2" value="R$1.000.000,00" />
+											</div>
+
+											<div class="col2">
+												<strong class="separador">Valor planejado</strong>
+												<input type="text" name="valor_planejado" id="valor_planejado2" value="R$1.000.000,00" />
+											</div>
+
+											<div class="col3">
+												<strong class="separador">Fonte de recurso</strong>
+												<textarea name="fonte" id="fonte2">Privado</textarea>
+											</div>
+
+											<div class="col4">
+												<strong class="separador">Financiadores</strong>
+												<textarea name="financiadores" id="financiadores2">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+											</div>
+
+											<div class="col5">
+												<strong class="right-radius">Status do projeto</strong>
+												<textarea name="status" id="status2">Cancelado</textarea>
+											</div>
+										</div>
+										<div>
+											<strong class="radius">Resultados obtidos</strong>
+											<textarea name="resultado" id="resultado2">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+										</div>
+
+										<div class="botoes">
+											<button type="button" class="excluir">Excluir</button>
+										</div>
+									</div>
+
+									
+
+								</div>
+							</div>
+							
+
+						</div>
+
+						<div class="botoes">
+							<a href="#">Cancelar</a> ou <input type="submit" value="Salvar" class="salvar" />
+						</div>
+
+					</form>
+
+				</div>
+
+				<div id="rodape" class="clearfix">
+					<div class="clearfix">
+						<div class="celula01">
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Portal das Organizações da Sociedade Civil &copy; 2013</h2>
+							<a href="beta.html" class="beta">Versão BETA?</a>
+						</div>
+						<div class="celula02">
+							<span>Apoio</span>
+							<img class="normal" src="imagens/logo_fgv.png" alt="FGV Projetos" />
+							<img class="contraste" src="imagens/contraste/logo_fgv.png" alt="FGV Projetos" />
+						</div>
+						<div class="celula03">
+							<span>Realização</span>
+							<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+							<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+						</div>
+					</div>
+				</div>
+
+				<div id="footer" class="clearfix">
+					<div id="doormat-container" class="columns-4 clearfix">
+						<div class="doormatColumn column-0">
+							
+							<dl class="doormatSection"><dt class="doormatSectionHeader">O Portal</dt>
+								<dd class="doormatSectionBody">
+									<a href="#">OSCs em números</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Dúvidas Frequentes</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">MROSC</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Análise sobre Parcerias com a União</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Editais Públicos</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Capacitações</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Biblioteca Virtual</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Legislação</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Links relacionados</a>
+									
+								</dd>
+								
+							</dl></div>
+							
+							<div class="doormatColumn column-1">
+								
+								<dl class="doormatSection"><dt class="doormatSectionHeader">Contato</dt>
+									<dd class="doormatSectionBody">
+										<a href="#">Lorem Ipsum</a>
+										
+									</dd>
+									<dd class="doormatSectionBody">
+										<a href="#">Dolor sit amet</a>
+										
+									</dd>
+									
+								</dl></div>
+								<div class="doormatColumn column-2">
+									
+									<dl class="doormatSection"><dt class="doormatSectionHeader">Redes sociais</dt>
+										<dd class="doormatSectionBody">
+											<a href="#">Facebook</a>
+											
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">Twitter</a>
+											
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">YouTube</a>
+											
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">Flickr</a>
+											
+										</dd>
+									</dl></div>
+
+									<div class="doormatColumn column-3">
+										<dl class="doormatSection">
+											<dt class="doormatSectionHeader">Mapa do site</dt>
+											<dd></dd> 
+										</dl>
+									</div>
+
+									<div class="doormatColumn column-4">
+										
+										<dl class="doormatSection"><dt class="doormatSectionHeader">RSS</dt>
+											<dd class="doormatSectionBody">
+												<a href="#">O que é RSS?</a>
+												
+											</dd>
+											<dd class="doormatSectionBody">
+												<a href="#">Assine nosso RSS</a>
+												
+											</dd>
+										</dl></div>
+										
+									</div>
+
+									
+									
+									<div class="footer-logos">
+										<div>
+											<a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+											<a href="http://www.brasil.gov.br/" class="logo-brasil"><img src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+
+							
+							<script type="text/javascript" src="js/acessibilidade.js"></script>
+							<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+							<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
+							<script type="text/javascript" src="js/scripts_min.js"></script>
+
+	<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+
+		$("#ecnpj").mask("00.000.000/0000-00");
+
+		$('.projetos').on('click', '.excluir', excluirProjeto);
+
+		$('.box').fancybox({
+				type: 'iframe',
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+				autoSize : true,
+				padding: 0,
+				helpers : {
+					overlay : {
+						css : {
+							'background' : 'rgba(0,0,0,0.6)'
+						}
+					}
+				},
+				width: 400,
+				minHeight: 300,
+				maxHeight: 400,
+				tpl: {
+					closeBtn:'none'
+				},
+				scrollOutside: true
+		});
+		$('.box_exportar').fancybox({
+				type: 'iframe',
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+				autoSize : false,
+				fitToView   : false,
+				padding: 0,
+				helpers : {
+					overlay : {
+						css : {
+							'background' : 'rgba(0,0,0,0.6)'
+						}
+					}
+				},
+				width: 400,
+				height: 550,
+				tpl: {
+					closeBtn:'none'
+				},
+				scrollOutside: true
+		});
+		
+		function excluirProjeto(event) {
+			var confirmar = confirm("Confirma exclusão?");
+			if (confirmar) $(event.target).closest('div.projeto').remove();
+			return false;
+		};	
+
+		$('.dados').on('click', '.excluir', excluirElemento);
+
+		function excluirElemento(event) {
+			$(event.target).closest('li').remove();
+			return false;
+		}
+		
+		$('.classificacao .adicionar').click(function(){
+			if ($('input#tag').val() != '' && $('input#tag').val() != $('input#tag').attr('placeholder')) {
+				var novaTag = '<li>'+
+				'<a href="#" class="excluir tooltip" title="Excluir">Excluir</a>'+
+				'<a href="#">'+ $('input#tag').val() +'</a></li>';
+				$(".classificacao ul").append(novaTag);
+				$('input#tag').val('');
+			} else {
+				$('input#tag').focus();
+			}					
+		});
+
+		$('.dados .adicionar').click(function(){
+			var comboBox = "<li>"+
+			"<select>"+
+			"<option value='CONJUVE' selected>CONJUVE</option>" +
+			"<option value='CONAJE'>CONAJE</option>" +
+			"</select>" +
+			"<div class='botoes'>" +
+			"<button type='button' class='excluir participacao'>Excluir</button>" +
+			"</div>" +
+			"</li>";
+			$(this).closest('ul').prepend(comboBox);
+		});
+
+		$('.projetos .adicionar').click(function(){
+			var novo_projeto = '<div class="clearfix projeto">'+
+			'<div>'+
+			'<div class="col1">'+
+			'<strong class="separador left-radius">Data de início</strong>'+
+			'<input type="text" name="data_inicio" id="data_inicio2" />'+
+			'</div>'+
+			'<div class="col2">'+
+			'<strong class="separador">Data de término</strong>'+
+			'<input type="text" name="data_termino" id="data_termino2" />'+
+			'</div>'+
+			'<div class="col3">'+
+			'<strong class="separador">Nome</strong>'+
+			'<textarea name="projeto_nome" id="projeto_nome2"></textarea>'+
+			'</div>'+
+			'<div class="col4">'+
+			'<strong class="separador">Objeto</strong>'+
+			'<textarea name="objeto" id="objeto2"></textarea>'+
+			'</div>'+
+			'<div class="col5">'+
+			'<strong class="right-radius">Descrição</strong>'+
+			'<textarea name="descprojeto" id="descprojeto2"></textarea>'+
+			'</div>'+
+			'</div>'+
+			'<div class="clearfix">'+
+			'<div class="col1">'+
+			'<strong class="left-radius">Valor obtido</strong>'+
+			'<input type="text" name="valor_obtido" id="valor_obtido2" />'+
+			'</div>'+
+			'<div class="col2">'+
+			'<strong class="separador">Valor planejado</strong>'+
+			'<input type="text" name="valor_planejado" id="valor_planejado2" />'+
+			'</div>'+
+			'<div class="col3">'+
+			'<strong class="separador">Fonte de recurso</strong>'+
+			'<textarea name="fonte" id="fonte2"></textarea>'+
+			'</div>'+
+			'<div class="col4">'+
+			'<strong class="separador">Financiadores</strong>'+
+			'<textarea name="financiadores" id="financiadores2"></textarea>'+
+			'</div>'+
+			'<div class="col5">'+
+			'<strong class="right-radius">Status do projeto</strong>'+
+			'<textarea name="status" id="status2"></textarea>'+
+			'</div>'+
+			'</div>'+
+			'<div>'+
+			'<strong class="radius">Resultados obtidos</strong>'+
+			'<textarea name="resultado" id="resultado2"></textarea>'+
+			'</div>'+
+			'<div class="botoes">'+
+			'<button type="button" class="excluir">Excluir</button>'+
+			'</div>'+
+			'<hr />'+
+			'</div>';
+
+			$('.projetos .titulo').after(novo_projeto);
+
+		});
+
+});
+
+// ]]></script>
+
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/validacao_entidade.js"></script>
+
+
+</body>
+
+</html>
