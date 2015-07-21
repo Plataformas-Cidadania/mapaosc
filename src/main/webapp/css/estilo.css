@@ -2712,7 +2712,7 @@ ul.dados li:hover a.excluir {
 	font-size: 20px;
 	font-style: normal;
 	position: absolute;
-	top: 18px;
+	top: 0px;
 	text-indent: 2px;
 	letter-spacing: -3px;
 }
@@ -2727,7 +2727,7 @@ ul.dados li:hover a.excluir {
 	margin-bottom: 15px;
 }
 
-#mapa.institucional .faq>div a {
+#mapa.institucional .faq>div a.topo {
 	background: url('../imagens/topo.gif') no-repeat 0 0;
 	text-decoration: none;
 	display: inline-block;
