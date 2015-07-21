@@ -1820,17 +1820,13 @@ input#b-twitter+label.tooltip,button#b-twitter {
 	margin: 10px 0;
 }
 
-input[type=button].buscar,button.buscar {
-	background-position: -7px -141px;
-}
-
 .formulario input[type=button].adicionar,input[type=button].localizar
 	{
 	width: 90px;
 }
 
 input[type=button].buscar,button.buscar{
-	width:67px;
+	width:80px;
 }
 
 .entidade_validacao img {
