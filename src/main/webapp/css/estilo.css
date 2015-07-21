@@ -749,9 +749,9 @@ a.ajuda {
 }
 
 #mapa_navegacao h4 {
-	height: 28px;
-	line-height: 28px;
-	padding: 0 0 0 15px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0;
 	margin: 10px 0 0;
 	width: auto;
 	font-family: RobotoBold, sans-serif;
@@ -762,8 +762,9 @@ a.ajuda {
 	color: #000;
 }
 
-#mapa_navegacao h4 a:hover,#mapa_navegacao h4 a:active {
-	color: #244196;
+#mapa_navegacao h4:hover a,#mapa_navegacao h4 a:active {
+	background-color: #244196;
+	color: white;
 }
 
 .tabbody#org {
@@ -3074,16 +3075,14 @@ div.infographicContainer{
 	line-height: 2em;
 }
 
-#mapa_navegacao span a {
-	display:block;
-}
-
 #mapa_navegacao h4 a {
 	float: right;
 }
 
-#mapa_navegacao h4 span a {
+#mapa_navegacao h4 span a, #mapa_navegacao h4 a:only-child {
 	float: none;
+	display:block;
+	padding-left:10px;
 }
 
 #mapa_navegacao .tabbody em {
@@ -3108,8 +3107,8 @@ div.infographicContainer{
     margin: 4px;
 }
 
-#mapa_navegacao .tabbody a:hover em {
-	border-color: transparent #1F3D93 transparent transparent;
+#mapa_navegacao .tabbody h4:hover a em {
+	border-color: transparent white transparent transparent;
 }
 
 #mapa_navegacao .tabbody em.dados_abertos {
@@ -3124,7 +3123,7 @@ div.infographicContainer{
 	top: 0;
 	width: 200px;
 	left: -150px;
-	background-color: rgba(244,244,244,0.4);
+	background-color: rgba(200,200,200,0.2);
 	padding: 5px;
 	border-radius: 5px;
 }
@@ -3136,7 +3135,7 @@ div.infographicContainer{
   left: 200px;
   font-size: 0px;
   border-width: 10px 0 10px 15px;
-  border-color: transparent transparent transparent rgba(244,244,244,0.4);
+  border-color: transparent transparent transparent rgba(200,200,200,0.2);
 }
 
 #mapa.cadastro .instrucoes ul li.desabilitado a {
