@@ -3143,18 +3143,22 @@ div.infographicContainer{
   border-color: transparent transparent transparent rgba(244,244,244,0.4);
 }
 
-.desabilitado a {
+#mapa.cadastro .instrucoes ul li.desabilitado a {
 	background-color: #5e5e5e;
 }
 
-.desabilitado .b-entidade+em {
+#mapa.cadastro .instrucoes ul li.desabilitado a:hover {
+	background-color: #5e5e5e;
+}
+
+#mapa.cadastro .instrucoes ul li.desabilitado .b-entidade+em {
 	background-image: url(../imagens/cadastro_03_desabilitado.png);
 }
 
-.desabilitado .b-cadastro+em {
+#mapa.cadastro .instrucoes ul li.desabilitado .b-cadastro+em {
 	background-image: url(../imagens/cadastro_02_desabilitado.png);
 }
 
-.desabilitado .b-redes+em {
+#mapa.cadastro .instrucoes ul li.desabilitado .b-redes+em {
 	background-image: url(../imagens/cadastro_01_desabilitado.png);
 }
