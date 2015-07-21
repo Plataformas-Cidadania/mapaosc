@@ -2557,10 +2557,70 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 
 .projeto_header .status {
     float: right;
-}
+}a
 
 .adicionar {
     float: right;
     margin-top: 3px;
     margin-right: 4px;
+}
+
+.esqueci_senha {
+	background: rgba(200,200,200,0.5);
+	position: fixed;
+	left: calc(50% - 175px);
+	top: 300px;
+	width: 350px;
+	border-radius: 10px;
+}
+
+.esqueci_senha > h2, .esqueci_senha > div {
+	padding: 10px 20px;
+}
+
+.esqueci_senha > h2 {
+	background-color: #244196;
+	border-radius: 10px 10px 0px 0px;
+	color: white;
+	font-size: 1.3em;
+}
+
+.esqueci_senha form {
+	margin-top: 10px;
+}
+
+.esqueci_senha form input[type=text] {
+	width: 84%;
+	margin-left: 5px;
+	border-radius: 15px;
+}
+
+.esqueci_senha form label {
+	font-weight: 800;
+}
+
+.esqueci_senha form fieldset {
+	  padding: 10px 0;
+}
+
+.esqueci_senha input[type=submit] {
+	background-color: #000;
+	height: 30px;
+	line-height: 20px;
+	margin-left: 5px;
+	color: #FFF;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	padding: 0 15px;
+}
+
+.esqueci_senha input[type=submit]:hover {
+	background-color: #1F3D93;
+	transition: all 200ms linear;
+}
+
+.esqueci_senha .botoes {
+	width: 11.5em;
+	margin: 0 auto;
 }
