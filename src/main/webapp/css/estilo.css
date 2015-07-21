@@ -3122,3 +3122,23 @@ div.infographicContainer{
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
+
+.formError #floatingLoginErrorList {
+	position: absolute;
+	top: 0;
+	width: 200px;
+	left: -150px;
+	background-color: rgba(244,244,244,0.4);
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.formError div#floatingLoginErrorList::after {
+  position: absolute;
+  border: solid;
+  content: '.';
+  left: 200px;
+  font-size: 0px;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent rgba(244,244,244,0.4);
+}
