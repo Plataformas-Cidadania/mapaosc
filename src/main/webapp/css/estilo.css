@@ -749,9 +749,9 @@ a.ajuda {
 }
 
 #mapa_navegacao h4 {
-	height: 28px;
-	line-height: 28px;
-	padding: 0 0 0 15px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0;
 	margin: 10px 0 0;
 	width: auto;
 	font-family: RobotoBold, sans-serif;
@@ -762,8 +762,9 @@ a.ajuda {
 	color: #000;
 }
 
-#mapa_navegacao h4 a:hover,#mapa_navegacao h4 a:active {
-	color: #244196;
+#mapa_navegacao h4:hover a,#mapa_navegacao h4 a:active {
+	background-color: #244196;
+	color: white;
 }
 
 .tabbody#org {
@@ -1174,7 +1175,7 @@ ul.dados li.fonte em {
 }
 
 #rodape>div {
-	max-width: 960px;
+	max-width: 1080px;
 	margin: 0 auto;
 }
 
@@ -1820,17 +1821,13 @@ input#b-twitter+label.tooltip,button#b-twitter {
 	margin: 10px 0;
 }
 
-input[type=button].buscar,button.buscar {
-	background-position: -7px -141px;
-}
-
 .formulario input[type=button].adicionar,input[type=button].localizar
 	{
 	width: 90px;
 }
 
 input[type=button].buscar,button.buscar{
-	width:67px;
+	width:80px;
 }
 
 .entidade_validacao img {
@@ -2712,7 +2709,7 @@ ul.dados li:hover a.excluir {
 	font-size: 20px;
 	font-style: normal;
 	position: absolute;
-	top: 18px;
+	top: 0px;
 	text-indent: 2px;
 	letter-spacing: -3px;
 }
@@ -2727,7 +2724,7 @@ ul.dados li:hover a.excluir {
 	margin-bottom: 15px;
 }
 
-#mapa.institucional .faq>div a {
+#mapa.institucional .faq>div a.topo {
 	background: url('../imagens/topo.gif') no-repeat 0 0;
 	text-decoration: none;
 	display: inline-block;
@@ -3072,4 +3069,91 @@ div.infographicContainer{
 	text-align: center;
 	font-size: .9em;
 	padding: 30px 35px 10px 0px;
+}
+
+.institucional .wrapper ul li {
+	line-height: 2em;
+}
+
+#mapa_navegacao h4 a {
+	float: right;
+}
+
+#mapa_navegacao h4 span a, #mapa_navegacao h4 a:only-child {
+	float: none;
+	display:block;
+	padding-left:10px;
+}
+
+#mapa_navegacao .tabbody em {
+	background-image: none !important;
+	-moz-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -ms-transform: rotate(0deg); 
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    float: right;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    /*border-color: transparent #1F3D93 transparent transparent;*/
+    border-color: transparent #000 transparent transparent;
+    width: 15px;
+    height: 20px;
+    padding: 0px;
+    margin: 4px;
+}
+
+#mapa_navegacao .tabbody h4:hover a em {
+	border-color: transparent white transparent transparent;
+}
+
+#mapa_navegacao .tabbody em.dados_abertos {
+    -ms-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.formError #floatingLoginErrorList {
+	position: absolute;
+	top: 0;
+	width: 200px;
+	left: -150px;
+	background-color: rgba(200,200,200,0.2);
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.formError div#floatingLoginErrorList::after {
+  position: absolute;
+  border: solid;
+  content: '.';
+  left: 200px;
+  font-size: 0px;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent rgba(200,200,200,0.2);
+}
+
+#mapa.cadastro .instrucoes ul li.desabilitado a {
+	background-color: #5e5e5e;
+}
+
+#mapa.cadastro .instrucoes ul li.desabilitado a:hover {
+	background-color: #5e5e5e;
+}
+
+#mapa.cadastro .instrucoes ul li.desabilitado .b-entidade+em {
+	background-image: url(../imagens/cadastro_03_desabilitado.png);
+}
+
+#mapa.cadastro .instrucoes ul li.desabilitado .b-cadastro+em {
+	background-image: url(../imagens/cadastro_02_desabilitado.png);
+}
+
+#mapa.cadastro .instrucoes ul li.desabilitado .b-redes+em {
+	background-image: url(../imagens/cadastro_01_desabilitado.png);
 }

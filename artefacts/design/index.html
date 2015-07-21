@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Portal das Organizações da Sociedade Civil - Página inicial</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+	<![endif]-->
+	
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">document.documentElement.className += " js";</script>
+
+
+</head>
+
+<body>
+
+	
+
+	<div id="main">
+		<div id="barra-brasil">
+		<div class="barra">
+			<ul>
+				<li><a href="http://www.acessoainformacao.gov.br" class="ai" title="Acesso à informação">Acesso à informação</a></li>
+				<li><a href="http://www.brasil.gov.br" class="brasilgov" title="Portal de Estado do Brasil">Portal de Estado do Brasil</a></li>
+			</ul>
+		</div>
+	</div>
+
+		<div id="topo">
+			<div id="topo_acessibilidade">
+				<ul id="nav1">
+					<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+					<li>Ir para o <a href="#mapa_expandir" accesskey="2">Menu 2</a></li>					
+					<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+					<li>Ir para a <a href="#busca" accesskey="4" onclick="$('#campobusca').focus();">Busca 4</a></li>
+				</ul>
+				<ul id="nav2">
+					<li><a href="#">Acessibilidade</a></li>
+					<li><a href="#rodape">Mapa do site</a></li>
+					<li id="contraste">Contraste
+						<a id="contraste_normal" href="#"><img src="imagens/09_contraste1.png" alt="Contraste normal" width="13" height="14" /></a>
+						<a id="alto_contraste" href="#"><img src="imagens/10_contraste2.png" alt="Alto contraste" width="13" height="14" /></a></li>
+						<li>Tamanho do texto
+							<a href="#" title="Aumentar fonte" class="inc-font">A+</a>
+							<a href="#" title="Fonte padrão" class="res-font">A</a>
+							<a href="#" title="Diminuir fonte" class="dec-font">A-</a></li>
+						</ul>
+					</div>
+
+					<div id="topo_links">
+						<a href="sobre.html" id="sobre">Sobre o portal</a>
+						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
+					</div>
+
+					<div id="topo_acesso" class="deslogado">
+						<form name="Acesso">
+							<label for="email" class="esconder">Email</label>
+							<input type="text" name="email" id="email" placeholder="Email"  />
+							<label for="senha" class="esconder">Senha</label>
+							<input type="password" name="senha" id="senha" placeholder="Senha"  />
+							<div>
+								<a href="esqueci_senha.html" class="box_frame">Esqueci a senha</a>
+								<a href="cadastro.html">Registrar-se</a>  
+							</div>
+							<input type="submit" name="entrar" id="entrar" value="Entrar" onclick="$('#topo_acesso.deslogado').hide(); $('#topo_acesso.logado').show();" />  <!--- JS adicionado para simular o acesso. Remover -->
+						</form>
+					</div>
+
+					<div id="topo_acesso" class="logado">
+						<div class="clearfix">
+							<ul>
+								<li><h2>Carlos Silva</h2></li>
+								<li><a href="#">Configurações</a></li>
+							</ul>
+
+							<a href="#"><img src="imagens/usuario.jpg" alt="Sua imagem de perfil" /></a>
+						</div>
+						
+						<input type="submit" name="sair" id="sair" value="Sair" onclick="$('#topo_acesso.logado').hide(); $('#topo_acesso.deslogado').show();" /> <!--- JS adicionado para simular o acesso. Remover -->
+					</div>
+
+					<a href="index.html">
+						<img class="normal" id="logo" src="imagens/logo.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial"  title="Ir para página inicial" />
+						<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+					</a>
+				</div>
+
+		<div id="mapa">
+
+			<div id="busca_filtros" class="filtros classificacao">
+				<h3>Filtrar</h3>
+
+				<ul class="dados">
+					<li class="fasfil"><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Assistência social</a></li>
+					<li class="fasfil"><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Cultura e recreação</a></li>
+					<li class="fasfil"><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Desenvolvimento e defesa de direitos</a></li>
+					<li class="fasfil"><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Religião</a></li>
+					<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Educação</a></li>
+				</ul>
+
+				<div>
+					<input type="text" name="tag" id="tag" placeholder="Adicionar nova tag..." maxlength="50" />
+					<button type="button" class="adicionar">Adicionar</button>
+				</div>
+
+				<img src="imagens/tagcloud.jpg" alt="Tag cloud" />
+			</div>
+
+			<div id="busca">
+
+				<form name="Busca">
+					<label for="campobusca" class="esconder">Buscar organização</label>
+					<div class="ajuda busca">
+						<p><strong>Para localizar um endereço, digite:</strong> <br />
+						O nome parcial ou completo do endereço no Brasil, como por exemplo: <br />
+						<em>Presidente Vargas</em> ou <em>Rio Grande do Norte</em></p>
+
+						<p><strong>Para localizar uma organização social civil, digite:</strong> <br />
+						O nome parcial ou completo da organização social civil ou seu CNPJ, como por exemplo: <br />
+						<em>Fundação</em> ou <em>12.345.678/0001-90</em></p>
+					</div>
+					<input type="text" name="campobusca" id="campobusca" placeholder="Informe a localização ou a organização desejada..."  />
+					<button type="button" name="buscar" class="buscar" onclick="$('#busca_resultado').toggle(); ">Buscar</button>
+					<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button>
+				</form>
+
+					<div class="filtros">
+						<a href="#busca_filtros" class="filtrar box">Filtrar</a>
+						<div class="ajuda filtros">
+							<p>Ajuda filtro</p>
+						</div>
+						<button type="button" name="ajuda" class="ajuda" id="ajuda_filtros">?</button>
+					</div>
+
+				<div id="busca_resultado">
+				<div>
+						<div>
+							<ul class="total">
+								<li><strong>Organização</strong></li>
+								<li><em>2 encontradas</em></li>
+							</ul>
+
+							<ul class="resultado">
+								<li><a href="#"><em>Instituto São Paulo</em>, Fortaleza, Ceará, Nordeste</a></li>
+								<li><a href="#">Fundação São Paulo, São Paulo, SP, Sudeste</a></li>
+							</ul>
+						</div>
+
+						<div>
+							<ul class="total">
+								<li><strong>Cidade</strong></li>
+								<li><em>1 encontrada</em></li>
+							</ul>
+
+							<ul class="resultado">
+								<li><a href="#"><em>São Paulo</em>, SP, Sudeste</a></li>
+							</ul>
+						</div>
+
+						<div>
+							<ul class="total">
+								<li><strong>Estado</strong></li>
+								<li><em>1 encontrado</em></li>
+							</ul>
+							<ul class="resultado">
+								<li><a href="#"><em>SP</em>, Sudeste</a></li>
+							</ul>
+						</div>
+				</div>
+			</div>
+
+			
+
+			</div>
+
+			
+
+			<div id="loading">
+				<div><strong>88</strong>%</div>
+				<img src="imagens/loading.png" alt="Carregando..." />
+			</div>
+
+			<div id="mapa_expandir">
+					<button class="tip_menu" type="button" name="Expandir menu" id="expandir">
+						<img id="fechar_menu" src="imagens/15_reduzir.png" alt="Fechar menu" />
+						<img id="expandir_menu" src="imagens/15_expandir.png" alt="Expandir menu" />
+					</button>
+
+					<div class="tabs clearfix">
+				        <h2 id="tab_mapa">Mapa</h2>
+				        <div id="mapa_navegacao">
+					        <div class="tabbody" id="regiao">
+					        	<ul class="breadcrumb">
+					        		<li><a href="#">Brasil</a> &gt;</li>
+					        		<li><a href="#">Sudeste</a> &gt;</li>
+					        		<li class="atual"><a href="#">São Paulo</a></li>
+					        	</ul>
+								<h3>Selecione a regiao.</h3>
+
+									<h4><a href="#" title="Dados gerais"><em class="dados">Dados gerais</em></a> <a href="#">Centro-Oeste</a></h4>
+									<ul class="dados">
+										<li><strong>320.931</strong> organizações</li>
+										<li>4.684 parcerias com a União, com prazo médio de 2 anos</li>
+										<li class="fonte"><em>Fonte:</em> RAIS SINCOV</li>
+									</ul>
+
+									<h4><a href="#" title="Dados gerais"><em class="dados">Dados gerais</em></a> <a href="#">Nordeste</a></h4>
+									<ul class="dados">
+										<li>320.931 organizações</li>
+										<li>4.684 parcerias com a União, com prazo médio de 2 anos</li>
+									</ul>
+
+									<h4><a href="#" title="Dados gerais"><em class="dados">Dados gerais</em></a> <a href="#">Norte</a></h4>
+									<ul class="dados">
+										<li>320.931 organizações</li>
+										<li>4.684 parcerias com a União, com prazo médio de 2 anos</li>
+									</ul>
+
+									<h4><a href="#" title="Dados gerais"><em class="dados">Dados gerais</em></a> <a href="#">Sudeste</a></h4>
+									<ul class="dados">
+										<li>320.931 organizações</li>
+										<li>4.684 parcerias com a União, com prazo médio de 2 anos</li>
+									</ul>
+
+									<h4><a href="#" title="Dados gerais"><em class="dados">Dados gerais</em></a> <a href="#">Sul</a></h4>
+									<ul class="dados">
+										<li>320.931 organizações</li>
+										<li>4.684 parcerias com a União, com prazo médio de 2 anos</li>
+									</ul>
+
+									<!-- Link adicionado apenas para exemplificar o modelo de layout. Remover -->
+									<br />
+									<a href="#" onclick="$('#regiao').hide(); $('#org').show();">Ver modelo de Organizacao &gt;</a>
+									<!-- Remover ate aqui -->
+							</div>
+
+							<h2 id="tab_indicadores">Infográficos</h2>
+					        <div class="tabbody infograficos">
+					        	Selecione o infográfico.
+					            	<h4><a href="info01.html">OSCs em Números</a></h4>
+					            	<h4><a href="info02.html">OSCs e os Recursos</a></h4>
+					            	<h4><a href="info03.html">OSCs Natureza jurídica/Faixas de vínculos</a></h4>
+					        </div> 
+
+
+							<div class="tabbody" id="org"> <!-- Não esquecer de aplicar o seletor #org. (atualmente oculto via css) -->
+					        	<ul class="breadcrumb">
+					        		<li><a href="#">Brasil</a> &gt;</li>
+					        		<li><a href="#">Sudeste</a> &gt;</li>
+					        		<li class="atual"><a href="#">São Paulo</a></li>
+					        	</ul>
+
+					        	<div class="organizacao">
+					        		<img src="imagens/fundacao.jpg" alt="Fundação São Paulo" />
+					        		<span title="SOCIEDADE PARA O DESENVOLVIMENTO DA TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO DO CENTRO-OESTE - INSTITUTO CENTRO-OESTE DE DESENVOLVIMENTO DE SOFTWARE - ICODES" class="tooltip">SOCIEDADE PARA O DESENVOLVIMENTO DA TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO DO CENTRO-OESTE - INSTITUTO CENTRO-OESTE DE DESENVOLVIMENTO DE SOFTWARE - ICODES</span>
+					        		<div title="1200 recomendaram esta organização!" class="tip_recomendacao">1200</div>
+					        	</div>
+
+								<h4><a href="#"><em class="dados">Expandir</em> Dados Gerais</a></h4>
+								<ul class="dados">
+									<li><strong>CNPJ:</strong> 60990751002097</li>
+									<li><strong>Endereço:</strong> Rua João Ramalho, 182, Perdizes, São Paulo - SP</li>
+									<li><strong>Atividade econômica:</strong> Educação Superior</li>
+									<li><strong>Descrição:</strong> Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta.</li>
+									<li><strong>Fundada em:</strong> 1945</li>
+									<li><strong>Site:</strong> <a href="www.pucsp.br/fundasp" target="_blank">www.pucsp.br/fundasp</a></li>
+									<li><strong>E-mail:</strong> <a href="mailto:fundacaosaopaulo@pucsp.br">fundacaosaopaulo@pucsp.br</a></li>
+								</ul>
+
+								<h4><a href="#"><em class="dados">Expandir</em> Relações de Trabalho</a></h4>
+								<ul class="dados">
+									<li><strong>CNPJ:</strong> 60990751002097</li>
+									<li><strong>Endereço:</strong> Rua João Ramalho, 182, Perdizes, São Paulo - SP</li>
+								</ul>
+
+								<h4><a href="#"><em class="dados">Expandir</em> Certificações Federais</a></h4>
+								<ul class="dados">
+									<li><strong>CNPJ:</strong> 60990751002097</li>
+									<li><strong>Endereço:</strong> Rua João Ramalho, 182, Perdizes, São Paulo - SP</li>
+								</ul>
+
+								<h4><a href="#"><em class="dados">Expandir</em> Recursos Públicos</a></h4>
+								<ul class="dados">
+									<li><strong>CNPJ:</strong> 60990751002097</li>
+									<li><strong>Endereço:</strong> Rua João Ramalho, 182, Perdizes, São Paulo - SP</li>
+								</ul>
+
+								<h4><a href="#"><em class="dados">Expandir</em> Participação Social</a></h4>
+								<ul class="dados">
+									<li><strong>CNPJ:</strong> 60990751002097</li>
+									<li><strong>Endereço:</strong> Rua João Ramalho, 182, Perdizes, São Paulo - SP</li>
+								</ul>
+
+								<h4><a href="#"><em class="dados">Expandir</em> Documentos</a></h4>								
+								<ul class="dados documentos">
+									<li class="incluidos">(100% incluídos)</li>
+									<li>Estatuto (2,4 MB)</li>
+									<li>Quadro de dirigentes (210 KB)</li>
+									<li>Convênios (1,3 MB)</li>
+									<li>Prestação de contas (940 KB)</li>
+									<li class="fonte"><em>Fonte:</em> SICONV</li>
+								</ul>
+
+								<h4><a href="#"><em class="dados">Expandir</em> Localização</a></h4>
+								<ul class="dados clearfix">
+									<li><strong>Latitude:</strong> -2232323</li>
+									<li><strong>Longitude:</strong> -46544454</li>
+									<li id="ajuda_local"><button type="button" name="Ajuda">?</button></li>
+									<li id="alterar_local"><button type="button" name="Alterar localização">Alterar</button></li>
+								</ul>
+
+								<div id="tip_ajuda_local">
+									<p><strong>Para localizar um endereço, digite:</strong> <br />
+									O nome parcial ou completo do endereço no Brasil, como por exemplo: <br />
+									<em>Presidente Vargas</em> ou <em>Rio Grande do Norte</em></p>
+								</div>
+
+								<button type="button" name="Ver detalhes" id="org_detalhes">Ver detalhes</button>
+
+								<button type="button" name="Recomendar" id="org_recomendar">Recomendar</button>
+
+
+
+								<!-- Link adicionado apenas para exemplificar o modelo de layout. Remover -->
+								<br />
+								<a href="#" onclick="$('#org').hide(); $('#regiao').show();">&lt; Voltar</a>
+								<!-- Remover ate aqui -->
+
+							</div>
+
+					        
+				    	</div>
+
+				    </div>
+			</div>
+
+			<div id="mapa_google">
+    		</div>
+
+    		<div class="mapa_organizacao clearfix">
+    			<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis</h2>
+    			<h4><em class="tip_recomendacao" data-hasqtip="24" oldtitle="1200 recomendaram esta organização!" title="" aria-describedby="qtip-24">1200</em></h4>
+
+    			<h5 class="endereco_popup"> Travessa Cais de Detenção S/N.º, Casa da Cultura de Pernambuco, Raio Oeste, 2º Andar, Sl. 303 - Latitude: 44.44, Longitude: 55.55</h5><div class="coluna1">
+	    			<strong> Contatos Disponíveis </strong>
+	    			<p>Telefone: +55 11 22222-2222</p>
+	    			<p>Site: <a href="ololo.hmtl">http://www.meusite.com.br/</a></p>
+	    			<p>João Feijó: <a href="mail:mail.me.me">joao@ONG.com</a></p>
+	    			<p>Felipe de Paiva: <a href="mail:mail.me.me">felipe@ONG.com</a></p>
+	    			<p>Mirnda Flores: <a href="mail:mail.me.me">miranda@ONG.com</a></p>
+	    			
+	    		</div>
+
+	    		<div class="coluna2">
+	    			<strong>Dados</strong>
+	    			<p>Projetos em curso: <a href="projetos.html">13</a></p>
+	    			<p>Recursos dos projetos em curso: <a href="projetos.html">R$ 555.000,00</a></p>
+	    		</div>
+	    		<div style="clear: both; width: 270px; margin: 0 115px; padding: 10px;">
+	    			<button type="button" name="Ver detalhes" id="org_detalhes">Ver detalhes</button>
+	    			<button type="button" name="Recomendar" id="org_recomendar">Recomendar</button>
+	    		</div>
+
+	    	</div>
+
+	    </div>
+
+		<div id="rodape" class="clearfix">
+			<div class="clearfix">
+				<div class="celula01">
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Portal das Organizações da Sociedade Civil &copy; 2013</h2>
+							<a href="beta.html" class="beta">Versão BETA?</a>
+						</div>
+				<div class="celula02">
+					<span>Apoio</span>
+					<img class="normal" src="imagens/logo_fgv.png" alt="FGV Projetos" />
+					<img class="contraste" src="imagens/contraste/logo_fgv.png" alt="FGV Projetos" />
+				</div>
+				<div class="celula03">
+					<span>Realização</span>
+					<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+					<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+				</div>
+			</div>
+		</div>
+
+		<div id="footer" class="clearfix">
+			<div id="doormat-container" class="columns-4 clearfix">
+		  <div class="doormatColumn column-0">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">O Portal</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">OSCs em números</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Dúvidas Frequentes</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">MROSC</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Análise sobre Parcerias com a União</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Editais Públicos</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Capacitações</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Biblioteca Virtual</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Legislação</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Links relacionados</a>
+		        
+		      </dd>
+		      
+		    </dl></div>
+		  
+		  <div class="doormatColumn column-1">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">Contato</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Lorem Ipsum</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Dolor sit amet</a>
+		        
+		      </dd>
+		      
+		    </dl></div>
+		  <div class="doormatColumn column-2">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">Redes sociais</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Facebook</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Twitter</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">YouTube</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Flickr</a>
+		        
+		      </dd>
+		    </dl></div>
+
+		    <div class="doormatColumn column-3">
+		    	<dl class="doormatSection">
+		    		<dt class="doormatSectionHeader">Mapa do site</dt>
+		    		<dd></dd> 
+		    	</dl>
+		    </div>
+
+		    <div class="doormatColumn column-4">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">RSS</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">O que é RSS?</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Assine nosso RSS</a>
+		        
+		      </dd>
+		    </dl></div>
+		
+		</div>
+
+		
+		    
+		    <div class="footer-logos">
+		        <div>
+		            <a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+		            <a href="http://www.brasil.gov.br/" class="logo-brasil"><img src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+		        </div>
+		    </div>
+		</div>
+
+	</div>
+
+
+	
+	<script type="text/javascript" src="js/acessibilidade.js"></script>
+	<script type="text/javascript" src="js/jquery.tabs.js"></script>
+	<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+	<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+
+	<!--[if lte IE 7]>
+		<script>
+		$("#ajuda").click(function(){
+				$('.ajuda').toggle();
+		});
+		$("#ajuda_local button").click(function(){
+			$('#tip_ajuda_local').toggle();
+		});
+		</script>
+	<![endif]-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			box_normal();
+			$('.dados').on('click', '.excluir', excluirElemento);
+
+			$("#tag").keyup(function(event){
+			    if(event.keyCode == 13){
+			        $("#tag + button.adicionar").click();
+			    }
+			});
+
+			function excluirElemento(event) {
+				$(event.target).closest('li').remove();
+				return false;
+			}
+			
+			$('.classificacao .adicionar').click(function(){
+				if ($('input#tag').val() != '' && $('input#tag').val() != $('input#tag').attr('placeholder')) {
+					var novaTag = '<li>'+
+					'<a href="#" class="excluir tooltip" title="Excluir">Excluir</a>'+
+					'<a href="#">'+ $('input#tag').val() +'</a></li>';
+					$(".classificacao ul").append(novaTag);
+					$('input#tag').val('');
+				} else {
+					$('input#tag').focus();
+				}		
+			});
+		});
+
+		function box_normal() {
+		$(".box").fancybox({
+				type: 'inline',
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+				padding: 0,
+				helpers : {
+					overlay : {
+						css : {
+							'background-color' : 'rgba(255,255,255,0.5)'
+						}
+					}
+				},
+				tpl: {
+					closeBtn: '<div class="modal_fechar filtros">-</div>'
+				}
+			});
+		}
+
+		$("#alto_contraste").click(function(){
+			$(".box").fancybox({
+				type: 'inline',
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+				padding: 0,
+				helpers : {
+					overlay : {
+						css : {
+							'background' : 'rgba(0,0,0,0.6)'
+						}
+					}
+				},
+				tpl: {
+					closeBtn: '<div class="modal_fechar filtros">-</div>'
+				}
+			});
+		});
+
+		$("#contraste_normal").click(function(){
+			box_normal();
+		});
+	</script>
+
+</body>
+
+</html>

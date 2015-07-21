@@ -97,7 +97,10 @@ public class MapController {
 		// logger.info("Centrando mapa");
 		opts.setCenter(center);
 		opts.setMapTypeId(MapTypeId.ROADMAP);
-
+		
+		/* limit zoom-out */
+		opts.setMinZoom(3);
+		
 		opts.setZoom(4);
 
 		// logger.info("Setando controles");

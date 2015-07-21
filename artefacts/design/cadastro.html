@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Portal das Organizações da Sociedade Civil - Cadastro</title>
+<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+
+<!--[if lte IE 8]>
+<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+<!--[if lte IE 7]>
+<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+<![endif]-->
+
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">document.documentElement.className += " js";</script>
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<div id="barra-brasil">
+		<div class="barra">
+			<ul>
+				<li><a href="http://www.acessoainformacao.gov.br" class="ai" title="Acesso à informação">Acesso à informação</a></li>
+				<li><a href="http://www.brasil.gov.br" class="brasilgov" title="Portal de Estado do Brasil">Portal de Estado do Brasil</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="topo">
+		<div id="topo_acessibilidade">
+			<ul id="nav1">
+				<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+				<li>Ir para o <a href="#topo_links" accesskey="2">Menu 2</a></li>					
+				<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+			</ul>
+			<ul id="nav2">
+				<li><a href="#">Acessibilidade</a></li>
+				<li><a href="#">Mapa do site</a></li>
+				<li id="contraste">Contraste
+					<a id="contraste_normal" href="#"><img src="imagens/09_contraste1.png" alt="Contraste normal" width="13" height="14" /></a>
+					<a id="alto_contraste" href="#"><img src="imagens/10_contraste2.png" alt="Alto contraste" width="13" height="14" /></a></li>
+					<li>Tamanho do texto
+						<a href="#" title="Aumentar fonte" class="inc-font">A+</a>
+						<a href="#" title="Fonte padrão" class="res-font">A</a>
+						<a href="#" title="Diminuir fonte" class="dec-font">A-</a></li>
+					</ul>
+				</div>
+
+				<div id="topo_links">
+					<a href="sobre.html" id="sobre">Sobre o portal</a>
+						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
+				</div>
+
+				<div id="topo_acesso" class="deslogado">
+						<form name="Acesso">
+							<label for="email" class="esconder">Email</label>
+							<input type="text" name="email" id="email" placeholder="Email"  />
+							<label for="senha" class="esconder">Senha</label>
+							<input type="password" name="senha" id="senha" placeholder="Senha"  />
+							<div>
+								<a href="esqueci_senha.html" class="box_frame">Esqueci a senha</a>
+								<a href="cadastro.html">Registrar-se</a>  
+							</div>
+							<input type="submit" name="entrar" id="entrar" value="Entrar" onclick="$('#topo_acesso.deslogado').hide(); $('#topo_acesso.logado').show();" />  <!--- JS adicionado para simular o acesso. Remover -->
+						</form>
+					</div>
+
+					<div id="topo_acesso" class="logado">
+						<div class="clearfix">
+							<ul>
+								<li><h2>Carlos Silva</h2></li>
+								<li><a href="#">Configurações</a></li>
+							</ul>
+
+							<a href="#"><img src="imagens/usuario.jpg" alt="Sua imagem de perfil" /></a>
+						</div>
+						
+						<input type="submit" name="sair" id="sair" value="Sair" onclick="$('#topo_acesso.logado').hide(); $('#topo_acesso.deslogado').show();" /> <!--- JS adicionado para simular o acesso. Remover -->
+					</div>
+
+				<a href="index.html">
+					<img class="normal" id="logo" src="imagens/logo.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial"  title="Ir para página inicial" />
+					<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+				</a>
+			</div>
+
+			<div id="mapa" class="cadastro">
+				
+
+				<h1><em>&nbsp;</em> Cadastro</h1>
+
+				<div class="instrucoes clearfix">
+					<img class="pin normal" src="imagens/cadastro_pin.png" alt="Ícone indicador de localização" />
+
+					<img class="pin contraste" src="imagens/contraste/cadastro_pin.png" alt="Ícone indicador de localização" />
+
+					<div>
+						<h2>Cadastre-se!</h2>
+						<p>Para ter acesso a mais conteúdos do Portal, 
+							utilize sua conta de uma rede social ou
+							cadastre-se informando seus dados.</p>
+
+							Se você for representante de uma entidade, 
+							precisará informar o <strong>certificado digital</strong>.
+						</div>
+
+						<ul>
+							<li><a href="#modal_redes" class="b-redes box">Use sua conta em redes sociais</a> <em class="opcao"> </em></li>
+							<li><a href="#modal_cadastro" class="b-cadastro box">Cadastre-se no portal</a> <em class="opcao"> </em></li>
+							<li><a href="#modal_entidade" class="b-entidade box">Represente sua entidade</a> <em class="opcao"> </em></li>
+						</ul>
+
+					</div>
+
+					<div id="modal_redes" class="modal formulario">
+						<h3 class="b-redes">Use sua conta em redes sociais</h3>
+						<div>
+							Utilizando a conta de uma rede social, você poderá:
+							<ul>
+								<li>Compartilhar informações com seus amigos.</li>
+							</ul>
+							<form id="form_redes" name="form_redes" method="post">
+								<div class="b-redes clearfix">
+									<span class="esconder">Google</span>
+									<input type="radio" id="b-google" name="redes" value="false" />
+									<label for="b-google" title="Google" class="tooltip"></label>
+
+									<span class="esconder">Facebook</span>
+									<input type="radio" id="b-facebook" name="redes" value="false" />
+									<label for="b-facebook" title="Facebook" class="tooltip"></label>
+									
+									<span class="esconder">Linkedin</span>
+									<input type="radio" id="b-linkedin" name="redes" value="false" />
+									<label for="b-linkedin" title="Linkedin" class="tooltip"></label>
+									
+									<span class="esconder">Yahoo</span>
+									<input type="radio" id="b-yahoo" name="redes" value="false" />
+									<label for="b-yahoo" title="Yahoo" class="tooltip"></label>
+
+									<span class="esconder">Twitter</span>
+									<input type="radio" id="b-twitter" name="redes" value="false" />
+									<label for="b-twitter" title="Twitter" class="tooltip"></label>
+								</div>
+								<div class="clearfix redes">
+									<label for="rusuario">Usuário:</label> <input type="text" name="rusuario" id="rusuario" placeholder="Escreva o usuário..." class="nome" required="required" />
+
+									<label for="rsenha">Senha:</label> <input type="password" name="rsenha" id="rsenha" placeholder="Escreva a senha..." class="senha" />
+								</div>
+								<h4>Gostaria de se cadastrar no Portal?</h4>
+								Informando seu CPF você será cadastrado e poderá avaliar as organizações e definir suas preferências no portal.
+
+								<div class="cadastro_cpf clearfix">
+									<div>
+										<input type="radio" name="rcadastro_cpf" id="rcpf_sim" value="sim" required="required" class="cpf_sim" />
+										<label for="rcpf_sim">Sim, meu CPF é:</label>
+										<input type="text" name="rcpf" id="rcpf" placeholder="CPF" maxlength="14" class="cpf" />
+									</div>
+									<div>
+										<input type="radio" name="rcadastro_cpf" id="rcpf_nao" value="nao" required="required" />
+										<label for="rcpf_nao">Não, quero apenas efetuar o login</label>
+									</div>
+								</div>
+
+								<div class="botoes"><a href="#" class="cancelar">Cancelar</a> ou <input type="submit" value="Entrar" class="botao_entrar" /></div>
+								
+							</form>
+						</div>
+					</div>
+
+
+					<div id="modal_cadastro" class="modal formulario">
+						<h3 class="b-cadastro">Cadastre-se no Portal</h3>
+						<div>
+							Cadastrando-se no Portal, você poderá:
+							<ul>
+								<li>Avaliar Organizações</li>
+								<li>Compartilhar informações com seus amigos</li>
+								<li>Definir suas preferências no portal</li>
+							</ul>
+							<form id="form_cadastro" name="form_cadastro" method="post">
+								<div class="clearfix">
+									<label for="cemail">Email:</label> <input type="text" name="cemail" id="cemail"  placeholder="E-mail" class="email" required="required" />
+
+									<label for="csenha">Senha:</label> <input type="password" name="csenha" id="csenha" placeholder="Senha" class="senha" required="required" />
+
+									<label for="ccsenha">Confirmar Senha:</label> <input type="password" name="ccsenha" id="ccsenha" placeholder="Confirmar Senha" required="required" class="senha" />
+
+									<label for="cnome">Nome:</label> <input type="text" name="cnome" id="cnome" placeholder="Nome" class="nome" required="required" />
+
+									<label for="ccpf">CPF</label> <input type="text" name="ccpf" id="ccpf" placeholder="CPF" class="cpf" required="required" />
+								</div>
+								<div>
+									<input type="checkbox" name="cinscrever" value="cinscrever" /> <div>Desejo receber e-mail sobre as novidades do Portal das Organizações da Sociedade Civil.</div>
+								</div>
+
+								<div class="botoes"><a href="#" class="cancelar">Cancelar</a> ou <input type="submit" value="Finalizar cadastro" /></div>
+							</form>
+						</div>
+					</div>
+
+
+					<div id="modal_entidade" class="modal formulario">
+						<h3 class="b-entidade"> Represente sua entidade</h3>
+						<div>
+							Sendo um representante da entidade, você poderá:
+							<ul>
+								<li>Informar dados da entidade</li>
+								<li>Compartilhar informações com seus amigos</li>
+								<li>Definir suas preferências no portal</li>
+							</ul>
+							
+							<div class="entidade_validacao">
+								
+								<div class="clearfix">
+									<img src="imagens/cadastro_01.png" width="20" height="20" alt="Etapa 1" />
+									<div>
+										<form>
+											Verifique se a entidade já está cadastrada no Portal, informando o nome ou CNPJ:
+											<input type="text" name="enome" id="enome" placeholder="Nome ou CNPJ da entidade" required="required" class="entidade" />
+											<div class="botoes">
+												<input type="button" value="Localizar" class="localizar" />
+										<script> // Script que simula o retorno da busca
+										$(document).ready(function() {
+											$('input.adicionar').hide();
+											$('input.localizar').click( function() {
+												$(this).hide();
+												$('input.adicionar').show();
+												$('input#enome').addClass('error');
+												$('input#enome').after('<label class="error adicionar">Não localizamos essa instituição ou CNPJ.<br />Gostaria de adicioná-la?</label>')
+											});
+											$('input.adicionar').click( function() {
+												$(this).hide();
+												$('input.localizar').show();
+												$('input#enome').removeClass('error');
+												$('label.error.adicionar').hide();
+
+											});
+										});
+										</script>
+										<input type="button" value="Adicionar" class="adicionar" />
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div>
+							<img src="imagens/cadastro_02.png" width="20" height="20" alt="Etapa 2" />
+							<div class="clearfix">
+								<strong>Informe seu certificado digital</strong> <br />
+								Se você ainda não possui um, contacte sua entidade para saber como obtê-lo.
+							</div>
+						</div>
+
+
+					</div>
+
+					<div class="entidade_validacao verificado">
+						
+						<div>
+							<img src="imagens/cadastro_01.png" width="20" height="20" alt="Etapa 1" />
+							<div>Sociedade para o Desenvolvimento da Tecnologia
+								da Informação  e Comunicação do Centro-Oeste 
+								- Instituto Centro - Oeste de desenvolvimentode
+								Software - ICODES <em class="verificado"></em>
+							</div>
+						</div>
+
+						<div>
+							<img src="imagens/cadastro_02.png" width="20" height="20" alt="Etapa 2" />
+							<div>Certificado Digital <em class="verificado"></em> </div>
+						</div>
+
+						
+					</div>
+
+					<form id="form_entidade" name="form_entidade" method="post" class="entidade_validacao">
+						<div>
+							<img src="imagens/cadastro_03.png" width="20" height="20" alt="Etapa 3" />
+							<div class="clearfix" id="entidade_identificacao">
+								<strong>Informe seus dados de identificação</strong> <br />
+								<label for="eemail">Email:</label> <input type="text" required="required" name="eemail" id="eemail"  placeholder="E-mail" class="email" />
+
+								<label for="esenha">Senha:</label> <input type="password" required="required" name="esenha" id="esenha" placeholder="Senha" class="senha" />
+
+								<label for="ecsenha">Confirmar Senha:</label> <input required="required" type="password" name="ecsenha" id="ecsenha" placeholder="Confirmar Senha" class="senha" />
+
+								<div><input type="checkbox" name="einscrever" value="einscrever" /> Desejo receber e-mail sobre as novidades do Portal das Organizações da Sociedade Civil.</div>
+							</div>
+						</div>
+						<div class="botoes"><a href="#" class="cancelar">Cancelar</a> ou <input type="submit" value="Entrar" class="botao_entrar" /></div>
+					</form>
+					
+					
+					
+					
+				</div>
+			</div>
+
+
+			<div class="bg-01"> </div>
+			<div class="bg-02"> </div>
+
+		</div>
+
+		<div id="rodape" class="clearfix">
+			<div class="clearfix">
+				<div class="celula01">
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Portal das Organizações da Sociedade Civil &copy; 2013</h2>
+							<a href="beta.html" class="beta">Versão BETA?</a>
+						</div>
+				<div class="celula02">
+					<span>Apoio</span>
+					<img class="normal" src="imagens/logo_fgv.png" alt="FGV Projetos" />
+					<img class="contraste" src="imagens/contraste/logo_fgv.png" alt="FGV Projetos" />
+				</div>
+				<div class="celula03">
+					<span>Realização</span>
+					<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+					<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+				</div>
+			</div>
+		</div>
+
+		<div id="footer" class="clearfix">
+			<div id="doormat-container" class="columns-4 clearfix">
+				<div class="doormatColumn column-0">
+					
+					<dl class="doormatSection"><dt class="doormatSectionHeader">O Portal</dt>
+						<dd class="doormatSectionBody">
+							<a href="#">OSCs em números</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">Dúvidas Frequentes</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">MROSC</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">Análise sobre Parcerias com a União</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">Editais Públicos</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">Capacitações</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">Biblioteca Virtual</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">Legislação</a>
+							
+						</dd>
+						<dd class="doormatSectionBody">
+							<a href="#">Links relacionados</a>
+							
+						</dd>
+						
+					</dl></div>
+					
+					<div class="doormatColumn column-1">
+						
+						<dl class="doormatSection"><dt class="doormatSectionHeader">Contato</dt>
+							<dd class="doormatSectionBody">
+								<a href="#">Lorem Ipsum</a>
+								
+							</dd>
+							<dd class="doormatSectionBody">
+								<a href="#">Dolor sit amet</a>
+								
+							</dd>
+							
+						</dl></div>
+						<div class="doormatColumn column-2">
+							
+							<dl class="doormatSection"><dt class="doormatSectionHeader">Redes sociais</dt>
+								<dd class="doormatSectionBody">
+									<a href="#">Facebook</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Twitter</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">YouTube</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Flickr</a>
+									
+								</dd>
+							</dl></div>
+
+							<div class="doormatColumn column-3">
+								<dl class="doormatSection">
+									<dt class="doormatSectionHeader">Mapa do site</dt>
+									<dd></dd> 
+								</dl>
+							</div>
+
+							<div class="doormatColumn column-4">
+								
+								<dl class="doormatSection"><dt class="doormatSectionHeader">RSS</dt>
+									<dd class="doormatSectionBody">
+										<a href="#">O que é RSS?</a>
+										
+									</dd>
+									<dd class="doormatSectionBody">
+										<a href="#">Assine nosso RSS</a>
+										
+									</dd>
+								</dl></div>
+								
+							</div>
+
+							
+							
+							<div class="footer-logos">
+								<div>
+									<a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+									<a href="http://www.brasil.gov.br/" class="logo-brasil"><img src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					
+					<script type="text/javascript" src="js/acessibilidade.js"></script>
+					<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+					<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
+					<script type="text/javascript" src="js/scripts_min.js"></script>
+					<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+					<script type="text/javascript" src="js/validacao_cadastro.js"></script>
+					
+					<script type="text/javascript">
+					$(document).ready(function() {
+						$(".box").fancybox({
+							type: 'inline',
+							closeClick	: false,
+							openEffect	: 'none',
+							closeEffect	: 'none',
+							padding: 0,
+							helpers : {
+								overlay : {
+									css : {
+										'background' : 'rgba(180, 180, 180, 0.8)'
+									}
+								}
+							},
+							tpl: {
+								closeBtn: '<div class="modal_fechar">X</div>'
+							}
+						});
+
+						$('input:radio[name=rcadastro_cpf]')[0].checked = true;
+
+						redimensionarTela();
+
+					});
+
+					/* Redimensionar o mapa e o menu no resize da janela */
+					function redimensionarTela() {
+						if($(window).height()<600) {
+							var newh = parseInt($(window).height())-alturaTopo-alturaRodape;
+							if(newh<370) newh = 370;		
+							if(newh<600) {
+								$('#mapa.cadastro').css('height', newh + 'px');
+							}
+						}
+						else {
+							$('#mapa.cadastro').css('height', parseInt($(window).height())-alturaTopo-alturaRodape); // volta à altura original
+						}
+					}
+					</script>
+
+					<!--[if lte IE 8]>
+					<script>
+						$("#modal_redes input[type=submit]").click(function(event) {
+							event.preventDefault();
+							 $("#modal_redes form").submit();
+						});
+						$("#modal_cadastro input[type=submit]").click(function(event) {
+							event.preventDefault();
+							 $("#modal_cadastro form").submit();
+						});
+						$("#modal_entidade input[type=submit]").click(function(event) {
+							event.preventDefault();
+							 $("#modal_entidade form").submit();
+						});
+
+						$("div.b-redes label").click(function() {
+							$("div.b-redes label").css('background-color','#000');
+							$(this).css('background-color','#1F3D93')
+						});
+
+					</script>
+					<![endif]-->
+				</body>
+
+				</html>
