@@ -5,7 +5,7 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.SafeHtmlCell;
@@ -14,8 +14,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.i18n.client.NumberFormat;
-import com.google.gwt.safecss.shared.SafeStyles;
-import com.google.gwt.safecss.shared.SafeStylesUtils;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -41,12 +39,12 @@ import com.google.gwt.view.client.Range;
 import com.google.gwt.view.client.RowCountChangeEvent;
 
 /**
- * @author victor Componente gr√°fico que apresenta os Infogr√°ficos na tela.
+ * @author victor Componente gr·fico que apresenta os Infogr·ficos na tela.
  */
 public class MatrixWidget extends Composite {
-	private Logger logger = Logger.getLogger(this.getClass().getName());
+	//private Logger logger = Logger.getLogger(this.getClass().getName());
 	private Place[] places;
-	private boolean ignoreClick;
+	//private boolean ignoreClick;
 	private ListBox indicatorListBox;
 	private Grid grid;
 
@@ -146,7 +144,7 @@ public class MatrixWidget extends Composite {
 			}
 		};
 
-		table.addColumn(placeColumn, "Localiza√ß√£o", "TOTAL");
+		table.addColumn(placeColumn, "LocalizaÁ„o", "TOTAL");
 
 		TextColumn<IndicatorTableValue> valueColumn = new TextColumn<IndicatorTableValue>() {
 			@Override
@@ -215,7 +213,7 @@ public class MatrixWidget extends Composite {
 		}
 	}
 
-	private static class AnchorCell extends AbstractCell<String> {
+	public static class AnchorCell extends AbstractCell<String> {
 
 		/**
 		 * The HTML templates used to render the cell.
@@ -236,7 +234,8 @@ public class MatrixWidget extends Composite {
 			 * @return a {@link SafeHtml} instance
 			 */
 			@SafeHtmlTemplates.Template("<a href=\"{0}\">{1}</a>")
-			SafeHtml cell(SafeStyles styles, SafeHtml value);
+			SafeHtml messageWithLink(String url, SafeHtml message);
+			//SafeHtml cell(SafeStyles styles, SafeHtml value);
 		}
 
 		/**
@@ -260,9 +259,9 @@ public class MatrixWidget extends Composite {
 			SafeHtml safeValue = SafeHtmlUtils.fromString(value);
 
 			// Use the template to create the Cell's html.
-			SafeStyles styles = SafeStylesUtils.forTrustedColor(safeValue
-					.asString());
-			SafeHtml rendered = templates.cell(styles, safeValue);
+			//SafeStyles styles = SafeStylesUtils.forTrustedColor(safeValue.asString());
+			String url = safeValue.asString();
+			SafeHtml rendered = templates.messageWithLink(url, safeValue);
 			sb.append(rendered);
 		}
 	}
