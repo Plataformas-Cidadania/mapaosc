@@ -36,5 +36,22 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/gwt-user.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/gwt-codeserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/gwt-dev.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/validation-api-1.0.0.GA.jar" sourcepath="C:/Users/b14122142/Desktop/Work/programs/gwt-2.7.0/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="output" path="target/MapaOSC-1.0.1-BETA/WEB-INF/classes"/>
 </classpath>

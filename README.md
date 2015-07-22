@@ -12,6 +12,8 @@ Por fim, ressalta-se que o MAPA será fonte de informações sistemáticas e atu
 
 **Dependências do projeto:**
 
+Gerenciador de Tarefas: Jira Cloud - https://plataformas-cidadania.atlassian.net
+
 Plataforma de Banco de dados: Postgresql / Postgis (http://www.postgresql.org/) 
 
 Framework de desenvolvimento Web: GWT versão 2.7 (http://www.gwtproject.org/) 
