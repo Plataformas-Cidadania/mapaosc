@@ -111,7 +111,7 @@ public class InfographicsController {
 
 	private void loadInfo02() {
 		Graph graph1 = new Graph();
-		graph1.setTitle("Cerca de <strong>4518</strong> OSCs");
+		graph1.setTitle("Cerca de <strong>4500</strong> OSCs com convênios celebrados");
 		graph1.setSvgImage("infograficos/recursos/infografico_7.png");
 		graph1.setSvgImageContrast("infograficos/recursos/contraste/infografico_7.png");
 		graph1.setWidth(332);
