@@ -154,47 +154,47 @@
 									<div class="gerais">
 										
 										<fieldset>
-											<p>
+											<div>
 												<strong>CNPJ:</strong>
 
 												<input type="text" name="ecnpj" id="ecnpj" value="86.795.176/0001-00" />
 
 												
-											</p>
-											<p>
+											</div>
+											<div>
 												<strong>Endereço:</strong>
 												<input type="text" name="eendereco" id="eendereco" value="Abcd" />
-											</p>
-											<p>
+											</div>
+											<div>
 												<strong>Localização:</strong>
 												<span>Lat</span>
 												<input class="local" type="text" name="elat" id="elat" value="132323" />
 												<span>Long</span>
 												<input class="local" type="text" name="elong" id="elong" value="2444" />
-											</p>
+											</div>
 											<!--<p>
 												<strong>Atividade econômica:</strong>
 												<input type="text" name="eatividade" id="eatividade" value="Abcd" />
 											</p>-->
 
-											<p>
+											<div>
 												<strong>Descrição:</strong>
 												<textarea name="edesc" id="edesc">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
-											</p>
-											<p>
+											</div>
+											<div>
 												<strong>Fundada em:</strong>
 												<input type="text" name="efundacao" id="efundacao" value="1945" />
-											</p>
+											</div>
 
-											<p>
+											<div>
 												<strong>Site:</strong>
 												<input type="text" name="esite" id="esite" value="www" />
-											</p>
+											</div>
 
-											<p>
+											<div>
 												<strong>E-mail:</strong>
 												<input type="text" name="eemail_org" id="eemail_org" value="fundacao@gmail.com" />
-											</p>
+											</div>
 
 											<!--<p>
 												<strong>Público-alvo:</strong>
@@ -246,72 +246,72 @@
 
 									</div>
 									<div class="collapsable">
-										<h2>Informações do Território <span class="collapse-click collapse-button negativo alternate"><div></div></span></h2>
+										<h2>Informações do Território <div class="collapse-click collapse-button negativo alternate"><div></div></div></h2>
 										<div class="territorio collapse-hidden">
 											<fieldset>
-												<p>
+												<div>
 													<strong>Região:</strong>
 													<a href="regiao">Sudeste</a>
-												</p>
-												<p>
+												</div>
+												<div>
 													<strong>Estado:</strong>
 													<a href="estado">Rio de Janeiro</a>
-												</p>
-												<p>
+												</div>
+												<div>
 													<strong>Município:</strong>
 													<a href="municipio">Rio de Janeiro</a>
-												</p>
-												<p>
+												</div>
+												<div>
 													<strong>Bairro/Região Censitária:</strong>
 													<a href="regiao">Centro</a>
-												</p>
+												</div>
 											</fieldset>
 										</div>
 									</div>
 									<div class="collapsable">
-										<h2>Colaboradores <span class="collapse-click collapse-button negativo"><div></div></span></h2>
+										<h2>Colaboradores <div class="collapse-click collapse-button negativo"><div></div></div></h2>
 										<div class="relacoes collapse-hidden">
 											<fieldset>
-												<p>
+												<div>
 													<strong>Funcionários:</strong>
 													<input type="text" name="efuncionarios" id="efuncionarios" value="10" />
-												</p>
-												<p>
+												</div>
+												<div>
 													<strong>Prestadores de serviço:</strong>
 													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</p>
-												<p>
+												</div>
+												<div>
 													<strong>Voluntários:</strong>
 													<input type="text" name="evoluntarios" id="evoluntarios" value="01" />
-												</p>
+												</div>
 											</fieldset>
 										</div>
 									</div>
 									<h2>Recursos públicos</h2>
 									<fieldset>
 										<div class="recursos collapsable">
-											<p>
+											<div>
 												<strong>Valor total das parcerias:</strong>
 												<span>R$</span>
 												<input type="text" name="vparcerias" id="vparcerias" value="243434343" />
-												<span class="collapse-click collapse-button"><div></div></span>
-											</p>
+												<div class="collapse-click collapse-button"><div></div></div>
+											</div>
 											<div class="collapse-hidden">
-											<p>
+											<div>
 												<strong>Valor das parcerias federais:</strong>
 												<span>R$</span>
 												<input type="text" name="vparceriasfederais" id="vparcerias" value="24344343" />
-											</p>
-											<p>
+											</div>
+											<div>
 												<strong>Valor das parcerias estaduais:</strong>
 												<span>R$</span>
 												<input type="text" name="vparceriasestaduais" id="vparcerias" value="2434111" />
-											</p>
-											<p>
+											</div>
+											<div>
 												<strong>Valor das parcerias municipais:</strong>
 												<span>R$</span>
 												<input type="text" name="vparceriasmunicipais" id="vparcerias" value="220000" />
-											</p>
+											</div>
 											</div>
 											<div>
 												<strong>Status de habilitação:</strong>
@@ -377,45 +377,54 @@
 
 									<div class="clearfix projeto collapsable">
 										<div class="projeto_header">
-											<span class="collapse-click collapse-button"><div></div></span>
-											<span class="status">Cancelado</span>
+											<div class="collapse-click collapse-button"><div></div></div>
 											<span class="nome">1 | Lorem ipsum dolor sit, consectetur adipiscing.</span>
 											<span class="clear_both"></span>
 										</div>
-										<div class="projeto_body">
+										<div class="projeto_body collapse-hidden">
 											<div class="linha clearfix">
 												<div class="col1_6">
-													<strong class="separador left-radius">Data de início</strong>
-													<p>12/07/1998</p>
+													<strong class="separador left-radius">Status</strong>
+													<p>
+														<select >
+															<option value="1" > Planejado </option>
+															<option value="2" > Em Execução </option>
+															<option value="3" > Finalizado </option>
+														</select>
+													</p>
 												</div>
 
 												<div class="col1_6">
-													<strong class="separador">Data de término</strong>
-													<p>12/07/1998</p>
+													<strong class="separador">Período</strong>
+													<p class="data_container"><input type="text" name="data_inicio" value='12/07/1998' /> a <input type="text" name="data_termino" value='12/07/2000' /></p>
 												</div>
 
 												<div class="col1_6">
 													<strong class="separador">Valor obtido</strong>
-													<p>R$ 1.000.000,00</p>
+													<p><input type="text" name="valor_obtido" value='R$ 1.000.000,00' /></p>
 												</div>
 												<div class="col1_6">
 													<strong class="separador">Valor planejado</strong>
-													<p>R$ 1.000.000,00</p>
+													<p><input type="text" name="valor_planejado" value='R$ 1.200.000,00' /></p>
 												</div>
 												
 
 												<div class="col1_6">
 													<strong class="separador">Fonte de recurso</strong>
-													<p>Privado, Público, Misto</p>
+													<p><select>
+															<option value="1" > Público </option>
+															<option value="2" > Privado </option>
+														</select>
+													</p>
 												</div>
 												<div class="col1_6">
 													<strong class="right-radius">Link</strong>
-													<p><a href="vamosla">link para página</a></p>
+													<p><a href="vamosla" contenteditable='true'>link para página</a></p>
 												</div>
 											</div>
 										
 
-											<div class="clearfix collapse-hidden linha">
+											<div class="clearfix linha">
 												<div class="col1_2">
 													<strong class="separador left-radius">Financiadores</strong>
 													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
@@ -435,53 +444,62 @@
 
 									<div class="clearfix projeto collapsable">
 										<div class="projeto_header">
-											<span class="collapse-click collapse-button"><div></div></span>
-											<span class="status">Cancelado</span>
+											<div class="collapse-click collapse-button"><div></div></div>
 											<span class="nome">2 | Lorem ipsum dolor sit, consectetur adipiscing.</span>
 											<span class="clear_both"></span>
 										</div>
-										<div class="projeto_body">
+										<div class="projeto_body collapse-hidden">
 											<div class="linha clearfix">
 												<div class="col1_6">
-													<strong class="separador left-radius">Data de início</strong>
-													<p>12/07/1998</p>
+													<strong class="separador left-radius">Status</strong>
+													<p>
+														<select disabled="disabled">
+															<option value="1" > Planejado </option>
+															<option value="2" > Em Execução </option>
+															<option value="3" selected="selected"> Finalizado </option>
+														</select>
+													</p>
 												</div>
 
 												<div class="col1_6">
-													<strong class="separador">Data de término</strong>
-													<p>12/07/1998</p>
+													<strong class="separador">Período</strong>
+													<p class="data_container"><input type="text" name="data_inicio" value='12/07/1998' disabled="disabled" /> a <input type="text" name="data_termino" value='12/07/2000' disabled="disabled" /></p>
 												</div>
 
 												<div class="col1_6">
 													<strong class="separador">Valor obtido</strong>
-													<p>R$ 1.000.000,00</p>
+													<p><input type="text" name="valor_obtido" value='R$ 1.000.000,00' disabled="disabled" /></p>
 												</div>
 												<div class="col1_6">
 													<strong class="separador">Valor planejado</strong>
-													<p>R$ 1.000.000,00</p>
+													<p><input type="text" name="valor_planejado" value='R$ 1.200.000,00' disabled="disabled" /></p>
 												</div>
 												
 
 												<div class="col1_6">
 													<strong class="separador">Fonte de recurso</strong>
-													<p>Privado, Público, Misto</p>
+													<p><select disabled="disabled">
+															<option value="1" > Público </option>
+															<option value="2" selected="selected"> Privado </option>
+														</select>
+													</p>
 												</div>
 												<div class="col1_6">
 													<strong class="right-radius">Link</strong>
-													<p><a href="vamosla">link para página</a></p>
+													<p><a href="vamosla" contenteditable='false'>link para página</a></p>
 												</div>
 											</div>
 										
 
-											<div class="clearfix collapse-hidden linha">
+											<div class="clearfix linha">
 												<div class="col1_2">
 													<strong class="separador left-radius">Financiadores</strong>
-													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+													<textarea name="financiadores" id="financiadores1" disabled="disabled">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
 												</div>
 
 												<div class="col1_2">
 													<strong class="right-radius">Descrição</strong>
-													<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+													<textarea name="descprojeto" id="descprojeto1" disabled="disabled">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
 										</div>
@@ -657,6 +675,22 @@
 			});
 		});
 
+		$('a[contenteditable=true]').focusin(function() {
+			el = $(this);
+			if(el.attr('contenteditable') == 'true') {
+				el.html(el.attr('href'));
+			}
+		});
+		
+		$('a[contenteditable=true]').focusout(function() {
+			el = $(this);
+			if(el.attr('contenteditable') == 'true') {
+				
+				el.attr('href',el.text());
+				el.html('link para fonte');
+			}
+		});
+		
 		$('.box').fancybox({
 				type: 'iframe',
 				closeClick	: false,
