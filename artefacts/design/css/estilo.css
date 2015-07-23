@@ -2146,7 +2146,7 @@ width:150px;
 background:url(../imagens/dropdown_arrow.png) no-repeat center right;
 }
 
-#mapa.organizacao div.tabela .dados div p:hover input[type=text],#mapa.organizacao div.tabela .dados div ul li:hover input[type=text],#mapa.organizacao div.tabela .dados div div:hover select,#mapa.organizacao div.tabela input[type=text]:focus,#mapa.organizacao div.tabela .dados div p:hover textarea,#mapa.organizacao div.tabela .projetos input:hover,#mapa.organizacao div.tabela .projetos textarea:hover {
+#mapa.organizacao div.tabela .dados div p:hover input[type=text],#mapa.organizacao div.tabela .dados div ul li:hover input[type=text],#mapa.organizacao div.tabela .dados div div:hover select,#mapa.organizacao div.tabela input[type=text]:focus,#mapa.organizacao div.tabela .dados div p:hover textarea,#mapa.organizacao div.tabela .projetos input:hover,#mapa.organizacao div.tabela .projetos textarea:hover, #mapa.organizacao div.tabela .projetos select:hover {
 border-color:#aaa;
 background-color:#fff;
 }
@@ -2444,7 +2444,23 @@ a.exportar:hover{text-decoration: none; color:#fff;}
     transition: height 0.6s;
 }
 
-.collapse-button {
+#mapa.organizacao div.tabela .dados div.collapse-button {
+  display: inline-block;
+  margin-right: 3px;
+  vertical-align: middle;
+}
+
+#mapa.organizacao div.tabela .dados div.collapse-button:hover {
+	background-color: transparent;
+}
+
+.projetos button.adicionar {
+	float: right;
+	margin-top: 3px;
+	margin-right: 3px;
+}
+
+#mapa.organizacao div.tabela .dados div.collapse-button, div.collapse-button {
     width: 30px;
     height: 35px;
     float:right;
@@ -2623,4 +2639,19 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 .esqueci_senha .botoes {
 	width: 11.5em;
 	margin: 0 auto;
+}
+
+.projetos select {
+	-ms-expand: none;
+	-webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+}
+
+.projetos select:focus {
+	border-radius: 10px 10px 0 0 !important;
+}
+
+.projetos .data_container, .projetos .data_container input {
+	text-align: center;
 }
