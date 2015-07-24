@@ -4,7 +4,7 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-	<context-param>a
+	<context-param>
 		<param-name>TestMode</param-name>
 		<param-value>FALSE</param-value>
 	</context-param>
