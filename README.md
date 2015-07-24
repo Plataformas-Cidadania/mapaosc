@@ -24,6 +24,6 @@ Gerenciador de projetos: Maven 2 (http://maven.apache.org/)
 
 API do Google Maps (https://developers.google.com/maps/documentation/javascript/?hl=pt-BR)
 
-** Wiki do projeto **
+**Wiki do projeto:**
 
 https://github.com/Plataformas-Cidadania/mapaosc/wiki
