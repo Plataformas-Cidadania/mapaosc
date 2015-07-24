@@ -11,3 +11,5 @@ gwt-unitCache
 www-test
 env
 .settings
+# ignore web.xml because the connection info
+src/main/webapp/WEB-INF/web.xml
