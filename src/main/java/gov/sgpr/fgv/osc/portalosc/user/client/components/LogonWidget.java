@@ -42,6 +42,8 @@ public class LogonWidget extends Composite {
 				.append("	<label for='senha' class='esconder'>Senha</label>");
 		htmlBuilder
 				.append("	<input type='password' name='senha' id='senha' placeholder='Senha' />");
+		htmlBuilder
+				.append("	<div id='floatingLoginErrorList'></div>");
 		htmlBuilder.append("	<div>");
 		htmlBuilder.append("		<a href='#'>Esqueci a senha</a>");
 		htmlBuilder.append("		<a href='");
@@ -128,7 +130,15 @@ public class LogonWidget extends Composite {
 					required : 'Campo obrigatório.',
 					email : 'Por favor, informe um email válido'
 				}
-			}
+			},
+			
+			errorPlacement: function(error, element) {
+				element.closest('form').addClass('formError');
+				error.appendTo($wnd.jQuery('#floatingLoginErrorList'));
+			},
+			success: function(enter, element) {
+				element.closest('form').removeClass('formError');
+			},
 		});
 	}-*/;
 

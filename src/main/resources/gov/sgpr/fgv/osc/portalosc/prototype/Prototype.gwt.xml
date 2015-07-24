@@ -3,7 +3,8 @@
 <module rename-to='Prototype'>
 	<!-- Inherit the core Web Toolkit stuff. -->
 	<inherits name='com.google.gwt.user.User' />
-
+	<define-property name="gwt.logging.firebugHandler" values="ENABLED, DISABLED"/>
+	<define-property name="gwt.logging.popupHandler" values="ENABLED, DISABLED"/>
 	<!-- We need the JUnit module in the main module, -->
 	<!-- otherwise eclipse complains (Google plugin bug?) -->
 	<inherits name='com.google.gwt.junit.JUnit' />

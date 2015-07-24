@@ -160,7 +160,7 @@ public class MenuItemWidget extends Composite {
 			Event.setEventListener(spanPopup, new EventListener() {
 				@Override
 				public void onBrowserEvent(Event event) {
-					final int left = event.getClientX() - 40;
+					final int left = event.getClientX() - 15;
 					final int bottom = event.getClientY();
 					span.getStyle().setMarginLeft(left, Unit.PX);
 					span.getStyle().setMarginBottom(bottom, Unit.PX);

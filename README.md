@@ -12,6 +12,8 @@ Por fim, ressalta-se que o MAPA será fonte de informações sistemáticas e atu
 
 **Dependências do projeto:**
 
+Gerenciador de Tarefas: Jira Cloud - https://plataformas-cidadania.atlassian.net
+
 Plataforma de Banco de dados: Postgresql / Postgis (http://www.postgresql.org/) 
 
 Framework de desenvolvimento Web: GWT versão 2.7 (http://www.gwtproject.org/) 
@@ -21,3 +23,7 @@ Linguagem de programação: Java JDK 1.7 (http://www.oracle.com/technetwork/pt/j
 Gerenciador de projetos: Maven 2 (http://maven.apache.org/)
 
 API do Google Maps (https://developers.google.com/maps/documentation/javascript/?hl=pt-BR)
+
+**Wiki do projeto:**
+
+https://github.com/Plataformas-Cidadania/mapaosc/wiki

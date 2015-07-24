@@ -46,7 +46,8 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		String key[] = context.getInitParameter("CHAVE_CRIPTOGRAFIA").split(",");
 		desKey = new Byte[key.length];
 		for (int i = 0; i < key.length; i++){
-			int intElem = Integer.valueOf(key[i].trim());
+			String valueString=key[i].trim();
+			int intElem = Integer.valueOf(valueString);
 			desKey[i] = (byte) intElem;
 		}
 	}
