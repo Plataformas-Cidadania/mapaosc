@@ -47,8 +47,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		desKey = new Byte[key.length];
 		for (int i = 0; i < key.length; i++){
 			String valueString=key[i].trim();
-			if(valueString.equals("[CRIPT]"))
-				valueString="9999";//tratamento provisório pra string estranha que está vindo 
 			int intElem = Integer.valueOf(valueString);
 			desKey[i] = (byte) intElem;
 		}
