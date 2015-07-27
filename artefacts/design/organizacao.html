@@ -313,13 +313,13 @@
 												<input type="text" name="vparceriasmunicipais" id="vparcerias" value="220000" />
 											</div>
 											</div>
-											<div>
+											<!-- <div>
 												<strong>Status de habilitação:</strong>
 												<select name="ehabilitacao">
 													<option value="sim">Habilitada</option>
 													<option value="nao" selected>Não habilitada</option>
 												</select>
-											</div>
+											</div>-->
 										</div>
 									</fieldset>					
 								</div>
@@ -373,6 +373,17 @@
 									<div class="titulo">
 										<h2>Projetos</h2>
 										<button type="button" class="adicionar">Adicionar</button>
+										<div class="filtro">
+											<span>Fontes:</span>
+											<span>
+												<label for='SICONV'>SICONV</label>
+												<input type='checkbox' name='SICONV' />
+											</span>
+											<span>
+												<label for='PRIVADO'>Privado</label>
+												<input type='checkbox' name='PRIVADO' />
+											</span>
+										</div>
 									</div>
 
 									<div class="clearfix projeto collapsable">
