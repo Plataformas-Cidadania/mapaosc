@@ -1977,7 +1977,7 @@ margin:5px 5px;
 margin:5px;
 }
 
-#mapa.organizacao div.projetos div div {
+#mapa.organizacao div.projetos div.projeto div {
     background-color:#FFF;
 }
 
@@ -2009,7 +2009,7 @@ border-radius:0 5px 5px 0;
 border-radius:5px;
 }
 
-#mapa.organizacao div.projetos div span {
+#mapa.organizacao div.projetos div.projeto span {
 display:block;
 margin:7px;
 overflow:hidden;
@@ -2219,7 +2219,7 @@ visibility:hidden;
 visibility:visible;
 }
 
-#mapa.organizacao div.tabela .projetos input,#mapa.organizacao div.tabela .projetos select,#mapa.organizacao div.tabela .projetos textarea {
+#mapa.organizacao div.tabela .projetos .projeto input,#mapa.organizacao div.tabela .projetos .projeto select,#mapa.organizacao div.tabela .projetos .projeto textarea {
 width:100%;
 }
 
@@ -2654,4 +2654,21 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 
 .projetos .data_container, .projetos .data_container input {
 	text-align: center;
+}
+
+.projetos div.filtro {
+	display: inline-block;
+	margin: 0;
+	background-color: transparent;
+	float: right;
+}
+
+.projetos div.filtro span {
+	display:inline-block;
+	margin: 0;
+}
+
+.projetos div.filtro span label {
+	clear:none;
+	float: none;
 }
