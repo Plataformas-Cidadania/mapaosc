@@ -168,6 +168,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				info.setVisible(false);
 				divMapa.getStyle().setDisplay(Display.BLOCK);
 				divMapa.setClassName("");
+				initFunction();
 				removeResizeHandler();
 				map.addResizeHandler();
 			}
@@ -590,6 +591,7 @@ public class MenuController implements ValueChangeHandler<String> {
 					$wnd.jQuery('.contraste').hide();
 
 					//$wnd.tooltips_padrao();
+					$wnd.redimensionarMapa();
 					$wnd.redimensionarGraficos();
 
 				});
