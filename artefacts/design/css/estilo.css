@@ -2010,7 +2010,7 @@ border-radius:5px;
 }
 
 #mapa.organizacao div.projetos div.projeto span {
-display:block;
+display:inline-block;
 margin:7px;
 overflow:hidden;
 }
@@ -2569,6 +2569,7 @@ a.exportar:hover{text-decoration: none; color:#fff;}
     clear: both;
     margin: 0 !important;
     padding: 0 !important;
+    display: inline !important;
 }
 
 .projeto_header .status {
@@ -2671,4 +2672,25 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 .projetos div.filtro span label {
 	clear:none;
 	float: none;
+}
+
+.nome .titulo_projeto {
+	min-width:80%;
+}
+
+.nome .titulo_projeto input {
+	padding: 5px;
+	border-radius:10px;
+}
+
+.no_margin_right {
+	margin-right:0px !important;
+}
+
+.no_margin_left {
+	margin-left:0px !important;
+}
+
+.no_margin {
+	margin: 0px !important;
 }
