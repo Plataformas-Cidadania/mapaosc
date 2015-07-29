@@ -137,7 +137,8 @@ public class LogonWidget extends Composite {
 				error.appendTo($wnd.jQuery('#floatingLoginErrorList'));
 			},
 			success: function(enter, element) {
-				element.closest('form').removeClass('formError');
+				$wnd.jQuery(element).closest('form').removeClass('formError');
+				$wnd.jQuery(element).removeClass('error');
 			},
 		});
 	}-*/;
