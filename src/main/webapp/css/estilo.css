@@ -3119,7 +3119,7 @@ div.infographicContainer{
     transform: rotate(-90deg);
 }
 
-.formError #floatingLoginErrorList {
+#floatingLoginErrorList {
 	position: absolute;
 	top: 0;
 	width: 200px;
@@ -3127,9 +3127,10 @@ div.infographicContainer{
 	background-color: rgba(200,200,200,0.2);
 	padding: 5px;
 	border-radius: 5px;
+	display: none;
 }
 
-.formError div#floatingLoginErrorList::after {
+div#floatingLoginErrorList::after {
   position: absolute;
   border: solid;
   content: '.';
@@ -3138,6 +3139,10 @@ div.infographicContainer{
   border-width: 10px 0 10px 15px;
   border-color: transparent transparent transparent rgba(200,200,200,0.2);
 }
+
+.formError #floatingLoginErrorList {
+	display: block;
+} 
 
 #mapa.cadastro .instrucoes ul li.desabilitado a {
 	background-color: #5e5e5e;
