@@ -3170,5 +3170,19 @@ div#floatingLoginErrorList::after {
 }
 
 .carousel-item {
-	
+	position: absolute;
+    top: -25px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    width: 420px;
+    height: 40px;
+    z-index: 1;
+}
+
+.carousel-item.now {
+	opacity: 1;
+	z-index: 10;
 }
