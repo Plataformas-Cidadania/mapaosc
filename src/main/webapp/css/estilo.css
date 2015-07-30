@@ -3099,13 +3099,13 @@ div.infographicContainer{
     float: right;
     background-color: transparent;
     border-style: solid;
-    border-width: 10px 15px 10px 0;
+    border-width: 8px 12px 8px 0;
     /*border-color: transparent #1F3D93 transparent transparent;*/
     border-color: transparent #000 transparent transparent;
-    width: 15px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
     padding: 0px;
-    margin: 4px;
+    margin: 6px;
 }
 
 #mapa_navegacao .tabbody h4:hover a em {
