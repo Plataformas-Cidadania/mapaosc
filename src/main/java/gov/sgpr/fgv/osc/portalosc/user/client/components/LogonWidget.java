@@ -133,12 +133,22 @@ public class LogonWidget extends Composite {
 			},
 			
 			errorPlacement: function(error, element) {
-				element.closest('form').addClass('formError');
 				error.appendTo($wnd.jQuery('#floatingLoginErrorList'));
 			},
-			success: function(enter, element) {
-				$wnd.jQuery(element).closest('form').removeClass('formError');
+			
+			showErrors: function(errorMap, errorList) {
+				if(errorList.length > 0) {
+					$wnd.jQuery(errorList[0].element).closest('form').addClass('formError');
+				}
+				this.defaultShowErrors();
+			},
+			
+			success: function(label, element) {
 				$wnd.jQuery(element).removeClass('error');
+				$wnd.jQuery(label).remove();
+				if($wnd.jQuery(element).closest('form').find('.error').length == 0) {
+					$wnd.jQuery(element).closest('form').removeClass('formError');
+				}
 			},
 		});
 	}-*/;
