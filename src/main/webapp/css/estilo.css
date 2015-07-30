@@ -3086,7 +3086,7 @@ div.infographicContainer{
 	padding-left:10px;
 }
 
-#mapa_navegacao .tabbody em {
+#mapa_navegacao .tabbody a > em {
 	background-image: none !important;
 	-moz-transition: all 0.4s ease;
     -webkit-transition: all 0.4s ease;
@@ -3162,4 +3162,18 @@ div#floatingLoginErrorList::after {
 
 #mapa.cadastro .instrucoes ul li.desabilitado .b-redes+em {
 	background-image: url(../imagens/cadastro_01_desabilitado.png);
+}
+
+#mapa_navegacao #menu_itens h4 > span {
+    display: block;
+    padding-left: 10px;
+}
+
+#mapa_navegacao #menu_itens h4:hover > span {
+    background-color: #1F3D93;
+    color: white;
+}
+
+#mapa_navegacao #menu_itens h4:hover > span > span {
+    margin-top: 28px;
 }
