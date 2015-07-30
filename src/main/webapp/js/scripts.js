@@ -8,6 +8,11 @@ $(document).ready(
 				$('#campobusca').focus();
 				return false;
 			});
+			setInterval(
+					function(){
+				carouselRoll('.carousel-wrapper');
+				},
+				5000);
 			/* Menu lateral expansivel */
 			$("#mapa_expandir button#expandir").attr('title', 'Fechar menu');
 			$('#expandir_menu').hide();
@@ -72,6 +77,15 @@ $(document).ready(
 			});
 
 		});
+
+function carouselRoll(carousel) {
+	var nextElement = $(carousel).find('.carousel-item.now + .carousel-item');
+	if($(carousel).find('.carousel-item.now:last-child').length > 0) {
+		nextElement = $(carousel).find('.carousel-item:first-child');
+	}
+	$(carousel).find('.carousel-item.now').removeClass('now');
+	nextElement.addClass('now');
+}
 
 /* Contraste */
 $("#contraste_normal").click(function() {
