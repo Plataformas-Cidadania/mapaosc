@@ -3163,3 +3163,12 @@ div#floatingLoginErrorList::after {
 #mapa.cadastro .instrucoes ul li.desabilitado .b-redes+em {
 	background-image: url(../imagens/cadastro_01_desabilitado.png);
 }
+
+.carousel-wrapper {
+	position: relative;
+	display:inline-block;
+}
+
+.carousel-item {
+	
+}
