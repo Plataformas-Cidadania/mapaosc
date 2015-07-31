@@ -1,9 +1,9 @@
 ﻿-- Municípios
-
+-- mudei aqui ó !
 DELETE FROM olap.ft_municipio;
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
-    SELECT c.edmu_cd_municipio, 1, count(a.bosc_sq_osc) FROM data.tb_osc a , syst.tb_osc_interacao b , data.tb_localizacao c
+    SELECT c.edmu_cd_municipio, 1, count(a.bosc_sq_osc) FROM data.tb_osc a , portal.tb_osc_interacao b , data.tb_localizacao c
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 
@@ -13,7 +13,7 @@ INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_va
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
   SELECT c.edmu_cd_municipio, 2, sum(a.siconv_qt_parceria_finalizada + a.siconv_qt_parceria_execucao) 
-  FROM data.tb_osc_siconv a , syst.tb_osc_interacao b , data.tb_localizacao c
+  FROM data.tb_osc_siconv a , portal.tb_osc_interacao b , data.tb_localizacao c
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 
@@ -25,7 +25,7 @@ INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_va
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
   SELECT c.edmu_cd_municipio, 3, sum(a.siconv_vl_global) 
-  FROM data.tb_osc_siconv a , syst.tb_osc_interacao b , data.tb_localizacao c
+  FROM data.tb_osc_siconv a , portal.tb_osc_interacao b , data.tb_localizacao c
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 
@@ -37,7 +37,7 @@ INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_va
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
 SELECT c.edmu_cd_municipio, 4, sum(a.rais_qt_vinculo_ativo) 
-  FROM data.tb_osc_rais a , syst.tb_osc_interacao b , data.tb_localizacao c
+  FROM data.tb_osc_rais a , portal.tb_osc_interacao b , data.tb_localizacao c
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 

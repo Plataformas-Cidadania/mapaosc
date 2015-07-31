@@ -2,7 +2,6 @@ package gov.sgpr.fgv.osc.portalosc.map.shared.interfaces;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface PlaceServiceAsync
 {
@@ -60,7 +59,7 @@ public interface PlaceServiceAsync
 
         private Util()
         {
-            // Utility class should not be instanciated
+            // Utility class should not be instantiated
         }
     }
 }
