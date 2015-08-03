@@ -71,10 +71,21 @@ label.error,#mapa.config h3 ~ fieldset,
 }
 #busca {
 	background: transparent;
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC);
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC)";
+	/*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC)";*/
 	zoom: 1;
 }
+
+#resultado_busca {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#EFFFFFFF);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#EFFFFFFF)";
+}
+
+#busca>div>form {
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC)";
+}
+
 #mapa_expandir button#expandir {
 	background: transparent;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99244196,endColorstr=#99244196);
@@ -109,4 +120,21 @@ label.error,#mapa.config h3 ~ fieldset,
 
 #topo_acessibilidade, #topo_links, #rodape, #footer {
 	zoom: 1;
+}
+
+#mapa_navegacao #menu_infograficos h4 a {
+	float: none;
+	display:block;
+	padding-left:10px;
+}
+
+#mapa_navegacao .tabbody em.dados_abertos {
+	border-width: 12px 8px 0px 8px;
+    border-color: #000 transparent transparent transparent;
+}
+
+#mapa_navegacao .tabbody h4:hover em.dados_abertos {
+	margin-top: 8px;
+	border-width: 12px 8px 0px 8px;
+    border-color: white transparent transparent transparent;
 }

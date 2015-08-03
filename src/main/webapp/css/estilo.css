@@ -3078,9 +3078,16 @@ div.infographicContainer{
 
 #mapa_navegacao h4 a {
 	float: right;
+	min-height:30px;
 }
 
-#mapa_navegacao h4 span a, #mapa_navegacao h4 a:only-child {
+#mapa_navegacao h4 span a {
+	float: none;
+	display:block;
+	padding-left:10px;
+}
+
+#mapa_navegacao h4 a:only-child {
 	float: none;
 	display:block;
 	padding-left:10px;
