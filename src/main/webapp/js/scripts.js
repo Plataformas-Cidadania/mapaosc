@@ -234,6 +234,7 @@ function redimensionarMapa() {
 		// original
 		$("#mapa_navegacao").css('height',
 				parseInt($(window).height()) - alturaTopo - alturaRodape - 110);
+		google.maps.event.trigger(mapa_google, 'resize');
 	}
 }
 
