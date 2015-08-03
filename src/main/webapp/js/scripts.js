@@ -234,8 +234,8 @@ function redimensionarMapa() {
 		// original
 		$("#mapa_navegacao").css('height',
 				parseInt($(window).height()) - alturaTopo - alturaRodape - 110);
-		google.maps.event.trigger(mapa_google, 'resize');
 	}
+	google.maps.event.trigger(mapa_google, 'resize');
 }
 
 /* Redimensionar o mapa e o menu no resize da janela */
