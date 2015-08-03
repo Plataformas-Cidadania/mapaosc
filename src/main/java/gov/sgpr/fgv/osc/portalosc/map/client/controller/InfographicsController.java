@@ -43,14 +43,14 @@ public class InfographicsController {
 
 	private void loadInfo01() {
 		Graph graph1 = new Graph();
-		graph1.setTitle("<strong>325 mil</strong> OSCs");
+		graph1.setTitle("<strong>303 mil</strong> OSCs");
 		graph1.setSvgImage("infograficos/numeros/infografico_1.png");
 		graph1.setSvgImageContrast("infograficos/numeros/contraste/infografico_1.png");
 		graph1.setWidth(332);
 		graph1.setHeight(292);
 
 		Graph graph2 = new Graph();
-		graph2.setTitle("<strong>2,2 milhões</strong> de vínculos ativos");
+		graph2.setTitle("<strong>2,1 milhões</strong> de vínculos formais");
 		graph2.setSvgImage("infograficos/numeros/infografico_2.svg");
 		graph2.setSvgImageContrast("infograficos/numeros/contraste/infografico_2.svg");
 		graph2.setWidth(332);
@@ -111,7 +111,7 @@ public class InfographicsController {
 
 	private void loadInfo02() {
 		Graph graph1 = new Graph();
-		graph1.setTitle("Cerca de <strong>4500</strong> OSCs com convênios celebrados");
+		graph1.setTitle("Cerca de <strong>11 mil</strong> OSCs");
 		graph1.setSvgImage("infograficos/recursos/infografico_7.png");
 		graph1.setSvgImageContrast("infograficos/recursos/contraste/infografico_7.png");
 		graph1.setWidth(332);
