@@ -167,8 +167,8 @@ public class MenuController implements ValueChangeHandler<String> {
 				search.setVisible(true);
 				info.setVisible(false);
 				divMapa.getStyle().setDisplay(Display.BLOCK);
-				initFunction();
 				divMapa.setClassName("");
+				initFunction();
 				removeResizeHandler();
 				map.addResizeHandler();
 			}
