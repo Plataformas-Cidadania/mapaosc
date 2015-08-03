@@ -167,6 +167,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				search.setVisible(true);
 				info.setVisible(false);
 				divMapa.getStyle().setDisplay(Display.BLOCK);
+				initFunction();
 				divMapa.setClassName("");
 				removeResizeHandler();
 				map.addResizeHandler();
@@ -591,6 +592,7 @@ public class MenuController implements ValueChangeHandler<String> {
 
 					//$wnd.tooltips_padrao();
 					$wnd.redimensionarGraficos();
+					$wnd.redimensionarMapa();
 
 				});
 		function tooltips_padrao() {

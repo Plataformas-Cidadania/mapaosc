@@ -226,10 +226,10 @@ function redimensionarMapa() {
 /* Redimensionar o mapa e o menu no resize da janela */
 function redimensionarGraficos() {
 	var alturaTela = $('#infograficos').height();
-	$('#mapa').css('height', alturaTela + 'px');
+	$('#mapa.infograficos').css('height', alturaTela + 'px');
 	var alturaMenu = parseInt($(window).height()) - alturaTopo - alturaRodape
 			- 110;
-	$("#mapa_navegacao").css('height', alturaMenu + 'px');
+	$(".infograficos #mapa_navegacao").css('height', alturaMenu + 'px');
 	$('body').css('overflow', 'auto');
 	$('html,body').scrollTop(0);
 }
