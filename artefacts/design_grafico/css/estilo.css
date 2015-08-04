@@ -270,11 +270,11 @@ float:right;
 vertical-align:middle;
 }
 
-#topo_acesso input#entrar {
+#topo_acesso input#entrar, input#esqueci_senha {
 background-image:url(../imagens/13_login.png);
 }
 
-#topo_acesso input#entrar:hover {
+#topo_acesso input#entrar:hover, input#esqueci_senha:hover {
 color:#1F3D93;
 background-image:url(../imagens/13_login_hover.png);
 }
@@ -1138,7 +1138,7 @@ height:180px;
 background:url(../imagens/cadastro_mapa3.png) no-repeat right top;
 }
 
-#mapa.cadastro h1,#mapa.config h1,#mapa.organizacao h1,#mapa.institucional h1, #mapa.infograficos h1 {
+#mapa.cadastro h1,#mapa.config h1,#mapa.organizacao h1,#mapa.institucional h1, #mapa.infograficos h1, #mapa.alterar_senha h1 {
 font-size:1.2em;
 display:block;
 text-transform:uppercase;
@@ -2693,4 +2693,61 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 
 .no_margin {
 	margin: 0px !important;
+}
+
+#mapa.alterar_senha .wrapper {
+	margin: 0 auto;
+	width: 60%;
+	min-width: 300px;
+}
+
+#mapa.alterar_senha .container {
+	margin: 50px 0;
+}
+
+#mapa.alterar_senha .wrapper form {
+	padding: 20px;
+	border-radius: 20px;
+	background-color: #ECECEC;
+}
+
+#mapa.alterar_senha .wrapper form label {
+	min-width: 140px;
+	display: inline-block;
+}
+
+p.esqueceu_senha {
+	margin: 15px 0;
+	font-size:18px;
+}
+
+input#esqueci_senha {
+	background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: right;
+    margin-top:5px;
+    padding: 5px;
+    padding-right: 25px;
+    font-size: 16px;
+    float:right;
+    border: 0px solid #aaa;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+input#esqueci_senha:hover {
+	color: #1f3d93;
+}
+
+.small_form {
+	display:inline-block;
+}
+
+.small_form .coluna_1 {
+	display: inline-block;
+}
+
+.small_form .coluna_2 {
+	display: inline-block;
 }
