@@ -39,7 +39,7 @@ import com.google.gwt.view.client.Range;
 import com.google.gwt.view.client.RowCountChangeEvent;
 
 /**
- * @author victor Componente gr·fico que apresenta os Infogr·ficos na tela.
+ * @author victor Componente gr√°fico que apresenta os Infogr√°ficos na tela.
  */
 public class MatrixWidget extends Composite {
 	//private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -68,7 +68,7 @@ public class MatrixWidget extends Composite {
 			indicatorListBox.addItem(ind);
 		}
 		int count = places.length > 50 ? 50 : places.length;
-		indicatorListBox.setVisibleItemCount(count);
+		indicatorListBox.setVisibleItemCount(count+1);//+1 pra evitar o erro de criar um dropbox de 1 item s√≥
 		String listHeight = (indicators.size() * 30) + "px";
 		indicatorListBox.setHeight(listHeight);
 		grid.setWidget(0, 0, indicatorListBox.asWidget());
@@ -144,7 +144,7 @@ public class MatrixWidget extends Composite {
 			}
 		};
 
-		table.addColumn(placeColumn, "LocalizaÁ„o", "TOTAL");
+		table.addColumn(placeColumn, "Localiza√ß√£o", "TOTAL");
 
 		TextColumn<IndicatorTableValue> valueColumn = new TextColumn<IndicatorTableValue>() {
 			@Override
