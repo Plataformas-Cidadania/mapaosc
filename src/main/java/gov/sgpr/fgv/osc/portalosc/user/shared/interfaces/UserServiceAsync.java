@@ -2,7 +2,6 @@ package gov.sgpr.fgv.osc.portalosc.user.shared.interfaces;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface UserServiceAsync
 {
@@ -74,7 +73,7 @@ public interface UserServiceAsync
 
         private Util()
         {
-            // Utility class should not be instanciated
+            // Utility class should not be instantiated
         }
     }
 }
