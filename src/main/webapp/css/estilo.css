@@ -1296,7 +1296,7 @@ span.menuTooltip:hover  {
 span.menuTooltip span {
      z-index:1000;
      display: none; 
-     position:fixed;
+     position:absolute;
      padding-top:5px;
      padding-bottom: 5px;
      padding-right:6px;
@@ -1314,7 +1314,7 @@ span.menuTooltip:hover span{
      text-shadow: 0 1px black;
      line-height: 15px;
 	 display:block;
-     position:fixed;
+     position:absolute;
      overflow:hidden;
       }
 
