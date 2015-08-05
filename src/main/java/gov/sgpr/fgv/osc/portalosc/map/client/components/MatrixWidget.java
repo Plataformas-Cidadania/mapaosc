@@ -68,7 +68,7 @@ public class MatrixWidget extends Composite {
 			indicatorListBox.addItem(ind);
 		}
 		int count = places.length > 50 ? 50 : places.length;
-		indicatorListBox.setVisibleItemCount(count);
+		indicatorListBox.setVisibleItemCount(count+1);
 		String listHeight = (indicators.size() * 30) + "px";
 		indicatorListBox.setHeight(listHeight);
 		grid.setWidget(0, 0, indicatorListBox.asWidget());
