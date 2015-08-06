@@ -62,20 +62,20 @@ public class MatrixWidget extends Composite {
 		super.onAttach();
 		final Element div = DOM.getElementById("matrixBody");
 		grid = new Grid(1, 3);
-		Set<String> indicators = places[0].getIndicators().keySet();
+		Set<String> indicators = places[0].getIndicators().keySet(); // Marcando linha referente ao MOSC 68
 		// List
 		for (String ind : indicators) {
 			indicatorListBox.addItem(ind);
 		}
-		int count = places.length > 50 ? 50 : places.length;
-		indicatorListBox.setVisibleItemCount(count);
+		int count = places.length > 50 ? 50 : places.length; 
+		indicatorListBox.setVisibleItemCount(count+1);
 		String listHeight = (indicators.size() * 30) + "px";
 		indicatorListBox.setHeight(listHeight);
 		grid.setWidget(0, 0, indicatorListBox.asWidget());
 
 		// Table
 		String indicator = (String) places[0].getIndicators().keySet()
-				.toArray()[0];
+				.toArray()[0]; // Marcando linha referente ao MOSC 68
 		ScrollPanel scrollPanel = new ScrollPanel(getTable(indicator));
 		int height = calculateHeight();
 		scrollPanel.setHeight(height + "px");
