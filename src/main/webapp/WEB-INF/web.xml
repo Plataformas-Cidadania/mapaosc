@@ -18,7 +18,7 @@
 	</context-param>
 	<context-param>
 		<param-name>ServerName</param-name>
-		<param-value>[HOST]</param-value>
+		<param-value>mapaosc-desenv.ipea.gov.br</param-value>
 	</context-param>
 	<context-param>
 		<param-name>Port</param-name>
@@ -26,15 +26,15 @@
 	</context-param>
 	<context-param>
 		<param-name>DatabaseName</param-name>
-		<param-value>[DB_NAME]</param-value>
+		<param-value>mapa_original</param-value>
 	</context-param>
 	<context-param>
 		<param-name>UserName</param-name>
-		<param-value>[USER]</param-value>
+		<param-value>i3geo</param-value>
 	</context-param>
 	<context-param>
 		<param-name>Password</param-name>
-		<param-value>[PASSWD]</param-value>
+		<param-value>i3geo</param-value>
 	</context-param>
 	<context-param>
 		<param-name>InitialPoolSize</param-name>
@@ -106,7 +106,7 @@
 	</context-param>
 	<context-param>
 		<param-name>CHAVE_CRIPTOGRAFIA</param-name>
-		<param-value>[CRIPT]</param-value>
+		<param-value>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15</param-value>
 	</context-param>
 	<!-- Servlets -->
 	<servlet>
