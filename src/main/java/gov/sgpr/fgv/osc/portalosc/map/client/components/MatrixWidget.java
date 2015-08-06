@@ -39,7 +39,7 @@ import com.google.gwt.view.client.Range;
 import com.google.gwt.view.client.RowCountChangeEvent;
 
 /**
- * @author victor Componente gr·fico que apresenta os Infogr·ficos na tela.
+ * @author victor Componente gr√°fico que apresenta os Infogr√°ficos na tela.
  */
 public class MatrixWidget extends Composite {
 	//private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -144,7 +144,7 @@ public class MatrixWidget extends Composite {
 			}
 		};
 
-		table.addColumn(placeColumn, "LocalizaÁ„o", "TOTAL");
+		table.addColumn(placeColumn, "Localiza√ß√£o", "TOTAL");
 
 		TextColumn<IndicatorTableValue> valueColumn = new TextColumn<IndicatorTableValue>() {
 			@Override
