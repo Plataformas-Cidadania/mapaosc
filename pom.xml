@@ -5,7 +5,7 @@
 	<!-- POM file generated with GWT webAppCreator -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>gov.sgpr.fgv.osc</groupId>
-	<artifactId>MapaOSC</artifactId>
+	<artifactId>mapaosc</artifactId>
 	<packaging>war</packaging>
 	<version>1.2.0-BETA</version>
 	<name>GWT Maven Archetype</name>
