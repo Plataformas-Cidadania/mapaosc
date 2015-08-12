@@ -582,6 +582,7 @@ public class MenuController implements ValueChangeHandler<String> {
 
 	public static native void clearHash() /*-{
 		$wnd.location.hash = '';
+		$wnd.history.pushState('', $wnd.document.title, $wnd.location.pathname);
 	}-*/;
 	
 	public static native void initFunction() /*-{
