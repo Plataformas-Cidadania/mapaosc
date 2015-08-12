@@ -169,6 +169,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				divMapa.getStyle().setDisplay(Display.BLOCK);
 				divMapa.setClassName("");
 				initFunction();
+				clearHash();
 				removeResizeHandler();
 				map.addResizeHandler();
 			}
@@ -579,6 +580,10 @@ public class MenuController implements ValueChangeHandler<String> {
 		});
 	}
 
+	public static native void clearHash() /*-{
+		$wnd.location.hash = '';
+	}-*/;
+	
 	public static native void initFunction() /*-{
 		$wnd.jQuery($doc).ready(
 				function() {
