@@ -3208,3 +3208,20 @@ div#floatingLoginErrorList::after {
 	opacity: 1;
 	z-index: 10;
 }
+
+ul.text-list > li {
+	margin-left: 30px;
+	list-style-image: url(../imagens/16_topicos.png);
+}
+
+ul.text-list > li > ul.text-list > li {
+	margin-left: 20px;
+	/*list-style-image: url(../imagens/16_topicos.png);*/
+	list-style-image: none;
+	list-style-type: circle;
+}
+
+.institucional h4 {
+	font-weight: bold;
+	font-size: 12px;
+}
