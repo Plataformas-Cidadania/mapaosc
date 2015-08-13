@@ -3223,5 +3223,9 @@ ul.text-list > li > ul.text-list > li {
 
 .institucional h4 {
 	font-weight: bold;
+	margin-bottom:4px;
+	padding-bottom:4px;
+	margin-top:10px;
+	border-bottom:1px solid;
 	font-size: 12px;
 }
