@@ -53,6 +53,7 @@ import com.google.maps.gwt.client.LatLng;
 //import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 //import com.google.gwt.core.client.GWT;
 
+@SuppressWarnings("deprecation")
 public class MenuController implements ValueChangeHandler<String> {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private final RootPanel menuPanel = RootPanel.get("menu_mapa");
@@ -102,6 +103,7 @@ public class MenuController implements ValueChangeHandler<String> {
 
 	private void loadPlaces(Place[] places, boolean clearBreadcrumb) {
 		menuPanel.clear();
+		@SuppressWarnings("rawtypes")
 		List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
 		for (Place place : places) {
 			placesList.add(place);
@@ -204,6 +206,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private void loadOrganizations(SortedMap<String, Integer> oscs) {
 		menuPanel.clear();
 		if (!oscs.isEmpty()) {
+			@SuppressWarnings("rawtypes")
 			List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
 			for (Map.Entry<String, Integer> osc : oscs.entrySet()) {
 				KeyValueMenuItem item = new KeyValueMenuItem();
@@ -297,7 +300,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			certificationsItem.setInfoSource(getHelpContent(osc
 					.getCertifications().getDataSources()));
 
-		AbstractMenuItem committeesItem = null;
+		AbstractMenuItem<?> committeesItem = null;
 		if (!osc.getCommittees().getCommittees().isEmpty()) {
 
 			final KeyValueMenuItem keyValueItem = new KeyValueMenuItem(
@@ -318,6 +321,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			textItem.setInfo("Esta Organização não participa de nenhum conselho ou comissão. ");
 			committeesItem = textItem;
 		}
+		@SuppressWarnings("rawtypes")
 		List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
 
 		menuItems.add(mainItem);
@@ -446,17 +450,8 @@ public class MenuController implements ValueChangeHandler<String> {
 										breadcrumb.removeLastItemUntil(item);
 								}
 
-								if (UserController.hasLoggedUser() == true)
-									loadOrganization(resultOsc);
-
-								else {
-									Window.Location
-											.replace(com.google.gwt.core.client.GWT
-													.getHostPageBaseURL()
-													+ "User.html");
-
-								}
-
+								//verificação retirada segundo a tarefa MOSC-156
+								loadOrganization(resultOsc);
 							}
 						};
 						placeService.getPlaceAncestorsInfo(resultOsc.getMain()
@@ -518,7 +513,14 @@ public class MenuController implements ValueChangeHandler<String> {
 				logger.info("Recomendacao add com sucesso");
 			}
 		};
-		oscService.setRecommendation(oscId, email, recommended, callback);
+		
+		//Verificação de usuário logado para poder recomendar uma OSC - MOSC-156
+		if (UserController.hasLoggedUser() == true)
+			oscService.setRecommendation(oscId, email, recommended, callback);
+		else {
+			Window.Location.replace(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "User.html");
+		}
+		
 	}
 
 	private static String getHelpContent(DataSource[] dataSources) {
