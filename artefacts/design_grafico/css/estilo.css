@@ -2591,11 +2591,11 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 	border-radius: 10px;
 }
 
-.esqueci_senha > h2, .esqueci_senha > div {
+.esqueci_senha > h2, .esqueci_senha > div, .alterar_senha > h2, .alterar_senha > div {
 	padding: 10px 20px;
 }
 
-.esqueci_senha > h2 {
+.esqueci_senha > h2, .alterar_senha > h2 {
 	background-color: #244196;
 	border-radius: 10px 10px 0px 0px;
 	color: white;
@@ -2711,14 +2711,13 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 	background-color: #ECECEC;
 }
 
-#mapa.alterar_senha .wrapper form label {
+.alterar_senha form label {
 	min-width: 140px;
 	display: inline-block;
 }
 
-p.esqueceu_senha {
-	margin: 15px 0;
-	font-size:18px;
+.alterar_senha p {
+	margin-bottom: 1.5em;
 }
 
 input#esqueci_senha {
@@ -2734,6 +2733,16 @@ input#esqueci_senha {
     border: 0px solid #aaa;
     border-radius: 5px;
     font-weight: bold;
+    margin-left:135px;
+}
+
+.alterar_senha {
+    background: rgba(200,200,200,0.5);
+    position: fixed;
+    left: calc(50% - 175px);
+    top: 300px;
+    width: 350px;
+    border-radius: 10px;
 }
 
 input#esqueci_senha:hover {
