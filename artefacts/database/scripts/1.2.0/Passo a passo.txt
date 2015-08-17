@@ -1,0 +1,25 @@
+1 - Ir para o diretório onde os arquivos enviados foram salvos.
+
+2 - Executar o seguinte comando para atualizar a estrutura do banco de dados:
+
+	psql -h [HOST_DO_BANCO] -d [NOME_DO_BANCO] -U [USUARIO_DO_BANCO] -f 2_update_schema.sql
+
+3 - Executar o seguinte comando para carregar as tabelas temp.tb_osc_rais_2011 e temp.tb_osc_siconv_2008_2012:
+	
+	psql -h [HOST_DO_BANCO] -d [NOME_DO_BANCO] -U [USUARIO_DO_BANCO] -f 3_load_data_temp.sql
+	
+4 - Executar o seguinte comando para carregar a tabela temp.tb_osc_rais_2013_completa:
+
+	psql -h [HOST_DO_BANCO] -d [NOME_DO_BANCO] -U [USUARIO_DO_BANCO] -f 4_insert_tb_osc_rais_2013_completa.sql
+
+5 - Executar o seguinte comando para carregar a tabela temp.tb_osc_siconv_2015_completa:
+
+	psql -h [HOST_DO_BANCO] -d [NOME_DO_BANCO] -U [USUARIO_DO_BANCO] -f 5_insert_tb_osc_siconv_2015_completa.sql
+
+6 - Executar o seguinte comando para processar os dados da tabela temp.tb_osc_rais_2013_completa:
+
+	psql -h [HOST_DO_BANCO] -d [NOME_DO_BANCO] -U [USUARIO_DO_BANCO] -f 6_process_data_rais_2013.sql
+
+7 - Executar o seguinte comando para processar os dados da tabela temp.tb_osc_siconv_2015_completa:
+
+	psql -h [HOST_DO_BANCO] -d [NOME_DO_BANCO] -U [USUARIO_DO_BANCO] -f 7_process_data_siconv_2015.sql
