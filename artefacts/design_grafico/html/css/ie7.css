@@ -1,0 +1,98 @@
+/* ie 7 */
+
+.tabs ul.tabs-list a {
+	width: 109px;
+}
+
+input#campobusca {
+	width: 320px;
+}
+
+button#buscar {
+	margin: 0 5px 0 5px;
+}
+.tabbody {
+	overflow-y: auto;
+	position: relative;
+}
+.organizacao {
+	width: auto;
+}
+.tabbody em.dados {
+	padding-top: 20px;
+}
+#busca {
+	height: 30px;
+}
+#topo_links {
+	height: 22px;
+}
+#topo_acessibilidade {
+	height: 17px;
+}
+#topo_acesso input#entrar, .logado#topo_acesso img {
+	float: none;
+}
+.mapa_organizacao div {
+	width: 44%;
+}
+.logo-brasil, .logo-acesso {
+	position: relative;
+	float: none;
+	top: 0;
+}
+.logo-brasil {
+	float: right;
+}
+.logo-acesso {
+	float: left;
+}
+.footer-logos {
+	position: relative;
+	overflow: hidden;
+}
+#rodape {
+	padding-right: 0;
+	padding-left: 0;
+}
+#org_detalhes, #org_recomendar {
+	width: 110px;
+	margin-left: 0;
+	margin-right: 3px;
+}
+
+.tabbody {
+	height: 94%;
+}
+.mapa_organizacao h4 em {
+	font-weight: normal;
+	font-style: normal;
+}
+
+.ajuda {
+	position: absolute;
+	top: 50px;
+	right: 180px;
+	width: 300px;
+}
+.ajuda, #tip_ajuda_local {
+	background-color: #000;
+	color: #fff;
+	font-size: 1em;
+	padding: 10px;
+	z-index: 300;
+}
+#tip_ajuda_local {
+	position: relative;
+}
+#mapa.cadastro .instrucoes ul li a { height: 25px }
+#topo_acesso input { height: 25px; width: 130px;}
+.modal h3, #busca_filtros h3 { height: 25px;}
+.formulario #form_cadastro input[type=text],.formulario #form_cadastro input[type=password] { width: 100px;}
+#entidade_identificacao input[type=text], #entidade_identificacao input[type=password]{ width: 100px}
+.formulario .cadastro_cpf label { clear: none;  float: left }
+.formulario input { margin-bottom: 3px;}
+#mapa.cadastro h1, #mapa.config h1, #mapa.organizacao h1, #mapa.institucional h1 {width: 95%}
+.formulario input[type="text"], .formulario input[type="password"], .formulario select { width: 120px;}
+#mapa_expandir .tabs ul.tabs-list a {width:109px;}
+button.ajuda {width: 15px}
