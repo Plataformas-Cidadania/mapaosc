@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Template E-mail</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<style>
+		body {
+			width: 960px;
+			margin: 0 auto;
+			font-family: 'Roboto', sans-serif;
+			font-size: 16px;
+		}
+		
+		.main {
+			/*border: 1px solid;*/
+			background-image: url(imagens/topo.jpg);
+			background-repeat: no-repeat;
+			background-position: top right;
+		}
+		header {
+			height: 120px;
+			padding: 20px;
+			border: 2px solid #f4f4f4;
+		}
+		h1 {
+			padding: 0.5em;
+			margin: 0;
+		}
+		.end_header {
+			background-color: #f4f4f4;
+		}
+		p {
+			text-indent: 2.5em;
+			text-align: justify;
+		}
+		.content {
+			padding:20px;
+			border: 2px solid #f4f4f4;
+		}
+		.assinatura {
+			text-align: left;
+			float: right;
+			background-image: url(imagens/simbolo.png);
+			min-height: 130px;
+			background-repeat: no-repeat;
+			padding-left: 148px;
+		}
+		.assinatura p {
+			margin: 0.25em;
+			text-indent: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<header>
+			<img src="imagens/logo.jpg" />
+		</header>
+		<div class="end_header">
+			<h1>[Assunto]</h1>
+		</div>
+		<div class="content">
+			<p> [Saudação], [Usuário] </p>
+			<p> [texto] </p>
+			<div class="assinatura">
+				<p> Agradeço pelo contato, </p>
+				<p> [Seu nome] </p>
+				<p> Equipe de Desenvolvimento do Mapa das OSCs </p>
+				<p> <a href="https://mapaosc.ipea.gov.br">Mapa das OSCs</a> - [Data] </p>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+</body>
