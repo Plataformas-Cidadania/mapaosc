@@ -3234,7 +3234,13 @@ ul.text-list > li > ul.text-list > li {
 	float: left;
 	margin-left: 195px;
     margin-top: 5px;
-}  
+}
+
+#topo_acesso form#acesso > div#acoes_login {
+	float: left;
+	margin-left: 195px;
+    margin-top: 5px;
+}    
 
 #topo_acesso form#acesso > div > a {
 	display:block;
