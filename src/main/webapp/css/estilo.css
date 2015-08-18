@@ -3229,3 +3229,26 @@ ul.text-list > li > ul.text-list > li {
 	border-bottom:1px solid;
 	font-size: 12px;
 }
+
+#topo_acesso form#acesso > div:not(#floatingLoginErrorList) {
+	float: left;
+	margin-left: 195px;
+    margin-top: 5px;
+}  
+
+#topo_acesso form#acesso > div > a {
+	display:block;
+}
+
+#topo_acesso #netUserImage{
+    width: 40px;
+    height: 40px;
+}
+
+#topo_acesso ul li {
+	margin: 4px;
+}
+
+#topo_acesso h2 {
+	font-size:16px;
+}
