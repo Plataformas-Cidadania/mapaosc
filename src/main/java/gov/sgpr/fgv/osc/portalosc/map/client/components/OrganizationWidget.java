@@ -7,10 +7,11 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -80,7 +81,7 @@ public class OrganizationWidget extends Composite {
 	@Override
 	protected void onAttach() {
 		super.onAttach();
-		final Element oscPageButton = DOM.getElementById("org_detalhes");
+		final Element oscPageButton = DOM.getElementById("org_detalhes"); 
 		if (oscPageButton != null) {
 			oscPageButton.getStyle().setDisplay(Display.NONE);
 		}
