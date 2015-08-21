@@ -1,0 +1,112 @@
+#nav1 li, #nav2 li,
+#topo_links a,
+#topo_acesso input[type=submit],
+#topo_acesso.deslogado div,
+#topo_acesso.logado ul,
+#topo_acesso.logado ul li,
+#busca > form,#busca > form + div.filtros,
+#busca .filtros a.filtrar,
+#mapa_navegacao .organizacao span,
+#mapa_navegacao .organizacao img,
+#mapa_expandir .tabbody em.dados,
+#mapa_expandir .tabbody .breadcrumb li,
+.tabs ul.tabs-list li, .tabs ul.tabs-list a,.config h2,
+.formulario input[type=text],.formulario input[type=password],.formulario select,
+.entidade_validacao em.verificado,
+label.error,#mapa.config h3 ~ fieldset,
+#mapa.config .tabbody fieldset + div,
+#mapa.organizacao .titulo h1,#mapa.organizacao .botoes,
+#mapa.organizacao div.tabela, #mapa.organizacao div.tabela > div,#mapa.organizacao div.social,
+.classificacao ul li,#mapa.organizacao div.tabela .dados div span,
+#mapa.organizacao div.tabela .dados div strong,#mapa.organizacao div.tabela .dados div ul,
+#mapa.organizacao div.projetos .titulo h2,ul.dados li a.excluir
+ {
+ 	/* Hack para funcionar o display: inline-block no IE */
+	display: inline-block;
+	*display: inline;
+	zoom: 1;  
+}
+.clearfix {
+    *zoom: 1;
+}
+
+
+.qtip-youtube .qtip-content{
+		filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#4a4a4a,EndColorStr=#000000);
+		-ms-filter: "progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#4a4a4a,EndColorStr=#000000);";
+	}
+
+	/* IE Specific */
+	.qtip-jtools .qtip-titlebar{
+		background-color: transparent;
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#717171,endColorstr=#4A4A4A);
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#717171,endColorstr=#4A4A4A)";
+	}
+	.qtip-jtools .qtip-content{
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4A4A4A,endColorstr=#232323);
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#4A4A4A,endColorstr=#232323)";
+	}
+
+
+	.qtip-tipped .qtip-titlebar{
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D);
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D)";
+	}
+
+
+/* rgba hack */
+
+
+#topo #contraste img:hover, #busca_resultado {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5FFFFFF,endColorstr=#E5FFFFFF);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5FFFFFF,endColorstr=#E5FFFFFF)";
+	zoom: 1;
+}
+#topo_acessibilidade, #topo_links {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7FFFFFFF,endColorstr=#7FFFFFFF);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7FFFFFFF,endColorstr=#7FFFFFFF)";
+	zoom: 1;
+}
+#busca {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2A7A9AC,endColorstr=#B2A7A9AC)";
+	zoom: 1;
+}
+#mapa_expandir button#expandir {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99244196,endColorstr=#99244196);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99244196,endColorstr=#99244196)";
+	zoom: 1;
+}
+#mapa_expandir button#expandir:hover {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FF244196,endColorstr=#FF244196);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FF244196,endColorstr=#FF244196)";
+	zoom: 1;
+}
+#mapa_navegacao {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5D1D3D4,endColorstr=#E5D1D3D4);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5D1D3D4,endColorstr=#E5D1D3D4)";
+	zoom: 1;
+}
+.mapa_organizacao {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5C8C8C8,endColorstr=#E5C8C8C8);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5C8C8C8,endColorstr=#E5C8C8C8)";
+	zoom: 1;
+}
+
+#mapa.cadastro .instrucoes {
+	background: transparent;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCC8C8C8,endColorstr=#CCC8C8C8);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCC8C8C8,endColorstr=#CCC8C8C8)";
+	zoom: 1;
+}
+
+#topo_acessibilidade, #topo_links, #rodape, #footer {
+	zoom: 1;
+}

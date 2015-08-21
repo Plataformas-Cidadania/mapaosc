@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Portal das Organizações da Sociedade Civil</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	
+
+</head>
+
+<body class="ver_tudo">
+
+	<h1>Últimas atualizações</h1>
+	<a href="#" class="modal_fechar filtros" onclick="parent.jQuery.fancybox.close()">-</a>
+
+	<div id="mapa" class="organizacao formulario"> 
+		<div class="docs">
+			<div>
+				<ul class="dados checklist">
+					<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">OCIP</a></li>
+					<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">UPF</a></li>
+					<li class="fonte"><em>Fonte:</em> SICONV</li>
+					<li class="data"><em>6 set 2013</em></li>
+				</ul>
+			</div>
+			<div>
+				<ul class="dados checklist">
+					<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">XXX</a></li>
+					<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">ABCD</a></li>
+					<li class="data"><em>6 set 2013</em></li>
+				</ul>
+			</div>
+	</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+	<script type="text/javascript" src="js/scripts_min.js"></script>
+
+	<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
+		$('.dados').on('click', '.excluir', excluirElemento);
+
+			function excluirElemento(event) {
+				$(event.target).closest('li').remove();
+				return false;
+			}
+	});
+
+	</script>
+</body>
+
+</html>
