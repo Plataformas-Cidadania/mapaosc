@@ -789,62 +789,84 @@
 		});
 
 		$('.projetos .adicionar').click(function(){
-			var novo_projeto = '<div class="clearfix projeto">'+
-			'<div>'+
-			'<div class="col1">'+
-			'<strong class="separador left-radius">Data de início</strong>'+
-			'<input type="text" name="data_inicio" id="data_inicio2" />'+
-			'</div>'+
-			'<div class="col2">'+
-			'<strong class="separador">Data de término</strong>'+
-			'<input type="text" name="data_termino" id="data_termino2" />'+
-			'</div>'+
-			'<div class="col3">'+
-			'<strong class="separador">Nome</strong>'+
-			'<textarea name="projeto_nome" id="projeto_nome2"></textarea>'+
-			'</div>'+
-			'<div class="col4">'+
-			'<strong class="separador">Objeto</strong>'+
-			'<textarea name="objeto" id="objeto2"></textarea>'+
-			'</div>'+
-			'<div class="col5">'+
-			'<strong class="right-radius">Descrição</strong>'+
-			'<textarea name="descprojeto" id="descprojeto2"></textarea>'+
-			'</div>'+
-			'</div>'+
-			'<div class="clearfix">'+
-			'<div class="col1">'+
-			'<strong class="left-radius">Valor obtido</strong>'+
-			'<input type="text" name="valor_obtido" id="valor_obtido2" />'+
-			'</div>'+
-			'<div class="col2">'+
-			'<strong class="separador">Valor planejado</strong>'+
-			'<input type="text" name="valor_planejado" id="valor_planejado2" />'+
-			'</div>'+
-			'<div class="col3">'+
-			'<strong class="separador">Fonte de recurso</strong>'+
-			'<textarea name="fonte" id="fonte2"></textarea>'+
-			'</div>'+
-			'<div class="col4">'+
-			'<strong class="separador">Financiadores</strong>'+
-			'<textarea name="financiadores" id="financiadores2"></textarea>'+
-			'</div>'+
-			'<div class="col5">'+
-			'<strong class="right-radius">Status do projeto</strong>'+
-			'<textarea name="status" id="status2"></textarea>'+
-			'</div>'+
-			'</div>'+
-			'<div>'+
-			'<strong class="radius">Resultados obtidos</strong>'+
-			'<textarea name="resultado" id="resultado2"></textarea>'+
-			'</div>'+
-			'<div class="botoes">'+
-			'<button type="button" class="excluir">Excluir</button>'+
-			'</div>'+
-			'<hr />'+
-			'</div>';
-
+			var novo_projeto = 
+			'<div class="clearfix projeto collapsable">\
+			<div class="projeto_header">\
+				<div class="collapse-click collapse-button"><div></div></div>\
+				<span class="nome" content-editable="true">2 | Lorem ipsum dolor sit, consectetur adipiscing.</span>\
+				<span class="clear_both"></span>\
+			</div>\
+			<div class="projeto_body collapse-hidden">\
+				<div class="linha clearfix">\
+					<div class="col1_6">\
+						<strong class="separador left-radius">Status</strong>\
+						<p>\
+							<select>\
+								<option value="1" > Planejado </option>\
+								<option value="2" > Em Execução </option>\
+								<option value="3" selected="selected"> Finalizado </option>\
+							</select>\
+						</p>\
+					</div>\
+\
+					<div class="col1_6">\
+						<strong class="separador">Período</strong>\
+						<p class="data_container"><input type="text" name="data_inicio" value="12/07/1998" /> a <input type="text" name="data_termino" value="12/07/2000" /></p>\
+					</div>\
+\
+					<div class="col1_6">\
+						<strong class="separador">Valor obtido</strong>\
+						<p><input type="text" name="valor_obtido" value="R$ 1.000.000,00" /></p>\
+					</div>\
+					<div class="col1_6">\
+						<strong class="separador">Valor planejado</strong>\
+						<p><input type="text" name="valor_planejado" value="R$ 1.200.000,00" /></p>\
+					</div>\
+\
+					<div class="col1_6">\
+						<strong class="separador">Fonte de recurso</strong>\
+						<p><select>\
+								<option value="1" > Público </option>\
+								<option value="2" selected="selected"> Privado </option>\
+							</select>\
+						</p>\
+					</div>\
+					<div class="col1_6">\
+						<strong class="right-radius">Link</strong>\
+						<p><a href="vamosla" contenteditable="true">link para página</a></p>\
+					</div>\
+				</div>\
+			\
+				<div class="clearfix linha">\
+					<div class="col1_2">\
+						<strong class="separador left-radius">Financiadores</strong>\
+						<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>\
+					</div>\
+\
+					<div class="col1_2">\
+						<strong class="right-radius">Descrição</strong>\
+						<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>\
+					</div>\
+				</div>\
+			</div>\
+			<hr />\
+		</div>';
 			$('.projetos .titulo').after(novo_projeto);
+			$('a[contenteditable=true]').focusin(function() {
+				el = $(this);
+				if(el.attr('contenteditable') == 'true') {
+					el.html(el.attr('href'));
+				}
+			});
+			
+			$('a[contenteditable=true]').focusout(function() {
+				el = $(this);
+				if(el.attr('contenteditable') == 'true') {
+					
+					el.attr('href',el.text());
+					el.html('link para fonte');
+				}
+			});
 
 		});
 
