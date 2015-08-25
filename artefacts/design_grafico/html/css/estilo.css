@@ -1710,10 +1710,9 @@ float:right;
 
 /* Página de organização */
 #mapa.organizacao .container {
-width:930px;
+width:1000px;
 left:100px;
 position:relative;
-margin-right:320px;
 }
 
 #mapa.organizacao .titulo h1 {
@@ -1828,7 +1827,7 @@ right:5px;
 
 #mapa.organizacao div.tabela {
 display:inline-block;
-width:740px;
+width:810px;
 vertical-align:top;
 margin:10px 0 0 5px;
 }
@@ -2050,7 +2049,7 @@ vertical-align:middle;
 }
 
 #mapa.organizacao div.tabela .dados div strong {
-width:30%;
+width:22%;
 text-align:right;
 padding:7px;
 vertical-align:middle;
@@ -2064,7 +2063,7 @@ min-height:35px;
 }
 
 #mapa.organizacao div.tabela .dados div input,.organizacao div.tabela .dados div textarea {
-width:55%;
+width:50%;
 vertical-align:middle;
 }
 
@@ -2073,8 +2072,17 @@ width:140px;
 }
 
 #mapa.organizacao div.tabela .dados div input.local {
-width:20%;
+width:18%;
 margin-right:5px;
+}
+
+#mapa.organizacao div.tabela .dados div span.fonte_dados {
+	text-align: right;
+	vertical-align: bottom;
+	font-style: italic;
+	width: 100%;
+    padding-bottom: 5px;
+    padding-right: 10px;
 }
 
 #mapa.organizacao div.tabela .dados div p {

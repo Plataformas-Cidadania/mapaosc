@@ -118,7 +118,7 @@
 									<button type="button" id="b-twitter" name="redes" value="false" title="Twitter" class="tooltip"></button>
 								</div>
 
-								<a href="como_participar.html" class="participar box">Como participar</a>
+								<a href="como_participar.html" class="participar box">Voluntariar-se</a>
 
 								<div class="recomendacoes">
 									<span title="1200 recomendações" class="tooltip">1200</span>
@@ -196,31 +196,25 @@
 												<input type="text" name="eemail_org" id="eemail_org" value="fundacao@gmail.com" />
 											</div>
 
-											<!--<p>
+											<p>
 												<strong>Público-alvo:</strong>
 												<input type="text" name="epublico" id="epublico" value="Lorem" />
-											</p>-->
+											</p>
 											
-											<!--<div>
+											<div>
 												<strong>Participação social:</strong>
 												<ul class="participacao">
 													<li>
-														<select>
-															<option value="CONJUVE" selected>CONJUVE</option>
-															<option value="CONAJE">CONAJE</option>
-														</select>
+														<input type="text" value="CONJUVE" />
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 													</li>
 													<li>
-														<select>
-															<option value="CONJUVE">CONJUVE</option>
-															<option value="CONAJE" selected>CONAJE</option>
-														</select>
+														<input type="text" value="CONAJE" />
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 													</li>
 													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
 												</ul>
-											</div>-->
+											</div>
 											
 											<div>
 												<strong>Fonte de recursos:</strong>
@@ -229,6 +223,7 @@
 														<select name="erecursos">
 															<option value="privada" selected>Privada</option>
 															<option value="doacao">Doação</option>
+															<option value="publica">Pública</option>
 														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 													</li>
@@ -236,6 +231,7 @@
 														<select name="erecursos">
 															<option value="privada">Privada</option>
 															<option value="doacao" selected>Doação</option>
+															<option value="publica">Pública</option>
 														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 													</li>
@@ -313,13 +309,7 @@
 												<input type="text" name="vparceriasmunicipais" id="vparcerias" value="220000" />
 											</div>
 											</div>
-											<!-- <div>
-												<strong>Status de habilitação:</strong>
-												<select name="ehabilitacao">
-													<option value="sim">Habilitada</option>
-													<option value="nao" selected>Não habilitada</option>
-												</select>
-											</div>-->
+											
 										</div>
 									</fieldset>					
 								</div>
@@ -334,7 +324,7 @@
 										</ul>
 									</div>
 
-									<!--<h2>Últimos documentos <a href="documentos.html" class="box">Ver todos</a></h2>
+									<h2>Últimos documentos <a href="documentos.html" class="box">Ver todos</a></h2>
 									<div class="documentos">
 										<ul class="dados">
 											<li class="incluidos">(100% incluídos)</li>
@@ -345,7 +335,7 @@
 											<li class="fonte"><em>Fonte:</em> SICONV</li>
 										</ul>
 										<button type="button" class="carregar">Carregar</button>
-									</div>-->
+									</div>
 
 									<h2>Certificados federais <a href="certificados.html" class="box">Ver todos</a></h2>
 									<div>
@@ -357,7 +347,7 @@
 										<!--<button type="button" class="adicionar">Adicionar</button>-->
 									</div>
 
-									<h2>Resultados alcançados <a href="#">Ver todos</a></h2>
+									<!--  <h2>Resultados alcançados <a href="#">Ver todos</a></h2>
 									<div class="resultados">
 										<ul class="dados">
 											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> Conquistou o Prêmio XYZOD de Lorem 2012</li>
@@ -365,7 +355,7 @@
 											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> Esteve no Congresso XIAYQN 2012 e lorem ipsum dolor.</li>
 										</ul>
 										<button type="button" class="adicionar">Adicionar</button>
-									</div>
+									</div>-->
 									
 								</div>
 
@@ -376,8 +366,8 @@
 										<div class="filtro">
 											<span>Fontes:</span>
 											<span>
-												<label for='SICONV'>SICONV</label>
-												<input type='checkbox' name='SICONV' />
+												<label for='PUBLICA'>Pública</label>
+												<input type='checkbox' name='PUBLICA' />
 											</span>
 											<span>
 												<label for='PRIVADO'>Privado</label>
