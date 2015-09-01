@@ -118,7 +118,7 @@
 									<button type="button" id="b-twitter" name="redes" value="false" title="Twitter" class="tooltip"></button>
 								</div>
 
-								<a href="como_participar.html" class="participar box">Voluntariar-se</a>
+								<a href="como_participar.html" class="participar box">Como Participar</a>
 
 								<div class="recomendacoes">
 									<span title="1200 recomendações" class="tooltip">1200</span>
@@ -157,21 +157,25 @@
 											<div>
 												<strong>CNPJ:</strong>
 
-												<input type="text" name="ecnpj" id="ecnpj" value="86.795.176/0001-00" />
+												<span>xxx.666.xxx</span>
 
 												
 											</div>
 											<div>
-												<strong>Endereço:</strong>
-												<input type="text" name="eendereco" id="eendereco" value="Abcd" />
+												<strong>Endereço da Sede:</strong>
+												<a href="Map.html#O55567">R. das margaridas 55, 22556-000, São Paulo - SP</a>
 											</div>
-											<div>
+											<div >
+												<strong>Outros Endereços:</strong><a href="Mapa.html?grupoOSC=123">ver no Mapa</a> ou <a href="Lista.html?grupoOSC=123">visualizar Lista</a>
+												
+											</div>
+											<!--  <div>
 												<strong>Localização:</strong>
 												<span>Lat</span>
 												<input class="local" type="text" name="elat" id="elat" value="132323" />
 												<span>Long</span>
 												<input class="local" type="text" name="elong" id="elong" value="2444" />
-											</div>
+											</div>-->
 											<!--<p>
 												<strong>Atividade econômica:</strong>
 												<input type="text" name="eatividade" id="eatividade" value="Abcd" />
@@ -181,6 +185,12 @@
 												<strong>Descrição:</strong>
 												<textarea name="edesc" id="edesc">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
 											</div>
+											
+											<div>
+												<strong>Público-alvo:</strong>
+												<textarea name="publicoalvo" id="publicoalvo">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
+											</div>
+											
 											<div>
 												<strong>Fundada em:</strong>
 												<input type="text" name="efundacao" id="efundacao" value="1945" />
@@ -195,21 +205,24 @@
 												<strong>E-mail:</strong>
 												<input type="text" name="eemail_org" id="eemail_org" value="fundacao@gmail.com" />
 											</div>
-
-											<p>
-												<strong>Público-alvo:</strong>
-												<input type="text" name="epublico" id="epublico" value="Lorem" />
-											</p>
 											
 											<div>
 												<strong>Participação social:</strong>
 												<ul class="participacao">
 													<li>
-														<input type="text" value="CONJUVE" />
+														<select name="oconselhos">
+															<option value="privada" selected>CONJUVE</option>
+															<option value="doacao">CONAJE</option>
+															<option value="publica">CONSELHO</option>
+														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 													</li>
 													<li>
-														<input type="text" value="CONAJE" />
+														<select name="oconselhos">
+															<option value="privada" selected>CONJUVE</option>
+															<option value="doacao">CONAJE</option>
+															<option value="publica">CONSELHO</option>
+														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 													</li>
 													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
@@ -241,7 +254,7 @@
 										</fieldset>
 
 									</div>
-									<div class="collapsable">
+									<!-- <div class="collapsable">
 										<h2>Informações do Território <div class="collapse-click collapse-button negativo alternate"><div></div></div></h2>
 										<div class="territorio collapse-hidden">
 											<fieldset>
@@ -263,7 +276,7 @@
 												</div>
 											</fieldset>
 										</div>
-									</div>
+									</div>  -->
 									<div class="collapsable">
 										<h2>Colaboradores <div class="collapse-click collapse-button negativo"><div></div></div></h2>
 										<div class="relacoes collapse-hidden">
@@ -279,6 +292,10 @@
 												<div>
 													<strong>Voluntários:</strong>
 													<input type="text" name="evoluntarios" id="evoluntarios" value="01" />
+												</div>
+												<div>
+													<strong>Funcionários com Deficiência:</strong>
+													<input type="text" name="edeficientes" id="edeficientes" value="01" />
 												</div>
 											</fieldset>
 										</div>
@@ -370,8 +387,12 @@
 												<input type='checkbox' name='PUBLICA' />
 											</span>
 											<span>
-												<label for='PRIVADO'>Privado</label>
+												<label for='PRIVADO'>Privada</label>
 												<input type='checkbox' name='PRIVADO' />
+											</span>
+											<span>
+												<label for='PROPRIA'>Própria</label>
+												<input type='checkbox' name='PROPRIA' />
 											</span>
 										</div>
 									</div>
@@ -399,17 +420,17 @@
 												</div>
 
 												<div class="col1_6">
-													<strong class="separador">Período</strong>
-													<p class="data_container"><input type="text" name="data_inicio" value='12/07/1998' /> a <input type="text" name="data_termino" value='12/07/2000' /></p>
+													<strong class="separador">Data Início</strong>
+													<p><input type="text" name="data_inicio" value='12/07/1998'  /></p>
 												</div>
 
 												<div class="col1_6">
-													<strong class="separador">Valor obtido</strong>
-													<p><input type="text" name="valor_obtido" value='R$ 1.000.000,00' /></p>
+													<strong class="separador">Data Final</strong>
+													<p><input type="text" name="data_termino" value='12/07/2000' /></p>
 												</div>
 												<div class="col1_6">
-													<strong class="separador">Valor planejado</strong>
-													<p><input type="text" name="valor_planejado" value='R$ 1.200.000,00' /></p>
+													<strong class="separador">Valor Total</strong>
+													<p><input type="text" name="valor_total" value='R$ 1.200.000,00' /></p>
 												</div>
 												
 
@@ -429,13 +450,29 @@
 										
 
 											<div class="clearfix linha">
-												<div class="col1_2">
+												<div class="col1_3">
 													<strong class="separador left-radius">Financiadores</strong>
 													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
 												</div>
-
+												<div class="col1_6">
+													<strong class="separador">Abrangência</strong>
+													<p><select>
+															<option value="1" > Nacional </option>
+															<option value="2" > Regional </option>
+															<option value="3" > Estadual </option>
+															<option value="4" > Municipal </option>
+														</select>
+													</p>
+												</div>
 												<div class="col1_2">
-													<strong class="right-radius">Descrição</strong>
+													<strong class="right-radius">Localização</strong>
+													<textarea name="descprojeto" id="localizacao">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+												</div>
+											</div>
+											
+											<div class="clearfix linha">
+												<div class="col1_1">
+													<strong class="right-radius left-radius">Descrição</strong>
 													<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
@@ -466,17 +503,17 @@
 												</div>
 
 												<div class="col1_6">
-													<strong class="separador">Período</strong>
-													<p class="data_container"><input type="text" name="data_inicio" value='12/07/1998' disabled="disabled" /> a <input type="text" name="data_termino" value='12/07/2000' disabled="disabled" /></p>
+													<strong class="separador">Data Início</strong>
+													<p><input type="text" name="data_inicio" value='12/07/1998' disabled="disabled" /></p>
 												</div>
 
 												<div class="col1_6">
-													<strong class="separador">Valor obtido</strong>
-													<p><input type="text" name="valor_obtido" value='R$ 1.000.000,00' disabled="disabled" /></p>
+													<strong class="separador">Data Final</strong>
+													<p><input type="text" name="data_termino" value='12/07/2000' disabled="disabled" /></p>
 												</div>
 												<div class="col1_6">
-													<strong class="separador">Valor planejado</strong>
-													<p><input type="text" name="valor_planejado" value='R$ 1.200.000,00' disabled="disabled" /></p>
+													<strong class="separador">Valor Total</strong>
+													<p><input type="text" name="valor_total" value='R$ 1.200.000,00' disabled="disabled" /></p>
 												</div>
 												
 
@@ -496,14 +533,30 @@
 										
 
 											<div class="clearfix linha">
-												<div class="col1_2">
+												<div class="col1_3">
 													<strong class="separador left-radius">Financiadores</strong>
-													<textarea name="financiadores" id="financiadores1" disabled="disabled">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
 												</div>
-
+												<div class="col1_6">
+													<strong class="separador">Abrangência</strong>
+													<p><select>
+															<option value="1" > Nacional </option>
+															<option value="2" > Regional </option>
+															<option value="3" > Estadual </option>
+															<option value="4" > Municipal </option>
+														</select>
+													</p>
+												</div>
 												<div class="col1_2">
-													<strong class="right-radius">Descrição</strong>
-													<textarea name="descprojeto" id="descprojeto1" disabled="disabled">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+													<strong class="right-radius">Localização</strong>
+													<textarea name="descprojeto" id="localizacao">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+												</div>
+											</div>
+											
+											<div class="clearfix linha">
+												<div class="col1_1">
+													<strong class="right-radius left-radius">Descrição</strong>
+													<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
 										</div>
@@ -667,7 +720,7 @@
 	<script type="text/javascript">// <![CDATA[
 	$(document).ready(function(){
 
-		$("#ecnpj").mask("00.000.000/0000-00");
+		//$("#ecnpj").mask("00.000.000/0000-00");
 
 		$('.projetos').on('click', '.excluir', excluirProjeto);
 
@@ -678,6 +731,8 @@
 				height: $(this).outerHeight(true)
 			});
 		});
+		
+		$('.collapse-me').addClass('collapsed');
 
 		$('a[contenteditable=true]').focusin(function() {
 			el = $(this);

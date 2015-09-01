@@ -1997,11 +1997,13 @@ border-right:3px solid #eee;
 }
 
 #mapa.organizacao div.projetos .left-radius {
-border-radius:5px 0 0 5px;
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
 }
 
 #mapa.organizacao div.projetos .right-radius {
-border-radius:0 5px 5px 0;
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
 }
 
 #mapa.organizacao div.projetos .radius {
@@ -2537,24 +2539,52 @@ a.exportar:hover{text-decoration: none; color:#fff;}
     padding: 5px;   
 }
 
+.col1_1 {
+    width: 100%;
+}
+
 .col1_2 {
     width: 50%;
 }
 
 .col1_3 {
-    width: 33%;
+    width: 33.33%;
+}
+
+.col2_3 {
+    width: 66.66%;
 }
 
 .col1_4 {
     width: 25%;
 }
 
+.col3_4 {
+    width: 75%;
+}
+
 .col1_5 {
     width: 20%;
 }
 
+.col2_5 {
+    width: 40%;
+}
+
+.col3_5 {
+    width: 60%;
+}
+
+.col4_5 {
+    width: 80%;
+}
+
 .col1_6 {
     width: 16.66%;
+}
+
+.col5_6 {
+    width: 83.33%;
 }
 
 .projeto_header {
@@ -2578,6 +2608,11 @@ a.exportar:hover{text-decoration: none; color:#fff;}
     margin: 0 !important;
     padding: 0 !important;
     display: inline !important;
+}
+
+.outros_enderecos li {
+	padding: 5px;
+	margin-left: 120px;
 }
 
 .projeto_header .status {
@@ -2767,4 +2802,17 @@ input#esqueci_senha:hover {
 
 .small_form .coluna_2 {
 	display: inline-block;
+}
+
+.collapsed .relacoes.collapse-hidden {
+	height: 10px !important;
+	font-size: 0.0em !important;
+}
+
+.collapsed .relacoes.collapse-hidden input {
+	display: none;
+}
+
+.organizacao fieldset > div {
+	padding:3px;
 }
