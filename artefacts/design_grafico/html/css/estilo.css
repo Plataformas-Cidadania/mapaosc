@@ -2816,3 +2816,31 @@ input#esqueci_senha:hover {
 .organizacao fieldset > div {
 	padding:3px;
 }
+
+.table_container {
+	width: 100%;
+	padding: 20px;
+}
+
+.docs .table_container table {
+	width: 100%;	
+}
+
+.docs .table_container table th, .docs .table_container table td {
+	text-align: left;
+	padding: 10px;
+	border: 1px solid #eee;
+	color: black;
+}
+
+.ver_tudo form {
+	margin: 12px;
+}
+
+.ver_tudo input#campobusca {
+	background-image: none;
+}
+
+.ver_tudo button#ajuda {
+	padding:5px 8px;
+}
