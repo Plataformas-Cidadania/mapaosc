@@ -2233,11 +2233,11 @@ visibility:visible;
 width:100%;
 }
 
-#mapa.organizacao ul.dados,.classificacao ul.dados {
+#mapa.organizacao ul.dados,.classificacao ul.dados, ul.locais {
 position:relative;
 }
 
-ul.dados li a.excluir {
+ul.dados li a.excluir, ul.locais li a.excluir {
 visibility:hidden;
 background:#F2F2F2 url(../imagens/sprite_organizacao.png) no-repeat -3px -180px;
 display:inline-block;
@@ -2249,7 +2249,7 @@ position:absolute;
 width:12px;
 }
 
-ul.dados li:hover a.excluir {
+ul.dados li:hover a.excluir, ul.locais li:hover a.excluir {
 visibility:visible;
 }
 
@@ -2724,6 +2724,8 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 .nome .titulo_projeto input {
 	padding: 5px;
 	border-radius:10px;
+	font-family: RobotoBold, sans-serif;
+	line-height: 20px;
 }
 
 .no_margin_right {
@@ -2843,4 +2845,22 @@ input#esqueci_senha:hover {
 
 .ver_tudo button#ajuda {
 	padding:5px 8px;
+}
+
+.localizacao_projeto, .localizacao_projeto div {
+	width: 100%;
+}
+
+.localizacao_projeto div input {
+	width: 65% !important;
+	border: #333 1px solid;
+}
+
+.localizacao_projeto div button {
+	float: none !important;
+}
+
+.localizacao_projeto div button#ajuda {
+	line-height: 19px;
+	padding: 5px 8px;
 }

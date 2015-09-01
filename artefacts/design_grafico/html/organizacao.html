@@ -466,7 +466,13 @@
 												</div>
 												<div class="col1_2">
 													<strong class="right-radius">Localização</strong>
-													<textarea name="descprojeto" id="localizacao">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+													<div class="localizacao_projeto">
+														<ul class="locais">
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5">Nordeste</a></li>
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#4">Norte</a></li>
+														</ul>
+														<div><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>
+													</div>
 												</div>
 											</div>
 											
@@ -535,11 +541,11 @@
 											<div class="clearfix linha">
 												<div class="col1_3">
 													<strong class="separador left-radius">Financiadores</strong>
-													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+													<textarea name="financiadores" id="financiadores1" disabled="disabled">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
 												</div>
 												<div class="col1_6">
 													<strong class="separador">Abrangência</strong>
-													<p><select>
+													<p><select disabled="disabled">
 															<option value="1" > Nacional </option>
 															<option value="2" > Regional </option>
 															<option value="3" > Estadual </option>
@@ -549,7 +555,13 @@
 												</div>
 												<div class="col1_2">
 													<strong class="right-radius">Localização</strong>
-													<textarea name="descprojeto" id="localizacao">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+													<div class="localizacao_projeto">
+														<ul class="locais">
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5544">São Paulo - SP</a></li>
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5543">Campinas - SP</a></li>
+														</ul>
+														<div style="display:none"><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>
+													</div>
 												</div>
 											</div>
 											
@@ -559,6 +571,7 @@
 													<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
+																			
 										</div>
 										<hr />
 									</div>
@@ -882,18 +895,39 @@
 					</div>\
 				</div>\
 			\
-				<div class="clearfix linha">\
-					<div class="col1_2">\
-						<strong class="separador left-radius">Financiadores</strong>\
-						<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>\
-					</div>\
-\
-					<div class="col1_2">\
-						<strong class="right-radius">Descrição</strong>\
-						<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>\
+			<div class="clearfix linha">\
+				<div class="col1_3">\
+					<strong class="separador left-radius">Financiadores</strong>\
+					<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>\
+				</div>\
+				<div class="col1_6">\
+					<strong class="separador">Abrangência</strong>\
+					<p><select>\
+							<option value="1" > Nacional </option>\
+							<option value="2" > Regional </option>\
+							<option value="3" > Estadual </option>\
+							<option value="4" > Municipal </option>\
+						</select>\
+					</p>\
+				</div>\
+				<div class="col1_2">\
+					<strong class="right-radius">Localização</strong>\
+					<div class="localizacao_projeto">\
+						<ul class="locais">\
+							<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5">Exemplo</a></li>\
+						</ul>\
+						<div><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>\
 					</div>\
 				</div>\
 			</div>\
+			\
+			<div class="clearfix linha">\
+				<div class="col1_1">\
+					<strong class="right-radius left-radius">Descrição</strong>\
+					<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>\
+				</div>\
+			</div>\
+		</div>\
 			<hr />\
 		</div>';
 			$('.projetos .titulo').after(novo_projeto);
