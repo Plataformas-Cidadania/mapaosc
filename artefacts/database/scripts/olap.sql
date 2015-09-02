@@ -1,5 +1,5 @@
-﻿-- Municípios
--- mudei aqui ó !
+-- Municípios
+
 DELETE FROM olap.ft_municipio;
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
@@ -7,7 +7,7 @@ INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_va
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 
-  AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = a.bosc_geometry) 
+  --AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = a.bosc_geometry) 
   GROUP BY c.edmu_cd_municipio
   ORDER BY c.edmu_cd_municipio;
 
@@ -17,11 +17,9 @@ INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_va
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 
-  AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d JOIN data.tb_osc e ON (d.bosc_sq_osc = e.bosc_sq_osc) WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = e.bosc_geometry) 
+  --AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d JOIN data.tb_osc e ON (d.bosc_sq_osc = e.bosc_sq_osc) WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = e.bosc_geometry) 
   GROUP BY c.edmu_cd_municipio
   ORDER BY c.edmu_cd_municipio;
-
-
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
   SELECT c.edmu_cd_municipio, 3, sum(a.siconv_vl_global) 
@@ -29,11 +27,9 @@ INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_va
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 
-  AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d JOIN data.tb_osc e ON (d.bosc_sq_osc = e.bosc_sq_osc) WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = e.bosc_geometry) 
+  --AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d JOIN data.tb_osc e ON (d.bosc_sq_osc = e.bosc_sq_osc) WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = e.bosc_geometry) 
   GROUP BY c.edmu_cd_municipio
   ORDER BY c.edmu_cd_municipio;
-
-
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
 SELECT c.edmu_cd_municipio, 4, sum(a.rais_qt_vinculo_ativo) 
@@ -41,29 +37,29 @@ SELECT c.edmu_cd_municipio, 4, sum(a.rais_qt_vinculo_ativo)
   WHERE a.bosc_sq_osc = b.bosc_sq_osc 
   AND b.bosc_sq_osc = c.bosc_sq_osc 
   AND b.inte_in_osc = true 
-  AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d JOIN data.tb_osc e ON (d.bosc_sq_osc = e.bosc_sq_osc) WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = e.bosc_geometry) 
+  --AND c.mdfd_cd_fonte_dados = (SELECT min(d.mdfd_cd_fonte_dados) FROM data.tb_localizacao d JOIN data.tb_osc e ON (d.bosc_sq_osc = e.bosc_sq_osc) WHERE d.bosc_sq_osc = c.bosc_sq_osc AND d.loca_geometry = e.bosc_geometry) 
   GROUP BY c.edmu_cd_municipio
   ORDER BY c.edmu_cd_municipio;  
 
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
 SELECT edmu_cd_municipio, 1, 0
-FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio)
+FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio WHERE indi_cd_indicadores = 1)
 ORDER BY edmu_cd_municipio ;
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
 SELECT edmu_cd_municipio, 2, 0
-FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio)
+FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio WHERE indi_cd_indicadores = 2)
 ORDER BY edmu_cd_municipio ;
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
 SELECT edmu_cd_municipio, 3, 0
-FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio)
+FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio WHERE indi_cd_indicadores = 3)
 ORDER BY edmu_cd_municipio ;
 
 INSERT INTO olap.ft_municipio(edmu_cd_municipio, indi_cd_indicadores, ftmu_vl_valor)
 SELECT edmu_cd_municipio, 4, 0
-FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio)
+FROM spat.ed_municipio WHERE edmu_cd_municipio NOT IN (SELECT edmu_cd_municipio  FROM olap.ft_municipio WHERE indi_cd_indicadores = 4)
 ORDER BY edmu_cd_municipio ;
 
 
