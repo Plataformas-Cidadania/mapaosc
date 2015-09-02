@@ -134,6 +134,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		menuPanel.add(instruction);
 		menuPanel.add(menu);
 		// initFunction();
+		
 	}
 
 	private void loadInfographicsMenu() {
@@ -596,7 +597,7 @@ public class MenuController implements ValueChangeHandler<String> {
 										.substring(0, 90)
 										+ '...');
 					}
-					$wnd.jQuery('.contraste').hide();
+					//$wnd.jQuery('.contraste').hide();
 
 					//$wnd.tooltips_padrao();
 					$wnd.redimensionarMapa();
