@@ -158,16 +158,18 @@
 												<strong>CNPJ:</strong>
 
 												<span>xxx.666.xxx</span>
-
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte RAIS"></span>
 												
 											</div>
 											<div>
 												<strong>Endereço da Sede:</strong>
 												<a href="Map.html#O55567">R. das margaridas 55, 22556-000, São Paulo - SP</a>
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte RAIS"></span>
 											</div>
 											<div >
-												<strong>Outros Endereços:</strong><a href="Mapa.html?grupoOSC=123">ver no Mapa</a> ou <a href="Lista.html?grupoOSC=123">visualizar Lista</a>
-												
+												<strong>Outros Endereços:</strong>
+												<a href="Mapa.html?grupoOSC=123">ver no Mapa</a> ou <a href="Lista.html?grupoOSC=123">visualizar Lista</a>
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte RAIS"></span>
 											</div>
 											<!--  <div>
 												<strong>Localização:</strong>
@@ -184,26 +186,31 @@
 											<div>
 												<strong>Descrição:</strong>
 												<textarea name="edesc" id="edesc">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
+												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 											
 											<div>
 												<strong>Público-alvo:</strong>
 												<textarea name="publicoalvo" id="publicoalvo">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
+												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 											
 											<div>
 												<strong>Fundada em:</strong>
 												<input type="text" name="efundacao" id="efundacao" value="1945" />
+												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 
 											<div>
 												<strong>Site:</strong>
 												<input type="text" name="esite" id="esite" value="www" />
+												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 
 											<div>
 												<strong>E-mail:</strong>
 												<input type="text" name="eemail_org" id="eemail_org" value="fundacao@gmail.com" />
+												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 											
 											<div>
@@ -216,6 +223,7 @@
 															<option value="publica">CONSELHO</option>
 														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
 													<li>
 														<select name="oconselhos">
@@ -224,6 +232,7 @@
 															<option value="publica">CONSELHO</option>
 														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
 													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
 												</ul>
@@ -239,6 +248,7 @@
 															<option value="publica">Pública</option>
 														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
 													<li>
 														<select name="erecursos">
@@ -247,6 +257,7 @@
 															<option value="publica">Pública</option>
 														</select>
 														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
 													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
 												</ul>
@@ -277,10 +288,16 @@
 											</fieldset>
 										</div>
 									</div>  -->
-									<div class="collapsable">
-										<h2>Colaboradores <div class="collapse-click collapse-button negativo"><div></div></div></h2>
-										<div class="relacoes collapse-hidden">
-											<fieldset>
+									<h2>Colaboradores</h2>
+									<fieldset>
+										<div class="recursos collapsable">
+											<div>
+												<strong>Total de Colaboradores:</strong>
+												<input type="text" name="vparcerias" id="vparcerias" value="15" />
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte RAIS"></span>
+												<div class="collapse-click collapse-button"><div></div></div>
+											</div>
+											<div class="collapse-hidden">
 												<div>
 													<strong>Funcionários:</strong>
 													<input type="text" name="efuncionarios" id="efuncionarios" value="10" />
@@ -297,9 +314,9 @@
 													<strong>Funcionários com Deficiência:</strong>
 													<input type="text" name="edeficientes" id="edeficientes" value="01" />
 												</div>
-											</fieldset>
+											</div>
 										</div>
-									</div>
+									</fieldset>
 									<h2>Recursos públicos</h2>
 									<fieldset>
 										<div class="recursos collapsable">
@@ -307,24 +324,25 @@
 												<strong>Valor total das parcerias:</strong>
 												<span>R$</span>
 												<input type="text" name="vparcerias" id="vparcerias" value="243434343" />
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte SINAFI"></span>
 												<div class="collapse-click collapse-button"><div></div></div>
 											</div>
 											<div class="collapse-hidden">
-											<div>
-												<strong>Valor das parcerias federais:</strong>
-												<span>R$</span>
-												<input type="text" name="vparceriasfederais" id="vparcerias" value="24344343" />
-											</div>
-											<div>
-												<strong>Valor das parcerias estaduais:</strong>
-												<span>R$</span>
-												<input type="text" name="vparceriasestaduais" id="vparcerias" value="2434111" />
-											</div>
-											<div>
-												<strong>Valor das parcerias municipais:</strong>
-												<span>R$</span>
-												<input type="text" name="vparceriasmunicipais" id="vparcerias" value="220000" />
-											</div>
+												<div>
+													<strong>Valor das parcerias federais:</strong>
+													<span>R$</span>
+													<input type="text" name="vparceriasfederais" id="vparcerias" value="24344343" />
+												</div>
+												<div>
+													<strong>Valor das parcerias estaduais:</strong>
+													<span>R$</span>
+													<input type="text" name="vparceriasestaduais" id="vparcerias" value="2434111" />
+												</div>
+												<div>
+													<strong>Valor das parcerias municipais:</strong>
+													<span>R$</span>
+													<input type="text" name="vparceriasmunicipais" id="vparcerias" value="220000" />
+												</div>
 											</div>
 											
 										</div>
@@ -568,7 +586,7 @@
 											<div class="clearfix linha">
 												<div class="col1_1">
 													<strong class="right-radius left-radius">Descrição</strong>
-													<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+													<textarea name="descprojeto" id="descprojeto1" disabled="disabled">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
 																			

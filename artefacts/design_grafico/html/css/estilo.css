@@ -2060,7 +2060,7 @@ vertical-align:middle;
 #mapa.organizacao div.tabela .dados div ul {
 margin:0;
 position:relative;
-width:65%;
+width:77.3%;
 min-height:35px;
 }
 
@@ -2101,7 +2101,7 @@ padding:2px 3px;
 
 #mapa.organizacao div.tabela .dados ul li.botoes {
 position:absolute;
-right:0;
+right:40px;
 top:2px;
 padding:0;
 }
@@ -2863,4 +2863,29 @@ input#esqueci_senha:hover {
 .localizacao_projeto div button#ajuda {
 	line-height: 19px;
 	padding: 5px 8px;
+}
+
+.fonte_de_dados {
+	float: right;
+	background-repeat: no-repeat;
+	width:30px;
+	height: 30px;
+	background-position: top;
+	font-size: 0px;
+}
+
+#mapa.organizacao div.tabela .dados div ul li .fonte_de_dados {
+	margin-right:0px;
+}
+
+.dado_oficial {
+	background-image: url(../imagens/base_dados.png);
+}
+
+.dado_organizacao {
+	background-image: url(../imagens/dado_representante.png);
+}
+
+fieldset > div > div > div {
+	padding: 4px;
 }
