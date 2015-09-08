@@ -2907,3 +2907,33 @@ fieldset > div > div > div {
 	background-image: none;
 	padding: 5px;
 }
+
+.organizacao .wrapper {
+	width: 55%;
+	min-width: 480px;
+	margin: 20px 0px 20px 100px;
+}
+
+.organizacao section header h2 {
+	font-size: 1.4em;
+}
+
+.organizacao section div h3 {
+	margin: 20px 0;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+.organizacao section p {
+	text-align: justify;
+	line-height: 1.5em;
+	font-size: 1.1em;
+	margin-bottom: 10px;
+	text-indent: 2em;
+}
+
+.organizacao section div h4 {
+	font-size: 1.2em;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
