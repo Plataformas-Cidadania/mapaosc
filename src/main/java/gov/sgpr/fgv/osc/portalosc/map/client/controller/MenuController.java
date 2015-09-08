@@ -332,7 +332,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		menuItems.add(certificationsItem);
 		menuItems.add(documentsItem);
 		menuItems.add(committeesItem);
-		// menuItems.add(localizationItem);
+		menuItems.add(localizationItem);
 
 		final OrganizationWidget oscInfo = new OrganizationWidget(menuInfo,
 				menuItems);
@@ -481,11 +481,10 @@ public class MenuController implements ValueChangeHandler<String> {
 			}
 
 			if (tokenType.equals("I")) {
-
 				Infographic i = Infographic.get(token);
 				info.loadInfo(i);
 				info.setVisible(true);
-				setupInfographics();
+				setupInfographics();					
 			}
 			if (tokenType.equals("M")) {
 				matrix.loadMatrix(tokenId);
@@ -718,6 +717,11 @@ public class MenuController implements ValueChangeHandler<String> {
 			});
 
 		}
+		
+		if($wnd.jQuery("#mapa.infograficos").length > 0) {
+			$wnd.jQuery("#tab_indicadores").click();
+		}
+		
 		$wnd.jQuery("#contraste_normal").click(function() {
 			$wnd.chooseStyle('none');
 			$wnd.jQuery('.normal').show();
