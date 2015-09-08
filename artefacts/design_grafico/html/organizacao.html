@@ -112,6 +112,9 @@
 								</div>
 
 								<div class="redes">
+									<div class="rede_edit">
+										Endereço: www.<input type="text" /> <input type="button" value="Alterar"/>
+									</div>
 									<button type="button" id="b-google" name="redes" value="false" title="Google" class="tooltip"></button>
 									<button type="button" id="b-facebook" name="redes" value="false" title="Facebook" class="tooltip"></button>
 									<button type="button" id="b-linkedin" name="redes" value="false" title="LinkedIn" class="tooltip"></button>
@@ -751,6 +754,15 @@
 	<script type="text/javascript">// <![CDATA[
 	$(document).ready(function(){
 
+		$(".rede_edit input[type=button]").click(function() {
+			$(".rede_edit").hide();
+			
+		});
+		
+		$(".redes button").click(function() {
+			$(".rede_edit").show();
+		});
+		
 		//$("#ecnpj").mask("00.000.000/0000-00");
 
 		$('.projetos').on('click', '.excluir', excluirProjeto);
