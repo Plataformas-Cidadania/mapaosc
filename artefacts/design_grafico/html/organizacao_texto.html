@@ -102,29 +102,82 @@
 								<h2>[Nome Organização]</h2>
 							</header>
 							<div>
-								<h3>Caracterização</h3>
-								<hr />
-								<p>A Organização [Nome Organização] sediada no logradouro <a href="#" title="Mostrar logradouro no mapa" target="_blank">[Logradouro]</a> na cidade de [Cidade] - [UF] desde [Data de Fundação]. {[Se tem filiais:] Possuindo um total de <a href="#" title="lista de filiais" target="_blank">[Total Filiais] filiais</a> espalhadas pelo Brasil.} Desde [ano base do mapa] investiu um total de [Total histórico de Recursos] reais em seus projetos, com foco em seu público alvo.</p>
-								<img src="mapa.jpg" width="480" height="480"/>
-								<p>Descrição fornecida da organização: [Descrição]</p>
-								<h3>Classificação</h3>
-								<hr />
-								<p>A organização foi classificada pelo IBGE na FASFIL como sendo uma organização <a href="#" title="Lista de organizações com a mesma classificação">[Tipo]</a> em [Ano] {[Se possui mais tags:], além dessa classificação ela selecionou para si também as seguintes classificações: [lista de links para as tags]}. A composição de seus colaboradores é majoritariamente de [maior grupo de trabalhadores], possuindo [percentual de portadores de deficiência]% funcionários portadores de deficiência, [percentual de estagiários]% estagiários e [percentual de voluntários]% voluntários. </p>
-								<img src="" width="480" height="480" title="gráfico do número de colaboradores por tipo"/>
-								<p>Descrição do público alvo pela organização: [Público Alvo]</p>
-								<h3>Atuação</h3>
-								<hr />
-								<p>Nos últimos 2 anos tem atuado nas regiões [Macro-Regiões nas quais atua], investindo um total de [Total de Recursos dos projetos em curso] em seus [Total de Projetos em curso] projetos. Também atua nos conselhos [Conselhos] com as respectivas representações [Tipo de cargo no conselho]. </p>
-								<img src="mapa.jpg" width="480" height="480" title="Gráfico do percentual de recursos utilizados para cada região"/>
-								<img src="mapa.jpg" width="480" height="480" title="Gráfico do percentual de recursos utilizados por fonte (pública, privada, própria)"/>
-								<p>[Tabela de recursos por projeto]</p>
-								<h3>Projetos</h3>
-								<hr />
 								<div>
-									<h4>{[Projeto #]} - Status: [Status do Projeto]</h4>
-									<div>
-										<p>A descrição fornecida pela OSC foi: [Projeto # - Descrição]</p>
-										<p>Esse projeto recebeu recursos advindos de [Fontes de Recursos], num total de [Total de recursos do projeto]. Iniciado em [Data de início], objetivou afetar as localidades [Lista de Localidades]. Mais detalhes podem ser conferidos na <a href="#">página da OSC</a>. </p>
+									<h3>Caracterização</h3>
+									<hr />
+									<p>A Organização [Nome Organização] sediada no logradouro <a href="#" title="Mostrar logradouro no mapa" target="_blank">[Logradouro]</a> na cidade de [Cidade] - [UF] desde [Data de Fundação]. {[Se tem filiais:] Possuindo um total de <a href="#" title="lista de filiais" target="_blank">[Total Filiais] filiais</a> espalhadas pelo Brasil.} Desde [ano base do mapa] investiu um total de [Total histórico de Recursos] reais em seus projetos, com foco em seu público alvo.</p>
+									<img src="graficos/mapa.png" height="480"/>
+									<p>Descrição fornecida da organização: [Descrição]</p>
+								</div>
+								<div>
+									<h3>Classificação</h3>
+									<hr />
+									<p>A organização foi classificada pelo IBGE na FASFIL como sendo uma organização <a href="#" title="Lista de organizações com a mesma classificação">[Tipo]</a> em [Ano] {[Se possui mais tags:], além dessa classificação ela selecionou para si também as seguintes classificações: [lista de links para as tags]}. A composição de seus colaboradores é majoritariamente de [maior grupo de trabalhadores], possuindo [percentual de portadores de deficiência]% funcionários portadores de deficiência, [percentual de estagiários]% estagiários e [percentual de voluntários]% voluntários. </p>
+									<h4>Colaboradores por tipo</h4>
+									<img src="graficos/grafico1.png" height="480" title="gráfico do número de colaboradores por tipo"/>
+									<p>Descrição do público alvo pela organização: [Público Alvo]</p>
+								</div>
+								<div>
+									<h3>Atuação</h3>
+									<hr />
+									<p>Nos últimos 2 anos tem atuado nas regiões [Macro-Regiões nas quais atua], investindo um total de [Total de Recursos dos projetos em curso] em seus [Total de Projetos em curso] projetos. Também atua nos conselhos [Conselhos] com as respectivas representações [Tipo de cargo no conselho]. </p>
+									<h4>Recursos por Macro-Região</h4>
+									<img src="graficos/grafico3.png" height="480" title="Gráfico do percentual de recursos utilizados para cada região"/>
+									<h4>Recursos por Fonte:</h4>
+									<img src="graficos/grafico2.png" height="480" title="Gráfico do percentual de recursos utilizados por fonte (pública, privada, própria)"/>
+									<p>[Tabela de recursos por projeto]</p>
+									<h4>Recursos por Projeto</h4>
+									<table class="true_table">
+										<thead>
+											<tr>
+												<th>N</th>
+												<th>Nome</th>
+												<th>Fonte</th>
+												<th>Valor</th>
+											</tr>
+										</thead>
+										<tr>
+											<td>Número</td>
+											<td>Ajuda a comunidades indígenas</td>
+											<td>Pública</td>
+											<td>R$ 500.000,00</td>
+										</tr>
+										<tr>
+											<td>Número</td>
+											<td>Auxílio aos desabrigados pela enchente</td>
+											<td>Própria</td>
+											<td>R$ 500.000,00</td>
+										</tr>
+										<tr>
+											<td>Número</td>
+											<td>Construção do Centro educacional João da Silva </td>
+											<td>Pública, Privada</td>
+											<td>R$ 2.000.000,00</td>
+										</tr>
+										<tr>
+											<td>Número</td>
+											<td>Vacinação gratuita para comunidades carentes</td>
+											<td>Privada</td>
+											<td>R$ 1.000.000,00</td>
+										</tr>
+									</table>
+								</div>
+								<div>
+									<h3>Projetos</h3>
+									<hr />
+									<div class="relatar_projeto">
+										<h4>{[Projeto #]} - Status: [Status do Projeto]</h4>
+										<div>
+											<p>A descrição fornecida pela OSC foi: [Projeto # - Descrição]</p>
+											<p>Esse projeto recebeu recursos advindos de [Fontes de Recursos], num total de [Total de recursos do projeto]. Iniciado em [Data de início], objetivou afetar as localidades [Lista de Localidades]. Mais detalhes podem ser conferidos na <a href="#">página da OSC</a>. </p>
+										</div>
+									</div>
+									<div class="relatar_projeto">
+										<h4>{[Projeto #]} - Status: [Status do Projeto]</h4>
+										<div>
+											<p>A descrição fornecida pela OSC foi: [Projeto # - Descrição]</p>
+											<p>Esse projeto recebeu recursos advindos de [Fontes de Recursos], num total de [Total de recursos do projeto]. Iniciado em [Data de início], objetivou afetar as localidades [Lista de Localidades]. Mais detalhes podem ser conferidos na <a href="#">página da OSC</a>. </p>
+										</div>
 									</div>
 								</div>
 							</div>
