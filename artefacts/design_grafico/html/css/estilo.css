@@ -2956,3 +2956,12 @@ div.relatar_projeto div {
 	border: 1px solid #ccc;
 }
 
+ul.lista_certificados {
+	margin-left:40px;
+}
+
+ul.lista_certificados li {
+	list-style: circle;
+	padding:5px;
+}
+
