@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
@@ -130,6 +131,32 @@ public class UserController {
 				logger.info("Validando logon");
 				if (logon.isValid()) {
 					validateLogin(logon.getEmail(), logon.getPassword());
+				}
+			}
+		});
+		
+		logon.addLogonLabelemail(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if(event.getCharCode() == KeyCodes.KEY_ENTER){
+				logger.info("Validando logon");
+				if (logon.isValid()) {
+					validateLogin(logon.getEmail(), logon.getPassword());
+				}
+				}
+			}
+		});
+		
+		logon.addLogonLabelsenha(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if(event.getCharCode() == KeyCodes.KEY_ENTER){
+				logger.info("Validando logon");
+				if (logon.isValid()) {
+					validateLogin(logon.getEmail(), logon.getPassword());
+				}
 				}
 			}
 		});
