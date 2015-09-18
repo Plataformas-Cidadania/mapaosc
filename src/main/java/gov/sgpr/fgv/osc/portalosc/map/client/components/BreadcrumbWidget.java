@@ -15,10 +15,10 @@ public class BreadcrumbWidget extends Composite implements ClickHandler {
 
 	public void addItem(BreadcrumbItem item) {
 		if (breadCrumbContent.isEmpty()) {
-			BreadcrumbItem root = new BreadcrumbItem();
-			root.setItemText("Brasil");
-			root.setItemId("0");
-			this.breadCrumbContent.add(root);
+			//BreadcrumbItem root = new BreadcrumbItem();
+			//root.setItemText("Brasil");
+			//root.setItemId("0");
+			//this.breadCrumbContent.add(root);
 		}
 		this.breadCrumbContent.add(item);
 	}
