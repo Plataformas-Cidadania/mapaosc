@@ -190,6 +190,71 @@ public class UserController {
 				}
 			}
 		});
+		defaultUser.addSubmitcemail(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if (event.getCharCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando cadastro de usuário padrão");
+					if (defaultUser.isValid()) {
+						logger.info("Buscando dados do cadastro de usuário padrão");
+						validateUser(defaultUser.getUser());
+					}
+				}
+			}
+		});
+		defaultUser.addSubmitcsenha(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if (event.getCharCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando cadastro de usuário padrão");
+					if (defaultUser.isValid()) {
+						logger.info("Buscando dados do cadastro de usuário padrão");
+						validateUser(defaultUser.getUser());
+					}
+				}
+			}
+		});
+		defaultUser.addSubmitccsenha(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if (event.getCharCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando cadastro de usuário padrão");
+					if (defaultUser.isValid()) {
+						logger.info("Buscando dados do cadastro de usuário padrão");
+						validateUser(defaultUser.getUser());
+					}
+				}
+			}
+		});
+		defaultUser.addSubmitcnome(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if (event.getCharCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando cadastro de usuário padrão");
+					if (defaultUser.isValid()) {
+						logger.info("Buscando dados do cadastro de usuário padrão");
+						validateUser(defaultUser.getUser());
+					}
+				}
+			}
+		});
+		defaultUser.addSubmitccpf(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if (event.getCharCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando cadastro de usuário padrão");
+					if (defaultUser.isValid()) {
+						logger.info("Buscando dados do cadastro de usuário padrão");
+						validateUser(defaultUser.getUser());
+					}
+				}
+			}
+		});
 		defaultUser.addCancelListener(new EventListener() {
 
 			@Override

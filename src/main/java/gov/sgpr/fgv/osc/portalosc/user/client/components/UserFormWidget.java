@@ -49,6 +49,41 @@ public class UserFormWidget extends Composite {
 		Event.setEventListener(btnFillIn, listener);
 		validate();
 	}
+	
+	public void addSubmitcemail(EventListener listener) {
+		Element cemail = DOM.getElementById("cemail");
+		Event.sinkEvents(cemail, Event.ONKEYPRESS);
+		Event.setEventListener(cemail, listener);
+		validate();
+	}
+	
+	public void addSubmitcsenha(EventListener listener) {
+		Element csenha = DOM.getElementById("csenha");
+		Event.sinkEvents(csenha, Event.ONKEYPRESS);
+		Event.setEventListener(csenha, listener);
+		validate();
+	}
+	
+	public void addSubmitccsenha(EventListener listener) {
+		Element ccsenha = DOM.getElementById("ccsenha");
+		Event.sinkEvents(ccsenha, Event.ONKEYPRESS);
+		Event.setEventListener(ccsenha, listener);
+		validate();
+	}
+	
+	public void addSubmitcnome(EventListener listener) {
+		Element cnome = DOM.getElementById("cnome");
+		Event.sinkEvents(cnome, Event.ONKEYPRESS);
+		Event.setEventListener(cnome, listener);
+		validate();
+	}
+	
+	public void addSubmitccpf(EventListener listener) {
+		Element ccpf = DOM.getElementById("ccpf");
+		Event.sinkEvents(ccpf, Event.ONKEYPRESS);
+		Event.setEventListener(ccpf, listener);
+		validate();
+	}
 
 	/**
 	 * @param listener
