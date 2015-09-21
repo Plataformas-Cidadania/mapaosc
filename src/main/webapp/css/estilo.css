@@ -1699,7 +1699,8 @@ input#r-cpf {
 .modal input[type=checkbox],.cadastro_cpf input[type=radio] {
 	margin: 0 7px 0 0;
 	float: left;
-	height: 30px;
+	height: auto;
+	margin: 4px 6px 0 4px;
 }
 
 div.b-redes label.tooltip,.social .redes button,.institucional .redes button
