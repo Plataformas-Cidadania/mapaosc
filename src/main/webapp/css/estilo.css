@@ -2721,6 +2721,10 @@ ul.dados li:hover a.excluir {
 	text-align: right;
 }
 
+#mapa.institucional .faq>div ul {
+	text-align: left;
+}
+
 #mapa.institucional .faq>div p {
 	text-align: left;
 	margin-bottom: 15px;
