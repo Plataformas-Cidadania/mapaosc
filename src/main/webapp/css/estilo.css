@@ -1789,6 +1789,7 @@ input#b-twitter+label.tooltip,button#b-twitter {
 
 #modal_cadastro form>div {
 	width: 280px;
+	clear:both;
 	margin: auto;
 }
 
@@ -2721,7 +2722,7 @@ ul.dados li:hover a.excluir {
 	text-align: right;
 }
 
-#mapa.institucional .faq>div ul {
+#mapa.institucional .faq ul {
 	text-align: left;
 }
 
