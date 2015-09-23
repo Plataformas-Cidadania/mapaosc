@@ -121,18 +121,22 @@ public class UserFormWidget extends Composite {
 	 * @return Usuário a ser cadastrado.
 	 */
 	public void setUser(DefaultUser user) {
-		InputElement email = InputElement.as(DOM.getElementById("cemail"));
-		InputElement passwd = InputElement.as(DOM.getElementById("csenha"));
-		InputElement cpasswd = InputElement.as(DOM.getElementById("ccsenha"));
-		InputElement name = InputElement.as(DOM.getElementById("cnome"));
-		InputElement cpf = InputElement.as(DOM.getElementById("ccpf"));
-		email.setValue(user.getEmail());
-		passwd.setValue(user.getPassword());
-		cpasswd.setValue(user.getPassword());
-		name.setValue(user.getName());
-		cpf.setValue(String.valueOf(user.getCpf()));
-		DOM.getElementById("cinscrever").setPropertyBoolean("checked",
-				user.isMailingListMember());
+		
+		if (DOM.getElementById("ctermo").getPropertyBoolean("checked"))
+		{
+			InputElement email = InputElement.as(DOM.getElementById("cemail"));
+			InputElement passwd = InputElement.as(DOM.getElementById("csenha"));
+			InputElement cpasswd = InputElement.as(DOM.getElementById("ccsenha"));
+			InputElement name = InputElement.as(DOM.getElementById("cnome"));
+			InputElement cpf = InputElement.as(DOM.getElementById("ccpf"));
+			email.setValue(user.getEmail());
+			passwd.setValue(user.getPassword());
+			cpasswd.setValue(user.getPassword());
+			name.setValue(user.getName());
+			cpf.setValue(String.valueOf(user.getCpf()));
+			DOM.getElementById("cinscrever").setPropertyBoolean("checked",
+					user.isMailingListMember());
+		}
 	}
 
 	private HTML getHtml() {
@@ -150,27 +154,31 @@ public class UserFormWidget extends Composite {
 		htmlBuilder
 				.append("<form id='form_cadastro' name='form_cadastro' method='post'>");
 		htmlBuilder.append("<div class='clearfix'>");
-		htmlBuilder.append("<label for='cemail'>Email:</label> ");
+		htmlBuilder.append("<div><label for='cemail'>Email:</label>");
 		htmlBuilder
-				.append("<input type='text' name='cemail' id='cemail' placeholder='E-mail' class='email' required='required' />");
-		htmlBuilder.append("<label for='csenha'>Senha:</label> ");
+				.append("<input type='text' name='cemail' id='cemail' placeholder='E-mail' class='email' required='required' /></div>");
+		htmlBuilder.append("<div><label for='csenha'>Senha:</label> ");
 		htmlBuilder
-				.append("<input type='password' name='csenha' id='csenha' placeholder='Senha' class='senha' required='required' />");
-		htmlBuilder.append("<label for='ccsenha'>Confirmar Senha:</label> ");
+				.append("<input type='password' name='csenha' id='csenha' placeholder='Senha' class='senha' required='required' /></div>");
+		htmlBuilder.append("<div><label for='ccsenha'>Confirmar Senha:</label> ");
 		htmlBuilder
-				.append("<input type='password' name='ccsenha' id='ccsenha' placeholder='Confirmar Senha' required='required' class='senha' />");
-		htmlBuilder.append("<label for='cnome'>Nome:</label> ");
+				.append("<input type='password' name='ccsenha' id='ccsenha' placeholder='Confirmar Senha' required='required' class='senha' /></div>");
+		htmlBuilder.append("<div><label for='cnome'>Nome:</label> ");
 		htmlBuilder
-				.append("<input type='text' name='cnome' id='cnome' placeholder='Nome' class='nome' required='required' />");
-		htmlBuilder.append("<label for='ccpf'>CPF</label> ");
+				.append("<input type='text' name='cnome' id='cnome' placeholder='Nome' class='nome' required='required' /></div>");
+		htmlBuilder.append("<div><label for='ccpf'>CPF</label> ");
 		htmlBuilder
-				.append("<input type='text' name='ccpf' id='ccpf' placeholder='CPF' class='cpf' required='required' />");
+				.append("<input type='text' name='ccpf' id='ccpf' placeholder='CPF' class='cpf' required='required' /></div>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("<div>");
+		htmlBuilder.append("<input type='checkbox' name='ctermo' value='ctermo' />");
+		htmlBuilder.append("Concordo com os <a href='termos.html'>termos de uso</a>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div>");
 		htmlBuilder
 				.append("<input type='checkbox' id='cinscrever' name='cinscrever'/>");
 		htmlBuilder
-				.append("<div>Desejo receber e-mail sobre as novidades do Mapa das Organizações da Sociedade Civil.</div>");
+				.append("Desejo receber e-mail sobre as novidades do Mapa das Organizações da Sociedade Civil.");
 		htmlBuilder.append("</div>");
 		htmlBuilder
 				.append("<div class='botoes' id='botoes_cadastro'><a href='#' class='cancelar' id='btnCancelar'>Cancelar</a> ou ");
@@ -271,6 +279,9 @@ public class UserFormWidget extends Composite {
 				},
 				cinscrever : {
 					required : false
+				},
+				ctermo : {
+					required : true
 				}
 			},
 			messages : {
@@ -293,8 +304,17 @@ public class UserFormWidget extends Composite {
 				ccpf : {
 					verificaCPF : 'CPF inválido.',
 					required : 'Informe seu CPF.'
+				},
+				ctermo : {
+					required : 'Campo obrigatório.'
 				}
-			}
+			},
+			
+			errorPlacement: function(error, element) {
+				var parent = $wnd.jQuery(element).parent();
+				console.log(parent); 
+				error.appendTo(parent);
+			},
 		});
 	}-*/;
 
