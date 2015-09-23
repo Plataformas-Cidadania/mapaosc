@@ -82,9 +82,25 @@ public class LogonWidget extends Composite {
 	 *            Controla o evento de click do botão de logon.
 	 */
 	public void addLogonListener(EventListener listener) {
+		
 		Element btnEnter = DOM.getElementById("entrar");
 		Event.sinkEvents(btnEnter, Event.ONCLICK);
 		Event.setEventListener(btnEnter, listener);
+		validate();
+		
+	}
+	
+	public void addLogonLabelemail(EventListener listener) {
+		Element email = DOM.getElementById("email");
+		Event.sinkEvents(email, Event.ONKEYPRESS);
+		Event.setEventListener(email, listener);
+		validate();
+	}
+	
+	public void addLogonLabelsenha(EventListener listener) {
+		Element senha = DOM.getElementById("senha");
+		Event.sinkEvents(senha, Event.ONKEYPRESS);
+		Event.setEventListener(senha, listener);
 		validate();
 	}
 
