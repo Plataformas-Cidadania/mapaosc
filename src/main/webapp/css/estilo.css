@@ -3233,6 +3233,8 @@ ul.text-list > li > ul.text-list > li {
 	padding-bottom:4px;
 	margin-top:10px;
 	border-bottom:1px solid;
+	margin-left: 30px;
+	mergin-right: 30px;
 	font-size: 0.9em;
 }
 
@@ -3263,4 +3265,9 @@ ul.text-list > li > ul.text-list > li {
 
 #topo_acesso h2 {
 	font-size:1.2em;
+}
+
+.popupContent p {
+	line-height: 1.4em;
+    padding-bottom: 10px;
 }
