@@ -12,14 +12,26 @@ import com.google.gwt.user.client.ui.HTML;
 public class BreadcrumbWidget extends Composite implements ClickHandler {
 
 	private LinkedList<BreadcrumbItem> breadCrumbContent = new LinkedList<BreadcrumbItem>();
-
+	private String type;
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setType(String type){
+		this.type = type;
+	}
+	
 	public void addItem(BreadcrumbItem item) {
 		if (breadCrumbContent.isEmpty()) {
 			BreadcrumbItem root = new BreadcrumbItem();
 			root.setItemText("Brasil");
-			root.setItemId("0");
+			root.setItemId(this.type+"0");
 			this.breadCrumbContent.add(root);
 		}
+		
+		item.setItemId(this.type+item.getItemId());
+		
 		this.breadCrumbContent.add(item);
 	}
 
