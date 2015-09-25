@@ -82,7 +82,6 @@ public class LogonWidget extends Composite {
 	 *            Controla o evento de click do botão de logon.
 	 */
 	public void addLogonListener(EventListener listener) {
-		
 		Element btnEnter = DOM.getElementById("entrar");
 		Event.sinkEvents(btnEnter, Event.ONCLICK);
 		Event.setEventListener(btnEnter, listener);
