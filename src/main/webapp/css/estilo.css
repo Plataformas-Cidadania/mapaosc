@@ -63,7 +63,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
 
 body {
 	line-height: 1;
-	font-size: 13px;
+	font-size: 0.8em;
 	min-width: 930px;
 }
 
@@ -1308,7 +1308,7 @@ span.menuTooltip:hover span{
      color:white; 
      border:0 solid transparent; 
      border-radius:5px;
-     font-size: 11px;
+     font-size: 0.8em;
      font-family: 'Lucida Grande', sans-serif;
      font-weight: bold;
      text-shadow: 0 1px black;
@@ -1345,7 +1345,7 @@ span.magneticTooltip:hover span{
      color:white; 
      border:0 solid transparent; 
      border-radius:5px;
-     font-size: 11px;
+     font-size: 0.8em;
      font-family: 'Lucida Grande', sans-serif;
      font-weight: bold;
      text-shadow: 0 1px black;
@@ -1601,7 +1601,7 @@ a.b-redes,a.b-cadastro,a.b-entidade {
 	background-color: #FFF;
 	border-radius: 10px;
 	color: #000;
-	font-size: 28px;
+	font-size: 2.2em;
 	line-height: 10px;
 	font-family: sans-serif;
 	left: 95%;
@@ -1671,7 +1671,7 @@ input#r-cpf {
 
 #modal_redes form div.redes span {
 	font-family: RobotoBold;
-	font-size: 13px;
+	font-size: 1em;
 	padding: 0  5px 0 5px;
 }
 
@@ -2708,7 +2708,7 @@ ul.dados li:hover a.excluir {
 	border-radius: 20px;
 	display: block;
 	color: #FFF;
-	font-size: 20px;
+	font-size: 1.6em;
 	font-style: normal;
 	position: absolute;
 	top: 0px;
@@ -3227,7 +3227,7 @@ ul.text-list > li > ul.text-list > li {
 	padding-bottom:4px;
 	margin-top:10px;
 	border-bottom:1px solid;
-	font-size: 12px;
+	font-size: 0.9em;
 }
 
 #topo_acesso form#acesso > div:not(#floatingLoginErrorList) {
@@ -3256,5 +3256,5 @@ ul.text-list > li > ul.text-list > li {
 }
 
 #topo_acesso h2 {
-	font-size:16px;
+	font-size:1.2em;
 }
