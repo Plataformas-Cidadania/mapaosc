@@ -97,6 +97,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 
 	private void loadPlaces(Place[] places, boolean clearBreadcrumb) {
+		String type = "P";
 		menuPanel.clear();
 		@SuppressWarnings("rawtypes")
 		List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
@@ -106,11 +107,12 @@ public class MenuController implements ValueChangeHandler<String> {
 			NumberFormat fmtCurrency = NumberFormat.getCurrencyFormat();
 			NumberFormat fmtNumber = NumberFormat.getDecimalFormat();
 			KeyValueMenuItem item = new KeyValueMenuItem();
+			String id = type+String.valueOf(place.getId());
 			
-			item.setId("P" + place.getId());
+			item.setId(id);
 			item.setCssClass("dados");
 			item.setItemTitle(place.getName());
-			item.setItemValue("P" + place.getId());
+			item.setItemValue(id);
 			
 			for (Map.Entry<String, Double> entry : place.getIndicators().entrySet()) {
 				if (entry.getKey().contains("Valor"))
@@ -340,20 +342,12 @@ public class MenuController implements ValueChangeHandler<String> {
 			final String tokenType = String.valueOf(token.charAt(0));
 			final String tokenId = token.substring(1);
 			
-			if (tokenType.equals("P")) {
-				if (isInteger(tokenId, 10))	processPlaces(token, tokenId);
-			}
-			else if (tokenType.equals("O")) {
-				if (isInteger(tokenId, 10)) processOrganizations(token, tokenId);
-			}
-			else if (tokenType.equals("0")) {
-				if (isInteger(tokenId, 10)) processPlace(token, tokenId);
-			}
-			else if (tokenType.equals("I")) {
-				if (isInteger(tokenId, 10)) processInfographic(token);
-			}
-			else if (tokenType.equals("M")) {
-				if (isInteger(tokenId, 10)) processMatrix(tokenId);
+			if (isInteger(tokenId, 10)){
+				if (tokenType.equals("P") && !token.equals("P0"))	processPlaces(token, tokenId);
+				else if (tokenType.equals("O"))	processOrganizations(token, tokenId);
+				else if (token.equals("P0"))	processPlace(token, tokenId);
+				else if (tokenType.equals("I"))	processInfographic(token);
+				else if (tokenType.equals("M"))	processMatrix(tokenId);
 			}
 		}
 	}
@@ -444,6 +438,8 @@ public class MenuController implements ValueChangeHandler<String> {
 	private void processPlaces(final String token, String tokenId) {
 		Integer idToken = Integer.parseInt(tokenId);
 		
+		breadcrumb.setType("P");
+		
 		AsyncCallback<Place[]> callbackBreadcrumb = new AsyncCallback<Place[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
@@ -454,7 +450,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				
 				for (Place place : result) {
 					BreadcrumbItem item = new BreadcrumbItem();
-					item.setItemId("P" + place.getId());
+					item.setItemId(String.valueOf(place.getId()));
 					item.setItemText(place.getName());
 					
 					if (!breadcrumb.isItemOnBreadcrumb(item.getItemId()))
@@ -605,7 +601,7 @@ public class MenuController implements ValueChangeHandler<String> {
 										.substring(0, 90)
 										+ '...');
 					}
-					$wnd.jQuery('.contraste').hide();
+					//$wnd.jQuery('.contraste').hide();
 
 					//$wnd.tooltips_padrao();
 					$wnd.redimensionarMapa();
@@ -726,6 +722,11 @@ public class MenuController implements ValueChangeHandler<String> {
 			});
 
 		}
+		
+		if($wnd.jQuery("#mapa.infograficos").length > 0) {
+			$wnd.jQuery("#tab_indicadores").click();
+		}
+		
 		$wnd.jQuery("#contraste_normal").click(function() {
 			$wnd.chooseStyle('none');
 			$wnd.jQuery('.normal').show();
