@@ -1508,6 +1508,7 @@ background-position:-2px -57px;
 
 #modal_cadastro form > div {
 width:280px;
+clear:both;
 margin:auto;
 }
 
@@ -2954,5 +2955,14 @@ div.relatar_projeto div {
 	min-width:50px;
 	padding:15px;
 	border: 1px solid #ccc;
+}
+
+ul.lista_certificados {
+	margin-left:40px;
+}
+
+ul.lista_certificados li {
+	list-style: circle;
+	padding:5px;
 }
 

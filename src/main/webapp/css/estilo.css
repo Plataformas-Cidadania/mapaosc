@@ -1699,7 +1699,8 @@ input#r-cpf {
 .modal input[type=checkbox],.cadastro_cpf input[type=radio] {
 	margin: 0 7px 0 0;
 	float: left;
-	height: 30px;
+	height: auto;
+	margin: 4px 6px 0 4px;
 }
 
 div.b-redes label.tooltip,.social .redes button,.institucional .redes button
@@ -1789,6 +1790,7 @@ input#b-twitter+label.tooltip,button#b-twitter {
 
 #modal_cadastro form>div {
 	width: 280px;
+	clear:both;
 	margin: auto;
 }
 
@@ -2721,6 +2723,10 @@ ul.dados li:hover a.excluir {
 	text-align: right;
 }
 
+#mapa.institucional .faq ul {
+	text-align: left;
+}
+
 #mapa.institucional .faq>div p {
 	text-align: left;
 	margin-bottom: 15px;
@@ -3227,6 +3233,8 @@ ul.text-list > li > ul.text-list > li {
 	padding-bottom:4px;
 	margin-top:10px;
 	border-bottom:1px solid;
+	margin-left: 30px;
+	mergin-right: 30px;
 	font-size: 0.9em;
 }
 
@@ -3257,4 +3265,9 @@ ul.text-list > li > ul.text-list > li {
 
 #topo_acesso h2 {
 	font-size:1.2em;
+}
+
+.popupContent p {
+	line-height: 1.4em;
+    padding-bottom: 10px;
 }
