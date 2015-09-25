@@ -39,7 +39,7 @@ import com.google.gwt.view.client.Range;
 import com.google.gwt.view.client.RowCountChangeEvent;
 
 /**
- * @author victor Componente gr�fico que apresenta os Infogr�ficos na tela.
+ * @author victor Componente gráfico que apresenta os Infográficos na tela.
  */
 public class MatrixWidget extends Composite {
 	//private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -62,19 +62,19 @@ public class MatrixWidget extends Composite {
 		super.onAttach();
 		final Element div = DOM.getElementById("matrixBody");
 		grid = new Grid(1, 3);
-		//Set<String> indicators = places[0].getIndicators().keySet();
-		/* List 
+		Set<String> indicators = places[0].getIndicators().keySet();
+		// List 
 		for (String ind : indicators) {
 			indicatorListBox.addItem(ind);
-		}*/
-		indicatorListBox.addItem("Quantidade de organizações");
+		}
+		/*indicatorListBox.addItem("Quantidade de organizações");
 		indicatorListBox.addItem("Valor dos Recursos");
 		indicatorListBox.addItem("Quantidade de parcerias");
-		indicatorListBox.addItem("Quantidade de vínculos");
+		indicatorListBox.addItem("Quantidade de vínculos");*/
 		int count = places.length > 50 ? 50 : places.length;
 		indicatorListBox.setVisibleItemCount(count+1);
-		//String listHeight = (indicators.size() * 30) + "px";
-		String listHeight = (3 * 30) + "px";
+		String listHeight = (indicators.size() * 30) + "px";
+		//String listHeight = (3 * 30) + "px";
 		indicatorListBox.setHeight(listHeight);
 		grid.setWidget(0, 0, indicatorListBox.asWidget());
 
