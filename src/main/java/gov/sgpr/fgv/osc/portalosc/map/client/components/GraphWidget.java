@@ -30,7 +30,7 @@ public class GraphWidget extends Composite {
 		htmlBuilder.append("\" height=\"");
 		htmlBuilder.append(graph.getHeight());
 		htmlBuilder.append("\" />");
-		htmlBuilder.append("<img class=\"contraste\" src=\"");
+		htmlBuilder.append("<img class=\"contraste\" style='display:none;' src=\"");
 		htmlBuilder.append(graph.getSvgImageContrast());
 		htmlBuilder.append("\" width=\"");
 		htmlBuilder.append(graph.getWidth());
