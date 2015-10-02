@@ -52,6 +52,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.maps.gwt.client.LatLng;
 
@@ -72,7 +73,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private static InfographicsController info;
 	private static MatrixController matrix;
 	private HandlerRegistration handleControl;
-	private RootPanel breadcrumbIndicadores = null;
+	private HTMLPanel breadcrumbIndicadores = new HTMLPanel("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
 	
 	public void setMap(MapController map, SearchController search) {
 		MenuController.map = map;
@@ -141,7 +142,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private void loadInfographicsMenu() {
 
 		StringBuilder igmBuilder = new StringBuilder();
-		igmBuilder.append("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
+		//igmBuilder.append("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
 		igmBuilder.append("<h3>Selecione o infográfico:</h3>");
 		igmBuilder.append("<h4><a id=\"I01\" href=\"#I01\">OSCs em Números</a></h4>");
 		igmBuilder.append("<h4><a id=\"I02\" href=\"#I02\">OSCs e os Recursos</a></h4>");
@@ -150,6 +151,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		igmBuilder.append("<h4><a id=\"M0\" href=\"#M0\">Matriz de indicadores</a></h4>");
 
 		HTML menu = new HTML(igmBuilder.toString());
+		indicatorsPanel.add(breadcrumbIndicadores);
 		indicatorsPanel.add(menu);
 		info = new InfographicsController();
 		info.setVisible(false);
@@ -373,7 +375,6 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 	
 	private void processMatrix(String tokenId) {
-		breadcrumbIndicadores = RootPanel.get("breadcrumb_indicadores");
 		breadcrumbIndicadores.clear();
 		
 		matrix.loadMatrix(tokenId);
@@ -390,17 +391,15 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 
 	private void initBreadcrumbMatrix(Element element, String hash){
+		String type = "M";
+		breadcrumb.setType(type);
 		if(listURL.isEmpty()){
 			BreadcrumbItem item = new BreadcrumbItem();
-			item.setItemId("M0");
-			item.setItemText("Brasil");
-			breadcrumb.addItem(item);
-			listURL.put(0, item);
 			
 			if (hash.equals("#M0")){
 				//logger.log(Level.INFO, "HASH: #M0");
 				Cookies.removeCookie("breadcrumb");
-				
+				Cookies.setCookie("breadcrumb","");
 				mountBreadcrumb(hash, element, false);
 			}
 			else {
@@ -411,12 +410,14 @@ public class MenuController implements ValueChangeHandler<String> {
 				
 				if(vetBreadcrumb!=null && !vetBreadcrumb.equals("")){
 					for(int s=1; s < vetBreadcrumb.length; s++){
+						String itemId = vetBreadcrumb[s].split("#")[1].replaceAll(type, "");
+						String itemText = vetBreadcrumb[s].split("#")[0];
 						item = new BreadcrumbItem();
-						item.setItemId(vetBreadcrumb[s].split("#")[1]);
-						item.setItemText(vetBreadcrumb[s].split("#")[0]);
+						item.setItemId(itemId);
+						item.setItemText(itemText);
 						
-						//logger.log(Level.INFO, "ITEM_ID: "+item.getItemId());
-						//logger.log(Level.INFO, "ITEM_TEXT: "+item.getItemText());
+						logger.log(Level.INFO, "ITEM_ID: "+item.getItemId());
+						logger.log(Level.INFO, "ITEM_TEXT: "+item.getItemText());
 						
 						if(item.getItemId().length()==2){
 							listURL.put(1, item);
@@ -454,7 +455,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				
 				if(link.equals(hash)){
 					BreadcrumbItem item = new BreadcrumbItem();
-					item.setItemId(hash.replace('#', ' ').trim());
+					item.setItemId(hash.replace('#', ' ').replace(breadcrumb.getType(),"").trim());
 					item.setItemText(textLink);
 					
 					if(tamLink==3){
@@ -526,7 +527,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private void processOrganizations(String token, String tokenId) {
 		String email = Cookies.getCookie("oscUid");
 		Integer idToken = Integer.parseInt(tokenId);
-		
+		breadcrumb.setType("P");
 		AsyncCallback<OscDetail> callbackDetails = new AsyncCallback<OscDetail>() {
 
 			public void onFailure(Throwable caught) {
@@ -546,7 +547,7 @@ public class MenuController implements ValueChangeHandler<String> {
 							breadcrumb.clearBreadcrumb();
 						for (Place place : result) {
 							BreadcrumbItem item = new BreadcrumbItem();
-							item.setItemId("P" + place.getId());
+							item.setItemId(String.valueOf(place.getId()));
 							item.setItemText(place.getName());
 							
 							if (!breadcrumb.isItemOnBreadcrumb(item.getItemId())) breadcrumb.addItem(item);
