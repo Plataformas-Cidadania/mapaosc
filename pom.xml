@@ -151,6 +151,19 @@
 				        <resource>
 				        	<directory>src/main/webapp</directory>
 			            	<filtering>true</filtering>
+			            	<includes>
+				            	<include>*.html</include>
+				            </includes>
+				            <excludes>
+				            	<exclude>fontes/*.*</exclude>
+				            	<exclude>imagens/*.*</exclude>
+				            	<exclude>documentos/*.*</exclude>
+				            	<exclude>infograficos/*.*</exclude>
+				            	<exclude>pins/*.*</exclude>
+				            	<exclude>WEB-INF/*.*</exclude>
+				            	<exclude>js/*.*</exclude>
+				            	<exclude>css/*.*</exclude>
+				            </excludes>
 			        	</resource>
 				    </webResources>
 				</configuration>
