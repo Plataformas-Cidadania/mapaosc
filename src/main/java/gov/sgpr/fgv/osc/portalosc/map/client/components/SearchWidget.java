@@ -119,15 +119,15 @@ public class SearchWidget extends Composite {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder
 				.append("<p>"
-						+ "<strong>Para localizar um endereço, digite:</strong> <br /> O"
-						+ " nome parcial ou completo do endereço no Brasil, como por exemplo:"
-						+ "<br /> <em>Presidente Vargas</em> ou <em>Rio Grande do Norte</em>"
+						+ "<strong>Para localizar um endereço, digite:</strong> <br />"
+						+ "O nome parcial ou completo do endereço para localizá-lo. Por exemplo: "
+						+ "<br /> <em>Presidente Vargas</em> ou <em>Rio Grande do Norte.</em>"
 						+ "</p>"
 
 						+ "<p>"
-						+ "<strong>Para localizar uma organização social civil, digite:</strong> <br />"
-						+ "O nome parcial ou completo da organização social civil ou seu CNPJ, como por exemplo: <br />"
-						+ "<em>Fundação</em> ou <em>12.345.678/0001-90</em>"
+						+ "<strong>Para localizar uma organização da sociedade civil, digite:</strong> <br />"
+						+ "O nome parcial ou completo da organização da sociedade civil, ou seu CNPJ, para localizá-la. Por exemplo: <br />"
+						+ "<em>Fundação</em> ou <em>12.345.678/0001-90.</em>"
 						+ "</p>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
@@ -197,7 +197,7 @@ public class SearchWidget extends Composite {
 				PopupPanel helpPanel = new PopupPanel();
 				helpPanel.add(getHelpHtml());
 				helpPanel.getElement().setId("ajuda");
-				helpPanel.setWidth("175px");
+				helpPanel.setWidth("190px");
 				helpPanel.setAutoHideEnabled(true);
 				helpPanel.setPopupPosition(
 						btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(),
