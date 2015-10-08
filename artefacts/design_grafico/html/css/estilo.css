@@ -808,17 +808,35 @@ padding:20px 0 0 23px;
 }
 
 #mapa_expandir .tabbody em.dados {
-background:url(../imagens/03_expandir.png) no-repeat;
-display:inline-block;
-height:0;
-width:12px;
-overflow:hidden;
-padding:12px 0 0;
-margin-right:5px;
+	background-image: none !important;
+    -moz-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    float: right;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 8px 12px 8px 0;
+    /* border-color: transparent #1F3D93 transparent transparent; */
+    border-color: transparent #000 transparent transparent;
+    width: 12px;
+    height: 12px;
+    padding: 0px;
+    margin: 6px;
+    font-size:0px;
 }
 
-#mapa_expandir .tabbody em.dados:hover {
-background:url(../imagens/03_expandir_hover.png) no-repeat;
+#mapa_expandir .tabbody div a:hover {
+	background-color: #1F3D93;
+	color: white;
+}
+
+#mapa_expandir .tabbody div a:hover em.dados {
+	border-color: transparent white transparent transparent;
 }
 
 #mapa_expandir .tabbody em.dados_abertos {
@@ -1508,7 +1526,6 @@ background-position:-2px -57px;
 
 #modal_cadastro form > div {
 width:280px;
-clear:both;
 margin:auto;
 }
 
@@ -2805,6 +2822,32 @@ input#esqueci_senha:hover {
 
 .small_form .coluna_2 {
 	display: inline-block;
+}
+
+#mapa_navegacao .tabbody div a {
+	float: right;
+    height: 28px;
+    width: 48px;
+    padding-left: 20px;
+    border-left: 4px solid #244196;
+    background-color: #ECEDED;
+} 
+
+#mapa_navegacao .tabbody div h4:hover {
+	background-color:#244196;
+}
+
+#mapa_navegacao .tabbody div h4:hover a {
+	background-color:#244196;
+	color: white;
+}
+
+#mapa_navegacao .tabbody div h4 a {
+	float: none;
+	width:auto;
+	height: auto;
+	padding: inherit;
+	border: none;
 }
 
 .collapsed .relacoes.collapse-hidden {
