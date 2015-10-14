@@ -167,7 +167,6 @@ public class OscMarker {
 			}
 			
 		});
-
 	}
 
 	private static Point getMarkerPixelCoordinates(GoogleMap map, LatLng latLng) {

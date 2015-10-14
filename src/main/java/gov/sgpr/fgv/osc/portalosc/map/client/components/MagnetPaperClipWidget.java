@@ -77,14 +77,18 @@ public class MagnetPaperClipWidget extends Composite {
 		});
 	}
 
+
 	/**
 	 * Adiciona um listener para o evento de click no título
 	 * @param listener
 	 */
 	public void addTitleClickListener(EventListener listener) {
 		final Element title = DOM.getElementById("title");
+		final Element btnDetails = DOM.getElementById("ppdetails");
 		Event.sinkEvents(title, Event.ONCLICK);
+		Event.sinkEvents(btnDetails, Event.ONCLICK);
 		Event.setEventListener(title, listener);
+		Event.setEventListener(btnDetails, listener);
 	}
 
 	/**
@@ -133,6 +137,7 @@ public class MagnetPaperClipWidget extends Composite {
 			} else {
 				htmlBuilder.append("<div class=\"coluna2\">");
 			}
+			
 			htmlBuilder.append("<strong>" + section.getSectionTitle()
 					+ "</strong>");
 
@@ -146,16 +151,23 @@ public class MagnetPaperClipWidget extends Composite {
 				String sectionContent = getCheckListSection((PaperClipCheckListSection) section);
 				htmlBuilder.append(sectionContent);
 			}
-
+			
 			htmlBuilder.append("</div>");
 		}
-
-		htmlBuilder.append("<h3 ><div  align = \"right\">" + windowInfo.getFooter());
-		htmlBuilder.append(""+getHelpButton()+"</div>");
+		
+		
+		htmlBuilder.append("<h3 ><div  align = \"right\">"+windowInfo.getFooter());
+		htmlBuilder.append(getHelpButton()+"</div>");
 		htmlBuilder.append("</h3>");
 		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
+	}
+	
+	private String getDetailsButton() {
+		StringBuilder helpBuilder = new StringBuilder("<button id=\"ppdetails\" class=\"details\"");
+		helpBuilder.append(">Detalhes</button>");
+		return helpBuilder.toString();
 	}
 
 	private String getHelpButton() {
@@ -173,6 +185,8 @@ public class MagnetPaperClipWidget extends Composite {
 			htmlBuilder.append(section.getSectionContent().get(key));
 			htmlBuilder.append("<br>");
 		}
+		htmlBuilder.append("<div  align = \"left\">");
+		htmlBuilder.append(getDetailsButton()+"</div>");
 		return htmlBuilder.toString();
 	}
 
