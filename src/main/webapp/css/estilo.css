@@ -496,7 +496,7 @@ input#campobusca {
 	vertical-align: middle;
 }
 
-#busca button,#alterar_local button,#ajuda_local button,#busca .filtros a.filtrar, .fonte button, #ppajuda
+#busca button,#alterar_local button,#ajuda_local button,#busca .filtros a.filtrar, .fonte button, #ppajuda, #ppdetails
 	{
 	border: none;
 	height: 25px;
