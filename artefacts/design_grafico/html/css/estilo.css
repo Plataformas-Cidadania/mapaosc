@@ -830,9 +830,10 @@ padding:20px 0 0 23px;
     font-size:0px;
 }
 
-#mapa_expandir .tabbody div a:hover {
+#mapa_expandir .tabbody h4:hover em.dados {
 	background-color: #1F3D93;
 	color: white;
+	border-color: transparent #fff transparent transparent;
 }
 
 #mapa_expandir .tabbody div a:hover em.dados {
@@ -2833,11 +2834,11 @@ input#esqueci_senha:hover {
     background-color: #ECEDED;
 } 
 
-#mapa_navegacao .tabbody div h4:hover {
+#mapa_navegacao .tabbody h4:hover {
 	background-color:#244196;
 }
 
-#mapa_navegacao .tabbody div h4:hover a {
+#mapa_navegacao .tabbody h4:hover a {
 	background-color:#244196;
 	color: white;
 }
