@@ -2644,62 +2644,69 @@ a.exportar:hover{text-decoration: none; color:#fff;}
     margin-right: 4px;
 }
 
-.esqueci_senha {
+.pop_up_alert {
 	background: rgba(200,200,200,0.5);
 	position: fixed;
 	left: calc(50% - 175px);
 	top: 300px;
 	width: 350px;
-	border-radius: 10px;
+	border-radius: 7px;
 }
 
-.esqueci_senha > h2, .esqueci_senha > div, .alterar_senha > h2, .alterar_senha > div {
+.pop_up_alert > h2, .pop_up_alert > div, .alterar_senha > h2, .alterar_senha > div {
 	padding: 10px 20px;
 }
 
-.esqueci_senha > h2, .alterar_senha > h2 {
+.pop_up_alert > h2, .alterar_senha > h2 {
 	background-color: #244196;
-	border-radius: 10px 10px 0px 0px;
+	border-radius: 7px 7px 0px 0px;
 	color: white;
 	font-size: 1.3em;
 }
 
-.esqueci_senha form {
+.pop_up_alert form {
 	margin-top: 10px;
 }
 
-.esqueci_senha form input[type=text] {
+.pop_up_alert form input[type=text] {
 	width: 84%;
 	margin-left: 5px;
-	border-radius: 15px;
+	border-radius: 5px;
 }
 
-.esqueci_senha form label {
+.pop_up_alert form label {
 	font-weight: 800;
 }
 
-.esqueci_senha form fieldset {
+.pop_up_alert form fieldset {
 	  padding: 10px 0;
 }
 
-.esqueci_senha input[type=submit] {
-	background-color: #000;
+.pop_up_alert input[type=submit] {
+	background-color: transparent;
 	height: 30px;
 	line-height: 20px;
 	margin-left: 5px;
-	color: #FFF;
-	border-radius: 4px;
+	color: #000;
+	border-radius: 5px;
 	border: none;
 	cursor: pointer;
-	padding: 0 15px;
+	padding: 0;
+	background-image: url(../imagens/13_login.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 20px;
+    font-weight: bold;
 }
 
-.esqueci_senha input[type=submit]:hover {
-	background-color: #1F3D93;
-	transition: all 200ms linear;
+.pop_up_alert input[type=submit]:hover {
+	color: #1F3D93;
+    transition: all 200ms linear;
+    background-color: transparent;
+    background-image: url(../imagens/13_login_hover.png);
 }
 
-.esqueci_senha .botoes {
+.pop_up_alert .botoes {
 	width: 11.5em;
 	margin: 0 auto;
 }
