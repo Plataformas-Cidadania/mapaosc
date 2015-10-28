@@ -11,7 +11,8 @@ import java.util.logging.Logger;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+//import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -152,7 +153,7 @@ public class MenuItemWidget extends Composite {
 		}
 
 //		final Element anchor = DOM.getElementById("nome_" + item.getItemValue());
-		final Element spanPopup = DOM.getElementById("popup"+item.getItemValue());
+		final Element spanPopup = DOM.getElementById("popup"+item.getId());
 		final Element span = (Element) spanPopup.getFirstChildElement();
 		if (span != null) {
 			Event.sinkEvents(spanPopup, Event.ONMOUSEOVER);
