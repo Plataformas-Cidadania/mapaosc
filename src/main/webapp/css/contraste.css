@@ -70,7 +70,8 @@ a:hover {
     color: #444;
 }
 #mapa_expandir h4 a:hover, #mapa_navegacao h4 a:active {
-    color: #00b0ff;
+    color: white;
+    background-color: #00b0FF;
 }
 .mapa_organizacao {
 	background-color: rgba(0, 0, 0, 0.9);
@@ -96,13 +97,33 @@ a:hover {
     color: #fff
 }
 #topo, #rodape, #topo a:link, #topo a:visited, #mapa.config, #mapa.cadastro, #mapa.organizacao, #mapa.institucional, #topo_acesso input, #topo_acesso input[type=submit] {
-    color: #fff;
+    color: yellow;
 }
 #topo_acesso input[type=submit] {
     background-color: transparent !important;
 }
 #topo_acesso input {
     background-color: #000 !important;
+}
+#topo_acesso input#entrar, #topo_acesso input#sair {
+	background-color: white !important;
+	color: black !important;
+}
+#topo_acesso input#entrar:hover {
+	background-color: #00b0ff !important;
+	color: white !important;
+	background-image: url("../imagens/contraste/13_login_hover.png");
+}
+#topo_acesso input#sair:hover {
+	background-color: #00b0ff !important;
+	color: white !important;
+	background-image: url("../imagens/contraste/13_logoff_hover.png");
+}  
+#topo_acesso a {
+	background-color: black;
+	color: yellow;
+	margin-bottom: 3px;
+	font-size: 1em;
 }
 #topo_acesso input#email {
     background-image: url("../imagens/contraste/11_email.png");
@@ -119,14 +140,42 @@ button.exportar:hover
     color: #fff;
     background-color: #000 !important;
 }
+#topo_acesso li h2 {
+	color: black;
+	font-size: 1.4em;
+}
+#topo_acesso li a {
+	color: yellow;
+	background-color: black;
+	font-size: 1em;
+}
+.GPBYFDEFD, .GPBYFDEED {
+	color: white;
+	text-shadow: none;
+	font-weight: bold;
+}
+table.GPBYFDEGE {
+	background-color: black;
+}
+table.GPBYFDEGE tbody .GPBYFDEPC {
+	backgorund-color: #000;
+}
+table.GPBYFDEGE tbody .GPBYFDEPD {
+	backgorund-color: #222;
+}
+.GPBYFDEPD a, .GPBYFDEPC a {
+	color: yellow;
+}
 #busca {
     
 }
 #topo_links #sobre {
     background: url('../imagens/contraste/07_portal.png') no-repeat center left;
+    color: yellow;
 }
 #topo_links #duvidas {
     background: url('../imagens/contraste/08_faq.png') no-repeat center left;
+    color: yellow;
 }
 #topo_links #sobre:hover {
     background: url('../imagens/contraste/07_portal.png') no-repeat center left;
@@ -160,10 +209,10 @@ button#ajuda:hover, button#buscar:hover, button#ajuda:active, button#buscar:acti
 #mapa.organizacao div.projetos div div,
 #mapa.organizacao div.tabela .projetos input, #mapa.organizacao div.tabela .projetos select, #mapa.organizacao div.tabela .projetos textarea,
 #mapa.institucional a  {
-    color: #fff;
+    color: yellow;
 }
 #footer a:hover {
-    color: #aaa;
+    color: white;
 }
 #mapa.cadastro .instrucoes, .modal,
 button#ajuda:hover, button#buscar:hover, button#ajuda:active, button#buscar:active, #alterar_local button:hover, #ajuda_local button:hover,
@@ -171,6 +220,14 @@ button#ajuda:hover, button#buscar:hover, button#ajuda:active, button#buscar:acti
 #mapa.organizacao div.tabela > div,
 .tabs {
     background-color: #000;
+}
+#rodape a.beta {
+	color: black;
+	background-color: white;
+}
+#rodape a.beta:hover {
+	color: white;
+	background-color: #00b0ff;
 }
 #mapa.cadastro .instrucoes h2,
 .formulario a:hover,
@@ -321,7 +378,7 @@ background-image: url(../imagens/sprite_cadastro.png);
 }
 
 #mapa.institucional .faq > div a {
-    background-image: url("../imagens/contraste/topo.gif");
+    /*background-image: url("../imagens/contraste/topo.gif");*/
 }
 #mapa.institucional .faq > div a:hover {
     background-image: url("../imagens/contraste/topo_hover.gif");
