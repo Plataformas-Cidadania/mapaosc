@@ -3240,7 +3240,7 @@ ul.text-list > li > ul.text-list > li {
 
 #topo_acesso form#acesso > div:not(#floatingLoginErrorList) {
 	float: left;
-	margin-left: 195px;
+	margin-left: 190px;
     margin-top: 5px;
 }
 

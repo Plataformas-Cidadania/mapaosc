@@ -6,7 +6,10 @@ a {
 	text-decoration: underline !important;
 }
 a:hover {
-    text-decoration: none !important;
+    text-decoration: underline !important;
+}
+#boardPanel {
+	background-image: none;
 }
 #topo {
 	background: url("../imagens/contraste/topo-contraste.jpg") no-repeat center right;
@@ -27,6 +30,12 @@ a:hover {
 }
 #mapa.institucional h2, #mapa.institucional h3, #mapa.institucional h3 em {
     border-bottom-color: #00b0ff;
+}
+p {
+	color: white;
+}
+h1, h2, h3, h4, h5, li, div, .graph h3 {
+	color: inherit;
 }
 /* #mapa { */
 /*     background-color: #333 !important; */
@@ -63,13 +72,17 @@ a:hover {
     background-color: #fff;
     border-right: 4px solid #00b0ff;
 }
+#infograficos>div h2 {
+	color: #00b0ff;
+	border-bottom-color: #00b0ff;
+}
 #mapa_expandir .tabbody > a {
     color: #fff;
 }
 #mapa_expandir .tabbody ul.dados li a {
     color: #444;
 }
-#mapa_expandir h4 a:hover, #mapa_navegacao h4 a:active {
+#mapa_expandir h4:hover a, #mapa_navegacao h4 a:active, #mapa_navegacao #menu_itens h4:hover > span {
     color: white;
     background-color: #00b0FF;
 }
@@ -97,7 +110,7 @@ a:hover {
     color: #fff
 }
 #topo, #rodape, #topo a:link, #topo a:visited, #mapa.config, #mapa.cadastro, #mapa.organizacao, #mapa.institucional, #topo_acesso input, #topo_acesso input[type=submit] {
-    color: yellow;
+    color: #FFF333;
 }
 #topo_acesso input[type=submit] {
     background-color: transparent !important;
@@ -121,7 +134,7 @@ a:hover {
 }  
 #topo_acesso a {
 	background-color: black;
-	color: yellow;
+	color: #FFF333;
 	margin-bottom: 3px;
 	font-size: 1em;
 }
@@ -145,37 +158,37 @@ button.exportar:hover
 	font-size: 1.4em;
 }
 #topo_acesso li a {
-	color: yellow;
+	color: #FFF333;
 	background-color: black;
 	font-size: 1em;
 }
-.GPBYFDEFD, .GPBYFDEED {
-	color: white;
-	text-shadow: none;
-	font-weight: bold;
+.GPBYFDEFD, .GPBYFDEED, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableHeader, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableFooter {
+	color: white !important;
+	text-shadow: none !important;
+	font-size: 1.1em;
 }
 table.GPBYFDEGE {
 	background-color: black;
 }
-table.GPBYFDEGE tbody .GPBYFDEPC {
-	backgorund-color: #000;
+table.GPBYFDEGE tbody .GPBYFDEPC, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableEvenRow {
+	background-color: #000 !important;
 }
-table.GPBYFDEGE tbody .GPBYFDEPD {
-	backgorund-color: #222;
+table.GPBYFDEGE tbody .GPBYFDEPD, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableOddRow {
+	background-color: #222 !important;
 }
-.GPBYFDEPD a, .GPBYFDEPC a {
-	color: yellow;
+.GPBYFDEPD a, .GPBYFDEPC a, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableCell a {
+	color: #FFF333;
 }
 #busca {
     
 }
 #topo_links #sobre {
     background: url('../imagens/contraste/07_portal.png') no-repeat center left;
-    color: yellow;
+    color: #FFF333;
 }
 #topo_links #duvidas {
     background: url('../imagens/contraste/08_faq.png') no-repeat center left;
-    color: yellow;
+    color: #FFF333;
 }
 #topo_links #sobre:hover {
     background: url('../imagens/contraste/07_portal.png') no-repeat center left;
@@ -209,7 +222,7 @@ button#ajuda:hover, button#buscar:hover, button#ajuda:active, button#buscar:acti
 #mapa.organizacao div.projetos div div,
 #mapa.organizacao div.tabela .projetos input, #mapa.organizacao div.tabela .projetos select, #mapa.organizacao div.tabela .projetos textarea,
 #mapa.institucional a  {
-    color: yellow;
+    color: #FFF333;
 }
 #footer a:hover {
     color: white;
