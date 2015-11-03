@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Portal das Organizações da Sociedade Civil - Página inicial</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+	<![endif]-->
+	
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">document.documentElement.className += " js";</script>
+
+
+</head>
+
+<body>
+
+	
+
+	<div id="main">
+		<div id="barra-brasil">
+		<div class="barra">
+			<ul>
+				<li><a href="http://www.acessoainformacao.gov.br" class="ai" title="Acesso à informação">Acesso à informação</a></li>
+				<li><a href="http://www.brasil.gov.br" class="brasilgov" title="Portal de Estado do Brasil">Portal de Estado do Brasil</a></li>
+			</ul>
+		</div>
+	</div>
+
+		<div id="topo">
+			<div id="topo_acessibilidade">
+				<ul id="nav1">
+					<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+					<li>Ir para o <a href="#mapa_expandir" accesskey="2">Menu 2</a></li>					
+					<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+					<li>Ir para a <a href="#busca" accesskey="4" onclick="$('#campobusca').focus();">Busca 4</a></li>
+				</ul>
+				<ul id="nav2">
+					<li><a href="#">Acessibilidade</a></li>
+					<li><a href="#rodape">Mapa do site</a></li>
+					<li id="contraste">Contraste
+						<a id="contraste_normal" href="#"><img src="imagens/09_contraste1.png" alt="Contraste normal" width="13" height="14" /></a>
+						<a id="alto_contraste" href="#"><img src="imagens/10_contraste2.png" alt="Alto contraste" width="13" height="14" /></a></li>
+						<li>Tamanho do texto
+							<a href="#" title="Aumentar fonte" class="inc-font">A+</a>
+							<a href="#" title="Fonte padrão" class="res-font">A</a>
+							<a href="#" title="Diminuir fonte" class="dec-font">A-</a></li>
+						</ul>
+					</div>
+
+					<div id="topo_links">
+						<a href="sobre.html" id="sobre">Sobre o portal</a>
+						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
+					</div>
+
+					<div id="topo_acesso" class="deslogado">
+						<form name="Acesso">
+							<label for="email" class="esconder">Email</label>
+							<input type="text" name="email" id="email" placeholder="Email"  />
+							<label for="senha" class="esconder">Senha</label>
+							<input type="password" name="senha" id="senha" placeholder="Senha"  />
+							<div>
+								<a href="esqueci_senha.html" class="box_frame">Esqueci a senha</a>
+								<a href="cadastro.html">Registrar-se</a>  
+							</div>
+							<input type="submit" name="entrar" id="entrar" value="Entrar" onclick="$('#topo_acesso.deslogado').hide(); $('#topo_acesso.logado').show();" />  <!--- JS adicionado para simular o acesso. Remover -->
+						</form>
+					</div>
+
+					<div id="topo_acesso" class="logado">
+						<div class="clearfix">
+							<ul>
+								<li><h2>Carlos Silva</h2></li>
+								<li><a href="#">Configurações</a></li>
+							</ul>
+
+							<a href="#"><img src="imagens/usuario.jpg" alt="Sua imagem de perfil" /></a>
+						</div>
+						
+						<input type="submit" name="sair" id="sair" value="Sair" onclick="$('#topo_acesso.logado').hide(); $('#topo_acesso.deslogado').show();" /> <!--- JS adicionado para simular o acesso. Remover -->
+					</div>
+
+					<a href="index.html">
+						<img class="normal" id="logo" src="imagens/logo.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial"  title="Ir para página inicial" />
+						<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+					</a>
+				</div>
+
+		<div id="mapa">
+			<h1><em>&nbsp;</em> Entrada de Dados</h1>
+			<div id="formulario_main">
+				<form>
+					<h2>Localidade:</h2>
+					<fieldset>
+						<div>
+						<p>Tipo de Localidade</p>
+						<input name="dlocalidade" type="radio" value="uf" id="dtipo_uf" /> <label for="dtipo_uf">Estado</label>
+						<input name="dlocalidade" type="radio" value="mun" id="dtipo_mun" /> <label for="dtipo_mun">Município</label>
+						</div>
+						<div><label for="destado">Estado:</label> <select name="destado" id="destado"> 
+							<option>estado 1</option>
+							<option>estado 2</option>
+							<option>estado 3</option>
+							<option>estado 4</option>
+							<option>estado 5</option>
+						</select></div>
+						<div><label for="dmunicipio">Município:</label> <select name="dmunicipio" id="dmunicipio">
+							<option>mun 1</option>
+							<option>mun 2</option>
+							<option>mun 3</option>
+							<option>mun 4</option>
+							<option>mun 5</option>
+						</select></div>
+						<h2>Dados</h2>
+						<div>
+						<p>Tipo de Entrada</p>
+						<input name="dentrada" type="radio" value="servico" id="denvio_servico" /> <label for="denvio_servico">Web Service</label>
+						<input name="dentrada" type="radio" value="arquivo" id="denvio_arquivo" /> <label for="denvio_arquivo">Arquivo</label>
+						</div>
+						<div><label for="darquivo">Arquivo:</label> <input type="file" name="darquivo" id="darquivo"></div>
+						<div><label for="dtipo_arquivo">Tipo de Arquivo </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
+							<option>CSV</option>
+							<option>XLS</option>
+						</select></div>
+						<div><label for="dservico">Endereço Serviço:</label> <input type="text" name="dservico" id="dservico"></div>
+						<div><label for="dtipo_servico">Tipo de Arquivo </label> <select name="dtipo_servico" id="dtipo_servico">
+							<option>CSV</option>
+							<option>XML</option>
+							<option>JSON</option>
+						</select></div>
+					</fieldset>
+					
+				</form>
+			</div>
+			<div id="loading">
+				<div><strong>88</strong>%</div>
+				<img src="imagens/loading.png" alt="Carregando..." />
+			</div>
+	    </div>
+
+		<div id="rodape" class="clearfix">
+			<div class="clearfix">
+				<div class="celula01">
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Portal das Organizações da Sociedade Civil &copy; 2013</h2>
+							<a href="beta.html" class="beta">Versão BETA?</a>
+						</div>
+				<div class="celula02">
+					<span>Apoio</span>
+					<img class="normal" src="imagens/logo_fgv.png" alt="FGV Projetos" />
+					<img class="contraste" src="imagens/contraste/logo_fgv.png" alt="FGV Projetos" />
+				</div>
+				<div class="celula03">
+					<span>Realização</span>
+					<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+					<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+				</div>
+			</div>
+		</div>
+
+		<div id="footer" class="clearfix">
+			<div id="doormat-container" class="columns-4 clearfix">
+		  <div class="doormatColumn column-0">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">O Portal</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">OSCs em números</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Dúvidas Frequentes</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">MROSC</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Análise sobre Parcerias com a União</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Editais Públicos</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Capacitações</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Biblioteca Virtual</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Legislação</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Links relacionados</a>
+		        
+		      </dd>
+		      
+		    </dl></div>
+		  
+		  <div class="doormatColumn column-1">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">Contato</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Lorem Ipsum</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Dolor sit amet</a>
+		        
+		      </dd>
+		      
+		    </dl></div>
+		  <div class="doormatColumn column-2">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">Redes sociais</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Facebook</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Twitter</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">YouTube</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Flickr</a>
+		        
+		      </dd>
+		    </dl></div>
+
+		    <div class="doormatColumn column-3">
+		    	<dl class="doormatSection">
+		    		<dt class="doormatSectionHeader">Mapa do site</dt>
+		    		<dd></dd> 
+		    	</dl>
+		    </div>
+
+		    <div class="doormatColumn column-4">
+		    
+		    <dl class="doormatSection"><dt class="doormatSectionHeader">RSS</dt>
+		      <dd class="doormatSectionBody">
+		        <a href="#">O que é RSS?</a>
+		        
+		      </dd>
+		      <dd class="doormatSectionBody">
+		        <a href="#">Assine nosso RSS</a>
+		        
+		      </dd>
+		    </dl></div>
+		
+		</div>
+
+		
+		    
+		    <div class="footer-logos">
+		        <div>
+		            <a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+		            <a href="http://www.brasil.gov.br/" class="logo-brasil"><img src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+		        </div>
+		    </div>
+		</div>
+
+	</div>
+
+
+	
+	<script type="text/javascript" src="js/acessibilidade.js"></script>
+	<script type="text/javascript" src="js/jquery.tabs.js"></script>
+	<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+	<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+
+	<!--[if lte IE 7]>
+		<script>
+		$("#ajuda").click(function(){
+				$('.ajuda').toggle();
+		});
+		$("#ajuda_local button").click(function(){
+			$('#tip_ajuda_local').toggle();
+		});
+		</script>
+	<![endif]-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			box_normal();
+			$('.dados').on('click', '.excluir', excluirElemento);
+
+			$("#tag").keyup(function(event){
+			    if(event.keyCode == 13){
+			        $("#tag + button.adicionar").click();
+			    }
+			});
+
+			function excluirElemento(event) {
+				$(event.target).closest('li').remove();
+				return false;
+			}
+			
+			$('.classificacao .adicionar').click(function(){
+				if ($('input#tag').val() != '' && $('input#tag').val() != $('input#tag').attr('placeholder')) {
+					var novaTag = '<li>'+
+					'<a href="#" class="excluir tooltip" title="Excluir">Excluir</a>'+
+					'<a href="#">'+ $('input#tag').val() +'</a></li>';
+					$(".classificacao ul").append(novaTag);
+					$('input#tag').val('');
+				} else {
+					$('input#tag').focus();
+				}		
+			});
+		});
+
+		function box_normal() {
+		$(".box").fancybox({
+				type: 'inline',
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+				padding: 0,
+				helpers : {
+					overlay : {
+						css : {
+							'background-color' : 'rgba(255,255,255,0.5)'
+						}
+					}
+				},
+				tpl: {
+					closeBtn: '<div class="modal_fechar filtros">-</div>'
+				}
+			});
+		}
+
+		$("#alto_contraste").click(function(){
+			$(".box").fancybox({
+				type: 'inline',
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+				padding: 0,
+				helpers : {
+					overlay : {
+						css : {
+							'background' : 'rgba(0,0,0,0.6)'
+						}
+					}
+				},
+				tpl: {
+					closeBtn: '<div class="modal_fechar filtros">-</div>'
+				}
+			});
+		});
+
+		$("#contraste_normal").click(function(){
+			box_normal();
+		});
+	</script>
+
+</body>
+
+</html>

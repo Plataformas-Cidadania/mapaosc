@@ -1157,7 +1157,7 @@ height:180px;
 background:url(../imagens/cadastro_mapa3.png) no-repeat right top;
 }
 
-#mapa.cadastro h1,#mapa.config h1,#mapa.organizacao h1,#mapa.institucional h1, #mapa.infograficos h1, #mapa.alterar_senha h1 {
+#mapa.cadastro h1, #mapa h1,#mapa.config h1,#mapa.organizacao h1,#mapa.institucional h1, #mapa.infograficos h1, #mapa.alterar_senha h1 {
 font-size:1.2em;
 display:block;
 text-transform:uppercase;
@@ -2415,7 +2415,7 @@ a.exportar:hover{text-decoration: none; color:#fff;}
 #mapa_navegacao .tabbody.infograficos h4 { margin: 20px 0;}
 #mapa_navegacao .tabbody.infograficos h4 a {font-family: RobotoBold;}
 
-#infograficos {margin: 0 auto 0 320px; padding-bottom: 20px;}
+#infograficos, #formulario_main {margin: 0 auto 0 320px; padding-bottom: 20px;}
 
 #infograficos h2 {font-size: 1.2em; color:#1f3d93; padding: 5px 0; border-bottom: 3px solid #1F3D93;margin: 20px 0;}
 
@@ -3017,3 +3017,17 @@ ul.lista_certificados li {
 	padding:5px;
 }
 
+#formulario_main label {
+	display: inline-block;
+	padding: 15px;
+}
+
+#formulario_main h2 {
+	font-size: 1.2em;
+	padding: 5px;
+	color: #1f3d93;
+	margin-bottom: 10px;
+	border-bottom: 3px solid #1f3d93;
+	margin-top: 15px;
+	font-family: "RobotoBold";
+}
