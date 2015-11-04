@@ -719,6 +719,47 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			releaseConnection(conn, pstmt, rs);
 		}
 	}
+	
+	public DataSource[] getFonteIndicadores(int[] id) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT mdfd_cd_fonte_dados, mdfd_sg_fonte_dados, mdfd_nm_fonte_dados, mdfd_dt_aquisicao, mdfd_ee_referencia "
+				+ "FROM data.md_fonte_dados WHERE mdfd_cd_fonte_dados in (?";
+		for (int i = 1; i < id.length; i++) {
+			sql += ", ?";
+		}
+		sql += ")";
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < id.length; i++) {
+				pstmt.setInt(i + 1, id[i]);
+			}
+			rs = pstmt.executeQuery();
+
+			Set<DataSource> dsCol = new HashSet<DataSource>();
+			while (rs.next()) {
+				DataSource ds = new DataSource();
+				ds.setId(rs.getInt("mdfd_cd_fonte_dados"));
+				ds.setAcronym(rs.getString("mdfd_sg_fonte_dados"));
+				ds.setName(rs.getString("mdfd_nm_fonte_dados"));
+				ds.setAcquisitionDate(rs.getDate("mdfd_dt_aquisicao"));
+				ds.setSiteURL(rs.getString("mdfd_ee_referencia"));
+				dsCol.add(ds);
+			}
+
+			return dsCol.toArray(new DataSource[dsCol.size()]);
+
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+		
+	}
+	
 
 	private DataSource[] getDataSources(int[] dataSourceId, int oscId)
 			throws RemoteException {

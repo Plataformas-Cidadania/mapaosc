@@ -2,19 +2,31 @@ package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.ListMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.SimpleTextMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
+import gov.sgpr.fgv.osc.portalosc.map.server.OscServiceImpl;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
 //import com.google.gwt.user.client.Element;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -25,6 +37,9 @@ public class MenuItemWidget extends Composite {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private AbstractMenuItem item;
 	private boolean opened = false;
+	private OscServiceAsync service = GWT.create(OscService.class);
+	private MenuController menuController = new MenuController();
+	private String fonteIndicadores = null;
 
 	public MenuItemWidget(AbstractMenuItem menuItem) {
 		this.item = menuItem;
@@ -84,13 +99,21 @@ public class MenuItemWidget extends Composite {
 				htmlBuilder.append(getKeyValue((KeyValueMenuItem) item));
 			else if (item instanceof AnchorListMenuItem)
 				htmlBuilder.append(getAnchorList((AnchorListMenuItem) item));
-
+			
+			String tokenType = String.valueOf(item.getId().charAt(0));
 			if (item.getInfoSource() != null
 					&& !item.getInfoSource().equals("")) {
 				htmlBuilder.append("<li class=\"fonte\">");
 				htmlBuilder.append("<em>Fonte: </em>");
 				htmlBuilder.append(getHelpButton("ajuda_" + item.getId()));
 				htmlBuilder.append("</li>");
+			}else {
+				if(tokenType.equals("P")){
+					htmlBuilder.append("<li class=\"fonte\">");
+					htmlBuilder.append("<em>Fonte: </em>");
+					htmlBuilder.append(getHelpButton("ajuda_" + item.getId()));
+					htmlBuilder.append("</li>");
+				}
 			}
 			htmlBuilder.append("</ul>");
 		}
@@ -143,6 +166,20 @@ public class MenuItemWidget extends Composite {
 		helpBuilder.append(">?</button>");
 		return helpBuilder.toString();
 	}
+	
+	private void processFonteIndicadores(int[] id) {
+		AsyncCallback<DataSource[]> callbackDetails = new AsyncCallback<DataSource[]>() {
+
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(final DataSource[] resultOsc) {
+				fonteIndicadores = menuController.getHelpContent(resultOsc);
+			}
+		};
+		service.getFonteIndicadores(id, callbackDetails);
+	}
 
 	@Override
 	protected void onAttach() {
@@ -192,14 +229,23 @@ public class MenuItemWidget extends Composite {
 			});
 		}
 		final Element btnHelp = DOM.getElementById("ajuda_" + item.getId());
+		int[] idFonte = { 1, 13 };
+		processFonteIndicadores(idFonte);
 		if (btnHelp != null) {
 			Event.sinkEvents(btnHelp, Event.ONCLICK);
 			Event.setEventListener(btnHelp, new EventListener() {
 
 				@Override
 				public void onBrowserEvent(Event event) {
+					String tokenType = String.valueOf(item.getId().charAt(0));
 					PopupPanel helpPanel = new PopupPanel();
-					HTML html = new HTML(item.getInfoSource());
+					String fonte;
+					if(tokenType.equals("P")){
+						fonte = fonteIndicadores;
+					}else{
+						fonte = item.getInfoSource();
+					}
+					HTML html = new HTML(fonte);
 					ScrollPanel scPanel = new ScrollPanel(html);
 					helpPanel.add(scPanel);
 					helpPanel.setWidth("275px");

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.Certifications;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.Committees;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMain;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
@@ -83,6 +84,8 @@ public interface OscService extends RemoteService {
 	 * @throws RemoteException
 	 */
 	void setRecommendation(int oscId, String email, boolean value) throws RemoteException;
+	
+	DataSource[] getFonteIndicadores(int[] id) throws RemoteException;
 	
 	
 }

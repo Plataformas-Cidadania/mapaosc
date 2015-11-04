@@ -658,7 +658,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		else  Window.Location.replace(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "User.html");
 	}
 
-	private static String getHelpContent(DataSource[] dataSources) {
+	public static String getHelpContent(DataSource[] dataSources) {
 		DateTimeFormat fmt = DateTimeFormat.getFormat("dd/MM/yyyy");
 		StringBuilder dsBuilder = new StringBuilder();
 		

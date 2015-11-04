@@ -63,6 +63,13 @@ public interface OscServiceAsync
 
 
     /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService
+     */
+    void getFonteIndicadores( int[] id, AsyncCallback<gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource[]> callback );
+
+
+    /**
      * Utility class to get the RPC Async interface from client-side code
      */
     public static final class Util 
