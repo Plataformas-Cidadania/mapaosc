@@ -3020,6 +3020,19 @@ ul.lista_certificados li {
 #formulario_main label {
 	display: inline-block;
 	padding: 15px;
+	padding-left: 0px;
+}
+
+#formulario_main div#localidade label {
+	min-width:80px;
+}
+
+#formulario_main div#dados label {
+	min-width:130px;	
+}
+
+#formulario_main input[type=radio] + label {
+	min-width:10px;
 }
 
 #formulario_main h2 {
@@ -3030,4 +3043,24 @@ ul.lista_certificados li {
 	border-bottom: 3px solid #1f3d93;
 	margin-top: 15px;
 	font-family: "RobotoBold";
+}
+
+#envio_de_servico, #envio_de_arquivo, #seletor_municipios {
+	display:none;
+}
+
+#formulario_main #localidade select {
+	min-width: 120px;
+}
+
+#formulario_main #localidade.municipio #seletor_municipios {
+	display:block;
+}
+
+#formulario_main #dados.servico #envio_de_servico {
+	display:block;
+}
+
+#formulario_main #dados.arquivo #envio_de_arquivo {
+	display:block;
 }

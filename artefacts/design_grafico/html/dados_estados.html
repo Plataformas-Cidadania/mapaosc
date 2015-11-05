@@ -100,44 +100,71 @@
 			<h1><em>&nbsp;</em> Entrada de Dados</h1>
 			<div id="formulario_main">
 				<form>
-					<h2>Localidade:</h2>
 					<fieldset>
-						<div>
-						<p>Tipo de Localidade</p>
-						<input name="dlocalidade" type="radio" value="uf" id="dtipo_uf" /> <label for="dtipo_uf">Estado</label>
-						<input name="dlocalidade" type="radio" value="mun" id="dtipo_mun" /> <label for="dtipo_mun">Município</label>
+						<h2>Localidade:</h2>
+						<div id="localidade">
+							<div>
+							<p>Tipo de Localidade</p>
+							<input name="dlocalidade" type="radio" value="uf" id="dtipo_uf" onchange="
+								if(this.checked) {
+									document.getElementById('localidade').className='uf';
+								} 
+								"/> <label for="dtipo_uf">Estado</label>
+							<input name="dlocalidade" type="radio" value="mun" id="dtipo_mun" onchange="
+								if(this.checked) {
+									document.getElementById('localidade').className='municipio';
+								} 
+								" /> <label for="dtipo_mun">Município</label>
+							</div>
+							<div><label for="destado">Estado:</label> <select name="destado" id="destado"> 
+								<option>estado 1</option>
+								<option>estado 2</option>
+								<option>estado 3</option>
+								<option>estado 4</option>
+								<option>estado 5</option>
+							</select></div>
+							<div id="seletor_municipios"><label for="dmunicipio">Município:</label> <select name="dmunicipio" id="dmunicipio">
+								<option>mun 1</option>
+								<option>mun 2</option>
+								<option>mun 3</option>
+								<option>mun 4</option>
+								<option>mun 5</option>
+							</select></div>
+							<span>Última atualização para esta localidade: <a href="#">2013-10-20</a></span>
 						</div>
-						<div><label for="destado">Estado:</label> <select name="destado" id="destado"> 
-							<option>estado 1</option>
-							<option>estado 2</option>
-							<option>estado 3</option>
-							<option>estado 4</option>
-							<option>estado 5</option>
-						</select></div>
-						<div><label for="dmunicipio">Município:</label> <select name="dmunicipio" id="dmunicipio">
-							<option>mun 1</option>
-							<option>mun 2</option>
-							<option>mun 3</option>
-							<option>mun 4</option>
-							<option>mun 5</option>
-						</select></div>
 						<h2>Dados</h2>
-						<div>
-						<p>Tipo de Entrada</p>
-						<input name="dentrada" type="radio" value="servico" id="denvio_servico" /> <label for="denvio_servico">Web Service</label>
-						<input name="dentrada" type="radio" value="arquivo" id="denvio_arquivo" /> <label for="denvio_arquivo">Arquivo</label>
+						<div id="dados">
+							<div>
+							<p>Tipo de Entrada</p>
+							<input name="dentrada" type="radio" value="servico" id="denvio_servico" onChange="
+								if(this.checked) {
+									document.getElementById('dados').className='servico';
+								} "/> 
+								<label for="denvio_servico">Web Service</label>
+							<input name="dentrada" type="radio" value="arquivo" id="denvio_arquivo" onChange="
+								
+								if(this.checked) {
+									document.getElementById('dados').className='arquivo';
+								} "/> 
+							<label for="denvio_arquivo">Arquivo</label>
+							</div>
+							<div id="envio_de_arquivo">
+								<div><label for="darquivo">Arquivo Enviado:</label> <input type="file" name="darquivo" id="darquivo"></div>
+								<div><label for="dtipo_arquivo">Tipo de Arquivo: </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
+									<option>CSV</option>
+									<option>XLS</option>
+								</select></div>
+							</div>
+							<div id="envio_de_servico">
+								<div><label for="dservico">Endereço Serviço:</label> <input type="text" name="dservico" id="dservico"></div>
+								<div><label for="dtipo_servico">Arquivo Retornado: </label> <select name="dtipo_servico" id="dtipo_servico">
+									<option>XML</option>
+									<option>JSON</option>
+									<option>CSV</option>
+								</select></div>
+							</div>
 						</div>
-						<div><label for="darquivo">Arquivo:</label> <input type="file" name="darquivo" id="darquivo"></div>
-						<div><label for="dtipo_arquivo">Tipo de Arquivo </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
-							<option>CSV</option>
-							<option>XLS</option>
-						</select></div>
-						<div><label for="dservico">Endereço Serviço:</label> <input type="text" name="dservico" id="dservico"></div>
-						<div><label for="dtipo_servico">Tipo de Arquivo </label> <select name="dtipo_servico" id="dtipo_servico">
-							<option>CSV</option>
-							<option>XML</option>
-							<option>JSON</option>
-						</select></div>
+						<input type='submit' value="Enviar Dados" disabled="disabled" />
 					</fieldset>
 					
 				</form>
