@@ -118,17 +118,7 @@ public class SearchWidget extends Composite {
 	private HTML getHelpHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder
-				.append("<p>"
-						+ "<strong>Para localizar um endereço, digite:</strong> <br />"
-						+ "O nome parcial ou completo do endereço para localizá-lo. Por exemplo: "
-						+ "<br /> <em>Presidente Vargas</em> ou <em>Rio Grande do Norte.</em>"
-						+ "</p>"
-
-						+ "<p>"
-						+ "<strong>Para localizar uma organização da sociedade civil, digite:</strong> <br />"
-						+ "O nome parcial ou completo da organização da sociedade civil, ou seu CNPJ, para localizá-la. Por exemplo: <br />"
-						+ "<em>Fundação</em> ou <em>12.345.678/0001-90.</em>"
-						+ "</p>");
+				.append("<p>Para localizar uma organização da sociedade civil digite o nome parcial ou completo da organização. Também é possível localizar organizações buscando por nome dos municípios ou dos estados.</p>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
@@ -197,7 +187,7 @@ public class SearchWidget extends Composite {
 				PopupPanel helpPanel = new PopupPanel();
 				helpPanel.add(getHelpHtml());
 				helpPanel.getElement().setId("ajuda");
-				helpPanel.setWidth("190px");
+				helpPanel.setWidth("210px");
 				helpPanel.setAutoHideEnabled(true);
 				helpPanel.setPopupPosition(
 						btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(),
