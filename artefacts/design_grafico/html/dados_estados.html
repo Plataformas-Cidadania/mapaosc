@@ -63,25 +63,11 @@
 						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
 					</div>
 
-					<div id="topo_acesso" class="deslogado">
-						<form name="Acesso">
-							<label for="email" class="esconder">Email</label>
-							<input type="text" name="email" id="email" placeholder="Email"  />
-							<label for="senha" class="esconder">Senha</label>
-							<input type="password" name="senha" id="senha" placeholder="Senha"  />
-							<div>
-								<a href="esqueci_senha.html" class="box_frame">Esqueci a senha</a>
-								<a href="cadastro.html">Registrar-se</a>  
-							</div>
-							<input type="submit" name="entrar" id="entrar" value="Entrar" onclick="$('#topo_acesso.deslogado').hide(); $('#topo_acesso.logado').show();" />  <!--- JS adicionado para simular o acesso. Remover -->
-						</form>
-					</div>
-
-					<div id="topo_acesso" class="logado">
+					<div id="topo_acesso" class="logado" style="display: block;">
 						<div class="clearfix">
 							<ul>
 								<li><h2>Carlos Silva</h2></li>
-								<li><a href="#">Configurações</a></li>
+								<li><a href="configuracoes_cadastro.html">Painel de Controle</a></li>
 							</ul>
 
 							<a href="#"><img src="imagens/usuario.jpg" alt="Sua imagem de perfil" /></a>
@@ -97,40 +83,18 @@
 				</div>
 
 		<div id="mapa">
-			<h1><em>&nbsp;</em> Entrada de Dados</h1>
+			<h1><em>&nbsp;</em> Painel de Controle</h1>
+			<div id="menu_lateral">
+				<h4><a href="configuracoes_cadastro.html">Configurações</a></h4>
+				<h4><a href="configuracoes_redes.html">Redes Sociais</a></h4>
+				<h4><a href="configuracoes_entidade.html">Representação de Entidade</a></h4>
+				<h4 class="active"><a href="dados_estados.html">Entrada de Dados</a></h4>
+			</div>
 			<div id="formulario_main">
 				<form>
 					<fieldset>
-						<h2>Localidade:</h2>
-						<div id="localidade">
-							<div>
-							<p>Tipo de Localidade</p>
-							<input name="dlocalidade" type="radio" value="uf" id="dtipo_uf" onchange="
-								if(this.checked) {
-									document.getElementById('localidade').className='uf';
-								} 
-								"/> <label for="dtipo_uf">Estado</label>
-							<input name="dlocalidade" type="radio" value="mun" id="dtipo_mun" onchange="
-								if(this.checked) {
-									document.getElementById('localidade').className='municipio';
-								} 
-								" /> <label for="dtipo_mun">Município</label>
-							</div>
-							<div><label for="destado">Estado:</label> <select name="destado" id="destado"> 
-								<option>estado 1</option>
-								<option>estado 2</option>
-								<option>estado 3</option>
-								<option>estado 4</option>
-								<option>estado 5</option>
-							</select></div>
-							<div id="seletor_municipios"><label for="dmunicipio">Município:</label> <select name="dmunicipio" id="dmunicipio">
-								<option>mun 1</option>
-								<option>mun 2</option>
-								<option>mun 3</option>
-								<option>mun 4</option>
-								<option>mun 5</option>
-							</select></div>
-							<span>Última atualização para esta localidade: <a href="#">2013-10-20</a></span>
+						<div id="localidade" style="margin-top:20px;">
+							<span>Última atualização para esta localidade: <a href="#">20-10-2013</a></span>
 						</div>
 						<h2>Dados</h2>
 						<div id="dados">
@@ -153,7 +117,7 @@
 								<div><label for="dtipo_arquivo">Tipo de Arquivo: </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
 									<option>CSV</option>
 									<option>XLS</option>
-								</select></div>
+								</select> <a href="#"> Verifique as regras para envio de acordo com o formato </a> </div>
 							</div>
 							<div id="envio_de_servico">
 								<div><label for="dservico">Endereço Serviço:</label> <input type="text" name="dservico" id="dservico"></div>
@@ -161,6 +125,13 @@
 									<option>XML</option>
 									<option>JSON</option>
 									<option>CSV</option>
+								</select> <a href="#"> Verifique as regras para envio de acordo com o formato </a> </div>
+								<div>
+								<label for="dperiodo"> Periodicidade: </label> <input name="dperiodo" id="dperiodo" type="text" value=""/> 
+								<select name="dtipo_periodo" id="dtipo_periodo">
+									<option>Dias</option>
+									<option>Semanas</option>
+									<option>Meses</option>
 								</select></div>
 							</div>
 						</div>
@@ -173,6 +144,7 @@
 				<div><strong>88</strong>%</div>
 				<img src="imagens/loading.png" alt="Carregando..." />
 			</div>
+			<div style="clear:both;"></div>
 	    </div>
 
 		<div id="rodape" class="clearfix">

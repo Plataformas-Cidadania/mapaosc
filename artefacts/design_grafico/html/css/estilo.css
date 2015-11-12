@@ -1649,7 +1649,7 @@ width:800px;
 }
 #mapa.config .instrucoes,
 #mapa.institucional .wrapper {
-margin-left:100px;
+margin-left:40px;
 margin-top:15px;
 }
 #mapa.institucional .wrapper {
@@ -3063,4 +3063,38 @@ ul.lista_certificados li {
 
 #formulario_main #dados.arquivo #envio_de_arquivo {
 	display:block;
+}
+
+#menu_lateral {
+	background: #ddd; 
+	float:left; 
+	width: 280px; 
+	height: 100%;
+}
+
+#menu_lateral h4 {
+	height: 28px;
+    line-height: 28px;
+    padding: 0 0 0 15px;
+    margin: 10px 0 0;
+    width: auto;
+    font-family: RobotoBold, sans-serif;
+}
+
+#menu_lateral h4 a {
+	background: #eee;
+	display: block;
+	padding-left: 10px;
+	border-right: 5px solid #1f3d93;
+}
+
+#menu_lateral h4.active a {
+	background: white;
+	border-right: none;
+	color: #1f3d93;
+}
+
+#menu_lateral h4:hover a {
+	background: #fff;
+	border-right: none;
 }
