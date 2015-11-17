@@ -94,7 +94,37 @@
 				<form>
 					<fieldset>
 						<div id="localidade" style="margin-top:20px;">
-							<span>Última atualização para esta localidade: <a href="#">20-10-2013</a></span>
+							<p><a href="#">Verifique as regras para envio dos dados </a></p>
+							<!--  <div>
+								<p>Tipo de Localidade</p>
+								<input name="dlocalidade" type="radio" value="uf" id="dtipo_uf" onchange="
+									if(this.checked) {
+										document.getElementById('localidade').className='uf';
+									} 
+									"/> <label for="dtipo_uf">Estado</label>
+								<input name="dlocalidade" type="radio" value="mun" id="dtipo_mun" onchange="
+									if(this.checked) {
+										document.getElementById('localidade').className='municipio';
+									} 
+									" /> <label for="dtipo_mun">Município</label>
+								</div>
+								<div><label for="destado">Estado:</label> <select name="destado" id="destado"> 
+										<option>estado 1</option>
+										<option>estado 2</option>
+										<option>estado 3</option>
+										<option>estado 4</option>
+										<option>estado 5</option>
+									</select>
+								</div>
+								<div id="seletor_municipios"><label for="dmunicipio">Município:</label> <select name="dmunicipio" id="dmunicipio">
+										<option>mun 1</option>
+										<option>mun 2</option>
+										<option>mun 3</option>
+										<option>mun 4</option>
+										<option>mun 5</option>
+									</select>
+								</div>-->
+							<p>Última atualização para esta localidade: <a href="#">20-10-2013</a></p>
 						</div>
 						<h2>Dados</h2>
 						<div id="dados">
@@ -117,7 +147,7 @@
 								<div><label for="dtipo_arquivo">Tipo de Arquivo: </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
 									<option>CSV</option>
 									<option>XLS</option>
-								</select> <a href="#"> Verifique as regras para envio de acordo com o formato </a> </div>
+								</select></div>
 							</div>
 							<div id="envio_de_servico">
 								<div><label for="dservico">Endereço Serviço:</label> <input type="text" name="dservico" id="dservico"></div>
@@ -125,7 +155,7 @@
 									<option>XML</option>
 									<option>JSON</option>
 									<option>CSV</option>
-								</select> <a href="#"> Verifique as regras para envio de acordo com o formato </a> </div>
+								</select> 
 								<div>
 								<label for="dperiodo"> Periodicidade: </label> <input name="dperiodo" id="dperiodo" type="text" value=""/> 
 								<select name="dtipo_periodo" id="dtipo_periodo">

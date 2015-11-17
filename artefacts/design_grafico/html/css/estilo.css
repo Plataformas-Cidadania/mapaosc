@@ -45,6 +45,9 @@ line-height:1;
 font-size:13px;
 min-width:930px;
 }
+p{
+	line-height: 1.5em
+}
 body,input,button,select,textarea {font-family:RobotoRegular, sans-serif;}
 * {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 ol,ul {list-style:none}
@@ -2939,7 +2942,7 @@ input#esqueci_senha:hover {
 }
 
 fieldset > div > div > div {
-	padding: 4px;
+	/*padding: 4px;*/
 }
 
 .rede_edit {
@@ -3019,7 +3022,7 @@ ul.lista_certificados li {
 
 #formulario_main label {
 	display: inline-block;
-	padding: 15px;
+	padding: 10px;
 	padding-left: 0px;
 }
 
