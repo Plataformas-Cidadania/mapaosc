@@ -54,6 +54,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.github.rwl</groupId>
 			<artifactId>gwt-maps</artifactId>
 			<version>3.8.0-pre1</version>

@@ -3,6 +3,7 @@
  */
 package gov.sgpr.fgv.osc.portalosc.user.server;
 
+import gov.sgpr.fgv.osc.portalosc.user.client.components.Email;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.ValidationException;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
@@ -13,10 +14,15 @@ import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.CpfValidator;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.EmailValidator;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -34,6 +40,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 	private static final long serialVersionUID = -7836597805845364122L;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private Byte[] desKey;
+	private Email email;
 
 	/* (non-Javadoc)
 	 * @see gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl#init(javax.servlet.ServletConfig)
@@ -50,6 +57,13 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			int intElem = Integer.valueOf(valueString);
 			desKey[i] = (byte) intElem;
 		}
+		
+		String serverSMTP = context.getInitParameter("SERVER_SMTP");
+		String authSMTP = context.getInitParameter("SMTP_AUTH");
+		String portSMTP = context.getInitParameter("SMTP_PORT");
+		String fromAddress = context.getInitParameter("FROM_ADDRESS");;
+		String nameAddress = context.getInitParameter("NAME_ADDRESS");;
+		email = new Email(serverSMTP, authSMTP, portSMTP, fromAddress, nameAddress);
 	}
 	/*
 	 * (non-Javadoc)
@@ -63,7 +77,8 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_nr_cpf, tusu_in_lista_email) VALUES (?, ?, ?, ?, ?, ?)";
+				+ "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo) VALUES (?, ?, ?, ?, ?, ?, ?);";
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
@@ -72,6 +87,33 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			pstmt.setString(4, user.getPassword());
 			pstmt.setLong(5, user.getCpf());
 			pstmt.setBoolean(6, user.isMailingListMember());
+			pstmt.setBoolean(7, false);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+			addToken(user.getCpf());
+		}
+		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+	}
+	
+	public void addToken(long cpf) throws RemoteException {
+		Connection conn = getConnection();
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date()); 
+		c.add(Calendar.DATE, 30); 
+		java.sql.Date sqlDate = new java.sql.Date(c.getTime().getTime());   
+		String token = md5(new Date().toString() + cpf);
+		PreparedStatement pstmt = null;
+
+		String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, cpf);
+			pstmt.setString(2, token);
+			pstmt.setDate(3, sqlDate);
 			pstmt.execute();
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
@@ -79,6 +121,162 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} finally {
 			releaseConnection(conn, pstmt);
 		}
+	}
+	
+	public void deleteToken(Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM portal.tb_token where tusu_sq_usuario=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+		}
+	}
+	
+	public String getToken(long cpf) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String token = null;
+		String sql = "SELECT tokn_cd_token FROM portal.tb_token WHERE tusu_sq_usuario = (SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?)";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, cpf);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				
+				token = rs.getString("tokn_cd_token");
+			}
+			return token;
+			
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public Integer getIdToken(String token) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Integer idUsuario = null;
+		String sql = "SELECT tusu_sq_usuario FROM portal.tb_token WHERE tokn_cd_token = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, token);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				idUsuario = rs.getInt("tusu_sq_usuario");
+			}
+			return idUsuario;
+			
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public String getName(Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String nmUser = null;
+		String sql = "SELECT tusu_nm_usuario FROM portal.tb_usuario WHERE tusu_sq_usuario = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				nmUser = rs.getString("tusu_nm_usuario");
+			}
+			return nmUser;
+			
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public String getEmail(Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String nmUser = null;
+		String sql = "SELECT tusu_ee_email FROM portal.tb_usuario WHERE tusu_sq_usuario = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				nmUser = rs.getString("tusu_ee_email");
+			}
+			return nmUser;
+			
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public String getPassword(Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String nmUser = null;
+		String sql = "SELECT tusu_cd_senha FROM portal.tb_usuario WHERE tusu_sq_usuario = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				nmUser = rs.getString("tusu_cd_senha");
+			}
+			return nmUser;
+			
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public void enableUser(Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE portal.tb_usuario SET tusu_in_ativo=? WHERE tusu_sq_usuario=?"; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setBoolean(1, true);
+			pstmt.setInt(2, idUser);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+		}
+		email.send(getEmail(idUser), "Cadastro Confirmado!" , email.welcome(getName(idUser)));
+	}
+	
+	public Integer usuarioAtivo(Integer idUser) throws RemoteException {
+		enableUser(idUser);
+		return idUser;
 	}
 
 	/*
@@ -123,6 +321,30 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				
 			}
 			return user;
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public Boolean getStatus(String email) throws RemoteException {
+		logger.info("Buscando status na base pelo email");
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Boolean status = null;
+		String sql = "SELECT tusu_in_ativo FROM portal.tb_usuario WHERE tusu_ee_email = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				status = rs.getBoolean("tusu_in_ativo");
+			}
+			return status;
+			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -194,6 +416,19 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			releaseConnection(conn, pstmt);
 		}
 
+	}
+	
+	private String md5(String s) {
+	    try {
+	        MessageDigest m = MessageDigest.getInstance("MD5");
+	        m.update(s.getBytes(), 0, s.length());
+	        String hash = new BigInteger(1,m.digest()).toString(16);
+	        return hash;    
+	        
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
 
 	private void validate(DefaultUser user) throws RemoteException {

@@ -23,6 +23,8 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
 import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
+import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
+import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,6 +76,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private static MatrixController matrix;
 	private HandlerRegistration handleControl;
 	private HTMLPanel breadcrumbIndicadores = new HTMLPanel("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
+	private UserServiceAsync userService = GWT.create(UserService.class);
 	
 	public void setMap(MapController map, SearchController search) {
 		MenuController.map = map;
@@ -358,7 +361,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				else if (token.equals("P0"))	processPlace(token, tokenId);
 				else if (tokenType.equals("I"))	processInfographic(token);
 				else if (tokenType.equals("M"))	processMatrix(tokenId);
-			}
+			}else if (tokenType.equals("T")) processToken(tokenId);
 		}
 	}
 
@@ -372,6 +375,89 @@ public class MenuController implements ValueChangeHandler<String> {
 	        if(Character.digit(s.charAt(i),radix) < 0) return false;
 	    }
 	    return true;
+	}
+	
+	private void processToken(String token) {
+		
+		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(Integer result) {
+				ativaUsuario(result);
+			}
+		};
+		userService.getIdToken(token, callback);
+	}
+	
+	private void ativaUsuario(Integer result){
+		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(Integer idUsuarioAtivo) {
+				retornaEmailUsuarioAtivo(idUsuarioAtivo);
+				logger.info( "Usuário ativado com sucesso!!!");
+			}
+		};
+		userService.usuarioAtivo(result,callback);
+		excluirToken(result);
+	}
+	
+	private void retornaEmailUsuarioAtivo(final Integer idUsuarioAtivo){
+		AsyncCallback<String> callback = new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(String emailUsuarioAtivo) {
+				retornaSenhaUsuarioAtivo(idUsuarioAtivo, emailUsuarioAtivo);
+			}
+		};
+		
+		userService.getEmail(idUsuarioAtivo, callback);
+	}
+	
+	private void retornaSenhaUsuarioAtivo(Integer idUsuarioAtivo, final String emailUsuarioAtivo){
+		AsyncCallback<String> callback = new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(String senhaUsuarioAtivo) {
+				UserController userController = new UserController();
+				userController.validateLoginToken(emailUsuarioAtivo, senhaUsuarioAtivo);
+			}
+		};
+		userService.getPassword(idUsuarioAtivo, callback);
+	}
+	
+	private void excluirToken(Integer result){
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(Void result) {
+				logger.info( "Token excluido!");
+			}
+		};
+		userService.deleteToken(result,callback);
+	}
+	
+	private void getEmail(Integer result){
+		AsyncCallback<String> callback = new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(String result) {
+				logger.info( "Email encontrado!");
+			}
+		};
+		userService.getEmail(result,callback);
 	}
 	
 	private void processMatrix(String tokenId) {

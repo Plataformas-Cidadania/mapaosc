@@ -130,7 +130,7 @@ public class UserController {
 			public void onBrowserEvent(Event event) {
 				logger.info("Validando logon");
 				if (logon.isValid()) {
-					validateLogin(logon.getEmail(), logon.getPassword());
+					statusUser(logon.getEmail());
 				}
 			}
 		});
@@ -139,11 +139,11 @@ public class UserController {
 
 			@Override
 			public void onBrowserEvent(Event event) {
-				if(event.getCharCode() == KeyCodes.KEY_ENTER){
-				logger.info("Validando logon");
-				if (logon.isValid()) {
-					validateLogin(logon.getEmail(), logon.getPassword());
-				}
+				if(event.getKeyCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando logon");
+					if (logon.isValid()) {
+						statusUser(logon.getEmail());
+					}
 				}
 			}
 		});
@@ -152,11 +152,11 @@ public class UserController {
 
 			@Override
 			public void onBrowserEvent(Event event) {
-				if(event.getCharCode() == KeyCodes.KEY_ENTER){
-				logger.info("Validando logon");
-				if (logon.isValid()) {
-					validateLogin(logon.getEmail(), logon.getPassword());
-				}
+				if(event.getKeyCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando logon");
+					if (logon.isValid()) {
+						statusUser(logon.getEmail());
+					}
 				}
 			}
 		});
@@ -190,63 +190,11 @@ public class UserController {
 				}
 			}
 		});
-		defaultUser.addSubmitcemail(new EventListener() {
+		defaultUser.addSubmitform(new EventListener() {
 
 			@Override
 			public void onBrowserEvent(Event event) {
-				if (event.getCharCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando cadastro de usuário padrão");
-					if (defaultUser.isValid()) {
-						logger.info("Buscando dados do cadastro de usuário padrão");
-						validateUser(defaultUser.getUser());
-					}
-				}
-			}
-		});
-		defaultUser.addSubmitcsenha(new EventListener() {
-
-			@Override
-			public void onBrowserEvent(Event event) {
-				if (event.getCharCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando cadastro de usuário padrão");
-					if (defaultUser.isValid()) {
-						logger.info("Buscando dados do cadastro de usuário padrão");
-						validateUser(defaultUser.getUser());
-					}
-				}
-			}
-		});
-		defaultUser.addSubmitccsenha(new EventListener() {
-
-			@Override
-			public void onBrowserEvent(Event event) {
-				if (event.getCharCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando cadastro de usuário padrão");
-					if (defaultUser.isValid()) {
-						logger.info("Buscando dados do cadastro de usuário padrão");
-						validateUser(defaultUser.getUser());
-					}
-				}
-			}
-		});
-		defaultUser.addSubmitcnome(new EventListener() {
-
-			@Override
-			public void onBrowserEvent(Event event) {
-				if (event.getCharCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando cadastro de usuário padrão");
-					if (defaultUser.isValid()) {
-						logger.info("Buscando dados do cadastro de usuário padrão");
-						validateUser(defaultUser.getUser());
-					}
-				}
-			}
-		});
-		defaultUser.addSubmitccpf(new EventListener() {
-
-			@Override
-			public void onBrowserEvent(Event event) {
-				if (event.getCharCode() == KeyCodes.KEY_ENTER){
+				if (event.getKeyCode() == KeyCodes.KEY_ENTER){
 					logger.info("Validando cadastro de usuário padrão");
 					if (defaultUser.isValid()) {
 						logger.info("Buscando dados do cadastro de usuário padrão");
@@ -386,8 +334,6 @@ public class UserController {
 			public void onSuccess(Void result) {
 				logger.info("Fechando tela de cadastro");
 				defaultUser.close();
-				logger.info("Realizando logon");
-				logon(user);
 				logger.info("Redirecionando para tela principal");
 				String url = GWT.getHostPageBaseURL() + "Map.html";
 				Window.Location.replace(url);
@@ -548,6 +494,28 @@ public class UserController {
 		userService.getUser(user.getCpf(), callback);
 
 	}
+	
+	private void statusUser(final String email){
+		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(Boolean result) {
+				if (result == null || result == true){
+					validateLogin(logon.getEmail(), logon.getPassword());
+				}else{
+					Element html = DOM.createLabel();
+					html.addClassName("error");
+					html.setInnerText("Confirme seu Cadastro!");
+					Element div = DOM.getElementById("floatingLoginErrorList");
+					div.getParentElement().addClassName("formError");
+					div.appendChild(html);
+				}
+			}
+		};
+		userService.getStatus(email, callback);
+	}
 
 	private void validateLogin(final String email, final String passwd) {
 		logger.info("Validando email do usuário e senha");
@@ -568,6 +536,28 @@ public class UserController {
 
 					logon(result);
 				}
+			}
+		};
+		userService.getUser(email, callback);
+	}
+	
+	public void validateLoginToken(final String email, final String passwd) {
+		logger.info("Validando Token");
+		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(DefaultUser result) {
+				if (result == null) {
+					logon.addInvalidEmail(email);
+				} else {
+					if (!passwd.equals(result.getPassword()))
+						logon.addInvalidPassword(passwd);
+				}
+				
+				logon(result);
+				Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
 			}
 		};
 		userService.getUser(email, callback);

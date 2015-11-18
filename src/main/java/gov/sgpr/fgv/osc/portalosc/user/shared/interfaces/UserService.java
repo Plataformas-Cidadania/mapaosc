@@ -26,6 +26,78 @@ public interface UserService extends RemoteService {
 	 *            usuário a ser adicionado
 	 */
 	public void addUser(DefaultUser user) throws RemoteException;
+	
+	/**
+	 * Adiciona o token no banco de dados
+	 * 
+	 * @param cpf
+	 *            
+	 */
+	public void addToken(long cpf) throws RemoteException;
+	
+	/**
+	 * Exclui o token no banco de dados
+	 * 
+	 * @param idUser
+	 *            
+	 */
+	public void deleteToken(Integer idUser) throws RemoteException;
+	
+	/**
+	 * @param idUser
+	 *            Id do usuário
+	 * @return Password do usuário.
+	 *         
+	 */
+	public String getPassword(Integer idUser) throws RemoteException;
+	
+	/**
+	 * @param idUser
+	 *            Id do usuário
+	 * @return Email do usuário.
+	 *         
+	 */
+	public String getEmail(Integer idUser) throws RemoteException;
+	
+	/**
+	 * Ativa Usuario
+	 * 
+	 * @param idUser
+	 *            
+	 */
+	public Integer usuarioAtivo(Integer idUser) throws RemoteException;
+	
+	/**
+	 * @param cpf
+	 *            Cpf do usuário
+	 * @return token do usuário.
+	 *         
+	 */
+	public String getToken(long cpf) throws RemoteException;
+	
+	/**
+	 * @param token
+	 *            
+	 * @return Id do usuário.
+	 *         
+	 */
+	public Integer getIdToken(String token) throws RemoteException;
+	
+	/**
+	 * Ativa usuário
+	 * 
+	 * @param idUser
+	 *            
+	 */
+	public void enableUser(Integer idUser) throws RemoteException;
+	
+	/**
+	 * @param email
+	 *            Email do usuário
+	 * @return Status do usuário.
+	 *         
+	 */
+	public Boolean getStatus(String email) throws RemoteException;
 
 	/**
 	 * @param email

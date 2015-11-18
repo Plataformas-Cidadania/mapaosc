@@ -50,37 +50,21 @@ public class UserFormWidget extends Composite {
 		validate();
 	}
 	
-	public void addSubmitcemail(EventListener listener) {
+	public void addSubmitform(EventListener listener) {
 		Element cemail = DOM.getElementById("cemail");
-		Event.sinkEvents(cemail, Event.ONKEYPRESS);
-		Event.setEventListener(cemail, listener);
-		validate();
-	}
-	
-	public void addSubmitcsenha(EventListener listener) {
 		Element csenha = DOM.getElementById("csenha");
-		Event.sinkEvents(csenha, Event.ONKEYPRESS);
-		Event.setEventListener(csenha, listener);
-		validate();
-	}
-	
-	public void addSubmitccsenha(EventListener listener) {
 		Element ccsenha = DOM.getElementById("ccsenha");
-		Event.sinkEvents(ccsenha, Event.ONKEYPRESS);
-		Event.setEventListener(ccsenha, listener);
-		validate();
-	}
-	
-	public void addSubmitcnome(EventListener listener) {
 		Element cnome = DOM.getElementById("cnome");
-		Event.sinkEvents(cnome, Event.ONKEYPRESS);
-		Event.setEventListener(cnome, listener);
-		validate();
-	}
-	
-	public void addSubmitccpf(EventListener listener) {
 		Element ccpf = DOM.getElementById("ccpf");
+		Event.sinkEvents(cemail, Event.ONKEYPRESS);
+		Event.sinkEvents(csenha, Event.ONKEYPRESS);
+		Event.sinkEvents(ccsenha, Event.ONKEYPRESS);
+		Event.sinkEvents(cnome, Event.ONKEYPRESS);
 		Event.sinkEvents(ccpf, Event.ONKEYPRESS);
+		Event.setEventListener(cemail, listener);
+		Event.setEventListener(csenha, listener);
+		Event.setEventListener(ccsenha, listener);
+		Event.setEventListener(cnome, listener);
 		Event.setEventListener(ccpf, listener);
 		validate();
 	}
