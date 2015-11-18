@@ -36,6 +36,14 @@ public interface UserService extends RemoteService {
 	public void addToken(long cpf) throws RemoteException;
 	
 	/**
+	 * Adiciona o token no banco de dados
+	 * 
+	 * @param idUsser
+	 *            
+	 */
+	public void addTokenPassword(Integer idUser) throws RemoteException;
+	
+	/**
 	 * Exclui o token no banco de dados
 	 * 
 	 * @param idUser
@@ -82,6 +90,14 @@ public interface UserService extends RemoteService {
 	 *         
 	 */
 	public Integer getIdToken(String token) throws RemoteException;
+	
+	/**
+	 * Altera senha
+	 * 
+	 * @param idUser, password
+	 *            
+	 */
+	public void setPassword(Integer idUser, String password) throws RemoteException;
 	
 	/**
 	 * Ativa usuário

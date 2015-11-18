@@ -3272,3 +3272,83 @@ ul.text-list > li > ul.text-list > li {
     padding-bottom: 10px;
 
 }
+
+.pop_up_alert {
+	background: rgba(240,240,240,1);
+	position: fixed;
+	left: calc(50% - 175px);
+	top: 300px;
+	width: 350px;
+	border-radius: 7px;
+}
+
+.pop_up_alert > h2, .pop_up_alert > div, .alterar_senha > h2, .alterar_senha > div {
+	padding: 10px 20px;
+}
+
+.pop_up_alert > h2, .alterar_senha > h2 {
+	background-color: #244196;
+	border-radius: 7px 7px 0px 0px;
+	color: white;
+	font-size: 1.3em;
+}
+
+.pop_up_alert form {
+	margin-top: 10px;
+}
+
+.pop_up_alert form input[type=text] {
+	width: 84%;
+	margin-left: 5px;
+	border-radius: 5px;
+}
+
+.pop_up_alert form label {
+	font-weight: 800;
+}
+
+.pop_up_alert form fieldset {
+	  padding: 10px 0;
+}
+
+.pop_up_alert input[type=button] {
+	background-color: transparent;
+	height: 30px;
+	line-height: 20px;
+	margin-left: 5px;
+	color: #000;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	background-image: url(../imagens/13_login.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 20px;
+    font-weight: bold;
+}
+
+.pop_up_alert input[type=button]:hover {
+	color: #1F3D93;
+    transition: all 200ms linear;
+    background-color: transparent;
+    background-image: url(../imagens/13_login_hover.png);
+}
+
+.pop_up_alert .botoes {
+	width: 11.5em;
+	margin: 0 auto;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999;
+    background: rgba(200,200,200,0.7);
+}
+
+.alterar_senha form label {
+	min-width: 140px;
+	display: inline-block;
+}

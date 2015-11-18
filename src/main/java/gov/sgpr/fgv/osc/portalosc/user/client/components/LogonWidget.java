@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -45,7 +45,7 @@ public class LogonWidget extends Composite {
 		htmlBuilder
 				.append("	<div id='floatingLoginErrorList'></div>");
 		htmlBuilder.append("	<div>");
-		htmlBuilder.append("		<a href='#'>Esqueci a senha</a>");
+		htmlBuilder.append("		<a id='esqueci' href='#'>Esqueci a senha</a>");
 		htmlBuilder.append("		<a href='");
 		htmlBuilder.append(GWT.getHostPageBaseURL() + "User.html");
 		htmlBuilder.append("		'>Registrar-se</a>");
@@ -76,13 +76,18 @@ public class LogonWidget extends Composite {
 		return html;
 
 	}
+	
+	public void addEsqueci(EventListener listener) {
+		Element btnEsqueci = DOM.getElementById("esqueci");
+		Event.sinkEvents(btnEsqueci, Event.ONCLICK);
+		Event.setEventListener(btnEsqueci, listener);
+	}
 
 	/**
 	 * @param listener
 	 *            Controla o evento de click do botão de logon.
 	 */
 	public void addLogonListener(EventListener listener) {
-		
 		Element btnEnter = DOM.getElementById("entrar");
 		Event.sinkEvents(btnEnter, Event.ONCLICK);
 		Event.setEventListener(btnEnter, listener);
@@ -90,16 +95,12 @@ public class LogonWidget extends Composite {
 		
 	}
 	
-	public void addLogonLabelemail(EventListener listener) {
+	public void addLogonLabel(EventListener listener) {
 		Element email = DOM.getElementById("email");
-		Event.sinkEvents(email, Event.ONKEYPRESS);
-		Event.setEventListener(email, listener);
-		validate();
-	}
-	
-	public void addLogonLabelsenha(EventListener listener) {
 		Element senha = DOM.getElementById("senha");
+		Event.sinkEvents(email, Event.ONKEYPRESS);
 		Event.sinkEvents(senha, Event.ONKEYPRESS);
+		Event.setEventListener(email, listener);
 		Event.setEventListener(senha, listener);
 		validate();
 	}

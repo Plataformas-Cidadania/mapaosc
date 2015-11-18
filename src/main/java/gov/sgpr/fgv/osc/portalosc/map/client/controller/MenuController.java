@@ -22,6 +22,7 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMain;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
+import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupChangePassword;
 import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
@@ -39,6 +40,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -77,6 +79,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private HandlerRegistration handleControl;
 	private HTMLPanel breadcrumbIndicadores = new HTMLPanel("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
 	private UserServiceAsync userService = GWT.create(UserService.class);
+	private PopupChangePassword changePassword = new PopupChangePassword();
 	
 	public void setMap(MapController map, SearchController search) {
 		MenuController.map = map;
@@ -362,6 +365,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				else if (tokenType.equals("I"))	processInfographic(token);
 				else if (tokenType.equals("M"))	processMatrix(tokenId);
 			}else if (tokenType.equals("T")) processToken(tokenId);
+			else if (tokenType.equals("C")) processPassword(tokenId);
 		}
 	}
 
@@ -377,15 +381,105 @@ public class MenuController implements ValueChangeHandler<String> {
 	    return true;
 	}
 	
-	private void processToken(String token) {
+	private void processPassword(String token) {
 		
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 
+			public void onSuccess(final Integer result) {
+				if(result != null){
+					changePassword.onModuleLoad();
+					changePassword.addSubmitListener(new EventListener() {
+
+						@Override
+						public void onBrowserEvent(Event event) {
+							if (changePassword.isValid()) {
+								logger.info("Alterando senha do usuário");
+								changePassword(result,changePassword.getPassword());
+							}
+						}
+					});
+					changePassword.addSubmitcsenha(new EventListener() {
+
+						@Override
+						public void onBrowserEvent(Event event) {
+							if(event.getKeyCode() == KeyCodes.KEY_ENTER){
+								if (changePassword.isValid()) {
+									logger.info("Alterando senha do usuário");
+									changePassword(result,changePassword.getPassword());
+								}
+							}
+						}
+					});
+					changePassword.addCancelListener(new EventListener() {
+
+						@Override
+						public void onBrowserEvent(Event event) {
+								changePassword.close();
+							}
+					});
+					changePassword.addStopPropagation(new EventListener() {
+
+						@Override
+						public void onBrowserEvent(Event event) {
+							event.stopPropagation();
+						}
+					});
+				}
+			}
+		};
+		userService.getIdToken(token, callback);
+	}
+
+	private void changePassword(Integer idUser, String password) {
+		
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+	
+			public void onSuccess(Void result) {
+				logger.info("Senha alterada com sucesso!");
+				Element pop = DOM.getElementById("popup");
+				pop.removeAllChildren();
+				Element header = DOM.createElement("h2");
+				header.setInnerText("Esqueceu a senha?");
+				Element div = DOM.createDiv();
+				Element p = DOM.createElement("p");
+				p.setInnerText("Senha alterada com sucesso!");
+				Element a = DOM.createAnchor();
+				a.setInnerText("Ok");
+				a.setAttribute("href", "#");
+				Event.sinkEvents(a, Event.ONCLICK);
+				Event.setEventListener(a, new EventListener() {
+					@Override
+					public void onBrowserEvent(Event event) {
+						changePassword.close();
+					}
+				});
+				div.appendChild(p);
+				div.appendChild(a);
+				pop.appendChild(header);
+				pop.appendChild(div);
+			}
+		};
+		userService.setPassword(idUser, password, callback);
+		excluirToken(idUser);
+	}
+	
+	private void processToken(String token) {
+		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
 			public void onSuccess(Integer result) {
-				ativaUsuario(result);
+				if(result != null){
+					ativaUsuario(result);
+				}
+				
 			}
 		};
 		userService.getIdToken(token, callback);
@@ -445,6 +539,19 @@ public class MenuController implements ValueChangeHandler<String> {
 			}
 		};
 		userService.deleteToken(result,callback);
+	}
+	
+	private void getPassword(Integer result){
+		AsyncCallback<String> callback = new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(String result) {
+				logger.info("");
+			}
+		};
+		userService.getPassword(result,callback);
 	}
 	
 	private void getEmail(Integer result){

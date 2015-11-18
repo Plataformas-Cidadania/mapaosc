@@ -1,6 +1,7 @@
 package gov.sgpr.fgv.osc.portalosc.user.client.controller;
 
 import gov.sgpr.fgv.osc.portalosc.user.client.components.LogonWidget;
+import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupPassword;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.RepresentantFormWidget;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.SocialNetFormWidget;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.UnavailableFormWidget;
@@ -56,6 +57,7 @@ public class UserController {
 	private SocialNetworkServiceAsync netUserService = com.google.gwt.core.shared.GWT
 			.create(SocialNetworkService.class);
 	private UserFormWidget defaultUser = new UserFormWidget();
+	private PopupPassword popupPassword = new PopupPassword();
 	private SocialNetFormWidget socialNetUser = new SocialNetFormWidget();
 	private RepresentantFormWidget organizationUserWidget = new RepresentantFormWidget();
 	private UnavailableFormWidget unavailableSocialNet = new UnavailableFormWidget();
@@ -134,30 +136,66 @@ public class UserController {
 				}
 			}
 		});
-		
-		logon.addLogonLabelemail(new EventListener() {
+		logon.addLogonLabel(new EventListener() {
 
 			@Override
 			public void onBrowserEvent(Event event) {
 				if(event.getKeyCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando logon");
-					if (logon.isValid()) {
-						statusUser(logon.getEmail());
+				logger.info("Validando logon");
+				if (logon.isValid()) {
+					statusUser(logon.getEmail());
+				}
+				}
+			}
+		});
+		logon.addEsqueci(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				addEsqueciSenha();
+			}			
+		});
+	}
+	
+	private void addEsqueciSenha() {
+		popupPassword.onModuleLoad();
+		popupPassword.addSubmitListener(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				logger.info("Validando email de usuário");
+				if (popupPassword.isValid()) {
+					logger.info("Buscando email do cadastro");
+					validateEmail(popupPassword.getEmail());
+				}
+			}
+		});
+		popupPassword.addSubmitcemail(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				if (event.getKeyCode() == KeyCodes.KEY_ENTER){
+					event.preventDefault();
+					logger.info("Validando email de usuário");
+					if (popupPassword.isValid()) {
+						logger.info("Buscando email do cadastro");
+						validateEmail(popupPassword.getEmail());
 					}
 				}
 			}
 		});
-		
-		logon.addLogonLabelsenha(new EventListener() {
+		popupPassword.addStopPropagation(new EventListener() {
 
 			@Override
 			public void onBrowserEvent(Event event) {
-				if(event.getKeyCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando logon");
-					if (logon.isValid()) {
-						statusUser(logon.getEmail());
-					}
-				}
+				event.stopPropagation();
+			}
+		});
+		popupPassword.addCancelListener(new EventListener() {
+
+			@Override
+			public void onBrowserEvent(Event event) {
+				popupPassword.close();
 			}
 		});
 	}
@@ -334,9 +372,33 @@ public class UserController {
 			public void onSuccess(Void result) {
 				logger.info("Fechando tela de cadastro");
 				defaultUser.close();
-				logger.info("Redirecionando para tela principal");
-				String url = GWT.getHostPageBaseURL() + "Map.html";
-				Window.Location.replace(url);
+				
+				popupPassword.onModuleLoad();
+				Element pop = DOM.getElementById("popup");
+				pop.removeAllChildren();
+				Element header = DOM.createElement("h2");
+				header.setInnerText("Cadastre-se no Mapa");
+				Element div = DOM.createDiv();
+				Element p = DOM.createElement("p");
+				p.setInnerText("Um e-mail foi enviado com as instruções para confirmação do seu cadastro.");
+				Element a = DOM.createAnchor();
+				a.setInnerText("Ok");
+				a.setAttribute("href", "#");
+				Event.sinkEvents(a, Event.ONCLICK);
+				Event.setEventListener(a, new EventListener() {
+					@Override
+					public void onBrowserEvent(Event event) {
+						popupPassword.close();
+						logger.info("Redirecionando para tela principal");
+						String url = GWT.getHostPageBaseURL() + "Map.html";
+						Window.Location.replace(url);
+						
+					}
+				});
+				div.appendChild(p);
+				div.appendChild(a);
+				pop.appendChild(header);
+				pop.appendChild(div);
 			}
 		};
 		userService.addUser(user, callback);
@@ -363,6 +425,80 @@ public class UserController {
 		};
 
 		netUserService.addUser(user, callback);
+	}
+	
+	public void addTokenPassword(Integer idUser) {
+		logger.info("Adicionando Token Esqueci Senha");
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(Void result) {
+				logger.info("Token Adicionado");
+				Element pop = DOM.getElementById("popup");
+				pop.removeAllChildren();
+				Element header = DOM.createElement("h2");
+				header.setInnerText("Esqueceu a senha?");
+				Element div = DOM.createDiv();
+				Element p = DOM.createElement("p");
+				p.setInnerText("Um e-mail foi enviado para você com instruções para redefinir sua senha.");
+				Element a = DOM.createAnchor();
+				a.setInnerText("Ok");
+				a.setAttribute("href", "#");
+				Event.sinkEvents(a, Event.ONCLICK);
+				Event.setEventListener(a, new EventListener() {
+					@Override
+					public void onBrowserEvent(Event event) {
+						popupPassword.close();
+					}
+				});
+				div.appendChild(p);
+				div.appendChild(a);
+				pop.appendChild(header);
+				pop.appendChild(div);
+			}
+		};
+		userService.addTokenPassword(idUser, callback);
+	}
+	
+	private void validateEmail(final String email) {
+		logger.info("Validando email");
+		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(DefaultUser result) {
+				if (result != null) {
+					logger.info("Email encontrado");
+					statusUserPassword(email,result.getId());
+				}else
+				{
+					logger.info("Email não foi encontrado");
+					popupPassword.addInvalidEmail();
+				}
+				
+			}
+		};
+		userService.getUser(email, callback);
+	}
+	
+	private void statusUserPassword(final String email, final Integer idUser){
+		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+
+			public void onSuccess(Boolean result) {
+				if (result == true){
+					addTokenPassword(idUser);
+				}else{
+					popupPassword.addConfirme();
+				}
+			}
+		};
+		userService.getStatus(email, callback);
 	}
 
 	private void validateUser(final DefaultUser user) {
@@ -557,7 +693,30 @@ public class UserController {
 				}
 				
 				logon(result);
-				Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
+				
+				popupPassword.onModuleLoad();
+				Element pop = DOM.getElementById("popup");
+				pop.removeAllChildren();
+				Element header = DOM.createElement("h2");
+				header.setInnerText("Cadastre-se no Mapa");
+				Element div = DOM.createDiv();
+				Element p = DOM.createElement("p");
+				p.setInnerText("Cadastro confirmado com sucesso!");
+				Element a = DOM.createAnchor();
+				a.setInnerText("Ok");
+				a.setAttribute("href", "#");
+				Event.sinkEvents(a, Event.ONCLICK);
+				Event.setEventListener(a, new EventListener() {
+					@Override
+					public void onBrowserEvent(Event event) {
+						popupPassword.close();
+						Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
+					}
+				});
+				div.appendChild(p);
+				div.appendChild(a);
+				pop.appendChild(header);
+				pop.appendChild(div);
 			}
 		};
 		userService.getUser(email, callback);

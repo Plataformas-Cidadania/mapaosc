@@ -123,6 +123,31 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		}
 	}
 	
+	public void addTokenPassword(Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date()); 
+		c.add(Calendar.DATE, 1); 
+		java.sql.Date sqlDate = new java.sql.Date(c.getTime().getTime());   
+		String token = md5(new Date().toString() + idUser);
+		PreparedStatement pstmt = null;
+
+		String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES (?, ?, ?);";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			pstmt.setString(2, token);
+			pstmt.setDate(3, sqlDate);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+		}
+		email.send(getEmail(idUser), "Alterar Senha", email.changePassword(getName(idUser), token));
+	}
+	
 	public void deleteToken(Integer idUser) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -253,6 +278,23 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public void setPassword(Integer idUser, String password) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE portal.tb_usuario SET tusu_cd_senha=? WHERE tusu_sq_usuario=?"; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, password);
+			pstmt.setInt(2, idUser);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
 		}
 	}
 	
