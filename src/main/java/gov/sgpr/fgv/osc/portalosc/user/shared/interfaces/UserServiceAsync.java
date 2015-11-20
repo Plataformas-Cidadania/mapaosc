@@ -17,6 +17,83 @@ public interface UserServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
      */
+    void addToken( long cpf, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void addTokenPassword( java.lang.Integer idUser, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void deleteToken( java.lang.Integer idUser, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void getPassword( java.lang.Integer idUser, AsyncCallback<java.lang.String> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void getEmail( java.lang.Integer idUser, AsyncCallback<java.lang.String> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void usuarioAtivo( java.lang.Integer idUser, AsyncCallback<java.lang.Integer> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void getToken( long cpf, AsyncCallback<java.lang.String> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void getIdToken( java.lang.String token, AsyncCallback<java.lang.Integer> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void setPassword( java.lang.Integer idUser, java.lang.String password, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void enableUser( java.lang.Integer idUser, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void getStatus( java.lang.String email, AsyncCallback<java.lang.Boolean> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
     void getUser( java.lang.String email, AsyncCallback<gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser> callback );
 
 
