@@ -29,7 +29,7 @@ public class Email {
 		this.nameAddress = nameAddress;
 	}
 	
-	public void send(String to,String subject, String content){
+	public void send(String to, String subject, String content){
 		
 		Properties props = new Properties();
 		  

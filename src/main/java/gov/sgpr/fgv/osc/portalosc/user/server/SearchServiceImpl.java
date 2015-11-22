@@ -17,12 +17,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 
-public class SearchServiceImpl extends RemoteServiceImpl implements
-		SearchService {
-
-	/**
-	 * 
-	 */
+public class SearchServiceImpl extends RemoteServiceImpl implements SearchService {
 	private static final long serialVersionUID = 7303151394220679280L;
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -34,8 +29,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements
 	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService#search
 	 * (java.lang.String)
 	 */
-	public List<SearchResult> search(String criteria, int limit)
-			throws RemoteException {
+	public List<SearchResult> search(String criteria, int limit) throws RemoteException {
 		List<SearchResult> result = new ArrayList<SearchResult>();
 
 		// Busca por cnpj

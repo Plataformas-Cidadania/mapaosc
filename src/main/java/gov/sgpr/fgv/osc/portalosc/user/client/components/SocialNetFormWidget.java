@@ -228,7 +228,6 @@ public class SocialNetFormWidget extends Composite {
 
 		Event.sinkEvents(cpfYes, Event.ONCLICK);
 		Event.setEventListener(cpfYes, new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				addValidateCpf();
 				isDefaultUser = true;
@@ -236,7 +235,6 @@ public class SocialNetFormWidget extends Composite {
 		});
 		Event.sinkEvents(cpfNo, Event.ONCLICK);
 		Event.setEventListener(cpfNo, new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				removeValidateCpf();
 				isDefaultUser = false;

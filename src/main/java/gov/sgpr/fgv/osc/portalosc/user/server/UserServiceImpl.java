@@ -10,6 +10,8 @@ import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.FacebookUser;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.RepresentantUser;
+import gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResult;
+import gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResultType;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.CpfValidator;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.EmailValidator;
@@ -21,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Normalizer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -33,10 +36,6 @@ import javax.servlet.ServletContext;
  * 
  */
 public class UserServiceImpl extends RemoteServiceImpl implements UserService {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7836597805845364122L;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private Byte[] desKey;
@@ -170,7 +169,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		ResultSet rs = null;
 		String token = null;
 		String sql = "SELECT tokn_cd_token FROM portal.tb_token WHERE tusu_sq_usuario = (SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?)";
-
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, cpf);
@@ -180,7 +179,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				token = rs.getString("tokn_cd_token");
 			}
 			return token;
-			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -203,7 +201,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				idUsuario = rs.getInt("tusu_sq_usuario");
 			}
 			return idUsuario;
-			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -226,7 +223,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				nmUser = rs.getString("tusu_nm_usuario");
 			}
 			return nmUser;
-			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -249,7 +245,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				nmUser = rs.getString("tusu_ee_email");
 			}
 			return nmUser;
-			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -272,7 +267,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				nmUser = rs.getString("tusu_cd_senha");
 			}
 			return nmUser;
-			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -334,8 +328,8 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT tusu_sq_usuario, tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_nr_cpf, tusu_in_lista_email  "
-				+ "FROM portal.tb_usuario  WHERE tusu_ee_email = ?";
+				   + 		"tusu_nr_cpf, tusu_in_lista_email "
+				   + "FROM portal.tb_usuario  WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
@@ -360,7 +354,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				user.setPassword(rs.getString("tusu_cd_senha"));
 				user.setCpf(rs.getLong("tusu_nr_cpf"));
 				user.setMailingListMember(rs.getBoolean("tusu_in_lista_email"));
-				
 			}
 			return user;
 		} catch (SQLException e) {
@@ -386,7 +379,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				status = rs.getBoolean("tusu_in_ativo");
 			}
 			return status;
-			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -395,7 +387,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		}
 	}
 
-	@Override
 	public DefaultUser getUser(long cpf) throws RemoteException {
 		logger.info("Buscando usuário por cpf");
 		Connection conn = getConnection();
@@ -457,7 +448,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} finally {
 			releaseConnection(conn, pstmt);
 		}
-
 	}
 	
 	private String md5(String s) {
@@ -498,10 +488,8 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw new RemoteException(e);
 		}
-
 	}
 	
-	@Override
 	public Byte[] getEncryptKey() throws RemoteException {
 		return desKey;
 	}
@@ -522,8 +510,8 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				long userUid = resultSet.getLong("ures_nm_login");
 				user.setUid(String.valueOf(userUid));
 			}
-				String photoUrl = "http://graph.facebook.com/" + user.getUid()+ "/picture?type=small";
-				user.setSmallPictureUrl(photoUrl);
+			String photoUrl = "http://graph.facebook.com/" + user.getUid()+ "/picture?type=small";
+			user.setSmallPictureUrl(photoUrl);
 			
 			return photoUrl;
 		}catch (SQLException e){
@@ -532,7 +520,6 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} finally {
 			releaseConnection(conn, pstatement, resultSet);
 		}
-		
 	}
 	
 	public RepresentantUser getRepresentantUser(String email)
@@ -541,26 +528,23 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT tusu_sq_usuario, tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_in_lista_email, bosc_sq_osc  "
-				+ "FROM portal.tb_usuario  WHERE tusu_ee_email = ?";
+				   + 		"tusu_nr_cpf, bosc_sq_osc, tusu_in_lista_email "
+				   + "FROM portal.tb_usuario WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			RepresentantUser user = null;
 			if (rs.next()) {
-				UserType type = UserType.get(rs.getInt("tpus_cd_tipo_usuario"));
-				int userId = rs.getInt("tusu_sq_usuario");
-
 				user = new RepresentantUser();
-				user.setId(userId);
-				user.setType(type);
+				user.setId(rs.getInt("tusu_sq_usuario"));
+				user.setType(UserType.get(rs.getInt("tpus_cd_tipo_usuario")));
 				user.setEmail(email);
 				user.setName(rs.getString("tusu_nm_usuario"));
 				user.setPassword(rs.getString("tusu_cd_senha"));
-				user.setMailingListMember(rs.getBoolean("tusu_in_lista_email"));
+				user.setCpf(rs.getLong("tusu_nr_cpf"));
 				user.setOscId(rs.getInt("bosc_sq_osc"));
-
+				user.setMailingListMember(rs.getBoolean("tusu_in_lista_email"));
 			}
 			return user;
 		} catch (SQLException e) {
@@ -569,34 +553,45 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} finally {
 			releaseConnection(conn, pstmt, rs);
 		}
-
 	}
 
 	public void addRepresentantUser(RepresentantUser user) throws RemoteException {
 		validateRepresentant(user);
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_in_lista_email, bosc_sq_osc) VALUES (?, ?, ?, ?, ?, ?)";
+		
+		String sql = "INSERT INTO portal.tb_usuario "
+				   + 			"(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
+				   + 			"tusu_nr_cpf, bosc_sq_osc, tusu_in_lista_email, tusu_in_ativo) "
+				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
 			pstmt.setString(2, user.getEmail());
 			pstmt.setString(3, user.getName());
 			pstmt.setString(4, user.getPassword());
-			pstmt.setBoolean(5, user.isMailingListMember());
+			pstmt.setLong(5, user.getCpf());
 			pstmt.setLong(6, user.getOscId());
+			pstmt.setBoolean(7, user.isMailingListMember());
+			pstmt.setBoolean(8, false);
 			pstmt.execute();
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt);
-		
+		}
+//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+//		
+		String emailOSC = searchEmailById(user.getOscId());
+		logger.info("Enviando e-mail para " + emailOSC + ".");
+//		email.send(emailOSC, 
+//				"Informação de Cadastro Mapa das Organizações da Sociedade Civil<br/><br/>"
+//			  + "Prezados, o senhor(a) <b>" + user.getName() + "</b> utilizando o e-mail <b>" + user.getEmail() + "</b> se cadastrou como representante da organização no Mapa das Organizações da Sociedade Civil.<br/>"
+//			  + "Caso a organização não esteja de acordo com o cadastro de representante, por favor entre em contato com os responsável pelo site pelo e-mail <b>mapaosc@ipea.gov.br</b>.",
+//				email.confirmation(user.getName(), getToken(user.getCpf()))
+//		);
 	}
-		
-	}
-	
 	
 	private void validateRepresentant(RepresentantUser user) throws RemoteException {
 		try {
@@ -618,7 +613,34 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw new RemoteException(e);
 		}
-
 	}
-
+	
+	private String searchEmailById(Integer id) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT cont_ds_contato "
+				   + "FROM portal.tb_osc_contato "
+				   + "WHERE bosc_sq_osc = ? AND cont_ds_tipo_contato = 'Email'";
+		
+		logger.info(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			String result = "mapaosc@ipea.gov.br";
+			while (rs.next()) {
+				if(result != null){
+					result = rs.getString("cont_ds_contato");
+				}
+			}
+			return result;
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
 }

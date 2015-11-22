@@ -42,37 +42,29 @@ import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
 import com.googlecode.gwt.crypto.client.TripleDesCipher;
 
 public class UserController {
+	private static Logger logger = Logger.getLogger(UserController.class.getName());
 	private final RootPanel loadingUserPanel = RootPanel.get("loading_user");
-	private static final int DELAY = 500;
-	private Date changeDate;
 	private final RootPanel defaultUserPanel = RootPanel.get("modal_cadastro");
 	private final RootPanel socialNetPanel = RootPanel.get("modal_redes");
-	private final RootPanel organizationUserPanel = RootPanel
-			.get("modal_entidade");
-	private static final String LOGON_CONTAINER = "topo_acesso";
-	private static Logger logger = Logger.getLogger(UserController.class
-			.getName());
-	private UserServiceAsync userService = com.google.gwt.core.shared.GWT
-			.create(UserService.class);
-	private SocialNetworkServiceAsync netUserService = com.google.gwt.core.shared.GWT
-			.create(SocialNetworkService.class);
+	private final RootPanel organizationUserPanel = RootPanel.get("modal_entidade");
 	private UserFormWidget defaultUser = new UserFormWidget();
-	private PopupPassword popupPassword = new PopupPassword();
 	private SocialNetFormWidget socialNetUser = new SocialNetFormWidget();
 	private RepresentantFormWidget organizationUserWidget = new RepresentantFormWidget();
 	private UnavailableFormWidget unavailableSocialNet = new UnavailableFormWidget();
-	private UnavailableFormWidget unavailableRep = new UnavailableFormWidget();
 	private LogonWidget logon = new LogonWidget();
-	private SocialNetworkServiceAsync socialNetService = com.google.gwt.core.shared.GWT
-			.create(SocialNetworkService.class);
-	private static DefaultUser currentUser = null;
+	private PopupPassword popupPassword = new PopupPassword();
+	private UserServiceAsync userService = com.google.gwt.core.shared.GWT.create(UserService.class);
+	private SocialNetworkServiceAsync netUserService = com.google.gwt.core.shared.GWT.create(SocialNetworkService.class);
+	private SocialNetworkServiceAsync socialNetService = com.google.gwt.core.shared.GWT.create(SocialNetworkService.class);
 	private SearchServiceAsync searchService = GWT.create(SearchService.class);
+	private static DefaultUser currentUser = null;
+	private static final int DELAY = 500;
+	private static final String LOGON_CONTAINER = "topo_acesso";
 	private static int LIMIT = 5;
-
 	private static byte[] desKey;
-
+	private Date changeDate;
+	
 	public void init() {
-
 		logger.info("Iniciando módulo de Usuário");
 		AsyncCallback<Byte[]> callback = new AsyncCallback<Byte[]>() {
 			public void onFailure(Throwable caught) {
@@ -113,8 +105,7 @@ public class UserController {
 			//addSocialNetUserWidget();
 		}
 		if (organizationUserPanel != null) {
-			organizationUserPanel.add(unavailableRep);
-			//addOrganizationUserWidget();
+			addOrganizationUserWidget();
 		}
 
 		if (facebookUserCode != null) {
@@ -125,10 +116,10 @@ public class UserController {
 	private void addLogonWidget(Element elem) {
 		// elem.addClassName("deslogado");
 		logger.info("Adicionando widget de logon");
+		
 		elem.appendChild(logon.getElement());
+		
 		logon.addLogonListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Validando logon");
 				if (logon.isValid()) {
@@ -136,21 +127,19 @@ public class UserController {
 				}
 			}
 		});
+		
 		logon.addLogonLabel(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				if(event.getKeyCode() == KeyCodes.KEY_ENTER){
-				logger.info("Validando logon");
-				if (logon.isValid()) {
-					statusUser(logon.getEmail());
-				}
+					logger.info("Validando logon");
+					if (logon.isValid()) {
+						statusUser(logon.getEmail());
+					}
 				}
 			}
 		});
+		
 		logon.addEsqueci(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				addEsqueciSenha();
 			}			
@@ -159,9 +148,8 @@ public class UserController {
 	
 	private void addEsqueciSenha() {
 		popupPassword.onModuleLoad();
+		
 		popupPassword.addSubmitListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Validando email de usuário");
 				if (popupPassword.isValid()) {
@@ -170,9 +158,8 @@ public class UserController {
 				}
 			}
 		});
+		
 		popupPassword.addSubmitcemail(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				if (event.getKeyCode() == KeyCodes.KEY_ENTER){
 					event.preventDefault();
@@ -184,16 +171,14 @@ public class UserController {
 				}
 			}
 		});
+		
 		popupPassword.addStopPropagation(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				event.stopPropagation();
 			}
 		});
+		
 		popupPassword.addCancelListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				popupPassword.close();
 			}
@@ -205,8 +190,6 @@ public class UserController {
 		logger.info("Adicionando widget de usuário logado");
 		elem.appendChild(logon.getElement());
 		logon.addLogoutListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Logout");
 				logout();
@@ -216,10 +199,10 @@ public class UserController {
 
 	private void addDefaultUserWidget() {
 		logger.info("Adicionando widget de usuário padrão");
+		
 		defaultUserPanel.add(defaultUser);
+		
 		defaultUser.addSubmitListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Validando cadastro de usuário padrão");
 				if (defaultUser.isValid()) {
@@ -228,9 +211,8 @@ public class UserController {
 				}
 			}
 		});
+		
 		defaultUser.addSubmitform(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				if (event.getKeyCode() == KeyCodes.KEY_ENTER){
 					logger.info("Validando cadastro de usuário padrão");
@@ -241,41 +223,37 @@ public class UserController {
 				}
 			}
 		});
+		
 		defaultUser.addCancelListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Fechando janela de cadastro de usuário padrão");
 				defaultUser.close();
-
 			}
 		});
-
 	}
-
+	
+	@SuppressWarnings("unused")
 	private void addSocialNetUserWidget() {
 		logger.info("Adicionando widget de usuário de rede social");
+		
 		socialNetPanel.add(socialNetUser);
+		
 		socialNetUser.enterFacebookUser(new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Buscando AppId do facebook");
 				getAppID();
 				setLoading(true);
 			}
 		});
+		
 		socialNetUser.addCancelListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Fechando janela de cadastro de usuário de rede social");
 				socialNetUser.close();
-
 			}
 		});
 
 		socialNetUser.addSubmitListener(new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Validando cadastro de usuário de rede social");
 				if (socialNetUser.isValid()) {
@@ -284,19 +262,19 @@ public class UserController {
 			}
 		});
 	}
-
+	
 	private void addOrganizationUserWidget() {
 		logger.info("Adicionando widget de usuário de representante da OSC");
+		
 		organizationUserPanel.add(organizationUserWidget);
 
 		organizationUserWidget.addFocusListener(new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				organizationUserWidget.setValue("");
 			}
 		});
+		
 		organizationUserWidget.addSearchChangeListener(new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Inserindo temporizador");
 				changeDate = new Date();
@@ -317,42 +295,33 @@ public class UserController {
 		});
 
 		organizationUserWidget.addSearchClickListener(new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("entityUser.addSearchClickListener");
 				String criteria = organizationUserWidget.getValue();
 				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-
 					public void onFailure(Throwable caught) {
 						logger.log(Level.SEVERE, caught.getMessage());
 					}
-
 					public void onSuccess(List<SearchResult> result) {
 						if (!result.isEmpty()) {
-							organizationUserWidget.showOrganization(
-									result.get(0).getValue(),
-									String.valueOf(result.get(0).getId()));
-
+							organizationUserWidget.showOrganization(result.get(0).getValue(), String.valueOf(result.get(0).getId()));
 						}
-
 					}
 				};
-				if (!criteria.trim().isEmpty())
+				if (!criteria.trim().isEmpty()){
 					searchService.search(criteria, LIMIT, callbackSearch);
+				}
 			}
 		});
-
+		
 		organizationUserWidget.addCancelListener(new EventListener() {
-
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Fechando tela de cadastro de representante da OSC");
 				organizationUserWidget.close();
-
 			}
 		});
+		
 		organizationUserWidget.addSubmitListener(new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				logger.info("Validando tela de cadastro de representante da OSC");
 				if (organizationUserWidget.isValid()) {
@@ -361,7 +330,7 @@ public class UserController {
 			}
 		});
 	}
-
+	
 	private void addUser(final DefaultUser user) {
 		logger.info("Adicionando usuário");
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
@@ -386,13 +355,11 @@ public class UserController {
 				a.setAttribute("href", "#");
 				Event.sinkEvents(a, Event.ONCLICK);
 				Event.setEventListener(a, new EventListener() {
-					@Override
 					public void onBrowserEvent(Event event) {
 						popupPassword.close();
 						logger.info("Redirecionando para tela principal");
 						String url = GWT.getHostPageBaseURL() + "Map.html";
 						Window.Location.replace(url);
-						
 					}
 				});
 				div.appendChild(p);
@@ -402,9 +369,8 @@ public class UserController {
 			}
 		};
 		userService.addUser(user, callback);
-
 	}
-
+	
 	private void addUser(final FacebookUser user) {
 		logger.info("Adicionando usuário do facebook");
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
@@ -421,10 +387,51 @@ public class UserController {
 				String url = GWT.getHostPageBaseURL() + "Map.html";
 				Window.Location.replace(url);
 			}
-
 		};
-
 		netUserService.addUser(user, callback);
+	}
+	
+	/**
+	 * Adiciona o email e o código da OSC para vincular o usuário à mesma
+	 */
+	private void addRepresentantUser(final RepresentantUser user) {
+		logger.info("Adicionando representante da OSC");
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+			
+			public void onSuccess(Void result) {
+				logger.info("Fechando tela de cadastro");
+				organizationUserWidget.close();
+				
+				popupPassword.onModuleLoad();
+				Element pop = DOM.getElementById("popup");
+				pop.removeAllChildren();
+				Element header = DOM.createElement("h2");
+				header.setInnerText("Cadastre-se no Mapa");
+				Element div = DOM.createDiv();
+				Element p = DOM.createElement("p");
+				p.setInnerText("Um e-mail foi enviado com as instruções para confirmação do seu cadastro. Outro e-mail foi enviado a OSC informando o seu cadastro.");
+				Element a = DOM.createAnchor();
+				a.setInnerText("Ok");
+				a.setAttribute("href", "#");
+				Event.sinkEvents(a, Event.ONCLICK);
+				Event.setEventListener(a, new EventListener() {
+					public void onBrowserEvent(Event event) {
+						popupPassword.close();
+						logger.info("Redirecionando para tela principal");
+						String url = GWT.getHostPageBaseURL() + "Map.html";
+						Window.Location.replace(url);
+					}
+				});
+				div.appendChild(p);
+				div.appendChild(a);
+				pop.appendChild(header);
+				pop.appendChild(div);
+			}
+		};
+		userService.addRepresentantUser(user, callback);
 	}
 	
 	public void addTokenPassword(Integer idUser) {
@@ -433,7 +440,7 @@ public class UserController {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Void result) {
 				logger.info("Token Adicionado");
 				Element pop = DOM.getElementById("popup");
@@ -448,7 +455,6 @@ public class UserController {
 				a.setAttribute("href", "#");
 				Event.sinkEvents(a, Event.ONCLICK);
 				Event.setEventListener(a, new EventListener() {
-					@Override
 					public void onBrowserEvent(Event event) {
 						popupPassword.close();
 					}
@@ -470,15 +476,14 @@ public class UserController {
 			}
 
 			public void onSuccess(DefaultUser result) {
-				if (result != null) {
+				if(result != null){
 					logger.info("Email encontrado");
-					statusUserPassword(email,result.getId());
-				}else
-				{
+					statusUserPassword(email, result.getId());
+				}
+				else{
 					logger.info("Email não foi encontrado");
 					popupPassword.addInvalidEmail();
 				}
-				
 			}
 		};
 		userService.getUser(email, callback);
@@ -491,9 +496,10 @@ public class UserController {
 			}
 
 			public void onSuccess(Boolean result) {
-				if (result == true){
+				if(result == true){
 					addTokenPassword(idUser);
-				}else{
+				}
+				else{
 					popupPassword.addConfirme();
 				}
 			}
@@ -517,30 +523,74 @@ public class UserController {
 			}
 		};
 		userService.getUser(user.getEmail(), callback);
-
 	}
 
+	/**
+	 * Realiza a validação dos dados fornecidos pelo representante da entidade a
+	 * ser cadastrado E verificar se o usuário já está cadastrado na base de
+	 * dados do mapa
+	 */
+	private void validateRepresentant(final RepresentantUser user) {
+		logger.info("Validando dados do representante da OSC");
+		AsyncCallback<RepresentantUser> callback = new AsyncCallback<RepresentantUser>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+			
+			public void onSuccess(RepresentantUser result) {
+				if(result != null){
+					organizationUserWidget.addInvalidEmail(user.getEmail());
+				}
+				if(organizationUserWidget.isValid()){
+					validateCpfRepresentant(user);
+				}
+			}
+		};
+		userService.getRepresentantUser(user.getEmail(), callback);
+	}
+	
 	private void validateCpf(final DefaultUser user) {
 		logger.info("Validando CPF");
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(DefaultUser result) {
 				logger.info("Usuário encontrado pelo CPF");
 				if (result != null) {
 					defaultUser.addInvalidCpf(String.valueOf(user.getCpf()));
 				}
 				logger.info("Validando usuário padrão");
-				if (defaultUser.isValid())
+				if (defaultUser.isValid()){
 					addUser(user);
+				}
 			}
 		};
 		userService.getUser(user.getCpf(), callback);
-
 	}
-
+	
+	private void validateCpfRepresentant(final RepresentantUser user) {
+		logger.info("Validando CPF");
+		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+			
+			public void onSuccess(DefaultUser result) {
+				logger.info("Usuário encontrado pelo CPF");
+				if (result != null) {
+					organizationUserWidget.addInvalidCpf(String.valueOf(user.getCpf()));
+				}
+				logger.info("Validando representante");
+				if (organizationUserWidget.isValid()){
+					addRepresentantUser(user);
+				}
+			}
+		};
+		userService.getUser(user.getCpf(), callback);
+	}
+	
 	/**
 	 * Método que verifica se o usuário já está cadastrado no mapa ao clicar no
 	 * botão do Facebook, após login já efetuado
@@ -551,16 +601,16 @@ public class UserController {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Boolean result) {
 				setLoading(false);
-				if (!result) {
+				if(!result){
 					logger.info("Usuário do facebook não está cadastrado");
 					socialNetUser.showSocialUser(user);
-				} else {
+				}
+				else{
 					logger.info("Usuário do facebook já está cadastrado");
-					socialNetUser.addUserAlreadyExists(user.getEmail()
-							.toString());
+					socialNetUser.addUserAlreadyExists(user.getEmail().toString());
 					socialNetUser.showSocialUser(user);
 				}
 			}
@@ -585,11 +635,13 @@ public class UserController {
 			}
 
 			public void onSuccess(Boolean result) {
-				if (result) {
+				if(result){
 					socialNetUser.closeWidget();
-				} else if (user.isDefaultUser()) {
+				}
+				else if(user.isDefaultUser()){
 					validateNetUser((DefaultUser) user);
-				} else {
+				}
+				else{
 					addUser(user);
 				}
 			}
@@ -603,13 +655,12 @@ public class UserController {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(DefaultUser result) {
 				validateNetCpf(user);
 			}
 		};
 		userService.getUser(user.getEmail(), callback);
-
 	}
 
 	private void validateNetCpf(final DefaultUser user) {
@@ -623,12 +674,12 @@ public class UserController {
 				if (result != null) {
 					socialNetUser.addInvalidCpf(String.valueOf(user.getCpf()));
 				}
-				if (socialNetUser.isValid())
+				if (socialNetUser.isValid()){
 					addUser(user);
+				}
 			}
 		};
 		userService.getUser(user.getCpf(), callback);
-
 	}
 	
 	private void statusUser(final String email){
@@ -638,9 +689,10 @@ public class UserController {
 			}
 
 			public void onSuccess(Boolean result) {
-				if (result == null || result == true){
+				if(result == null || result == true){
 					validateLogin(logon.getEmail(), logon.getPassword());
-				}else{
+				}
+				else{
 					Element html = DOM.createLabel();
 					html.addClassName("error");
 					html.setInnerText("Confirme seu Cadastro!");
@@ -663,13 +715,14 @@ public class UserController {
 			public void onSuccess(DefaultUser result) {
 				if (result == null) {
 					logon.addInvalidEmail(email);
-				} else {
+				}
+				else{
 					String encriptedPasswd = encrypt(passwd);
-					if (!encriptedPasswd.equals(result.getPassword()))
+					if (!encriptedPasswd.equals(result.getPassword())){
 						logon.addInvalidPassword(passwd);
+					}
 				}
 				if (logon.isValid()) {
-
 					logon(result);
 				}
 			}
@@ -685,13 +738,14 @@ public class UserController {
 			}
 
 			public void onSuccess(DefaultUser result) {
-				if (result == null) {
+				if(result == null){
 					logon.addInvalidEmail(email);
-				} else {
-					if (!passwd.equals(result.getPassword()))
-						logon.addInvalidPassword(passwd);
 				}
-				
+				else{
+					if(!passwd.equals(result.getPassword())){
+						logon.addInvalidPassword(passwd);
+					}
+				}
 				logon(result);
 				
 				popupPassword.onModuleLoad();
@@ -707,7 +761,6 @@ public class UserController {
 				a.setAttribute("href", "#");
 				Event.sinkEvents(a, Event.ONCLICK);
 				Event.setEventListener(a, new EventListener() {
-					@Override
 					public void onBrowserEvent(Event event) {
 						popupPassword.close();
 						Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
@@ -727,19 +780,18 @@ public class UserController {
 		logon.getElement().removeFromParent();
 		logon = new LogonWidget(user);
 		Element logonDiv = Document.get().getElementById(LOGON_CONTAINER);
-		if (logonDiv != null) {
+		if(logonDiv != null){
 			addLoggedInWidget(logonDiv);
 		}
 		currentUser = user;
 
-		if (user.getType() == UserType.FACEBOOK) {
+		if(user.getType() == UserType.FACEBOOK){
 			FacebookUser userF = new FacebookUser();
 			userF = (FacebookUser) user;
 			Element userImage = DOM.getElementById("netUserImage");
 			userImage.setAttribute("src", userF.getSmallPictureUrl());
 		}
 		Cookies.setCookie("oscUid", user.getEmail());
-
 	}
 
 	private void logonFacebokUser(final FacebookUser user) {
@@ -749,7 +801,7 @@ public class UserController {
 
 		Element logonDiv = Document.get().getElementById(LOGON_CONTAINER);
 
-		if (logonDiv != null) {
+		if(logonDiv != null){
 			addLoggedInWidget(logonDiv);
 		}
 		currentUser = user;
@@ -762,11 +814,11 @@ public class UserController {
 	public static boolean hasLoggedUser() {
 		logger.info("Verificando se existe usuário logado");
 		String email = Cookies.getCookie("oscUid");
-		if (email != null && !email.isEmpty()) {
+		if(email != null && !email.isEmpty()){
 			return true;
 		}
 		String snUid = Cookies.getCookie("oscSnUid");
-		if (snUid != null && !snUid.isEmpty()) {
+		if(snUid != null && !snUid.isEmpty()){
 			return true;
 		}
 		return false;
@@ -778,12 +830,12 @@ public class UserController {
 
 	public static boolean isMasterUser() {
 		logger.info("Verificando se é usuário master");
-		if (currentUser == null) {
+		if(currentUser == null){
 			return false;
-		} else {
+		}
+		else{
 			return currentUser.getType().equals(UserType.MASTER);
 		}
-
 	}
 
 	private void logout() {
@@ -792,9 +844,10 @@ public class UserController {
 		logon = new LogonWidget();
 		Element logonDiv = Document.get().getElementById(LOGON_CONTAINER);
 
-		if (logonDiv != null) {
+		if(logonDiv != null){
 			addLogonWidget(logonDiv);
 		}
+		
 		Cookies.removeCookie("oscUid");
 		Cookies.removeCookie("oscSnUid");
 		currentUser = null;
@@ -809,7 +862,7 @@ public class UserController {
 			}
 
 			public void onSuccess(DefaultUser result) {
-				if (result != null) {
+				if(result != null){
 					logon(result);
 				}
 			}
@@ -824,7 +877,7 @@ public class UserController {
 	private void logonFacebookUser(final String email) {
 		logger.info("Logon do usuário do facebook");
 		String urlUser = GWT.getHostPageBaseURL() + "User.html";
-		if (urlUser.contains("127.0.0.1")) {
+		if(urlUser.contains("127.0.0.1")){
 			urlUser = urlUser.replaceAll("127.0.0.1", "localhost");
 		}
 
@@ -834,7 +887,7 @@ public class UserController {
 			}
 
 			public void onSuccess(FacebookUser user) {
-				if (user != null) {
+				if(user != null){
 					logger.info("chamou o getFacebookuser... para chamar o logon");
 					logonFacebokUser(user);
 				}
@@ -849,7 +902,7 @@ public class UserController {
 	public void facebookRedirect(String appId) {
 		logger.info("Redirecionando para a página de login do facebook");
 		String urlUser = GWT.getHostPageBaseURL() + "User.html";
-		if (urlUser.contains("127.0.0.1")) {
+		if(urlUser.contains("127.0.0.1")){
 			urlUser = urlUser.replaceAll("127.0.0.1", "localhost");
 		}
 		String linkOAuth = "http://www.facebook.com/dialog/oauth/?client_id="
@@ -857,7 +910,6 @@ public class UserController {
 				+ "&scope=user_about_me,user_birthday,email,publish_stream";
 
 		Window.Location.replace(linkOAuth);
-
 	}
 
 	public static String encrypt(String passwd) {
@@ -900,7 +952,7 @@ public class UserController {
 		logger.info("Buscando dados do usuário no facebook");
 		setLoading(true);
 		String urlUser = GWT.getHostPageBaseURL() + "User.html";
-		if (urlUser.contains("127.0.0.1")) {
+		if(urlUser.contains("127.0.0.1")){
 			urlUser = urlUser.replaceAll("127.0.0.1", "localhost");
 		}
 		AsyncCallback<FacebookUser> callback = new AsyncCallback<FacebookUser>() {
@@ -924,13 +976,12 @@ public class UserController {
 			}
 
 			public void onSuccess(String appId) {
-				if (appId != null) {
+				if(appId != null){
 					facebookRedirect(appId);
 				}
 			}
 		};
 		netUserService.getFacebookAppId(callback);
-
 	}
 
 	/**
@@ -939,15 +990,15 @@ public class UserController {
 	 */
 	private void setLoading(boolean isLoading) {
 		logger.info("Loanding bar");
-		if (loadingUserPanel != null) {
+		if(loadingUserPanel != null){
 			addLoadingBar();
 		}
-		if (isLoading == true) {
+		if(isLoading == true){
 			loadingUserPanel.setVisible(true);
-		} else {
+		}
+		else{
 			loadingUserPanel.setVisible(false);
 		}
-
 	}
 
 	private void addLoadingBar() {
@@ -968,72 +1019,24 @@ public class UserController {
 			public void onSuccess(List<SearchResult> result) {
 				if (!result.isEmpty()) {
 					addResultItems(result);
-
 				}
 
 			}
 		};
-		if (!criteria.trim().isEmpty())
+		if (!criteria.trim().isEmpty()){
 			searchService.search(criteria, LIMIT, callbackSearch);
+		}
 	}
 
 	public void addResultItems(final List<SearchResult> items) {
 		logger.info("Adicionando resultados da busca");
 		EventListener listener = new EventListener() {
-			@Override
 			public void onBrowserEvent(Event event) {
 				Element elem = Element.as(event.getCurrentEventTarget());
 				final String oscId = elem.getAttribute("value");
-				organizationUserWidget.showOrganization(elem.getInnerText(),
-						oscId);
+				organizationUserWidget.showOrganization(elem.getInnerText(), oscId);
 			}
 		};
 		organizationUserWidget.addResultItems(items, listener);
-
-	}
-
-	/**
-	 * Realiza a validação dos dados fornecidos pelo representante da entidade a
-	 * ser cadastrado E verificar se o usuário já está cadastrado na base de
-	 * dados do mapa
-	 */
-	private void validateRepresentant(final RepresentantUser user) {
-		logger.info("Validando dados do representante da OSC");
-		AsyncCallback<RepresentantUser> callback = new AsyncCallback<RepresentantUser>() {
-			public void onFailure(Throwable caught) {
-				logger.log(Level.SEVERE, caught.getMessage());
-			}
-
-			public void onSuccess(RepresentantUser result) {
-				if (result != null) {
-					organizationUserWidget.addInvalidEmail(user.getEmail());
-				}
-				if (organizationUserWidget.isValid())
-					addRepresentantUser(user);
-			}
-		};
-		userService.getRepresentantUser(user.getEmail(), callback);
-
-	}
-
-	/**
-	 * Adiciona o email e o código da OSC para vincular o usuário à mesma
-	 */
-	private void addRepresentantUser(final RepresentantUser user) {
-		logger.info("Adicionando representante da OSC");
-		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
-			public void onFailure(Throwable caught) {
-				logger.log(Level.SEVERE, caught.getMessage());
-			}
-
-			public void onSuccess(Void result) {
-				organizationUserWidget.close();
-				logon(user);
-				String url = GWT.getHostPageBaseURL() + "Map.html";
-				Window.Location.replace(url);
-			}
-		};
-		userService.addRepresentantUser(user, callback);
-
 	}
 }
