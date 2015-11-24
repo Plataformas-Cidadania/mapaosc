@@ -100,7 +100,10 @@
 
 						<div class="titulo">
 							<h1><em>&nbsp;</em> Fundação São Paulo</h1>
-							<div class="botoes"><a href="exportar.html" class="exportar box_exportar">Exportar</a></div>
+							<div class="botoes">
+								<a href="exportar.html" class="botao exportar box_exportar">Exportar</a>
+								<a href="#" class="botao">Configurações</a>
+							</div>
 						</div>
 
 						<div class="container">
@@ -113,7 +116,7 @@
 
 								<div class="redes">
 									<div class="rede_edit">
-										Endereço: www.<input type="text" /> <input type="button" value="Alterar"/>
+										Endereço: www.<input type="text" /> <input type="button" value="Salvar"/>
 									</div>
 									<button type="button" id="b-google" name="redes" value="false" title="Google" class="tooltip"></button>
 									<button type="button" id="b-facebook" name="redes" value="false" title="Facebook" class="tooltip"></button>
@@ -174,6 +177,21 @@
 												<a href="Mapa.html?grupoOSC=123">ver no Mapa</a> ou <a href="Lista.html?grupoOSC=123">visualizar Lista</a>
 												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte RAIS"></span>
 											</div>
+											<div>
+												<strong>Natureza Jurídica:</strong>
+												<span>Organização sem fim lucrativo</span>
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, fonte RAIS"></span>
+											</div>
+											<div>
+												<strong>CNAE:</strong>
+												<span>?</span>
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, fonte RAIS"></span>
+											</div>
+											<div>
+												<strong>Responsável Legal:</strong>
+												<span>João da Silva</span><span> de 1991</span><span> até 2018</span>
+												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, fonte RAIS"></span>
+											</div>
 											<!--  <div>
 												<strong>Localização:</strong>
 												<span>Lat</span>
@@ -192,18 +210,17 @@
 												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 											
-											<div>
+											<!--  <div>
 												<strong>Público-alvo:</strong>
 												<textarea name="publicoalvo" id="publicoalvo">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
 												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
-											</div>
+											</div>-->
 											
 											<div>
 												<strong>Fundada em:</strong>
 												<input type="text" name="efundacao" id="efundacao" value="1945" />
 												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
-
 											<div>
 												<strong>Site:</strong>
 												<input type="text" name="esite" id="esite" value="www" />
@@ -296,46 +313,14 @@
 										<div class="recursos collapsable">
 											<div>
 												<strong>Total de Colaboradores:</strong>
-												<input type="text" name="vparcerias" id="vparcerias" value="15" />
+												<input type="text" name="vparcerias" id="vparcerias" value="12" />
 												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte RAIS"></span>
 												<div class="collapse-click collapse-button"><div></div></div>
 											</div>
 											<div class="collapse-hidden">
 												<div>
-													<strong>Funcionários ativos:</strong>
+													<strong>Trabalhadores:</strong>
 													<input type="text" name="efuncionarios" id="efuncionarios" value="10" />
-												</div>
-												<div>
-													<strong>Fucionários com CLT:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</div>
-												<div  class="hidden">
-													<strong>Servidores Públicos:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</div>
-												<div>
-													<strong>Cedidos:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</div>
-												<div>
-													<strong>Estagiários:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</div>
-												<div>
-													<strong>Autônomos:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</div>
-												<div>
-													<strong>Temporários:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</div>
-												<div>
-													<strong>Cooperados:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
-												</div>
-												<div>
-													<strong>Residência Médica:</strong>
-													<input type="text" name="eprestadores" id="eprestadores" value="15" />
 												</div>
 												<div>
 													<strong>Voluntários:</strong>
@@ -500,8 +485,8 @@
 
 											<div class="clearfix linha">
 												<div class="col1_3">
-													<strong class="separador left-radius">Financiadores</strong>
-													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+													<strong class="separador left-radius">Público Alvo</strong>
+													<textarea name="publicoalvo" id="publicoalvo1">Pessoas de baixa renda...</textarea>
 												</div>
 												<div class="col1_6">
 													<strong class="separador">Abrangência</strong>
@@ -526,8 +511,12 @@
 											</div>
 											
 											<div class="clearfix linha">
-												<div class="col1_1">
-													<strong class="right-radius left-radius">Descrição</strong>
+												<div class="col1_3">
+													<strong class="left-radius separador">Financiadores</strong>
+													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+												</div>
+												<div class="col2_3">
+													<strong class="right-radius">Descrição</strong>
 													<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
@@ -589,8 +578,8 @@
 
 											<div class="clearfix linha">
 												<div class="col1_3">
-													<strong class="separador left-radius">Financiadores</strong>
-													<textarea name="financiadores" id="financiadores1" disabled="disabled">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+													<strong class="separador left-radius">Público Alvo</strong>
+													<textarea name="financiadores" id="financiadores1" disabled="disabled">Pessoas de baixa renda...</textarea>
 												</div>
 												<div class="col1_6">
 													<strong class="separador">Abrangência</strong>
@@ -615,8 +604,12 @@
 											</div>
 											
 											<div class="clearfix linha">
-												<div class="col1_1">
-													<strong class="right-radius left-radius">Descrição</strong>
+												<div class="col1_3">
+													<strong class="left-radius separador">Financiadores</strong>
+													<textarea name="financiadores" id="financiadores1" disabled="disabled">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+												</div>
+												<div class="col2_3">
+													<strong class="right-radius">Descrição</strong>
 													<textarea name="descprojeto" id="descprojeto1" disabled="disabled">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
@@ -958,8 +951,8 @@
 			\
 			<div class="clearfix linha">\
 				<div class="col1_3">\
-					<strong class="separador left-radius">Financiadores</strong>\
-					<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>\
+					<strong class="separador left-radius">Público Alvo</strong>\
+					<textarea name="financiadores" id="financiadores1">Pessoas xyz</textarea>\
 				</div>\
 				<div class="col1_6">\
 					<strong class="separador">Abrangência</strong>\
@@ -983,8 +976,12 @@
 			</div>\
 			\
 			<div class="clearfix linha">\
-				<div class="col1_1">\
-					<strong class="right-radius left-radius">Descrição</strong>\
+				<div class="col1_3">\
+					<strong class="separador left-radius">Financiadores</strong>\
+					<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>\
+				</div>\
+				<div class="col2_3">\
+					<strong class="right-radius">Descrição</strong>\
 					<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>\
 				</div>\
 			</div>\
