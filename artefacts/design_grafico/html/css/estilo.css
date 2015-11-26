@@ -1515,7 +1515,7 @@ color:#FFF;
 border-radius:4px;
 border:none;
 cursor:pointer;
-padding:5px 0 5px 17px;
+padding:5px 5px 5px 17px;
 }
 
 .botao_entrar {
@@ -2957,10 +2957,15 @@ fieldset > div > div > div {
 }
 
 .formulario .rede_edit input {
-	background-color: white;
-	color: black;
 	background-image: none;
 	padding: 5px;
+	color:white;
+	background: black;
+}
+
+.formulario .rede_edit input:hover {
+	background-color: white;
+	color: black;
 }
 
 .organizacao .wrapper {
@@ -3119,4 +3124,24 @@ ul.lista_certificados li {
 .configuracao form p label {
 	float: none;
 	clear: none;
+}
+
+.visualizacao_dados {
+	margin:8px 0px;
+}
+
+.redes div {
+	line-height: 28px;
+	padding: 5px; 
+}
+
+#statusRedeSocial {
+	color: green;
+	font-weight: bold;	
+}
+
+#mapa.participar textarea {
+	display:block;
+	width: 100%;
+	height: 280px;
 }
