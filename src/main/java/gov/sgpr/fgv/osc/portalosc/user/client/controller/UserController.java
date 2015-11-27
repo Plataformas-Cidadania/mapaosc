@@ -293,25 +293,25 @@ public class UserController {
 			}
 		});
 		
-		organizationUserWidget.addSearchClickListener(new EventListener() {
-			public void onBrowserEvent(Event event) {
-				logger.info("entityUser.addSearchClickListener");
-				String criteria = organizationUserWidget.getValue();
-				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-					public void onFailure(Throwable caught) {
-						logger.log(Level.SEVERE, caught.getMessage());
-					}
-					public void onSuccess(List<SearchResult> result) {
-						if (!result.isEmpty()) {
-							organizationUserWidget.showOrganization(result.get(0).getValue(), String.valueOf(result.get(0).getId()));
-						}
-					}
-				};
-				if (!criteria.trim().isEmpty()){
-					searchService.search(criteria, LIMIT, callbackSearch);
-				}
-			}
-		});
+//		organizationUserWidget.addSearchClickListener(new EventListener() {
+//			public void onBrowserEvent(Event event) {
+//				logger.info("entityUser.addSearchClickListener");
+//				String criteria = organizationUserWidget.getValue();
+//				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
+//					public void onFailure(Throwable caught) {
+//						logger.log(Level.SEVERE, caught.getMessage());
+//					}
+//					public void onSuccess(List<SearchResult> result) {
+//						if (!result.isEmpty()) {
+//							organizationUserWidget.showOrganization(result.get(0).getValue(), String.valueOf(result.get(0).getId()));
+//						}
+//					}
+//				};
+//				if (!criteria.trim().isEmpty()){
+//					searchService.search(criteria, LIMIT, callbackSearch);
+//				}
+//			}
+//		});
 		
 		organizationUserWidget.addCancelListener(new EventListener() {
 			public void onBrowserEvent(Event event) {

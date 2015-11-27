@@ -74,15 +74,15 @@ public class RepresentantFormWidget extends Composite {
 		validate();
 	}
 	
-	/**
-	 * @param listener
-	 *            Controla o evento de click do botão "Localizar".
-	 */
-	public void addSearchClickListener(EventListener listener) {
-		final Element elem = DOM.getElementById("localizarOSC");
-		Event.sinkEvents(elem, Event.ONCLICK);
-		Event.setEventListener(elem, listener);
-	}
+//	/**
+//	 * @param listener
+//	 *            Controla o evento de click do botão "Localizar".
+//	 */
+//	public void addSearchClickListener(EventListener listener) {
+//		final Element elem = DOM.getElementById("localizarOSC");
+//		Event.sinkEvents(elem, Event.ONCLICK);
+//		Event.setEventListener(elem, listener);
+//	}
 
 	/**
 	 * @param listener
@@ -174,7 +174,7 @@ public class RepresentantFormWidget extends Composite {
 		htmlBuilder.append("					Verifique se a organização já está cadastrada no Mapa, informando o nome ou CNPJ: ");
 		htmlBuilder.append("					<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade required='required' class='entidade' />");
 		htmlBuilder.append("					<div class='botoes'>");
-		htmlBuilder.append("						<input type='button' name='localizarOSC' id='localizarOSC' value='Buscar' class='buscar' />");
+//		htmlBuilder.append("						<input type='button' name='localizarOSC' id='localizarOSC' value='Buscar' class='buscar' />");
 		htmlBuilder.append("						<label><strong><span id='oscCode' name='oscCode'></span></strong></label>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</form>");
