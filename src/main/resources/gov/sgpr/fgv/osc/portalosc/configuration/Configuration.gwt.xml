@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.5.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.5.1/distro-source/core/src/gwt-module.dtd">
+<module rename-to='Configuration'>
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.logging.Logging" />
+	<inherits name='com.google.gwt.junit.JUnit' />
+	<inherits name="com.google.gwt.i18n.I18N" />
+	<inherits name="com.googlecode.gwt.crypto.Crypto"/>
+	
+	<extend-property name="locale" values="pt_BR" />
+	
+	<source path='client' />
+	<source path='shared' />
+	
+	<entry-point class="gov.sgpr.fgv.osc.portalosc.configuration.client.Configuration" />
+	
+	<set-property-fallback name="locale" value="pt_BR" />
+	
+	<set-property name="gwt.logging.enabled" value="TRUE" />
+	<set-property name="gwt.logging.logLevel" value="INFO" />
+	<set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+	<set-property name="gwt.logging.consoleHandler" value="DISABLED" />
+	<set-property name="gwt.logging.developmentModeHandler" value="DISABLED" />
+	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
+	
+	<servlet path='/configurationService' class='gov.sgpr.fgv.osc.portalosc.configuration.server.ConfigurationServiceImpl'></servlet>
+	<servlet path='/searchOSCConfigService' class='gov.sgpr.fgv.osc.portalosc.configuration.server.SearchServiceImpl'></servlet>
+</module>
