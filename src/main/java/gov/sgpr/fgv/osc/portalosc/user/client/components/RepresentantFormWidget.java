@@ -134,7 +134,7 @@ public class RepresentantFormWidget extends Composite {
 		user.setType(UserType.OSC_AGENT);
 		user.setOscId(Integer.parseInt(oscId.getInnerHTML()));	
 		
-		return user;	
+		return user;
 	}
 	
 	/**
@@ -158,10 +158,9 @@ public class RepresentantFormWidget extends Composite {
 	
 	private HTML getHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
-
+		
 		htmlBuilder.append("<h3 class='b-entidade'>Represente sua entidade</h3>");
 		htmlBuilder.append("<div>Sendo um representante da organização, você poderá:");
-		
 		htmlBuilder.append("	<ul>");
 		htmlBuilder.append("		<li>Informar dados da organização</li>");
 		htmlBuilder.append("		<li>Compartilhar informações com seus amigos</li>");
@@ -176,7 +175,7 @@ public class RepresentantFormWidget extends Composite {
 		htmlBuilder.append("					<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade required='required' class='entidade' />");
 		htmlBuilder.append("					<div class='botoes'>");
 		htmlBuilder.append("						<input type='button' name='localizarOSC' id='localizarOSC' value='Buscar' class='buscar' />");
-		htmlBuilder.append("						<label><strong><span  id='oscCode' name='oscCode'></span></strong></label>");
+		htmlBuilder.append("						<label><strong><span id='oscCode' name='oscCode'></span></strong></label>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</form>");
 		htmlBuilder.append("			</div>");
@@ -231,7 +230,7 @@ public class RepresentantFormWidget extends Composite {
 		htmlBuilder.append("		</div>");		
 		htmlBuilder.append("	</form>");
 		htmlBuilder.append("</div>");
-
+		
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
@@ -241,7 +240,7 @@ public class RepresentantFormWidget extends Composite {
 		super.onAttach();
 		searchTextField = DOM.getElementById("enome");
 	}
-
+	
 	public void addResultItems(List<SearchResult> items, EventListener listener) {
 		searchWidget.setItems(items);
 		searchWidget.addSearchListener(listener);
@@ -250,7 +249,7 @@ public class RepresentantFormWidget extends Composite {
 	public void showOrganization(String oscInfo, String oscId) {
 		final Element searchWidget = DOM.getElementById("resultado_busca");
 		final Element representant = DOM.getElementById("div-representant");
-		//final Element certDigital = DOM.getElementById("cert_digital_ok");
+//		final Element certDigital = DOM.getElementById("cert_digital_ok");
 		final Element fieldOscName = DOM.getElementById("oscName");
 		final Element fieldOscCode = DOM.getElementById("oscCode");
 		final Element representantName = DOM.getElementById("entity_name");

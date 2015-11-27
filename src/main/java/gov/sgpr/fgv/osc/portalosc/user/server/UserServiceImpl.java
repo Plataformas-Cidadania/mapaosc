@@ -1,6 +1,3 @@
-/**
- * 
- */
 package gov.sgpr.fgv.osc.portalosc.user.server;
 
 import gov.sgpr.fgv.osc.portalosc.user.client.components.Email;
@@ -10,8 +7,6 @@ import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.FacebookUser;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.RepresentantUser;
-import gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResult;
-import gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResultType;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.CpfValidator;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.EmailValidator;
@@ -23,7 +18,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.Normalizer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -60,8 +54,8 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		String serverSMTP = context.getInitParameter("SERVER_SMTP");
 		String authSMTP = context.getInitParameter("SMTP_AUTH");
 		String portSMTP = context.getInitParameter("SMTP_PORT");
-		String fromAddress = context.getInitParameter("FROM_ADDRESS");;
-		String nameAddress = context.getInitParameter("NAME_ADDRESS");;
+		String fromAddress = context.getInitParameter("FROM_ADDRESS");
+		String nameAddress = context.getInitParameter("NAME_ADDRESS");
 		email = new Email(serverSMTP, authSMTP, portSMTP, fromAddress, nameAddress);
 	}
 	/*
@@ -580,17 +574,13 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt);
+			addToken(user.getCpf());
 		}
-//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
-//		
+		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+		
 		String emailOSC = searchEmailById(user.getOscId());
 		logger.info("Enviando e-mail para " + emailOSC + ".");
-//		email.send(emailOSC, 
-//				"Informação de Cadastro Mapa das Organizações da Sociedade Civil<br/><br/>"
-//			  + "Prezados, o senhor(a) <b>" + user.getName() + "</b> utilizando o e-mail <b>" + user.getEmail() + "</b> se cadastrou como representante da organização no Mapa das Organizações da Sociedade Civil.<br/>"
-//			  + "Caso a organização não esteja de acordo com o cadastro de representante, por favor entre em contato com os responsável pelo site pelo e-mail <b>mapaosc@ipea.gov.br</b>.",
-//				email.confirmation(user.getName(), getToken(user.getCpf()))
-//		);
+		email.send(emailOSC, "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(user, searchNameOSCByOSC(user.getOscId())));
 	}
 	
 	private void validateRepresentant(RepresentantUser user) throws RemoteException {
@@ -634,6 +624,31 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				if(result != null){
 					result = rs.getString("cont_ds_contato");
 				}
+			}
+			return result;
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	private String searchNameOSCByOSC(Integer idOSC) throws RemoteException {
+		logger.info("Buscando informações da OSC");
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT bosc_nm_osc "
+				   + "FROM data.tb_osc "
+				   + "WHERE bosc_sq_osc = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, idOSC);
+			rs = pstmt.executeQuery();
+			String result = "Nome ou CNPJ da entidade";
+			if (rs.next()) {
+				result = rs.getString("bosc_nm_osc");
 			}
 			return result;
 		} catch (SQLException e) {

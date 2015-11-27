@@ -107,7 +107,6 @@ public class UserController {
 		if (organizationUserPanel != null) {
 			addOrganizationUserWidget();
 		}
-
 		if (facebookUserCode != null) {
 			getSocialUserInfo(facebookUserCode);
 		}
@@ -293,7 +292,7 @@ public class UserController {
 				t.schedule(DELAY);
 			}
 		});
-
+		
 		organizationUserWidget.addSearchClickListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				logger.info("entityUser.addSearchClickListener");
@@ -317,6 +316,7 @@ public class UserController {
 		organizationUserWidget.addCancelListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				logger.info("Fechando tela de cadastro de representante da OSC");
+				organizationUserWidget = new RepresentantFormWidget();
 				organizationUserWidget.close();
 			}
 		});
@@ -784,7 +784,7 @@ public class UserController {
 			addLoggedInWidget(logonDiv);
 		}
 		currentUser = user;
-
+		
 		if(user.getType() == UserType.FACEBOOK){
 			FacebookUser userF = new FacebookUser();
 			userF = (FacebookUser) user;
@@ -792,6 +792,7 @@ public class UserController {
 			userImage.setAttribute("src", userF.getSmallPictureUrl());
 		}
 		Cookies.setCookie("oscUid", user.getEmail());
+		Cookies.setCookie("idUser", String.valueOf(user.getId()));
 	}
 
 	private void logonFacebokUser(final FacebookUser user) {
@@ -1011,23 +1012,20 @@ public class UserController {
 	public void search(String criteria) {
 		logger.info("Realizando busca");
 		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
 			public void onSuccess(List<SearchResult> result) {
 				if (!result.isEmpty()) {
 					addResultItems(result);
 				}
-
 			}
 		};
 		if (!criteria.trim().isEmpty()){
 			searchService.search(criteria, LIMIT, callbackSearch);
 		}
 	}
-
+	
 	public void addResultItems(final List<SearchResult> items) {
 		logger.info("Adicionando resultados da busca");
 		EventListener listener = new EventListener() {

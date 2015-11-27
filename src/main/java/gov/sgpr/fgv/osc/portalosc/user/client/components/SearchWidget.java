@@ -4,7 +4,6 @@ import gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Node;
@@ -17,7 +16,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
 
 public class SearchWidget extends Composite {
-	private Logger logger = Logger.getLogger(this.getClass().getName());
 	public PopupPanel searchResultsPanel = new PopupPanel();
 	private List<SearchResult> items = new ArrayList<SearchResult>();
 
@@ -39,34 +37,31 @@ public class SearchWidget extends Composite {
 
 	public HTML getSearchHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<div id =\"popUp\" name =\"popUp\">");
+		htmlBuilder.append("<div id ='popUp' name ='popUp'>");
 		if (!this.items.isEmpty()) {
-			htmlBuilder.append("<ul id = \"resultList\" class=\"resultado\">");
+			htmlBuilder.append("<ul id = 'resultList' class='resultado'>");
 
 			for (int index = 0; index < items.size(); index++) {
-				htmlBuilder.append("<li value = \""
-						+ this.items.get(index).getId() + "\"><strong>"
+				htmlBuilder.append("<li value = '"
+						+ this.items.get(index).getId() + "'><strong>"
 						+ this.items.get(index).getValue() + "</strong></li>");
 			}
 			htmlBuilder.append("</ul>");
 		} else {
-			htmlBuilder.append("<div>" + "<ul class=\"total\">"
+			htmlBuilder.append("<div>" + "<ul class='total'>"
 					+ "<li><strong></strong></li>" + "<li><em></em></li>"
 					+ "</ul>");
-			htmlBuilder.append("<ul class=\"resultado\">");
+			htmlBuilder.append("<ul class='resultado'>");
 			htmlBuilder
-					.append("<li><a href=\"\"> Nenhum resultado encontrado </a></li>");
+					.append("<li><a href=''> Nenhum resultado encontrado </a></li>");
 			htmlBuilder.append("</ul>" + "</div>");
-
 		}
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
 
 	public void addSearchListener(EventListener listener) {
-
 		Element elem = DOM.getElementById("resultList");
-
 		for (int i = 0; i < elem.getChildCount(); i++) {
 			final Node child = elem.getChild(i);
 			if (child.getNodeType() == Node.ELEMENT_NODE) {
@@ -75,6 +70,5 @@ public class SearchWidget extends Composite {
 				Event.setEventListener(childElement, listener);
 			}
 		}
-
 	}
 }

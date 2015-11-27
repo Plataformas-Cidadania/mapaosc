@@ -3368,3 +3368,26 @@ ul.text-list > li > ul.text-list > li {
 .tela_cheia #botao_tela_cheia {
 	background-image: url('../imagens/deixar_tela_cheia.png');
 }
+
+.configuracao {
+	margin-top: 15px;
+}
+
+.configuracao form {
+	margin: 0 auto;
+	width: 800px;
+}
+
+.configuracao form div.tabbody > h3 {
+	margin-top: 1em;
+	margin-left: 1.2em;;
+}
+
+.configuracao form p label {
+	float: none;
+	clear: none;
+}
+
+.configuracao #enome {
+	margin-bottom: 10px;
+}

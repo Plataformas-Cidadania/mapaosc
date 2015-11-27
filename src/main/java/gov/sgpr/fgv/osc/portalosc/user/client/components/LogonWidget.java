@@ -16,14 +16,14 @@ import com.google.gwt.user.client.ui.HTML;
 
 public class LogonWidget extends Composite {
 	private final Logger logger = Logger.getLogger(this.getClass().getName());
-
+	
 	/**
 	 * Construtor
 	 */
 	public LogonWidget() {
 		initWidget(getHtml());
 	}
-
+	
 	public LogonWidget(DefaultUser user) {
 		initWidget(getLoggedHtml(user.getName()));
 	}
@@ -67,7 +67,7 @@ public class LogonWidget extends Composite {
 		htmlBuilder.append("		<li><h2>");
 		htmlBuilder.append(name);
 		htmlBuilder.append("		</h2></li>");
-		htmlBuilder.append("		<li><a href='#'>  Configurações  </a></li>");
+		htmlBuilder.append("		<li><a href='" + GWT.getHostPageBaseURL() + "Configuration.html'>  Configurações  </a></li>");
 		htmlBuilder.append("	</ul>");
 		htmlBuilder.append("</div>");
 		htmlBuilder
@@ -82,7 +82,7 @@ public class LogonWidget extends Composite {
 		Event.sinkEvents(btnEsqueci, Event.ONCLICK);
 		Event.setEventListener(btnEsqueci, listener);
 	}
-
+	
 	/**
 	 * @param listener
 	 *            Controla o evento de click do botão de logon.
@@ -92,7 +92,6 @@ public class LogonWidget extends Composite {
 		Event.sinkEvents(btnEnter, Event.ONCLICK);
 		Event.setEventListener(btnEnter, listener);
 		validate();
-		
 	}
 	
 	public void addLogonLabel(EventListener listener) {
@@ -104,7 +103,7 @@ public class LogonWidget extends Composite {
 		Event.setEventListener(senha, listener);
 		validate();
 	}
-
+	
 	/**
 	 * @param listener
 	 *            Controla o evento de click do botão de logout.
