@@ -1506,7 +1506,7 @@ color:#1F3D93;
 text-decoration:underline;
 }
 
-.formulario input[type=submit],.formulario input[type=button],.formulario button,.classificacao button, a.beta,#mapa.organizacao a.participar, a.exportar {
+.formulario input[type=submit],.formulario input[type=button],.formulario button,.classificacao button, a.beta,#mapa.organizacao a.participar, a.botao {
 background-color:#000;
 height:29px;
 line-height:20px;
@@ -1515,7 +1515,7 @@ color:#FFF;
 border-radius:4px;
 border:none;
 cursor:pointer;
-padding:5px 0 5px 17px;
+padding:5px 5px 5px 17px;
 }
 
 .botao_entrar {
@@ -1754,7 +1754,7 @@ background-image:url(../imagens/sprite_organizacao.png);
 background-repeat:no-repeat;
 }
 
-#mapa.organizacao button, #mapa.organizacao a.participar, a.exportar {
+#mapa.organizacao button, #mapa.organizacao a.participar, a.botao {
 padding:5px 8px 5px 22px;
 }
 
@@ -2412,8 +2412,8 @@ text-indent: 15px;
 .ver_tudo.exportar .topico {background: url("../imagens/16_topicos.png") no-repeat 0 4px;font-family: RobotoBold, sans-serif; text-indent: 15px; color:#000; margin: 10px 0;}
 .ver_tudo button.exportar {margin: 15px}
 
-a.exportar{display: block;font-family: RobotoRegular, sans-serif;font-weight: normal;}
-a.exportar:hover{text-decoration: none; color:#fff;}
+a.botao{display: inline-block;font-family: RobotoRegular, sans-serif;font-weight: normal;}
+a.botao:hover{text-decoration: none; color:#fff;}
 
 #mapa_navegacao .tabbody.infograficos h4 { margin: 20px 0;}
 #mapa_navegacao .tabbody.infograficos h4 a {font-family: RobotoBold;}
@@ -2957,10 +2957,15 @@ fieldset > div > div > div {
 }
 
 .formulario .rede_edit input {
-	background-color: white;
-	color: black;
 	background-image: none;
 	padding: 5px;
+	color:white;
+	background: black;
+}
+
+.formulario .rede_edit input:hover {
+	background-color: white;
+	color: black;
 }
 
 .organizacao .wrapper {
@@ -3119,4 +3124,24 @@ ul.lista_certificados li {
 .configuracao form p label {
 	float: none;
 	clear: none;
+}
+
+.visualizacao_dados {
+	margin:8px 0px;
+}
+
+.redes div {
+	line-height: 28px;
+	padding: 5px; 
+}
+
+#statusRedeSocial {
+	color: green;
+	font-weight: bold;	
+}
+
+#mapa.participar textarea {
+	display:block;
+	width: 100%;
+	height: 280px;
 }

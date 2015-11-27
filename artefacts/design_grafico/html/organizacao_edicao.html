@@ -102,7 +102,7 @@
 							<h1><em>&nbsp;</em> Fundação São Paulo</h1>
 							<div class="botoes">
 								<a href="exportar.html" class="botao exportar box_exportar">Exportar</a>
-								<a class="botao" href="organizacao_edicao.html">Edição</a>
+								<a href="organizacao.html" class="botao">Visualização</a>
 							</div>
 						</div>
 
@@ -110,17 +110,23 @@
 
 							<div class="social">
 								<div class="imagem">
+									<button type="button" class="carregar">Carregar</button>
 									<img src="imagens/org_imagem.jpg" alt="Fundação São Paulo" width="160" height="160" />
 								</div>
 
 								<div class="redes">
+									<div class="rede_edit">
+										Endereço: redesocial/<input type="text" /> <input type="button" value="Seguir Link"/><input type="button" value="Salvar"/>
+									</div>
 									<button type="button" id="b-google" name="redes" value="false" title="Google" class="tooltip"></button>
 									<button type="button" id="b-facebook" name="redes" value="false" title="Facebook" class="tooltip"></button>
 									<button type="button" id="b-linkedin" name="redes" value="false" title="LinkedIn" class="tooltip"></button>
 									<button type="button" id="b-twitter" name="redes" value="false" title="Twitter" class="tooltip"></button>
+									<div>Compartilhamento em Redes Sociais <span id="statusRedeSocial">Habilitado</span></div>
+									<div><input type="button" class="botao" value="Desabilitar" /></div>
 								</div>
 
-								<a href="como_participar.html" class="participar box">Como Participar</a>
+								<a href="como_participar_edicao.html" class="participar box">Como Participar</a>
 
 								<div class="recomendacoes">
 									<span title="1200 recomendações" class="tooltip">1200</span>
@@ -131,14 +137,14 @@
 								<div class="classificacao">
 									<h3>Classificação</h3>
 									<ul class="dados">
-										<li class="fasfil"><a href="#">Educação e pesquisa</a></li>
-										<li><a href="#">Faculdade</a></li>
+										<li class="fasfil"><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Educação e pesquisa</a></li>
+										<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Faculdade</a></li>
 									</ul>
 
-									<!--  <div>
+									<div>
 										<input type="text" name="tag" id="tag" placeholder="Adicionar nova tag..." />
 										<button type="button" class="adicionar">Adicionar</button>
-									</div>-->
+									</div>
 									
 								</div>
 
@@ -202,7 +208,7 @@
 
 											<div>
 												<strong>Descrição:</strong>
-												<textarea name="edesc" id="edesc" disabled="disabled">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
+												<textarea name="edesc" id="edesc">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla. Etiam auctor ullamcorper quam at porta. Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu ma</textarea>
 												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 											
@@ -214,18 +220,18 @@
 											
 											<div>
 												<strong>Fundada em:</strong>
-												<span>1945</span>
+												<input type="text" name="efundacao" id="efundacao" value="1945" />
 												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 											<div>
 												<strong>Site:</strong>
-												<a href="#">www.meusitelalala.com.br</a>
+												<input type="text" name="esite" id="esite" value="www" />
 												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 
 											<div>
 												<strong>E-mail:</strong>
-												<span>fundacao@gmail.com</span>
+												<input type="text" name="eemail_org" id="eemail_org" value="fundacao@gmail.com" />
 												<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 											</div>
 											
@@ -233,14 +239,24 @@
 												<strong>Participação social:</strong>
 												<ul class="participacao">
 													<li>
-														<span class="visualizacao_dados">CONAJE</span>
+														<select name="oconselhos">
+															<option value="privada" selected>CONJUVE</option>
+															<option value="doacao">CONAJE</option>
+															<option value="publica">CONSELHO</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
 													<li>
-														<span class="visualizacao_dados">CONJUVE</span>
+														<select name="oconselhos">
+															<option value="privada" selected>CONJUVE</option>
+															<option value="doacao">CONAJE</option>
+															<option value="publica">CONSELHO</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
-													
+													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
 												</ul>
 											</div>
 											
@@ -248,13 +264,24 @@
 												<strong>Fonte de recursos:</strong>
 												<ul class="recursos">
 													<li>
-														<span class="visualizacao_dados">Pública</span>														
+														<select name="erecursos">
+															<option value="privada" selected>Privada</option>
+															<option value="doacao">Doação</option>
+															<option value="publica">Pública</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
 													<li>
-														<span class="visualizacao_dados"> Doação </span>
+														<select name="erecursos">
+															<option value="privada">Privada</option>
+															<option value="doacao" selected>Doação</option>
+															<option value="publica">Pública</option>
+														</select>
+														<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 														<span class="fonte_de_dados dado_organizacao" title="Dado preenchido pela Organização"></span>
 													</li>
+													<li class="botoes"><button type="button" class="adicionar participacao">Adicionar</button></li>
 												</ul>
 											</div>
 										</fieldset>
@@ -288,22 +315,22 @@
 										<div class="recursos collapsable">
 											<div>
 												<strong>Total de Colaboradores:</strong>
-												<span>12</span>
+												<input type="text" name="vparcerias" id="vparcerias" value="12" />
 												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte RAIS"></span>
 												<div class="collapse-click collapse-button"><div></div></div>
 											</div>
 											<div class="collapse-hidden">
 												<div>
 													<strong>Trabalhadores:</strong>
-													<span>10</span>
+													<input type="text" name="efuncionarios" id="efuncionarios" value="10" />
 												</div>
 												<div>
 													<strong>Voluntários:</strong>
-													<span>01</span>
+													<input type="text" name="evoluntarios" id="evoluntarios" value="01" />
 												</div>
 												<div>
 													<strong>Colaboradores portadores de deficiência:</strong>
-													<span>01</span>
+													<input type="text" name="edeficientes" id="edeficientes" value="01" />
 												</div>
 											</div>
 										</div>
@@ -314,7 +341,7 @@
 											<div>
 												<strong>Valor total das parcerias:</strong>
 												<span>R$</span>
-												<span>12321421421442,00</span>
+												<input type="text" name="vparcerias" id="vparcerias" value="243434343" />
 												<span class="fonte_de_dados dado_oficial" title="Dado Oficial, Fonte SINAFI"></span>
 												<div class="collapse-click collapse-button"><div></div></div>
 											</div>
@@ -322,17 +349,17 @@
 												<div>
 													<strong>Valor das parcerias federais:</strong>
 													<span>R$</span>
-													<span>12321421421442,00</span>
+													<input type="text" name="vparceriasfederais" id="vparcerias" value="24344343" />
 												</div>
 												<div>
 													<strong>Valor das parcerias estaduais:</strong>
 													<span>R$</span>
-													<span>12321421421442,00</span>
+													<input type="text" name="vparceriasestaduais" id="vparcerias" value="2434111" />
 												</div>
 												<div>
 													<strong>Valor das parcerias municipais:</strong>
 													<span>R$</span>
-													<span>12321421421442,00</span>
+													<input type="text" name="vparceriasmunicipais" id="vparcerias" value="220000" />
 												</div>
 											</div>
 											
@@ -354,19 +381,20 @@
 									<div class="documentos">
 										<ul class="dados">
 											<li class="incluidos">(100% incluídos)</li>
-											<li><a href="#">Estatuto</a> (2,4 MB)</li>
-											<li><a href="#">Quadro de dirigentes</a> (210 KB)</li>
-											<li><a href="#">Convênios</a> (1,3 MB)</li>
-											<li><a href="#">Prestação de contas</a> (940 KB)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Estatuto</a> (2,4 MB)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Quadro de dirigentes</a> (210 KB)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Convênios</a> (1,3 MB)</li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">Prestação de contas</a> (940 KB)</li>
 											<li class="fonte"><em>Fonte:</em> SICONV</li>
 										</ul>
+										<button type="button" class="carregar">Carregar</button>
 									</div>
 
 									<h2>Certificados federais <a href="certificados.html" class="box">Ver todos</a></h2>
 									<div>
 										<ul class="dados checklist">
-											<li><a href="#">OCIP</a></li>
-											<li><a href="#">UPF</a></li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">OCIP</a></li>
+											<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="#">UPF</a></li>
 											<li class="fonte"><em>Fonte:</em> SICONV</li>
 										</ul>
 										<!--<button type="button" class="adicionar">Adicionar</button>-->
@@ -387,7 +415,7 @@
 								<div class="projetos">
 									<div class="titulo">
 										<h2>Projetos</h2>
-										<!-- <button type="button" class="adicionar">Adicionar</button> -->
+										<button type="button" class="adicionar">Adicionar</button>
 										<div class="filtro">
 											<span>Fontes:</span>
 											<span>
@@ -419,7 +447,7 @@
 												<div class="col1_6">
 													<strong class="separador left-radius">Status</strong>
 													<p>
-														<select disabled="disabled">
+														<select >
 															<option value="1" > Planejado </option>
 															<option value="2" > Em Execução </option>
 															<option value="3" > Finalizado </option>
@@ -429,16 +457,16 @@
 
 												<div class="col1_6">
 													<strong class="separador">Data Início</strong>
-													<p><input type="text" disabled="disabled" name="data_inicio" value='12/07/1998'  /></p>
+													<p><input type="text" name="data_inicio" value='12/07/1998'  /></p>
 												</div>
 
 												<div class="col1_6">
 													<strong class="separador">Data Final</strong>
-													<p><input type="text" disabled="disabled" name="data_termino" value='12/07/2000' /></p>
+													<p><input type="text" name="data_termino" value='12/07/2000' /></p>
 												</div>
 												<div class="col1_6">
 													<strong class="separador">Valor Total</strong>
-													<p><input type="text"  disabled="disabled" name="valor_total" value='R$ 1.200.000,00' /></p>
+													<p><input type="text" name="valor_total" value='R$ 1.200.000,00' /></p>
 												</div>
 												
 
@@ -452,7 +480,7 @@
 												</div>
 												<div class="col1_6">
 													<strong class="right-radius">Link</strong>
-													<p><a href="vamosla" contenteditable='false'>link para página</a></p>
+													<p><a href="vamosla" contenteditable='true'>link para página</a></p>
 												</div>
 											</div>
 										
@@ -460,11 +488,11 @@
 											<div class="clearfix linha">
 												<div class="col1_3">
 													<strong class="separador left-radius">Público Alvo</strong>
-													<textarea name="publicoalvo" id="publicoalvo1" disabled="disabled">Pessoas de baixa renda...</textarea>
+													<textarea name="publicoalvo" id="publicoalvo1">Pessoas de baixa renda...</textarea>
 												</div>
 												<div class="col1_6">
 													<strong class="separador">Abrangência</strong>
-													<p><select disabled="disabled">
+													<p><select>
 															<option value="1" > Nacional </option>
 															<option value="2" > Regional </option>
 															<option value="3" > Estadual </option>
@@ -476,10 +504,10 @@
 													<strong class="right-radius">Localização</strong>
 													<div class="localizacao_projeto">
 														<ul class="locais">
-															<li><a href="mapa.html#5">Nordeste</a></li>
-															<li><a href="mapa.html#4">Norte</a></li>
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5">Nordeste</a></li>
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#4">Norte</a></li>
 														</ul>
-														<!--<div><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>-->
+														<div><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>
 													</div>
 												</div>
 											</div>
@@ -487,11 +515,11 @@
 											<div class="clearfix linha">
 												<div class="col1_3">
 													<strong class="left-radius separador">Financiadores</strong>
-													<textarea name="financiadores" id="financiadores1" disabled="disabled">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
+													<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>
 												</div>
 												<div class="col2_3">
 													<strong class="right-radius">Descrição</strong>
-													<textarea name="descprojeto" id="descprojeto1" disabled="disabled">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
+													<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>
 												</div>
 											</div>
 																			
@@ -569,10 +597,10 @@
 													<strong class="right-radius">Localização</strong>
 													<div class="localizacao_projeto">
 														<ul class="locais">
-															<li><a href="mapa.html#5544">São Paulo - SP</a></li>
-															<li><a href="mapa.html#5543">Campinas - SP</a></li>
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5544">São Paulo - SP</a></li>
+															<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5543">Campinas - SP</a></li>
 														</ul>
-														<!--<div style="display:none"><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>-->
+														<div style="display:none"><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>
 													</div>
 												</div>
 											</div>
@@ -598,6 +626,10 @@
 							</div>
 							
 
+						</div>
+
+						<div class="botoes">
+							<a href="#">Cancelar</a> ou <input type="submit" value="Salvar" class="salvar" />
 						</div>
 
 					</form>
@@ -745,7 +777,19 @@
 	<script type="text/javascript">// <![CDATA[
 	$(document).ready(function(){
 
+		$(".rede_edit input[type=button]").click(function() {
+			$(".rede_edit").hide();
+			
+		});
+		
+		$(".redes button").click(function() {
+			$(".rede_edit").show();
+		});
+		
 		//$("#ecnpj").mask("00.000.000/0000-00");
+
+		$('.projetos').on('click', '.excluir', excluirProjeto);
+
 		$('.collapse-click').click(function() { $(this).closest('.collapsable').toggleClass('collapsed') });
 
 		$('.collapse-hidden').each(function() {
@@ -756,7 +800,22 @@
 		
 		$('.collapse-me').addClass('collapsed');
 
-
+		$('a[contenteditable=true]').focusin(function() {
+			el = $(this);
+			if(el.attr('contenteditable') == 'true') {
+				el.html(el.attr('href'));
+			}
+		});
+		
+		$('a[contenteditable=true]').focusout(function() {
+			el = $(this);
+			if(el.attr('contenteditable') == 'true') {
+				
+				el.attr('href',el.text());
+				el.html('link para fonte');
+			}
+		});
+		
 		$('.box').fancybox({
 				type: 'iframe',
 				closeClick	: false,
@@ -801,7 +860,154 @@
 				},
 				scrollOutside: true
 		});
+		
+		function excluirProjeto(event) {
+			var confirmar = confirm("Confirma exclusão?");
+			if (confirmar) $(event.target).closest('div.projeto').remove();
+			return false;
+		};	
 
+		$('.dados').on('click', '.excluir', excluirElemento);
+
+		function excluirElemento(event) {
+			$(event.target).closest('li').remove();
+			return false;
+		}
+		
+		$('.classificacao .adicionar').click(function(){
+			if ($('input#tag').val() != '' && $('input#tag').val() != $('input#tag').attr('placeholder')) {
+				var novaTag = '<li>'+
+				'<a href="#" class="excluir tooltip" title="Excluir">Excluir</a>'+
+				'<a href="#">'+ $('input#tag').val() +'</a></li>';
+				$(".classificacao ul").append(novaTag);
+				$('input#tag').val('');
+			} else {
+				$('input#tag').focus();
+			}					
+		});
+
+		$('.dados .adicionar').click(function(){
+			var comboBox = "<li>"+
+			"<select>"+
+			"<option value='CONJUVE' selected>CONJUVE</option>" +
+			"<option value='CONAJE'>CONAJE</option>" +
+			"</select>" +
+			"<div class='botoes'>" +
+			"<button type='button' class='excluir participacao'>Excluir</button>" +
+			"</div>" +
+			"</li>";
+			$(this).closest('ul').prepend(comboBox);
+		});
+
+		$('.projetos .adicionar').click(function(){
+			var novo_projeto = 
+			'<div class="clearfix projeto collapsable">\
+			<div class="projeto_header">\
+					<div class="collapse-click collapse-button"><div></div></div>\
+					<div class="nome">\
+						<span class="no_margin_right">1 |</span>\
+						<span class="no_margin titulo_projeto"><input value="Lorem ipsum dolor sit, consectetur adipiscing." /></span>\
+					</div>\
+					<span class="clear_both"></span>\
+				</div>\
+				<div class="projeto_body collapse-hidden">\
+				<div class="linha clearfix">\
+					<div class="col1_6">\
+						<strong class="separador left-radius">Status</strong>\
+						<p>\
+							<select>\
+								<option value="1" > Planejado </option>\
+								<option value="2" > Em Execução </option>\
+								<option value="3" selected="selected"> Finalizado </option>\
+							</select>\
+						</p>\
+					</div>\
+\
+					<div class="col1_6">\
+						<strong class="separador">Período</strong>\
+						<p class="data_container"><input type="text" name="data_inicio" value="12/07/1998" /> a <input type="text" name="data_termino" value="12/07/2000" /></p>\
+					</div>\
+\
+					<div class="col1_6">\
+						<strong class="separador">Valor obtido</strong>\
+						<p><input type="text" name="valor_obtido" value="R$ 1.000.000,00" /></p>\
+					</div>\
+					<div class="col1_6">\
+						<strong class="separador">Valor planejado</strong>\
+						<p><input type="text" name="valor_planejado" value="R$ 1.200.000,00" /></p>\
+					</div>\
+\
+					<div class="col1_6">\
+						<strong class="separador">Fonte de recurso</strong>\
+						<p><select>\
+								<option value="1" > Público </option>\
+								<option value="2" selected="selected"> Privado </option>\
+							</select>\
+						</p>\
+					</div>\
+					<div class="col1_6">\
+						<strong class="right-radius">Link</strong>\
+						<p><a href="vamosla" contenteditable="true">link para página</a></p>\
+					</div>\
+				</div>\
+			\
+			<div class="clearfix linha">\
+				<div class="col1_3">\
+					<strong class="separador left-radius">Público Alvo</strong>\
+					<textarea name="financiadores" id="financiadores1">Pessoas xyz</textarea>\
+				</div>\
+				<div class="col1_6">\
+					<strong class="separador">Abrangência</strong>\
+					<p><select>\
+							<option value="1" > Nacional </option>\
+							<option value="2" > Regional </option>\
+							<option value="3" > Estadual </option>\
+							<option value="4" > Municipal </option>\
+						</select>\
+					</p>\
+				</div>\
+				<div class="col1_2">\
+					<strong class="right-radius">Localização</strong>\
+					<div class="localizacao_projeto">\
+						<ul class="locais">\
+							<li><a href="#" class="excluir tooltip" title="Excluir">Excluir</a> <a href="mapa.html#5">Exemplo</a></li>\
+						</ul>\
+						<div><label for="campobusca" class="esconder" style="background: none;">Buscar localização</label>	<input title="Campo de Busca para a Localização" type="text" name="campobusca" id="campobusca" placeholder="Informe a localização desejada...">	<button type="button" name="adicionar" id="adicionar" class="adicionar">Adicionar</button>	<button type="button" name="ajuda" class="ajuda" id="ajuda">?</button></div>\
+					</div>\
+				</div>\
+			</div>\
+			\
+			<div class="clearfix linha">\
+				<div class="col1_3">\
+					<strong class="separador left-radius">Financiadores</strong>\
+					<textarea name="financiadores" id="financiadores1">Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>\
+				</div>\
+				<div class="col2_3">\
+					<strong class="right-radius">Descrição</strong>\
+					<textarea name="descprojeto" id="descprojeto1">Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>\
+				</div>\
+			</div>\
+		</div>\
+			<hr />\
+		</div>';
+			$('.projetos .titulo').after(novo_projeto);
+			$('a[contenteditable=true]').focusin(function() {
+				el = $(this);
+				if(el.attr('contenteditable') == 'true') {
+					el.html(el.attr('href'));
+				}
+			});
+			
+			$('a[contenteditable=true]').focusout(function() {
+				el = $(this);
+				if(el.attr('contenteditable') == 'true') {
+					
+					el.attr('href',el.text());
+					el.html('link para fonte');
+				}
+			});
+
+		});
 
 });
 
