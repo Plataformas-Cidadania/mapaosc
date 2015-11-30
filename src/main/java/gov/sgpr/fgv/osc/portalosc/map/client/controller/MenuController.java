@@ -151,7 +151,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		//igmBuilder.append("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
 		igmBuilder.append("<h3>Selecione o infográfico:</h3>");
 		igmBuilder.append("<h4><a id=\"I01\" href=\"#I01\">OSCs em Números</a></h4>");
-		igmBuilder.append("<h4><a id=\"I02\" href=\"#I02\">OSCs e os Recursos</a></h4>");
+		//igmBuilder.append("<h4><a id=\"I02\" href=\"#I02\">OSCs e os Recursos</a></h4>");
 		igmBuilder.append("<h4><a id=\"I03\" href=\"#I03\">OSCs Natureza jurídica/Faixas de vínculos</a></h4>");
 		igmBuilder.append("<h3>ou </h3>");
 		igmBuilder.append("<h4><a id=\"M0\" href=\"#M0\">Matriz de indicadores</a></h4>");
