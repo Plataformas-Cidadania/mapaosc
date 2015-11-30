@@ -46,8 +46,7 @@ import com.google.maps.gwt.client.ZoomControlOptions;
 public class MapController {
 	public static final String MAP_CONTAINER = "mapa_google";
 	public static final String CLUSTER_GROUP = "clusters";
-	private static final LatLng DEFAULT_CENTER = LatLng.create(-8.581021,
-			-52.785187);
+	private static final LatLng DEFAULT_CENTER = LatLng.create(-8.581021, -52.785187);
 	private static final int DELAY = 300;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private HashMap<Integer, Marker> markerMap = new HashMap<Integer, Marker>();
@@ -110,14 +109,13 @@ public class MapController {
 		zoomControlOptions.setPosition(ControlPosition.RIGHT_TOP);
 		opts.setPanControlOptions(panControlOptions);
 		opts.setZoomControlOptions(zoomControlOptions);
-
+		
 		// logger.info("Criando mapa");
-		map = GoogleMap.create(Document.get().getElementById(MAP_CONTAINER),
-				opts);
+		map = GoogleMap.create(Document.get().getElementById(MAP_CONTAINER), opts);
 		Element clusterGroup = DOM.createDiv();
 		clusterGroup.setId(CLUSTER_GROUP);
 		DOM.getElementById(MAP_CONTAINER).insertFirst(clusterGroup);
-
+		
 		map.addBoundsChangedListener(new BoundsChangedHandler() {
 			public void handle() {
 				boundsChangeAction();
@@ -128,6 +126,7 @@ public class MapController {
 				boundsChangeAction();
 			}
 		});
+		
 		addResizeHandler();
 	}
 
@@ -156,7 +155,6 @@ public class MapController {
 		// logger.info(bbox.toString());
 		setLoading(true);
 		mapService.getOSCCoordinates(bbox, zoomLevel, all, callback);
-
 	}
 
 	private void setMarkers(Coordinate[] locations, final Date thisDate) {
@@ -230,11 +228,10 @@ public class MapController {
 		loading.getStyle().setPropertyPx("top", top);
 		loading.getStyle().setPosition(Position.ABSOLUTE);
 		loading.getStyle().setZIndex(5);
-
+		
 		DOM.getElementById(MAP_CONTAINER).insertFirst(loading);
-
 	}
-
+	
 	private void setLoading(boolean isLoading) {
 		if (loading == null) {
 			addLoadingBar();
