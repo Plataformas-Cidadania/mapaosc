@@ -3359,14 +3359,9 @@ ul.text-list > li > ul.text-list > li {
     right: 10px;
     width: 30px;
     height: 30px;
-    z-index: 99999999999999999;
+    z-index: 5;
     border-radius: 3px;
     bottom: 24px;
-    background-image: url('../imagens/tela_cheia.png');
-}
-
-.tela_cheia #botao_tela_cheia {
-	background-image: url('../imagens/deixar_tela_cheia.png');
 }
 
 .configuracao {
