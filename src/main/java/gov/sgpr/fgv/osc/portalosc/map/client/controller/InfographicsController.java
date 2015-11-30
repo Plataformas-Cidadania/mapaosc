@@ -43,7 +43,7 @@ public class InfographicsController {
 
 	private void loadInfo01() {
 		Graph graph1 = new Graph();
-		graph1.setTitle("<strong>325 mil</strong> OSCs");
+		graph1.setTitle("<strong>323 mil</strong> OSCs");
 		graph1.setSvgImage("infograficos/numeros/infografico_1.png");
 		graph1.setSvgImageContrast("infograficos/numeros/contraste/infografico_1.png");
 		graph1.setWidth(332);
