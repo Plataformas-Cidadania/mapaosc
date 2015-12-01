@@ -3,29 +3,32 @@
 <module rename-to='Map'>
 	<define-property name="gwt.logging.firebugHandler" values="ENABLED, DISABLED"/>
 	<define-property name="gwt.logging.popupHandler" values="ENABLED, DISABLED"/>
+	
 	<inherits name="gov.sgpr.fgv.osc.portalosc.user.User" />
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.maps.gwt.GoogleMaps" />
 	<inherits name="com.google.gwt.logging.Logging" />
 	<inherits name='com.google.gwt.junit.JUnit' />
 	<inherits name="com.google.gwt.i18n.I18N"/>
+<!-- 	<inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
+	
 	<extend-property name="locale" values="pt_BR"/>
 	
-<!-- 	<inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
 	<source path='client' />
 	<source path='shared' />
+	
 	<entry-point class="gov.sgpr.fgv.osc.portalosc.map.client.Map" />
+	
 	<set-property name="gwt.logging.enabled" value="TRUE" />
 	<set-property name="gwt.logging.logLevel" value="INFO" />
 	<set-property name="gwt.logging.firebugHandler" value="DISABLED" />
-	<set-property name="gwt.logging.simpleRemoteHandler"
-		value="ENABLED" />
-	<set-property-fallback name="locale" value="pt_BR"/> 
+	<set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" /> 
 	<set-property name="gwt.logging.consoleHandler" value="DISABLED" />
-	<set-property name="gwt.logging.developmentModeHandler"
-		value="DISABLED" />
+	<set-property name="gwt.logging.developmentModeHandler"	value="DISABLED" />
 	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
 	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
+	<set-property-fallback name="locale" value="pt_BR"/>
+	
 	<servlet path='/mapService' class='gov.sgpr.fgv.osc.portalosc.map.server.MapServiceImpl'></servlet>
 	<servlet path='/oscService' class='gov.sgpr.fgv.osc.portalosc.map.server.OscServiceImpl'></servlet>
 	<servlet path='/placeService' class='gov.sgpr.fgv.osc.portalosc.map.server.PlaceServiceImpl'></servlet>
