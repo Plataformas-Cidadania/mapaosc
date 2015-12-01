@@ -2,13 +2,12 @@ package gov.sgpr.fgv.osc.portalosc.configuration.server;
 
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.ConfigurationModel;
 
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.mail.Address;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -16,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 
 public class Email {
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	private String serverSMTP = null;
 	private String authSMTP = null;
@@ -30,41 +30,35 @@ public class Email {
 		this.fromAddress = fromAddress;
 		this.nameAddress = nameAddress;
 	}
-	
-	public void send(String to, String subject, String content){
-		
+
+	public void send(String to, String subject, String content){	
 		Properties props = new Properties();
 		
-	  	props.put("mail.smtp.host", serverSMTP);
-	    props.put("mail.smtp.auth", authSMTP);
-	    props.put("mail.smtp.port", portSMTP);
+		props.put("mail.smtp.host", serverSMTP);
+		props.put("mail.smtp.auth", authSMTP);
+		props.put("mail.smtp.port", portSMTP);
 		
-	    Session session = Session.getDefaultInstance(props);
-	    
-	    /** Ativa Debug para sessão */
-	    session.setDebug(true);
-		  
-	    try {
-		  
-		  MimeMessage message = new MimeMessage(session);
-
-		  Address from = new InternetAddress(fromAddress, nameAddress);
-		  Address para = new InternetAddress(to);
-		  
-		  message.setFrom(from);
-		  message.addRecipient(RecipientType.TO, para);
-
-		  message.setSubject(subject);
-		  message.setSentDate(new java.util.Date());
-		 
-		  message.setContent(content, "text/html; charset=utf-8");
-		 
-		  Transport.send(message);
-		  
-		 } catch (MessagingException e) {
-			 throw new RuntimeException(e);
-		 } catch (UnsupportedEncodingException e) {
-			 e.printStackTrace();
+		Session session = Session.getDefaultInstance(props);
+		
+		/** Ativa Debug para sessão */
+		session.setDebug(true);
+	
+		try{
+			MimeMessage message = new MimeMessage(session);
+			
+			Address from = new InternetAddress(fromAddress, nameAddress);
+			Address para = new InternetAddress(to);
+			
+			message.setFrom(from);
+			message.addRecipient(RecipientType.TO, para);
+			message.setSubject(subject);
+			message.setSentDate(new java.util.Date());
+			message.setContent(content, "text/html; charset=utf-8");
+			
+			Transport.send(message);
+		
+		}catch(Exception e){
+			logger.info("Ocorreu um erro no envio de e-mail para " + to + ".");
 		}
 	}
 	
