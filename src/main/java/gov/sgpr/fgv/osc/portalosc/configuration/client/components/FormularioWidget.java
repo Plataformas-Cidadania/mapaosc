@@ -136,11 +136,12 @@ public class FormularioWidget extends Composite {
 	public ConfigurationModel getUser() {
 		ConfigurationModel user = new ConfigurationModel();
 		String ctipo = InputElement.as(DOM.getElementById("ctipo")).getValue();
-		String cid = InputElement.as(DOM.getElementById("cid")).getValue();
+		String eid = InputElement.as(DOM.getElementById("eid")).getValue();
 		String oscCode = InputElement.as(DOM.getElementById("oscCode")).getValue();
-		if(ctipo != "4" && cid != oscCode){
+		if(ctipo != "4" && eid != oscCode){
 			user.setTipoUsuario(4);
-		}else{
+		}
+		else{
 			user.setTipoUsuario(Integer.valueOf(ctipo));
 		}
 		user.setId(Integer.valueOf(InputElement.as(DOM.getElementById("cid")).getValue()));
@@ -150,7 +151,8 @@ public class FormularioWidget extends Composite {
 		user.setSenha(ConfigurationController.encrypt(InputElement.as(DOM.getElementById("csenha")).getValue()));
 		if(DOM.getElementById("inscrever").getPropertyBoolean("checked")){
 			user.setListaEmail(true);
-		}else{
+		}
+		else{
 			user.setListaEmail(false);
 		}
 		user.setIdOsc(Integer.valueOf(oscCode));
