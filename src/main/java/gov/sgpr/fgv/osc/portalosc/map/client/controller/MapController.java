@@ -27,6 +27,8 @@ import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -121,9 +123,23 @@ public class MapController {
 				boundsChangeAction();
 			}
 		});
+		
 		map.addZoomChangedListener(new ZoomChangedHandler() {
 			public void handle() {
 				boundsChangeAction();
+			}
+		});
+		
+		Element btnSalvar = DOM.getElementById("btnTelaCheia");
+		Event.sinkEvents(btnSalvar, Event.ONCLICK);
+		Event.setEventListener(btnSalvar, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				if(Window.Location.getHref().contains("/Map.html")){
+					Window.Location.replace(Window.Location.getHref().replace("/Map.html", "/MapFull.html"));
+				}
+				else{
+					Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
+				}
 			}
 		});
 		
