@@ -52,21 +52,51 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 		validate(configuration);
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE portal.tb_usuario "
-				   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
-				   + 	 "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = ?, tusu_in_lista_email = ? "
-				   + "WHERE tusu_sq_usuario = ?";
+		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, configuration.getTipoUsuario());
-			pstmt.setString(2, configuration.getEmail());
-			pstmt.setString(3, configuration.getNome());
-			pstmt.setString(4, configuration.getSenha());
-			pstmt.setLong(5, configuration.getCPF());
-			pstmt.setInt(6, configuration.getIdOsc());
-			pstmt.setBoolean(7, configuration.getListaEmail());
-			pstmt.setLong(8, configuration.getId());
-			pstmt.execute();
+			logger.info("\nTipo do usuário: " + configuration.getTipoUsuario());
+			if(configuration.getTipoUsuario() == 2){
+				logger.info("\nAtualizando informações do usuário padrão");
+				
+				String sql = "UPDATE portal.tb_usuario "
+						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
+						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, tusu_in_lista_email = ? "
+						   + "WHERE tusu_sq_usuario = ?";
+				
+				logger.info(sql);
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, configuration.getTipoUsuario());
+				pstmt.setString(2, configuration.getEmail());
+				pstmt.setString(3, configuration.getNome());
+				pstmt.setString(4, configuration.getSenha());
+				pstmt.setLong(5, configuration.getCPF());
+				pstmt.setBoolean(6, configuration.getListaEmail());
+				pstmt.setLong(7, configuration.getId());
+				pstmt.execute();
+			}
+			else if(configuration.getTipoUsuario() == 4){
+				logger.info("Atualizando informações do usuário representante");
+				
+				String sql = "UPDATE portal.tb_usuario "
+						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
+						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = ?, tusu_in_lista_email = ? "
+						   + "WHERE tusu_sq_usuario = ?";
+				
+				logger.info(sql);
+				logger.info("\n");
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, configuration.getTipoUsuario());
+				pstmt.setString(2, configuration.getEmail());
+				pstmt.setString(3, configuration.getNome());
+				pstmt.setString(4, configuration.getSenha());
+				pstmt.setLong(5, configuration.getCPF());
+				pstmt.setInt(6, configuration.getIdOsc());
+				pstmt.setBoolean(7, configuration.getListaEmail());
+				pstmt.setLong(8, configuration.getId());
+				pstmt.execute();
+			}
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -77,8 +107,7 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 		if(flagEmail){
 			String emailOSC = searchEmailById(configuration.getIdOsc());
 			logger.info("Enviando e-mail para " + emailOSC + ".");
-//			email.send(emailOSC, "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(configuration, searchNameOSCByOSC(configuration.getIdOsc())));
-			email.send("vagnerpraia@gmail.com", "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(configuration, searchNameOSCByOSC(configuration.getIdOsc())));
+			email.send(emailOSC, "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(configuration, searchNameOSCByOSC(configuration.getIdOsc())));
 		}
 	}
 	

@@ -211,7 +211,6 @@ public class ConfigurationController {
 			}
 			public void onSuccess(String result) {
 				logger.info("Organização encontrado");
-//				DOM.getElementById("enome").setAttribute("value", result);
 				DOM.getElementById("oscName").setInnerText(result);
 			}
 		};
@@ -224,7 +223,6 @@ public class ConfigurationController {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
 				if (formularioWidget.isValid()) {
@@ -241,7 +239,6 @@ public class ConfigurationController {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
 				if (result != null) {
@@ -293,12 +290,10 @@ public class ConfigurationController {
 				Window.Location.replace(url);
 			}
 		};
-		if(configuration.getIdOsc() != 0) DOM.getElementById("cnome").setAttribute("value", String.valueOf(configuration.getIdOsc()));
-		if(configuration.getIdOsc() != 0) DOM.getElementById("cemail").setAttribute("value", InputElement.as(DOM.getElementById("eid")).getValue());
-		
 		if(String.valueOf(configuration.getIdOsc()) != InputElement.as(DOM.getElementById("eid")).getValue()){
 			configurationService.updateConfiguration(configuration, true, callback);
-		}else{
+		}
+		else{
 			configurationService.updateConfiguration(configuration, false, callback);
 		}
 	}
