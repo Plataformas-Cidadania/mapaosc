@@ -42,15 +42,21 @@ margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display:block}
 body {
 line-height:1;
-font-size:13px;
+font-size:0.8em;
 min-width:930px;
 }
 p{
-	line-height: 1.5em
+	line-height: 1.5em;
+	font-size: 1.1em;
 }
 body,input,button,select,textarea {font-family:RobotoRegular, sans-serif;}
 * {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
-ol,ul {list-style:none}
+ol,ul {
+	list-style:none;
+}
+ol ol, ol ul, ul ol, ul ul {
+	font-size: 1em;
+}
 blockquote,q {quotes:none}
 blockquote:before,blockquote:after,q:before,q:after {content:'';content:none}
 table {border-collapse:collapse;border-spacing:0}
@@ -2303,7 +2309,7 @@ margin: 10px 0;
 padding: 10px 0;
 color: #000;
 text-indent: 2.3em;
-font-size: 1.2em;
+font-size: 1.5em;
 }
 #mapa.institucional h2.contato {
 background: url('../imagens/20_contato.png') no-repeat 5px center;
@@ -2336,6 +2342,7 @@ margin-top: 20px
 font-family: 'RobotoBold', sans-serif;
 border-bottom: 3px solid #1F3D93;
 cursor: default;
+font-size: 1.3em;
 }
 #mapa.institucional h3 {
 color:#1F3D93;
@@ -2346,17 +2353,17 @@ margin-top: 15px;
 }
 #mapa.institucional h3 em {
 background-color: #1F3D93;
-width: 20px;
-height: 20px;
-border-radius: 20px;
+width: 1em;
+height: 1em;
+border-radius: 1em;
 display: block;
 color: #FFF;
-font-size: 20px;
+font-size: 1.6em;
 font-style: normal;
 position: absolute;
-top: 18px;
-text-indent: 2px;
-letter-spacing: -3px;
+top: 0.7em;
+text-indent: 0.1em;
+letter-spacing: -0.15em;
 }
 #mapa.institucional .faq > div {
 margin:15px 0 40px 30px;
@@ -2806,7 +2813,7 @@ input#esqueci_senha {
     margin-top:5px;
     padding: 5px;
     padding-right: 25px;
-    font-size: 16px;
+    font-size: 1.3em;
     float:right;
     border: 0px solid #aaa;
     border-radius: 5px;
@@ -3218,11 +3225,12 @@ ul.lista_certificados li {
 	background-color: #3d931f;
 }
 
-ul.text-list {
+.text-list {
 	margin-bottom: 1em;
+	font-size: 1.1em; 
 }
 
-ul.text-list > li {
+.text-list li {
 	line-height: 1.5em;
 	margin-bottom: 0.5em;
 	margin-top: 0.5em;
@@ -3230,7 +3238,11 @@ ul.text-list > li {
 	list-style-image: url(../imagens/16_topicos.png);
 }
 
-ul.text-list > li > ul.text-list > li {
+.text-list .text-list {
+	font-size: 1em;
+} 
+
+.text-list > li > .text-list > li {
 	/*list-style-image: url(../imagens/16_topicos.png);*/
 	list-style-image: none;
 	list-style-type: circle;
