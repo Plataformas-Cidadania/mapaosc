@@ -61,7 +61,6 @@
 						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
 					</div>
 
-
 					<div id="topo_acesso" class="logado" style="display: block;">
 						<div class="clearfix">
 							<ul>
@@ -84,75 +83,80 @@
 				<div id="mapa" class="config formulario">
 					
 
-					<h1><em>&nbsp;</em>Painel de Controle</h1>
-					<div id="menu_lateral" style="height: 400px;">
-						<h4><a href="configuracoes_cadastro.html">Configurações</a></h4>
-						<h4 class="active"><a href="configuracoes_redes.html">Redes Sociais</a></h4>
-						<h4><a href="configuracoes_entidade.html">Representação de Entidade</a></h4>
-						<h4><a href="dados_estados.html">Entrada de Dados</a></h4>
-						<h4><a href="adm_representantes_est_mun.html">Administrar Representantes</a></h4>
+					<h1><em>&nbsp;</em> Painel de Controle</h1>
+					<div class="clearfix">
+						<div id="menu_lateral" style="height: 400px;">
+							<h4><a href="configuracoes_cadastro.html">Configurações</a></h4>
+							<h4><a href="configuracoes_redes.html">Redes Sociais</a></h4>
+							<h4><a href="configuracoes_entidade.html">Representação de Entidade</a></h4>
+							<h4><a href="dados_estados.html">Entrada de Dados</a></h4>
+							<h4 class="active"><a href="adm_representantes_est_mun.html">Administrar Representantes</a></h4>
+						</div>
+						<div class="instrucoes" style='float:left;'>
+							<table class="tabela">
+								<thead>
+									<tr>
+										<th class="numero"></th>
+										<th class="nome">Nome</th>
+										<th class="mail">E-mail</th>
+										<th class="cpf">CPF</th>
+										<th class="uf">UF</th>
+										<th class="mun">Município</th>
+										<th class="org">Orgão</th>
+										<th class="cargo">Função</th>
+										<th class="telefone">Telefone</th>
+										<th class="status">Status</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="numero">1</td>
+										<td class="nome">João da Silva</td>
+										<td class="mail">joao@j.com</td>
+										<td class="cpf">xxx.xxx.xxx-xx</td>
+										<td class="uf">RJ</td>
+										<td class="mun">Rio de Janeiro</td>
+										<td class="org">Secretaria de Educação</td>
+										<td class="cargo">Secretario</td>
+										<td class="telefone">(21) 5544-3322</td>
+										<td class="status">Requisição</td>
+										<td><a class="botao bom">Aprovar</a></td>
+										<td><a class="botao ruim">Rejeitar</a></td>
+									</tr>
+									<tr>
+										<td class="numero">2</td>
+										<td class="nome">João da Silva</td>
+										<td class="mail">joao@j.com</td>
+										<td class="cpf">xxx.xxx.xxx-xx</td>
+										<td class="uf">RJ</td>
+										<td class="mun">Rio de Janeiro</td>
+										<td class="org">Secretaria de Educação</td>
+										<td class="cargo">Secretario</td>
+										<td class="telefone">(21) 5544-3322</td>
+										<td class="status">Aprovado</td>
+										<td><a class="botao">Bloquear</a></td>
+										<td><a class="botao ruim">Apagar</a></td>
+									</tr>
+									<tr>
+										<td class="numero">3</td>
+										<td class="nome">João da Silva</td>
+										<td class="mail">joao@j.com</td>
+										<td class="cpf">xxx.xxx.xxx-xx</td>
+										<td class="uf">RJ</td>
+										<td class="mun">Rio de Janeiro</td>
+										<td class="org">Secretaria de Educação</td>
+										<td class="cargo">Secretario</td>
+										<td class="telefone">(21) 5544-3322</td>
+										<td class="status">Bloqueado</td>
+										<td><a class="botao">Desbloquear</a></td>
+										<td><a class="botao ruim">Apagar</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-					<div class="instrucoes" style="float:left">
-						Utilize outra conta no Google ou em outra rede Social.
-
-						<form id="form_redes" name="form_redes" method="post">
-							<div class="tabs clearfix">
-								<h2>Identificação</h2>
-								<div class="tabbody content" id="c_redes">
-									<h3>Utilizando a conta de uma rede social, você poderá:</h3>
-									<ul>
-										<li>Compartilhar informações com seus amigos.</li>
-									</ul>
-									<fieldset>
-										<h3>Caso deseje alterar a conta google ou rede social, clique no ícone da opção desejada:</h3>
-										<div class="b-redes clearfix">
-											<span class="esconder">Google</span>
-											<input type="radio" id="b-google" name="redes" value="false" />
-											<label for="b-google" title="Google" class="tooltip"></label>
-
-											<span class="esconder">Facebook</span>
-											<input type="radio" id="b-facebook" name="redes" value="false" />
-											<label for="b-facebook" title="Facebook" class="tooltip"></label>
-											
-											<span class="esconder">Linkedin</span>
-											<input type="radio" id="b-linkedin" name="redes" value="false" />
-											<label for="b-linkedin" title="Linkedin" class="tooltip"></label>
-											
-											<span class="esconder">Yahoo</span>
-											<input type="radio" id="b-yahoo" name="redes" value="false" />
-											<label for="b-yahoo" title="Yahoo" class="tooltip"></label>
-
-											<span class="esconder">Twitter</span>
-											<input type="radio" id="b-twitter" name="redes" value="false" />
-											<label for="b-twitter" title="Twitter" class="tooltip"></label>
-										</div>
-										<label for="rusuario">Usuário:</label> <input type="text" name="rusuario" id="rusuario" placeholder="Usuário" class="nome" />
-										<label for="rsenha">Senha:</label> <input type="password" name="rsenha" id="rsenha" placeholder="Senha" class="senha" />
-									</fieldset>
-
-									<div>
-										<h3>Gostaria de se cadastrar no Portal?</h3>
-										Informando seu CPF você será cadastrado e poderá avaliar as organizações e definir suas preferências no Portal.
-										<fieldset class="cadastro_cpf clearfix">
-											<div>
-												<input type="radio" name="rcadastro_cpf" id="rcpf_sim" value="sim" required="required" class="cpf_sim" />
-												<label for="rcpf_sim">Sim, meu CPF é:</label>
-												<input type="text" name="rcpf" id="rcpf" placeholder="CPF" maxlength="14" class="cpf" />
-											</div>
-											<div>
-												<input type="radio" name="rcadastro_cpf" id="rcpf_nao" value="nao" required="required" />
-												<label for="rcpf_nao">Não, quero apenas efetuar o login</label>
-											</div>
-										</fieldset>
-									</div>
-								</div>
-							</div>
-
-							<div class="botoes"><a href="#">Cancelar</a> ou <input type="submit" class="salvar" value="Salvar alterações" /></div>
-						</form>
-
-					</div>
-
 				</div>
 
 				<div id="rodape" class="clearfix">
@@ -293,17 +297,25 @@
 							<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
 							<script type="text/javascript" src="js/scripts_min.js"></script>
 							<script type="text/javascript" src="js/jquery.tabs.js"></script>
-							<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-							<script type="text/javascript" src="js/validacao_cadastro.js"></script>
 
-							<script type="text/javascript">
-							$(document).ready(function() {
 
-								$('input:radio[name=rcadastro_cpf]')[0].checked = true;
+	<script type="text/javascript">// <![CDATA[
+	$(document).ready(function(){
 
-							});
-							</script>
-							
-						</body>
+		$(".tabs").accessibleTabs({
+			tabhead:'h2',
+			fx:"show",
+			fxspeed:null
+		});
 
-						</html>
+		$('input:radio[name=tipo_mapa]')[0].checked = true;
+		
+	});
+	// ]]></script>
+
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/validacao_cadastro.js"></script>
+	
+</body>
+
+</html>

@@ -2413,7 +2413,7 @@ text-indent: 15px;
 .ver_tudo button.exportar {margin: 15px}
 
 a.botao{display: inline-block;font-family: RobotoRegular, sans-serif;font-weight: normal;}
-a.botao:hover{text-decoration: none; color:#fff;}
+a.botao:hover{text-decoration: none; color:#fff; background-color: #1F3D93;}
 
 #mapa_navegacao .tabbody.infograficos h4 { margin: 20px 0;}
 #mapa_navegacao .tabbody.infograficos h4 a {font-family: RobotoBold;}
@@ -3144,4 +3144,62 @@ ul.lista_certificados li {
 	display:block;
 	width: 100%;
 	height: 280px;
+}
+
+.tabela {
+	width: 100%;
+	min-width: 800px;
+	border: 1px solid #efefef;
+}
+
+.tabela td, .tabela th {
+	/*border: 1px solid #efefef;*/
+	padding: 5px;
+	text-align: left;
+	min-width: 20px;
+}
+
+.tabela tr:nth-child(even) {
+	background-color: #efefef;
+}
+
+.tabela td.nome, .tabela th.nome, .tabela td.org, .tabela th.org {
+	min-width: 150px;
+}
+
+.tabela td.nome {
+	font-weight: bold;
+}
+
+.tabela td.mail, .tabela th.mail {
+	min-width: 120px;
+}
+
+.tabela td.cpf, .tabela th.cpf {
+	min-width: 110px;
+}
+
+.tabela td.mun, .tabela th.mun, 
+.tabela td.telefone, .tabela th.telefone {
+	min-width: 120px;
+}
+
+.tabela td.cargo, .tabela th.cargo,
+.tabela td.status, .tabela th.status {
+	min-width: 80px;
+}
+.tabela td.uf, .tabela th.uf {
+	
+}  
+
+.tabela td .botao {
+	display: block;
+}
+
+.botao.ruim:hover {
+	background-color: #931f3d;
+}
+
+.botao.bom:hover {
+	background-color: #3d931f;
 }
