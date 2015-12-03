@@ -2430,7 +2430,7 @@ a.botao:hover{text-decoration: none; color:#fff; background-color: #1F3D93;}
 #mapa_navegacao .tabbody.infograficos h4 { margin: 20px 0;}
 #mapa_navegacao .tabbody.infograficos h4 a {font-family: RobotoBold;}
 
-#infograficos, #formulario_main {margin: 0 auto 0 320px; padding-bottom: 20px;}
+#infograficos {margin: 0 auto 0 320px; padding-bottom: 20px;}
 
 #infograficos h2 {font-size: 1.2em; color:#1f3d93; padding: 5px 0; border-bottom: 3px solid #1F3D93;margin: 20px 0;}
 
@@ -3199,7 +3199,7 @@ ul.lista_certificados li {
 
 .tabela td.cargo, .tabela th.cargo,
 .tabela td.status, .tabela th.status { 
-	width: 70px;
+	width: 8em;
 }
 .tabela td.uf, .tabela th.uf {
 	max-width: 4em;
@@ -3264,4 +3264,8 @@ ul.lista_certificados li {
 	margin: 2em;
 	width: 100%;
 	max-width: calc(100% - 21em);
+}
+
+#formulario_main {
+	margin: 0 auto 0 19em; padding-bottom: 20px;
 }
