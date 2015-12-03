@@ -130,18 +130,18 @@ public class MapController {
 			}
 		});
 		
-		Element btnSalvar = DOM.getElementById("btnTelaCheia");
-		Event.sinkEvents(btnSalvar, Event.ONCLICK);
-		Event.setEventListener(btnSalvar, new EventListener() {
-			public void onBrowserEvent(Event event) {
-				if(Window.Location.getHref().contains("/Map.html")){
-					Window.Location.replace(Window.Location.getHref().replace("/Map.html", "/MapFull.html"));
-				}
-				else{
-					Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
-				}
-			}
-		});
+//		Element btnSalvar = DOM.getElementById("btnTelaCheia");
+//		Event.sinkEvents(btnSalvar, Event.ONCLICK);
+//		Event.setEventListener(btnSalvar, new EventListener() {
+//			public void onBrowserEvent(Event event) {
+//				if(Window.Location.getHref().contains("/Map.html")){
+//					Window.Location.replace(Window.Location.getHref().replace("/Map.html", "/MapFull.html"));
+//				}
+//				else{
+//					Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
+//				}
+//			}
+//		});
 		
 		addResizeHandler();
 	}
