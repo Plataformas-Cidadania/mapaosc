@@ -1515,7 +1515,7 @@ color:#FFF;
 border-radius:4px;
 border:none;
 cursor:pointer;
-padding:5px 5px 5px 17px;
+padding:5px 5px 5px 30px;
 }
 
 .botao_entrar {
@@ -1654,6 +1654,7 @@ width:800px;
 #mapa.institucional .wrapper {
 margin-left:40px;
 margin-top:15px;
+margin-bottom: 50px;
 }
 #mapa.institucional .wrapper {
 width: 60%
@@ -2311,7 +2312,10 @@ background: url('../imagens/20_contato.png') no-repeat 5px center;
 background: url('../imagens/19_parceiros.png') no-repeat 2px center;
 }
 #mapa.institucional p {
-line-height: 1.5em;
+	text-indent: 2em;
+	line-height: 1.5em;
+	text-align: justify;
+    margin-bottom: 1em;
 }
 #mapa.institucional p.contato {
 margin: 10px 0;
@@ -3212,4 +3216,26 @@ ul.lista_certificados li {
 
 .botao.bom:hover {
 	background-color: #3d931f;
+}
+
+ul.text-list {
+	margin-bottom: 1em;
+}
+
+ul.text-list > li {
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+	margin-left: 30px;
+	list-style-image: url(../imagens/16_topicos.png);
+}
+
+ul.text-list > li > ul.text-list > li {
+	/*list-style-image: url(../imagens/16_topicos.png);*/
+	list-style-image: none;
+	list-style-type: circle;
+}
+
+ul.text-list em {
+	color: #D34f6d;
 }
