@@ -75,6 +75,7 @@ left:-9999px;
 #main {
 width:100%;
 overflow:hidden;
+min-width: 1200px;
 }
 
 #topo,#rodape,#topo a,input#campobusca,#mapa.config, #mapa.cadastro, #mapa.organizacao,#mapa.institucional {
@@ -3097,7 +3098,7 @@ ul.lista_certificados li {
 #menu_lateral {
 	background: #ddd; 
 	float:left; 
-	width: 280px; 
+	width: 17em; 
 	height: 100%;
 }
 
@@ -3184,34 +3185,41 @@ ul.lista_certificados li {
 	background-color: #efefef;
 }
 
-.tabela td.nome, .tabela th.nome, .tabela td.org, .tabela th.org {
-	min-width: 150px;
+.tabela td.nome, .tabela th.nome {
+
 }
 
 .tabela td.nome {
 	font-weight: bold;
 }
 
-.tabela td.mail, .tabela th.mail {
-	min-width: 120px;
-}
-
-.tabela td.cpf, .tabela th.cpf {
-	min-width: 110px;
-}
-
-.tabela td.mun, .tabela th.mun, 
 .tabela td.telefone, .tabela th.telefone {
-	min-width: 120px;
+	width: 110px;
 }
 
 .tabela td.cargo, .tabela th.cargo,
-.tabela td.status, .tabela th.status {
-	min-width: 80px;
+.tabela td.status, .tabela th.status { 
+	width: 70px;
 }
 .tabela td.uf, .tabela th.uf {
-	
+	max-width: 4em;
+	width: 4em;
 }  
+
+.tabela tr td:nth-last-child(2), .tabela th:nth-last-child(2) {
+	max-width:9.8em;
+	width:9.8em;
+}
+
+.tabela tr td:first-child, .tabela th:first-child {
+	width:2.2em;
+	max-width:2.2em;
+}
+
+.tabela tr td:last-child, .tabela th:last-child {
+	width:7.2em;
+	max-width:7.2em;
+}
 
 .tabela td .botao {
 	display: block;
@@ -3248,6 +3256,12 @@ ul.lista_certificados li {
 	list-style-type: circle;
 }
 
-ul.text-list em {
+.text-list em {
 	color: #D34f6d;
+}
+
+.tabela_wrapper {
+	margin: 2em;
+	width: 100%;
+	max-width: calc(100% - 21em);
 }
