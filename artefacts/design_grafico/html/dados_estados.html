@@ -144,27 +144,28 @@
 							<label for="denvio_arquivo">Arquivo</label>
 							</div>
 							<div id="envio_de_arquivo">
-								<div><label for="darquivo">Arquivo Enviado:</label> <input type="file" name="darquivo" id="darquivo"></div>
-								<div><label for="dtipo_arquivo">Tipo de Arquivo: </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
+								<div class="input"><label for="darquivo">Arquivo Enviado:</label> <input type="file" name="darquivo" id="darquivo"></div><div><label>Realize o Upload do Arquivo</label></div> 
+								<div class="input"><label for="dtipo_arquivo">Tipo de Arquivo: </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
 									<option>CSV</option>
 									<option>XLS</option>
-								</select></div>
+								</select></div><div><label>Selecione o tipo de arquivo a ser enviado</label></div>
 							</div>
 							<div id="envio_de_servico">
-								<div><label for="dservico">Endereço Serviço:</label> <input type="text" name="dservico" id="dservico"></div>
-								<div><label for="dtipo_servico">Arquivo Retornado: </label> <select name="dtipo_servico" id="dtipo_servico">
+								<div class="input"><label for="dservico">Endereço do Serviço:</label> <input type="text" name="dservico" id="dservico"></div><div><label>Indique o endereço de acesso ao webservice</label></div>
+								<div class="input"><label for="dtipo_servico">Arquivo Retornado: </label> <select name="dtipo_servico" id="dtipo_servico">
 									<option>XML</option>
 									<option>JSON</option>
 									<option>CSV</option>
 								</select> 
-								<div>
+							</div><div><label>Selecione como o arquivo do webservice foi estuturado</label></div>
+							<div class="input">
 								<label for="dperiodo"> Periodicidade: </label> <input name="dperiodo" id="dperiodo" type="text" value=""/> 
 								<select name="dtipo_periodo" id="dtipo_periodo">
 									<option>Dias</option>
 									<option>Semanas</option>
 									<option>Meses</option>
-								</select></div>
-							</div>
+								</select>
+							</div><div><label>Indique a periodicidade com a qual o sistema deve atualizar os dados</label></div>
 						</div>
 						<input type='submit' value="Enviar Dados" disabled="disabled" />
 					</fieldset>

@@ -3073,6 +3073,16 @@ ul.lista_certificados li {
 	display:block;
 }
 
+#formulario_main #dados #envio_de_servico div, #formulario_main #dados #envio_de_arquivo div {
+	float:left;
+	min-width: 500px;
+}
+
+#formulario_main #dados #envio_de_servico div.input, #formulario_main #dados #envio_de_arquivo div.input, #formulario_main #dados > input {
+	float:left;
+	clear:both;
+}
+
 #menu_lateral {
 	background: #ddd; 
 	float:left; 
