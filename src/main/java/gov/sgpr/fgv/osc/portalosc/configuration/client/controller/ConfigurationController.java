@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
@@ -118,6 +117,12 @@ public class ConfigurationController {
 //				}
 //			}
 //		});
+		
+		formularioWidget.addCancelOSCClickListener(new EventListener() {
+			public void onBrowserEvent(Event event) {
+				formularioWidget.clearOSC();
+			}
+		});
 		
 		formularioWidget.addSalvarListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
@@ -274,10 +279,12 @@ public class ConfigurationController {
 		logger.info("Atualizando usuário");
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
+				DOM.getElementById("cnome").setAttribute("value", "Failure");
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 			
 			public void onSuccess(Void result) {
+				DOM.getElementById("cemail").setAttribute("value", "Sucess");
 				logger.info("Redirecionando para tela principal");
 				if(configuration.getTipoUsuario() != 3){
 					Cookies.setCookie("oscUid", configuration.getEmail());
@@ -290,12 +297,7 @@ public class ConfigurationController {
 				Window.Location.replace(url);
 			}
 		};
-		if(String.valueOf(configuration.getIdOsc()) != InputElement.as(DOM.getElementById("eid")).getValue()){
-			configurationService.updateConfiguration(configuration, true, callback);
-		}
-		else{
-			configurationService.updateConfiguration(configuration, false, callback);
-		}
+		configurationService.updateConfiguration(configuration, formularioWidget.getEmail(), callback);
 	}
 	
 	public static String encrypt(String passwd) {

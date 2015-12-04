@@ -54,17 +54,11 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 		PreparedStatement pstmt = null;
 		
 		try {
-			logger.info("\nTipo do usuário: " + configuration.getTipoUsuario());
 			if(configuration.getTipoUsuario() == 2){
-				logger.info("\nAtualizando informações do usuário padrão");
-				
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
-						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, tusu_in_lista_email = ? "
+						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = null, tusu_in_lista_email = ? "
 						   + "WHERE tusu_sq_usuario = ?";
-				
-				logger.info(sql);
-				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
 				pstmt.setString(2, configuration.getEmail());
@@ -73,19 +67,12 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				pstmt.setLong(5, configuration.getCPF());
 				pstmt.setBoolean(6, configuration.getListaEmail());
 				pstmt.setLong(7, configuration.getId());
-				pstmt.execute();
 			}
 			else if(configuration.getTipoUsuario() == 4){
-				logger.info("Atualizando informações do usuário representante");
-				
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
 						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = ?, tusu_in_lista_email = ? "
 						   + "WHERE tusu_sq_usuario = ?";
-				
-				logger.info(sql);
-				logger.info("\n");
-				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
 				pstmt.setString(2, configuration.getEmail());
@@ -95,8 +82,8 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				pstmt.setInt(6, configuration.getIdOsc());
 				pstmt.setBoolean(7, configuration.getListaEmail());
 				pstmt.setLong(8, configuration.getId());
-				pstmt.execute();
 			}
+			pstmt.execute();
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -307,20 +294,25 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 		try {
 			CpfValidator cpfValidator = new CpfValidator();
 			if (!cpfValidator.validate(configuration.getCPF())) {
+				logger.info("CPF inválido");
 				throw new ValidationException("CPF inválido");
 			}
 			EmailValidator emailValidator = new EmailValidator();
 			if (!emailValidator.validate(configuration.getEmail())) {
+				logger.info("Email inválido");
 				throw new ValidationException("Email inválido");
 			}
 			if (configuration.getNome() == null || configuration.getNome().isEmpty()) {
+				logger.info("Nome do usuário não preenchido");
 				throw new ValidationException("Nome do usuário não preenchido");
 			}
 			if (configuration.getSenha() == null
 					|| configuration.getSenha().isEmpty()) {
+				logger.info("Senha do usuário não cadastrada");
 				throw new ValidationException("Senha do usuário não cadastrada");
 			}
 			if (configuration.getTipoUsuario() == null) {
+				logger.info("Tipo do usuário não especificado.");
 				throw new ValidationException("Tipo do usuário não especificado.");
 			}
 		} catch (Exception e) {
