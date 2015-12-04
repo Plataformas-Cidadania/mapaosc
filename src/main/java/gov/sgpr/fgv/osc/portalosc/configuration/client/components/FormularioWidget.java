@@ -54,16 +54,14 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<fieldset>");
 		htmlBuilder.append("						<input type='hidden' name='eid' id='eid' class='entidade' value='0' />");
 		htmlBuilder.append("						<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade' class='entidade' editable='false' />");
-//		htmlBuilder.append("						<div class='botoes'>");
-//		htmlBuilder.append("							<input type='button' name='localizarOSC' id='localizarOSC' value='Buscar' class='localizar' />");
-//		htmlBuilder.append("						</div>");
 		
 		htmlBuilder.append("						<div id='entity_name' style='display:none'>");
-//		htmlBuilder.append("							<img src='imagens/cadastro_01.png' width='20' height='20' alt='Etapa 1'>");
-		htmlBuilder.append("							<p>Representante da organização:</p>");
+		htmlBuilder.append("							<p></p><p>Representante da organização:</p>");
 		htmlBuilder.append("							<label><strong><span id='oscName' name='oscName'></span></strong></label>");
 		htmlBuilder.append("							<input type='hidden' name='oscCode' id='oscCode' value='0' />");
-//		htmlBuilder.append("							<img src='imagens/cadastro_check.png'  alt='Cadastro check'></p>");
+		htmlBuilder.append("						</div>");
+		htmlBuilder.append("						<div id='botoes' style='display:none'>");
+		htmlBuilder.append("							<input type='button' name='cancelarOSC' id='cancelarOSC' value='Cancelar' class='localizar' alt='Cancelar ser representante de OSC' />");
 		htmlBuilder.append("						</div>");
 		
 		htmlBuilder.append("					</fieldset>");
@@ -114,6 +112,16 @@ public class FormularioWidget extends Composite {
 	
 	/**
 	 * @param listener
+	 *            Controla o evento de click do botão "Localizar".
+	 */
+	public void addCancelOSCClickListener(EventListener listener) {
+		final Element elem = DOM.getElementById("cancelarOSC");
+		Event.sinkEvents(elem, Event.ONCLICK);
+		Event.setEventListener(elem, listener);
+	}
+	
+	/**
+	 * @param listener
 	 *            Controla o evento de click do botão salvar.
 	 */
 	public void addSalvarListener(EventListener listener) {
@@ -135,14 +143,12 @@ public class FormularioWidget extends Composite {
 	
 	public ConfigurationModel getUser() {
 		ConfigurationModel user = new ConfigurationModel();
-		String ctipo = InputElement.as(DOM.getElementById("ctipo")).getValue();
-		String eid = InputElement.as(DOM.getElementById("eid")).getValue();
 		String oscCode = InputElement.as(DOM.getElementById("oscCode")).getValue();
-		if(ctipo != "4" && eid != oscCode){
-			user.setTipoUsuario(4);
+		if(oscCode == "0"){
+			user.setTipoUsuario(2);
 		}
 		else{
-			user.setTipoUsuario(Integer.valueOf(ctipo));
+			user.setTipoUsuario(Integer.valueOf(InputElement.as(DOM.getElementById("ctipo")).getValue()));
 		}
 		user.setId(Integer.valueOf(InputElement.as(DOM.getElementById("cid")).getValue()));
 		user.setNome(InputElement.as(DOM.getElementById("cnome")).getValue());
@@ -173,6 +179,7 @@ public class FormularioWidget extends Composite {
 		DOM.getElementById("eid").setAttribute("value", String.valueOf(user.getIdOsc()));
 		if(user.getIdOsc() != 0){
 			DOM.getElementById("entity_name").getStyle().setDisplay(Display.BLOCK);
+			DOM.getElementById("botoes").getStyle().setDisplay(Display.BLOCK);
 		}
 		DOM.getElementById("oscCode").setAttribute("value", String.valueOf(user.getIdOsc()));
 	}
@@ -188,13 +195,32 @@ public class FormularioWidget extends Composite {
 	public void showOrganization(String oscInfo, String oscId) {
 		DOM.getElementById("resultado_busca").getStyle().setDisplay(Display.NONE);
 		DOM.getElementById("entity_name").getStyle().setDisplay(Display.BLOCK);
+		DOM.getElementById("botoes").getStyle().setDisplay(Display.BLOCK);
 		DOM.getElementById("oscName").setInnerText(oscInfo);
 		DOM.getElementById("oscCode").setAttribute("value", oscId);
+		DOM.getElementById("ctipo").setAttribute("value", "4");
+	}
+	
+	public void clearOSC(){
+		DOM.getElementById("entity_name").getStyle().setDisplay(Display.NONE);
+		DOM.getElementById("botoes").getStyle().setDisplay(Display.NONE);
+		DOM.getElementById("oscName").setInnerText("");
+		DOM.getElementById("oscCode").setAttribute("value", "0");
+		DOM.getElementById("ctipo").setAttribute("value", "2");
 	}
 	
 	public void addResultItems(List<SearchResult> items, EventListener listener) {
 		searchWidget.setItems(items);
 		searchWidget.addSearchListener(listener);
+	}
+	
+	public Boolean getEmail(){
+		Boolean result = false;
+		if(InputElement.as(DOM.getElementById("oscCode")).getValue() != InputElement.as(DOM.getElementById("eid")).getValue() && 
+				InputElement.as(DOM.getElementById("ctipo")).getValue() == "4"){
+			result = true;
+		}
+		return result;
 	}
 	
 	private native void validate() /*-{
