@@ -130,7 +130,9 @@ public class MapController {
 				boundsChangeAction();
 			}
 		});
-
+		
+		DOM.getElementById("botao_tela_cheia").getStyle().setDisplay(Display.BLOCK);
+		
 		Element btnSalvar = DOM.getElementById("btnTelaCheia");
 		Event.sinkEvents(btnSalvar, Event.ONCLICK);
 		Event.setEventListener(btnSalvar, new EventListener() {
@@ -145,6 +147,11 @@ public class MapController {
 					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
 					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Retrair o mapa");
 					DOM.getElementById("imgTelaCheia").setAttribute("title", "Retrair o mapa");
+					
+					DOM.getElementById("topo_links").getStyle().setDisplay(Display.NONE);
+					DOM.getElementById("logo").getStyle().setHeight(57, Unit.PX);
+					DOM.getElementById("logo").getStyle().setWidth(264.6, Unit.PX);
+					DOM.getElementById("topo").getStyle().setHeight(100, Unit.PX);
 				}
 				else{
 					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.BLOCK);
@@ -156,11 +163,14 @@ public class MapController {
 					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
 					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Expandir o mapa");
 					DOM.getElementById("imgTelaCheia").setAttribute("title", "Expandir o mapa");
+					
+					DOM.getElementById("topo_links").getStyle().setDisplay(Display.BLOCK);
+					DOM.getElementById("logo").getStyle().setHeight(95, Unit.PX);
+					DOM.getElementById("logo").getStyle().setWidth(441, Unit.PX);
+					DOM.getElementById("topo").getStyle().setHeight(145, Unit.PX);
 				}
 			}
 		});
-		
-		addResizeHandler();
 	}
 	
 	private void loadMarkers(final Date thisDate) {

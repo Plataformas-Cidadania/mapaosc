@@ -176,6 +176,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				search.setVisible(true);
 				info.setVisible(false);
 				divMapa.getStyle().setDisplay(Display.BLOCK);
+				DOM.getElementById("botao_tela_cheia").getStyle().setDisplay(Display.BLOCK);
 				divMapa.setClassName("");
 				initFunction();
 				clearHash();

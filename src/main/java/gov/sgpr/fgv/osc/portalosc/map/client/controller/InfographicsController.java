@@ -8,6 +8,7 @@ import gov.sgpr.fgv.osc.portalosc.map.client.components.model.Infographics;
 import java.util.logging.Logger;
 
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -26,6 +27,7 @@ public class InfographicsController {
 	}
 
 	public void loadInfo(Infographic info) {
+		DOM.getElementById("botao_tela_cheia").getStyle().setDisplay(Display.NONE);
 		switch (info) {
 		case OSC_NUMEROS:
 			loadInfo01();
