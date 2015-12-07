@@ -112,46 +112,8 @@ public class UserController {
 		if (facebookUserCode != null) {
 			getSocialUserInfo(facebookUserCode);
 		}
-		
-		DOM.getElementById("botao_tela_cheia").getStyle().setBottom(80.0, Unit.PX);
-		Element btnSalvar = DOM.getElementById("btnTelaCheia");
-		Event.sinkEvents(btnSalvar, Event.ONCLICK);
-		Event.setEventListener(btnSalvar, new EventListener() {
-			public void onBrowserEvent(Event event) {
-				if(DOM.getElementById("topo").getStyle().getDisplay() != "none"){
-					DOM.getElementById("barra-brasil").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("topo").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("busca").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("infograficos").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("rodape").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("footer").getStyle().setDisplay(Display.NONE);
-					
-					DOM.getElementById("botao_tela_cheia").getStyle().setBottom(24.0, Unit.PX);
-					
-					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
-					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Sair do mapa em tela cheia");
-					DOM.getElementById("imgTelaCheia").setAttribute("title", "Sair do mapa em tela cheia");
-				}
-				else{
-					DOM.getElementById("barra-brasil").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("topo").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("busca").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("infograficos").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("rodape").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("footer").getStyle().setDisplay(Display.BLOCK);
-					
-					DOM.getElementById("botao_tela_cheia").getStyle().setBottom(80.0, Unit.PX);
-					
-					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
-					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Abrir mapa em tela cheia");
-					DOM.getElementById("imgTelaCheia").setAttribute("title", "Abrir mapa em tela cheia");
-				}
-			}
-		});
 	}
-
+	
 	private void addLogonWidget(Element elem) {
 		// elem.addClassName("deslogado");
 		logger.info("Adicionando widget de logon");

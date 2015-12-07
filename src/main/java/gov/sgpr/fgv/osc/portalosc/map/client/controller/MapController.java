@@ -22,6 +22,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Position;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
@@ -129,23 +130,39 @@ public class MapController {
 				boundsChangeAction();
 			}
 		});
-		
-//		Element btnSalvar = DOM.getElementById("btnTelaCheia");
-//		Event.sinkEvents(btnSalvar, Event.ONCLICK);
-//		Event.setEventListener(btnSalvar, new EventListener() {
-//			public void onBrowserEvent(Event event) {
-//				if(Window.Location.getHref().contains("/Map.html")){
-//					Window.Location.replace(Window.Location.getHref().replace("/Map.html", "/MapFull.html"));
-//				}
-//				else{
-//					Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
-//				}
-//			}
-//		});
+
+		Element btnSalvar = DOM.getElementById("btnTelaCheia");
+		Event.sinkEvents(btnSalvar, Event.ONCLICK);
+		Event.setEventListener(btnSalvar, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				if(DOM.getElementById("doormat-container").getStyle().getDisplay() != "none"){
+					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.NONE);
+					DOM.getElementById("infograficos").getStyle().setDisplay(Display.NONE);
+					DOM.getElementById("rodape").getStyle().setDisplay(Display.NONE);
+					DOM.getElementById("doormat-container").getStyle().setDisplay(Display.NONE);
+					DOM.getElementById("mapa").getStyle().setHeight(846.0, Unit.PX);
+					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
+					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Retrair o mapa");
+					DOM.getElementById("imgTelaCheia").setAttribute("title", "Retrair o mapa");
+				}
+				else{
+					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.BLOCK);
+					DOM.getElementById("infograficos").getStyle().setDisplay(Display.BLOCK);
+					DOM.getElementById("rodape").getStyle().setDisplay(Display.BLOCK);
+					DOM.getElementById("doormat-container").getStyle().setDisplay(Display.BLOCK);
+					DOM.getElementById("mapa").getStyle().setHeight(768.0, Unit.PX);
+					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
+					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Expandir o mapa");
+					DOM.getElementById("imgTelaCheia").setAttribute("title", "Expandir o mapa");
+				}
+			}
+		});
 		
 		addResizeHandler();
 	}
-
+	
 	private void loadMarkers(final Date thisDate) {
 		int zoomLevel = (int) map.getZoom();
 
