@@ -3356,7 +3356,7 @@ ul.text-list > li > ul.text-list > li {
 #botao_tela_cheia {
 	background-color: #eee;
     position: absolute;
-    bottom: 16px;
+    bottom: 22px;
     right: 10px;
     width: 30px;
     height: 30px;
