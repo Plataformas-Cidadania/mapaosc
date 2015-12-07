@@ -3269,3 +3269,48 @@ ul.lista_certificados li {
 #formulario_main {
 	margin: 0 auto 0 19em; padding-bottom: 20px;
 }
+
+.tela_cheia #topo #topo_links {
+	background: transparent;
+}
+
+.tela_cheia #topo {
+	height: auto;
+}
+
+.tela_cheia #topo > a {
+	padding-left: 5px;
+}
+
+.tela_cheia .texto_logo {
+	font-family: RobotoRegular, sans-serif;
+	font-size: 20px;
+	padding: 5px;
+	vertical-align: top;
+	display: inline-block;
+	font-weight: 300;
+}
+
+.tela_cheia .texto_logo strong {
+	font-family: RobotoBold, sans-serif;
+}
+
+.tela_cheia #topo #topo_acesso {
+	display: none;
+}
+
+.tela_cheia #topo #logo {
+	top: 0;
+	left: 0;
+	position: static;
+	width: 30px;
+	height: 30px;
+}
+
+.tela_cheia #doormat-container {
+	display: none;
+}
+
+.tela_cheia #footer{
+	display: none;
+}
