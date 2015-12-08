@@ -3303,7 +3303,7 @@ ul.lista_certificados li {
 	top: 0;
 	left: 0;
 	position: static;
-	width: 30px;
+	width: auto;
 	height: 30px;
 }
 
