@@ -75,14 +75,14 @@
   <notepads>
   </notepads>
   <connection>
-    <name>CONNECTION_NAME</name>
-    <server>mapaosc-desenv</server>
+    <name>mapa_original</name>
+    <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>DATABASE_NAME</database>
+    <database>mapa_original</database>
     <port>5432</port>
-    <username>USER_NAME</username>
-    <password>Encrypted 2be98afc86aa7f2e49b389d43e9bd9dfe</password>
+    <username>i3geo</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce798d95aad5</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -99,14 +99,14 @@
     </attributes>
   </connection>
   <connection>
-    <name>mapa_original</name>
-    <server>localhost</server>
+    <name>CONNECTION_NAME</name>
+    <server>HOST_NAME</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>mapa_original</database>
+    <database>DATABASE_NAME</database>
     <port>5432</port>
-    <username>i3geo</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce798d95aad5</password>
+    <username>USER_NAME</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10eeb39ce9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
