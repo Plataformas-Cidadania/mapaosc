@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Mapa das Organizações da Sociedade Civil - Beta</title>
+	<!--[if IE]><link rel="shortcut icon" href="/imagens/favicon.ico" type="image/x-icon" /><![endif]-->
+	<link rel="icon" href="/imagens/fav.png">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+	<![endif]-->
+	
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">document.documentElement.className += " js";</script>
+
+	<script type="text/javascript" src="User/User.nocache.js"></script>
+
+</head>
+
+<body>
+
+	<div id="main">
+	<div id="barra-brasil">
+			<ul id="menu-barra-temp" >
+				<li><a id="link-portal"
+					href="http://brasil.gov.br">Portal
+						do Governo Brasileiro</a></li>
+				<li><a id= "atualizar-barra" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize
+						sua Barra de Governo</a></li>
+			</ul>
+		</div>
+
+		<div id="topo">
+			<div id="topo_acessibilidade">
+				<ul id="nav1">
+					<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+					<li>Ir para o <a href="#topo_links" accesskey="2">Menu 2</a></li>					
+					<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+				</ul>
+				<ul id="nav2">
+					<li><a href="http://www.governoeletronico.gov.br/acessibilidade" target="_blank">Acessibilidade</a></li>
+					<li id="contraste">Contraste
+						<a id="contraste_normal" href="#"><img src="imagens/09_contraste1.png" alt="Contraste normal" width="13" height="14" /></a>
+						<a id="alto_contraste" href="#"><img src="imagens/10_contraste2.png" alt="Alto contraste" width="13" height="14" /></a></li>
+						<li>Tamanho do texto
+							<a href="#" title="Aumentar fonte" class="inc-font">A+</a>
+							<a href="#" title="Fonte padrão" class="res-font">A</a>
+							<a href="#" title="Diminuir fonte" class="dec-font">A-</a></li>
+						</ul>
+					</div>
+
+					<div id="topo_links">
+						<a href="sobre.html" id="sobre">Sobre o mapa</a>
+						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
+					</div>
+
+					<div id="topo_acesso">	</div>
+
+					<a href="Map.html">
+						<img class="normal" id="logo" src="imagens/logo.jpg" alt="Mapa das Organizações da Sociedade Civil - Página inicial"  title="Ir para página inicial" />
+						<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Mapa das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+					</a>
+				</div>
+
+				<div id="mapa" class="institucional">
+
+					<div><h1>Formato dos Dados</h1>
+
+					<div class="metodologia wrapper clearfix">
+						
+						<h2>CSV</h2>
+						<p>O formato CSV(<strong>C</strong>omma <strong>S</strong>eparated <strong>V</strong>alues) é um dos formatos mais utilizados para a troca de dados entre duas bases. Sua utilização tão abrangente se deve ao fato de poder ser lido, editado e gerado a partir tanto de bases de dados no formato SQL quanto de arquivos do Excel. A principal característica do formato é o fato de ser formado imitando uma tabela, com um cabeçalho contendo o nome das colunas, seguido de uma tripa de dados de um registro a cada linha. Como o nome já indica cada par de valores, tanto no cabeçalho quanto nas colunas, é separado por vírgulas(<em>,</em>) ou pontos e vírgulas(<em>;</em>) portanto é necessário que esses caracteres não apareçam nas variáveis do arquivo.</p>
+						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo CSV</a></p>
+						<p>Esse formato pode ser utilizado com ambos os tipos de envio.</p>  
+						<h2>XLS</h2>
+						<p>Formato padrão do Microsoft Excel, o XLS(<strong>X</strong>m<strong>L</strong> <strong>S</strong>preadsheet) tem uma qualidade razoável e é simples de ser gerado pela ubiquidade do microsoft office.</p>
+						<p>Esse formato é exclusivo para uso com Upload de Arquivo.</p>
+						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo XLS</a></p>
+						<h2>XML</h2>
+						<p>O formato XML (e<strong>X</strong>tensible <strong>M</strong>arkup <strong>L</strong>anguage) é popularmente utilizado para a tranferência de dados binários nos quais é necessária um maior controle do dado recebido. Foi substituído pelo JSON para boa parte das aplicações mais simples já que adicionava uma complexidade alta e por vezes desnecessária ao processo. Sua principal vantagem é a quantidade de maneiras através das quais é possível verificar a veracidade do dado disponível. </p>
+						<p>Esse formato é exclusivo para uso com WebServices.</p>
+						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo XML</a></p>
+						<h2>JSON</h2>
+						<p>O formato JSON (<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation) é um formato de transferência de dados que apresenta cada elemento como um objeto com diversos atributos. Sua utilização cresce bastante ao longo do tempo, em especial pela sua simplicidade e fácil compreensão. Uma outra vantagem é que para os formatos utilizados em WebServices ele é mais leve que o outro formato popular, o xml.</p> 
+						<p>Esse formato é exclusivo para uso com WebServices.</p>
+						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo JSON</a></p>
+					</div>
+				</div>
+
+				<div id="rodape" class="clearfix">
+					<div class="clearfix">
+						<div class="celula01">
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Mapa das Organizações da Sociedade Civil &copy; 2015</h2>
+							<a href="beta.html" class="beta">Versão BETA?</a>
+						</div>
+						<div class="celula02">
+							<span>Apoio</span>
+							<a href= "http://www.ipea.gov.br/" target="_blank"><img class="normal" src="imagens/logo_50anos.png"
+							alt="Ipea" /> <img class="contraste"
+							src="imagens/contraste/logo_50anos.png" alt="Ipea" /></a>
+						</div>
+						<div class="celula03">
+							<span>Realização</span>
+							<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+							<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+						</div>
+					</div>
+				</div>
+
+				<!-- ////////// -->
+				
+				<div id="footer" class="clearfix">
+							<div id="doormat-container" class="columns-4 clearfix">
+								<div class="doormatColumn column-1">
+				
+									<dl class="doormatSection">
+										<dt class="doormatSectionHeader">O Mapa</dt>
+										<dd class="doormatSectionBody">
+										<a href="Map.html#I01">OSCs em números</a>
+				<!-- 							<span id="menuFooter"><a href="#I01">OSCs em números</a></span> -->
+				
+										</dd>
+										<dd class="doormatSectionBody"> 
+				 							<a href="faq.html">Dúvidas Frequentes</a> 
+				
+				 						</dd> 
+										<dd class="doormatSectionBody">
+											<a href="http://www.secretariageral.gov.br/mrosc" target="_blank">Marco Legal das OSC</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="metodologia.pdf" target="_blank">Metodologia</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="mailto: mapaosc@ipea.gov.br">Contato e Sugestões</a>
+				
+										</dd>
+									</dl>
+								</div>
+				
+								<div class="doormatColumn column-0">
+				
+									<dl class="doormatSection">
+										<dt class="doormatSectionHeader">Bases de Dados</dt>
+										<dd class="doormatSectionBody">
+											<a href="http://portal.mte.gov.br/" target="_blank">Ministério do Trabalho e Emprego</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.justica.gov.br/" target="_blank">Ministério da Justiça</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.mec.gov.br/" target="_blank">Ministério da Educação e Cultura</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.mds.gov.br/" target="_blank">Ministério do Desenvolvimento Social</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.mma.gov.br/" target="_blank">Ministério do Meio Ambiente</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.cultura.gov.br/" target="_blank">Ministério da Cultura</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.cidades.gov.br/" target="_blank">Ministério das Cidades</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://portalsaude.saude.gov.br/" target="_blank">Ministério da Saúde</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.mcti.gov.br/" target="_blank">Ministério de Ciência e Tecnologia</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.planejamento.gov.br/" target="_blank">Ministério do Planejamento</a>
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.esporte.gov.br/" target="_blank">Ministério dos Esportes</a>
+										</dd>
+										
+										
+				
+									</dl>
+								</div>
+								<div class="doormatColumn column-2">
+				
+									<dl class="doormatSection">
+										<dt class="doormatSectionHeader">Links Úteis</dt>
+										<dd class="doormatSectionBody">
+											<a href="http://www.convenios.gov.br/portal/" target="_blank">Portal dos Convênios</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.brasil.gov.br/" target="_blank">Portal Brasil</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.secretariageral.gov.br/atuacao/mrosc/estudos-e-pesquisas">Biblioteca do Marco Legal das OSC</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="https://www.facebook.com/mroscs?ref=hl">Facebook do Marco Legal das OSC</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.participa.br/osc/">Comunidade OSC</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.participa.br/">Participa.br</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.participatorio.juventude.gov.br" target="_blank">Participatório da Juventude</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="http://www.atlasbrasil.org.br/" target="_blank">Atlas do Desenvolvimento Humano no Brasil</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="https://observatoriosc.wordpress.com/" target="_blank">Observatório das Organizações da Sociedade Civil</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+										    <a href="http://culturaeduca.cc" target="_blank">Culturaeduca.cc</a>
+										</dd >
+										<dd class="doormatSectionBody">
+										    <a href="http://sniic.cultura.gov.br" target="_blank">Sniic - Sistema Nacional de Informações e Indicadores Culturais</a>
+										</dd>
+									</dl>
+								</div>
+				
+								<div class="doormatColumn column-2" style="display:none">
+				
+									<dl class="doormatSection">
+										<dt class="doormatSectionHeader">Redes Sociais</dt>
+										<dd class="doormatSectionBody">
+											<a href="#">Facebook</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">Twitter</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">YouTube</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">Flickr</a>
+				
+										</dd>
+									</dl>
+								</div>
+				
+								<div class="doormatColumn column-3" style="display:none">
+									<dl class="doormatSection">
+										<dt class="doormatSectionHeader">Mapa do site</dt>
+										<dd></dd>
+									</dl>
+								</div>
+				
+								<div class="doormatColumn column-4" style="display:none">
+				
+									<dl class="doormatSection">
+										<dt class="doormatSectionHeader">RSS</dt>
+										<dd class="doormatSectionBody">
+											<a href="#">O que é RSS?</a>
+				
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">Assine nosso RSS</a>
+				
+										</dd>
+									</dl>
+								</div>
+				
+							</div>
+				
+				
+				
+							<div class="footer-logos">
+								<div>
+									<a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img
+										src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+									<a href="http://www.brasil.gov.br/" class="logo-brasil"><img
+										src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+								</div>
+							</div>
+						</div>
+					
+				<!-- ////////// -->
+					</div>
+							
+							<script type="text/javascript" src="js/acessibilidade.js"></script>
+							<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+							<script type="text/javascript" src="js/scripts_min.js"></script>
+							<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+							<script src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+							
+	
+</body>
+
+</html>
