@@ -3315,6 +3315,11 @@ ul.lista_certificados li {
 	display: none;
 }
 
+.metodologia em {
+	font-family: RobotoRegular, sans-serif;
+	font-style: normal;
+}
+
 a.botao {
 	background-color:#000;
 	height:29px;
