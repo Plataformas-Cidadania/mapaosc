@@ -3466,3 +3466,16 @@ a.botao {
 	cursor:pointer;
 	padding:5px 8px 5px 22px;
 }
+
+.blueLinkList a {
+	color: #1F3D93;
+}
+
+ol.numbered {
+	list-style: decimal;
+	margin-left: 3em;
+}
+
+ol.numbered li {
+	line-height: 1.5em;
+}
