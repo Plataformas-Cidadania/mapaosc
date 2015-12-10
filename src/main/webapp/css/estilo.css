@@ -2660,7 +2660,10 @@ ul.dados li:hover a.excluir {
 }
 
 #mapa.institucional p {
+	text-indent: 2em;
 	line-height: 1.5em;
+	text-align: justify;
+    margin-bottom: 1em;
 }
 
 #mapa.institucional p.contato {
@@ -3215,16 +3218,28 @@ div#floatingLoginErrorList::after {
 	z-index: 10;
 }
 
-ul.text-list > li {
-	margin-left: 30px;
+.text-list {
+	margin-bottom: 1em;
+	font-size: 1.1em;
+	margin-left: 3.5em; 
+}
+
+.text-list li {
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
 	list-style-image: url(../imagens/16_topicos.png);
 }
 
-ul.text-list > li > ul.text-list > li {
-	margin-left: 20px;
+.text-list .text-list {
+	font-size: 1em;
+} 
+
+.text-list > li > .text-list > li {
 	/*list-style-image: url(../imagens/16_topicos.png);*/
 	list-style-image: none;
 	list-style-type: circle;
+	margin-left: 2em;
 }
 
 .institucional h4 {
@@ -3478,4 +3493,12 @@ ol.numbered {
 
 ol.numbered li {
 	line-height: 1.5em;
+}
+
+
+
+.metodologia em {
+	font-family: RobotoRegular, sans-serif;
+	font-style: normal;
+	color: #D34f6d;
 }
