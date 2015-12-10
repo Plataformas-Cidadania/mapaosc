@@ -3233,13 +3233,13 @@ div#floatingLoginErrorList::after {
 
 .text-list .text-list {
 	font-size: 1em;
+	margin-left: 2em;
 } 
 
 .text-list > li > .text-list > li {
 	/*list-style-image: url(../imagens/16_topicos.png);*/
 	list-style-image: none;
 	list-style-type: circle;
-	margin-left: 2em;
 }
 
 .institucional h4 {
