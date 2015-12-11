@@ -101,7 +101,7 @@ public class MapController {
 		opts.setMapTypeId(MapTypeId.ROADMAP);
 		
 		/* limit zoom-out */
-		opts.setMinZoom(3);
+		opts.setMinZoom(4);
 		
 		opts.setZoom(4);
 
@@ -115,6 +115,7 @@ public class MapController {
 		
 		// logger.info("Criando mapa");
 		map = GoogleMap.create(Document.get().getElementById(MAP_CONTAINER), opts);
+		
 		Element clusterGroup = DOM.createDiv();
 		clusterGroup.setId(CLUSTER_GROUP);
 		DOM.getElementById(MAP_CONTAINER).insertFirst(clusterGroup);
@@ -135,39 +136,103 @@ public class MapController {
 		
 		Element btnSalvar = DOM.getElementById("btnTelaCheia");
 		Event.sinkEvents(btnSalvar, Event.ONCLICK);
+		
+		/* ========================= VAGNER ========================= */
+//		Event.setEventListener(btnSalvar, new EventListener() {
+//			public void onBrowserEvent(Event event) {
+////				if(DOM.getElementById("doormat-container").getStyle().getDisplay() != "none"){
+//				if(!DOM.getElementById("main").hasClassName("tela_cheia")){
+//					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.NONE);
+//					DOM.getElementById("infograficos").getStyle().setDisplay(Display.NONE);
+//					DOM.getElementById("rodape").getStyle().setDisplay(Display.NONE);
+//					DOM.getElementById("doormat-container").getStyle().setDisplay(Display.NONE);
+////					DOM.getElementById("mapa").getStyle().setHeight(846.0, Unit.PX);
+//					
+//					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
+//					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Retrair o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("title", "Retrair o mapa");
+//					
+//					DOM.getElementById("topo_links").getStyle().setDisplay(Display.NONE);
+//					DOM.getElementById("logo").getStyle().setHeight(57, Unit.PX);
+//					DOM.getElementById("logo").getStyle().setWidth(264.6, Unit.PX);
+//					DOM.getElementById("topo").getStyle().setHeight(100, Unit.PX);
+//					
+//					DOM.getElementById("main").addClassName("tela_cheia");
+//					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("barra-brasil").getClientHeight() + DOM.getElementById("rodape").getClientHeight() + 1), Unit.PX);
+//				}
+//				else{
+//					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.BLOCK);
+//					DOM.getElementById("infograficos").getStyle().setDisplay(Display.BLOCK);
+//					DOM.getElementById("rodape").getStyle().setDisplay(Display.BLOCK);
+//					DOM.getElementById("doormat-container").getStyle().setDisplay(Display.BLOCK);
+////					DOM.getElementById("mapa").getStyle().setHeight(768.0, Unit.PX);
+//										
+//					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
+//					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Expandir o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("title", "Expandir o mapa");
+//					
+//					DOM.getElementById("topo_links").getStyle().setDisplay(Display.BLOCK);
+//					DOM.getElementById("logo").getStyle().setHeight(95, Unit.PX);
+//					DOM.getElementById("logo").getStyle().setWidth(441, Unit.PX);
+//					DOM.getElementById("topo").getStyle().setHeight(145, Unit.PX);
+//					
+//					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("barra-brasil").getClientHeight() + DOM.getElementById("rodape").getClientHeight()), Unit.PX);
+//					DOM.getElementById("main").removeClassName("tela_cheia");
+//				}
+//			}
+//		});
+		/* ========================= VAGNER ========================= */
+		
+		/* ========================= GABRIEL ========================= */
+//		Event.setEventListener(btnSalvar, new EventListener() {
+//			public void onBrowserEvent(Event event) {
+//				if(!DOM.getElementById("main").hasClassName("tela_cheia")){
+//					DOM.getElementById("main").addClassName("tela_cheia");
+//					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
+//					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Retrair o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("title", "Retrair o mapa");
+//					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("barra-brasil").getClientHeight() + DOM.getElementById("rodape").getClientHeight() + 1), Unit.PX);
+//				}
+//				else{
+//					DOM.getElementById("main").removeClassName("tela_cheia");
+//					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
+//					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Expandir o mapa");
+//					DOM.getElementById("imgTelaCheia").setAttribute("title", "Expandir o mapa");
+//					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("barra-brasil").getClientHeight() + DOM.getElementById("rodape").getClientHeight()), Unit.PX);
+//				}
+//			}
+//		});
+		/* ========================= GABRIEL ========================= */
+		
 		Event.setEventListener(btnSalvar, new EventListener() {
 			public void onBrowserEvent(Event event) {
-				if(DOM.getElementById("doormat-container").getStyle().getDisplay() != "none"){
-					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("infograficos").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("rodape").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("doormat-container").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("mapa").getStyle().setHeight(846.0, Unit.PX);
+				if(!DOM.getElementById("main").hasClassName("tela_cheia")){
+					DOM.getElementById("main").addClassName("tela_cheia");
+					
 					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
 					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
 					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Retrair o mapa");
 					DOM.getElementById("imgTelaCheia").setAttribute("title", "Retrair o mapa");
 					
-					DOM.getElementById("topo_links").getStyle().setDisplay(Display.NONE);
-					DOM.getElementById("logo").getStyle().setHeight(57, Unit.PX);
-					DOM.getElementById("logo").getStyle().setWidth(264.6, Unit.PX);
-					DOM.getElementById("topo").getStyle().setHeight(100, Unit.PX);
+					DOM.getElementById("logo").setAttribute("src", "imagens/simbolo.png");
+					
+					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("rodape").getClientHeight()), Unit.PX);
 				}
 				else{
-					DOM.getElementById("mapa_expandir").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("infograficos").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("rodape").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("doormat-container").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("mapa").getStyle().setHeight(768.0, Unit.PX);
+					DOM.getElementById("main").removeClassName("tela_cheia");
+					
 					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
 					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
 					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Expandir o mapa");
 					DOM.getElementById("imgTelaCheia").setAttribute("title", "Expandir o mapa");
 					
-					DOM.getElementById("topo_links").getStyle().setDisplay(Display.BLOCK);
-					DOM.getElementById("logo").getStyle().setHeight(95, Unit.PX);
-					DOM.getElementById("logo").getStyle().setWidth(441, Unit.PX);
-					DOM.getElementById("topo").getStyle().setHeight(145, Unit.PX);
+					DOM.getElementById("logo").setAttribute("src", "imagens/logo.png");
+					
+					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("barra-brasil").getClientHeight() + DOM.getElementById("rodape").getClientHeight()), Unit.PX);
 				}
 			}
 		});

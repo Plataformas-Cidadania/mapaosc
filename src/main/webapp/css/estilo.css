@@ -3396,3 +3396,73 @@ ul.text-list > li > ul.text-list > li {
 .configuracao #enome {
 	margin-bottom: 10px;
 }
+
+.celula03 img {
+	margin-top: -10px;
+}
+
+.tela_cheia #topo #topo_links {
+	background: transparent;
+}
+
+.tela_cheia #topo {
+	height: auto;
+}
+
+.tela_cheia #topo > a {
+	padding-left: 5px;
+}
+
+.tela_cheia .texto_logo {
+	font-family: RobotoRegular, sans-serif;
+	font-size: 20px;
+	padding: 5px;
+	vertical-align: top;
+	display: inline-block;
+	font-weight: 300;
+}
+
+.tela_cheia .texto_logo strong {
+	font-family: RobotoBold, sans-serif;
+}
+
+.tela_cheia #topo #topo_acesso, .tela_cheia #topo #topo_acessibilidade {
+	display: none;
+}
+
+.tela_cheia #topo #logo {
+	top: 0;
+	left: 0;
+	position: static;
+	width: auto;
+	height: 30px;
+}
+
+.tela_cheia #busca {
+	margin-top: -32px;
+}
+
+.tela_cheia #busca form {
+	padding: 4px 4px 3px 4px;
+}
+
+.tela_cheia #doormat-container, .tela_cheia #footer, .tela_cheia #barra-brasil, .tela_cheia #mapa_expandir {
+	display: none;
+}
+
+.tela_cheia #rodape {
+	padding-bottom: 0;
+	height: auto;
+}
+
+a.botao {
+	background-color:#000;
+	height:29px;
+	line-height:20px;
+	margin-left:5px;
+	color:#FFF;
+	border-radius:4px;
+	border:none;
+	cursor:pointer;
+	padding:5px 8px 5px 22px;
+}
