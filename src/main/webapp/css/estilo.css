@@ -3461,7 +3461,7 @@ div#floatingLoginErrorList::after {
 	padding: 4px 4px 3px 4px;
 }
 
-.tela_cheia #doormat-container, .tela_cheia #footer, .tela_cheia #barra-brasil {
+.tela_cheia #doormat-container, .tela_cheia #footer, .tela_cheia #barra-brasil, .tela_cheia #mapa_expandir {
 	display: none;
 }
 
