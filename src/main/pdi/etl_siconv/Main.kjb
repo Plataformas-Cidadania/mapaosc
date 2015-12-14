@@ -143,13 +143,10 @@
       <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
-      <argument0>&#x24;&#x7b;URL&#x7d;</argument0>
-      <argument1>&#x24;&#x7b;DIRECTORY_DOWNLOAD&#x7d;</argument1>
-      <argument2>&#x24;&#x7b;FILENAME&#x7d;</argument2>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>603</xloc>
+      <xloc>614</xloc>
       <yloc>137</yloc>
       </entry>
     <entry>
@@ -271,26 +268,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Create a folder</from>
-      <to>Download</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Download</from>
-      <to>Transformation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Transformation</from>
       <to>Load</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update</from>
+      <to>SUCESS</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -307,8 +295,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Update</from>
-      <to>SUCESS</to>
+      <from>Create a folder</from>
+      <to>Download</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Download</from>
+      <to>Transformation</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
