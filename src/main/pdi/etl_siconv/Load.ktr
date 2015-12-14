@@ -75,14 +75,14 @@
   <notepads>
   </notepads>
   <connection>
-    <name>mapa_original</name>
-    <server>localhost</server>
+    <name>dv_mapa_osc_test_2</name>
+    <server>mapaosc-desenv</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>mapa_original</database>
+    <database>dv_mapa_osc_test_2</database>
     <port>5432</port>
     <username>i3geo</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce798d95aad5</password>
+    <password>Encrypted 2be98afc86aa7f2e4cb10be75dfc2ff8b</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -99,14 +99,14 @@
     </attributes>
   </connection>
   <connection>
-    <name>CONNECTION_NAME</name>
-    <server>HOST_NAME</server>
+    <name>mapa_original</name>
+    <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>DATABASE_NAME</database>
+    <database>mapa_original</database>
     <port>5432</port>
-    <username>USER_NAME</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10eeb39ce9</password>
+    <username>i3geo</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce798d95aad5</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -154,14 +154,18 @@
   <hop> <from>Log Erro 5</from><to>Insert log.log_erro_etl_siconv 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Log Erro 6</from><to>Insert log.log_erro_etl_siconv 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Selecionar insert syst.nm_cd_fonte_dados</from><to>Insert data.tb_osc_siconv</to><enabled>Y</enabled> </hop>
-  <hop> <from>Selecionar insert syst.nm_cd_fonte_dados</from><to>Insert syst.nm_cd_fonte_dados</to><enabled>Y</enabled> </hop>
   <hop> <from>Selecionar novas OSC</from><to>Insert data.tb_osc</to><enabled>Y</enabled> </hop>
   <hop> <from>Selecionar novas OSC</from><to>Select values 1</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select bosc_sq_osc</from><to>Insert syst.nm_cd_fonte_dados</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 1</from><to>Selecionar insert syst.nm_cd_fonte_dados</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2</from><to>Select bosc_sq_osc</to><enabled>Y</enabled> </hop>
   <hop> <from>Get rows from result</from><to>Selecionar novas OSC</to><enabled>Y</enabled> </hop>
   <hop> <from>Insert data.tb_localizacao</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select bosc_sq_osc</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 2</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join</from><to>Insert syst.nm_cd_fonte_dados</to><enabled>Y</enabled> </hop>
+  <hop> <from>Selecionar insert syst.nm_cd_fonte_dados</from><to>Insert syst.nm_cd_fonte_dados</to><enabled>Y</enabled> </hop>
+  <hop> <from>Insert data.tb_osc</from><to>Sort rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Copy rows to result</name>
@@ -176,8 +180,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>2082</xloc>
-      <yloc>416</yloc>
+      <xloc>2239</xloc>
+      <yloc>414</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -197,8 +201,8 @@
     <scaletime>seconds</scaletime>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>683</xloc>
-      <yloc>572</yloc>
+      <xloc>685</xloc>
+      <yloc>580</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -300,8 +304,8 @@
         <precision>-1</precision>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>494</xloc>
-      <yloc>257</yloc>
+      <xloc>493</xloc>
+      <yloc>232</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -317,7 +321,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -353,8 +357,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1709</xloc>
-      <yloc>416</yloc>
+      <xloc>1866</xloc>
+      <yloc>414</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -370,7 +374,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -421,8 +425,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1891</xloc>
-      <yloc>416</yloc>
+      <xloc>2048</xloc>
+      <yloc>414</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -438,7 +442,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -468,8 +472,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>683</xloc>
-      <yloc>404</yloc>
+      <xloc>685</xloc>
+      <yloc>412</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -485,7 +489,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -545,8 +549,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1530</xloc>
-      <yloc>416</yloc>
+      <xloc>1687</xloc>
+      <yloc>414</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -562,7 +566,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -619,8 +623,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>335</xloc>
-      <yloc>405</yloc>
+      <xloc>337</xloc>
+      <yloc>413</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -636,7 +640,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -693,8 +697,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1525</xloc>
-      <yloc>51</yloc>
+      <xloc>1682</xloc>
+      <yloc>49</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -710,7 +714,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -782,8 +786,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>340</xloc>
-      <yloc>540</yloc>
+      <xloc>342</xloc>
+      <yloc>548</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -799,7 +803,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -871,8 +875,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1531</xloc>
-      <yloc>751</yloc>
+      <xloc>1688</xloc>
+      <yloc>749</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -888,7 +892,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -918,8 +922,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1314</xloc>
-      <yloc>414</yloc>
+      <xloc>1471</xloc>
+      <yloc>412</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -935,7 +939,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
+    <connection>dv_mapa_osc_test_2</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -966,8 +970,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1096</xloc>
-      <yloc>414</yloc>
+      <xloc>1253</xloc>
+      <yloc>412</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1026,8 +1030,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1253</xloc>
-      <yloc>190</yloc>
+      <xloc>1410</xloc>
+      <yloc>188</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1086,8 +1090,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1387</xloc>
-      <yloc>223</yloc>
+      <xloc>1544</xloc>
+      <yloc>221</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1146,8 +1150,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1524</xloc>
-      <yloc>260</yloc>
+      <xloc>1681</xloc>
+      <yloc>258</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1206,8 +1210,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1652</xloc>
-      <yloc>232</yloc>
+      <xloc>1809</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1266,8 +1270,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1797</xloc>
-      <yloc>203</yloc>
+      <xloc>1954</xloc>
+      <yloc>201</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1326,8 +1330,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>528</xloc>
-      <yloc>405</yloc>
+      <xloc>530</xloc>
+      <yloc>413</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1374,8 +1378,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>534</xloc>
-      <yloc>541</yloc>
+      <xloc>536</xloc>
+      <yloc>549</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1422,8 +1426,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1258</xloc>
-      <yloc>541</yloc>
+      <xloc>1415</xloc>
+      <yloc>539</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1470,8 +1474,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1395</xloc>
-      <yloc>557</yloc>
+      <xloc>1552</xloc>
+      <yloc>555</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1518,8 +1522,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1531</xloc>
-      <yloc>574</yloc>
+      <xloc>1688</xloc>
+      <yloc>572</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1566,8 +1570,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1666</xloc>
-      <yloc>556</yloc>
+      <xloc>1823</xloc>
+      <yloc>554</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1614,8 +1618,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1802</xloc>
-      <yloc>539</yloc>
+      <xloc>1959</xloc>
+      <yloc>537</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1631,20 +1635,20 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Insert data.tb_osc_siconv</send_true_to>
-<send_false_to>Insert syst.nm_cd_fonte_dados</send_false_to>
+<send_true_to>Insert syst.nm_cd_fonte_dados</send_true_to>
+<send_false_to>Insert data.tb_osc_siconv</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
  <leftvalue>cd_fonte_dados</leftvalue>
- <function>&#x3d;</function>
+ <function>IS NULL</function>
  <rightvalue/>
  <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1095</xloc>
-      <yloc>259</yloc>
+      <xloc>1078</xloc>
+      <yloc>232</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1666,14 +1670,14 @@
 <condition>
  <negated>N</negated>
  <leftvalue>bosc_sq_osc</leftvalue>
- <function>&#x3d;</function>
+ <function>IS NULL</function>
  <rightvalue/>
  <value><name>constant</name><type>Integer</type><text>0</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>&#x23;&#x3b;-&#x23;</mask></value> </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>686</xloc>
-      <yloc>257</yloc>
+      <xloc>685</xloc>
+      <yloc>232</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1689,8 +1693,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>CONNECTION_NAME</connection>
-    <sql>SELECT &#x3f; bosc_nr_identificacao, &#x3f; siconv_vl_global, &#x3f; siconv_vl_repasse, &#x3f; siconv_vl_empenhado, &#x3f; siconv_vl_desembolsado, &#x3f; siconv_vl_contrapartida_financeira, &#x3f; siconv_vl_contrapartida_outras, &#x3f; bosc_nm_osc, &#x3f; loca_ds_endereco, &#x3f; loca_nm_bairro, &#x3f; loca_nm_cep, &#x3f; cont_nm_representante, bosc_sq_osc, &#x3f; edmu_cd_municipio, &#x3f; siconv_qt_parceria_finalizada, &#x3f; siconv_qt_parceria_execucao, &#x3f; inte_in_ativa, &#x3f; inte_in_osc, &#x3f; dcti_cd_tipo, &#x3f; mdfd_cd_fonte_dados, &#x3f; cd_fonte_dados FROM data.tb_osc WHERE bosc_nr_identificacao &#x3d; &#x3f;&#x3a;&#x3a;NUMERIC</sql>
+    <connection>dv_mapa_osc_test_2</connection>
+    <sql>SELECT &#x3f; AS bosc_nr_identificacao, bosc_sq_osc FROM data.tb_osc WHERE bosc_nr_identificacao &#x3d; &#x3f;&#x3a;&#x3a;NUMERIC</sql>
     <limit>0</limit>
     <lookup>Select values 2</lookup>
     <execute_each_row>Y</execute_each_row>
@@ -1698,8 +1702,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1097</xloc>
-      <yloc>573</yloc>
+      <xloc>943</xloc>
+      <yloc>580</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1802,8 +1806,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>882</xloc>
-      <yloc>257</yloc>
+      <xloc>861</xloc>
+      <yloc>232</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1906,8 +1910,104 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>880</xloc>
-      <yloc>572</yloc>
+      <xloc>794</xloc>
+      <yloc>580</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>bosc_nr_identificacao</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>881</xloc>
+      <yloc>412</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>bosc_nr_identificacao</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1074</xloc>
+      <yloc>580</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>LEFT OUTER</join_type>
+<step1>Sort rows</step1>
+<step2>Sort rows 2</step2>
+    <keys_1>
+      <key>bosc_nr_identificacao</key>
+    </keys_1>
+    <keys_2>
+      <key>bosc_nr_identificacao</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1076</xloc>
+      <yloc>412</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
