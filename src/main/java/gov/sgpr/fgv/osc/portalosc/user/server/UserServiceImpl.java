@@ -67,10 +67,11 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 	 */
 	public void addUser(DefaultUser user) throws RemoteException {
 		validate(user);
+		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo) VALUES (?, ?, ?, ?, ?, ?, ?);";
+				+ "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -81,6 +82,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			pstmt.setLong(5, user.getCpf());
 			pstmt.setBoolean(6, user.isMailingListMember());
 			pstmt.setBoolean(7, false);
+			pstmt.setDate(8, sqlDate);
 			pstmt.execute();
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
@@ -270,13 +272,15 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 	}
 	
 	public void setPassword(Integer idUser, String password) throws RemoteException {
+		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE portal.tb_usuario SET tusu_cd_senha=? WHERE tusu_sq_usuario=?"; 
+		String sql = "UPDATE portal.tb_usuario SET tusu_cd_senha=?, tusu_dt_atualizacao=? WHERE tusu_sq_usuario=?"; 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, password);
-			pstmt.setInt(2, idUser);
+			pstmt.setDate(2, sqlDate);
+			pstmt.setInt(3, idUser);
 			pstmt.execute();
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
@@ -551,13 +555,14 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 
 	public void addRepresentantUser(RepresentantUser user) throws RemoteException {
 		validateRepresentant(user);
+		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		
 		String sql = "INSERT INTO portal.tb_usuario "
 				   + 			"(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				   + 			"tusu_nr_cpf, bosc_sq_osc, tusu_in_lista_email, tusu_in_ativo) "
-				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				   + 			"tusu_nr_cpf, bosc_sq_osc, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) "
+				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
@@ -568,6 +573,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			pstmt.setLong(6, user.getOscId());
 			pstmt.setBoolean(7, user.isMailingListMember());
 			pstmt.setBoolean(8, false);
+			pstmt.setDate(9, sqlDate);
 			pstmt.execute();
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
