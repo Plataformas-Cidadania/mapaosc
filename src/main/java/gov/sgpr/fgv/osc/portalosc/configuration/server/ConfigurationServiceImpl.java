@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -49,6 +50,7 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 	
 	public void updateConfiguration(ConfigurationModel configuration, Boolean flagEmail) throws RemoteException {
 		logger.info("Atualizando informações do usuário no banco de dados");
+		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		validate(configuration);
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -57,7 +59,7 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 			if(configuration.getTipoUsuario() == 2){
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
-						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = null, tusu_in_lista_email = ? "
+						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = null, tusu_in_lista_email = ?, tusu_dt_atualizacao = ? "
 						   + "WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
@@ -66,12 +68,13 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				pstmt.setString(4, configuration.getSenha());
 				pstmt.setLong(5, configuration.getCPF());
 				pstmt.setBoolean(6, configuration.getListaEmail());
-				pstmt.setLong(7, configuration.getId());
+				pstmt.setDate(7, sqlDate);
+				pstmt.setLong(8, configuration.getId());
 			}
 			else if(configuration.getTipoUsuario() == 4){
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
-						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = ?, tusu_in_lista_email = ? "
+						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = ?, tusu_in_lista_email = ? , tusu_dt_atualizacao = ?"
 						   + "WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
@@ -81,7 +84,8 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				pstmt.setLong(5, configuration.getCPF());
 				pstmt.setInt(6, configuration.getIdOsc());
 				pstmt.setBoolean(7, configuration.getListaEmail());
-				pstmt.setLong(8, configuration.getId());
+				pstmt.setDate(8, sqlDate);
+				pstmt.setLong(9, configuration.getId());
 			}
 			pstmt.execute();
 		} catch (SQLException e) {
