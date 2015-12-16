@@ -3,6 +3,7 @@ package gov.sgpr.fgv.osc.portalosc.map.client.controller;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.BreadcrumbWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.MenuWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.OrganizationWidget;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
@@ -80,6 +81,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private HTMLPanel breadcrumbIndicadores = new HTMLPanel("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
 	private UserServiceAsync userService = GWT.create(UserService.class);
 	private PopupChangePassword changePassword = new PopupChangePassword();
+	private SearchWidget searchWidget = new SearchWidget();
 	
 	public void setMap(MapController map, SearchController search) {
 		MenuController.map = map;
@@ -349,6 +351,9 @@ public class MenuController implements ValueChangeHandler<String> {
 		centerMap(LatLng.create(osc.getCoordinate().getY(), osc.getCoordinate().getX()));
 
 		changeIcons(osc.getMain().getId());
+		
+		String oscBusca = DOM.getElementById("tooltip_").getInnerText();
+		searchWidget.setOscBox(oscBusca);
 	}
 	
 	public void onValueChange(ValueChangeEvent<String> event) {

@@ -77,6 +77,8 @@ public class SearchController {
 							if (result.get(0).getType().equals(SearchResultType.OSC)){
 								History.newItem("O" + result.get(0).getId());
 							}
+							
+							searchWidget.close();
 						}
 					}
 				};
@@ -95,6 +97,12 @@ public class SearchController {
 			
 			public void onSuccess(List<SearchResult> result) {
 				searchWidget.setItems(result);
+				searchWidget.addresultBusca(new EventListener() {
+					@Override
+					public void onBrowserEvent(Event event) {
+						searchWidget.close();
+					}
+				});
 			}
 		};
 		if (!criteria.trim().isEmpty())
