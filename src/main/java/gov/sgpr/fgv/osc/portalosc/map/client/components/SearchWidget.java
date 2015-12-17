@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
+import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -18,7 +18,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
 
 public class SearchWidget extends Composite {
-	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private List<SearchResult> items = new ArrayList<SearchResult>();
 	private Map<String, String> oscItems = new LinkedHashMap<String, String>();
 	private Map<String, String> stateItems = new LinkedHashMap<String, String>();
@@ -148,6 +147,11 @@ public class SearchWidget extends Composite {
 				"auto");
 		searchResultsPanel.show();
 	}
+	
+	public void setOscBox(String osc){
+		InputElement busca = DOM.getElementById("campobusca").cast();
+		busca.setValue(osc);
+	}
 
 	private HTML getHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
@@ -226,6 +230,16 @@ public class SearchWidget extends Composite {
 		final Element elem = DOM.getElementById("ajuda_filtros");
 		Event.sinkEvents(elem, Event.ONCLICK);
 		Event.setEventListener(elem, listener);
+	}
+	
+	public void addresultBusca(EventListener listener) {
+		final Element elem = DOM.getElementById("resultado_busca");
+		Event.sinkEvents(elem, Event.ONCLICK);
+		Event.setEventListener(elem, listener);
+	}
+	
+	public void close(){
+		searchResultsPanel.hide();
 	}
 
 }
