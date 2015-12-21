@@ -20,7 +20,7 @@ Framework de desenvolvimento Web: GWT versão 2.7 (http://www.gwtproject.org/)
 
 Linguagem de programação: Java JDK 1.8 (http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
 
-Gerenciador de projetos: Maven 2 (http://maven.apache.org/)
+Gerenciador de projetos: Maven 3 (http://maven.apache.org/)
 
 API do Google Maps (https://developers.google.com/maps/documentation/javascript/?hl=pt-BR)
 
