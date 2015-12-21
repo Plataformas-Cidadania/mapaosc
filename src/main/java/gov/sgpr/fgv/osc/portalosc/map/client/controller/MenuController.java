@@ -262,7 +262,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			mainItem.setInfoSource(getHelpContent(oscmain.getDataSources()));
 
 		final AnchorListMenuItem documentsItem = new AnchorListMenuItem();
-		documentsItem.setItemTitle("Acesso a informação (Documentos)");
+		documentsItem.setItemTitle("Acesso à informação (Documentos)");
 		documentsItem.setId("doc");
 		documentsItem.setCssClass("dados documentos");
 		documentsItem.addInfo("Prestação de contas", osc.getAccountabilityPath());
