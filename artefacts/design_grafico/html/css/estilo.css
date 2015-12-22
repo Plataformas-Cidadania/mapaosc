@@ -3326,3 +3326,25 @@ a.botao {
 	cursor:pointer;
 	padding:5px 8px 5px 22px;
 }
+
+.institucional .wrapper ul li {
+    line-height: 2em;
+}
+
+
+ul.text-list > li {
+    margin-left: 30px;
+    list-style-image: url(../imagens/16_topicos.png);
+}
+.mapa_organizacao p {
+	font-size: 1em;
+}
+
+.mapa_organizacao strong {
+	display: inline-block;
+}
+
+#mapa.institucional .acessibilidade h3 {
+	margin-left: 40px;
+	border-bottom: 0px;
+}
