@@ -375,14 +375,14 @@ public class PublicResources implements Serializable,
 				fmtCurrency.format(culturalApprovedValue));
 		content.put("Valor Captado (Incentivo)",
 				fmtCurrency.format(culturalRaisedValue));
-		content.put("Proponente (P&D)",
+		/*content.put("Proponente (P&D)",
 				fmtNumber.format(technologicalAsProposer));
 		content.put("Executor (P&D)",
 				fmtNumber.format(technologicalAsExecutor));
 		content.put("Coexecutor (P&D)",
 				fmtNumber.format(technologicalAsCoExecutor));
 		content.put("Interveniente (P&D)",
-				fmtNumber.format(technologicalAsIntervenient));
+				fmtNumber.format(technologicalAsIntervenient));*/
 
 		return content;
 	}
