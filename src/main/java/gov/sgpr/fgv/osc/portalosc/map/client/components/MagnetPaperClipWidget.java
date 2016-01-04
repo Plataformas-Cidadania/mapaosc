@@ -75,6 +75,21 @@ public class MagnetPaperClipWidget extends Composite {
 			}
 
 		});
+		final Element spanPopup = DOM.getElementById("spantitle");
+		final Element span = (Element) spanPopup.getFirstChildElement();
+		if (span != null) {
+			Event.sinkEvents(spanPopup, Event.ONMOUSEOVER);
+			Event.sinkEvents(spanPopup, Event.ONMOUSEMOVE);
+			Event.setEventListener(spanPopup, new EventListener() {
+				@Override
+				public void onBrowserEvent(Event event) {
+					final int left = event.getClientX() + 5;
+					final int bottom = event.getClientY() - 5;
+					span.getStyle().setLeft(left, Unit.PX);
+					span.getStyle().setTop(bottom, Unit.PX);
+				}
+			});
+		}
 	}
 
 
