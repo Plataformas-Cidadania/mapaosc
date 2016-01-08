@@ -7,6 +7,7 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
@@ -14,6 +15,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -54,10 +56,12 @@ public class OrganizationWidget extends Composite {
 		htmlBuilder.append("\" alt=\"");
 		htmlBuilder.append(menuInfo.getTitle());
 		htmlBuilder.append("\" />");
+		htmlBuilder.append("<a href=\"" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "\">");
 		htmlBuilder.append("<span id =\"tooltip_\" title = \"\"");
 		htmlBuilder.append("	class=\"menuTooltip\">");
 		htmlBuilder.append(menuInfo.getTitle());
 		htmlBuilder.append("</span>");
+		htmlBuilder.append("</a>");
 		htmlBuilder.append("<div id='like_counter' title=\"");
 		htmlBuilder.append(menuInfo.getLikeCounter());
 		htmlBuilder

@@ -3355,6 +3355,17 @@ div#floatingLoginErrorList::after {
 	margin: 0 auto;
 }
 
+.nome .titulo_projeto {
+	min-width:80%;
+}
+
+.nome .titulo_projeto input {
+	padding: 5px;
+	border-radius:10px;
+	font-family: RobotoBold, sans-serif;
+	line-height: 20px;
+}
+
 .overlay {
     position: fixed;
     width: 100%;
@@ -3495,10 +3506,40 @@ ol.numbered li {
 	line-height: 1.5em;
 }
 
-
-
 .metodologia em {
 	font-family: RobotoRegular, sans-serif;
 	font-style: normal;
 	color: #D34f6d;
+}
+
+.projetos select {
+	-ms-expand: none;
+	-webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+}
+
+.projetos select:focus {
+	border-radius: 10px 10px 0 0 !important;
+}
+
+.projetos .data_container, .projetos .data_container input {
+	text-align: center;
+}
+
+.projetos div.filtro {
+	display: inline-block;
+	margin: 0;
+	background-color: transparent;
+	float: right;
+}
+
+.projetos div.filtro span {
+	display:inline-block;
+	margin: 0;
+}
+
+.projetos div.filtro span label {
+	clear:none;
+	float: none;
 }
