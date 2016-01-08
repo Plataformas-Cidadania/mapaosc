@@ -1155,13 +1155,17 @@ ul.dados li.fonte em {
 	margin-left: 20px;
 }
 
-#rodape h2 {
-	font-family: RobotoBold, sans-serif;
-	width: 136px;
-	line-height: 16px;
-	overflow: hidden;
-	float: left;
-}
+#rodape h2, #mapa.institucional #rodape h2 {
+    font-family: RobotoBold, sans-serif;
+    width: 136px;
+    line-height: 16px;
+    overflow: hidden;
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    font-size: 1em;
+    border-bottom: 0;
 
 #rodape a.beta {
 	text-decoration: none;
