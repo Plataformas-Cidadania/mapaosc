@@ -165,6 +165,8 @@ public class MapController {
 				}
 			}
 		});
+		
+		addResizeHandler();
 	}
 	
 	private void loadMarkers(final Date thisDate) {
