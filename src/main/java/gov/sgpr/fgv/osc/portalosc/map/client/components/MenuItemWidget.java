@@ -72,7 +72,7 @@ public class MenuItemWidget extends Composite {
 
 		//htmlBuilder.append("<span id =\"popup"+item.getItemValue()+"\" title=\"");
 		htmlBuilder.append("<span id =\"popup"+item.getId()+"\" title=\"");
-		htmlBuilder.append("\" class=\"menuTooltip\"><span class=\"hidden\">"+titleToolTip+"</span>");
+		htmlBuilder.append("\" class=\"menuTooltip\"><span>"+titleToolTip+"</span>");
 		if (item.getItemValue() != null && !item.getItemValue().isEmpty()) {
 			htmlBuilder.append("<a id=\"nome_"+item.getItemValue() +"\" href=\"#");
 			htmlBuilder.append(item.getItemValue());

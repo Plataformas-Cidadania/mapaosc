@@ -172,8 +172,8 @@ a:hover {
 }
 
 #barra-brasil{
-	background: #7F7F7F; 
-	height: 20px; 
+/* 	background: #7F7F7F;  */
+	height: 32px; 
 	padding: 0 0 0 10px; 
 	display: block;
 }
@@ -1166,6 +1166,7 @@ ul.dados li.fonte em {
     text-indent: 0;
     font-size: 1em;
     border-bottom: 0;
+}
 
 #rodape a.beta {
 	text-decoration: none;
@@ -1543,6 +1544,7 @@ span.magneticTooltip:hover span{
 }
 
 .modal {
+	position: relative;
 	display: none;
 	width: 350px;
 	min-height: 440px;
@@ -1593,6 +1595,7 @@ a.b-redes,a.b-cadastro,a.b-entidade {
 	line-height: 15px;
 	border-radius: 2px;
 	left: 320px;
+	z-index: 2000;
 }
 
 .modal_fechar:hover {
@@ -3050,7 +3053,7 @@ div.infographicContainer{
 	margin: 10px 10px 0px 5px;
 }
 #enome{
-	margin: 10px 75px -25px 0px;
+/* 	margin: 10px 75px -25px 0px; */
 }
 #resultado_busca{
 	position: relative;
@@ -3546,4 +3549,34 @@ ol.numbered li {
 .projetos div.filtro span label {
 	clear:none;
 	float: none;
+}
+
+.breadcrumb {
+    padding: 0px;
+    background-color: transparent;
+}
+
+.breadcrumb>li+li:before {
+    padding: 0px;
+    content: "";
+}
+
+.container {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+label {
+    display: initial;
+}
+
+#rodape h2.tooltip {
+	font-family: RobotoBold, sans-serif;
+	width: 136px;
+	line-height: 16px;
+	overflow: hidden;
+	float: left;
+	position: static;
+	opacity: 1;
+	font-size: 11px;
 }

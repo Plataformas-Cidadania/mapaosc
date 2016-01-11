@@ -129,7 +129,7 @@ public class MagnetPaperClipWidget extends Composite {
 						+ windowInfo.getCssClass()
 						+ "\">"
 						+ "<span id =\"spantitle\" class=\"magneticTooltip\" >"
-						+"<span id =\"\" class =\"hidden\">"
+						+"<span id =\"\" >"
 						+windowInfo.getTitle() 
 						+"</span>"
 						+"<a id='title' title=\""
