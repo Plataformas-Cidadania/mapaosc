@@ -99,6 +99,12 @@
 	        <artifactId>gwt-crypto</artifactId>
 	        <version>2.3.0</version>
 	    </dependency>
+	    <dependency>
+		    <groupId>org.gwtbootstrap3</groupId>
+		    <artifactId>gwtbootstrap3</artifactId>
+		    <version>0.9.2</version>
+		    <scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -4,6 +4,7 @@
 	<define-property name="gwt.logging.firebugHandler" values="ENABLED, DISABLED"/>
 	<define-property name="gwt.logging.popupHandler" values="ENABLED, DISABLED"/>
 	
+	<inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
 	<inherits name="gov.sgpr.fgv.osc.portalosc.user.User" />
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.maps.gwt.GoogleMaps" />
@@ -11,7 +12,7 @@
 	<inherits name='com.google.gwt.junit.JUnit' />
 	<inherits name="com.google.gwt.i18n.I18N"/>
 <!-- 	<inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
-	
+	<stylesheet src='/css/estilo.css'/>
 	<extend-property name="locale" values="pt_BR"/>
 	
 	<source path='client' />
