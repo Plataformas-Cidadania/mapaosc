@@ -24,6 +24,8 @@ public class SearchWidget extends Composite {
 	private Map<String, String> countyItems = new LinkedHashMap<String, String>();
 	private Element searchTextField;
 	private PopupPanel searchResultsPanel = new PopupPanel();
+	public Integer result = 0;
+	public Integer count = 0;
 
 	public SearchWidget() {
 		initWidget(getHtml());
@@ -33,6 +35,7 @@ public class SearchWidget extends Composite {
 		oscItems.clear();
 		stateItems.clear();
 		countyItems.clear();
+		int count = 1;
 		StringBuilder htmlBuilder = new StringBuilder();
 		if (!this.items.isEmpty()) {
 			for (SearchResult item : this.items) {
@@ -43,7 +46,7 @@ public class SearchWidget extends Composite {
 				if (item.getType().equals(SearchResultType.OSC))
 					this.oscItems.put(item.getValue(), "O" + item.getId());
 			}
-			htmlBuilder.append("<div>");
+			htmlBuilder.append("<div id=\"resultado\">");
 			if (!this.oscItems.isEmpty()) {
 				if (this.oscItems.size() == 1)
 					htmlBuilder.append("<div>" + "<ul class=\"total\">"
@@ -56,9 +59,12 @@ public class SearchWidget extends Composite {
 							+ "<li><em>" + this.oscItems.size()
 							+ " encontrados</em></li>" + "</ul>");
 				htmlBuilder.append("<ul class=\"resultado\">");
-				for (Map.Entry<String, String> entry : this.oscItems.entrySet())
-					htmlBuilder.append("<li><a href=\"#" + entry.getValue()
+				
+				for (Map.Entry<String, String> entry : this.oscItems.entrySet()){
+					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.getValue()
 							+ "\">" + entry.getKey() + "</a></li>");
+					count++;
+				}
 
 				htmlBuilder.append("</ul>" + "</div>");
 			}
@@ -74,10 +80,13 @@ public class SearchWidget extends Composite {
 							+ this.stateItems.size() + " encontrados</em></li>"
 							+ "</ul>");
 				htmlBuilder.append("<ul class=\"resultado\">");
+				
 				for (Map.Entry<String, String> entry : this.stateItems
-						.entrySet())
-					htmlBuilder.append("<li><a href=\"#" + entry.getValue()
+						.entrySet()){
+					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.getValue()
 							+ "\">" + entry.getKey() + "</a></li>");
+					count++;
+				}
 
 				htmlBuilder.append("</ul>" + "</div>");
 			}
@@ -94,10 +103,13 @@ public class SearchWidget extends Composite {
 							+ "<li><em>" + this.countyItems.size()
 							+ " encontrados</em></li>" + "</ul>");
 				htmlBuilder.append("<ul class=\"resultado\">");
+				
 				for (Map.Entry<String, String> entry : this.countyItems
-						.entrySet())
-					htmlBuilder.append("<li><a href=\"#" + entry.getValue()
+						.entrySet()){
+					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.getValue()
 							+ "\">" + entry.getKey() + "</a></li>");
+					count++;
+				}
 
 				htmlBuilder.append("</ul>" + "</div>");
 			}
@@ -146,6 +158,8 @@ public class SearchWidget extends Composite {
 		DOM.setStyleAttribute(searchResultsPanel.getElement(), "overflow",
 				"auto");
 		searchResultsPanel.show();
+		
+		result = oscItems.size() + stateItems.size() + countyItems.size();
 	}
 	
 	public void setOscBox(String osc){
@@ -212,6 +226,15 @@ public class SearchWidget extends Composite {
 		final Element elem = DOM.getElementById("campobusca");
 		Event.sinkEvents(elem, Event.ONFOCUS);
 		Event.setEventListener(elem, listener);
+	}
+	
+	public void addFocus(EventListener listener) {
+		if(result > 1 ){
+			count = 1;
+			final Element elem = DOM.getElementById("resultado");
+			Event.sinkEvents(elem, Event.ONKEYDOWN);
+			Event.setEventListener(elem, listener);
+		}
 	}
 
 	public void addChangeListener(EventListener listener) {

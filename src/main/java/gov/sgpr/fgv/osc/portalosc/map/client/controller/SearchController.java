@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.History;
@@ -42,17 +44,22 @@ public class SearchController {
 		searchWidget.addChangeListener(new EventListener() {
 			@Override
 			public void onBrowserEvent(Event event) {
-				changeDate = new Date();
-				final Date thisDate = changeDate;
-				Timer t = new Timer() {
-					@Override
-					public void run() {
-						if (changeDate.equals(thisDate)) {
-							search();
+				if(event.getKeyCode() == KeyCodes.KEY_DOWN || event.getKeyCode() == KeyCodes.KEY_UP){
+					if(DOM.getElementById("list1") != null)
+						DOM.getElementById("list1").focus();
+				}else{
+					changeDate = new Date();
+					final Date thisDate = changeDate;
+					Timer t = new Timer() {
+						@Override
+						public void run() {
+							if (changeDate.equals(thisDate)) {
+								search();
+							}
 						}
-					}
-				};
-				t.schedule(DELAY);
+					};
+					t.schedule(DELAY);
+				}
 			}
 		});
 		
@@ -97,6 +104,29 @@ public class SearchController {
 			
 			public void onSuccess(List<SearchResult> result) {
 				searchWidget.setItems(result);
+			
+				searchWidget.addFocus(new EventListener() {
+					@Override
+					public void onBrowserEvent(Event event) {
+						if (event.getKeyCode() == KeyCodes.KEY_DOWN){
+							event.preventDefault();
+							searchWidget.count++;
+							if(searchWidget.count>searchWidget.result){
+								searchWidget.count = 5;
+							}
+							DOM.getElementById("list"+ searchWidget.count).focus();
+						}else{
+							if (event.getKeyCode() == KeyCodes.KEY_UP){
+								event.preventDefault();
+								searchWidget.count--;
+								if(searchWidget.count<1){
+									searchWidget.count = 1;
+								}
+								DOM.getElementById("list"+ searchWidget.count).focus();
+							}
+						}
+					}
+				});
 				searchWidget.addresultBusca(new EventListener() {
 					@Override
 					public void onBrowserEvent(Event event) {
