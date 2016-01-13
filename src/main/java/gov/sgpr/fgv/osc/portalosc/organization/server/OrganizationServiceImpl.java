@@ -1,12 +1,14 @@
 package gov.sgpr.fgv.osc.portalosc.organization.server;
 
 import java.sql.Connection;
-import java.util.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -51,7 +53,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		
 		try {
 			sql = "SELECT bosc_nm_osc, bosc_nm_fantasia_osc, bosc_nr_identificacao, ospr_ds_endereco, dcnj_nm_natureza_juridica, "
-				+ "		  dcsc_nm_subclasse, ospr_tx_descricao, ospr_dt_ano_fundacao, ospr_ee_site "
+				+ "		  dcsc_nm_subclasse, ospr_tx_descricao, ospr_dt_ano_fundacao, ospr_ee_site, vl_valor_parcerias_total,  "
+				+ "		  vl_valor_parcerias_federal, vl_valor_parcerias_estadual, vl_valor_parcerias_municipal, ee_facebook, "
+				+ "		  ee_google, ee_linkedin, ee_twitter, im_imagem, ee_como_participar "
 				+ "FROM portal.vm_osc_principal "
 				+ "WHERE bosc_sq_osc = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -67,7 +71,29 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				organization.setDescricaoProjeto(rs.getString("ospr_tx_descricao"));
 				organization.setAnoFundacao(rs.getInt("ospr_dt_ano_fundacao"));
 				organization.setSite(rs.getString("ospr_ee_site"));
+				organization.setValorParceriasTotal(rs.getDouble("vl_valor_parcerias_total"));
+				organization.setValorParceriasFederal(rs.getDouble("vl_valor_parcerias_federal"));
+				organization.setValorParceriasEstadual(rs.getDouble("vl_valor_parcerias_estadual"));
+				organization.setFacebook(rs.getString("ee_facebook"));
+				organization.setGoogle(rs.getString("ee_google"));
+				organization.setLinkedin(rs.getString("ee_linkedin"));
+				organization.setTwitter(rs.getString("ee_twitter"));
+				organization.setImagem(rs.getString("im_imagem"));
+				organization.setComoParticipar(rs.getString("ee_como_participar"));
 			}
+			rs.close();
+			pstmt.close();
+			
+			sql = "SELECT count(bosc_sq_osc) AS sum "
+				+ "FROM portal.nm_osc_usuario "
+				+ "WHERE bosc_sq_osc = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				organization.setRecomendacoes(rs.getInt("sum"));
+			}
+			organization.setTotalColaboradores(organization.getTrabalhadores() + organization.getVoluntarios() + organization.getPortadoresDeficiencia());
 			rs.close();
 			pstmt.close();
 			
@@ -137,6 +163,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				projeto.setLocalizacao(rs.getString("localizacao"));
 				projeto.setFinanciadores(rs.getString("financiadores"));
 				projeto.setDescricao(rs.getString("descricao"));
+				
 				projetoList.add(projeto);
 			}
 			organization.setProjetos(projetoList);
@@ -152,29 +179,64 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 			ArrayList<String> certificacao = new ArrayList<String>();
+			
+			
+			
 			if (rs.next()) {
-				Date now = Calendar.getInstance().getTime();
-				if(now.after(rs.getDate("cnea_dt_publicacao"))){
-					certificacao.add("CNAE");
-				}
-				if(now.after(rs.getDate("cebas_mec_dt_inicio_validade")) && now.before(rs.getDate("cebas_mec_dt_fim_validade"))){
-					certificacao.add("CEBAS/MEC");
-				}
+				Date now = new Date(new java.util.Date().getTime());
 				
-				if(now.after(rs.getDate("cebas_saude_dt_inicio_validade")) && now.before(rs.getDate("cebas_saude_dt_fim_validade"))){
-					certificacao.add("CEBAS/Saúde");
+				String strDateCNAE = rs.getString("cnea_dt_publicacao");
+				if(strDateCNAE != null){
+					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCNAE);
+					if(now.after(date)){
+						certificacao.add("CNAE");
+					}
 				}
-				
-				if(now.after(rs.getDate("cnes_oscip_dt_publicacao"))){
-					certificacao.add("CNES/OSCIP");
+				logger.info("TEST0");
+				String strDateInicioCebasMec = rs.getString("cebas_mec_dt_inicio_validade");
+				String strDateFimCebasMec = rs.getString("cebas_mec_dt_fim_validade");
+				if(strDateInicioCebasMec != null && strDateFimCebasMec != null){
+					Date dateInicioCebasMec = new SimpleDateFormat("yyyy-mm-dd").parse(strDateInicioCebasMec);
+					Date dateFimCebasMec = new SimpleDateFormat("yyyy-mm-dd").parse(strDateFimCebasMec);
+					if(now.after(dateInicioCebasMec) && now.before(dateFimCebasMec)){
+						certificacao.add("CEBAS/MEC");
+					}
 				}
-				
-				if(now.after(rs.getDate("cnes_upf_dt_declaracao"))){
-					certificacao.add("CNES/UFP");
+				logger.info("TEST1");
+				String strDateInicioCebasSaude = rs.getString("cebas_saude_dt_inicio_validade");
+				String strDateFimCebasSaude = rs.getString("cebas_saude_dt_fim_validade");
+				if(strDateInicioCebasSaude != null && strDateFimCebasSaude != null){
+					Date dateInicioCebasSaude = new SimpleDateFormat("yyyy-mm-dd").parse(strDateInicioCebasSaude);
+					Date dateFimCebasSaude = new SimpleDateFormat("yyyy-mm-dd").parse(strDateFimCebasSaude);
+					if(now.after(dateInicioCebasSaude) && now.before(dateFimCebasSaude)){
+						certificacao.add("CEBAS/Saúde");
+					}
 				}
-				
-				if(now.after(rs.getDate("cebas_mds_dt_inicio_validade")) && now.before(rs.getDate("cebas_mds_dt_fim_validade"))){
-					certificacao.add("CEBAS/MDS");
+				logger.info("TEST2");
+				String strDateCnesOscip = rs.getString("cnes_oscip_dt_publicacao");
+				if(strDateCnesOscip != null){
+					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCnesOscip);
+					if(now.after(date)){
+						certificacao.add("CNES/OSCIP");
+					}
+				}
+				logger.info("TEST3");
+				String strDateCnesUfp = rs.getString("cnes_upf_dt_declaracao");
+				if(strDateCnesUfp != null){
+					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCnesUfp);
+					if(now.after(date)){
+						certificacao.add("CNES/UFP");
+					}
+				}
+				logger.info("TEST4");
+				String strDateInicioCebasMds = rs.getString("cebas_mds_dt_inicio_validade");
+				String strDateFimCebasMds = rs.getString("cebas_mds_dt_fim_validade");
+				if(strDateInicioCebasMds != null && strDateFimCebasMds != null){
+					Date dateInicioCebasMds = new SimpleDateFormat("yyyy-mm-dd").parse(strDateInicioCebasMds);
+					Date dateFimCebasMds = new SimpleDateFormat("yyyy-mm-dd").parse(strDateFimCebasMds);
+					if(now.after(dateInicioCebasMds) && now.before(dateFimCebasMds)){
+						certificacao.add("CEBAS/MDS");
+					}
 				}
 			}
 			organization.setCertificacao(certificacao);
@@ -182,6 +244,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} catch (ParseException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
 		} finally {
@@ -221,5 +286,32 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 	
 	public Byte[] getEncryptKey() throws RemoteException {
 		return desKey;
+	}
+	
+	public Boolean searchOSCbyUser(Integer idUser, Integer idOsc) throws RemoteException{
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Boolean result = false;
+		String sql = "SELECT bosc_sq_osc "
+				   + "FROM portal.tb_usuario "
+				   + "WHERE tusu_sq_usuario = ?"
+				   + "AND bosc_sq_osc = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			pstmt.setInt(2, idOsc);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = true;
+			}
+			return result;
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
 	}
 }

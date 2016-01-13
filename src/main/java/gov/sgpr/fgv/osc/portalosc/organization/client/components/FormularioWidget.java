@@ -3,12 +3,12 @@ package gov.sgpr.fgv.osc.portalosc.organization.client.components;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import org.omg.CORBA.DATA_CONVERSION;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
@@ -23,8 +23,8 @@ import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ProjetoModel;
 public class FormularioWidget extends Composite {
 	private final Logger logger = Logger.getLogger(this.getClass().getName());
 	
-	public FormularioWidget(OrganizationModel organizationModel){
-		initWidget(getHTML(organizationModel));
+	public FormularioWidget(OrganizationModel organizationModel, Boolean editable){
+		initWidget(getHTML(organizationModel, editable));
 	}
 	
 	@Override
@@ -32,21 +32,26 @@ public class FormularioWidget extends Composite {
 		super.onAttach();
 	}
 	
-	private HTML getHTML(OrganizationModel org){
+	private HTML getHTML(OrganizationModel org, Boolean editable){
 		StringBuilder htmlBuilder = new StringBuilder();
 		
+		logger.info(" ========== TESTE FormularioWidget ========== \n"
+				  + org.getId() + "\n"
+				  + org.getCnpj() + "\n"
+				  + org.getRazaoSocial() + "\n");
+				  
 		htmlBuilder.append("<div class='container'>");
 		htmlBuilder.append("	<div class='social'>");
 		htmlBuilder.append("		<div class='imagem'>");
-		htmlBuilder.append("			<img src='imagens/org_imagem.jpg' alt='" + org.getRazaoSocial() + "' width='160' height='160' />"); // FALTA BANCO
+		htmlBuilder.append("			<img src='imagens/osc/" + (org.getGoogle() != "" ? org.getGoogle() + "' alt='" + org.getRazaoSocial() + "' width='160' height='160'" : "org_indisponivel.jpg'") + " />");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
-//		htmlBuilder.append("			<button type='button' id='b-google' name='redes' value='false' title='Google' class='tooltip'></button>"); // FALTA BANCO
-//		htmlBuilder.append("			<button type='button' id='b-facebook' name='redes' value='false' title='Facebook' class='tooltip'></button>"); // FALTA BANCO
-//		htmlBuilder.append("			<button type='button' id='b-linkedin' name='redes' value='false' title='LinkedIn' class='tooltip'></button>"); // FALTA BANCO
-//		htmlBuilder.append("			<button type='button' id='b-twitter' name='redes' value='false' title='Twitter' class='tooltip'></button>"); // FALTA BANCO
+		htmlBuilder.append("			<a href='" + (org.getGoogle() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-google' name='redes' title='Google' class='tooltip'></button></a>");
+		htmlBuilder.append("			<a href='" + (org.getFacebook() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-facebook' name='redes' title='Facebook' class='tooltip'></button></a>");
+		htmlBuilder.append("			<a href='" + (org.getLinkedin() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn' class='tooltip' ></button></a>");
+		htmlBuilder.append("			<a href='" + (org.getTwitter() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-twitter' name='redes' title='Twitter' class='tooltip'></button></a>");
 		htmlBuilder.append("		</div>");
-		htmlBuilder.append("		<a href='como_participar.html' class='participar box'>Como Participar</a>");
+		htmlBuilder.append("		<a href='" + (org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString()) + "' class='participar box'>Como Participar</a>");
 		htmlBuilder.append("		<div class='recomendacoes'>");
 		htmlBuilder.append("			<span class='tooltip' title='" + org.getRecomendacoes() + " recomendações'>" + org.getRecomendacoes() + "</span>");
 		htmlBuilder.append("		</div>");
@@ -54,7 +59,7 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("		<div class='classificacao'>");
 //		htmlBuilder.append("			<h3>Classificação</h3>");
 //		htmlBuilder.append("			<ul class='dados'>");
-//		htmlBuilder.append("				<li class='fasfil'><a href='#'>Educação e pesquisa</a></li>"); // FALTA BANCO
+//		htmlBuilder.append("				<li class='fasfil'><a href='#'>Educação e pesquisa</a></li>");
 //		htmlBuilder.append("			</ul>");
 //		htmlBuilder.append("		</div>");
 //		htmlBuilder.append("		<div class='tags'>");
@@ -68,17 +73,17 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("				<fieldset>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Razão Social:</strong>");
-		htmlBuilder.append("						<input type='text' name='razao_social' id='razao_social' placeholder='Informação não disponível' value='" + org.getRazaoSocial() + "' />");
+		htmlBuilder.append("						<input type='text' name='razao_social' id='razao_social' placeholder='Informação não disponível' value='" + org.getRazaoSocial() + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Nome Fantasia:</strong>");
-		htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' />");
+		htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>CNPJ:</strong>");
-		htmlBuilder.append("						<input type='text' name='cnpj' id='cnpj' placeholder='Informação não disponível' value='" + org.getCnpj().toString() + "' />");
+		htmlBuilder.append("						<input type='text' name='cnpj' id='cnpj' placeholder='Informação não disponível' value='" + convertNumberToString(org.getCnpj()) + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
@@ -97,37 +102,37 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Natureza Jurídica:</strong>");
-		htmlBuilder.append("						<input type='text' name='natureza_juridica' id='natureza_juridica' placeholder='Informação não disponível' value='" + org.getNaturezaJuridica() + "' />");
+		htmlBuilder.append("						<input type='text' name='natureza_juridica' id='natureza_juridica' placeholder='Informação não disponível' value='" + org.getNaturezaJuridica() + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>CNAE:</strong>");
-		htmlBuilder.append("						<input type='text' name='cnae' id='cnae' placeholder='Informação não disponível' value='" + org.getCnae() + "' />");
+		htmlBuilder.append("						<input type='text' name='cnae' id='cnae' placeholder='Informação não disponível' value='" + org.getCnae() + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("					<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Responsável Legal:</strong>");
-		htmlBuilder.append("						<input type='text' name='responsavel' id='responsavel' placeholder='Informação não disponível' value='" + org.getResponsavel() + "' />");
+		htmlBuilder.append("						<input type='text' name='responsavel' id='responsavel' placeholder='Informação não disponível' value='" + org.getResponsavel() + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Descrição do Projeto:</strong>");
-		htmlBuilder.append("						<textarea name='descricao_projeto' id='descricao_projeto' placeholder='Informação não disponível'>" + org.getDescricaoProjeto() + "</textarea>");
+		htmlBuilder.append("						<textarea name='descricao_projeto' id='descricao_projeto' placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Ano de Fundação:</strong>");
-		htmlBuilder.append("						<input type='text' name='ano_fundacao' id='ano_fundacao' placeholder='Informação não disponível' value='" + convertNumberToString(org.getAnoFundacao()) + "' />");
+		htmlBuilder.append("						<input type='text' name='ano_fundacao' id='ano_fundacao' placeholder='Informação não disponível' value='" + convertNumberToString(org.getAnoFundacao()) + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Site:</strong>");
-		htmlBuilder.append("						<input type='text' name='site' id='site' placeholder='Informação não disponível' value='" + org.getSite() + "' />");
+		htmlBuilder.append("						<input type='text' name='site' id='site' placeholder='Informação não disponível' value='" + org.getSite() + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>E-mail:</strong>");
-		htmlBuilder.append("						<input type='text' name='email' id='email' placeholder='Informação não disponível' value='" + org.getEmail() + "' />");
+		htmlBuilder.append("						<input type='text' name='email' id='email' placeholder='Informação não disponível' value='" + org.getEmail() + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		
@@ -174,22 +179,22 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Total de Colaboradores:</strong>");
-		htmlBuilder.append("						<input type='text' name='total_colaboradores' id='total_colaboradores' placeholder='Informação não disponível' value='" + convertNumberToString(org.getTotalColaboradores()) + "' />");
+		htmlBuilder.append("						<input type='text' name='total_colaboradores' id='total_colaboradores' placeholder='Informação não disponível' value='" + convertNumberToString(org.getTotalColaboradores()) + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("						<div class='collapse-click collapse-button'><div></div></div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div class='collapse-hidden'>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Trabalhadores:</strong>");
-		htmlBuilder.append("							<input type='text' name='trabalhadores' id='trabalhadores' placeholder='Informação não disponível' value='" + convertNumberToString(org.getTrabalhadores()) + "' />");
+		htmlBuilder.append("							<input type='text' name='trabalhadores' id='trabalhadores' placeholder='Informação não disponível' value='" + convertNumberToString(org.getTrabalhadores()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Voluntários:</strong>");
-		htmlBuilder.append("							<input type='text' name='voluntarios' id='voluntarios' placeholder='Informação não disponível' value='" + convertNumberToString(org.getVoluntarios()) + "' />");
+		htmlBuilder.append("							<input type='text' name='voluntarios' id='voluntarios' placeholder='Informação não disponível' value='" + convertNumberToString(org.getVoluntarios()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Colaboradores portadores de deficiência:</strong>");
-		htmlBuilder.append("							<input type='text' name='colaboradores_portadores_deficiencia' id='colaboradores_portadores_deficiencia' placeholder='Informação não disponível' value='" + convertNumberToString(org.getPortadoresDeficiencia()) + "' />");
+		htmlBuilder.append("							<input type='text' name='colaboradores_portadores_deficiencia' id='colaboradores_portadores_deficiencia' placeholder='Informação não disponível' value='" + convertNumberToString(org.getPortadoresDeficiencia()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
@@ -198,23 +203,23 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Valor total das parcerias:</strong>");
-		htmlBuilder.append("						<input type='text' name='valor_total_parcerias' id='valor_total_parcerias' placeholder='Informação não disponível' />");
+		htmlBuilder.append("						<strong>Valor total das parcerias (R$):</strong>");
+		htmlBuilder.append("						<input type='text' name='valor_total_parcerias' id='valor_total_parcerias' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasTotal()) + "' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte SINAFI'></span>");
 		htmlBuilder.append("						<div class='collapse-click collapse-button'><div></div></div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div class='collapse-hidden'>");
 		htmlBuilder.append("						<div>");
-		htmlBuilder.append("							<strong>Valor das parcerias federais:</strong>");
-		htmlBuilder.append("							<input type='text' name='valor_parcerias_federais' id='valor_parcerias_federais' placeholder='Informação não disponível' />");
+		htmlBuilder.append("							<strong>Valor das parcerias federais (R$):</strong>");
+		htmlBuilder.append("							<input type='text' name='valor_parcerias_federais' id='valor_parcerias_federais' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasFederal()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
-		htmlBuilder.append("							<strong>Valor das parcerias estaduais:</strong>");
-		htmlBuilder.append("							<input type='text' name='valor_parcerias_estaduais' id='valor_parcerias_estaduais' placeholder='Informação não disponível' />");
+		htmlBuilder.append("							<strong>Valor das parcerias estaduais (R$):</strong>");
+		htmlBuilder.append("							<input type='text' name='valor_parcerias_estaduais' id='valor_parcerias_estaduais' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasEstadual()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
-		htmlBuilder.append("							<strong>Valor das parcerias municipais:</strong>");
-		htmlBuilder.append("							<input type='text' name='valor_parcerias_municipais' id='valor_parcerias_municipais' placeholder='Informação não disponível' />");
+		htmlBuilder.append("							<strong>Valor das parcerias municipais (R$):</strong>");
+		htmlBuilder.append("							<input type='text' name='valor_parcerias_municipais' id='valor_parcerias_municipais' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasMunicipal()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
@@ -243,9 +248,13 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<h2>Certificados federais</h2>");
 		htmlBuilder.append("			<div>");
 		htmlBuilder.append("				<ul class='dados checklist'>");
-		for (String s : org.getCertificacao()) {
-			htmlBuilder.append("					<li>" + s + "</li>");
-//			htmlBuilder.append("					<li class='fonte'><em>Fonte:</em> SICONV</li>");
+		if(org.getCertificacao().size() == 0){
+			htmlBuilder.append("					<li>Organização sem certificados</li>");
+		}else{
+			for (String s : org.getCertificacao()) {
+				htmlBuilder.append("					<li>" + s + "</li>");
+//				htmlBuilder.append("					<li class='fonte'><em>Fonte:</em> SICONV</li>");
+			}
 		}
 		htmlBuilder.append("				</ul>");
 		htmlBuilder.append("			</div>");
@@ -258,15 +267,15 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("					<span>Fontes:</span>");
 //		htmlBuilder.append("					<span>");
 //		htmlBuilder.append("						<label for='PUBLICA'>Pública</label>");
-//		htmlBuilder.append("						<input type='checkbox' name='PUBLICA' />");
+//		htmlBuilder.append("						<input type='checkbox' name='PUBLICA' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("					</span>");
 //		htmlBuilder.append("					<span>");
 //		htmlBuilder.append("						<label for='PRIVADO'>Privada</label>");
-//		htmlBuilder.append("						<input type='checkbox' name='PRIVADO' />");
+//		htmlBuilder.append("						<input type='checkbox' name='PRIVADO' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("					</span>");
 //		htmlBuilder.append("					<span>");
 //		htmlBuilder.append("						<label for='PROPRIA'>Própria</label>");
-//		htmlBuilder.append("						<input type='checkbox' name='PROPRIA' />");
+//		htmlBuilder.append("						<input type='checkbox' name='PROPRIA' " + (editable ? "" : "readonly") + "/>");
 //		htmlBuilder.append("					</span>");
 //		htmlBuilder.append("				</div>");
 		htmlBuilder.append("			</div>");
@@ -275,14 +284,13 @@ public class FormularioWidget extends Composite {
 			htmlBuilder.append("				<span id='projeto' title='projeto'>Informação não disponível</span>");
 			htmlBuilder.append("			</div>");
 		}else{
-			for(int i = 1; i <= org.getProjetos().size(); i++){
-				ProjetoModel p = org.getProjetos().get(i);
+			for (ProjetoModel p : org.getProjetos()){
 				htmlBuilder.append("			<div class='clearfix projeto collapsable'>");
 				htmlBuilder.append("				<div class='projeto_header'>");
 				htmlBuilder.append("					<div class='collapse-click collapse-button'><div></div></div>");
 				htmlBuilder.append("						<div class='nome'>");
-				htmlBuilder.append("							<span class='no_margin_right'>" + i + " |</span>");
-				htmlBuilder.append("							<input type='text' name='projeto_nome_projeto' id='projeto_nome_projeto' placeholder='Informação não disponível' value='" + p.getTitulo() + "' />");
+				htmlBuilder.append("							<span class='no_margin_right'>" + (org.getProjetos().indexOf(p) + 1) + " |</span>");
+				htmlBuilder.append("							<input type='text' name='projeto_nome_projeto' id='projeto_nome_projeto' placeholder='Informação não disponível' value='" + p.getTitulo() + "' " + (editable ? "" : "readonly") + "/>");
 				htmlBuilder.append("						</div>");
 				htmlBuilder.append("						<span class='clear_both'></span>");
 				htmlBuilder.append("					</div>");
@@ -291,79 +299,70 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador left-radius'>Status</strong>");
 				htmlBuilder.append("								<p>");
-				htmlBuilder.append("									<select id='projeto_status'>");
-				if(p.getStatus() == "planejado"){
-					htmlBuilder.append("										<option value='planejado' checked='checked'> Planejado </option>");
-					htmlBuilder.append("										<option value='execucao' > Em Execução </option>");
-					htmlBuilder.append("										<option value='finalizado' > Finalizado </option>");
-				}else if(p.getStatus() == "execucao"){
-					htmlBuilder.append("										<option value='planejado' > Planejado </option>");
-					htmlBuilder.append("										<option value='execucao' checked='checked'> Em Execução </option>");
-					htmlBuilder.append("										<option value='finalizado' > Finalizado </option>");
-				}else if(p.getStatus() == "finalizado"){
-					htmlBuilder.append("										<option value='planejado' > Planejado </option>");
-					htmlBuilder.append("										<option value='execucao' > Em Execução </option>");
-					htmlBuilder.append("										<option value='finalizado' checked='checked'> Finalizado </option>");
-				}
+				htmlBuilder.append("									<select id='projeto_status' " + (editable ? "" : "disabled='disabled'") + ">");
+				htmlBuilder.append("										<option value='planejado' " + (p.getStatus() == "planejado" ? "checked='checked'" : "") + "> Planejado </option>");
+				htmlBuilder.append("										<option value='execucao' " + (p.getStatus() == "execucao" ? "checked='checked'" : "") + "> Em Execução </option>");
+				htmlBuilder.append("										<option value='finalizado' " + (p.getStatus() == "finalizado" ? "checked='checked'" : "") + "> Finalizado </option>");
 				htmlBuilder.append("									</select>");
 				htmlBuilder.append("								</p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador'>Data Início</strong>");
-				htmlBuilder.append("								<p><input type='text' name='projeto_data_inicio' id='projeto_data_inicio' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataInicio()) + "' /></p>");
+				htmlBuilder.append("								<p><input type='text' name='projeto_data_inicio' id='projeto_data_inicio' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataInicio()) + "' " + (editable ? "" : "readonly") + "/></p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador'>Data Final</strong>");
-				htmlBuilder.append("								<p><input type='text' name='projeto_data_final' id='projeto_data_final' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataFim()) + "' /></p>");
+				htmlBuilder.append("								<p><input type='text' name='projeto_data_final' id='projeto_data_final' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataFim()) + "' " + (editable ? "" : "readonly") + "/></p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador'>Valor Total</strong>");
-				htmlBuilder.append("								<p><input type='text' name='projeto_valor_total' id='projeto_valor_total' placeholder='Informação não disponível' value='" + convertNumberToString(p.getValorTotal()) + "' /></p>");
+				htmlBuilder.append("								<strong class='separador'>Valor Total (R$)</strong>");
+				htmlBuilder.append("								<p><input type='text' name='projeto_valor_total' id='projeto_valor_total' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(p.getValorTotal()) + "' /></p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador'>Principal Fonte de Recurso</strong>");
-				htmlBuilder.append("								<p><input type='text' name='projeto_fonte_recursos' id='projeto_fonte_recursos' placeholder='Informação não disponível' value='" + p.getFonteRecursos() + "' /></p>");
+				htmlBuilder.append("								<p><input type='text' name='projeto_fonte_recursos' id='projeto_fonte_recursos' placeholder='Informação não disponível' value='" + p.getFonteRecursos() + "' " + (editable ? "" : "readonly") + "/></p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='right-radius'>Link</strong>");
-				htmlBuilder.append("								<p><a href='vamosla' contenteditable='false'>link para página</a></p>");
+				htmlBuilder.append("								<p><input type='text' name='projeto_link' id='projeto_link' placeholder='Informação não disponível' value='" + p.getLink() + "' " + (editable ? "" : "readonly") + "/></p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("						</div>");
 				htmlBuilder.append("						<div class='clearfix linha'>");
 				htmlBuilder.append("							<div class='col1_3'>");
 				htmlBuilder.append("								<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
-				htmlBuilder.append("								<textarea name='projeto_publico_alvo' id='projeto_publico_alvo' disabled='disabled'>Pessoas de baixa renda...</textarea>");
+				htmlBuilder.append("								<textarea name='projeto_publico_alvo' id='projeto_publico_alvo'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getPublicoAlvo() + "</textarea>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador'>Abrangência</strong>");
 				htmlBuilder.append("								<p>");
-				htmlBuilder.append("									<select disabled='disabled'>");
-				htmlBuilder.append("										<option value='1' > Nacional </option>");
-				htmlBuilder.append("										<option value='2' > Regional </option>");
-				htmlBuilder.append("										<option value='3' > Estadual </option>");
-				htmlBuilder.append("										<option value='4' > Municipal </option>");
+				htmlBuilder.append("									<select " + (editable ? "" : "disabled='disabled'") + ">");
+				htmlBuilder.append("										<option value='nacional' " + (p.getAbrangencia() == "nacional" ? "checked='checked'" : "") + "> Nacional </option>");
+				htmlBuilder.append("										<option value='regional' " + (p.getAbrangencia() == "regional" ? "checked='checked'" : "") + "> Regional </option>");
+				htmlBuilder.append("										<option value='estadual' " + (p.getAbrangencia() == "estadual" ? "checked='checked'" : "") + "> Estadual </option>");
+				htmlBuilder.append("										<option value='municipal' " + (p.getAbrangencia() == "municipal" ? "checked='checked'" : "") + "> Municipal </option>");
 				htmlBuilder.append("									</select>");
 				htmlBuilder.append("								</p>");
 				htmlBuilder.append("							</div>");
-				htmlBuilder.append("							<div class='col1_2'>");
-				htmlBuilder.append("							<strong class='right-radius'>Localização do Projeto</strong>");
-				htmlBuilder.append("							<div class='localizacao_projet'>");
-				htmlBuilder.append("								<ul class='locais'>");
-				htmlBuilder.append("									<li><a href='mapa.html#5'>Nordeste</a></li>");
-				htmlBuilder.append("								</ul>");
+//				htmlBuilder.append("							<div class='col1_2'>");
+//				htmlBuilder.append("								<strong class='right-radius'>Localização do Projeto</strong>");
+//				htmlBuilder.append("								<div class='localizacao_projet'>");
+//				htmlBuilder.append("									<ul class='locais'>");
+//				htmlBuilder.append("										<li><a href='mapa.html#5'>Nordeste</a></li>");
+//				htmlBuilder.append("									</ul>");
+//				htmlBuilder.append("								</div>");
+//				htmlBuilder.append("							</div>");
+				htmlBuilder.append("						</div>");
+				htmlBuilder.append("						<div class='clearfix linha'>");
+				htmlBuilder.append("							<div class='col1_3'>");
+				htmlBuilder.append("								<strong class='left-radius separador'>Financiadores do Projeto</strong>");
+				htmlBuilder.append("								<textarea name='financiadores' id='financiadores1'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getFinanciadores() + "</textarea>");
 				htmlBuilder.append("							</div>");
-				htmlBuilder.append("						</div>");
+				htmlBuilder.append("							<div class='col2_3'>");
+				htmlBuilder.append("								<strong class='right-radius'>Descrição do Projeto</strong>");
+				htmlBuilder.append("								<textarea name='descprojeto' id='descprojeto1'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getDescricao() + "</textarea>");
+				htmlBuilder.append("							</div>");
+				htmlBuilder.append("						</div>");						
 				htmlBuilder.append("					</div>");
-				htmlBuilder.append("					<div class='clearfix linha'>");
-				htmlBuilder.append("						<div class='col1_3'>");
-				htmlBuilder.append("							<strong class='left-radius separador'>Financiadores do Projeto</strong>");
-				htmlBuilder.append("							<textarea name='financiadores' id='financiadores1' disabled='disabled'>Empresa AXDAS Associados, XXR, Lorem IPSUM</textarea>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("						<div class='col2_3'>");
-				htmlBuilder.append("							<strong class='right-radius'>Descrição do Projeto</strong>");
-				htmlBuilder.append("							<textarea name='descprojeto' id='descprojeto1' disabled='disabled'>Lorem ipsum dolor sit, consectetur adipiscing elit. Nulla eu malesuada nulla.auctor ullamcorper quam at porta.</textarea>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("					</div>");						
 				htmlBuilder.append("				</div>");
 				htmlBuilder.append("			<hr />");
 			}
@@ -378,17 +377,25 @@ public class FormularioWidget extends Composite {
 	}
 	
 	private String convertNumberToString(Number number){
-		String result = String.valueOf(number);
-		if(number.longValue() == 0L){
-			result = "";
+		String result = "";
+		if(number.longValue() >= 0){
+			result = String.valueOf(number);
+		}
+		return result;
+	}
+	
+	private String convertNumberToCurrencyString(Number number){
+		String result = "";
+		if(number.longValue() >= 0){
+			result = NumberFormat.getFormat("#0.00").format(number);
 		}
 		return result;
 	}
 	
 	private String convertDateToString(Date date){
-		String result = date.toString();
-		if(result.length() == 0){
-			result = "";
+		String result = "";
+		if(date != null){
+			result = DateTimeFormat.getFormat("dd/MM/yyyy").format(date);
 		}
 		return result;
 	}

@@ -1,5 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.organization.client.controller;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +32,8 @@ public class OrganizationController {
 	private final RootPanel formularioElement = RootPanel.get("modal_formulario");
 	private static byte[] desKey;
 	
+	private OrganizationModel organization = new OrganizationModel();
+	
 	public void init() {
 		logger.info("Iniciando módulo de configuração");
 		
@@ -61,8 +64,9 @@ public class OrganizationController {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 			public void onSuccess(OrganizationModel result) {
-				logger.info("Organização encontrado");
-				addFormularioWidget(result);
+				logger.info("Organização encontrada");
+				organization = result;
+				checkUser();
 			}
 		};
 		organizationService.getOrganizationByID(id, callback);
@@ -82,10 +86,32 @@ public class OrganizationController {
 		organizationService.setOrganization(organizationModel, callback);
 	}
 	
-	private void addFormularioWidget(OrganizationModel organizationModel) {
+	private void checkUser(){
+		logger.info("Verfificando se usuário é representante da OSC");
+		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+			public void onSuccess(Boolean result) {
+				logger.info("Organização encontrado");
+				if(result){
+					addFormularioWidget(true);
+				}else{
+					addFormularioWidget(false);
+				}
+			}
+		};
+		String userId = Cookies.getCookie("oscUid");
+		if (userId != null && !userId.isEmpty()) {
+			organizationService.searchOSCbyUser(Integer.parseInt(userId), organization.getId(), callback);
+		}else{
+			addFormularioWidget(false);
+		}
+	}
+	
+	private void addFormularioWidget(Boolean editable) {
 		logger.info("Adicionando widget do formulário");
-		
-		formularioWidget = new FormularioWidget(organizationModel);
+		formularioWidget = new FormularioWidget(organization, editable);
 		formularioElement.add(formularioWidget);
 	}
 	
