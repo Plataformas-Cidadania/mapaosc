@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.DOM;
@@ -22,15 +21,13 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Panel;
 
 public class OrganizationWidget extends Composite {
-
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private OscMenuSummary menuInfo;
 	private List<AbstractMenuItem> menuItems;
 
 	private MenuController controller = new MenuController();
 
-	public OrganizationWidget(OscMenuSummary menuInfo,
-			List<AbstractMenuItem> menuItems) {
+	public OrganizationWidget(OscMenuSummary menuInfo, List<AbstractMenuItem> menuItems) {
 		this.menuInfo = menuInfo;
 		this.menuItems = menuItems;
 
@@ -50,34 +47,22 @@ public class OrganizationWidget extends Composite {
 		// TODO: Remover imagem hardcoded
 		menuInfo.setImageUrl("imagens/org_indisponivel.jpg");
 		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<div class=\"organizacao\">");
-		htmlBuilder.append("<img src=\"");
-		htmlBuilder.append(menuInfo.getImageUrl());
-		htmlBuilder.append("\" alt=\"");
-		htmlBuilder.append(menuInfo.getTitle());
-		htmlBuilder.append("\" />");
-		htmlBuilder.append("<a href=\"" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "\">");
-		htmlBuilder.append("<span id =\"tooltip_\" title = \"\"");
-		htmlBuilder.append("	class=\"menuTooltip\">");
-		htmlBuilder.append(menuInfo.getTitle());
-		htmlBuilder.append("</span>");
-		htmlBuilder.append("</a>");
-		htmlBuilder.append("<div id='like_counter' title=\"");
-		htmlBuilder.append(menuInfo.getLikeCounter());
-		htmlBuilder
-				.append(" recomendaram esta organização!\" class=\"tip_recomendacao\">");
-		htmlBuilder.append(menuInfo.getLikeCounter() + "</div>" + "</div>");
+		htmlBuilder.append("<div class='organizacao'>");
+		htmlBuilder.append("	<img src='" + menuInfo.getImageUrl() + "' alt='" + menuInfo.getTitle() + "' />");
+//		htmlBuilder.append("	<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
+		htmlBuilder.append("		<span id='tooltip_' title='' class='menuTooltip'>" + menuInfo.getTitle() + "</span>");
+//		htmlBuilder.append("	</a>");
+		htmlBuilder.append("	<div id='like_counter' title='" + menuInfo.getLikeCounter() + " recomendaram esta organização.' class='tip_recomendacao'>");
+		htmlBuilder.append(			menuInfo.getLikeCounter());
+		htmlBuilder.append("	</div>");
+		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div id='menu_itens'></div>");
-
-		String btnText = menuInfo.isRecommended() ? "Recomendar (desfazer)"
-				: "Recomendar";
-
-		htmlBuilder
-				.append("<button type=\"button\" name=\"Ver detalhes\" id=\"org_detalhes\">Ver detalhes</button>");
-
-		htmlBuilder
-				.append("<button type=\"button\" name=\"Recomendar\" id=\"org_recomendar\">"
-						+ btnText + "</button>");
+		htmlBuilder.append("	<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
+		htmlBuilder.append("		<button type='button' name='Ver detalhes' id='org_detalhes'>Ver detalhes</button>");
+		htmlBuilder.append("	</a>");
+		String btnText = menuInfo.isRecommended() ? "Recomendar (desfazer)" : "Recomendar";
+		
+		htmlBuilder.append("<button type=\"button\" name=\"Recomendar\" id=\"org_recomendar\">" + btnText + "</button>");
 
 		return htmlBuilder.toString();
 	}
@@ -85,10 +70,6 @@ public class OrganizationWidget extends Composite {
 	@Override
 	protected void onAttach() {
 		super.onAttach();
-		final Element oscPageButton = DOM.getElementById("org_detalhes"); 
-		if (oscPageButton != null) {
-			oscPageButton.getStyle().setDisplay(Display.NONE);
-		}
 
 		final Element span = DOM.getElementById("tooltip_");
 		final Element spanPopup = (Element) span.getFirstChildElement();
