@@ -12,25 +12,35 @@ import java.util.ArrayList;
 public class OrganizationModel implements Serializable {
 	private static final long serialVersionUID = -436498762969230574L;
 	
-	private Integer id = 0;
+	private Integer id = -1;
 	private String razaoSocial = "";
 	private String nomeFantasia = "";
-	private Long cnpj = 0L;
+	private Long cnpj = -1L;
 	private String endereco = "";
 	private String naturezaJuridica = "";
 	private String cnae = "";
 	private String responsavel = "";
 	private String descricaoProjeto = "";
-	private Integer anoFundacao = 0;
+	private Integer anoFundacao = -1;
 	private String site = "";
 	private String email = "";
 	private ArrayList<String> participacaoSocial = new ArrayList<String>();
 	private ArrayList<String> fonteRecursos = new ArrayList<String>();
-	private Integer totalColaboradores = 0;
-	private Integer trabalhadores = 0;
-	private Integer voluntarios = 0;
-	private Integer portadoresDeficiencia = 0;
-	private Integer recomendacoes = 0;
+	private Integer totalColaboradores = -1;
+	private Integer trabalhadores = -1;
+	private Integer voluntarios = -1;
+	private Integer portadoresDeficiencia = -1;
+	private Double valorParceriasTotal = -1.0;
+	private Double valorParceriasFederal = -1.0;
+	private Double valorParceriasEstadual = -1.0;
+	private Double valorParceriasMunicipal = -1.0;
+	private String imagem = "";
+	private String facebook = "";
+	private String google = "";
+	private String linkedin = "";
+	private String twitter = "";
+	private String comoParticipar = "";
+	private Integer recomendacoes = -1;
 	private ArrayList<String> classificacao = new ArrayList<String>();
 	private ArrayList<String> certificadosFederais = new ArrayList<String>();
 	private ArrayList<ProjetoModel> projetos = new ArrayList<ProjetoModel>();
@@ -195,6 +205,96 @@ public class OrganizationModel implements Serializable {
 	public void setPortadoresDeficiencia(Integer portadoresDeficiencia) {
 		if(portadoresDeficiencia != null){
 			this.portadoresDeficiencia = portadoresDeficiencia;
+		}
+	}
+	
+	public Double getValorParceriasTotal() {
+		return valorParceriasTotal;
+	}
+	public void setValorParceriasTotal(Double valorParceriasTotal) {
+		if(valorParceriasTotal != null){
+			this.valorParceriasTotal = valorParceriasTotal;
+		}
+	}
+	
+	public Double getValorParceriasFederal() {
+		return valorParceriasFederal;
+	}
+	public void setValorParceriasFederal(Double valorParceriasFederal) {
+		if(valorParceriasMunicipal != null){
+			this.valorParceriasFederal = valorParceriasFederal;
+		}
+	}
+	
+	public Double getValorParceriasEstadual() {
+		return valorParceriasEstadual;
+	}
+	public void setValorParceriasEstadual(Double valorParceriasEstadual) {
+		if(valorParceriasMunicipal != null){
+			this.valorParceriasEstadual = valorParceriasEstadual;
+		}
+	}
+	
+	public Double getValorParceriasMunicipal() {
+		return valorParceriasMunicipal;
+	}
+	public void setValorParceriasMunicipal(Double valorParceriasMunicipal) {
+		if(valorParceriasMunicipal != null){
+			this.valorParceriasMunicipal = valorParceriasMunicipal;
+		}
+	}
+	
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		if(imagem != null){
+			this.imagem = imagem;
+		}
+	}
+	
+	public String getFacebook() {
+		return facebook;
+	}
+	public void setFacebook(String facebook) {
+		if(facebook != null){
+			this.facebook = facebook;
+		}
+	}
+	
+	public String getGoogle() {
+		return google;
+	}
+	public void setGoogle(String google) {
+		if(google != null){
+			this.google = google;
+		}
+	}
+	
+	public String getLinkedin() {
+		return linkedin;
+	}
+	public void setLinkedin(String linkedin) {
+		if(linkedin != null){
+			this.linkedin = linkedin;
+		}
+	}
+	
+	public String getTwitter() {
+		return twitter;
+	}
+	public void setTwitter(String twitter) {
+		if(twitter != null){
+			this.twitter = twitter;
+		}
+	}
+	
+	public String getComoParticipar() {
+		return comoParticipar;
+	}
+	public void setComoParticipar(String comoParticipar) {
+		if(comoParticipar != null){
+			this.comoParticipar = comoParticipar;
 		}
 	}
 	

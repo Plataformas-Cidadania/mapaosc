@@ -14,9 +14,9 @@ public class ProjetoModel implements Serializable {
 	
 	private String titulo = "";
 	private String status = "";
-	private Date dataInicio = new Date();
-	private Date dataFim = new Date();
-	private Double valorTotal = 0.0;
+	private Date dataInicio = null;
+	private Date dataFim = null;
+	private Double valorTotal = -1.0;
 	private String fonteRecursos = "";
 	private String link = "";
 	private String publicoAlvo = "";
