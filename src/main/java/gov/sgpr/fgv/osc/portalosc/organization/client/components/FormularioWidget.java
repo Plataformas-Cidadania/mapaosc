@@ -35,11 +35,6 @@ public class FormularioWidget extends Composite {
 	private HTML getHTML(OrganizationModel org, Boolean editable){
 		StringBuilder htmlBuilder = new StringBuilder();
 		
-		logger.info(" ========== TESTE FormularioWidget ========== \n"
-				  + org.getId() + "\n"
-				  + org.getCnpj() + "\n"
-				  + org.getRazaoSocial() + "\n");
-				  
 		htmlBuilder.append("<div class='container'>");
 		htmlBuilder.append("	<div class='social'>");
 		htmlBuilder.append("		<div class='imagem'>");
