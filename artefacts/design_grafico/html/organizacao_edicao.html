@@ -310,6 +310,32 @@
 											</fieldset>
 										</div>
 									</div>  -->
+									<h2>
+										Quadro de Diretores
+										<button type="button" class="adicionar" id="adicionarDiretor" style="float:right;margin-top:3px;margin-right: 3px;">Adicionar</button>
+									</h2>
+									<fieldset>
+										<div class="diretores">
+											<div>
+												<select>
+													<option>Diretor Financeiro</option>
+													<option>Diretor Administrativo</option>
+													<option>Diretor de Recursos Humanos</option>
+												</select>
+												<input type="text" name="diretor1" id="diretor1" value="João Silveira Nunes da Mesquita" />
+												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+											</div>
+											<div>
+												<select>
+													<option>Diretor Financeiro</option>
+													<option>Diretor Administrativo</option>
+													<option>Diretor de Recursos Humanos</option>
+												</select>
+												<input type="text" name="diretor2" id="diretor2" value="Joaquim Silveira Nunes da Mesquita" />
+												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
+											</div>
+										</div>
+									</fieldset>
 									<h2>Colaboradores</h2>
 									<fieldset>
 										<div class="recursos collapsable">
@@ -897,6 +923,18 @@
 			"</div>" +
 			"</li>";
 			$(this).closest('ul').prepend(comboBox);
+		});
+		
+		$('#adicionarDiretor').click(function(){
+			$('.diretores').append('<div> \
+												<select>\
+													<option>Diretor Financeiro</option>\
+													<option>Diretor Administrativo</option>\
+													<option>Diretor de Recursos Humanos</option>\
+												</select>\
+												<input type="text" name="diretor1" id="diretor1" value="" class="valid">\
+												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>\
+											</div>');
 		});
 
 		$('.projetos .adicionar').click(function(){
