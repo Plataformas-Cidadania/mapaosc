@@ -317,20 +317,12 @@
 									<fieldset>
 										<div class="diretores">
 											<div>
-												<select>
-													<option>Diretor Financeiro</option>
-													<option>Diretor Administrativo</option>
-													<option>Diretor de Recursos Humanos</option>
-												</select>
+												<input type="text" name="cargo1" id="cargo1" placeholder="Diretor..." value="Diretor Financeiro">
 												<input type="text" name="diretor1" id="diretor1" value="João Silveira Nunes da Mesquita" />
 												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 											</div>
 											<div>
-												<select>
-													<option>Diretor Financeiro</option>
-													<option>Diretor Administrativo</option>
-													<option>Diretor de Recursos Humanos</option>
-												</select>
+												<input type="text" name="cargo2" id="cargo2" placeholder="Diretor..." value="Diretor Administrativo">
 												<input type="text" name="diretor2" id="diretor2" value="Joaquim Silveira Nunes da Mesquita" />
 												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 											</div>
@@ -927,11 +919,7 @@
 		
 		$('#adicionarDiretor').click(function(){
 			$('.diretores').append('<div> \
-												<select>\
-													<option>Diretor Financeiro</option>\
-													<option>Diretor Administrativo</option>\
-													<option>Diretor de Recursos Humanos</option>\
-												</select>\
+												<input type="text" name="cargo1" id="cargo1" placeholder="Diretor...">\
 												<input type="text" name="diretor1" id="diretor1" value="" class="valid">\
 												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>\
 											</div>');
