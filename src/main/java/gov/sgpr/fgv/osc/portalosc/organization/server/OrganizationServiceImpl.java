@@ -192,7 +192,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 						certificacao.add("CNAE");
 					}
 				}
-				logger.info("TEST0");
 				String strDateInicioCebasMec = rs.getString("cebas_mec_dt_inicio_validade");
 				String strDateFimCebasMec = rs.getString("cebas_mec_dt_fim_validade");
 				if(strDateInicioCebasMec != null && strDateFimCebasMec != null){
@@ -202,7 +201,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 						certificacao.add("CEBAS/MEC");
 					}
 				}
-				logger.info("TEST1");
 				String strDateInicioCebasSaude = rs.getString("cebas_saude_dt_inicio_validade");
 				String strDateFimCebasSaude = rs.getString("cebas_saude_dt_fim_validade");
 				if(strDateInicioCebasSaude != null && strDateFimCebasSaude != null){
@@ -212,7 +210,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 						certificacao.add("CEBAS/Saúde");
 					}
 				}
-				logger.info("TEST2");
 				String strDateCnesOscip = rs.getString("cnes_oscip_dt_publicacao");
 				if(strDateCnesOscip != null){
 					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCnesOscip);
@@ -220,7 +217,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 						certificacao.add("CNES/OSCIP");
 					}
 				}
-				logger.info("TEST3");
 				String strDateCnesUfp = rs.getString("cnes_upf_dt_declaracao");
 				if(strDateCnesUfp != null){
 					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCnesUfp);
@@ -228,7 +224,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 						certificacao.add("CNES/UFP");
 					}
 				}
-				logger.info("TEST4");
 				String strDateInicioCebasMds = rs.getString("cebas_mds_dt_inicio_validade");
 				String strDateFimCebasMds = rs.getString("cebas_mds_dt_fim_validade");
 				if(strDateInicioCebasMds != null && strDateFimCebasMds != null){
