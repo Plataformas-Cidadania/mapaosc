@@ -1,21 +1,21 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
+
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
 
 public class SearchWidget extends Composite {
 	private List<SearchResult> items = new ArrayList<SearchResult>();
@@ -200,7 +200,7 @@ public class SearchWidget extends Composite {
 		Event.sinkEvents(btnHelp, Event.ONCLICK);
 		Event.setEventListener(btnHelp, new EventListener() {
 
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				PopupPanel helpPanel = new PopupPanel();
 				helpPanel.add(getHelpHtml());

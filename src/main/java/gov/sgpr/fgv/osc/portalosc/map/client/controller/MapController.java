@@ -1,15 +1,4 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.controller;
-
-import gov.sgpr.fgv.osc.portalosc.map.client.components.ClusterMarker;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.OscMarker;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Cluster;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Coordinate;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,7 +34,21 @@ import com.google.maps.gwt.client.MapTypeId;
 import com.google.maps.gwt.client.Marker;
 import com.google.maps.gwt.client.PanControlOptions;
 import com.google.maps.gwt.client.ZoomControlOptions;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.ClusterMarker;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.OscMarker;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
+import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
+import vhmeirelles.geocluster.BoundingBox;
+import vhmeirelles.geocluster.Cluster;
+import vhmeirelles.geocluster.Coordinate;
 
+/*
+ * Eric Ferreira
+ * Modified Date: 26/01/2016
+ * Change cluster and boundingbox classes to library GeoCluster
+ */
 public class MapController {
 	public static final String MAP_CONTAINER = "mapa_google";
 	public static final String CLUSTER_GROUP = "clusters";
@@ -302,7 +305,7 @@ public class MapController {
 	public void addResizeHandler() {
 		handleControl = Window.addResizeHandler(new ResizeHandler() {
 
-			@Override
+			//@Override
 			public void onResize(ResizeEvent event) {
 				initFunction();
 			}

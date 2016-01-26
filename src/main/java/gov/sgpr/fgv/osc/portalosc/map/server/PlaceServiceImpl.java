@@ -1,13 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.server;
 
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Coordinate;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
-import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
-import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,11 +24,21 @@ import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
+import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
+import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
+import vhmeirelles.geocluster.BoundingBox;
+import vhmeirelles.geocluster.Coordinate;
+
 /**
  * Implementação do Serviço que busca informações sobre as divisões geopoliticas
  * 
  * @author victor
- * 
+ * Eric Ferreira
+ * Modified Date: 26/01/2016
+ * Change cluster and boundingbox classes to library GeoCluster
  */
 public class PlaceServiceImpl extends RemoteServiceImpl implements PlaceService {
 

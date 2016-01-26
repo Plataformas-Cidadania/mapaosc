@@ -1,11 +1,10 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.model;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueRenderer;
-
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Map;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueRenderer;
 
 public class Committees implements Serializable,
 		KeyValueRenderer<String, String> {
@@ -78,7 +77,7 @@ public class Committees implements Serializable,
 		return true;
 	}
 
-	@Override
+	
 	public Map<String, String> getContent() {
 		
 		return values;

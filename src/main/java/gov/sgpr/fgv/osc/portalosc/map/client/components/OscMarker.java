@@ -1,16 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipAbstractSection;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipCheckListSection;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipKeyValueSection;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipWindowInfo;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Certifications;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,6 +25,17 @@ import com.google.maps.gwt.client.MarkerOptions;
 import com.google.maps.gwt.client.MouseEvent;
 import com.google.maps.gwt.client.Point;
 import com.google.maps.gwt.client.Projection;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipAbstractSection;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipCheckListSection;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipKeyValueSection;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipWindowInfo;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Certifications;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
 
 public class OscMarker {
 	private static Logger logger = Logger.getLogger(OscMarker.class.getName());
@@ -161,7 +161,7 @@ public class OscMarker {
 		
 		paperclip.addTitleClickListener(new EventListener(){
 
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				History.newItem("O" + summary.getId());
 			}

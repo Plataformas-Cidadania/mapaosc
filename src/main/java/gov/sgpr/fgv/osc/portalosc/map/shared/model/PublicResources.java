@@ -1,13 +1,13 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.model;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueRenderer;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.google.gwt.i18n.client.NumberFormat;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueRenderer;
 
 /**
  * @author victor
@@ -350,7 +350,7 @@ public class PublicResources implements Serializable,
 				+ Arrays.toString(dataSources) + "]";
 	}
 
-	@Override
+	
 	public Map<String, String> getContent() {
 
 		NumberFormat fmtCurrency = NumberFormat.getCurrencyFormat();

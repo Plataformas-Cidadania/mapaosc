@@ -1,11 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipAbstractSection;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipCheckListSection;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipKeyValueSection;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipListSection;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipWindowInfo;
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,6 +12,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipAbstractSection;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipCheckListSection;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipKeyValueSection;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipListSection;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipWindowInfo;
 
 /**
  * Renderiza visualmente um PaperClip a partir de um objeto
@@ -52,7 +52,7 @@ public class MagnetPaperClipWidget extends Composite {
 		Event.sinkEvents(btnHelp, Event.ONCLICK);
 		Event.setEventListener(btnHelp, new EventListener() {
 
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				PopupPanel helpPanel = new PopupPanel();
 				HTML html = new HTML(windowInfo.getFooterToolTip());
@@ -81,7 +81,7 @@ public class MagnetPaperClipWidget extends Composite {
 			Event.sinkEvents(spanPopup, Event.ONMOUSEOVER);
 			Event.sinkEvents(spanPopup, Event.ONMOUSEMOVE);
 			Event.setEventListener(spanPopup, new EventListener() {
-				@Override
+				
 				public void onBrowserEvent(Event event) {
 					final int left = event.getClientX() + 5;
 					final int bottom = event.getClientY() - 5;

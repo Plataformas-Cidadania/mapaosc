@@ -1,11 +1,11 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.model;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueRenderer;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueRenderer;
 
 /**
  * @author victor Dados principais da OSC
@@ -441,7 +441,7 @@ public class OscMain implements Serializable, KeyValueRenderer<String, String> {
 				+ ", state =" + state;
 	}
 
-	@Override
+	
 	public Map<String, String> getContent() {
 		Map<String, String> content = new LinkedHashMap<String, String>();
 		content.put("CNPJ", formattedCode);

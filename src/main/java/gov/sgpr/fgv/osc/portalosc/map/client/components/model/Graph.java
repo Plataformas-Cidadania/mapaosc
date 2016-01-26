@@ -1,8 +1,8 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components.model;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.GraphWidget;
-
 import com.google.gwt.user.client.ui.Widget;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.GraphWidget;
 
 /**
  * @author victor
@@ -56,7 +56,7 @@ public class Graph implements GraphRenderer {
 		this.height = height;
 	}
 
-	@Override
+	
 	public Widget getWidget() {
 		GraphWidget w = new GraphWidget(this);
 		w.setStyleName("graph");

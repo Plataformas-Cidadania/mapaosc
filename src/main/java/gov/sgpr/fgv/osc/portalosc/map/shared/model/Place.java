@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import vhmeirelles.geocluster.BoundingBox;
+import vhmeirelles.geocluster.Coordinate;
+
 /**
  * Classe que representa um lugar.
  * 
  * @author victor
- * 
+ * Eric Ferreira
+ * Modified Date: 26/01/2016
+ * Change cluster and boundingbox classes to library GeoCluster
  */
 public class Place implements Serializable, Comparable<Place> {
 
@@ -19,8 +24,8 @@ public class Place implements Serializable, Comparable<Place> {
 
 	int id;
 	String name;
-	Coordinate centroid;
-	BoundingBox boundingBox;
+	Coordinate centroid = new Coordinate();
+	BoundingBox boundingBox = new BoundingBox();
 	
 	Map<String, Double> indicators = new HashMap<String, Double>();
 

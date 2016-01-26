@@ -11,6 +11,7 @@
 	<inherits name="com.google.gwt.logging.Logging" />
 	<inherits name='com.google.gwt.junit.JUnit' />
 	<inherits name="com.google.gwt.i18n.I18N"/>
+	
 <!-- 	<inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
 	<stylesheet src='/css/estilo.css'/>
 	<extend-property name="locale" values="pt_BR"/>

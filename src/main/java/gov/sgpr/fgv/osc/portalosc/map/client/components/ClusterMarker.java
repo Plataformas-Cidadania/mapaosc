@@ -1,11 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Cluster;
-
 import java.util.logging.Logger;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.FontWeight;
@@ -19,6 +14,16 @@ import com.google.maps.gwt.client.LatLng;
 import com.google.maps.gwt.client.LatLngBounds;
 import com.google.maps.gwt.client.Point;
 import com.google.maps.gwt.client.Projection;
+import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
+import vhmeirelles.geocluster.BoundingBox;
+import vhmeirelles.geocluster.Cluster;
+
+
+/*
+ * Eric Ferreira
+ * Modified Date: 26/01/2016
+ * Change cluster and boundingbox classes to library GeoCluster
+ */
 
 public class ClusterMarker {
 	private static final LatLng DEFAULT_CENTER = LatLng.create(-8.581021,
@@ -27,8 +32,8 @@ public class ClusterMarker {
 			.getName());
 	private static int[] levels = { 10, 100, 1000, 10000 };
 	private static int[] imageSize = { 30, 39, 47, 57, 65 };
-
-	public static void create(final GoogleMap map, final Cluster cluster) {
+		
+	public static void create(final GoogleMap map,  final Cluster cluster) {
 		int level = getLevel(cluster.getQuantity());
 		final LatLng latLng = LatLng.create(cluster.getY(), cluster.getX());
 		Element div = DOM.createDiv();

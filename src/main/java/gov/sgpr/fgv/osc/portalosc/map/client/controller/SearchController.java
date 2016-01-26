@@ -1,11 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.controller;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
-
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,6 +16,12 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
+
 public class SearchController {
 	private static final int DELAY = 500;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -35,14 +35,14 @@ public class SearchController {
 		searchDiv.add(searchWidget);
 		
 		searchWidget.addFocusListener(new EventListener() {
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				searchWidget.setValue("");
 			}
 		});
 		
 		searchWidget.addChangeListener(new EventListener() {
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				if(event.getKeyCode() == KeyCodes.KEY_DOWN || event.getKeyCode() == KeyCodes.KEY_UP){
 					if(DOM.getElementById("list1") != null)
@@ -64,7 +64,7 @@ public class SearchController {
 		});
 		
 		searchWidget.addSearchClickListener(new EventListener() {
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				String criteria = searchWidget.getValue();
 				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
@@ -106,7 +106,7 @@ public class SearchController {
 				searchWidget.setItems(result);
 			
 				searchWidget.addFocus(new EventListener() {
-					@Override
+					
 					public void onBrowserEvent(Event event) {
 						if (event.getKeyCode() == KeyCodes.KEY_DOWN){
 							event.preventDefault();
@@ -128,7 +128,7 @@ public class SearchController {
 					}
 				});
 				searchWidget.addresultBusca(new EventListener() {
-					@Override
+					
 					public void onBrowserEvent(Event event) {
 						searchWidget.close();
 					}

@@ -109,7 +109,7 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 		}
 	}
 
-	@Override
+	
 	public boolean hasUser(FacebookUser user) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -155,7 +155,7 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 		}
 	}
 
-	@Override
+	
 	public FacebookUser getAppAccessTokenAndUserInfo(String facebookUserCode,
 			String urlUser) throws RemoteException {
 		String appId = facebookAppId;

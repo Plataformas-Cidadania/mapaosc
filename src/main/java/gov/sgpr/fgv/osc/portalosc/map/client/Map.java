@@ -1,12 +1,12 @@
 package gov.sgpr.fgv.osc.portalosc.map.client;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
-import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
-import gov.sgpr.fgv.osc.portalosc.map.client.controller.SearchController;
-
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
+import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
+import gov.sgpr.fgv.osc.portalosc.map.client.controller.SearchController;
 
 public class Map implements EntryPoint {
 	private final Logger logger = Logger.getLogger(this.getClass().getName());

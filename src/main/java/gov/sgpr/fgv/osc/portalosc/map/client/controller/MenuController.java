@@ -1,33 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.controller;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.BreadcrumbWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.MenuWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.OrganizationWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.Infographic;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.SimpleTextMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMain;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
-import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupChangePassword;
-import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
-import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
-import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -61,6 +33,38 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.maps.gwt.client.LatLng;
 
+import gov.sgpr.fgv.osc.portalosc.map.client.components.BreadcrumbWidget;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.MenuWidget;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.OrganizationWidget;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.Infographic;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.SimpleTextMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMain;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
+import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupChangePassword;
+import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
+import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
+import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
+import vhmeirelles.geocluster.BoundingBox;
+/*
+ * Eric Ferreira
+ * Modified Date: 26/01/2016
+ * Change cluster and boundingbox classes to library GeoCluster
+ */
 public class MenuController implements ValueChangeHandler<String> {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private final RootPanel menuPanel = RootPanel.get("menu_mapa");
@@ -82,6 +86,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	private UserServiceAsync userService = GWT.create(UserService.class);
 	private PopupChangePassword changePassword = new PopupChangePassword();
 	private SearchWidget searchWidget = new SearchWidget();
+	
 	
 	public void setMap(MapController map, SearchController search) {
 		MenuController.map = map;
@@ -170,7 +175,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		Event.sinkEvents(tabMapa, Event.ONCLICK);
 		Event.setEventListener(tabMapa, new EventListener() {
 
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				final Element divMapa = DOM.getElementById("mapa");
 
@@ -399,7 +404,7 @@ public class MenuController implements ValueChangeHandler<String> {
 					changePassword.onModuleLoad();
 					changePassword.addSubmitListener(new EventListener() {
 
-						@Override
+						
 						public void onBrowserEvent(Event event) {
 							if (changePassword.isValid()) {
 								logger.info("Alterando senha do usuário");
@@ -409,7 +414,7 @@ public class MenuController implements ValueChangeHandler<String> {
 					});
 					changePassword.addSubmitcsenha(new EventListener() {
 
-						@Override
+						
 						public void onBrowserEvent(Event event) {
 							if(event.getKeyCode() == KeyCodes.KEY_ENTER){
 								if (changePassword.isValid()) {
@@ -421,14 +426,14 @@ public class MenuController implements ValueChangeHandler<String> {
 					});
 					changePassword.addCancelListener(new EventListener() {
 
-						@Override
+						
 						public void onBrowserEvent(Event event) {
 								changePassword.close();
 							}
 					});
 					changePassword.addStopPropagation(new EventListener() {
 
-						@Override
+						
 						public void onBrowserEvent(Event event) {
 							event.stopPropagation();
 						}
@@ -460,7 +465,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				a.setAttribute("href", "#");
 				Event.sinkEvents(a, Event.ONCLICK);
 				Event.setEventListener(a, new EventListener() {
-					@Override
+					
 					public void onBrowserEvent(Event event) {
 						changePassword.close();
 					}
@@ -909,7 +914,7 @@ public class MenuController implements ValueChangeHandler<String> {
 	public void addResizeHandler() {
 		handleControl = Window.addResizeHandler(new ResizeHandler() {
 
-			@Override
+			
 			public void onResize(ResizeEvent event) {
 				initFunction();
 			}
