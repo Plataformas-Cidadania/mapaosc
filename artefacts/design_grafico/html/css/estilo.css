@@ -3348,3 +3348,7 @@ ul.text-list > li {
 	margin-left: 40px;
 	border-bottom: 0px;
 }
+
+#mapa.organizacao div.tabela .dados .diretores input:first-child {
+	width:160px;
+}
