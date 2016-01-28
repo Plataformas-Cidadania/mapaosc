@@ -27,4 +27,6 @@
 	<set-property name="gwt.logging.developmentModeHandler"	value="DISABLED" />
 	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
 	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
+	
+	<servlet path='/staticContentLoader' class='gov.sgpr.fgv.osc.portalosc.staticcontent.server.StaticContentServiceImpl'></servlet>
 </module>
