@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import vhmeirelles.geocluster.BoundingBox;
-import vhmeirelles.geocluster.Coordinate;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
 
 /**
  * Classe que representa um lugar.
@@ -24,8 +24,8 @@ public class Place implements Serializable, Comparable<Place> {
 
 	int id;
 	String name;
-	Coordinate centroid = new Coordinate();
-	BoundingBox boundingBox = new BoundingBox();
+	Coordinate centroid;
+	BoundingBox boundingBox;
 	
 	Map<String, Double> indicators = new HashMap<String, Double>();
 

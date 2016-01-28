@@ -1,6 +1,7 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
 import java.util.logging.Logger;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.FontWeight;
@@ -14,9 +15,10 @@ import com.google.maps.gwt.client.LatLng;
 import com.google.maps.gwt.client.LatLngBounds;
 import com.google.maps.gwt.client.Point;
 import com.google.maps.gwt.client.Projection;
+
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
-import vhmeirelles.geocluster.BoundingBox;
-import vhmeirelles.geocluster.Cluster;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Cluster;
 
 
 /*

@@ -59,7 +59,7 @@ import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupChangePassword;
 import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
-import vhmeirelles.geocluster.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
 /*
  * Eric Ferreira
  * Modified Date: 26/01/2016

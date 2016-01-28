@@ -29,8 +29,8 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
-import vhmeirelles.geocluster.BoundingBox;
-import vhmeirelles.geocluster.Coordinate;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
 
 /**
  * Implementação do Serviço que busca informações sobre as divisões geopoliticas

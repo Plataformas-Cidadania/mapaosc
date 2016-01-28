@@ -1,6 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.model;
 
-import vhmeirelles.geocluster.Coordinate;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
 
 /**
  * @author victor

@@ -46,21 +46,21 @@ public interface MapServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService
      */
-    void getOSCCoordinates( vhmeirelles.geocluster.BoundingBox bbox, int width, int height, boolean all, AsyncCallback<vhmeirelles.geocluster.Coordinate[]> callback );
+    void getOSCCoordinates( vhmeirelles.gwtGeocluster.model.BoundingBox bbox, int width, int height, boolean all, AsyncCallback<vhmeirelles.gwtGeocluster.model.Coordinate[]> callback );
 
 
     /**
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService
      */
-    void getOSCCoordinates( vhmeirelles.geocluster.BoundingBox bbox, int zoomLevel, boolean all, AsyncCallback<vhmeirelles.geocluster.Coordinate[]> callback );
+    void getOSCCoordinates( vhmeirelles.gwtGeocluster.model.BoundingBox bbox, int zoomLevel, boolean all, AsyncCallback<vhmeirelles.gwtGeocluster.model.Coordinate[]> callback );
 
 
     /**
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService
      */
-    void getOSCCoordinates( vhmeirelles.geocluster.BoundingBox bbox, boolean all, AsyncCallback<java.util.Set<gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate>> callback );
+    void getOSCCoordinates( vhmeirelles.gwtGeocluster.model.BoundingBox bbox, boolean all, AsyncCallback<java.util.Set<gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate>> callback );
 
 
     /**

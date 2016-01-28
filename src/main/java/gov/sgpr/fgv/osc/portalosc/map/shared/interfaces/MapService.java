@@ -8,8 +8,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
-import vhmeirelles.geocluster.BoundingBox;
-import vhmeirelles.geocluster.Coordinate;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
 
 /**
  * @author victor

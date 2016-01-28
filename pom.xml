@@ -107,7 +107,7 @@
 		</dependency>
 	    <dependency>
 	    	<groupId>vhmeirelles</groupId>
-	    	<artifactId>geocluster</artifactId>
+	    	<artifactId>gwt-geocluster</artifactId>
 	    	<version>0.0.1</version>
 	    </dependency>
 	</dependencies>

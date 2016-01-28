@@ -23,10 +23,10 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
-import vhmeirelles.geocluster.BoundingBox;
-import vhmeirelles.geocluster.Cluster;
-import vhmeirelles.geocluster.Coordinate;
-import vhmeirelles.geocluster.GeoCluster;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Cluster;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
+import vhmeirelles.gwtGeocluster.model.GeoCluster;
 
 /**
  * @author victor

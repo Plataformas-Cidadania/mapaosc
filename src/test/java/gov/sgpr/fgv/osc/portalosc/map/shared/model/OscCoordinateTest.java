@@ -1,10 +1,10 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.model;
 
-import junit.framework.TestCase;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 public class OscCoordinateTest extends TestCase {
 

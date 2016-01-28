@@ -12,8 +12,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-import vhmeirelles.geocluster.BoundingBox;
-import vhmeirelles.geocluster.Coordinate;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
 
 /**
  * GWT JUnit <b>integration</b> tests must extend GWTTestCase. Using
