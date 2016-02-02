@@ -2332,13 +2332,6 @@ button.recomendar:hover {
 	border-radius: 5px 5px 0 0;
 }
 
-#mapa.organizacao div.projetos div div div {
-	float: left;
-	width: 100%;
-	vertical-align: top;
-	padding-bottom: 10px;
-}
-
 #mapa.organizacao div.projetos div.col1,#mapa.organizacao div.projetos div.col2
 	{
 	width: 15%;
@@ -3366,8 +3359,16 @@ div#floatingLoginErrorList::after {
 	min-width:80%;
 }
 
-.nome .titulo_projeto input {
-	padding: 5px;
+.nome .numero_convenio {
+	min-width:20%;
+}
+
+.nome .titulo_convenio {
+	min-width:60%;
+}
+
+.nome .titulo_projeto input, .nome .titulo_convenio input {
+	padding: 6px 4px;
 	border-radius:10px;
 	font-family: RobotoBold, sans-serif;
 	line-height: 20px;
@@ -3579,4 +3580,769 @@ label {
 	position: static;
 	opacity: 1;
 	font-size: 11px;
+}
+
+/* PÃ¡gina de organizaÃ§Ã£o */
+#mapa.organizacao .container {
+width:1000px;
+left:100px;
+position:relative;
+margin-left: 0px;
+}
+
+#mapa.organizacao .titulo h1 {
+width:auto;
+display:inline-block;
+}
+#mapa.organizacao .titulo .botoes {
+margin-left: 10px;
+}
+#mapa.organizacao .botoes {
+display:inline-block;
+font-size:1em;
+}
+
+#mapa.organizacao h1 em,#mapa.organizacao .social .classificacao h3,.classificacao ul.dados li,button.alterar,button.carregar,button.exportar,a.exportar,button.adicionar,input[type=button].adicionar,button.participar,#mapa.organizacao a.participar,button.excluir,button.recomendar,.ver_tudo.exportar h1 em {
+background-image:url(../imagens/sprite_organizacao.png);
+background-repeat:no-repeat;
+}
+
+#mapa.organizacao button, #mapa.organizacao a.participar, a.botao {
+padding:5px 8px 5px 22px;
+}
+
+button.alterar {
+background-position:3px -20px;
+}
+
+button.carregar {
+background-position:3px -98px;
+}
+
+button.exportar,.ver_tudo.exportar h1 em , a.exportar{
+background-position:3px -45px;
+}
+
+button.adicionar,input[type=button].adicionar {
+background-position:2px -148px;
+}
+
+button.excluir {
+background-position:2px -172px;
+}
+
+button.participar, #mapa.organizacao a.participar {
+background-position:2px -197px;
+margin:10px auto;
+display: block;
+width: 130px;
+}
+#mapa.organizacao a.participar:hover { text-decoration: none}
+
+#mapa.organizacao input[type=submit].salvar {
+background-image:none;
+font-size:inherit;
+padding:4px 8px;
+}
+
+#mapa.organizacao button.excluir,#mapa.organizacao button.adicionar,#mapa.organizacao button.carregar {
+font-size:.9em;
+padding:0 4px 0 18px;
+}
+
+button.recomendar {
+background:url(../imagens/05_recomendar.png) 9px 10px no-repeat;
+background-color:#dd9c28;
+}
+
+button.recomendar:hover {
+background-color:#E7AB37;
+}
+
+#mapa.organizacao form > .botoes {
+width:100%;
+background-color:#ccc;
+height:80px;
+line-height:80px;
+text-align:center;
+font-size:1.2em;
+margin:0;
+z-index:1;
+margin-top:20px;
+}
+
+#mapa form > .titulo {
+height:40px;
+background-color:#F2F2F2;
+width:100%;
+}
+
+#mapa.organizacao .tabela div h2,#mapa.organizacao .projetos .titulo, .ver_tudo h1 {
+background-color:#1F3D93;
+color:#FFF;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+width:100%;
+padding-left:9px;
+display:block;
+height:35px;
+line-height:35px;
+text-decoration:none;
+position:relative;
+}
+
+#mapa.organizacao .tabela div h2 a {
+color:#FFF;
+font-family:RobotoRegular,sans-serif;
+font-size:.85em;
+position:absolute;
+right:5px;
+}
+
+#mapa.organizacao div.tabela {
+display:inline-block;
+width:810px;
+vertical-align:top;
+margin:10px 0 0 5px;
+}
+
+#mapa.organizacao div.tabela > div {
+display:inline-block;
+background-color:#F2F2F2;
+border-radius:5px;
+}
+
+#mapa.organizacao div.tabela div.docs > div {
+margin:5px 10px;
+position:relative;
+}
+
+#mapa.organizacao div.social {
+width:180px;
+display:inline-block;
+vertical-align:top;
+background-color:#eef7fc;
+min-height:600px;
+float:left;
+padding:7px 0;
+border-radius:5px;
+margin:10px 0 0 5px;
+text-align:center;
+}
+
+#mapa.organizacao div.social .classificacao {
+text-align:left;
+margin:15px 10px;
+}
+
+#mapa.organizacao div.social .classificacao h3 {
+font-family:RobotoBold, sans-serif;
+font-size:1.1em;
+background-position:0 -78px;
+text-indent:27px;
+line-height:20px;
+color:#000;
+}
+
+.classificacao ul li a:hover {
+color:#000;
+}
+
+.classificacao ul li.fasfil,.classificacao ul li.fasfil a.excluir {
+background-color:#7C9FDF!important;
+}
+
+.classificacao ul li,.classificacao ul li a.excluir {
+background-color:#8DC3E9;
+}
+
+.classificacao ul li {
+list-style-image:none;
+padding:6px;
+border-radius:5px;
+display:inline-block;
+float:left;
+clear:both;
+margin:5px 0;
+text-indent:17px;
+background-position:2px -221px;
+max-width:150px;
+overflow:hidden;
+position:relative;
+}
+
+#busca_filtros ul.dados {
+margin:0 10px;
+}
+
+#busca_filtros ul.dados li {
+float:none;
+max-width:none;
+margin:0 5px 5px 0;
+}
+
+.classificacao ul.dados li a.excluir {
+left:3px;
+padding:17px 1px 0;
+background-color:#8DC3E9;
+width: 15px;
+}
+
+#mapa.organizacao div.social .classificacao input {
+background-image:none;
+}
+
+#mapa.organizacao div.social .classificacao div {
+text-align:right;
+}
+
+#mapa.organizacao div.social .classificacao button {
+position:relative;
+right:0;
+margin:10px 0;
+}
+
+#mapa.organizacao div.dados {
+width:66%;
+vertical-align:top;
+margin-right:5px;
+}
+
+#mapa.organizacao div.dados ul.recursos li {
+list-style-image:none;
+}
+
+#mapa.organizacao div.docs {
+width:32%;
+vertical-align:top;
+}
+
+#mapa.organizacao div.tabela .docs ul li {
+margin-bottom:10px;
+position:relative;
+}
+
+#mapa.organizacao div.docs div ul a {
+color:#567BBE;
+}
+
+#mapa.organizacao div.docs div ul em.data {
+display:block;
+margin:3px 0 12px 12px;
+color:#AAA;
+}
+
+#mapa.organizacao div.docs div ul.dados li.fonte {
+margin-top:10px;
+}
+
+#mapa.organizacao div.projetos {
+width:100%;
+margin-top:10px;
+}
+
+#mapa.organizacao div.projetos hr {
+border:1px dashed #5353A0;
+margin:5px 5px;
+}
+
+#mapa.organizacao div.projetos > div.projeto {
+margin:5px;
+}
+
+#mapa.organizacao div.projetos div.projeto div {
+    background-color:#FFF;
+}
+
+#mapa.organizacao div.projetos div.col1,#mapa.organizacao div.projetos div.col2 {
+width:18%;
+}
+
+#mapa.organizacao div.projetos div.col3 {
+width:12%;
+}
+
+#mapa.organizacao div.projetos div.col4,#mapa.organizacao div.projetos div.col5 {
+width:26%;
+}
+
+#mapa.organizacao div.projetos .separador {
+border-right:3px solid #eee;
+}
+
+#mapa.organizacao div.projetos .left-radius {
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+
+#mapa.organizacao div.projetos .right-radius {
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+#mapa.organizacao div.projetos .radius {
+border-radius:5px;
+}
+
+#mapa.organizacao div.projetos div.projeto span {
+display:inline-block;
+margin:7px;
+overflow:hidden;
+}
+
+#mapa.organizacao div.projetos div strong {
+display:block;
+padding:8px 5px;
+background-color:#BBB;
+color:#FFF;
+white-space:nowrap;
+overflow:hidden;
+cursor:default;
+}
+
+#mapa.organizacao div.projetos .nome {
+color:#000;
+font-family:RobotoBold, sans-serif;
+}
+
+#mapa.organizacao div.projetos .botoes {
+width:100%;
+text-align:right;
+margin:0;
+padding:5px;
+background-color:transparent;
+}
+
+#mapa.organizacao div.tabela .dados div strong,#mapa.organizacao div.tabela .dados div ul {
+display:inline-block;
+vertical-align:top;
+}
+
+#mapa.organizacao div.tabela .dados div span {
+display:inline-block;
+margin-right:3px;
+vertical-align:middle;
+}
+
+#mapa.organizacao div.tabela .dados div strong {
+width:22%;
+text-align:right;
+padding:7px;
+vertical-align:middle;
+}
+
+#mapa.organizacao div.tabela .dados div ul {
+margin:0;
+position:relative;
+width:77.3%;
+min-height:35px;
+}
+
+#mapa.organizacao div.tabela .dados div input,.organizacao div.tabela .dados div textarea {
+width:50%;
+vertical-align:middle;
+}
+
+#mapa.organizacao div.tabela .dados div.relacoes input,#mapa.organizacao div.tabela .dados div.recursos input {
+width:140px;
+}
+
+#mapa.organizacao div.tabela .dados div input.local {
+width:18%;
+margin-right:5px;
+}
+
+#mapa.organizacao div.tabela .dados div span.fonte_dados {
+	text-align: right;
+	vertical-align: bottom;
+	font-style: italic;
+	width: 100%;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+
+#mapa.organizacao div.tabela .dados div p {
+padding:2px;
+}
+
+#mapa.organizacao div.tabela .dados div p:hover,#mapa.organizacao div.tabela .dados div div:hover {
+background-color:#ddd;
+}
+
+#mapa.organizacao div.tabela .dados ul li {
+padding:2px 3px;
+}
+
+#mapa.organizacao div.tabela .dados ul li.botoes {
+position:absolute;
+right:40px;
+top:2px;
+padding:0;
+}
+
+#mapa.organizacao div.tabela .dados .botoes {
+visibility:hidden;
+margin:0;
+}
+
+#mapa.organizacao div.tabela .dados div div:hover .botoes {
+visibility:visible;
+}
+
+#mapa.organizacao div.tabela .dados select,#mapa.organizacao div.tabela .dados input {
+overflow:hidden;
+}
+
+#mapa.organizacao div.tabela .dados input[type=text],#mapa.organizacao div.tabela .dados select,#mapa.organizacao div.tabela .dados textarea {
+background:#F2F2F2;
+vertical-align:middle;
+border:1px solid #F2F2F2;
+}
+
+#mapa.organizacao div input[type=text],#mapa.organizacao div select,#mapa.organizacao div.tabela textarea {
+float:none;
+padding:0 5px;
+outline:none;
+border-radius:10px;
+}
+
+#mapa.organizacao div.tabela .projetos input,#mapa.organizacao div.tabela .projetos select,#mapa.organizacao div.tabela .projetos textarea {
+background:#fff;
+border:1px solid #fff;
+}
+
+#mapa.organizacao div.tabela .dados select option {
+background-color:#F2F2F2;
+}
+
+#mapa.organizacao div.tabela .dados select {
+padding:3px;
+border-radius:10px;
+-webkit-appearance:none;
+-moz-appearance:window;
+appearance:none;
+text-indent:.01px;
+text-overflow:" ";
+width:150px;
+}
+
+#mapa.organizacao div.tabela .dados div div:hover select {
+background:url(../imagens/dropdown_arrow.png) no-repeat center right;
+}
+
+#mapa.organizacao div.tabela .dados div p:hover input[type=text],#mapa.organizacao div.tabela .dados div ul li:hover input[type=text],#mapa.organizacao div.tabela .dados div div:hover select,#mapa.organizacao div.tabela input[type=text]:focus,#mapa.organizacao div.tabela .dados div p:hover textarea,#mapa.organizacao div.tabela .projetos input:hover,#mapa.organizacao div.tabela .projetos textarea:hover, #mapa.organizacao div.tabela .projetos select:hover {
+border-color:#aaa;
+background-color:#fff;
+}
+
+#mapa.organizacao div.tabela .dados div p:hover textarea {
+overflow:auto;
+}
+
+.formulario input[type=text]:focus,.formulario input[type=password]:focus,.formulario div.tabela .dados div div:hover select:focus,.formulario div.tabela textarea:focus,input#campobusca:focus {
+box-shadow:0 0 3px 0 #00a3ff;
+outline:none;
+}
+
+#mapa.organizacao div.projetos .titulo h2 {
+width:auto;
+display:inline-block;
+}
+
+#mapa.organizacao div.projetos .titulo button.adicionar {
+visibility:hidden;
+}
+
+#mapa.organizacao div.projetos:hover button.adicionar {
+visibility:visible;
+}
+
+#mapa.organizacao .social .redes {
+margin-top:10px;
+}
+
+#mapa.organizacao .social .botoes {
+margin:10px 0;
+}
+
+#mapa.organizacao .social .recomendacoes {
+position:relative;
+background:url(../imagens/17_recomendacoes_big.png) no-repeat center;
+width:100%;
+height:100px;
+margin:15px 0;
+}
+
+#mapa.organizacao .social .recomendacoes span {
+display:block;
+font-size:1.2em;
+position:absolute;
+bottom:20px;
+left:60px;
+text-align:center;
+width:60px;
+white-space:nowrap;
+overflow:hidden;
+cursor:default;
+}
+
+#mapa.organizacao .social .imagem {
+position:relative;
+width:160px;
+margin:0 auto;
+}
+
+#mapa.organizacao .social .imagem button {
+position:absolute;
+bottom:10px;
+right:10px;
+visibility:hidden;
+}
+
+#mapa.organizacao .social .imagem:hover button {
+visibility:visible;
+}
+
+#mapa.organizacao div.tabela .projetos .projeto input,#mapa.organizacao div.tabela .projetos .projeto select,#mapa.organizacao div.tabela .projetos .projeto textarea {
+width:100%;
+}
+
+#mapa.organizacao ul.dados,.classificacao ul.dados, ul.locais {
+position:relative;
+}
+
+ul.dados li a.excluir, ul.locais li a.excluir {
+visibility:hidden;
+background:#F2F2F2 url(../imagens/sprite_organizacao.png) no-repeat -3px -180px;
+display:inline-block;
+height:0;
+left:0;
+overflow:hidden;
+padding:15px 0 0;
+position:absolute;
+width:12px;
+}
+
+ul.dados li:hover a.excluir, ul.locais li:hover a.excluir {
+visibility:visible;
+}
+
+.organizacao .docs div:hover button {
+visibility:visible;
+}
+
+.organizacao .docs div button {
+visibility:hidden;
+bottom:0;
+position:absolute;
+}
+
+.organizacao .docs div ul.dados {
+padding-bottom:10px;
+}
+
+.organizacao .docs .resultados ul.dados {
+padding-bottom:30px;
+}
+
+.collapsable {
+}
+
+.collapsed .collapse-hidden {
+    height:0px !important;
+    margin:0px;
+    padding:0px;
+    overflow: hidden;
+}
+
+.collapse-hidden {
+    height: 100%;
+    -webkit-transition: height 0.6s; 
+    -moz-transition: height 0.6s; 
+    -ms-transition: height 0.6s; 
+    transition: height 0.6s;
+}
+
+#mapa.organizacao div.tabela .dados div.collapse-button {
+  display: inline-block;
+  margin-right: 3px;
+  vertical-align: middle;
+}
+
+#mapa.organizacao div.tabela .dados div.collapse-button:hover {
+	background-color: transparent;
+}
+
+.projetos button.adicionar {
+	float: right;
+	margin-top: 3px;
+	margin-right: 3px;
+}
+
+#mapa.organizacao div.tabela .dados div.collapse-button, div.collapse-button {
+    width: 30px;
+    height: 35px;
+    float:right;
+    margin: 0px !important;
+    padding-top: 7px;
+    padding-right: 10px;
+}
+
+.collapse-button div {
+    -moz-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); /* Safari */
+    transform: rotate(-90deg);
+    float: right;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #1F3D93 transparent transparent;
+
+}  
+
+.collapse-button div:hover {
+    background-color: transparent !important;
+}
+
+.collapse-button.negativo div {
+    border-color: transparent white transparent transparent;
+}
+
+.collapsed .collapse-button div {
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg); /* Safari */
+    transform: rotate(0deg);
+}
+
+.mapa_organizacao.clearfix h5 {
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.mapa_organizacao.clearfix div > button#org_detalhes, .mapa_organizacao.clearfix div > button#org_recomendar {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.mapa_organizacao .coluna2 {
+    border: none;
+}
+
+.mapa_organizacao .coluna1 {
+    border-right: 1px solid #aaa;
+}
+
+.linha div {
+    float: left;
+    padding-bottom: 10px;
+}
+
+.linha p {
+    text-align: left;
+    padding: 5px;   
+}
+
+.col1_1 {
+    width: 100%;
+}
+
+.col1_2 {
+    width: 50%;
+}
+
+.col1_3 {
+    width: 33.33%;
+}
+
+.col2_3 {
+    width: 66.66%;
+}
+
+.col1_4 {
+    width: 25%;
+}
+
+.col3_4 {
+    width: 75%;
+}
+
+.col1_5 {
+    width: 20%;
+}
+
+.col2_5 {
+    width: 40%;
+}
+
+.col3_5 {
+    width: 60%;
+}
+
+.col4_5 {
+    width: 80%;
+}
+
+.col1_6 {
+    width: 16.66%;
+}
+
+.col5_6 {
+    width: 83.33%;
+}
+
+.projeto_header {
+    padding-top: 1px;
+    margin-bottom: 0px;
+    border-radius: 5px 5px 0 0;
+}
+
+.projeto_header span {
+    line-height: 20px;
+}
+
+.projeto_body {
+    margin-top: 0px;
+    padding-bottom: 3px;
+    border-radius:0px 0px 5px 5px;
+}
+
+.clear_both {
+    clear: both;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: inline !important;
+}
+
+.outros_enderecos li {
+	padding: 5px;
+	margin-left: 120px;
+}
+
+.projeto_header .status {
+    float: right;
+}a
+
+.adicionar {
+    float: right;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
+#mapa.organizacao div.tabela .dados .diretores input:first-child {
+	width:160px;
+}
+
+.mapa_organizacao p {
+	font-size: 1em;
+}
+
+.mapa_organizacao strong {
+	display: inline-block;
 }
