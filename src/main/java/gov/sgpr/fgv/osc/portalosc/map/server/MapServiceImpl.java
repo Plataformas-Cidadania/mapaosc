@@ -5,15 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+
+import org.apache.commons.logging.Log;
 
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
@@ -56,7 +62,9 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	private int clusterGridSize = 100;
 	private int minClusterZoomLevel = 4;
 	private int maxClusterZoomLevel = 18;
+	private boolean flagRefreshClusters;
 	GeoCluster geocluster = new GeoCluster();
+	
 
 	/*
 	 * (non-Javadoc)
@@ -76,6 +84,12 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		clusterGridSize = Integer.valueOf(context.getInitParameter("ClusterGridSize"));
 		minClusterZoomLevel = Integer.valueOf(context.getInitParameter("MinClusterZoomLevel"));
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
+		flagRefreshClusters = Boolean.valueOf(context.getInitParameter("FlagRefreshClusters"));
+		
+		logger.log(Level.INFO, ""+flagRefreshClusters);
+		if(flagRefreshClusters)	
+			clusterCalc();
+		
 	}
 
 	/*
@@ -743,8 +757,10 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 			//elements = cluster(coords, gridSize, zoomLevel);
 			elements = geocluster.cluster(coords, gridSize, zoomLevel);
+			logger.log(Level.INFO,""+elements.size());
 		}
 		return elements.toArray(new Coordinate[elements.size()]);
+		
 	}
 
 	public Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all)
@@ -764,6 +780,32 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		return coords;
 	}
 
-	
+	public void clusterCalc(){
+//		Set<Coordinate> elements = new HashSet<Coordinate>();
+//		
+//		for (int i = minClusterZoomLevel; i <= maxClusterZoomLevel; i++){
+//			Set<Coordinate> coords = new HashSet<Coordinate>();
+//			coords.addAll(getOSCCoordinates(bbox, all));
+//			elements = geocluster.cluster(coords, clusterGridSize, i);
+//		}
+//			elements.toArray(new Coordinate[elements.size()]);
+//			
+//			Connection conn = getConnection();
+//			PreparedStatement pstmt = null;
+//			String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setLong(1, cpf);
+//				pstmt.setString(2, token);
+//				pstmt.setDate(3, sqlDate);
+//				pstmt.execute();
+//			} catch (SQLException e) {
+//				logger.severe(e.getMessage());
+//				throw new RemoteException(e);
+//			} finally {
+//				releaseConnection(conn, pstmt);
+//			}
+		
+	}
 
 }
