@@ -64,7 +64,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	private int maxClusterZoomLevel = 18;
 	private boolean flagRefreshClusters;
 	GeoCluster geocluster = new GeoCluster();
-	
+
 
 	/*
 	 * (non-Javadoc)
@@ -85,10 +85,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		minClusterZoomLevel = Integer.valueOf(context.getInitParameter("MinClusterZoomLevel"));
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
 		flagRefreshClusters = Boolean.valueOf(context.getInitParameter("FlagRefreshClusters"));
-		
-		logger.log(Level.INFO, ""+flagRefreshClusters);
-		if(flagRefreshClusters)	
-			clusterCalc();
+		//clusterCalc();
 		
 	}
 
@@ -726,6 +723,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		//int zoomLevel = getBoundsZoomLevel(bbox, width, height);
 		int zoomLevel = geocluster.getBoundsZoomLevel(bbox, width, height);
 		return getOSCCoordinates(bbox, zoomLevel, all);
+		
 	}
 
 	/*
@@ -757,8 +755,9 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 			//elements = cluster(coords, gridSize, zoomLevel);
 			elements = geocluster.cluster(coords, gridSize, zoomLevel);
-			logger.log(Level.INFO,""+elements.size());
+			
 		}
+			
 		return elements.toArray(new Coordinate[elements.size()]);
 		
 	}
@@ -775,21 +774,28 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 					&& coord.getY() <= bbox.getMaxY()) {
 				coords.add(coord);
 			}
+			
 		}
 
 		return coords;
+		
+		
 	}
 
 	public void clusterCalc(){
-//		Set<Coordinate> elements = new HashSet<Coordinate>();
-//		
-//		for (int i = minClusterZoomLevel; i <= maxClusterZoomLevel; i++){
-//			Set<Coordinate> coords = new HashSet<Coordinate>();
-//			coords.addAll(getOSCCoordinates(bbox, all));
-//			elements = geocluster.cluster(coords, clusterGridSize, i);
-//		}
-//			elements.toArray(new Coordinate[elements.size()]);
-//			
+		if(flagRefreshClusters){
+		Set<Coordinate> elements = new HashSet<Coordinate>();
+		
+		for (int i = minClusterZoomLevel; i <= maxClusterZoomLevel; i++){
+			BoundingBox bbox = new BoundingBox();
+			bbox.setBounds(-135.2343766875, -41.83682747857742, 32.0214826875, 19.062118368308703);
+			Set<Coordinate> coords = new HashSet<Coordinate>();
+			coords.addAll(getOSCCoordinates(bbox, true));
+			elements = geocluster.cluster(coords, clusterGridSize, i);
+		}
+			Coordinate[] a = elements.toArray(new Coordinate[elements.size()]);
+			logger.log(Level.INFO, ""+a);
+		}
 //			Connection conn = getConnection();
 //			PreparedStatement pstmt = null;
 //			String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
