@@ -31,7 +31,10 @@ public class StaticContentController
 				logger.info("Chave de criptografia encontrada");
 				url = result.getUrl();
 				setTitle(result.getTitle());
-				loadStaticContent("static_content");
+				if(url.length() > 0)
+					loadStaticContent("static_content");
+				else
+					DOM.getElementById("static_content").setInnerText("Unknown Page Requested");
 			}
 
 		};
