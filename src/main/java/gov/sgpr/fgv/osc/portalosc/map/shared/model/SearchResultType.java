@@ -6,6 +6,6 @@ package gov.sgpr.fgv.osc.portalosc.map.shared.model;
  *
  */
 public enum SearchResultType {
-	REGION, STATE, COUNTY, OSC;
+	REGION, STATE, COUNTY, OSC, ADDRESS;
 
 }

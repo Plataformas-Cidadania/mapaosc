@@ -3,8 +3,11 @@ package gov.sgpr.fgv.osc.portalosc.map.client.controller;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchGoogleResult;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -13,6 +16,10 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
@@ -103,8 +110,57 @@ public class SearchController {
 			}
 			
 			public void onSuccess(List<SearchResult> result) {
+				if(result.size() < 5 && searchWidget.getValue().length() > 3){
+					String address = searchWidget.getValue();
+					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+");
+					
+					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
+					try{
+						req.sendRequest(null, new RequestCallback() {
+							
+							@Override
+							public void onResponseReceived(Request request, Response response) {
+								ArrayList<SearchGoogleResult> searchGoogleResultList = new ArrayList<SearchGoogleResult>();
+								
+								Boolean flag = false;
+								for(String s : response.getText().split("\n")){
+									SearchGoogleResult searchResult = new SearchGoogleResult();
+									if(s.contains("formatted_address")) searchResult.setAddress(s.split(": ")[1].split("\",")[0].replace("\"", ""));
+									if(s.contains("\"location\" :")) flag = true;
+									if(flag){
+										if(s.contains("lat")) searchResult.setLatitude(s.split(": ")[1].split(",")[0].replace("\"", ""));
+										else if(s.contains("lng")) searchResult.setLongetude(s.split(": ")[1].replace("\"", ""));
+										if(searchResult.getLatitude() != null && searchResult.getLongetude() != null) flag = false;
+									}
+									searchGoogleResultList.add(searchResult);
+								}
+								
+								ArrayList<SearchResult> searchResultList = new ArrayList<SearchResult>();
+								Integer id = -1;
+								for(SearchGoogleResult searchGoogleResult : searchGoogleResultList){
+									logger.info(searchGoogleResult.toString());
+									SearchResult searchResult = new SearchResult();
+									searchResult.setId(-1);
+									searchResult.setValue(searchGoogleResult.getAddress());
+									searchResult.setType(SearchResultType.OSC);
+									searchResultList.add(searchResult);
+									id--;
+								}
+								
+//								searchWidget.setItems(searchResultList);
+							}
+							
+							@Override
+							public void onError(Request request, Throwable exception) {
+								logger.info("Erro na busca de endereço pelo Google");
+							}
+						});
+					}catch(Exception e){
+						logger.info("Erro na busca de endereço pelo Google\n" + e);
+					}
+				}
 				searchWidget.setItems(result);
-			
+				
 				searchWidget.addFocus(new EventListener() {
 					@Override
 					public void onBrowserEvent(Event event) {
