@@ -161,7 +161,7 @@ import java.util.Arrays;
 
 	/**
 	 * @return Fontes de dados da Informação
-	 */
+	 * /
 	public DataSource[] getDataSources() {
 		return dataSources;
 	}
