@@ -9,15 +9,13 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.StaticContentService;
 import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.StaticContentServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.model.Content;
-import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 
 public class StaticContentController 
 {
 	private static Logger logger = Logger.getLogger(StaticContentController.class.getName());
-	private StaticContentServiceAsync staticContentService = com.google.gwt.core.shared.GWT.create(StaticContentService.class);
+	private StaticContentServiceAsync staticContentService = com.google.gwt.core.shared.GWT.create(StaticContentServiceAsync.class);
 	private String url;
 	
 	public void init() 
