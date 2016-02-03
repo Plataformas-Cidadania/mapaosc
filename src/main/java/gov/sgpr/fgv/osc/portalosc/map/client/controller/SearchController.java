@@ -4,7 +4,6 @@ import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
 
 import java.util.Date;
 import java.util.List;
@@ -17,7 +16,6 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -45,9 +43,11 @@ public class SearchController {
 			@Override
 			public void onBrowserEvent(Event event) {
 				if(event.getKeyCode() == KeyCodes.KEY_DOWN || event.getKeyCode() == KeyCodes.KEY_UP){
-					if(DOM.getElementById("list1") != null)
+					if(DOM.getElementById("list1") != null) {
 						DOM.getElementById("list1").focus();
-				}else{
+					}
+				}
+				else{
 					changeDate = new Date();
 					final Date thisDate = changeDate;
 					Timer t = new Timer() {
@@ -63,35 +63,35 @@ public class SearchController {
 			}
 		});
 		
-		searchWidget.addSearchClickListener(new EventListener() {
-			@Override
-			public void onBrowserEvent(Event event) {
-				String criteria = searchWidget.getValue();
-				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-					
-					public void onFailure(Throwable caught) {
-						logger.log(Level.SEVERE, caught.getMessage());
-					}
-					
-					public void onSuccess(List<SearchResult> result) {
-						if (!result.isEmpty()) {
-							if (result.get(0).getType().equals(SearchResultType.STATE)){
-								History.newItem("P" + result.get(0).getId());
-							}
-							if (result.get(0).getType().equals(SearchResultType.COUNTY)){
-								History.newItem("P" + result.get(0).getId());
-							}
-							if (result.get(0).getType().equals(SearchResultType.OSC)){
-								History.newItem("O" + result.get(0).getId());
-							}
-							
-							searchWidget.close();
-						}
-					}
-				};
-				searchService.search(criteria, LIMIT, callbackSearch);
-			}
-		});
+//		searchWidget.addSearchClickListener(new EventListener() {
+//			@Override
+//			public void onBrowserEvent(Event event) {
+//				String criteria = searchWidget.getValue();
+//				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
+//					
+//					public void onFailure(Throwable caught) {
+//						logger.log(Level.SEVERE, caught.getMessage());
+//					}
+//					
+//					public void onSuccess(List<SearchResult> result) {
+//						if (!result.isEmpty()) {
+//							if (result.get(0).getType().equals(SearchResultType.STATE)){
+//								History.newItem("P" + result.get(0).getId());
+//							}
+//							if (result.get(0).getType().equals(SearchResultType.COUNTY)){
+//								History.newItem("P" + result.get(0).getId());
+//							}
+//							if (result.get(0).getType().equals(SearchResultType.OSC)){
+//								History.newItem("O" + result.get(0).getId());
+//							}
+//							
+//							searchWidget.close();
+//						}
+//					}
+//				};
+//				searchService.search(criteria, LIMIT, callbackSearch);
+//			}
+//		});
 	}
 	
 	private void search() {
@@ -135,8 +135,9 @@ public class SearchController {
 				});
 			}
 		};
-		if (!criteria.trim().isEmpty())
+		if (!criteria.trim().isEmpty()) {
 			searchService.search(criteria, LIMIT, callbackSearch);
+		}
 	}
 	
 	/**

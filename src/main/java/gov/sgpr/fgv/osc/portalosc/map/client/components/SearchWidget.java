@@ -155,8 +155,7 @@ public class SearchWidget extends Composite {
 		int top = searchBox.getAbsoluteTop() + searchBox.getOffsetHeight();
 		searchResultsPanel.setPopupPosition(left, top);
 		DOM.setIntStyleAttribute(searchResultsPanel.getElement(), "zIndex", 200);
-		DOM.setStyleAttribute(searchResultsPanel.getElement(), "overflow",
-				"auto");
+		DOM.setStyleAttribute(searchResultsPanel.getElement(), "overflow", "auto");
 		searchResultsPanel.show();
 		
 		result = oscItems.size() + stateItems.size() + countyItems.size();
@@ -170,23 +169,17 @@ public class SearchWidget extends Composite {
 	private HTML getHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<form name=\"Busca\">");
-		htmlBuilder
-				.append("	<label for=\"campobusca\" class=\"esconder\">Buscar organização</label>");
-		htmlBuilder
-				.append("	<input type=\"text\" name=\"campobusca\" id=\"campobusca\" placeholder=\"Informe a localização ou a organização desejada...\"  />");
-		htmlBuilder
-				.append("	<button type=\"button\" name=\"buscar\" id=\"buscar\" class=\"buscar\">Buscar</button>");
-		htmlBuilder
-				.append("	<button type=\"button\" name=\"ajuda\" class=\"ajuda\" id=\"ajuda\">?</button>");
+		htmlBuilder.append("	<label for=\"campobusca\" class=\"esconder\">Buscar organização</label>");
+		htmlBuilder.append("	<input type=\"text\" name=\"campobusca\" id=\"campobusca\" placeholder=\"Informe a localização ou a organização desejada...\"  />");
+//		htmlBuilder.append("	<button type=\"button\" name=\"buscar\" id=\"buscar\" class=\"buscar\">Buscar</button>");
+		htmlBuilder.append("	<button type=\"button\" name=\"ajuda\" class=\"ajuda\" id=\"ajuda\">?</button>");
 		htmlBuilder.append("</form>");
 		htmlBuilder.append("<div class=\"filtros\">");
-		htmlBuilder
-				.append("	<a href=\"#busca_filtros\" class=\"filtrar box\">Filtrar</a>");
+		htmlBuilder.append("	<a href=\"#busca_filtros\" class=\"filtrar box\">Filtrar</a>");
 		htmlBuilder.append("	<div class=\"ajuda filtros\">");
 		htmlBuilder.append("		<p>Ajuda filtro</p>");
 		htmlBuilder.append("	</div>");
-		htmlBuilder
-				.append("	<button type=\"button\" name=\"ajuda\" class=\"ajuda\" id=\"ajuda_filtros\">?</button>");
+		htmlBuilder.append("	<button type=\"button\" name=\"ajuda\" class=\"ajuda\" id=\"ajuda_filtros\">?</button>");
 		htmlBuilder.append("</div>");
 
 		HTML html = new HTML(htmlBuilder.toString());
@@ -207,12 +200,9 @@ public class SearchWidget extends Composite {
 				helpPanel.getElement().setId("ajuda");
 				helpPanel.setWidth("210px");
 				helpPanel.setAutoHideEnabled(true);
-				helpPanel.setPopupPosition(
-						btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(),
-						btnHelp.getAbsoluteTop() + btnHelp.getOffsetHeight());
+				helpPanel.setPopupPosition(btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(), btnHelp.getAbsoluteTop() + btnHelp.getOffsetHeight());
 				DOM.setIntStyleAttribute(helpPanel.getElement(), "zIndex", 100);
-				DOM.setStyleAttribute(helpPanel.getElement(), "background",
-						"black");
+				DOM.setStyleAttribute(helpPanel.getElement(), "background", "black");
 				DOM.setStyleAttribute(helpPanel.getElement(), "color", "white");
 				DOM.setStyleAttribute(helpPanel.getElement(), "padding", "5px");
 				helpPanel.show();
@@ -243,11 +233,11 @@ public class SearchWidget extends Composite {
 		Event.setEventListener(elem, listener);
 	}
 
-	public void addSearchClickListener(EventListener listener) {
-		final Element elem = DOM.getElementById("buscar");
-		Event.sinkEvents(elem, Event.ONCLICK);
-		Event.setEventListener(elem, listener);
-	}
+//	public void addSearchClickListener(EventListener listener) {
+//		final Element elem = DOM.getElementById("buscar");
+//		Event.sinkEvents(elem, Event.ONCLICK);
+//		Event.setEventListener(elem, listener);
+//	}
 
 	public void addFilterClickListener(EventListener listener) {
 		final Element elem = DOM.getElementById("ajuda_filtros");
