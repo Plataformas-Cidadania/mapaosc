@@ -83,7 +83,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OSCService#getSummary
 	 * (int)
 	 */
-	public OscSummary getSummary(int oscId) throws RemoteException {
+	/*public OscSummary getSummary(int oscId) throws RemoteException {
 		
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -179,6 +179,107 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			return path;
 		} else {
 			return null;
+		}
+	}*/
+	public OscSummary getSummary(int oscId) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT bosc_nr_identificacao, dcti_cd_tipo, bosc_nm_osc, bosc_nm_fantasia_osc, ospr_ds_endereco, "
+				+ "ospr_ds_endereco_complemento, ospr_nm_bairro, ospr_nm_municipio, ospr_sg_uf, ospr_nm_cep, "
+				+ "dcsc_cd_alpha_subclasse, dcsc_nm_subclasse, ST_AsText(ospr_geometry) wkt, dcnj_cd_alpha_natureza_juridica, "
+				+ "dcnj_nm_natureza_juridica, ospr_dt_ano_fundacao, ospr_ee_site, ospr_cd_municipio, cont_ds_tipo_contato,"
+				+ " cont_ds_contato, ' ' as contatos "
+				+ "FROM portal.vm_osc_principal a JOIN portal.tb_osc_contato b ON a.bosc_sq_osc = b.bosc_sq_osc "
+				+ "WHERE a.bosc_sq_osc = ? GROUP BY a.bosc_sq_osc, b.cont_ds_tipo_contato, b.cont_ds_contato ";
+		
+
+		// logger.info(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oscId);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				OscSummary summary = new OscSummary();
+				summary.setId(oscId);
+				long code = rs.getLong("bosc_nr_identificacao");
+				summary.setCode(code);
+				int type = rs.getInt("dcti_cd_tipo");
+				if (type == 1) {
+					summary.setFormattedCode(formatCNPJ(code));
+				} else {
+					summary.setFormattedCode(String.valueOf(code));
+				}
+				String name = rs.getString("bosc_nm_fantasia_osc");
+				if (name == null || name.isEmpty())
+					name = rs.getString("bosc_nm_osc");
+				summary.setName(name);
+				summary.setRecomendations(getRecommendations(oscId));
+				String address = rs.getString("ospr_ds_endereco");
+				String neighborhood = rs.getString("ospr_nm_bairro");
+				String county = rs.getString("ospr_nm_municipio");
+				String state = rs.getString("ospr_sg_uf");
+				String cep = rs.getString("ospr_nm_cep");
+				String complement = rs
+						.getString("ospr_ds_endereco_complemento");
+
+				StringBuilder fullAddress = new StringBuilder(address);
+				if (neighborhood != null && !neighborhood.isEmpty()) {
+					fullAddress.append(", " + neighborhood);
+				}
+				fullAddress.append(", " + county);
+				fullAddress.append(", " + state);
+				if (cep != null && !cep.isEmpty()) {
+					fullAddress.append(", " + cep);
+				}
+				if (complement != null && !complement.isEmpty()) {
+					fullAddress.append(", " + complement);
+				}
+				summary.setAddress(fullAddress.toString());
+				//summary.setContacts(rs.getString("cont_ds_contato"));
+				
+				summary.setCountyId(rs.getInt("ospr_cd_municipio"));
+				
+				summary.setContatos(rs.getString("cont_ds_contato"));
+				
+				summary.setCnaeCode(rs.getString("dcsc_cd_alpha_subclasse"));
+				summary.setCnaeDescription(rs.getString("dcsc_nm_subclasse"));
+				summary.setLegalTypeCode(rs
+						.getString("dcnj_cd_alpha_natureza_juridica"));
+				summary.setLegalTypeDescription(rs
+						.getString("dcnj_nm_natureza_juridica"));
+				summary.setFoundationYear(rs.getInt("ospr_dt_ano_fundacao"));
+				summary.setSite(rs.getString("ospr_ee_site"));
+				summary.setState(rs.getString("ospr_sg_uf"));
+				summary.setCounty(rs.getString("ospr_nm_municipio"));
+				String wkt = rs.getString("wkt");
+				if (wkt != null && !wkt.isEmpty()) {
+					WKTReader reader = new WKTReader();
+					try {
+						Point point = (Point) reader.read(wkt);
+						OscCoordinate coord = new OscCoordinate();
+						coord.setId(oscId);
+						coord.setX(point.getX());
+						coord.setY(point.getY());
+						summary.setCoordinate(coord);
+					} catch (ParseException e) {
+						logger.severe(e.getMessage());
+					}
+				}
+				summary.setContacts(getContacts(oscId));
+				int[] dsCodes = { 1, 2, 5, 6, 8, 12, 13 };
+				DataSource[] dataSources = getDataSources(dsCodes, oscId);
+				summary.setDataSources(dataSources);
+
+				return summary;
+			}
+			return null;
+
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
 		}
 	}
 
