@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript">document.documentElement.className += " js";</script>
 
-	<script type="text/javascript" src="User/User.nocache.js"></script>
+	<script type="text/javascript" src="StaticContent/StaticContent.nocache.js"></script>
 
 </head>
 
@@ -73,101 +73,15 @@
 
 				<div id="mapa" class="institucional">
 
-					<div><h1>Acessibilidade</h1>
-					<div class="wrapper clearfix acessibilidade">
-						<div>
-							<p>Este portal segue as diretrizes do eMAG (Modelo de Acessibilidade em Governo Eletrônico), conforme as normas do Governo Federal, em obediência ao Decreto nº 5.296, de 2.12.2004.</p>
-							<p>O termo acessibilidade significa incluir a pessoa com deficiência na participação de atividades como o uso de produtos, serviços e informações. Alguns exemplos são os prédios com rampas de acesso para cadeira de rodas e banheiros adaptados para deficientes.</p>
-							<p>Na internet, acessibilidade refere-se principalmente às recomendações do WCAG (World Content Accessibility Guide) do W3C e, no caso do Governo Brasileiro, ao eMAG (Modelo de Acessibilidade em Governo Eletrônico). O eMAG está alinhado as recomendações internacionais, mas estabelece padrões de comportamento acessível para sítios governamentais.</p>
-							<p>Na parte superior do portal existe uma barra de acessibilidade onde se encontram atalhos de navegação padronizados e a opção para alterar o contraste. Essas ferramentas estão disponíveis em todas as páginas do portal.</p>
-						</div>	
-						<h2>Atalhos de Acessibilidade</h2>
-						<div>
-							<ul class="text-list">
-								<li> Alt + 1: Acessar Conteúdo </li>
-								<li> Alt + 2: Acessar Menu Principal </li>
-								<li> Alt + 3: Acessar Busca </li>
-								<li> Alt + 4: Acessar Rodapé </li>
-							</ul>
-						</div>
-						<h2>Utilização dos atalhos</h2>
-						<div>
-							<p>Esses atalhos valem para o navegador Chrome, mas existem algumas variações para outros navegadores:</p>
-							<ul class="text-list">
-								<li>Quem prefere utilizar o Internet Explorer é preciso apertar o botão Enter do seu teclado após uma das combinações acima. Portanto, para chegar ao campo de busca interna é preciso pressionar Alt+3 e depois Enter.</li>
-								<li>No caso do Firefox, em vez de Alt + número, tecle simultaneamente Alt + Shift + número.</li>
-								<li>Sendo Firefox no Mac OS, em vez de Alt + Shift + número, tecle simultaneamente Ctrl + Alt + número.</li>
-								<li>No Opera, as teclas são Shift + Escape + número. Ao teclar apenas Shift + Escape, o usuário encontrará uma janela com todas as alternativas de ACCESSKEY da página.</li>
-							</ul>
-						</div>
-						
-						<h2>Testes de Acessibilidade</h2>
-						<div>
-							<div>
-								<h3><a href="http://www.governoeletronico.gov.br/acoes-e-projetos/e-MAG/ases-avaliador-e-simulador-de-acessibilidade-sitios">Teste ASES</a></h3>
-								<p>
-									No teste ASES foram encontrados erros referentes a elementos do tipo link próximos entre si, elementos cuja funcionalidade se dá exclusivamente por mouse e objetos gerados por javascript que não estarão disponíveis para quem não tem javascript habilitado. Alguns avisos também foram dados em relação ao conteúdo das páginas e os mesmos foram avaliados em um teste de especialista descrito abaixo.  
-								</p>
-							</div>
-							<div>
-								<h3><a href="http://www.cynthiasays.com/">Teste WCAG</a></h3>
-								<p>
-									No teste de WCAG os seguintes erros foram encontrados para alcançar a categoria A:
-								</p>
-								<ul class="text-list">
-									<li>Falta de elementos nav e/ou a utilização dos Aria Roles apropriados</li>
-									<li>Elementos cuja única identificação de seu estado ou função são imagens ou cores</li>
-									<li>Aumentar a descritibilidade das ações realizadas pelos links em seu texto, alt, title</li>
-									<li>Elementos que não funcionam com teclado</li>
-								</ul>
-								<p>Um outro problema apresentado pelo teste foi referente a utilização dos Headings (Cabeçalhos), entretanto outros testes como o teste sintático do html e a verificação manual das regras do WCAG não corroboraram para existência desse problema, assim a existência do mesmo terá de ser avaliada em testes de usabilidade com usuários com deficiência.</p>
-							</div>
-							<div>
-								<h3><a href="www.nvaccess.org/">Teste com Leitor de Tela NVDA</a></h3>
-								<p>
-									O teste com leitor de tela NVDA demonstrou a necessidade de alterações em diversas páginas para facilitar a navegação de quem utiliza teclado e da criação de funcionalidades extras para facilitar a navegação. É importante ressaltar que o leitor de tela DOSVOX não funciona no Mapa das OSCs devido ao fato do mesmo não processar javascript. 
-								</p>
-								<p>
-									É importante ressaltar que os testes com leitores de tela como o DOSVOX não são possíveis posto que o funcionamento do Mapa pressupõe a execução de javascript e portanto não há de funcionar na navegação limitada do DOSVOX. Talvez haja alguma extensão ou mecanismo para o pleno funcionamento do Mapa no DOSVOX, entretanto como o mesmo não é parece existir o uso do DOSVOX é desaconselhado, sendo recomendado o uso do JAWS ou NVDA como substitutos.  
-								</p>
-							</div>
-							<div>
-								<h3><a href="#">Teste com Usuários com Deficiência Visual</a></h3>
-								<p>
-									Não realizado.
-								</p>
-							</div>
-						</div>
-						<p>Ao final desse texto, você poderá baixar alguns arquivos que explicam melhor o termo acessibilidade e como deve ser implementado nos sítios da Internet.</p>
-						<h2>Leis e decretos sobre acessibilidade:</h2>
-						<div>
-							<ul class="text-list">
-								<li><a href="http://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/decreto/d5296.htm">Decreto nº 5.296 de 02 de dezembro de 2004 (link externo)</a></li>
-								<li><a href="http://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/decreto/d6949.htm">Decreto nº 6.949, de 25 de agosto de 2009 (link externo) - Promulga a Convenção Internacional sobre os Direitos das Pessoas com Deficiência e seu Protocolo Facultativo, assinados em Nova York, em 30 de março de 2007</a></li>
-								<li><a href="http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/decreto/d7724.htm">Decreto nº 7.724, de 16 de Maio de 2012 (link externo) - Regulamenta a Lei Nº 12.527, que dispõe sobre o acesso a informações.</a></li>
-								<li><a href="http://www.governoeletronico.gov.br/acoes-e-projetos/e-MAG">Modelo de Acessibilidade de Governo Eletrônico (link externo)</a></li>
-								<li><a href="http://www.governoeletronico.gov.br/o-gov.br/legislacao/portaria-no-03-de-07-de-maio-de-2007">Portaria nº 03, de 07 de Maio de 2007 (link externo) - Institucionaliza o Modelo de Acessibilidade em Governo Eletrônico – e-MAG</a></li>
-							</ul>
-						</div>
-						<h2>Dúvidas, sugestões e críticas:</h2>
-						<div>
-							<p>No caso de problemas com a acessibilidade do mapa, favor <a href="mailto:mapaosc@ipea.gov.br">enviar mensagem para mapaosc@ipea.gov.br</a>.</p>
-						</div>
-						<h2>Dicas, links e recursos úteis:</h2>
-						<div>
-							<ul class="text-list">
-								<li><a href="http://acessibilidadelegal.com/">Acessibilidade Legal (link externo)</a></li>
-								<li><a href="http://acessodigital.net/">Acesso Digital (link externo)</a></li>
-							</ul>
-						</div>
+					<div><h1 id="page_header"></h1></div>
+					<div id="static_content" class="wrapper clearfix acessibilidade">
 					</div>
-
 				</div>
 
 				<div id="rodape" class="clearfix">
 					<div class="clearfix">
 						<div class="celula01">
-							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Mapa das Organizações da Sociedade Civil &copy; 2016</h2>
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Mapa das Organizações da Sociedade Civil &copy; 2015</h2>
 							<a href="beta.html" class="beta">Versão BETA</a>
 						</div>
 						<div class="celula02">

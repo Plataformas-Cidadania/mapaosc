@@ -317,20 +317,12 @@
 									<fieldset>
 										<div class="diretores">
 											<div>
-												<select>
-													<option>Diretor Financeiro</option>
-													<option>Diretor Administrativo</option>
-													<option>Diretor de Recursos Humanos</option>
-												</select>
+												<input type="text" name="cargo1" id="cargo1" placeholder="Diretor..." value="Diretor Financeiro">
 												<input type="text" name="diretor1" id="diretor1" value="João Silveira Nunes da Mesquita" />
 												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 											</div>
 											<div>
-												<select>
-													<option>Diretor Financeiro</option>
-													<option>Diretor Administrativo</option>
-													<option>Diretor de Recursos Humanos</option>
-												</select>
+												<input type="text" name="cargo2" id="cargo2" placeholder="Diretor..." value="Diretor Administrativo">
 												<input type="text" name="diretor2" id="diretor2" value="Joaquim Silveira Nunes da Mesquita" />
 												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>
 											</div>
@@ -403,7 +395,7 @@
 										</ul>
 									</div>
 
-									<h2>Últimos documentos <a href="documentos.html" class="box">Ver todos</a></h2>
+									<!-- <h2>Últimos documentos <a href="documentos.html" class="box">Ver todos</a></h2>
 									<div class="documentos">
 										<ul class="dados">
 											<li class="incluidos">(100% incluídos)</li>
@@ -414,7 +406,7 @@
 											<li class="fonte"><em>Fonte:</em> SICONV</li>
 										</ul>
 										<button type="button" class="carregar">Carregar</button>
-									</div>
+									</div> -->
 
 									<h2>Certificados federais <a href="certificados.html" class="box">Ver todos</a></h2>
 									<div>
@@ -558,7 +550,11 @@
 									<div class="clearfix projeto collapsable">
 										<div class="projeto_header">
 											<div class="collapse-click collapse-button"><div></div></div>
-											<span class="nome">2 | Lorem ipsum dolor sit, consectetur adipiscing.</span>
+											<div class="nome">
+												<span class="no_margin_right">2 |</span>
+												<span class="no_margin numero_convenio"> Parceria nºWWWWWWWWWW </span>
+												<span class="no_margin titulo_convenio"><input value="Lorem ipsum dolor sit, consectetur adipiscing." /></span>
+											</div>
 											<span class="clear_both"></span>
 										</div>
 										<div class="projeto_body collapse-hidden">
@@ -599,7 +595,7 @@
 												</div>
 												<div class="col1_6">
 													<strong class="right-radius">Link</strong>
-													<p><a href="vamosla" contenteditable='false'>link para página</a></p>
+													<p><a href="vamosla" contenteditable='false'>Sobre a Parceria</a></p>
 												</div>
 											</div>
 										
@@ -927,12 +923,8 @@
 		
 		$('#adicionarDiretor').click(function(){
 			$('.diretores').append('<div> \
-												<select>\
-													<option>Diretor Financeiro</option>\
-													<option>Diretor Administrativo</option>\
-													<option>Diretor de Recursos Humanos</option>\
-												</select>\
-												<input type="text" name="diretor1" id="diretor1" value="" class="valid">\
+												<input type="text" name="cargo1" id="cargo1" placeholder="Diretor...">\
+												<input type="text" name="diretor1" id="diretor1" value="" class="valid" placeholder="Nome do Diretor">\
 												<div class="botoes"><button type="button" class="excluir participacao">Excluir</button></div>\
 											</div>');
 		});

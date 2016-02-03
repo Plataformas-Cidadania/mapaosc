@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 1.6.4//EN" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.4/distro-source/core/src/gwt-module.dtd">
+<module rename-to='StaticContent'>
+	<define-property name="gwt.logging.firebugHandler" values="ENABLED, DISABLED"/>
+	<define-property name="gwt.logging.popupHandler" values="ENABLED, DISABLED"/>
+	
+	<inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
+	<inherits name="gov.sgpr.fgv.osc.portalosc.user.User" />
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.logging.Logging" />
+	<inherits name='com.google.gwt.junit.JUnit' />
+	<inherits name="com.google.gwt.i18n.I18N"/>
+<!-- 	<inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
+	<stylesheet src='/css/estilo.css'/>
+	<extend-property name="locale" values="pt_BR"/>
+	
+	<source path='client' />
+	<source path='shared' />
+	
+	<entry-point class="gov.sgpr.fgv.osc.portalosc.staticcontent.client.StaticContent" />
+	
+	<set-property name="gwt.logging.enabled" value="TRUE" />
+	<set-property name="gwt.logging.logLevel" value="INFO" />
+	<set-property name="gwt.logging.firebugHandler" value="DISABLED" />
+	<set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" /> 
+	<set-property name="gwt.logging.consoleHandler" value="DISABLED" />
+	<set-property name="gwt.logging.developmentModeHandler"	value="DISABLED" />
+	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
+	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
+	
+	<servlet path='/staticContentService' class='gov.sgpr.fgv.osc.portalosc.staticcontent.server.StaticContentServiceImpl'></servlet>
+</module>

@@ -2762,8 +2762,8 @@ a.botao:hover{text-decoration: none; color:#fff; background-color: #1F3D93;}
 	min-width:80%;
 }
 
-.nome .titulo_projeto input {
-	padding: 5px;
+.nome .titulo_projeto input, .nome .titulo_convenio input {
+	padding: 6px 4px;
 	border-radius:10px;
 	font-family: RobotoBold, sans-serif;
 	line-height: 20px;
@@ -3347,4 +3347,19 @@ ul.text-list > li {
 #mapa.institucional .acessibilidade h3 {
 	margin-left: 40px;
 	border-bottom: 0px;
+}
+
+#mapa.organizacao div.tabela .dados .diretores input:first-child {
+	width:160px;
+}
+
+.nome .numero_convenio {
+	min-width:20%;
+	padding: 7px 4px;
+	font-family: RobotoBold, sans-serif;
+	line-height: 20px;
+}
+
+.nome .titulo_convenio {
+	min-width:60%;
 }
