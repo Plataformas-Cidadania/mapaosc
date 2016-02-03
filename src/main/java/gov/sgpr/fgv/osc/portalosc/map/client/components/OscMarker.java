@@ -92,16 +92,34 @@ public class OscMarker {
 		PaperClipKeyValueSection oscInfo = new PaperClipKeyValueSection();
 		oscInfo.setSectionTitle("");
 
-		if (summary.getLegalTypeDescription() != null) {
+		/*if (summary.getLegalTypeDescription() != null) {
 			oscInfo.addKeyValue("Natureza Jurídica",
 					summary.getLegalTypeDescription());
+		}*/
+		if (summary.getAddress() != null) {
+			oscInfo.addKeyValue("Endereço",
+					summary.getAddress());
 		}
-		if (summary.getFoundationYear() != null
+		/*if (summary.getContatos() != null) {
+			oscInfo.addKeyValue("Contatos",
+					summary.getContatos());
+		}*/
+		//PaperClipCheckListSection oscContacts = new PaperClipCheckListSection();
+		//oscContacts.setSectionTitle("Contatos");
+		
+		Map<String, String> Contatos = summary.getContacts();
+		
+		for (int i = 0; i<Contatos.size(); i++) { 
+				oscInfo.addKeyValue("Contatos",Contatos.toString());
+		}
+		//oscInfo.addKeyValue(Contatos.get(Contatos.toString());
+		
+/*		if (summary.getFoundationYear() != null
 				&& summary.getFoundationYear() != 0) {
 			oscInfo.addKeyValue("Ano de Fundação",
 					String.valueOf(summary.getFoundationYear()));
 		}
-		if (summary.getLength() != null) {
+/*		if (summary.getLength() != null) {
 			oscInfo.addKeyValue("Tamanho da OSC", summary.getLength()
 					+ " vínculos");
 		}
@@ -114,11 +132,11 @@ public class OscMarker {
 				fmt.format(summary.getEncourageLawValue()));
 
 		String committee = summary.isCommitteeParticipant() ? "sim" : "não";
-		oscInfo.addKeyValue("Participa de Conselhos ou Comissões", committee);
+		oscInfo.addKeyValue("Participa de Conselhos ou Comissões", committee);*/
 
 		PaperClipCheckListSection oscCertifications = new PaperClipCheckListSection();
-		oscCertifications.setSectionTitle("Certificações");
-		Certifications cert = summary.getCertifications();
+		oscCertifications.setSectionTitle("Dados");//Certificações");
+/*		Certifications cert = summary.getCertifications();
 		boolean oscip = cert.getOscipPublication() != null;
 		oscCertifications.addElementToList("OSCIP", oscip);
 		boolean upf = cert.getUpfDeclaration() != null;
@@ -134,7 +152,7 @@ public class OscMarker {
 		oscCertifications
 				.addElementToList("Cebas Assistência Social", cebasMDS);
 		boolean cnea = cert.getCneaPublication() != null;
-		oscCertifications.addElementToList("CNEA", cnea);
+		oscCertifications.addElementToList("CNEA", cnea);*/
 
 		List<PaperClipAbstractSection> sections = new ArrayList<PaperClipAbstractSection>();
 		sections.add(oscInfo);
