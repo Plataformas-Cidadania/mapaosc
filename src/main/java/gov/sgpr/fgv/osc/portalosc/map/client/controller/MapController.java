@@ -44,6 +44,7 @@ import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
 import vhmeirelles.gwtGeocluster.model.Cluster;
 import vhmeirelles.gwtGeocluster.model.Coordinate;
+import vhmeirelles.gwtGeocluster.model.SimpleCluster;
 
 /*
  * Eric Ferreira
@@ -211,8 +212,8 @@ public class MapController {
 				Marker oscMarker = OscMarker.create(map, osc, sel);
 				markers.add(oscMarker);
 			}
-			if (location instanceof Cluster) {
-				Cluster cluster = (Cluster) location;
+			if (location instanceof SimpleCluster) {
+				SimpleCluster cluster = (SimpleCluster) location;
 				ClusterMarker.create(map, cluster);
 			}
 		}

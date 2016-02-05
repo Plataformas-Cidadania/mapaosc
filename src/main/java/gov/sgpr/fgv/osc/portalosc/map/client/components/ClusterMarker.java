@@ -18,7 +18,7 @@ import com.google.maps.gwt.client.Projection;
 
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
-import vhmeirelles.gwtGeocluster.model.Cluster;
+import vhmeirelles.gwtGeocluster.model.SimpleCluster;
 
 
 /*
@@ -35,7 +35,7 @@ public class ClusterMarker {
 	private static int[] levels = { 10, 100, 1000, 10000 };
 	private static int[] imageSize = { 30, 39, 47, 57, 65 };
 		
-	public static void create(final GoogleMap map,  final Cluster cluster) {
+	public static void create(final GoogleMap map,  final SimpleCluster cluster) {
 		int level = getLevel(cluster.getQuantity());
 		final LatLng latLng = LatLng.create(cluster.getY(), cluster.getX());
 		Element div = DOM.createDiv();

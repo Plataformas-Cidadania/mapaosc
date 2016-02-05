@@ -5,26 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
+import gov.sgpr.fgv.osc.portalosc.map.client.components.ClusterMarker;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
@@ -33,22 +30,21 @@ import vhmeirelles.gwtGeocluster.model.BoundingBox;
 import vhmeirelles.gwtGeocluster.model.Cluster;
 import vhmeirelles.gwtGeocluster.model.Coordinate;
 import vhmeirelles.gwtGeocluster.model.GeoCluster;
+import vhmeirelles.gwtGeocluster.model.SimpleCluster;
 
 /**
  * @author victor
  * 
- * Eric Ferreira
- * Modified Date: 26/01/2016
- * Change cluster, boundingbox and coordinate classes to library GeoCluster
+ *         Eric Ferreira Modified Date: 26/01/2016 Change cluster, boundingbox
+ *         and coordinate classes to library GeoCluster
  */
- 
+
 public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1171796036824255570L;
-	
 
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -65,13 +61,11 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	private boolean flagRefreshClusters;
 	GeoCluster geocluster = new GeoCluster();
 
-
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * gov.sgpr.fgv.osc.portalosc.map.server.RemoteServiceImpl#init(javax.servlet
-	 * .ServletConfig)
+	 * @see gov.sgpr.fgv.osc.portalosc.map.server.RemoteServiceImpl#init(javax.
+	 * servlet .ServletConfig)
 	 */
 	@Override
 	public void init(ServletConfig config) {
@@ -85,25 +79,22 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		minClusterZoomLevel = Integer.valueOf(context.getInitParameter("MinClusterZoomLevel"));
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
 		flagRefreshClusters = Boolean.valueOf(context.getInitParameter("FlagRefreshClusters"));
-		//clusterCalc();
-		
+		// clusterCalc();
+
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#getOscLocation
-	 * (int, int)
+	 * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#
+	 * getOscLocation (int, int)
 	 */
-	public OscCoordinate[] getOSCCoordinates(int minValue, int maxValue)
-			throws RemoteException {
+	public OscCoordinate[] getOSCCoordinates(int minValue, int maxValue) throws RemoteException {
 		// logger.info("MapServiceImpl.getOSCLocations()");
 		if (running || allOscCoordinates.isEmpty()) {
 			return getOscCoordinatesByRange(minValue, maxValue);
 		} else {
-			Collection<OscCoordinate> oscLocations = allOscCoordinates.subMap(
-					minValue, maxValue).values();
+			Collection<OscCoordinate> oscLocations = allOscCoordinates.subMap(minValue, maxValue).values();
 			return oscLocations.toArray(new OscCoordinate[oscLocations.size()]);
 		}
 	}
@@ -116,8 +107,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	 * @return coleção de oscs
 	 * @throws RemoteException
 	 */
-	private OscCoordinate[] getOscCoordinatesByRange(int minValue, int maxValue)
-			throws RemoteException {
+	private OscCoordinate[] getOscCoordinatesByRange(int minValue, int maxValue) throws RemoteException {
 		// logger.info("MapServiceImpl.getOscLocationsByRange()");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -157,8 +147,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		}
 	}
 
-	private OscCoordinate[] getCountyCoordinates(int countyCode, int minValue,
-			int maxValue) throws RemoteException {
+	private OscCoordinate[] getCountyCoordinates(int countyCode, int minValue, int maxValue) throws RemoteException {
 
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -201,8 +190,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		}
 	}
 
-	private OscCoordinate[] getStateCoordinates(int stateCode, int minValue,
-			int maxValue) throws RemoteException {
+	private OscCoordinate[] getStateCoordinates(int stateCode, int minValue, int maxValue) throws RemoteException {
 
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -245,8 +233,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		}
 	}
 
-	private OscCoordinate[] getRegionCoordinates(int regionCode, int minValue,
-			int maxValue) throws RemoteException {
+	private OscCoordinate[] getRegionCoordinates(int regionCode, int minValue, int maxValue) throws RemoteException {
 
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -515,8 +502,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 	}
 
-	private void createStateCoordinatesCache(int stateCode)
-			throws RemoteException {
+	private void createStateCoordinatesCache(int stateCode) throws RemoteException {
 		// logger.info("MapServiceImpl.createStateCoordinatesCache()");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -540,8 +526,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 	}
 
-	private void createCoordinatesCache(int locationCode)
-			throws RemoteException {
+	private void createCoordinatesCache(int locationCode) throws RemoteException {
 		// logger.info("MapServiceImpl.createCoordinatesCache()");
 		if (String.valueOf(locationCode).length() == 7) {
 			createCountyCoordinatesCache(locationCode);
@@ -555,8 +540,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		throw new RemoteException("Código de localização inválido");
 	}
 
-	private void createCountyCoordinatesCache(int countyCode)
-			throws RemoteException {
+	private void createCountyCoordinatesCache(int countyCode) throws RemoteException {
 		// logger.info("MapServiceImpl.createCountyCoordinatesCache(" +
 		// countyCode + ")");
 		Connection conn = getConnection();
@@ -593,15 +577,13 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			countyCoordinates.put(countyCode, coordinates);
 			int stateCode = countyCode / 100000;
 			int regionCode = stateCode / 10;
-			ConcurrentNavigableMap<Integer, OscCoordinate> stateCoord = stateCoordinates
-					.get(stateCode);
+			ConcurrentNavigableMap<Integer, OscCoordinate> stateCoord = stateCoordinates.get(stateCode);
 			if (stateCoord == null) {
 				stateCoord = new ConcurrentSkipListMap<Integer, OscCoordinate>();
 			}
 			stateCoord.putAll(coordinates);
 			stateCoordinates.put(stateCode, stateCoord);
-			ConcurrentNavigableMap<Integer, OscCoordinate> regionCoord = regionCoordinates
-					.get(regionCode);
+			ConcurrentNavigableMap<Integer, OscCoordinate> regionCoord = regionCoordinates.get(regionCode);
 			if (regionCoord == null) {
 				regionCoord = new ConcurrentSkipListMap<Integer, OscCoordinate>();
 			}
@@ -634,13 +616,12 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#getOSCCoordinates
-	 * (int, int, int)
+	 * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#
+	 * getOSCCoordinates (int, int, int)
 	 */
-	public OscCoordinate[] getOSCCoordinates(int locationCode, int minValue,
-			int maxValue) throws RemoteException {
-		// logger.info("MapServiceImpl.getOSCCoordinates(locationCode,  minValue, maxValue)");
+	public OscCoordinate[] getOSCCoordinates(int locationCode, int minValue, int maxValue) throws RemoteException {
+		// logger.info("MapServiceImpl.getOSCCoordinates(locationCode, minValue,
+		// maxValue)");
 		if (running || countyCoordinates.isEmpty()) {
 			if (String.valueOf(locationCode).length() == 7)
 				return getCountyCoordinates(locationCode, minValue, maxValue);
@@ -653,19 +634,16 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			throw new RemoteException("Código de localização inválido");
 		}
 		if (String.valueOf(locationCode).length() == 7) {
-			Collection<OscCoordinate> coords = countyCoordinates
-					.get(locationCode).subMap(minValue, maxValue).values();
+			Collection<OscCoordinate> coords = countyCoordinates.get(locationCode).subMap(minValue, maxValue).values();
 			return coords.toArray(new OscCoordinate[coords.size()]);
 		}
 		if (String.valueOf(locationCode).length() == 2) {
-			Collection<OscCoordinate> coords = stateCoordinates
-					.get(locationCode).subMap(minValue, maxValue).values();
+			Collection<OscCoordinate> coords = stateCoordinates.get(locationCode).subMap(minValue, maxValue).values();
 			return coords.toArray(new OscCoordinate[coords.size()]);
 		}
 
 		if (String.valueOf(locationCode).length() == 1) {
-			Collection<OscCoordinate> coords = regionCoordinates
-					.get(locationCode).subMap(minValue, maxValue).values();
+			Collection<OscCoordinate> coords = regionCoordinates.get(locationCode).subMap(minValue, maxValue).values();
 			return coords.toArray(new OscCoordinate[coords.size()]);
 		}
 
@@ -690,8 +668,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		if (String.valueOf(locationCode).length() == 2) {
 			int size = 0;
 			for (int code : countyCoordinates.keySet()) {
-				if (String.valueOf(code).substring(0, 2)
-						.equals(String.valueOf(locationCode))) {
+				if (String.valueOf(code).substring(0, 2).equals(String.valueOf(locationCode))) {
 					size = size + countyCoordinates.get(code).size();
 				}
 			}
@@ -700,8 +677,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		if (String.valueOf(locationCode).length() == 1) {
 			int size = 0;
 			for (int code : countyCoordinates.keySet()) {
-				if (String.valueOf(code).substring(0, 1)
-						.equals(String.valueOf(locationCode))) {
+				if (String.valueOf(code).substring(0, 1).equals(String.valueOf(locationCode))) {
 					size = size + countyCoordinates.get(code).size();
 				}
 			}
@@ -714,35 +690,32 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#getOSCCoordinates
+	 * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#
+	 * getOSCCoordinates
 	 * (gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox, int, int)
 	 */
-	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int width,
-			int height, boolean all) throws RemoteException {
-		//int zoomLevel = getBoundsZoomLevel(bbox, width, height);
+	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int width, int height, boolean all) throws RemoteException {
+		// int zoomLevel = getBoundsZoomLevel(bbox, width, height);
 		int zoomLevel = geocluster.getBoundsZoomLevel(bbox, width, height);
 		return getOSCCoordinates(bbox, zoomLevel, all);
-		
+
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#getOSCCoordinates
+	 * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService#
+	 * getOSCCoordinates
 	 * (gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox, int)
 	 */
-	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel,
-			boolean all) throws RemoteException {
+	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel, boolean all) throws RemoteException {
 		Set<Coordinate> elements = new HashSet<Coordinate>();
 
 		if (zoomLevel < initialClusterZoomLevel)
 			return elements.toArray(new Coordinate[elements.size()]);
 
 		int gridSize = clusterGridSize;
-		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates
-				: activeOscCoordinates;
+		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
 		if (zoomLevel < minClusterZoomLevel) {
 			Cluster cluster = new Cluster();
 			cluster.addAll(col.values());
@@ -753,65 +726,73 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			if (zoomLevel > maxClusterZoomLevel)
 				return coords.toArray(new Coordinate[coords.size()]);
 
-			//elements = cluster(coords, gridSize, zoomLevel);
+			// elements = cluster(coords, gridSize, zoomLevel);
 			elements = geocluster.cluster(coords, gridSize, zoomLevel);
-			
+			// clusterCalc(all);
 		}
-			
+
 		return elements.toArray(new Coordinate[elements.size()]);
-		
 	}
 
-	public Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all)
-			throws RemoteException {
+	public Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all) throws RemoteException {
 		Set<OscCoordinate> coords = new HashSet<OscCoordinate>();
-		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates
-				: activeOscCoordinates;
+		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
 		for (OscCoordinate coord : col.values()) {
-			if (coord.getX() >= bbox.getMinX()
-					&& coord.getX() <= bbox.getMaxX()
-					&& coord.getY() >= bbox.getMinY()
+			if (coord.getX() >= bbox.getMinX() && coord.getX() <= bbox.getMaxX() && coord.getY() >= bbox.getMinY()
 					&& coord.getY() <= bbox.getMaxY()) {
 				coords.add(coord);
 			}
-			
+
 		}
 
 		return coords;
-		
-		
+
 	}
 
-	public void clusterCalc(){
-		if(flagRefreshClusters){
-		Set<Coordinate> elements = new HashSet<Coordinate>();
-		
-		for (int i = minClusterZoomLevel; i <= maxClusterZoomLevel; i++){
-			BoundingBox bbox = new BoundingBox();
-			bbox.setBounds(-135.2343766875, -41.83682747857742, 32.0214826875, 19.062118368308703);
-			Set<Coordinate> coords = new HashSet<Coordinate>();
-			coords.addAll(getOSCCoordinates(bbox, true));
-			elements = geocluster.cluster(coords, clusterGridSize, i);
+	public void clusterCalc(boolean all) {
+		if (flagRefreshClusters) {
+			Set<Coordinate> elements = new HashSet<Coordinate>();
+
+			// for (int i = minClusterZoomLevel; i <= maxClusterZoomLevel; i++){
+			for (int i = 4; i <= 5; i++) {
+				BoundingBox bbox = new BoundingBox();
+				bbox.setBounds(-135.2343766875, -41.83682747857742, 32.0214826875, 19.062118368308703);
+				Set<Coordinate> coords = new HashSet<Coordinate>();
+				coords.addAll(getOSCCoordinates(bbox, all));
+				elements = geocluster.cluster(coords, clusterGridSize, i);
+
+				for (Coordinate c : elements) {
+
+					if (c instanceof SimpleCluster) {
+						SimpleCluster cluster = (SimpleCluster) c;
+						logger.info("x="+cluster.getX());;
+					}
+					
+					
+
+				}
+			}
+			// clusterCalc();
+
 		}
-			Coordinate[] a = elements.toArray(new Coordinate[elements.size()]);
-			logger.log(Level.INFO, ""+a);
-		}
-//			Connection conn = getConnection();
-//			PreparedStatement pstmt = null;
-//			String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
-//			try {
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setLong(1, cpf);
-//				pstmt.setString(2, token);
-//				pstmt.setDate(3, sqlDate);
-//				pstmt.execute();
-//			} catch (SQLException e) {
-//				logger.severe(e.getMessage());
-//				throw new RemoteException(e);
-//			} finally {
-//				releaseConnection(conn, pstmt);
-//			}
-		
+		// Connection conn = getConnection();
+		// PreparedStatement pstmt = null;
+		// String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario,
+		// tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM
+		// portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
+		// try {
+		// pstmt = conn.prepareStatement(sql);
+		// pstmt.setLong(1, cpf);
+		// pstmt.setString(2, token);
+		// pstmt.setDate(3, sqlDate);
+		// pstmt.execute();
+		// } catch (SQLException e) {
+		// logger.severe(e.getMessage());
+		// throw new RemoteException(e);
+		// } finally {
+		// releaseConnection(conn, pstmt);
+		// }
+
 	}
 
 }
