@@ -119,7 +119,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 			ArrayList<String> participacaoSocial = new ArrayList<String>();
-			if (rs.next()) {
+			while (rs.next()) {
 				participacaoSocial.add(rs.getString("cons_nm_conselho"));
 			}
 			organization.setParticipacaoSocial(participacaoSocial);
@@ -149,7 +149,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 			ArrayList<ProjetoModel> projetoList = new ArrayList<ProjetoModel>();
-			if (rs.next()) {
+			while (rs.next()) {
 				ProjetoModel projeto = new ProjetoModel();
 				projeto.setTitulo(rs.getString("titulo"));
 				projeto.setStatus(rs.getString("status"));
@@ -178,11 +178,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
-			ArrayList<String> certificacao = new ArrayList<String>();
-			
-			
-			
-			if (rs.next()) {
+			ArrayList<String> certificacao = new ArrayList<String>();			
+			while (rs.next()) {
 				Date now = new Date(new java.util.Date().getTime());
 				
 				String strDateCNAE = rs.getString("cnea_dt_publicacao");
