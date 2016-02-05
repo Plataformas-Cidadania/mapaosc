@@ -1,7 +1,11 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.model;
 
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueRenderer;
+
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Resumo da OSC apresentado no pin do mapa.
