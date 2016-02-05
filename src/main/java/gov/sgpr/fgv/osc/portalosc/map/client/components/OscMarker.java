@@ -101,19 +101,15 @@ public class OscMarker {
 			oscInfo.addKeyValue("Endereço",
 					summary.getAddress());
 		}
-		/*if (summary.getContatos() != null) {
-			oscInfo.addKeyValue("Contatos",
-					summary.getContatos());
-		}*/
-		//PaperClipCheckListSection oscContacts = new PaperClipCheckListSection();
-		//oscContacts.setSectionTitle("Contatos");
 		
-		Map<String, String> Contatos = summary.getContacts();
+		Map<String, String> Contatos = new LinkedHashMap<String, String>();
+		Contatos = summary.getContacts();
 		
-		for (int i = 0; i<Contatos.size(); i++) { 
-				oscInfo.addKeyValue("Contatos",Contatos.toString());
+		if(!Contatos.isEmpty()){
+			for (Map.Entry<String, String> entry : Contatos.entrySet()) {				
+				oscInfo.addKeyValue(entry.getKey(),entry.getValue());
+			}
 		}
-		//oscInfo.addKeyValue(Contatos.get(Contatos.toString());
 		
 /*		if (summary.getFoundationYear() != null
 				&& summary.getFoundationYear() != 0) {
