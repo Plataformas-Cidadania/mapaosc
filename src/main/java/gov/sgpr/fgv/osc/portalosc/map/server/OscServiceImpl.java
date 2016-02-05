@@ -147,7 +147,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		} finally {
 			releaseConnection(conn, pstmt, rs);
 		}
-	}
+	}*/
 
 	private String getDocumentPath(long cnpj, DocumentType type)
 			throws RemoteException {
@@ -181,7 +181,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		} else {
 			return null;
 		}
-	}*/
+	}
 	public OscSummary getSummary(int oscId) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
