@@ -5,13 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -21,9 +19,9 @@ import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.ClusterMarker;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
+import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
@@ -81,7 +79,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
 		flagRefreshClusters = Boolean.valueOf(context.getInitParameter("FlagRefreshClusters"));
 		maxClusterZoomLevelCalc = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevelCalc"));
-		// clusterCalc();
+		clusterCalc(UserController.isMasterUser());
 
 	}
 
@@ -712,28 +710,77 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	 */
 	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel, boolean all) throws RemoteException {
 		Set<Coordinate> elements = new HashSet<Coordinate>();
-
-		if (zoomLevel < initialClusterZoomLevel)
-			return elements.toArray(new Coordinate[elements.size()]);
-
-		int gridSize = clusterGridSize;
 		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
-		if (zoomLevel < minClusterZoomLevel) {
-			Cluster cluster = new Cluster();
-			cluster.addAll(col.values());
-			elements.add(cluster);
-		} else {
-			Set<Coordinate> coords = new HashSet<Coordinate>();
-			coords.addAll(getOSCCoordinates(bbox, all));
-			if (zoomLevel > maxClusterZoomLevel)
-				return coords.toArray(new Coordinate[coords.size()]);
+		logger.info(""+bbox);
+		logger.info(""+zoomLevel);
+		if (zoomLevel >= minClusterZoomLevel && zoomLevel <= maxClusterZoomLevelCalc) {
 
-			// elements = cluster(coords, gridSize, zoomLevel);
-			elements = geocluster.cluster(coords, gridSize, zoomLevel);
-			clusterCalc(all);
+			Connection conn = getConnection();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT ST_AsText(cluster_geometry) wkt, cluster_quantity,zoom_level FROM portal.tb_osc_cluster where zoom_level = ?";
+			// logger.info(sql);
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, zoomLevel);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int quantity = rs.getInt("cluster_quantity");
+					String wkt = rs.getString("wkt");
+					if (wkt != null && !wkt.isEmpty()) {
+						WKTReader reader = new WKTReader();
+						try {
+							Point point = (Point) reader.read(wkt);
+							SimpleCluster cluster = new SimpleCluster();
+							cluster.setX(point.getX());
+							cluster.setY(point.getY());
+							cluster.setQuantity(quantity);
+							cluster.setBbox(bbox);
+							
+							elements.add(cluster);
+						} catch (ParseException e) {
+							logger.severe(e.getMessage());
+						}
+					}
+				}
+
+			} catch (SQLException e) {
+				logger.severe(e.getMessage());
+				throw new RemoteException(e);
+			} finally {
+				releaseConnection(conn, pstmt, rs);
+			}
+
+		}
+
+		else
+
+		{
+			if (zoomLevel < initialClusterZoomLevel)
+				return elements.toArray(new Coordinate[elements.size()]);
+
+			int gridSize = clusterGridSize;
+			//ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
+			if (zoomLevel < minClusterZoomLevel) {
+				Cluster cluster = new Cluster();
+				cluster.addAll(col.values());
+				elements.add(cluster);
+			} else {
+				Set<Coordinate> coords = new HashSet<Coordinate>();
+				coords.addAll(getOSCCoordinates(bbox, all));
+				if (zoomLevel > maxClusterZoomLevel)
+					return coords.toArray(new Coordinate[coords.size()]);
+
+				// elements = cluster(coords, gridSize, zoomLevel);
+				elements = geocluster.cluster(coords, gridSize, zoomLevel);
+
+				// clusterCalc(all);
+			}
 		}
 
 		return elements.toArray(new Coordinate[elements.size()]);
+
 	}
 
 	public Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all) throws RemoteException {
@@ -776,7 +823,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			for (int i = minClusterZoomLevel; i <= maxClusterZoomLevelCalc; i++) {
 				// for (int i = 4; i < 5; i++) {
 				BoundingBox bbox = new BoundingBox();
-				bbox.setBounds(-135.2343766875, -41.83682747857742, 32.0214826875, 19.062118368308703);
+				bbox.setBounds(-121.1718766875, -45.64476785916705, 17.958982687499997, 23.966176339963845);
 				Set<Coordinate> coords = new HashSet<Coordinate>();
 				coords.addAll(getOSCCoordinates(bbox, all));
 				elements = geocluster.cluster(coords, clusterGridSize, i);
@@ -785,7 +832,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 					if (c instanceof SimpleCluster) {
 						SimpleCluster cluster = (SimpleCluster) c;
-						logger.info(cluster.toWKT() + " - " + cluster.getQuantity() + " - " + i);
+						// logger.info(cluster.toWKT() + " - " +
+						// cluster.getQuantity() + " - " + i);
 
 						conn = getConnection();
 						pstmt = null;
