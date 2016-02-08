@@ -58,7 +58,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	private int clusterGridSize = 100;
 	private int minClusterZoomLevel = 4;
 	private int maxClusterZoomLevel = 18;
-	private boolean flagRefreshClusters;
+	private boolean flagRefreshClusters = false;
+	private int maxClusterZoomLevelCalc = 9;
 	GeoCluster geocluster = new GeoCluster();
 
 	/*
@@ -79,6 +80,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		minClusterZoomLevel = Integer.valueOf(context.getInitParameter("MinClusterZoomLevel"));
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
 		flagRefreshClusters = Boolean.valueOf(context.getInitParameter("FlagRefreshClusters"));
+		maxClusterZoomLevelCalc = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevelCalc"));
 		// clusterCalc();
 
 	}
@@ -728,7 +730,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 			// elements = cluster(coords, gridSize, zoomLevel);
 			elements = geocluster.cluster(coords, gridSize, zoomLevel);
-			// clusterCalc(all);
+			clusterCalc(all);
 		}
 
 		return elements.toArray(new Coordinate[elements.size()]);
@@ -751,10 +753,28 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 	public void clusterCalc(boolean all) {
 		if (flagRefreshClusters) {
+
+			Connection conn = getConnection();
+			PreparedStatement pstmt = null;
+			String sqlDrop = "DROP TABLE IF EXISTS portal.tb_osc_cluster;";
+			String sqlCreate = " CREATE TABLE portal.tb_osc_cluster("
+					+ "cluster_geometry geometry(Point,4674) NOT NULL," + "cluster_quantity INT NOT NULL,"
+					+ "zoom_level INT NOT NULL);";
+			try {
+				pstmt = conn.prepareStatement(sqlDrop + sqlCreate);
+				pstmt.execute();
+			} catch (SQLException e) {
+				logger.severe(e.getMessage());
+				throw new RemoteException(e);
+			} finally {
+				releaseConnection(conn, pstmt);
+
+			}
+
 			Set<Coordinate> elements = new HashSet<Coordinate>();
 
-			// for (int i = minClusterZoomLevel; i <= maxClusterZoomLevel; i++){
-			for (int i = 4; i <= 5; i++) {
+			for (int i = minClusterZoomLevel; i <= maxClusterZoomLevelCalc; i++) {
+				// for (int i = 4; i < 5; i++) {
 				BoundingBox bbox = new BoundingBox();
 				bbox.setBounds(-135.2343766875, -41.83682747857742, 32.0214826875, 19.062118368308703);
 				Set<Coordinate> coords = new HashSet<Coordinate>();
@@ -765,34 +785,32 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 					if (c instanceof SimpleCluster) {
 						SimpleCluster cluster = (SimpleCluster) c;
-						logger.info("x="+cluster.getX());;
+						logger.info(cluster.toWKT() + " - " + cluster.getQuantity() + " - " + i);
+
+						conn = getConnection();
+						pstmt = null;
+						String sqlInsert = "INSERT INTO portal.tb_osc_cluster(cluster_geometry,cluster_quantity,zoom_level)"
+								+ "VALUES(ST_GeomFromText(?,4674),?,?)";
+						try {
+							pstmt = conn.prepareStatement(sqlInsert);
+							pstmt.setString(1, cluster.toWKT());
+							pstmt.setInt(2, cluster.getQuantity());
+							pstmt.setInt(3, i);
+							pstmt.execute();
+						} catch (SQLException e) {
+							logger.severe(e.getMessage());
+							throw new RemoteException(e);
+						} finally {
+							releaseConnection(conn, pstmt);
+						}
+
 					}
-					
-					
 
 				}
+
 			}
-			// clusterCalc();
 
 		}
-		// Connection conn = getConnection();
-		// PreparedStatement pstmt = null;
-		// String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario,
-		// tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM
-		// portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
-		// try {
-		// pstmt = conn.prepareStatement(sql);
-		// pstmt.setLong(1, cpf);
-		// pstmt.setString(2, token);
-		// pstmt.setDate(3, sqlDate);
-		// pstmt.execute();
-		// } catch (SQLException e) {
-		// logger.severe(e.getMessage());
-		// throw new RemoteException(e);
-		// } finally {
-		// releaseConnection(conn, pstmt);
-		// }
 
 	}
-
 }
