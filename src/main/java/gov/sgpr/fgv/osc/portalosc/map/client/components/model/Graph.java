@@ -15,6 +15,15 @@ public class Graph implements GraphRenderer {
 	private String svgImageContrast;
 	private int width;
 	private int height;
+	private String legend;
+	
+	public String getLegend() {
+		return legend;
+	}
+
+	public void setLegend(String legend) {
+		this.legend = legend;
+	}
 
 	public String getTitle() {
 		return title;

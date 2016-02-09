@@ -37,6 +37,9 @@ public class GraphWidget extends Composite {
 		htmlBuilder.append("\" height=\"");
 		htmlBuilder.append(graph.getHeight());
 		htmlBuilder.append("\" />");
+		htmlBuilder.append("<p class='legenda'>");
+		htmlBuilder.append(graph.getLegend());
+		htmlBuilder.append("</p>");
 		htmlBuilder.append("</div>");
 
 		HTML html = new HTML(htmlBuilder.toString());

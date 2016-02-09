@@ -45,18 +45,20 @@ public class InfographicsController {
 
 	private void loadInfo01() {
 		Graph graph1 = new Graph();
-		graph1.setTitle("<strong>323 mil</strong> OSCs");
+		graph1.setTitle("Número e % de OSCs por Região");
 		graph1.setSvgImage("infograficos/numeros/infografico_1.png");
 		graph1.setSvgImageContrast("infograficos/numeros/contraste/infografico_1.png");
 		graph1.setWidth(332);
 		graph1.setHeight(292);
+		graph1.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph2 = new Graph();
-		graph2.setTitle("<strong>2,2 milhões</strong> de vínculos ativos");
+		graph2.setTitle("Número e % de vínculos ativos por faixa de vínculos");
 		graph2.setSvgImage("infograficos/numeros/infografico_2.svg");
 		graph2.setSvgImageContrast("infograficos/numeros/contraste/infografico_2.svg");
 		graph2.setWidth(332);
 		graph2.setHeight(292);
+		graph2.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph3 = new Graph();
 		graph3.setTitle("Relação com o governo Federal <strong>15%</strong> das OSCs");
@@ -64,27 +66,33 @@ public class InfographicsController {
 		graph3.setSvgImageContrast("infograficos/numeros/contraste/infografico_3.svg");
 		graph3.setWidth(332);
 		graph3.setHeight(292);
+		graph3.setLegend("");
+		//graph3.setLegend("Fonte: SICONV (2009 a 2016), Ministério da Justiça (2015), Ministério da Educação (2014), Ministério do Desenvolvimento Social (2016) e Ministério da Saúde (2016).");
 
 		Graph graph4 = new Graph();
-		graph4.setTitle("Instituições por <strong>Natureza Jurídica</strong> (%)");
+		graph4.setTitle("Percentual de instituições por <strong>Natureza Jurídica</strong>");
 		graph4.setSvgImage("infograficos/numeros/infografico_4.svg");
 		graph4.setSvgImageContrast("infograficos/numeros/contraste/infografico_4.svg");
 		graph4.setWidth(332);
 		graph4.setHeight(292);
+		graph4.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph5 = new Graph();
-		graph5.setTitle("Títulos e certificações");
+		graph5.setTitle("% de OSCs que possuem Títulos ou certificações");
 		graph5.setSvgImage("infograficos/numeros/infografico_5.svg");
 		graph5.setSvgImageContrast("infograficos/numeros/contraste/infografico_5.svg");
 		graph5.setWidth(332);
 		graph5.setHeight(292);
+		graph5.setLegend("Fonte: Ministério da Justiça (2015), Ministério da Educação (2014), Ministério do Desenvolvimento Social (2016) e Ministério da Saúde (2016).");
 
 		Graph graph6 = new Graph();
-		graph6.setTitle("Recursos públicos");
+		graph6.setTitle("Recursos públicos destinados às OSCs");
 		graph6.setSvgImage("infograficos/numeros/infografico_7.svg");
 		graph6.setSvgImageContrast("infograficos/numeros/contraste/infografico_7.svg");
 		graph6.setWidth(332);
 		graph6.setHeight(126);
+		graph6.setLegend("");
+		//graph3.setLegend("Fonte: SICONV (2009 a 2016), SIAFI (2016)");
 
 		Graph graph7 = new Graph();
 		graph7.setTitle("Participação social");
@@ -92,6 +100,7 @@ public class InfographicsController {
 		graph7.setSvgImageContrast("infograficos/numeros/contraste/infografico_6.svg");
 		graph7.setWidth(332);
 		graph7.setHeight(142);
+		graph7.setLegend("");
 
 		Infographics innerGraph = new Infographics(2, 1);
 		innerGraph.addGraph(0, 0, graph6);
@@ -176,13 +185,15 @@ public class InfographicsController {
 		graph1.setSvgImageContrast("infograficos/natureza_juridica/contraste/infografico_1.svg");
 		graph1.setWidth(600);
 		graph1.setHeight(410);
+		graph1.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph2 = new Graph();
-		graph2.setTitle("<ul id=\"info03_2\" class=\"clearfix\"><li>Distribuição de Vínculos por Faixas de Vínculos (%)</li></ul>");
+		graph2.setTitle("<ul id=\"info03_2\" class=\"clearfix\"><li>% e número de vínculos de trabalho das OSCs, por natureza jurídica</li></ul>");
 		graph2.setSvgImage("infograficos/natureza_juridica/infografico_2.svg");
 		graph2.setSvgImageContrast("infograficos/natureza_juridica/contraste/infografico_2.svg");
 		graph2.setWidth(600);
 		graph2.setHeight(410);
+		graph2.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Infographics info = new Infographics(2, 1);
 		info.setTitle("OSCs natureza jurídica / faixa de vínculos");
