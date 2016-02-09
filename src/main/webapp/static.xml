@@ -2,7 +2,38 @@
 <sites>
 	<site>
 	  <name>Acessibilidade</name>
-	  <hash>#acessibilidade</hash>
-	  <id>2</id>
+	  <key>acessibilidade</key>
+	  <page>acessibilidade.html</page>
+	  <class>acessibilidade</class>
+	</site>
+	<site>
+	  <name>Metodologia</name>
+	  <key>metodologia</key>
+	  <page>metodologia.html</page>
+	  <class>metodologia</class>
+	</site>
+	<site>
+	  <name>Perguntas Frequentes</name>
+	  <key>faq</key>
+	  <page>faq.html</page>
+	  <class>faq</class>
+	</site>
+	<site>
+	  <name>Versão beta (${project.version})</name>
+	  <key>versao</key>
+	  <page>beta.html</page>
+	  <class>faq</class>
+	</site>
+	<site>
+	  <name>Sobre o Mapa</name>
+	  <key>sobre</key>
+	  <page>sobre.html</page>
+	  <class>sobre</class>
+	</site>
+	<site>
+	  <name>Termos de Uso</name>
+	  <key>termos</key>
+	  <page>termos.html</page>
+	  <class>sobre</class>
 	</site>
 </sites>

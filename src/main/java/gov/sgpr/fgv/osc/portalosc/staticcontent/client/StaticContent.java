@@ -5,15 +5,15 @@ import com.google.gwt.core.client.EntryPoint;
 import gov.sgpr.fgv.osc.portalosc.staticcontent.client.controller.StaticContentController;
 
 /**
+ * @author Gabriel
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class StaticContent implements EntryPoint {
 	private StaticContentController staticController = new StaticContentController();
 
-	/**
-	 * This is the entry point method.
+	/* (non-Javadoc)
+	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
 	 */
-
 	public void onModuleLoad() {
 		staticController.init();
 	}

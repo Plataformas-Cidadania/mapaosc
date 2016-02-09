@@ -6,9 +6,18 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.model.Content;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 
+/**
+ * @author Gabriel
+ *
+ */
 @RemoteServiceRelativePath("staticContentService")
 public interface StaticContentService extends  RemoteService{
 	
-	public Content getContentFromHash(String hash) throws RemoteException;
+	/**
+	 * @param hash
+	 * @return Content
+	 * @throws RemoteException
+	 */
+	public Content getContentFromParam(String param) throws RemoteException;
 	
 }

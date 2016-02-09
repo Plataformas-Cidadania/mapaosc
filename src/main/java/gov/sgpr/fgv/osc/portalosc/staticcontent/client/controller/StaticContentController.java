@@ -13,12 +13,19 @@ import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.StaticContentS
 import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.StaticContentServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.model.Content;
 
+/**
+ * @author Gabriel
+ *
+ */
 public class StaticContentController 
 {
 	private static Logger logger = Logger.getLogger(StaticContentController.class.getName());
 	private StaticContentServiceAsync staticContentService = com.google.gwt.core.shared.GWT.create(StaticContentService.class);
 	private String url;
 	
+	/**
+	 * 
+	 */
 	public void init() 
 	{
 		AsyncCallback<Content> callback = new AsyncCallback<Content>() {
@@ -27,9 +34,10 @@ public class StaticContentController
 			}
 
 			public void onSuccess(Content result) {
-				logger.info("Chave de criptografia encontrada");
+				logger.info("Resposta de Conteúdo Estático recebida");
 				url = result.getUrl();
 				setTitle(result.getTitle());
+				DOM.getElementById("static_content").addClassName(result.getCssClass());
 				if(url.length() > 0)
 					loadStaticContent("static_content");
 				else
@@ -37,10 +45,13 @@ public class StaticContentController
 			}
 
 		};
-		String hash = Window.Location.getHash();
-		staticContentService.getContentFromHash(hash, callback);
+		String param = Window.Location.getParameter("page");
+		staticContentService.getContentFromParam(param, callback);
 	}
 	
+	/**
+	 * @param element_id
+	 */
 	public void loadStaticContent(String element_id) 
 	{
 		final Element d = DOM.getElementById(element_id);

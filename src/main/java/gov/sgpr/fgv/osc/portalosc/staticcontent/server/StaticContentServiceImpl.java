@@ -17,6 +17,10 @@ import gov.sgpr.fgv.osc.portalosc.staticcontent.shared.model.Content;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 
+/**
+ * @author Gabriel
+ *
+ */
 public class StaticContentServiceImpl extends RemoteServiceImpl implements StaticContentService {
 	
 	private String staticUrl;
@@ -26,6 +30,9 @@ public class StaticContentServiceImpl extends RemoteServiceImpl implements Stati
 	 * 
 	 */
 
+	/* (non-Javadoc)
+	 * @see gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl#init(javax.servlet.ServletConfig)
+	 */
 	@Override
 	public void init(ServletConfig config)
 	{
@@ -43,33 +50,39 @@ public class StaticContentServiceImpl extends RemoteServiceImpl implements Stati
 			for(int i = 0; i < nodes.getLength(); i++)
 			{
 				Element site = (Element)nodes.item(i);
-				String id = site.getElementsByTagName("id").item(0).getFirstChild().getNodeValue();
+				String page = site.getElementsByTagName("page").item(0).getFirstChild().getNodeValue();
 				String title = site.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
-				String hash = site.getElementsByTagName("hash").item(0).getFirstChild().getNodeValue();
+				String key = site.getElementsByTagName("key").item(0).getFirstChild().getNodeValue();
+				String cssClass = site.getElementsByTagName("class").item(0).getFirstChild().getNodeValue();
 				Content content = new Content();
-				content.setId(id);
+				content.setPage(page);
 				content.setTitle(title);
-				content.setUrl(staticUrl+"?option=com_content&view=article&id="+id);
-				map.put(hash, content);
+				content.setCssClass(cssClass);
+				content.setUrl(staticUrl+page);
+				map.put(key, content);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.StaticContentService#getContentFromHash(java.lang.String)
+	 */
 	@Override
-	public Content getContentFromHash(String hash) throws RemoteException 
+	public Content getContentFromParam(String param) throws RemoteException 
 	{
 		Content content;
-		if(map.containsKey(hash))
+		if(map.containsKey(param))
 		{
-			content = map.get(hash);
+			content = map.get(param);
 		}
 		else
 		{
 			content = new Content();
 			content.setUrl("");
 			content.setTitle("Unknown Page");
+			content.setCssClass("");
 		}
 		return content;
 	}
