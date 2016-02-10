@@ -16,6 +16,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
 import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
@@ -711,14 +712,13 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel, boolean all) throws RemoteException {
 		Set<Coordinate> elements = new HashSet<Coordinate>();
 		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
-		logger.info(""+bbox);
-		logger.info(""+zoomLevel);
+		
 		if (zoomLevel >= minClusterZoomLevel && zoomLevel <= maxClusterZoomLevelCalc) {
 
 			Connection conn = getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			String sql = "SELECT ST_AsText(cluster_geometry) wkt, cluster_quantity,zoom_level FROM portal.tb_osc_cluster where zoom_level = ?";
+			String sql = "SELECT ST_AsText(cluster_geometry) wkt, cluster_quantity,zoom_level,ST_xmin(cluster_boundingbox) minX,ST_xmax(cluster_boundingbox) maxX,ST_ymin(cluster_boundingbox) minY,ST_ymax(cluster_boundingbox) maxY  FROM portal.tb_osc_cluster where zoom_level = ?";
 			// logger.info(sql);
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -728,6 +728,11 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 				while (rs.next()) {
 					int quantity = rs.getInt("cluster_quantity");
 					String wkt = rs.getString("wkt");
+					double minX,minY,maxX,maxY;
+					minX = rs.getDouble("minx");
+					minY = rs.getDouble("miny");
+					maxX = rs.getDouble("maxx");
+					maxY = rs.getDouble("miny");
 					if (wkt != null && !wkt.isEmpty()) {
 						WKTReader reader = new WKTReader();
 						try {
@@ -736,7 +741,10 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 							cluster.setX(point.getX());
 							cluster.setY(point.getY());
 							cluster.setQuantity(quantity);
+							bbox.setBounds(minX, minY, maxX, maxY);
 							cluster.setBbox(bbox);
+							
+							
 							
 							elements.add(cluster);
 						} catch (ParseException e) {
@@ -805,8 +813,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			PreparedStatement pstmt = null;
 			String sqlDrop = "DROP TABLE IF EXISTS portal.tb_osc_cluster;";
 			String sqlCreate = " CREATE TABLE portal.tb_osc_cluster("
-					+ "cluster_geometry geometry(Point,4674) NOT NULL," + "cluster_quantity INT NOT NULL,"
-					+ "zoom_level INT NOT NULL);";
+					+ "cluster_geometry geometry(Point,4674) NOT NULL, cluster_quantity INT NOT NULL,"
+					+ "zoom_level INT NOT NULL, cluster_boundingbox geometry(Polygon,4674) NOT NULL);";
 			try {
 				pstmt = conn.prepareStatement(sqlDrop + sqlCreate);
 				pstmt.execute();
@@ -834,16 +842,22 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 						SimpleCluster cluster = (SimpleCluster) c;
 						// logger.info(cluster.toWKT() + " - " +
 						// cluster.getQuantity() + " - " + i);
-
+						
 						conn = getConnection();
 						pstmt = null;
-						String sqlInsert = "INSERT INTO portal.tb_osc_cluster(cluster_geometry,cluster_quantity,zoom_level)"
-								+ "VALUES(ST_GeomFromText(?,4674),?,?)";
+						double minX,minY,maxX,maxY = 0;
+						String sqlInsert = "INSERT INTO portal.tb_osc_cluster(cluster_geometry,cluster_quantity,zoom_level,cluster_boundingbox)"
+								+ "VALUES(ST_GeomFromText(?,4674),?,?,ST_GeomFromText(?,4674))";
 						try {
 							pstmt = conn.prepareStatement(sqlInsert);
 							pstmt.setString(1, cluster.toWKT());
 							pstmt.setInt(2, cluster.getQuantity());
 							pstmt.setInt(3, i);
+							minX = cluster.getBbox().getMinX();
+							minY = cluster.getBbox().getMinY();
+							maxX = cluster.getBbox().getMaxX();
+							maxY = cluster.getBbox().getMaxY();
+							pstmt.setString(4, "POLYGON(("+minX+" "+minY+","+minX+" "+maxY+","+maxX+" "+maxY+","+maxX+" "+minY+","+minX+" "+minY+"))");
 							pstmt.execute();
 						} catch (SQLException e) {
 							logger.severe(e.getMessage());
