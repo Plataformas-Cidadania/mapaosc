@@ -261,16 +261,16 @@ public class MenuController implements ValueChangeHandler<String> {
 		if (osc.getMain().getDataSources().length > 0)
 			mainItem.setInfoSource(getHelpContent(oscmain.getDataSources()));
 
-		final AnchorListMenuItem documentsItem = new AnchorListMenuItem();
-		documentsItem.setItemTitle("Acesso à informação (Documentos)");
-		documentsItem.setId("doc");
-		documentsItem.setCssClass("dados documentos");
-		documentsItem.addInfo("Prestação de contas", osc.getAccountabilityPath());
-		documentsItem.addInfo("Estatuto", osc.getByLawPath());
-		documentsItem.addInfo("Quadro de diretores", osc.getDirectorsBoardPath());
-		documentsItem.addInfo("Convênios", osc.getTreatyPath());
-		DataSource[] ds = { osc.getDocumentDataSource() };
-		documentsItem.setInfoSource(getHelpContent(ds));
+//		final AnchorListMenuItem documentsItem = new AnchorListMenuItem();
+//		documentsItem.setItemTitle("Acesso à informação (Documentos)");
+//		documentsItem.setId("doc");
+//		documentsItem.setCssClass("dados documentos");
+//		documentsItem.addInfo("Prestação de contas", osc.getAccountabilityPath());
+//		documentsItem.addInfo("Estatuto", osc.getByLawPath());
+//		documentsItem.addInfo("Quadro de diretores", osc.getDirectorsBoardPath());
+//		documentsItem.addInfo("Convênios", osc.getTreatyPath());
+//		DataSource[] ds = { osc.getDocumentDataSource() };
+//		documentsItem.setInfoSource(getHelpContent(ds));
 
 		final KeyValueMenuItem localizationItem = new KeyValueMenuItem();
 		localizationItem.setItemTitle("Localização");
@@ -338,7 +338,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		menuItems.add(publicResourcesItem);
 		menuItems.add(workRelationshipItem);
 		menuItems.add(certificationsItem);
-		menuItems.add(documentsItem);
+//		menuItems.add(documentsItem);
 		menuItems.add(committeesItem);
 		// menuItems.add(localizationItem);
 
