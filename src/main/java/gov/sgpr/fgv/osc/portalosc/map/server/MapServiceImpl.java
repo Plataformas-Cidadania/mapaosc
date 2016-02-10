@@ -712,7 +712,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel, boolean all) throws RemoteException {
 		Set<Coordinate> elements = new HashSet<Coordinate>();
 		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
-		
+		logger.info("BEFORE "+bbox);
 		if (zoomLevel >= minClusterZoomLevel && zoomLevel <= maxClusterZoomLevelCalc) {
 
 			Connection conn = getConnection();
@@ -732,7 +732,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 					minX = rs.getDouble("minx");
 					minY = rs.getDouble("miny");
 					maxX = rs.getDouble("maxx");
-					maxY = rs.getDouble("miny");
+					maxY = rs.getDouble("maxy");
 					if (wkt != null && !wkt.isEmpty()) {
 						WKTReader reader = new WKTReader();
 						try {
@@ -743,9 +743,6 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 							cluster.setQuantity(quantity);
 							bbox.setBounds(minX, minY, maxX, maxY);
 							cluster.setBbox(bbox);
-							
-							
-							
 							elements.add(cluster);
 						} catch (ParseException e) {
 							logger.severe(e.getMessage());
