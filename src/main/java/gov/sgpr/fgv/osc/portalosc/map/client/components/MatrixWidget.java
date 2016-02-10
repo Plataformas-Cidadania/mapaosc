@@ -138,7 +138,9 @@ public class MatrixWidget extends Composite {
 			public SafeHtml getValue(IndicatorTableValue obj) {
 				SafeHtmlBuilder sb = new SafeHtmlBuilder();
 				String html;
-				if (obj.placeCode == -1) {
+				String url = Window.Location.getHref();
+				Integer cod = Integer.parseInt(url.substring(url.indexOf("#") + 2));
+				if (obj.placeCode == -1 || obj.placeCode == cod) {
 					html = "<strong>" + obj.placeName + "<st)rong>";
 				} else {
 					html = "<a href=\"#M" + obj.placeCode + "\">"

@@ -107,10 +107,12 @@ i,em {
 a {
 	color: #000;
 	font-family: RobotoBold, sans-serif;
+	text-decoration: underline;
 }
 
 a:hover {
-	text-decoration: none
+	color: #020202;
+    text-decoration: none;
 }
 
 .clearfix:before,.clearfix:after {
