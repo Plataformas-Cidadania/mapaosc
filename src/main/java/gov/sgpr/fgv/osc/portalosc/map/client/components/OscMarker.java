@@ -12,6 +12,7 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;

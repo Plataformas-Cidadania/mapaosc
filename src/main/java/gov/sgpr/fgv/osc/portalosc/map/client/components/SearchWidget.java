@@ -22,6 +22,7 @@ public class SearchWidget extends Composite {
 	private Map<String, String> oscItems = new LinkedHashMap<String, String>();
 	private Map<String, String> stateItems = new LinkedHashMap<String, String>();
 	private Map<String, String> countyItems = new LinkedHashMap<String, String>();
+	private List<SearchResult> addressItems = new ArrayList<SearchResult>();
 	private Element searchTextField;
 	private PopupPanel searchResultsPanel = new PopupPanel();
 	public Integer result = 0;
@@ -35,6 +36,8 @@ public class SearchWidget extends Composite {
 		oscItems.clear();
 		stateItems.clear();
 		countyItems.clear();
+		addressItems.clear();
+		
 		int count = 1;
 		StringBuilder htmlBuilder = new StringBuilder();
 		if (!this.items.isEmpty()) {
@@ -45,6 +48,8 @@ public class SearchWidget extends Composite {
 					this.countyItems.put(item.getValue(), "P" + item.getId());
 				if (item.getType().equals(SearchResultType.OSC))
 					this.oscItems.put(item.getValue(), "O" + item.getId());
+				if (item.getType().equals(SearchResultType.ADDRESS))
+					this.addressItems.add(item);
 			}
 			htmlBuilder.append("<div id=\"resultado\">");
 			if (!this.oscItems.isEmpty()) {
@@ -65,7 +70,7 @@ public class SearchWidget extends Composite {
 							+ "\">" + entry.getKey() + "</a></li>");
 					count++;
 				}
-
+				
 				htmlBuilder.append("</ul>" + "</div>");
 			}
 			if (!stateItems.isEmpty()) {
@@ -87,10 +92,10 @@ public class SearchWidget extends Composite {
 							+ "\">" + entry.getKey() + "</a></li>");
 					count++;
 				}
-
+				
 				htmlBuilder.append("</ul>" + "</div>");
 			}
-
+			
 			if (!countyItems.isEmpty()) {
 				if (this.countyItems.size() == 1)
 					htmlBuilder.append("<div>" + "<ul class=\"total\">"
@@ -110,9 +115,31 @@ public class SearchWidget extends Composite {
 							+ "\">" + entry.getKey() + "</a></li>");
 					count++;
 				}
-
+				
 				htmlBuilder.append("</ul>" + "</div>");
 			}
+			
+			if (!addressItems.isEmpty()) {
+				if (this.addressItems.size() == 1)
+					htmlBuilder.append("<div>" + "<ul class=\"total\">"
+							+ "<li><strong>Endereço</strong></li>"
+							+ "<li><em>" + this.addressItems.size()
+							+ " encontrado</em></li>" + "</ul>");
+				else
+					htmlBuilder.append("<div>" + "<ul class=\"total\">"
+							+ "<li><strong>Municípios</strong></li>"
+							+ "<li><em>" + this.addressItems.size()
+							+ " encontrados</em></li>" + "</ul>");
+				htmlBuilder.append("<ul class=\"resultado\">");
+				
+				for(SearchResult item : this.addressItems){
+					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#A" + "?lat=" + item.getLatitude() + "&lon=" + item.getLongetude() + "\">" + item.getValue() + "</a></li>");
+					count++;
+				}
+				
+				htmlBuilder.append("</ul>" + "</div>");
+			}
+			
 			htmlBuilder.append("</div>");
 		} else {
 			htmlBuilder.append("<div>" + "<ul class=\"total\">"
@@ -125,7 +152,7 @@ public class SearchWidget extends Composite {
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
-
+	
 	private HTML getHelpHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder
@@ -133,21 +160,21 @@ public class SearchWidget extends Composite {
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
-
+	
 	public void setValue(String value) {
 		searchTextField.setAttribute("value", value);
 	}
-
+	
 	public String getValue() {
 		return searchTextField.getPropertyString("value");
 	}
-
+	
 	public void setItems(List<SearchResult> items) {
 		this.items = items;
 		final Element searchBox = DOM.getElementById("campobusca");
 		searchResultsPanel.clear();
 		searchResultsPanel.add(getSearchBoxHtml());
-
+		
 		searchResultsPanel.getElement().setId("resultado_busca");
 		searchResultsPanel.setAutoHideEnabled(true);
 		searchResultsPanel.setWidth(searchBox.getOffsetWidth() + "px");
@@ -165,7 +192,7 @@ public class SearchWidget extends Composite {
 		InputElement busca = DOM.getElementById("campobusca").cast();
 		busca.setValue(osc);
 	}
-
+	
 	private HTML getHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<form name=\"Busca\">");
@@ -185,14 +212,14 @@ public class SearchWidget extends Composite {
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
-
+	
 	@Override
 	protected void onAttach() {
 		super.onAttach();
 		final Element btnHelp = DOM.getElementById("ajuda");
 		Event.sinkEvents(btnHelp, Event.ONCLICK);
 		Event.setEventListener(btnHelp, new EventListener() {
-
+			
 			@Override
 			public void onBrowserEvent(Event event) {
 				PopupPanel helpPanel = new PopupPanel();
@@ -209,9 +236,8 @@ public class SearchWidget extends Composite {
 			}
 		});
 		searchTextField = DOM.getElementById("campobusca");
-
 	}
-
+	
 	public void addFocusListener(EventListener listener) {
 		final Element elem = DOM.getElementById("campobusca");
 		Event.sinkEvents(elem, Event.ONFOCUS);
@@ -226,19 +252,19 @@ public class SearchWidget extends Composite {
 			Event.setEventListener(elem, listener);
 		}
 	}
-
+	
 	public void addChangeListener(EventListener listener) {
 		final Element elem = DOM.getElementById("campobusca");
 		Event.sinkEvents(elem, Event.ONKEYDOWN);
 		Event.setEventListener(elem, listener);
 	}
-
+	
 //	public void addSearchClickListener(EventListener listener) {
 //		final Element elem = DOM.getElementById("buscar");
 //		Event.sinkEvents(elem, Event.ONCLICK);
 //		Event.setEventListener(elem, listener);
 //	}
-
+	
 	public void addFilterClickListener(EventListener listener) {
 		final Element elem = DOM.getElementById("ajuda_filtros");
 		Event.sinkEvents(elem, Event.ONCLICK);
@@ -254,5 +280,4 @@ public class SearchWidget extends Composite {
 	public void close(){
 		searchResultsPanel.hide();
 	}
-
 }

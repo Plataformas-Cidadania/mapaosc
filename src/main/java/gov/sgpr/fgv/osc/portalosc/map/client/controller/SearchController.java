@@ -3,7 +3,6 @@ package gov.sgpr.fgv.osc.portalosc.map.client.controller;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchGoogleResult;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
 
@@ -101,8 +100,12 @@ public class SearchController {
 //		});
 	}
 	
+	SearchResult searchResult = new SearchResult();
+	Integer limitResult = 5;
+	
 	private void search() {
 		String criteria = searchWidget.getValue();
+		
 		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
 			
 			public void onFailure(Throwable caught) {
@@ -114,40 +117,32 @@ public class SearchController {
 					String address = searchWidget.getValue();
 					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+");
 					
+					limitResult = 5 - result.size();
 					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
 					try{
 						req.sendRequest(null, new RequestCallback() {
 							
 							@Override
 							public void onResponseReceived(Request request, Response response) {
-								ArrayList<SearchGoogleResult> searchGoogleResultList = new ArrayList<SearchGoogleResult>();
-								
+								List<SearchResult> listResult = new ArrayList<SearchResult>();
 								Boolean flag = false;
 								for(String s : response.getText().split("\n")){
-									SearchGoogleResult searchResult = new SearchGoogleResult();
-									if(s.contains("formatted_address")) searchResult.setAddress(s.split(": ")[1].split("\",")[0].replace("\"", ""));
+									if(searchResult.getLongetude() != null) searchResult.setId(listResult.size() + 1);
+									searchResult.setType(SearchResultType.ADDRESS);
+									if(s.contains("formatted_address")) searchResult.setValue(s.split(": ")[1].split("\",")[0].replace("\"", ""));
 									if(s.contains("\"location\" :")) flag = true;
 									if(flag){
 										if(s.contains("lat")) searchResult.setLatitude(s.split(": ")[1].split(",")[0].replace("\"", ""));
 										else if(s.contains("lng")) searchResult.setLongetude(s.split(": ")[1].replace("\"", ""));
 										if(searchResult.getLatitude() != null && searchResult.getLongetude() != null) flag = false;
 									}
-									searchGoogleResultList.add(searchResult);
+									if(searchResult.getLongetude() != null){
+										listResult.add(searchResult);
+										searchResult = new SearchResult();
+									}
+									if(listResult.size() >= limitResult) break;
 								}
-								
-								ArrayList<SearchResult> searchResultList = new ArrayList<SearchResult>();
-								Integer id = -1;
-								for(SearchGoogleResult searchGoogleResult : searchGoogleResultList){
-									logger.info(searchGoogleResult.toString());
-									SearchResult searchResult = new SearchResult();
-									searchResult.setId(-1);
-									searchResult.setValue(searchGoogleResult.getAddress());
-									searchResult.setType(SearchResultType.OSC);
-									searchResultList.add(searchResult);
-									id--;
-								}
-								
-//								searchWidget.setItems(searchResultList);
+								searchWidget.setItems(listResult);
 							}
 							
 							@Override

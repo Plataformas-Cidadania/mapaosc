@@ -83,7 +83,7 @@ public class MapController {
 		map.setZoom(20);
 		map.setCenter(center);
 	}
-
+	
 	public LatLng getCenter() {
 		return map.getCenter();
 	}
@@ -301,12 +301,10 @@ public class MapController {
 
 	public void addResizeHandler() {
 		handleControl = Window.addResizeHandler(new ResizeHandler() {
-
 			@Override
 			public void onResize(ResizeEvent event) {
 				initFunction();
 			}
-
 		});
 	}
 
