@@ -69,9 +69,8 @@ public class Content implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Content [title=" + title + ", id=" + page + ", url=" + url + "]";
+		return "Content [title=" + title + ", page=" + page + ", url=" + url + ", cssClass=" + cssClass + "]";
 	}
-	
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -80,6 +79,7 @@ public class Content implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cssClass == null) ? 0 : cssClass.hashCode());
 		result = prime * result + ((page == null) ? 0 : page.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -99,6 +99,11 @@ public class Content implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Content other = (Content) obj;
+		if (cssClass == null) {
+			if (other.cssClass != null)
+				return false;
+		} else if (!cssClass.equals(other.cssClass))
+			return false;
 		if (page == null) {
 			if (other.page != null)
 				return false;
@@ -115,8 +120,6 @@ public class Content implements Serializable {
 		} else if (!url.equals(other.url))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 	
 }
