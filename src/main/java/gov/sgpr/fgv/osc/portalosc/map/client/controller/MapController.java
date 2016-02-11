@@ -79,11 +79,11 @@ public class MapController {
 		isSelected = false;
 	}
 
-	public void centerMap(LatLng center) {
-		map.setZoom(20);
+	public void centerMap(LatLng center, Double zoom) {
 		map.setCenter(center);
+		map.setZoom(zoom);
 	}
-
+	
 	public LatLng getCenter() {
 		return map.getCenter();
 	}
@@ -301,12 +301,10 @@ public class MapController {
 
 	public void addResizeHandler() {
 		handleControl = Window.addResizeHandler(new ResizeHandler() {
-
 			@Override
 			public void onResize(ResizeEvent event) {
 				initFunction();
 			}
-
 		});
 	}
 

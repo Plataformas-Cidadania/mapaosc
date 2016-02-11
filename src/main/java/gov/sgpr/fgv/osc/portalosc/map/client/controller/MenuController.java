@@ -87,14 +87,14 @@ public class MenuController implements ValueChangeHandler<String> {
 		MenuController.map = map;
 		MenuController.search = search;
 	}
-
+	
 	public void init() {
 		logger.info("iniciando menu");
 		loadInfographicsMenu();
 		String initToken = History.getToken();
 		if (initToken.length() == 0) History.newItem(null);
 		else History.newItem(initToken);
-
+		
 		History.addValueChangeHandler(this);
 		History.fireCurrentHistoryState();
 		
@@ -102,14 +102,14 @@ public class MenuController implements ValueChangeHandler<String> {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Place[] result) {
 				loadPlaces(result, true);
 			}
 		};
 		placeService.getPlaces(PlaceType.REGION, callbackPlaces);
 	}
-
+	
 	private void loadPlaces(Place[] places, boolean clearBreadcrumb) {
 		String type = "P";
 		menuPanel.clear();
@@ -148,7 +148,6 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 
 	private void loadInfographicsMenu() {
-
 		StringBuilder igmBuilder = new StringBuilder();
 		//igmBuilder.append("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
 		igmBuilder.append("<h3>Selecione o infográfico:</h3>");
@@ -348,7 +347,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		menuPanel.add(oscInfo);
 		// initFunction();
 
-		centerMap(LatLng.create(osc.getCoordinate().getY(), osc.getCoordinate().getX()));
+		centerMap(LatLng.create(osc.getCoordinate().getY(), osc.getCoordinate().getX()), 20.0);
 
 		changeIcons(osc.getMain().getId());
 		
@@ -372,6 +371,8 @@ public class MenuController implements ValueChangeHandler<String> {
 				else if (tokenType.equals("M"))	processMatrix(tokenId);
 			}else if (tokenType.equals("T")) processToken(tokenId);
 			else if (tokenType.equals("C")) processPassword(tokenId);
+			
+			if(tokenType.equals("A")) processAddress(tokenId.split("&")[0].replace("?lat=", ""), tokenId.split("&")[1].replace("lon=", ""));
 		}
 	}
 
@@ -763,7 +764,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		
 		oscService.getDetail(idToken, email, callbackDetails);
 	}
-
+	
 	private void processPlaces(final String token, String tokenId) {
 		Integer idToken = Integer.parseInt(tokenId);
 		
@@ -833,12 +834,15 @@ public class MenuController implements ValueChangeHandler<String> {
 			placeService.getOsc(idToken, all, callbackOsc);
 		}
 	}
-
+	
+	private void processAddress(String lat, String lon){
+		centerMap(LatLng.create(Double.parseDouble(lat), Double.parseDouble(lon)), 19.0);
+	}
+	
 	/**
 	 * @param recommended
 	 *            recomendação do usuário Envia a recomendação para banco
 	 */
-
 	public void RecommendationManager(boolean recommended, int oscId) {
 		String email = Cookies.getCookie("oscUid");
 
@@ -885,19 +889,19 @@ public class MenuController implements ValueChangeHandler<String> {
 		}
 		return dsBuilder.toString();
 	}
-
+	
 	public static void fitBoundsMap(BoundingBox box) {
 		map.fitBoundsToView(box);
 	}
-
+	
 	public static void changeIcons(int oscId) {
 		map.changeToSelectedIcon(oscId);
 	}
-
-	public static void centerMap(LatLng center) {
-		map.centerMap(center);
+	
+	public static void centerMap(LatLng center, Double zoom) {
+		map.centerMap(center, zoom);
 	}
-
+	
 	public static void resetAllIcons() {
 		map.resetIcon();
 	}
