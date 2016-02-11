@@ -35,6 +35,9 @@ public class SearchController {
 	private SearchServiceAsync searchService = GWT.create(SearchService.class);
 	private static int LIMIT = 5;
 	private Date changeDate;
+	private SearchResult searchResult = new SearchResult();
+	private Integer limitResult = 5;
+	private Integer quantLetter = 0;
 	
 	public void init() {
 		searchDiv.add(searchWidget);
@@ -104,9 +107,6 @@ public class SearchController {
 		});
 	}
 	
-	SearchResult searchResult = new SearchResult();
-	Integer limitResult = 5;
-	
 	private void search() {
 		String criteria = searchWidget.getValue();
 		
@@ -116,11 +116,12 @@ public class SearchController {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 			
-			public void onSuccess(final List<SearchResult> result) {
-				if(result.size() < 5 && searchWidget.getValue().length() > 3){
+			public void onSuccess(final List<SearchResult> result) {				
+				if(result.size() < 5 && searchWidget.getValue().length() > 3 && quantLetter != searchWidget.getValue().length()){
 					String address = searchWidget.getValue();
-					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+");
+					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + ",brasil";
 					
+					quantLetter = searchWidget.getValue().length();
 					limitResult = 5 - result.size();
 					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
 					try{
@@ -159,6 +160,7 @@ public class SearchController {
 						logger.info("Erro na busca de endereço pelo Google\n" + e);
 					}
 				}
+				
 				searchWidget.setItems(result);
 				
 				searchWidget.addFocus(new EventListener() {
