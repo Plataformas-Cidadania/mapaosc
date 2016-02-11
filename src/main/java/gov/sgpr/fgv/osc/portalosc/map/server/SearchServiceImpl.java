@@ -208,7 +208,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		String sql = "SELECT eduf_cd_uf, eduf_nm_uf "
 				   + "FROM spat.ed_uf "
 				   + "WHERE similarity(eduf_nm_uf, ?) > 0.5 "
-				   + "OR UPPER(eduf_sg_uf) = 'RJ' "
+				   + "OR UPPER(eduf_sg_uf) = ? "
 				   + "ORDER BY eduf_nm_uf <-> ?"
 				   + "LIMIT ?";
 		
@@ -217,7 +217,8 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 			pstmt.setString(1, normalized);
 			pstmt.setString(2, normalized);
-			pstmt.setInt(3, limit);
+			pstmt.setString(3, normalized);
+			pstmt.setInt(4, limit);
 			rs = pstmt.executeQuery();
 			List<SearchResult> result = new ArrayList<SearchResult>();
 			while (rs.next()) {

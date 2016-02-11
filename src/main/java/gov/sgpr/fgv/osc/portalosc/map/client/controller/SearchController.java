@@ -22,6 +22,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -34,6 +35,9 @@ public class SearchController {
 	private SearchServiceAsync searchService = GWT.create(SearchService.class);
 	private static int LIMIT = 5;
 	private Date changeDate;
+	private SearchResult searchResult = new SearchResult();
+	private Integer limitResult = 5;
+	private Integer quantLetter = 0;
 	
 	public void init() {
 		searchDiv.add(searchWidget);
@@ -69,39 +73,39 @@ public class SearchController {
 			}
 		});
 		
-//		searchWidget.addSearchClickListener(new EventListener() {
-//			@Override
-//			public void onBrowserEvent(Event event) {
-//				String criteria = searchWidget.getValue();
-//				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-//					
-//					public void onFailure(Throwable caught) {
-//						logger.log(Level.SEVERE, caught.getMessage());
-//					}
-//					
-//					public void onSuccess(List<SearchResult> result) {
-//						if (!result.isEmpty()) {
-//							if (result.get(0).getType().equals(SearchResultType.STATE)){
-//								History.newItem("P" + result.get(0).getId());
-//							}
-//							if (result.get(0).getType().equals(SearchResultType.COUNTY)){
-//								History.newItem("P" + result.get(0).getId());
-//							}
-//							if (result.get(0).getType().equals(SearchResultType.OSC)){
-//								History.newItem("O" + result.get(0).getId());
-//							}
-//							
-//							searchWidget.close();
-//						}
-//					}
-//				};
-//				searchService.search(criteria, LIMIT, callbackSearch);
-//			}
-//		});
+		searchWidget.addSearchClickListener(new EventListener() {
+			@Override
+			public void onBrowserEvent(Event event) {
+				String criteria = searchWidget.getValue();
+				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
+					
+					public void onFailure(Throwable caught) {
+						logger.log(Level.SEVERE, caught.getMessage());
+					}
+					
+					public void onSuccess(List<SearchResult> result) {
+						if (!result.isEmpty()) {
+							if (result.get(0).getType().equals(SearchResultType.STATE)){
+								History.newItem("P" + result.get(0).getId());
+							}
+							if (result.get(0).getType().equals(SearchResultType.COUNTY)){
+								History.newItem("P" + result.get(0).getId());
+							}
+							if (result.get(0).getType().equals(SearchResultType.OSC)){
+								History.newItem("O" + result.get(0).getId());
+							}
+							if (result.get(0).getType().equals(SearchResultType.ADDRESS)){
+								History.newItem("A" + result.get(0).getId());
+							}
+							
+							searchWidget.close();
+						}
+					}
+				};
+				searchService.search(criteria, LIMIT, callbackSearch);
+			}
+		});
 	}
-	
-	SearchResult searchResult = new SearchResult();
-	Integer limitResult = 5;
 	
 	private void search() {
 		String criteria = searchWidget.getValue();
@@ -112,11 +116,15 @@ public class SearchController {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 			
-			public void onSuccess(List<SearchResult> result) {
-				if(result.size() < 5 && searchWidget.getValue().length() > 3){
+			public void onSuccess(final List<SearchResult> result) {
+				
+				logger.info(String.valueOf(result.size()));
+				
+				if(result.size() < 5 && searchWidget.getValue().length() > 3 && quantLetter != searchWidget.getValue().length()){
 					String address = searchWidget.getValue();
-					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+");
+					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + "+brasil";
 					
+					quantLetter = searchWidget.getValue().length();
 					limitResult = 5 - result.size();
 					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
 					try{
@@ -137,12 +145,13 @@ public class SearchController {
 										if(searchResult.getLatitude() != null && searchResult.getLongetude() != null) flag = false;
 									}
 									if(searchResult.getLongetude() != null){
-										listResult.add(searchResult);
+										if(!result.contains(searchResult)) listResult.add(searchResult);
 										searchResult = new SearchResult();
 									}
-									if(listResult.size() >= limitResult) break;
+									if(listResult.size() > limitResult) break;
 								}
-								searchWidget.setItems(listResult);
+								result.addAll(listResult);
+								onSuccess(result);
 							}
 							
 							@Override
@@ -154,6 +163,7 @@ public class SearchController {
 						logger.info("Erro na busca de endereço pelo Google\n" + e);
 					}
 				}
+				
 				searchWidget.setItems(result);
 				
 				searchWidget.addFocus(new EventListener() {
