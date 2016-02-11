@@ -2951,17 +2951,6 @@ div.infographicContainer{
 
 .graph h3 {
 	color: #777;
-	padding: 5px 0;
-}
-
-.graph img {
-	border-right: 2px solid #E1E1E1;
-	border-top: 2px solid #E1E1E1;
-}
-
-#infograficos img {
-	border-right: 2px solid #E1E1E1;
-	border-top: 2px solid #E1E1E1;
 }
 
 .info03 ul {
@@ -4350,7 +4339,17 @@ padding-bottom:30px;
 }
 
 p.legenda {
-	border-right: 2px solid #E1E1E1;
+/*	border-right: 2px solid #E1E1E1;*/
 	padding: 15px 10px;
 	margin-top: -2px;
+	font-size: 0.8em;
+}
+
+.graph h3 {
+	padding: 5px;
+}
+
+.graph {
+	border-right: 2px solid #E1E1E1;
+    border-top: 2px solid #E1E1E1;
 }

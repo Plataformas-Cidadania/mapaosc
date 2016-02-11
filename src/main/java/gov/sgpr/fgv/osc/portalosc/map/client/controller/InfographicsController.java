@@ -45,7 +45,7 @@ public class InfographicsController {
 
 	private void loadInfo01() {
 		Graph graph1 = new Graph();
-		graph1.setTitle("Número e % de OSCs por Região");
+		graph1.setTitle("Número e % de OSCs por Região (2013)");
 		graph1.setSvgImage("infograficos/numeros/infografico_1.png");
 		graph1.setSvgImageContrast("infograficos/numeros/contraste/infografico_1.png");
 		graph1.setWidth(332);
@@ -53,7 +53,7 @@ public class InfographicsController {
 		graph1.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph2 = new Graph();
-		graph2.setTitle("Número e % de vínculos ativos por faixa de vínculos");
+		graph2.setTitle("Número e % de vínculos ativos, por faixas de vínculos (2013)");
 		graph2.setSvgImage("infograficos/numeros/infografico_2.svg");
 		graph2.setSvgImageContrast("infograficos/numeros/contraste/infografico_2.svg");
 		graph2.setWidth(332);
@@ -61,16 +61,15 @@ public class InfographicsController {
 		graph2.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph3 = new Graph();
-		graph3.setTitle("Relação com o governo Federal <strong>15%</strong> das OSCs");
+		graph3.setTitle("Número de OSCs que mantiveram relação com a administração federal, por fonte (2009-2015)");
 		graph3.setSvgImage("infograficos/numeros/infografico_3.svg");
 		graph3.setSvgImageContrast("infograficos/numeros/contraste/infografico_3.svg");
 		graph3.setWidth(332);
 		graph3.setHeight(292);
-		graph3.setLegend("");
-		//graph3.setLegend("Fonte: SICONV (2009 a 2016), Ministério da Justiça (2015), Ministério da Educação (2014), Ministério do Desenvolvimento Social (2016) e Ministério da Saúde (2016).");
+		graph3.setLegend("Fontes: Min. Justiça, Tesouro Nacional, Finep, Min. Cultura");
 
 		Graph graph4 = new Graph();
-		graph4.setTitle("Percentual de instituições por <strong>Natureza Jurídica</strong>");
+		graph4.setTitle("Percentual e número de instituições por <strong>Natureza Jurídica</strong> (2013)");
 		graph4.setSvgImage("infograficos/numeros/infografico_4.svg");
 		graph4.setSvgImageContrast("infograficos/numeros/contraste/infografico_4.svg");
 		graph4.setWidth(332);
@@ -78,7 +77,7 @@ public class InfographicsController {
 		graph4.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph5 = new Graph();
-		graph5.setTitle("% de OSCs que possuem Títulos ou certificações");
+		graph5.setTitle("% de OSCs que possuem Títulos ou certificações federais (2009-2015)");
 		graph5.setSvgImage("infograficos/numeros/infografico_5.svg");
 		graph5.setSvgImageContrast("infograficos/numeros/contraste/infografico_5.svg");
 		graph5.setWidth(332);
@@ -86,21 +85,21 @@ public class InfographicsController {
 		graph5.setLegend("Fonte: Ministério da Justiça (2015), Ministério da Educação (2014), Ministério do Desenvolvimento Social (2016) e Ministério da Saúde (2016).");
 
 		Graph graph6 = new Graph();
-		graph6.setTitle("Recursos públicos destinados às OSCs");
+		graph6.setTitle("Valor dos recursos públicos destinados às OSCs, por base de origem(2009-2015)");
 		graph6.setSvgImage("infograficos/numeros/infografico_7.svg");
-		graph6.setSvgImageContrast("infograficos/numeros/contraste/infografico_7.svg");
+		graph6.setSvgImageContrast("infograficos/numeros/contraste/infografico_6.svg");
 		graph6.setWidth(332);
 		graph6.setHeight(126);
 		graph6.setLegend("");
 		//graph3.setLegend("Fonte: SICONV (2009 a 2016), SIAFI (2016)");
 
 		Graph graph7 = new Graph();
-		graph7.setTitle("Participação social");
+		graph7.setTitle("Número e % de OSCs que atuam em instituições participativas federais");
 		graph7.setSvgImage("infograficos/numeros/infografico_6.svg");
-		graph7.setSvgImageContrast("infograficos/numeros/contraste/infografico_6.svg");
+		graph7.setSvgImageContrast("infograficos/numeros/contraste/infografico_7.svg");
 		graph7.setWidth(332);
 		graph7.setHeight(142);
-		graph7.setLegend("");
+		graph7.setLegend("Fonte: Secretaria-Geral da Presidência da República, 2013");
 
 		Infographics innerGraph = new Infographics(2, 1);
 		innerGraph.addGraph(0, 0, graph6);
