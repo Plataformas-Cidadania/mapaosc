@@ -10,7 +10,7 @@ public interface StaticContentServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.StaticContentService
      */
-    void getContentFromHash( java.lang.String hash, AsyncCallback<gov.sgpr.fgv.osc.portalosc.staticcontent.shared.model.Content> callback );
+    void getContentFromParam( java.lang.String param, AsyncCallback<gov.sgpr.fgv.osc.portalosc.staticcontent.shared.model.Content> callback );
 
 
     /**

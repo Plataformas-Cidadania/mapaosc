@@ -16,7 +16,8 @@ public class SearchResult implements Serializable {
 	private int id;
 	private String value;
 	private SearchResultType type;
-	
+	private String latitude;
+	private String longetude;
 	
 	public int getId() {
 		return id;
@@ -36,6 +37,19 @@ public class SearchResult implements Serializable {
 	public void setType(SearchResultType type) {
 		this.type = type;
 	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongetude() {
+		return longetude;
+	}
+	public void setLongetude(String longetude) {
+		this.longetude = longetude;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -65,11 +79,10 @@ public class SearchResult implements Serializable {
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
-		return "SearchResult [id=" + id + ", value=" + value + ", type=" + type
-				+ "]";
+		return "SearchResult [id=" + id + ", value=" + value + ", type=" + type + ", latitude=" + latitude
+				+ ", longetude=" + longetude + "]";
 	}
-	
-	
 }
