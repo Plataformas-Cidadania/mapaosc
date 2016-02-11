@@ -16,13 +16,11 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
 import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
@@ -80,7 +78,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
 		flagRefreshClusters = Boolean.valueOf(context.getInitParameter("FlagRefreshClusters"));
 		maxClusterZoomLevelCalc = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevelCalc"));
-		clusterCalc(UserController.isMasterUser());
+		clusterCalc(true);
 
 	}
 
@@ -114,7 +112,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null LIMIT ? OFFSET ?";
+				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null LIMIT ? OFFSET ?";
 		// logger.info(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -154,7 +152,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edmu_geometry FROM spat.ed_municipio WHERE edmu_cd_municipio = ?),a.bosc_geometry) = true LIMIT ? OFFSET ?";
 
 		// logger.info(sql);
@@ -197,7 +195,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT eduf_geometry FROM spat.ed_uf WHERE eduf_cd_uf = ?),a.bosc_geometry) = true LIMIT ? OFFSET ?";
 
 		// logger.info(sql);
@@ -240,7 +238,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT eduf_geometry FROM spat.ed_uf WHERE eduf_cd_uf = ?),a.bosc_geometry) = true LIMIT ? OFFSET ?";
 
 		// logger.info(sql);
@@ -287,7 +285,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null";
+				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null";
 		// logger.info(sql);
 		try {
 			stmt = conn.createStatement();
@@ -310,7 +308,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
+				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edmu_geometry FROM spat.ed_municipio WHERE edmu_cd_municipio = ?),a.bosc_geometry) = true";
 		// logger.info(sql);
 		try {
@@ -335,7 +333,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
+				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT eduf_geometry FROM spat.ed_uf WHERE eduf_cd_uf = ?),a.bosc_geometry) = true";
 		// logger.info(sql);
 		try {
@@ -360,7 +358,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
+				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edre_geometry FROM spat.ed_regiao WHERE edre_cd_regiao = ?),a.bosc_geometry) = true";
 		// logger.info(sql);
 		try {
@@ -548,7 +546,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edmu_geometry FROM spat.ed_municipio WHERE edmu_cd_municipio = ?),a.bosc_geometry) = true ";
 		// logger.info(sql);
 		try {
@@ -742,6 +740,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 							cluster.setY(point.getY());
 							cluster.setQuantity(quantity);
 							bbox.setBounds(minX, minY, maxX, maxY);
+							//logger.info(bbox.toString() + " ZoomLevel "+zoomLevel + " Quantity "+quantity);
 							cluster.setBbox(bbox);
 							elements.add(cluster);
 						} catch (ParseException e) {
@@ -804,10 +803,31 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	}
 
 	public void clusterCalc(boolean all) {
-		if (flagRefreshClusters) {
+		
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlConsult = "SELECT configuration, value FROM syst.tb_mapaosc_config WHERE configuration = 'Created_Clusters';";
+		boolean createdClusters = false;
+		try {
+			pstmt = conn.prepareStatement(sqlConsult);
+			rs = pstmt.executeQuery();
+			while (rs.next()){
+				createdClusters = Boolean.parseBoolean(rs.getString("value")); 
+			}
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
 
-			Connection conn = getConnection();
-			PreparedStatement pstmt = null;
+		}
+		
+		
+		if (!createdClusters) {
+			logger.info("Calculation Clusters ...");
+			conn = getConnection();
+			pstmt = null;
 			String sqlDrop = "DROP TABLE IF EXISTS portal.tb_osc_cluster;";
 			String sqlCreate = " CREATE TABLE portal.tb_osc_cluster("
 					+ "cluster_geometry geometry(Point,4674) NOT NULL, cluster_quantity INT NOT NULL,"
@@ -822,22 +842,29 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 				releaseConnection(conn, pstmt);
 
 			}
-
+			
+			logger.info("Prepared DB.");
+			
 			Set<Coordinate> elements = new HashSet<Coordinate>();
 
-			for (int i = minClusterZoomLevel; i <= maxClusterZoomLevelCalc; i++) {
-				// for (int i = 4; i < 5; i++) {
-				BoundingBox bbox = new BoundingBox();
-				bbox.setBounds(-121.1718766875, -45.64476785916705, 17.958982687499997, 23.966176339963845);
-				Set<Coordinate> coords = new HashSet<Coordinate>();
-				coords.addAll(getOSCCoordinates(bbox, all));
+			BoundingBox bbox = new BoundingBox();
+			bbox.setBounds(-121.1718766875, -45.64476785916705, 17.958982687499997, 23.966176339963845);
+			Set<Coordinate> coords = new HashSet<Coordinate>();
+			logger.info("Add all Coords...");
+			coords.addAll(getOSCCoordinates(bbox, all));
+			
+			//for (int i = minClusterZoomLevel; i <= maxClusterZoomLevelCalc; i++) {
+			for (int i = 4; i < 5; i++) {
+				logger.info("Clusters calculation...");
+				
 				elements = geocluster.cluster(coords, clusterGridSize, i);
-
+				
+				
 				for (Coordinate c : elements) {
 
 					if (c instanceof SimpleCluster) {
 						SimpleCluster cluster = (SimpleCluster) c;
-						// logger.info(cluster.toWKT() + " - " +
+						logger.info("Insert Clusters in DB...");
 						// cluster.getQuantity() + " - " + i);
 						
 						conn = getConnection();
@@ -855,6 +882,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 							maxX = cluster.getBbox().getMaxX();
 							maxY = cluster.getBbox().getMaxY();
 							pstmt.setString(4, "POLYGON(("+minX+" "+minY+","+minX+" "+maxY+","+maxX+" "+maxY+","+maxX+" "+minY+","+minX+" "+minY+"))");
+							//logger.info("POLYGON(("+minX+" "+minY+","+minX+" "+maxY+","+maxX+" "+maxY+","+maxX+" "+minY+","+minX+" "+minY+"))"+ " ZoomLevel "+i + " Quantity "+cluster.getQuantity());
 							pstmt.execute();
 						} catch (SQLException e) {
 							logger.severe(e.getMessage());
@@ -870,6 +898,20 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			}
 
 		}
+		logger.info("Clusters created in DB.");
+		conn = getConnection();
+		pstmt = null;
+		String sql = "UPDATE syst.tb_mapaosc_config SET value='true' WHERE configuration = 'Created_Clusters';";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
 
+		}
 	}
 }
