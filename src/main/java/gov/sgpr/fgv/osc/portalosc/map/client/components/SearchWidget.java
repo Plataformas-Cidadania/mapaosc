@@ -122,12 +122,12 @@ public class SearchWidget extends Composite {
 			if (!addressItems.isEmpty()) {
 				if (this.addressItems.size() == 1)
 					htmlBuilder.append("<div>" + "<ul class=\"total\">"
-							+ "<li><strong>Endereço</strong></li>"
+							+ "<li><strong>Endereços</strong></li>"
 							+ "<li><em>" + this.addressItems.size()
 							+ " encontrado</em></li>" + "</ul>");
 				else
 					htmlBuilder.append("<div>" + "<ul class=\"total\">"
-							+ "<li><strong>Municípios</strong></li>"
+							+ "<li><strong>Endereços</strong></li>"
 							+ "<li><em>" + this.addressItems.size()
 							+ " encontrados</em></li>" + "</ul>");
 				htmlBuilder.append("<ul class=\"resultado\">");
@@ -198,7 +198,7 @@ public class SearchWidget extends Composite {
 		htmlBuilder.append("<form name=\"Busca\">");
 		htmlBuilder.append("	<label for=\"campobusca\" class=\"esconder\">Buscar organização</label>");
 		htmlBuilder.append("	<input type=\"text\" name=\"campobusca\" id=\"campobusca\" placeholder=\"Informe a localização ou a organização desejada...\"  />");
-//		htmlBuilder.append("	<button type=\"button\" name=\"buscar\" id=\"buscar\" class=\"buscar\">Buscar</button>");
+		htmlBuilder.append("	<button type=\"button\" name=\"buscar\" id=\"buscar\" class=\"buscar\">Buscar</button>");
 		htmlBuilder.append("	<button type=\"button\" name=\"ajuda\" class=\"ajuda\" id=\"ajuda\">?</button>");
 		htmlBuilder.append("</form>");
 		htmlBuilder.append("<div class=\"filtros\">");
@@ -259,11 +259,11 @@ public class SearchWidget extends Composite {
 		Event.setEventListener(elem, listener);
 	}
 	
-//	public void addSearchClickListener(EventListener listener) {
-//		final Element elem = DOM.getElementById("buscar");
-//		Event.sinkEvents(elem, Event.ONCLICK);
-//		Event.setEventListener(elem, listener);
-//	}
+	public void addSearchClickListener(EventListener listener) {
+		final Element elem = DOM.getElementById("buscar");
+		Event.sinkEvents(elem, Event.ONCLICK);
+		Event.setEventListener(elem, listener);
+	}
 	
 	public void addFilterClickListener(EventListener listener) {
 		final Element elem = DOM.getElementById("ajuda_filtros");

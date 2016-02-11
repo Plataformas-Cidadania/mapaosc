@@ -102,14 +102,14 @@ public class MenuController implements ValueChangeHandler<String> {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Place[] result) {
 				loadPlaces(result, true);
 			}
 		};
 		placeService.getPlaces(PlaceType.REGION, callbackPlaces);
 	}
-
+	
 	private void loadPlaces(Place[] places, boolean clearBreadcrumb) {
 		String type = "P";
 		menuPanel.clear();
@@ -347,7 +347,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		menuPanel.add(oscInfo);
 		// initFunction();
 
-		centerMap(LatLng.create(osc.getCoordinate().getY(), osc.getCoordinate().getX()));
+		centerMap(LatLng.create(osc.getCoordinate().getY(), osc.getCoordinate().getX()), 20.0);
 
 		changeIcons(osc.getMain().getId());
 		
@@ -836,14 +836,13 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 	
 	private void processAddress(String lat, String lon){
-		centerMap(LatLng.create(Double.parseDouble(lat), Double.parseDouble(lon)));
+		centerMap(LatLng.create(Double.parseDouble(lat), Double.parseDouble(lon)), 19.0);
 	}
 	
 	/**
 	 * @param recommended
 	 *            recomendação do usuário Envia a recomendação para banco
 	 */
-
 	public void RecommendationManager(boolean recommended, int oscId) {
 		String email = Cookies.getCookie("oscUid");
 
@@ -899,8 +898,8 @@ public class MenuController implements ValueChangeHandler<String> {
 		map.changeToSelectedIcon(oscId);
 	}
 	
-	public static void centerMap(LatLng center) {
-		map.centerMap(center);
+	public static void centerMap(LatLng center, Double zoom) {
+		map.centerMap(center, zoom);
 	}
 	
 	public static void resetAllIcons() {

@@ -22,6 +22,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -69,35 +70,38 @@ public class SearchController {
 			}
 		});
 		
-//		searchWidget.addSearchClickListener(new EventListener() {
-//			@Override
-//			public void onBrowserEvent(Event event) {
-//				String criteria = searchWidget.getValue();
-//				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-//					
-//					public void onFailure(Throwable caught) {
-//						logger.log(Level.SEVERE, caught.getMessage());
-//					}
-//					
-//					public void onSuccess(List<SearchResult> result) {
-//						if (!result.isEmpty()) {
-//							if (result.get(0).getType().equals(SearchResultType.STATE)){
-//								History.newItem("P" + result.get(0).getId());
-//							}
-//							if (result.get(0).getType().equals(SearchResultType.COUNTY)){
-//								History.newItem("P" + result.get(0).getId());
-//							}
-//							if (result.get(0).getType().equals(SearchResultType.OSC)){
-//								History.newItem("O" + result.get(0).getId());
-//							}
-//							
-//							searchWidget.close();
-//						}
-//					}
-//				};
-//				searchService.search(criteria, LIMIT, callbackSearch);
-//			}
-//		});
+		searchWidget.addSearchClickListener(new EventListener() {
+			@Override
+			public void onBrowserEvent(Event event) {
+				String criteria = searchWidget.getValue();
+				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
+					
+					public void onFailure(Throwable caught) {
+						logger.log(Level.SEVERE, caught.getMessage());
+					}
+					
+					public void onSuccess(List<SearchResult> result) {
+						if (!result.isEmpty()) {
+							if (result.get(0).getType().equals(SearchResultType.STATE)){
+								History.newItem("P" + result.get(0).getId());
+							}
+							if (result.get(0).getType().equals(SearchResultType.COUNTY)){
+								History.newItem("P" + result.get(0).getId());
+							}
+							if (result.get(0).getType().equals(SearchResultType.OSC)){
+								History.newItem("O" + result.get(0).getId());
+							}
+							if (result.get(0).getType().equals(SearchResultType.ADDRESS)){
+								History.newItem("A" + result.get(0).getId());
+							}
+							
+							searchWidget.close();
+						}
+					}
+				};
+				searchService.search(criteria, LIMIT, callbackSearch);
+			}
+		});
 	}
 	
 	SearchResult searchResult = new SearchResult();
@@ -112,7 +116,7 @@ public class SearchController {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 			
-			public void onSuccess(List<SearchResult> result) {
+			public void onSuccess(final List<SearchResult> result) {
 				if(result.size() < 5 && searchWidget.getValue().length() > 3){
 					String address = searchWidget.getValue();
 					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+");
@@ -137,12 +141,13 @@ public class SearchController {
 										if(searchResult.getLatitude() != null && searchResult.getLongetude() != null) flag = false;
 									}
 									if(searchResult.getLongetude() != null){
-										listResult.add(searchResult);
+										if(!result.contains(searchResult)) listResult.add(searchResult);
 										searchResult = new SearchResult();
 									}
-									if(listResult.size() >= limitResult) break;
+									if(listResult.size() > limitResult) break;
 								}
-								searchWidget.setItems(listResult);
+								result.addAll(listResult);
+								onSuccess(result);
 							}
 							
 							@Override
