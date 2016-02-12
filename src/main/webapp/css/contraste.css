@@ -1,438 +1,438 @@
-body {
+body.contraste_ativo {
 	color:#fff;
 	background-color: #000;
 }
-a {
+.contraste_ativo a {
 	text-decoration: underline !important;
 }
-a:hover {
+.contraste_ativo a:hover {
     text-decoration: underline !important;
 }
-#boardPanel {
+.contraste_ativo #boardPanel {
 	background-image: none;
 }
-#topo {
+.contraste_ativo #topo {
 	background: url("../imagens/contraste/topo-contraste.jpg") no-repeat center right;
 }
-#topo_acessibilidade, #topo_links, #rodape, #footer {
-	background-color: rgba(0, 0, 0, 0.8);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000) !important;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000)" !important;
+.contraste_ativo #topo_acessibilidade, .contraste_ativo  #topo_links, .contraste_ativo  #rodape, .contraste_ativo  #footer {
+	background-color: rgba(0, .contraste_ativo  0, .contraste_ativo  0, .contraste_ativo  0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, .contraste_ativo endColorstr=#CC000000) !important;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, .contraste_ativo endColorstr=#CC000000)" !important;
 	color: #fff;
 }
-#topo_links a:link, #topo_links a:visited {
+.contraste_ativo #topo_links a:link, .contraste_ativo  #topo_links a:visited {
 	color: #fff !important;
 }
-#topo_acessibilidade a, #topo_acessibilidade a:link, #topo_acessibilidade a:visited, #topo_acessibilidade a:active,
-#mapa_expandir .tabbody .breadcrumb li a,
+.contraste_ativo #topo_acessibilidade a, .contraste_ativo  #topo_acessibilidade a:link, .contraste_ativo  #topo_acessibilidade a:visited, .contraste_ativo  #topo_acessibilidade a:active, .contraste_ativo 
+#mapa_expandir .tabbody .breadcrumb li a, .contraste_ativo 
 #mapa.institucional h3 {
 	color: #00b0ff;
 }
-#mapa.institucional h2, #mapa.institucional h3, #mapa.institucional h3 em {
+.contraste_ativo #mapa.institucional h2, .contraste_ativo  #mapa.institucional h3, .contraste_ativo  #mapa.institucional h3 em {
     border-bottom-color: #00b0ff;
 }
-p {
+.contraste_ativo p {
 	color: white;
 }
-h1, h2, h3, h4, h5, li, div, .graph h3 {
+.contraste_ativo h1, .contraste_ativo  h2, .contraste_ativo  h3, .contraste_ativo  h4, .contraste_ativo  h5, .contraste_ativo  li, .contraste_ativo  div, .contraste_ativo  .graph h3 {
 	color: inherit;
 }
 /* #mapa { */
 /*     background-color: #333 !important; */
 /* } */
-#mapa_navegacao {
+.contraste_ativo #mapa_navegacao {
 	background-color: #000 !important;
     filter: none !important;
     -ms-filter: none !important;
 }
-#mapa_expandir .tabs ul.tabs-list .first.current a {
+.contraste_ativo #mapa_expandir .tabs ul.tabs-list .first.current a {
     background-image: url("../imagens/01_mapa_off.png") !important;
     background-color: #000;
     color: #fff
 }
-#mapa_expandir .tabs ul.tabs-list .first a {
+.contraste_ativo #mapa_expandir .tabs ul.tabs-list .first a {
     background-image: url("../imagens/01_mapa_on.png") !important;
     background-color: #fff;
     color: #000;
 }
-#mapa_expandir .tabs ul.tabs-list .last.current a {
+.contraste_ativo #mapa_expandir .tabs ul.tabs-list .last.current a {
    background-color: #000;
     background-image: url("../imagens/02_indicadores_off.png") !important;
     color: #FFFFFF;
 }
-#mapa_expandir .tabs ul.tabs-list .last a {
+.contraste_ativo #mapa_expandir .tabs ul.tabs-list .last a {
    background-color: #fff;
     background-image: url("../imagens/02_indicadores_on.png") !important;
     color: #000;
 }
-#mapa_expandir .tabs ul.tabs-list {
+.contraste_ativo #mapa_expandir .tabs ul.tabs-list {
     background-color: #fff;
 }
-#mapa_expandir .tabbody ul.dados, #mapa_navegacao h4 {
+.contraste_ativo #mapa_expandir .tabbody ul.dados, .contraste_ativo  #mapa_navegacao h4 {
     background-color: #fff;
     border-right: 4px solid #00b0ff;
 }
-#infograficos>div h2 {
+.contraste_ativo #infograficos>div h2 {
 	color: #00b0ff;
 	border-bottom-color: #00b0ff;
 }
-#mapa_expandir .tabbody > a {
+.contraste_ativo  #mapa_expandir .tabbody > a {
     color: #fff;
 }
-#mapa_expandir .tabbody ul.dados li a {
+.contraste_ativo #mapa_expandir .tabbody ul.dados li a {
     color: #444;
 }
-#mapa_expandir h4:hover a, #mapa_navegacao h4 a:active, #mapa_navegacao #menu_itens h4:hover > span {
+.contraste_ativo #mapa_expandir h4:hover a, .contraste_ativo  #mapa_navegacao h4 a:active, .contraste_ativo  #mapa_navegacao #menu_itens h4:hover > span {
     color: white;
     background-color: #00b0FF;
 }
-.mapa_organizacao {
-	background-color: rgba(0, 0, 0, 0.9);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000,endColorstr=#E5000000) !important;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000,endColorstr=#E5000000)" !important;
+.contraste_ativo .mapa_organizacao {
+	background-color: rgba(0, .contraste_ativo  0, .contraste_ativo  0, .contraste_ativo  0.9);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000, .contraste_ativo endColorstr=#E5000000) !important;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000, .contraste_ativo endColorstr=#E5000000)" !important;
 }
-#mapa.organizacao span, .tabbody ul.dados, #mapa_navegacao h4, .mapa_organizacao h4 em, .mapa_organizacao h2, #loading, #busca_resultado, .tip_recomendacao,
+.contraste_ativo #mapa.organizacao span, .contraste_ativo  .tabbody ul.dados, .contraste_ativo  #mapa_navegacao h4, .contraste_ativo  .mapa_organizacao h4 em, .contraste_ativo  .mapa_organizacao h2, .contraste_ativo  #loading, .contraste_ativo  #busca_resultado, .contraste_ativo  .tip_recomendacao, .contraste_ativo 
 #mapa_navegacao h4 a {
     color: #000;
 }
-.mapa_organizacao ul li {
+.contraste_ativo .mapa_organizacao ul li {
     list-style-image: url('../imagens/contraste/18_check.png');
 }
 
-#org_detalhes {
+.contraste_ativo #org_detalhes {
     background: url('../imagens/contraste/04_detalhes.png') 7px center no-repeat;
     background-color: #fff;
     color: #000;
 }
-#org_detalhes:hover {
+.contraste_ativo #org_detalhes:hover {
     background: url('../imagens/04_detalhes.png') 7px center no-repeat;
     background-color: #333333;
     color: #fff
 }
-#topo, #rodape, #topo a:link, #topo a:visited, #mapa.config, #mapa.cadastro, #mapa.organizacao, #mapa.institucional, #topo_acesso input, #topo_acesso input[type=submit] {
+.contraste_ativo #topo, .contraste_ativo  #rodape, .contraste_ativo  #topo a:link, .contraste_ativo  #topo a:visited, .contraste_ativo  #mapa.config, .contraste_ativo  #mapa.cadastro, .contraste_ativo  #mapa.organizacao, .contraste_ativo  #mapa.institucional, .contraste_ativo  #topo_acesso input, .contraste_ativo  #topo_acesso input[type=submit] {
     color: #FFF333;
 }
-#topo_acesso input[type=submit] {
+.contraste_ativo #topo_acesso input[type=submit] {
     background-color: transparent !important;
 }
-#topo_acesso input {
+.contraste_ativo #topo_acesso input {
     background-color: #000 !important;
 }
-#topo_acesso input#entrar, #topo_acesso input#sair {
+.contraste_ativo #topo_acesso input#entrar, .contraste_ativo  #topo_acesso input#sair {
 	background-color: white !important;
 	color: black !important;
 }
-#topo_acesso input#entrar:hover {
+.contraste_ativo #topo_acesso input#entrar:hover {
 	background-color: #00b0ff !important;
 	color: white !important;
 	background-image: url("../imagens/contraste/13_login_hover.png");
 }
-#topo_acesso input#sair:hover {
+.contraste_ativo #topo_acesso input#sair:hover {
 	background-color: #00b0ff !important;
 	color: white !important;
 	background-image: url("../imagens/contraste/13_logoff_hover.png");
 }  
-#topo_acesso a {
+.contraste_ativo #topo_acesso a {
 	background-color: black;
 	color: #FFF333;
 	margin-bottom: 3px;
 	font-size: 1em;
 }
-#topo_acesso input#email {
+.contraste_ativo #topo_acesso input#email {
     background-image: url("../imagens/contraste/11_email.png");
 }
-#topo_acesso input#senha {
+.contraste_ativo #topo_acesso input#senha {
     background-image: url("../imagens/contraste/12_senha.png");
 }
-#busca_resultado .resultado a {
+.contraste_ativo #busca_resultado .resultado a {
     text-decoration: none !important;
 }
-#busca_resultado .resultado li a:hover,
+.contraste_ativo #busca_resultado .resultado li a:hover, .contraste_ativo 
 button.exportar:hover
  {
     color: #fff;
     background-color: #000 !important;
 }
-#topo_acesso li h2 {
+.contraste_ativo #topo_acesso li h2 {
 	color: black;
 	font-size: 1.4em;
 }
-#topo_acesso li a {
+.contraste_ativo #topo_acesso li a {
 	color: #FFF333;
 	background-color: black;
 	font-size: 1em;
 }
-.GPBYFDEFD, .GPBYFDEED, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableHeader, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableFooter {
+.contraste_ativo .GPBYFDEFD, .contraste_ativo  .GPBYFDEED, .contraste_ativo  .com-google-gwt-user-cellview-client-CellTable-Style-cellTableHeader, .contraste_ativo  .com-google-gwt-user-cellview-client-CellTable-Style-cellTableFooter {
 	color: white !important;
 	text-shadow: none !important;
 	font-size: 1.1em;
 }
-table.GPBYFDEGE {
+.contraste_ativo table.GPBYFDEGE {
 	background-color: black;
 }
-table.GPBYFDEGE tbody .GPBYFDEPC, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableEvenRow {
+.contraste_ativo table.GPBYFDEGE tbody .GPBYFDEPC, .contraste_ativo  .com-google-gwt-user-cellview-client-CellTable-Style-cellTableEvenRow {
 	background-color: #000 !important;
 }
-table.GPBYFDEGE tbody .GPBYFDEPD, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableOddRow {
+.contraste_ativo table.GPBYFDEGE tbody .GPBYFDEPD, .contraste_ativo  .com-google-gwt-user-cellview-client-CellTable-Style-cellTableOddRow {
 	background-color: #222 !important;
 }
-.GPBYFDEPD a, .GPBYFDEPC a, .com-google-gwt-user-cellview-client-CellTable-Style-cellTableCell a {
+.contraste_ativo .GPBYFDEPD a, .contraste_ativo  .GPBYFDEPC a, .contraste_ativo  .com-google-gwt-user-cellview-client-CellTable-Style-cellTableCell a {
 	color: #FFF333;
 }
-#busca {
+.contraste_ativo #busca {
     
 }
-#topo_links #sobre {
+.contraste_ativo #topo_links #sobre {
     background: url('../imagens/contraste/07_portal.png') no-repeat center left;
     color: #FFF333;
 }
-#topo_links #duvidas {
+.contraste_ativo #topo_links #duvidas {
     background: url('../imagens/contraste/08_faq.png') no-repeat center left;
     color: #FFF333;
 }
-#topo_links #sobre:hover {
+.contraste_ativo #topo_links #sobre:hover {
     background: url('../imagens/contraste/07_portal.png') no-repeat center left;
 }
-#topo_links #duvidas:hover {
+.contraste_ativo #topo_links #duvidas:hover {
     background: url('../imagens/contraste/08_faq.png') no-repeat center left;
 }
-#doormat-container dl {
+.contraste_ativo #doormat-container dl {
     border-left: 1px dotted #00b0ff;
 }
-#doormat-container dt {
+.contraste_ativo #doormat-container dt {
     color: #00b0ff;
 }
-#footer a,
-.formulario a,
-#mapa.organizacao span,
-#mapa.cadastro .instrucoes, .modal,
-button#ajuda:hover, button#buscar:hover, button#ajuda:active, button#buscar:active, #alterar_local button:hover, #ajuda_local button:hover,
-#mapa.cadastro .instrucoes ul li a:hover, .formulario .botoes input:hover, .formulario.organizacao button:hover,
-#mapa.config .tabs,
-#mapa.organizacao div.tabela > div,
-#mapa.organizacao div.projetos div div,
-#mapa.organizacao div.social .classificacao h3,
-#mapa.organizacao div.tabela .dados div p:hover input[type=text], #mapa.organizacao div.tabela .dados div ul li:hover input[type=text],
-#mapa.organizacao div.tabela .dados div div:hover select, #mapa.organizacao div.tabela input[type=text]:focus,
-#mapa.organizacao div.tabela .dados div p:hover textarea, #mapa.organizacao div.tabela .projetos input:hover, #mapa.organizacao div.tabela .projetos textarea:hover,
-#mapa.organizacao div.tabela .dados select option,
-#mapa.organizacao.formulario > .botoes,
-#mapa.organizacao div.social,
-#mapa.organizacao div.tabela .dados input, #mapa.organizacao div.tabela .dados select, #mapa.organizacao div.tabela .dados textarea,
-#mapa.organizacao div.projetos div div,
-#mapa.organizacao div.tabela .projetos input, #mapa.organizacao div.tabela .projetos select, #mapa.organizacao div.tabela .projetos textarea,
+.contraste_ativo #footer a, .contraste_ativo 
+.formulario a, .contraste_ativo 
+#mapa.organizacao span, .contraste_ativo 
+#mapa.cadastro .instrucoes, .contraste_ativo  .modal, .contraste_ativo 
+button#ajuda:hover, .contraste_ativo  button#buscar:hover, .contraste_ativo  button#ajuda:active, .contraste_ativo  button#buscar:active, .contraste_ativo  #alterar_local button:hover, .contraste_ativo  #ajuda_local button:hover, .contraste_ativo 
+#mapa.cadastro .instrucoes ul li a:hover, .contraste_ativo  .formulario .botoes input:hover, .contraste_ativo  .formulario.organizacao button:hover, .contraste_ativo 
+#mapa.config .tabs, .contraste_ativo 
+#mapa.organizacao div.tabela > div, .contraste_ativo 
+#mapa.organizacao div.projetos div div, .contraste_ativo 
+#mapa.organizacao div.social .classificacao h3, .contraste_ativo 
+#mapa.organizacao div.tabela .dados div p:hover input[type=text], .contraste_ativo  #mapa.organizacao div.tabela .dados div ul li:hover input[type=text], .contraste_ativo 
+#mapa.organizacao div.tabela .dados div div:hover select, .contraste_ativo  #mapa.organizacao div.tabela input[type=text]:focus, .contraste_ativo 
+#mapa.organizacao div.tabela .dados div p:hover textarea, .contraste_ativo  #mapa.organizacao div.tabela .projetos input:hover, .contraste_ativo  #mapa.organizacao div.tabela .projetos textarea:hover, .contraste_ativo 
+#mapa.organizacao div.tabela .dados select option, .contraste_ativo 
+#mapa.organizacao.formulario > .botoes, .contraste_ativo 
+#mapa.organizacao div.social, .contraste_ativo 
+#mapa.organizacao div.tabela .dados input, .contraste_ativo  #mapa.organizacao div.tabela .dados select, .contraste_ativo  #mapa.organizacao div.tabela .dados textarea, .contraste_ativo 
+#mapa.organizacao div.projetos div div, .contraste_ativo 
+#mapa.organizacao div.tabela .projetos input, .contraste_ativo  #mapa.organizacao div.tabela .projetos select, .contraste_ativo  #mapa.organizacao div.tabela .projetos textarea, .contraste_ativo 
 #mapa.institucional a  {
     color: #FFF333;
 }
-#footer a:hover {
+.contraste_ativo #footer a:hover {
     color: white;
 }
-#mapa.cadastro .instrucoes, .modal,
-button#ajuda:hover, button#buscar:hover, button#ajuda:active, button#buscar:active, #alterar_local button:hover, #ajuda_local button:hover,
-#mapa.config .tabs,
-#mapa.organizacao div.tabela > div,
+.contraste_ativo #mapa.cadastro .instrucoes, .contraste_ativo  .modal, .contraste_ativo 
+button#ajuda:hover, .contraste_ativo  button#buscar:hover, .contraste_ativo  button#ajuda:active, .contraste_ativo  button#buscar:active, .contraste_ativo  #alterar_local button:hover, .contraste_ativo  #ajuda_local button:hover, .contraste_ativo 
+#mapa.config .tabs, .contraste_ativo 
+#mapa.organizacao div.tabela > div, .contraste_ativo 
 .tabs {
     background-color: #000;
 }
-#rodape a.beta {
+.contraste_ativo #rodape a.beta {
 	color: black;
 	background-color: white;
 }
-#rodape a.beta:hover {
+.contraste_ativo #rodape a.beta:hover {
 	color: white;
 	background-color: #00b0ff;
 }
-#mapa.cadastro .instrucoes h2,
-.formulario a:hover,
-#mapa.organizacao div.docs div ul a,
-#mapa.institucional a:hover,
+.contraste_ativo #mapa.cadastro .instrucoes h2, .contraste_ativo 
+.formulario a:hover, .contraste_ativo 
+#mapa.organizacao div.docs div ul a, .contraste_ativo 
+#mapa.institucional a:hover, .contraste_ativo 
 #mapa_navegacao .tabbody.infograficos h4 a.current  {
     color: #00b0ff;
 }
-.modal h3, .mapa_organizacao h2, #mapa.config .tabs li.current a, #mapa.config h2,
-div.b-redes label:hover, .social button:hover,
-#mapa.cadastro h1,
-#mapa.config h1, .formulario.organizacao h1,
-#mapa.organizacao h1,
-#mapa.organizacao .tabela div h2, #mapa.organizacao .projetos .titulo,
-#mapa_navegacao .organizacao,
-#mapa.cadastro .instrucoes ul li a:hover,
-#mapa form > .titulo,
- #mapa_expandir button#expandir,
- #mapa.institucional h1,
- .mapa_organizacao h2, #mapa.institucional h3 em,
+.contraste_ativo .modal h3, .contraste_ativo  .mapa_organizacao h2, .contraste_ativo  #mapa.config .tabs li.current a, .contraste_ativo  #mapa.config h2, .contraste_ativo 
+div.b-redes label:hover, .contraste_ativo  .social button:hover, .contraste_ativo 
+#mapa.cadastro h1, .contraste_ativo 
+#mapa.config h1, .contraste_ativo  .formulario.organizacao h1, .contraste_ativo 
+#mapa.organizacao h1, .contraste_ativo 
+#mapa.organizacao .tabela div h2, .contraste_ativo  #mapa.organizacao .projetos .titulo, .contraste_ativo 
+#mapa_navegacao .organizacao, .contraste_ativo 
+#mapa.cadastro .instrucoes ul li a:hover, .contraste_ativo 
+#mapa form > .titulo, .contraste_ativo 
+ #mapa_expandir button#expandir, .contraste_ativo 
+ #mapa.institucional h1, .contraste_ativo 
+ .mapa_organizacao h2, .contraste_ativo  #mapa.institucional h3 em, .contraste_ativo 
  #mapa.infograficos h1 {
     background-color: #00b0ff;
 }
-#mapa.cadastro .instrucoes ul li a, .cadastro h1,
-#mapa.config h1, #mapa.organizacao h1, #mapa.institucional h1,
-#mapa.institucional h3 em, .modal h3, #busca_filtros h3, #mapa.infograficos h1 {
+.contraste_ativo #mapa.cadastro .instrucoes ul li a, .contraste_ativo  .cadastro h1, .contraste_ativo 
+#mapa.config h1, .contraste_ativo  #mapa.organizacao h1, .contraste_ativo  #mapa.institucional h1, .contraste_ativo 
+#mapa.institucional h3 em, .contraste_ativo  .modal h3, .contraste_ativo  #busca_filtros h3, .contraste_ativo  #mapa.infograficos h1 {
     color: #000
 }
-#infograficos h2 {
+.contraste_ativo #infograficos h2 {
     color: #fff;
     border-bottom-color: #fff;
 }
-#modal_redes h3, a.b-redes {
+.contraste_ativo #modal_redes h3, .contraste_ativo  a.b-redes {
     background-position: 0px -24px;
 }
-#mapa.cadastro {
+.contraste_ativo #mapa.cadastro {
 background-image: url(../imagens/contraste/cadastro_mapa.gif);
 }
-#mapa.organizacao div.tabela .dados div p:hover, #mapa.organizacao div.tabela .dados div div:hover {
+.contraste_ativo #mapa.organizacao div.tabela .dados div p:hover, .contraste_ativo  #mapa.organizacao div.tabela .dados div div:hover {
     background-color: #555;
 }
-#mapa.organizacao div.tabela .dados div p:hover input[type=text], #mapa.organizacao div.tabela .dados div ul li:hover input[type=text],
-#mapa.organizacao div.tabela .dados div div:hover select, #mapa.organizacao div.tabela input[type=text]:focus,
-#mapa.organizacao div.tabela .dados div p:hover textarea, #mapa.organizacao div.tabela .projetos input:hover, #mapa.organizacao div.tabela .projetos textarea:hover,
+.contraste_ativo #mapa.organizacao div.tabela .dados div p:hover input[type=text], .contraste_ativo  #mapa.organizacao div.tabela .dados div ul li:hover input[type=text], .contraste_ativo 
+#mapa.organizacao div.tabela .dados div div:hover select, .contraste_ativo  #mapa.organizacao div.tabela input[type=text]:focus, .contraste_ativo 
+#mapa.organizacao div.tabela .dados div p:hover textarea, .contraste_ativo  #mapa.organizacao div.tabela .projetos input:hover, .contraste_ativo  #mapa.organizacao div.tabela .projetos textarea:hover, .contraste_ativo 
 #mapa.organizacao div.tabela .dados select option {
     border-color: #00b0ff;
     background-color: #00b0ff;
 }
-#mapa.organizacao div.projetos .separador {
+.contraste_ativo #mapa.organizacao div.projetos .separador {
     border-right: 3px solid #000;
 }
-#mapa.organizacao div.projetos div strong {
+.contraste_ativo #mapa.organizacao div.projetos div strong {
     background-color: #555;
 }
-#mapa.organizacao div.social {
+.contraste_ativo #mapa.organizacao div.social {
     background-color: #005280
 }
-#mapa.organizacao div.projetos div div,
-#mapa.organizacao div.tabela .projetos input, #mapa.organizacao div.tabela .projetos select, #mapa.organizacao div.tabela .projetos textarea   {
+.contraste_ativo #mapa.organizacao div.projetos div div, .contraste_ativo 
+#mapa.organizacao div.tabela .projetos input, .contraste_ativo  #mapa.organizacao div.tabela .projetos select, .contraste_ativo  #mapa.organizacao div.tabela .projetos textarea   {
     background: #000;
     border: 1px solid #000;
 }
-#mapa.organizacao > .botoes,
+.contraste_ativo #mapa.organizacao > .botoes, .contraste_ativo 
 #mapa.organizacao div.social {
     background-color: #000;
 }
-#mapa.organizacao .docs ul.dados li:hover a.excluir {
+.contraste_ativo #mapa.organizacao .docs ul.dados li:hover a.excluir {
     background: #000 url("../imagens/03_diminuir_hover.png") no-repeat 0 0;
 }
-.mapa_organizacao ul li, .checklist li {
+.contraste_ativo .mapa_organizacao ul li, .contraste_ativo  .checklist li {
     list-style-image: url('../imagens/05_recomendar.png') !important; 
 }
-.documentos li, .formulario .documentos li {
+.contraste_ativo .documentos li, .contraste_ativo  .formulario .documentos li {
     list-style-image: url('../imagens/contraste/documentos.gif');
 }
-#mapa.organizacao .social .recomendacoes span {
+.contraste_ativo #mapa.organizacao .social .recomendacoes span {
     color: #000;
 }
-#mapa.organizacao .social .classificacao h3 {
+.contraste_ativo #mapa.organizacao .social .classificacao h3 {
     background: url('../imagens/contraste/classificacao.gif') no-repeat 0 0;
 }
-.bg-01 {
+.contraste_ativo .bg-01 {
 background-image:url(../imagens/contraste/cadastro_mapa2.png);
 }
 
-.bg-02 {
+.contraste_ativo .bg-02 {
 background-image:url(../imagens/contraste/cadastro_mapa3.png);
 }
 
-a.b-redes, a.b-cadastro, a.b-entidade, div.b-redes label.tooltip {
+.contraste_ativo a.b-redes, .contraste_ativo  a.b-cadastro, .contraste_ativo  a.b-entidade, .contraste_ativo  div.b-redes label.tooltip {
     background-color: #fff;
     background-image: url(../imagens/contraste/sprite_cadastro.png);
 }
-div.b-redes label.tooltip,.social .redes button, .institucional .redes button {
+.contraste_ativo div.b-redes label.tooltip, .contraste_ativo .social .redes button, .contraste_ativo  .institucional .redes button {
 background-color:#fff;
 }
-.formulario input[type=text], .formulario input[type=password], div.b-redes label.tooltip, #mapa.organizacao .redes button, #mapa.institucional .redes button, .modal h3, a.b-redes, a.b-cadastro, a.b-entidade, .formulario .botoes input {
+.contraste_ativo .formulario input[type=text], .contraste_ativo  .formulario input[type=password], .contraste_ativo  div.b-redes label.tooltip, .contraste_ativo  #mapa.organizacao .redes button, .contraste_ativo  #mapa.institucional .redes button, .contraste_ativo  .modal h3, .contraste_ativo  a.b-redes, .contraste_ativo  a.b-cadastro, .contraste_ativo  a.b-entidade, .contraste_ativo  .formulario .botoes input {
 background-image: url(../imagens/contraste/sprite_cadastro.png);
 }
-button.adicionar, input.adicionar[type="button"],button.adicionar:hover, input.adicionar[type="button"]:hover {
+.contraste_ativo button.adicionar, .contraste_ativo  input.adicionar[type="button"], .contraste_ativo button.adicionar:hover, .contraste_ativo  input.adicionar[type="button"]:hover {
 background-image: url(../imagens/sprite_organizacao.png) !important;
 }
-#busca_filtros h3 {
+.contraste_ativo #busca_filtros h3 {
     background-image: url("../imagens/contraste/filtrar.gif");
 }
-input[type=text], input[type=password], select,
+.contraste_ativo input[type=text], .contraste_ativo  input[type=password], .contraste_ativo  select, .contraste_ativo 
 input#campobusca {
 border: 1px solid #fff;
 color: #fff;
 background-color: #000
 }
-button.ajuda:hover, #busca button:hover, button.ajuda:active, button.buscar:active, #busca .filtros a.filtrar:hover, #alterar_local button:hover, #ajuda_local button:hover, .cadastro .instrucoes ul li a:hover, div.b-redes label.tooltip:hover, div.redes button:hover, button.alterar:hover, button.carregar:hover, button.adicionar:hover, input[type=button].adicionar:hover, button.participar:hover, input[type=submit].salvar:hover, button.excluir:hover, input[type=submit].botao_entrar:hover, .formulario input[type=submit]:hover, .formulario input[type=button]:hover, .formulario button:hover, #busca_filtros div button:hover, #busca_filtros h3 {
+.contraste_ativo button.ajuda:hover, .contraste_ativo  #busca button:hover, .contraste_ativo  button.ajuda:active, .contraste_ativo  button.buscar:active, .contraste_ativo  #busca .filtros a.filtrar:hover, .contraste_ativo  #alterar_local button:hover, .contraste_ativo  #ajuda_local button:hover, .contraste_ativo  .cadastro .instrucoes ul li a:hover, .contraste_ativo  div.b-redes label.tooltip:hover, .contraste_ativo  div.redes button:hover, .contraste_ativo  button.alterar:hover, .contraste_ativo  button.carregar:hover, .contraste_ativo  button.adicionar:hover, .contraste_ativo  input[type=button].adicionar:hover, .contraste_ativo  button.participar:hover, .contraste_ativo  input[type=submit].salvar:hover, .contraste_ativo  button.excluir:hover, .contraste_ativo  input[type=submit].botao_entrar:hover, .contraste_ativo  .formulario input[type=submit]:hover, .contraste_ativo  .formulario input[type=button]:hover, .contraste_ativo  .formulario button:hover, .contraste_ativo  #busca_filtros div button:hover, .contraste_ativo  #busca_filtros h3 {
 background-color: #00B0FF;
 }
-.formulario .botoes input,
-.formulario input[type="submit"], .formulario input[type="button"], .formulario button, .classificacao button {
+.contraste_ativo .formulario .botoes input, .contraste_ativo 
+.formulario input[type="submit"], .contraste_ativo  .formulario input[type="button"], .contraste_ativo  .formulario button, .contraste_ativo  .classificacao button {
     background-color: #fff;
     color: #000
 }
-#mapa.cadastro .instrucoes ul li a.b-redes + em {
+.contraste_ativo #mapa.cadastro .instrucoes ul li a.b-redes + em {
 background-image: url(../imagens/contraste/cadastro_01.png);
 }
-#mapa.cadastro .instrucoes ul li a.b-cadastro + em {
+.contraste_ativo #mapa.cadastro .instrucoes ul li a.b-cadastro + em {
 background-image: url(../imagens/contraste/cadastro_02.png);
 }
-#mapa.cadastro .instrucoes ul li a.b-entidade + em {
+.contraste_ativo #mapa.cadastro .instrucoes ul li a.b-entidade + em {
 background-image: url(../imagens/contraste/cadastro_03.png);
 }
-#mapa_expandir .tabbody#regiao ul.dados li, .formulario ul li {
+.contraste_ativo #mapa_expandir .tabbody#regiao ul.dados li, .contraste_ativo  .formulario ul li {
 list-style-image: url(../imagens/contraste/16_topicos.png);
 }
-input.error, input.erro_ent, textarea.erro_ent, select.erro_ent {
+.contraste_ativo input.error, .contraste_ativo  input.erro_ent, .contraste_ativo  textarea.erro_ent, .contraste_ativo  select.erro_ent {
 background-color: #000!important;
 }
 
-#alterar_local button:hover, #ajuda_local button:hover, .formulario .botoes input:hover {
+.contraste_ativo #alterar_local button:hover, .contraste_ativo  #ajuda_local button:hover, .contraste_ativo  .formulario .botoes input:hover {
 background-image: url(../imagens/sprite_cadastro.png);
 }
- .filtros a.filtrar { text-decoration: none !important;}
+ .contraste_ativo .filtros a.filtrar { text-decoration: none !important;}
 
- .config .tabs ul.tabs-list .first.current a,  .config .tabs ul.tabs-list .first a, .config h2 {
+ .contraste_ativo .config .tabs ul.tabs-list .first.current a, .contraste_ativo   .config .tabs ul.tabs-list .first a, .contraste_ativo  .config h2 {
     color: #000;
     background-position: 0 -540px;
 }
-.config .tabs ul.tabs-list .last.current a, .config .tabs ul.tabs-list .last a {
+.contraste_ativo .config .tabs ul.tabs-list .last.current a, .contraste_ativo  .config .tabs ul.tabs-list .last a {
     color: #000;
     background-position: 0 -600px;
 }
 
-#mapa.institucional .faq > div a {
+.contraste_ativo #mapa.institucional .faq > div a {
     /*background-image: url("../imagens/contraste/topo.gif");*/
 }
-#mapa.institucional .faq > div a:hover {
+.contraste_ativo #mapa.institucional .faq > div a:hover {
     background-image: url("../imagens/contraste/topo_hover.gif");
 }
 
-#mapa.organizacao div.tabela .dados input[type="text"], #mapa.organizacao div.tabela .dados select, #mapa.organizacao div.tabela .dados textarea {
+.contraste_ativo #mapa.organizacao div.tabela .dados input[type="text"], .contraste_ativo  #mapa.organizacao div.tabela .dados select, .contraste_ativo  #mapa.organizacao div.tabela .dados textarea {
     background-color: #000;
     border-color: #000;
 }
 
-#mapa.organizacao h1 em, #mapa.organizacao .social .classificacao h3, .classificacao ul.dados li, button.alterar, button.carregar, button.exportar, button.adicionar, input.adicionar[type="button"], button.participar, button.excluir {
+.contraste_ativo #mapa.organizacao h1 em, .contraste_ativo  #mapa.organizacao .social .classificacao h3, .contraste_ativo  .classificacao ul.dados li, .contraste_ativo  button.alterar, .contraste_ativo  button.carregar, .contraste_ativo  button.exportar, .contraste_ativo  button.adicionar, .contraste_ativo  input.adicionar[type="button"], .contraste_ativo  button.participar, .contraste_ativo  button.excluir {
 background-image: url(../imagens/contraste/sprite_organizacao.png);
 }
-button.alterar:hover, button.carregar:hover, button.exportar:hover, button.adicionar:hover, input.adicionar[type="button"]:hover, button.participar:hover, button.excluir:hover {
+.contraste_ativo button.alterar:hover, .contraste_ativo  button.carregar:hover, .contraste_ativo  button.exportar:hover, .contraste_ativo  button.adicionar:hover, .contraste_ativo  input.adicionar[type="button"]:hover, .contraste_ativo  button.participar:hover, .contraste_ativo  button.excluir:hover {
 background-image: url(../imagens/sprite_organizacao.png);
 }
-button.recomendar {
+.contraste_ativo button.recomendar {
     background: url("../imagens/05_recomendar.png") no-repeat scroll 9px 10px #DD9C28;
     color: #fff;
 }
-button.recomendar:hover {
+.contraste_ativo button.recomendar:hover {
     background-color: #E7AB37;
 }
-#mapa.institucional h2.parceiros {
+.contraste_ativo #mapa.institucional h2.parceiros {
     background-image: url("../imagens/contraste/19_parceiros.png");
 }
-#mapa.institucional h2.contato {
+.contraste_ativo #mapa.institucional h2.contato {
     background-image: url("../imagens/contraste/20_contato.png");
 }
-#mapa.institucional h2 {
+.contraste_ativo #mapa.institucional h2 {
     color: #fff;
 }
-#busca_filtros div button {
+.contraste_ativo #busca_filtros div button {
     background-color: #000;
     color: #fff;
     background-image: url("../imagens/sprite_organizacao.png");
 }
-#mapa.infograficos{background-image: url('../imagens/contraste/bolinhas_fundo.png')}
+.contraste_ativo #mapa.infograficos{background-image: url('../imagens/contraste/bolinhas_fundo.png')}
 #infograficos{
 	background-color: #000;
 }
-#mapa{
+.contraste_ativo #mapa{
 	background-color: #000;
 }

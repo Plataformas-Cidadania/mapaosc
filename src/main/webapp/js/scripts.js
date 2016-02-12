@@ -89,12 +89,14 @@ function carouselRoll(carousel) {
 
 /* Contraste */
 $("#contraste_normal").click(function() {
+	$("body").removeClass("contraste_ativo");
 	chooseStyle('none');
 	$('.normal').show();
 	$('.contraste').hide();
 });
 
 $("#alto_contraste").click(function() {
+	$("body").addClass("contraste_ativo");
 	chooseStyle('contrast', 0);
 	$('.contraste').show();
 	$('.normal').hide();
