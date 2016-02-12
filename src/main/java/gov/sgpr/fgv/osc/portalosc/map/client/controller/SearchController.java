@@ -6,7 +6,6 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResult;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,7 +35,6 @@ public class SearchController {
 	private static int LIMIT = 5;
 	private Date changeDate;
 	private SearchResult searchResult = new SearchResult();
-	private Integer limitResult = 5;
 	private Integer quantLetter = 0;
 	
 	public void init() {
@@ -117,22 +115,20 @@ public class SearchController {
 			}
 			
 			public void onSuccess(final List<SearchResult> result) {				
-				if(result.size() < 5 && searchWidget.getValue().length() > 3 && quantLetter != searchWidget.getValue().length()){
+				if(result.size() < LIMIT && searchWidget.getValue().length() > 3 && quantLetter != searchWidget.getValue().length()){
 					String address = searchWidget.getValue();
 					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + ",brasil";
 					
 					quantLetter = searchWidget.getValue().length();
-					limitResult = 5 - result.size();
 					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
 					try{
 						req.sendRequest(null, new RequestCallback() {
 							
 							@Override
 							public void onResponseReceived(Request request, Response response) {
-								List<SearchResult> listResult = new ArrayList<SearchResult>();
 								Boolean flag = false;
 								for(String s : response.getText().split("\n")){
-									if(searchResult.getLongetude() != null) searchResult.setId(listResult.size() + 1);
+									if(searchResult.getLongetude() != null) searchResult.setId(result.size() + 1);
 									searchResult.setType(SearchResultType.ADDRESS);
 									if(s.contains("formatted_address")) searchResult.setValue(s.split(": ")[1].split("\",")[0].replace("\"", ""));
 									if(s.contains("\"location\" :")) flag = true;
@@ -142,12 +138,11 @@ public class SearchController {
 										if(searchResult.getLatitude() != null && searchResult.getLongetude() != null) flag = false;
 									}
 									if(searchResult.getLongetude() != null){
-										if(!result.contains(searchResult)) listResult.add(searchResult);
+										if(!result.contains(searchResult)) result.add(searchResult);
 										searchResult = new SearchResult();
 									}
-									if(listResult.size() > limitResult) break;
+									if(result.size() > LIMIT) break;
 								}
-								result.addAll(listResult);
 								onSuccess(result);
 							}
 							
