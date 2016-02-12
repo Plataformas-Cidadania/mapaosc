@@ -189,10 +189,12 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		String sql = "SELECT bosc_nr_identificacao, dcti_cd_tipo, bosc_nm_osc, bosc_nm_fantasia_osc, ospr_ds_endereco, "
 				+ "ospr_ds_endereco_complemento, ospr_nm_bairro, ospr_nm_municipio, ospr_sg_uf, ospr_nm_cep, "
 				+ "dcsc_cd_alpha_subclasse, dcsc_nm_subclasse, ST_AsText(ospr_geometry) wkt, dcnj_cd_alpha_natureza_juridica, "
-				+ "dcnj_nm_natureza_juridica, ospr_dt_ano_fundacao, ospr_ee_site, ospr_cd_municipio, cont_ds_tipo_contato,"
-				+ " cont_ds_contato, ' ' as contatos "
-				+ "FROM portal.vm_osc_principal a JOIN portal.tb_osc_contato b ON a.bosc_sq_osc = b.bosc_sq_osc "
-				+ "WHERE a.bosc_sq_osc = ? GROUP BY a.bosc_sq_osc, b.cont_ds_tipo_contato, b.cont_ds_contato ";
+				+ "dcnj_nm_natureza_juridica, ospr_dt_ano_fundacao, ospr_ee_site, ospr_cd_municipio "
+				// cont_ds_tipo_contato," + " cont_ds_contato, ' ' as contatos "
+				+ "FROM portal.vm_osc_principal "
+				// a JOIN portal.tb_osc_contato b ON a.bosc_sq_osc = b.bosc_sq_osc "
+				+ "WHERE bosc_sq_osc = ? " ;
+				// GROUP BY a.bosc_sq_osc, b.cont_ds_tipo_contato, b.cont_ds_contato ";
 		
 
 		// logger.info(sql);
@@ -241,7 +243,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				
 				summary.setCountyId(rs.getInt("ospr_cd_municipio"));
 				
-				summary.setContatos(rs.getString("cont_ds_contato"));
+			//	summary.setContatos(rs.getString("cont_ds_contato"));
 				
 				summary.setCnaeCode(rs.getString("dcsc_cd_alpha_subclasse"));
 				summary.setCnaeDescription(rs.getString("dcsc_nm_subclasse"));
