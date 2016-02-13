@@ -4354,6 +4354,14 @@ p.legenda {
     border-top: 2px solid #E1E1E1;
 }
 
+#graphs td td {
+	border-right: 0px;
+}
+
+#graphs td tr:first-child td {
+	border-top: 0px;
+}
+
 .organizacao fieldset > div {
 	padding:3px;
 }
