@@ -4349,7 +4349,7 @@ p.legenda {
 	padding: 5px;
 }
 
-.graph {
+#graphs td {
 	border-right: 2px solid #E1E1E1;
     border-top: 2px solid #E1E1E1;
 }

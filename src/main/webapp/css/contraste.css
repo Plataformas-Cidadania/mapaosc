@@ -15,9 +15,9 @@ body.contraste_ativo {
 	background: url("../imagens/contraste/topo-contraste.jpg") no-repeat center right;
 }
 .contraste_ativo #topo_acessibilidade, .contraste_ativo  #topo_links, .contraste_ativo  #rodape, .contraste_ativo  #footer {
-	background-color: rgba(0, .contraste_ativo  0, .contraste_ativo  0, .contraste_ativo  0.8);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, .contraste_ativo endColorstr=#CC000000) !important;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, .contraste_ativo endColorstr=#CC000000)" !important;
+	background-color: rgba(0,  0,  0,  0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, endColorstr=#CC000000) !important;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,  endColorstr=#CC000000)" !important;
 	color: #fff;
 }
 .contraste_ativo #topo_links a:link, .contraste_ativo  #topo_links a:visited {
@@ -87,9 +87,9 @@ body.contraste_ativo {
     background-color: #00b0FF;
 }
 .contraste_ativo .mapa_organizacao {
-	background-color: rgba(0, .contraste_ativo  0, .contraste_ativo  0, .contraste_ativo  0.9);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000, .contraste_ativo endColorstr=#E5000000) !important;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000, .contraste_ativo endColorstr=#E5000000)" !important;
+	background-color: rgba(0,  0,   0, 0.9);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000, endColorstr=#E5000000) !important;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E5000000, endColorstr=#E5000000)" !important;
 }
 .contraste_ativo #mapa.organizacao span, .contraste_ativo  .tabbody ul.dados, .contraste_ativo  #mapa_navegacao h4, .contraste_ativo  .mapa_organizacao h4 em, .contraste_ativo  .mapa_organizacao h2, .contraste_ativo  #loading, .contraste_ativo  #busca_resultado, .contraste_ativo  .tip_recomendacao, .contraste_ativo 
 #mapa_navegacao h4 a {
