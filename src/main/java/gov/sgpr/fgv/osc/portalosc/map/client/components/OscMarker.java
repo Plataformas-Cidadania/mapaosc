@@ -93,48 +93,51 @@ public class OscMarker {
 
 		PaperClipKeyValueSection oscInfo = new PaperClipKeyValueSection();
 		oscInfo.setSectionTitle("");
-
-		/*if (summary.getLegalTypeDescription() != null) {
-			oscInfo.addKeyValue("Natureza Jurídica",
-					summary.getLegalTypeDescription());
-		}*/
+		
 		if (summary.getAddress() != null) {
 			oscInfo.addKeyValue("Endereço",
 					summary.getAddress());
 		}
 		
-		Map<String, String> Contatos = new LinkedHashMap<String, String>();
-		Contatos = summary.getContacts();
-		
-		if(!Contatos.isEmpty()){
-			for (Map.Entry<String, String> entry : Contatos.entrySet()) {				
-				oscInfo.addKeyValue(entry.getKey(),entry.getValue());
-			}
+		if (summary.getCnaeDescription() != null) {
+			oscInfo.addKeyValue("Área(s) de Atuação",
+					summary.getCnaeDescription());
 		}
 		
-/*		if (summary.getFoundationYear() != null
+		if (summary.getLegalTypeDescription() != null) {
+			oscInfo.addKeyValue("Natureza Jurídica",
+					summary.getLegalTypeDescription());
+		}
+		
+		if (summary.getSite() != null) {
+			oscInfo.addKeyValue("Site",
+					summary.getSite());
+		}
+		
+		if (summary.getFoundationYear() != null
 				&& summary.getFoundationYear() != 0) {
 			oscInfo.addKeyValue("Ano de Fundação",
 					String.valueOf(summary.getFoundationYear()));
 		}
-/*		if (summary.getLength() != null) {
-			oscInfo.addKeyValue("Tamanho da OSC", summary.getLength()
-					+ " vínculos");
-		}
-		oscInfo.addKeyValue("Parcerias",
-				String.valueOf(summary.getPartnerships()));
-		NumberFormat fmt = NumberFormat.getCurrencyFormat();
-		oscInfo.addKeyValue("Valor das Parcerias",
-				fmt.format(summary.getPartnershipGlobalValue()));
-		oscInfo.addKeyValue("Lei de Incentivo",
-				fmt.format(summary.getEncourageLawValue()));
-
-		String committee = summary.isCommitteeParticipant() ? "sim" : "não";
-		oscInfo.addKeyValue("Participa de Conselhos ou Comissões", committee);*/
 
 		PaperClipCheckListSection oscCertifications = new PaperClipCheckListSection();
-		oscCertifications.setSectionTitle("Dados");//Certificações");
-/*		Certifications cert = summary.getCertifications();
+		oscCertifications.setSectionTitle("");
+
+		if (summary.getPartnerships() != null) {
+			oscCertifications.addKeyValue("Projetos em curso",String.valueOf(summary.getPartnerships()));
+	        }
+		 
+		if (summary.getGlobalValue() != null) {
+			NumberFormat fmtCurrency = NumberFormat.getCurrencyFormat();
+			oscCertifications.addKeyValue("Recursos públicos previstos para os projetos em curso",fmtCurrency.format(summary.getGlobalValue()));
+		}
+		 
+		if (summary.getLength() != null) {
+			oscCertifications.addKeyValue("Vínculos de Trabalho", summary.getLength());
+		}
+		
+/*		oscCertifications.setSectionTitle("Dados");//Certificações");
+		Certifications cert = summary.getCertifications();
 		boolean oscip = cert.getOscipPublication() != null;
 		oscCertifications.addElementToList("OSCIP", oscip);
 		boolean upf = cert.getUpfDeclaration() != null;
