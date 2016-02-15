@@ -849,6 +849,7 @@ public class UserController {
 			addLogonWidget(logonDiv);
 		}
 		
+		Cookies.removeCookie("idUser");
 		Cookies.removeCookie("oscUid");
 		Cookies.removeCookie("oscSnUid");
 		currentUser = null;
