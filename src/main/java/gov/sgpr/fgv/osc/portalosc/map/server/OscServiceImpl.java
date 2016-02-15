@@ -189,12 +189,13 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		String sql = "SELECT bosc_nr_identificacao, dcti_cd_tipo, bosc_nm_osc, bosc_nm_fantasia_osc, ospr_ds_endereco, "
 				+ "ospr_ds_endereco_complemento, ospr_nm_bairro, ospr_nm_municipio, ospr_sg_uf, ospr_nm_cep, "
 				+ "dcsc_cd_alpha_subclasse, dcsc_nm_subclasse, ST_AsText(ospr_geometry) wkt, dcnj_cd_alpha_natureza_juridica, "
-				+ "dcnj_nm_natureza_juridica, ospr_dt_ano_fundacao, ospr_ee_site, ospr_cd_municipio "
-				// cont_ds_tipo_contato," + " cont_ds_contato, ' ' as contatos "
-				+ "FROM portal.vm_osc_principal "
-				// a JOIN portal.tb_osc_contato b ON a.bosc_sq_osc = b.bosc_sq_osc "
-				+ "WHERE bosc_sq_osc = ? " ;
-				// GROUP BY a.bosc_sq_osc, b.cont_ds_tipo_contato, b.cont_ds_contato ";
+				+ "dcnj_nm_natureza_juridica, ospr_dt_ano_fundacao, ospr_ee_site, ospr_cd_municipio, "
+				+ "rais_qt_vinculo_ativo, siconv_vl_global, siconv_qt_parceria_execucao "				
+				+ "FROM portal.vm_osc_principal a "
+				+ "LEFT JOIN data.tb_osc_rais b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
+				+ "LEFT JOIN data.tb_osc_siconv c ON (a.bosc_sq_osc = c.bosc_sq_osc) "
+				//+ "a JOIN portal.tb_osc_contato b ON a.bosc_sq_osc = b.bosc_sq_osc "
+				+ "WHERE a.bosc_sq_osc = ? " ;
 		
 
 		// logger.info(sql);
@@ -223,6 +224,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				String county = rs.getString("ospr_nm_municipio");
 				String state = rs.getString("ospr_sg_uf");
 				String cep = rs.getString("ospr_nm_cep");
+				String length = rs.getString("rais_qt_vinculo_ativo");
+				Double vlglobal = rs.getDouble("siconv_vl_global");
 				String complement = rs
 						.getString("ospr_ds_endereco_complemento");
 
@@ -239,12 +242,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 					fullAddress.append(", " + complement);
 				}
 				summary.setAddress(fullAddress.toString());
-				//summary.setContacts(rs.getString("cont_ds_contato"));
 				
 				summary.setCountyId(rs.getInt("ospr_cd_municipio"));
-				
-			//	summary.setContatos(rs.getString("cont_ds_contato"));
-				
 				summary.setCnaeCode(rs.getString("dcsc_cd_alpha_subclasse"));
 				summary.setCnaeDescription(rs.getString("dcsc_nm_subclasse"));
 				summary.setLegalTypeCode(rs
@@ -253,6 +252,9 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 						.getString("dcnj_nm_natureza_juridica"));
 				summary.setFoundationYear(rs.getInt("ospr_dt_ano_fundacao"));
 				summary.setSite(rs.getString("ospr_ee_site"));
+				summary.setLength(length);
+				summary.setGlobalValue(vlglobal);
+				summary.setPartnerships(rs.getInt("siconv_qt_parceria_execucao"));
 				summary.setState(rs.getString("ospr_sg_uf"));
 				summary.setCounty(rs.getString("ospr_nm_municipio"));
 				String wkt = rs.getString("wkt");
