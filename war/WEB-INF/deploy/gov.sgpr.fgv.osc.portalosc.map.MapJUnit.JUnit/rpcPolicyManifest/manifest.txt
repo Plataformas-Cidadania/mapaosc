@@ -1,2 +1,0 @@
-# Module gov.sgpr.fgv.osc.portalosc.map.MapJUnit.JUnit
-# RPC service class, partial path of RPC policy file

@@ -55,7 +55,6 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	private int clusterGridSize = 100;
 	private int minClusterZoomLevel = 4;
 	private int maxClusterZoomLevel = 18;
-	private boolean flagRefreshClusters = false;
 	private int maxClusterZoomLevelCalc = 9;
 	GeoCluster geocluster = new GeoCluster();
 
@@ -76,7 +75,6 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		clusterGridSize = Integer.valueOf(context.getInitParameter("ClusterGridSize"));
 		minClusterZoomLevel = Integer.valueOf(context.getInitParameter("MinClusterZoomLevel"));
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
-		flagRefreshClusters = Boolean.valueOf(context.getInitParameter("FlagRefreshClusters"));
 		maxClusterZoomLevelCalc = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevelCalc"));
 		clusterCalc(true);
 
