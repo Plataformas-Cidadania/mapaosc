@@ -1,7 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.organization.server;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +17,7 @@ import gov.sgpr.fgv.osc.portalosc.organization.shared.model.OrganizationModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ProjetoModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.exception.RemoteException;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationService;
+import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 
 /**
  * @author vagnerpraia
@@ -281,6 +281,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 	}
 	
 	public Boolean searchOSCbyUser(Integer idUser, Integer idOsc) throws RemoteException{
+		logger.info("searchOSCbyUser");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

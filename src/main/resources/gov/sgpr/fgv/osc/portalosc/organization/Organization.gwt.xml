@@ -7,6 +7,7 @@
 	<inherits name='com.google.gwt.junit.JUnit' />
 	<inherits name="com.google.gwt.i18n.I18N" />
 	<inherits name="com.googlecode.gwt.crypto.Crypto"/>
+	<inherits name="gov.sgpr.fgv.osc.portalosc.user.User" />
 	
 	<stylesheet src='/css/estilo.css'/>
 	<extend-property name="locale" values="pt_BR" />
