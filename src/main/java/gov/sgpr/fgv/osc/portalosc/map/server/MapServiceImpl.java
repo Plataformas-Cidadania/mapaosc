@@ -710,14 +710,13 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	public Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel, boolean all) throws RemoteException {
 		Set<Coordinate> elements = new HashSet<Coordinate>();
 		ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
-		logger.info("BEFORE "+bbox);
+
 		if (zoomLevel >= minClusterZoomLevel && zoomLevel <= maxClusterZoomLevelCalc) {
 
 			Connection conn = getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			String sql = "SELECT ST_AsText(cluster_geometry) wkt, cluster_quantity,zoom_level,ST_xmin(cluster_boundingbox) minX,ST_xmax(cluster_boundingbox) maxX,ST_ymin(cluster_boundingbox) minY,ST_ymax(cluster_boundingbox) maxY  FROM portal.tb_osc_cluster where zoom_level = ?";
-			// logger.info(sql);
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, zoomLevel);
@@ -726,7 +725,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 				while (rs.next()) {
 					int quantity = rs.getInt("cluster_quantity");
 					String wkt = rs.getString("wkt");
-					double minX,minY,maxX,maxY;
+					double minX, minY, maxX, maxY = 0;
 					minX = rs.getDouble("minx");
 					minY = rs.getDouble("miny");
 					maxX = rs.getDouble("maxx");
@@ -739,9 +738,9 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 							cluster.setX(point.getX());
 							cluster.setY(point.getY());
 							cluster.setQuantity(quantity);
-							bbox.setBounds(minX, minY, maxX, maxY);
-							//logger.info(bbox.toString() + " ZoomLevel "+zoomLevel + " Quantity "+quantity);
-							cluster.setBbox(bbox);
+							BoundingBox bb = new BoundingBox();
+							bb.setBounds(minX, minY, maxX, maxY);
+							cluster.setBbox(bb);
 							elements.add(cluster);
 						} catch (ParseException e) {
 							logger.severe(e.getMessage());
@@ -765,7 +764,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 				return elements.toArray(new Coordinate[elements.size()]);
 
 			int gridSize = clusterGridSize;
-			//ConcurrentNavigableMap<Integer, OscCoordinate> col = all ? allOscCoordinates : activeOscCoordinates;
+			// ConcurrentNavigableMap<Integer, OscCoordinate> col = all ?
+			// allOscCoordinates : activeOscCoordinates;
 			if (zoomLevel < minClusterZoomLevel) {
 				Cluster cluster = new Cluster();
 				cluster.addAll(col.values());
@@ -779,7 +779,6 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 				// elements = cluster(coords, gridSize, zoomLevel);
 				elements = geocluster.cluster(coords, gridSize, zoomLevel);
 
-				// clusterCalc(all);
 			}
 		}
 
@@ -803,7 +802,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	}
 
 	public void clusterCalc(boolean all) {
-		
+
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -812,8 +811,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		try {
 			pstmt = conn.prepareStatement(sqlConsult);
 			rs = pstmt.executeQuery();
-			while (rs.next()){
-				createdClusters = Boolean.parseBoolean(rs.getString("value")); 
+			while (rs.next()) {
+				createdClusters = Boolean.parseBoolean(rs.getString("value"));
 			}
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
@@ -822,8 +821,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			releaseConnection(conn, pstmt);
 
 		}
-		
-		
+
 		if (!createdClusters) {
 			logger.info("Calculation Clusters ...");
 			conn = getConnection();
@@ -842,9 +840,9 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 				releaseConnection(conn, pstmt);
 
 			}
-			
+
 			logger.info("Prepared DB.");
-			
+
 			Set<Coordinate> elements = new HashSet<Coordinate>();
 
 			BoundingBox bbox = new BoundingBox();
@@ -852,24 +850,22 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			Set<Coordinate> coords = new HashSet<Coordinate>();
 			logger.info("Add all Coords...");
 			coords.addAll(getOSCCoordinates(bbox, all));
-			
+
 			for (int i = minClusterZoomLevel; i <= maxClusterZoomLevelCalc; i++) {
-			//for (int i = 4; i < 5; i++) {
+				// for (int i = 4; i < 5; i++) {
 				logger.info("Clusters calculation...");
-				
+
 				elements = geocluster.cluster(coords, clusterGridSize, i);
-				
-				
+
+				logger.info("Insert Clusters in DB...");
 				for (Coordinate c : elements) {
 
 					if (c instanceof SimpleCluster) {
 						SimpleCluster cluster = (SimpleCluster) c;
-						logger.info("Insert Clusters in DB...");
-						// cluster.getQuantity() + " - " + i);
-						
+
 						conn = getConnection();
 						pstmt = null;
-						double minX,minY,maxX,maxY = 0;
+						double minX, minY, maxX, maxY = 0;
 						String sqlInsert = "INSERT INTO portal.tb_osc_cluster(cluster_geometry,cluster_quantity,zoom_level,cluster_boundingbox)"
 								+ "VALUES(ST_GeomFromText(?,4674),?,?,ST_GeomFromText(?,4674))";
 						try {
@@ -881,8 +877,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 							minY = cluster.getBbox().getMinY();
 							maxX = cluster.getBbox().getMaxX();
 							maxY = cluster.getBbox().getMaxY();
-							pstmt.setString(4, "POLYGON(("+minX+" "+minY+","+minX+" "+maxY+","+maxX+" "+maxY+","+maxX+" "+minY+","+minX+" "+minY+"))");
-							//logger.info("POLYGON(("+minX+" "+minY+","+minX+" "+maxY+","+maxX+" "+maxY+","+maxX+" "+minY+","+minX+" "+minY+"))"+ " ZoomLevel "+i + " Quantity "+cluster.getQuantity());
+							pstmt.setString(4, "POLYGON((" + minX + " " + minY + "," + minX + " " + maxY + "," + maxX
+									+ " " + maxY + "," + maxX + " " + minY + "," + minX + " " + minY + "))");
 							pstmt.execute();
 						} catch (SQLException e) {
 							logger.severe(e.getMessage());
@@ -896,22 +892,22 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 				}
 
 			}
+			logger.info("Clusters created in DB.");
+			conn = getConnection();
+			pstmt = null;
+			String sql = "UPDATE syst.tb_mapaosc_config SET value='true' WHERE configuration = 'Created_Clusters';";
 
-		}
-		logger.info("Clusters created in DB.");
-		conn = getConnection();
-		pstmt = null;
-		String sql = "UPDATE syst.tb_mapaosc_config SET value='true' WHERE configuration = 'Created_Clusters';";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.execute();
-		} catch (SQLException e) {
-			logger.severe(e.getMessage());
-			throw new RemoteException(e);
-		} finally {
-			releaseConnection(conn, pstmt);
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.execute();
+			} catch (SQLException e) {
+				logger.severe(e.getMessage());
+				throw new RemoteException(e);
+			} finally {
+				releaseConnection(conn, pstmt);
 
+			}
 		}
+
 	}
 }
