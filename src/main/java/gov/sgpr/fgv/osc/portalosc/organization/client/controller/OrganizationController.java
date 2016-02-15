@@ -1,15 +1,10 @@
 package gov.sgpr.fgv.osc.portalosc.organization.client.controller;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -21,9 +16,7 @@ import com.googlecode.gwt.crypto.client.TripleDesCipher;
 import gov.sgpr.fgv.osc.portalosc.organization.client.components.FormularioWidget;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationService;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ConfigurationModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.OrganizationModel;
-import gov.sgpr.fgv.osc.portalosc.organization.client.components.LogonWidget;
 
 public class OrganizationController {
 	private static Logger logger = Logger.getLogger(OrganizationController.class.getName());
@@ -101,7 +94,7 @@ public class OrganizationController {
 				}
 			}
 		};
-		String userId = Cookies.getCookie("oscUid");
+		String userId = Cookies.getCookie("idUser");
 		if (userId != null && !userId.isEmpty()) {
 			organizationService.searchOSCbyUser(Integer.parseInt(userId), organization.getId(), callback);
 		}else{
@@ -115,27 +108,27 @@ public class OrganizationController {
 		formularioElement.add(formularioWidget);
 	}
 	
-	private void addLoggedInWidget(ConfigurationModel user) {
-		logger.info("Adicionando widget de usuário logado");
-		
-		Element element = Document.get().getElementById("topo_acesso");
-		
-		LogonWidget logonWidget = new LogonWidget(user);
-		element.appendChild(logonWidget.getElement());
-		logonWidget.addLogoutListener(new EventListener(){
-			public void onBrowserEvent(Event event) {
-				logger.info("Logout");
-				logout();
-			}
-		});
-	}
-	
-	private void logout() {
-		logger.info("Realizando logout");
-		Cookies.removeCookie("oscUid");
-		Cookies.removeCookie("oscSnUid");
-		Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
-	}
+//	private void addLoggedInWidget(ConfigurationModel user) {
+//		logger.info("Adicionando widget de usuário logado");
+//		
+//		Element element = Document.get().getElementById("topo_acesso");
+//		
+//		LogonWidget logonWidget = new LogonWidget(user);
+//		element.appendChild(logonWidget.getElement());
+//		logonWidget.addLogoutListener(new EventListener(){
+//			public void onBrowserEvent(Event event) {
+//				logger.info("Logout");
+//				logout();
+//			}
+//		});
+//	}
+//	
+//	private void logout() {
+//		logger.info("Realizando logout");
+//		Cookies.removeCookie("oscUid");
+//		Cookies.removeCookie("oscSnUid");
+//		Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
+//	}
 	
 	public static String encrypt(String passwd) {
 		logger.info("Encriptando senha");

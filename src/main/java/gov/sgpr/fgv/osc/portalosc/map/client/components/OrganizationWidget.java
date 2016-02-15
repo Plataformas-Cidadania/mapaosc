@@ -57,9 +57,9 @@ public class OrganizationWidget extends Composite {
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div id='menu_itens'></div>");
-//		htmlBuilder.append("	<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
-//		htmlBuilder.append("		<button type='button' name='Ver detalhes' id='org_detalhes'>Ver detalhes</button>");
-//		htmlBuilder.append("	</a>");
+		htmlBuilder.append("	<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
+		htmlBuilder.append("		<button type='button' name='Ver detalhes' id='org_detalhes'>Ver detalhes</button>");
+		htmlBuilder.append("	</a>");
 		String btnText = menuInfo.isRecommended() ? "Recomendar (desfazer)" : "Recomendar";
 		
 		htmlBuilder.append("<button type=\"button\" name=\"Recomendar\" id=\"org_recomendar\">" + btnText + "</button>");
