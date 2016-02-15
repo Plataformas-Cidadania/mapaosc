@@ -853,8 +853,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			logger.info("Add all Coords...");
 			coords.addAll(getOSCCoordinates(bbox, all));
 			
-			//for (int i = minClusterZoomLevel; i <= maxClusterZoomLevelCalc; i++) {
-			for (int i = 4; i < 5; i++) {
+			for (int i = minClusterZoomLevel; i <= maxClusterZoomLevelCalc; i++) {
+			//for (int i = 4; i < 5; i++) {
 				logger.info("Clusters calculation...");
 				
 				elements = geocluster.cluster(coords, clusterGridSize, i);
