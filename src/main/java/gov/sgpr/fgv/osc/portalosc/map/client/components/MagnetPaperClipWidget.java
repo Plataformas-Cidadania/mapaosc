@@ -8,6 +8,7 @@ import gov.sgpr.fgv.osc.portalosc.map.client.components.model.PaperClipWindowInf
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.Map;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.DOM;
@@ -216,7 +217,7 @@ public class MagnetPaperClipWidget extends Composite {
 		return htmlBuilder.toString();
 	}
 
-	private String getCheckListSection(PaperClipCheckListSection section) {
+	/*private String getCheckListSection(PaperClipCheckListSection section) {
 		StringBuilder htmlBuilder = new StringBuilder("<ul>");
 		for (String key : section.getSectionContent().keySet()) {
 			boolean checked = section.getSectionContent().get(key);
@@ -227,6 +228,18 @@ public class MagnetPaperClipWidget extends Composite {
 			htmlBuilder.append(key);
 			htmlBuilder.append("</li>");
 		}
+		htmlBuilder.append("</ul>");
+		return htmlBuilder.toString();
+	}*/
+	private String getCheckListSection(PaperClipCheckListSection section) {
+		StringBuilder htmlBuilder = new StringBuilder("<ul>");
+		for (Map.Entry<String, String> entry : section.getSectionContent().entrySet()) {
+			htmlBuilder.append("<li>");
+			htmlBuilder.append("<strong>"+entry.getKey()+":</strong> ");
+			htmlBuilder.append(entry.getValue());
+			htmlBuilder.append("</li>");
+		}
+		
 		htmlBuilder.append("</ul>");
 		return htmlBuilder.toString();
 	}
