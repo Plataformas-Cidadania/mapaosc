@@ -295,7 +295,10 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 	private String formattedCode;
 	private String name;
 	private String address;	
+	private String length;
 	private int countyId;
+	private Double partnershipGlobalValue;
+	private Integer partnerships;
 	private String cnaeCode;
 	private String cnaeDescription;
 	private String legalTypeCode;
@@ -382,6 +385,22 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 		this.contatos = contatos;
 	}
 	/**
+	 * @return Valor global das parcerias realizadas pela OSC com o governo
+	 *         federal
+	 */
+	public Double getGlobalValue() {
+		return partnershipGlobalValue;
+	}
+
+	/**
+	 * @param partnershipGlobalValue
+	 *            {@link #getPartnershipGlobalValue()}
+	 */
+	public void setGlobalValue(Double partnershipGlobalValue) {
+		this.partnershipGlobalValue = partnershipGlobalValue;
+	}
+	
+	/**
 	 * @return Quantidade de recomendações feitas à OSC
 	 */
 	public int getRecomendations() {
@@ -394,6 +413,22 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 	 */
 	public void setRecomendations(int recomendations) {
 		this.recommendations = recomendations;
+	}
+	/**
+	 * @return Tamanho (em número de vínculos) da OSC
+	 */
+	
+	public String getLength() {
+		return length;
+	}
+
+	/**
+	 * @param length
+	 *            {@link #getLength()}
+	 */ 
+	
+	public void setLength(String length) {
+		this.length = length;
 	}
 	
 	/**
@@ -410,6 +445,21 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	/**
+	 * @return Quantidade de parcerias com o governo federal feita OSC
+	 */
+	public Integer getPartnerships() {
+		return partnerships;
+	}
+
+	/**
+	 * @param partnerships
+	 *            {@link #getPartnerships()}
+	 */
+	public void setPartnerships(Integer partnerships) {
+		this.partnerships = partnerships;
+	}
+	
 	/**
 	 * @return Código Nacional de Atividade Econômica 2.1
 	 */
@@ -747,16 +797,17 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 	@Override
 	public Map<String, String> getContent() {
 		Map<String, String> content = new LinkedHashMap<String, String>();
-		/*content.put("CNPJ", formattedCode);
+		//content.put("CNPJ", formattedCode);
 		content.put("Endereço", address);
-		content.put("Atividade Econômica", cnaeDescription);
+		content.put("Área(s) de Atuação", cnaeDescription);
 		content.put("Natureza Juridica", legalTypeDescription);
-		content.put("Descrição entidade", description != null ? description
-				: "Não disponível");
+		//content.put("Descrição entidade", description != null ? description
+		//		: "Não disponível");
+		content.put("Site", site != null ? site : "Não disponível");
 		content.put("Ano de fundação",
 				foundationYear.equals("0") ? String.valueOf(foundationYear)
 						: "Não disponível");*/
-		content.put("Website", site != null ? site : "Não disponível");
+		
 		for (Map.Entry<String, String> entry : contacts.entrySet()) {
 			content.put(entry.getKey(), entry.getValue());
 		}
