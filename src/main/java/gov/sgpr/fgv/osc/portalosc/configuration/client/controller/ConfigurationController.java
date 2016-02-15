@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
@@ -24,7 +23,6 @@ import gov.sgpr.fgv.osc.portalosc.configuration.client.components.FormularioWidg
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.ConfigurationService;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.ConfigurationServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.ConfigurationModel;
-import gov.sgpr.fgv.osc.portalosc.configuration.client.components.LogonWidget;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.SearchResult;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.SearchService;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.SearchServiceAsync;
@@ -64,7 +62,10 @@ public class ConfigurationController {
 		
 		logger.info("Buscando Cookies");
 		Integer idUser = Integer.valueOf(Cookies.getCookie("idUser"));
-		setConfiguration(idUser);
+		logger.info(" ========== " + String.valueOf(idUser) + " ==========");
+		if(idUser != null){
+			setConfiguration(idUser);
+		}
 	}
 	
 	private void addFormularioWidget() {
@@ -169,26 +170,6 @@ public class ConfigurationController {
 		formularioWidget.addResultItems(items, listener);
 	}
 	
-	private void addLoggedInWidget(ConfigurationModel user) {
-		logger.info("Adicionando widget de usuário logado");
-		Element element = Document.get().getElementById("topo_acesso");
-		LogonWidget logonWidget = new LogonWidget(user);
-		element.appendChild(logonWidget.getElement());
-		logonWidget.addLogoutListener(new EventListener(){
-			public void onBrowserEvent(Event event) {
-				logger.info("Logout");
-				logout();
-			}
-		});
-	}
-	
-	private void logout() {
-		logger.info("Realizando logout");
-		Cookies.removeCookie("oscUid");
-		Cookies.removeCookie("oscSnUid");
-		Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
-	}
-	
 	/**
 	 * @return Busca o usuário no banco de dados.
 	 */
@@ -201,7 +182,6 @@ public class ConfigurationController {
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
 				formularioWidget.setUser(result);
-				addLoggedInWidget(result);
 				setOrganization(Integer.valueOf(result.getIdOsc()));
 			}
 		};
