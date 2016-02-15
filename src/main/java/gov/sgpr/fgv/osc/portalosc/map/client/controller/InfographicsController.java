@@ -53,7 +53,7 @@ public class InfographicsController {
 		graph1.setLegend("Fonte: RAIS/MTE, 2013");
 
 		Graph graph2 = new Graph();
-		graph2.setTitle("Número e % de vínculos ativos, por faixas de vínculos (2013)");
+		graph2.setTitle("Número e % de vínculos ativos das OSCs, por faixas de vínculos (2013)");
 		graph2.setSvgImage("infograficos/numeros/infografico_2.svg");
 		graph2.setSvgImageContrast("infograficos/numeros/contraste/infografico_2.svg");
 		graph2.setWidth(332);
@@ -89,12 +89,12 @@ public class InfographicsController {
 		graph6.setSvgImage("infograficos/numeros/infografico_7.svg");
 		graph6.setSvgImageContrast("infograficos/numeros/contraste/infografico_6.svg");
 		graph6.setWidth(332);
-		graph6.setHeight(126);
+		graph6.setHeight(200);
 		graph6.setLegend("");
 		//graph3.setLegend("Fonte: SICONV (2009 a 2016), SIAFI (2016)");
 
 		Graph graph7 = new Graph();
-		graph7.setTitle("Número e % de OSCs que atuam em instituições participativas federais");
+		graph7.setTitle("Número e % de OSCs que atuaram em instituições participativas federais (2003-2013)");
 		graph7.setSvgImage("infograficos/numeros/infografico_6.svg");
 		graph7.setSvgImageContrast("infograficos/numeros/contraste/infografico_7.svg");
 		graph7.setWidth(332);
