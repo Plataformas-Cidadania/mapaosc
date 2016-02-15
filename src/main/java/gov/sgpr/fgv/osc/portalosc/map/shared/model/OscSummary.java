@@ -806,7 +806,7 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 		content.put("Site", site != null ? site : "Não disponível");
 		content.put("Ano de fundação",
 				foundationYear.equals("0") ? String.valueOf(foundationYear)
-						: "Não disponível");*/
+						: "Não disponível");
 		
 		for (Map.Entry<String, String> entry : contacts.entrySet()) {
 			content.put(entry.getKey(), entry.getValue());
