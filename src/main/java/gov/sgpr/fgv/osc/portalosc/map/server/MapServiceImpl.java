@@ -110,7 +110,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null LIMIT ? OFFSET ?";
+				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null LIMIT ? OFFSET ?";
 		// logger.info(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -150,7 +150,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edmu_geometry FROM spat.ed_municipio WHERE edmu_cd_municipio = ?),a.bosc_geometry) = true LIMIT ? OFFSET ?";
 
 		// logger.info(sql);
@@ -193,7 +193,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT eduf_geometry FROM spat.ed_uf WHERE eduf_cd_uf = ?),a.bosc_geometry) = true LIMIT ? OFFSET ?";
 
 		// logger.info(sql);
@@ -236,7 +236,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT eduf_geometry FROM spat.ed_uf WHERE eduf_cd_uf = ?),a.bosc_geometry) = true LIMIT ? OFFSET ?";
 
 		// logger.info(sql);
@@ -283,7 +283,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null";
+				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null";
 		// logger.info(sql);
 		try {
 			stmt = conn.createStatement();
@@ -306,7 +306,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
+				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edmu_geometry FROM spat.ed_municipio WHERE edmu_cd_municipio = ?),a.bosc_geometry) = true";
 		// logger.info(sql);
 		try {
@@ -331,7 +331,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
+				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT eduf_geometry FROM spat.ed_uf WHERE eduf_cd_uf = ?),a.bosc_geometry) = true";
 		// logger.info(sql);
 		try {
@@ -356,7 +356,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT count(*) size FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc) "
-				+ "WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
+				+ "WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edre_geometry FROM spat.ed_regiao WHERE edre_cd_regiao = ?),a.bosc_geometry) = true";
 		// logger.info(sql);
 		try {
@@ -544,7 +544,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.bosc_sq_osc, ST_AsText(a.bosc_geometry) wkt FROM data.tb_osc a JOIN portal.tb_osc_interacao b ON "
-				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND a.bosc_geometry is not null "
+				+ "(a.bosc_sq_osc = b.bosc_sq_osc) WHERE b.inte_in_osc = true AND b.inte_in_ativa = true AND a.bosc_geometry is not null "
 				+ "AND ST_Contains((SELECT edmu_geometry FROM spat.ed_municipio WHERE edmu_cd_municipio = ?),a.bosc_geometry) = true ";
 		// logger.info(sql);
 		try {
