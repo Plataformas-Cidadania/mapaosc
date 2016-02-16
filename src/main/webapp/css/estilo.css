@@ -3234,7 +3234,6 @@ div#floatingLoginErrorList::after {
 }
 
 .institucional h4 {
-	font-weight: bold;
 	margin-bottom:4px;
 	padding-bottom:4px;
 	margin-top:10px;
@@ -3242,6 +3241,7 @@ div#floatingLoginErrorList::after {
 	margin-left: 30px;
 	mergin-right: 30px;
 	font-size: 0.9em;
+	font-family: "RobotoBold", sans-serif;
 }
 
 #topo_acesso form#acesso > div:not(#floatingLoginErrorList) {
@@ -4515,4 +4515,44 @@ ul.lista_certificados {
 ul.lista_certificados li {
 	list-style: circle;
 	padding:5px;
+}
+
+.institucional table {
+	border: 1px solid #ccc;
+	margin-left: 2em;
+}
+
+.institucional table td {
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+.institucional table th {
+	border: 1px solid #ccc;
+	background: #1f3d93;
+	color: white;
+	font-family: "RobotoBold", sans-serif;
+	text-align: center;
+	padding: 5px;
+}
+
+.institucional li {
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.institucional ul {
+	margin-left: 2em;
+}
+
+.institucional ol {
+	margin-left: 4em;
+}
+
+.institucional ul li {
+	list-style-image: url(../imagens/16_topicos.png);
+}
+
+.institucional ol li {
+	list-style: decimal-leading-zero;
 }
