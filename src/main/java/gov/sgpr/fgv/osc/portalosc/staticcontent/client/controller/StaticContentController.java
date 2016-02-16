@@ -88,5 +88,6 @@ public class StaticContentController
 	{
 		Element h = DOM.getElementById("page_header");
 		h.setInnerText(title);
+		Window.setTitle("Mapa das Organizações da Sociedade Civil - " + title);
 	}
 }
