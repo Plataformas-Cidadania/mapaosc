@@ -67,7 +67,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 			return result;
 		}
 		
-		// Busca por nome Completo da OSC
+		// Busca por OSC
 		newLimit = limit - result.size();
 		ret = searchOsc(criteria, newLimit);
 		result.addAll(ret);
@@ -89,8 +89,8 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 				   + "AND ("
 				   + "    similarity(bosc_nm_osc, ?) > 0.2 "
 				   + "    OR similarity(bosc_nm_fantasia_osc, ?) > 0.2 "
-				   + "    OR bosc_nr_identificacao::TEXT ILIKE '%?%' "
-				   + "    OR bosc_sq_osc::TEXT ILIKE '%?%' "
+				   + "    OR bosc_nr_identificacao = ? "
+				   + "    OR bosc_sq_osc = ? "
 				   + ") " 
 				   + "ORDER BY ts_rank(document, to_tsquery('portuguese_unaccent', ?)) DESC "
 				   + "LIMIT ?";
@@ -104,8 +104,10 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 			pstmt.setString(1, normalized_to_tsquery);
 			pstmt.setString(2, normalized);
 			pstmt.setString(3, normalized);
-			pstmt.setString(4, normalized_to_tsquery);
-			pstmt.setInt(5, limit);			
+			pstmt.setInt(4, Integer.parseInt(normalized));
+			pstmt.setInt(5, Integer.parseInt(normalized));
+			pstmt.setString(6, normalized_to_tsquery);
+			pstmt.setInt(7, limit);
 			rs = pstmt.executeQuery();
 			List<SearchResult> result = new ArrayList<SearchResult>();
 			while (rs.next()) {
