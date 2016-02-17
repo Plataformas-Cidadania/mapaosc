@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * @author victor Serviço de Busca do mapa
  * 
@@ -44,15 +42,6 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		criteria1 = criteria1.replace(".", "");
 		criteria1 = criteria1.replace("-", "");
 		criteria1 = criteria1.replace("/", "");
-		
-		// Busca por CNPJ
-		if (StringUtils.isNumeric(criteria1.trim())) {
-			List<SearchResult> ret = searchOscByCode(Long.valueOf(criteria1), limit);
-			result.addAll(ret);
-			if (result.size() == limit) {
-				return result;
-			}
-		}
 		
 		// Busca por região
 		int newLimit = limit - result.size();
@@ -80,7 +69,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		
 		// Busca por nome Completo da OSC
 		newLimit = limit - result.size();
-		ret = searchOscByFullName(criteria, newLimit);
+		ret = searchOsc(criteria, newLimit);
 		result.addAll(ret);
 		if (result.size() == limit) {
 			return result;
@@ -89,40 +78,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		return result;
 	}
 	
-	private List<SearchResult> searchOscByCode(long code, int limit) throws RemoteException {
-		Connection conn = getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "SELECT a.bosc_sq_osc, COALESCE(a.bosc_nm_fantasia_osc, a.bosc_nm_osc) nome  "
-				+ "FROM portal.vm_osc_principal a JOIN portal.tb_osc_interacao b ON (a.bosc_sq_osc = b.bosc_sq_osc)"
-				+ "WHERE b.inte_in_ativa = true AND b.inte_in_osc = true AND "
-				+ "CAST(a.bosc_nr_identificacao as character varying) like ? ORDER BY a.bosc_nr_identificacao LIMIT ? ";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			String value = "%" + code + "%";
-			pstmt.setString(1, value);
-			pstmt.setInt(2, limit);
-			rs = pstmt.executeQuery();
-			List<SearchResult> result = new ArrayList<SearchResult>();
-			while (rs.next()) {
-				SearchResult sr = new SearchResult();
-				sr.setId(rs.getInt("bosc_sq_osc"));
-				sr.setValue(rs.getString("nome"));
-				sr.setType(SearchResultType.OSC);
-				result.add(sr);
-			}
-			return result;
-			
-		} catch (SQLException e) {
-			logger.severe(e.getMessage());
-			throw new RemoteException(e);
-		} finally {
-			releaseConnection(conn, pstmt, rs);
-		}
-	}
-	
-	private List<SearchResult> searchOscByFullName(String name, int limit) throws RemoteException {
+	private List<SearchResult> searchOsc(String name, int limit) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -134,6 +90,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 				   + "    similarity(bosc_nm_osc, ?) > 0.2 "
 				   + "    OR similarity(bosc_nm_fantasia_osc, ?) > 0.2 "
 				   + "    OR bosc_nr_identificacao::TEXT ILIKE '%?%' "
+				   + "    OR bosc_sq_osc::TEXT ILIKE '%?%' "
 				   + ") " 
 				   + "ORDER BY ts_rank(document, to_tsquery('portuguese_unaccent', ?)) DESC "
 				   + "LIMIT ?";
