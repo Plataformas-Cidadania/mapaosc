@@ -21,6 +21,7 @@ import com.vividsolutions.jts.io.WKTReader;
 
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
+import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
