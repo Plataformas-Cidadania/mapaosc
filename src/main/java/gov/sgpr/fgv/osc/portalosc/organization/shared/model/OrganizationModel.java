@@ -26,6 +26,10 @@ public class OrganizationModel implements Serializable {
 	private String email = "";
 	private ArrayList<String> participacaoSocial = new ArrayList<String>();
 	private ArrayList<String> fonteRecursos = new ArrayList<String>();
+	
+	private ArrayList<DiretorModel> diretores = new ArrayList<DiretorModel>();
+	private ArrayList<ConvenioModel> convenios = new ArrayList<ConvenioModel>();
+	
 	private Integer totalColaboradores = -1;
 	private Integer trabalhadores = -1;
 	private Integer voluntarios = -1;
@@ -169,6 +173,25 @@ public class OrganizationModel implements Serializable {
 	public void setFonteRecursos(ArrayList<String> fonteRecursos) {
 		if(fonteRecursos != null){
 			this.fonteRecursos = fonteRecursos;
+		}
+	}
+	
+	public ArrayList<DiretorModel> getDiretores() {
+		return diretores;
+	}
+	public void setDiretores(ArrayList<DiretorModel> diretores) {
+		if(diretores != null){
+			this.diretores = diretores;
+		}
+	}
+	
+	
+	public ArrayList<ConvenioModel> getConvenios() {
+		return convenios;
+	}
+	public void setConvenios(ArrayList<ConvenioModel> convenios) {
+		if(convenios != null){
+			this.convenios = convenios;
 		}
 	}
 	
