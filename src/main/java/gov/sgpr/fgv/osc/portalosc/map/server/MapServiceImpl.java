@@ -77,7 +77,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 		minClusterZoomLevel = Integer.valueOf(context.getInitParameter("MinClusterZoomLevel"));
 		maxClusterZoomLevel = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevel"));
 		maxClusterZoomLevelCalc = Integer.valueOf(context.getInitParameter("MaxClusterZoomLevelCalc"));
-		clusterCalc(true);
+		clusterCalc(false);
 
 	}
 
