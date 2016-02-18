@@ -1,4 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.controller;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,7 +43,6 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
 import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
-import vhmeirelles.gwtGeocluster.model.Cluster;
 import vhmeirelles.gwtGeocluster.model.Coordinate;
 import vhmeirelles.gwtGeocluster.model.SimpleCluster;
 
@@ -66,6 +66,7 @@ public class MapController {
 	private int selectedId;
 	private boolean isSelected = false;
 	private HandlerRegistration handleControl;
+	private boolean isCreated;
 
 	public MapController getInstance() {
 		return this;
@@ -94,86 +95,94 @@ public class MapController {
 	}
 
 	public void init() {
-		initFunction();
-		// logger.info("Iniciando log");
-		LatLng center = LatLng.create(-13.239945, -51.606447);
+		boolean aa = createdClusters();
+		if (aa) {
+			initFunction();
+			// logger.info("Iniciando log");
+			LatLng center = LatLng.create(-13.239945, -51.606447);
 
-		logger.info("Criando mapa");
-		MapOptions opts = MapOptions.create();
+			logger.info("Criando mapa");
+			MapOptions opts = MapOptions.create();
 
-		// logger.info("Centrando mapa");
-		opts.setCenter(center);
-		opts.setMapTypeId(MapTypeId.ROADMAP);
-		
-		/* limit zoom-out */
-		opts.setMinZoom(4);
-		
-		opts.setZoom(4);
+			// logger.info("Centrando mapa");
+			opts.setCenter(center);
+			opts.setMapTypeId(MapTypeId.ROADMAP);
 
-		// logger.info("Setando controles");
-		PanControlOptions panControlOptions = PanControlOptions.create();
-		panControlOptions.setPosition(ControlPosition.RIGHT_TOP);
-		ZoomControlOptions zoomControlOptions = ZoomControlOptions.create();
-		zoomControlOptions.setPosition(ControlPosition.RIGHT_TOP);
-		opts.setPanControlOptions(panControlOptions);
-		opts.setZoomControlOptions(zoomControlOptions);
-		
-		// logger.info("Criando mapa");
-		map = GoogleMap.create(Document.get().getElementById(MAP_CONTAINER), opts);
-		
-		Element clusterGroup = DOM.createDiv();
-		clusterGroup.setId(CLUSTER_GROUP);
-		DOM.getElementById(MAP_CONTAINER).insertFirst(clusterGroup);
-		
-		map.addBoundsChangedListener(new BoundsChangedHandler() {
-			public void handle() {
-				boundsChangeAction();
-			}
-		});
-		
-		map.addZoomChangedListener(new ZoomChangedHandler() {
-			public void handle() {
-				boundsChangeAction();
-			}
-		});
-		
-		DOM.getElementById("botao_tela_cheia").getStyle().setDisplay(Display.BLOCK);
-		
-		Element btnSalvar = DOM.getElementById("btnTelaCheia");
-		Event.sinkEvents(btnSalvar, Event.ONCLICK);
-		
-		Event.setEventListener(btnSalvar, new EventListener() {
-			public void onBrowserEvent(Event event) {
-				if(!DOM.getElementById("main").hasClassName("tela_cheia")){
-					DOM.getElementById("main").addClassName("tela_cheia");
-					
-					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
-					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
-					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Retrair o mapa");
-					DOM.getElementById("imgTelaCheia").setAttribute("title", "Retrair o mapa");
-					
-					DOM.getElementById("logo").setAttribute("src", "imagens/simbolo.png");
-					
-					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("rodape").getClientHeight()), Unit.PX);
+			/* limit zoom-out */
+			opts.setMinZoom(4);
+
+			opts.setZoom(4);
+
+			// logger.info("Setando controles");
+			PanControlOptions panControlOptions = PanControlOptions.create();
+			panControlOptions.setPosition(ControlPosition.RIGHT_TOP);
+			ZoomControlOptions zoomControlOptions = ZoomControlOptions.create();
+			zoomControlOptions.setPosition(ControlPosition.RIGHT_TOP);
+			opts.setPanControlOptions(panControlOptions);
+			opts.setZoomControlOptions(zoomControlOptions);
+
+			// logger.info("Criando mapa");
+			map = GoogleMap.create(Document.get().getElementById(MAP_CONTAINER), opts);
+
+			Element clusterGroup = DOM.createDiv();
+			clusterGroup.setId(CLUSTER_GROUP);
+			DOM.getElementById(MAP_CONTAINER).insertFirst(clusterGroup);
+
+			map.addBoundsChangedListener(new BoundsChangedHandler() {
+				public void handle() {
+					boundsChangeAction();
 				}
-				else{
-					DOM.getElementById("main").removeClassName("tela_cheia");
-					
-					DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
-					DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
-					DOM.getElementById("imgTelaCheia").setAttribute("alt", "Expandir o mapa");
-					DOM.getElementById("imgTelaCheia").setAttribute("title", "Expandir o mapa");
-					
-					DOM.getElementById("logo").setAttribute("src", "imagens/logo.png");
-					
-					DOM.getElementById("mapa").getStyle().setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight() + DOM.getElementById("barra-brasil").getClientHeight() + DOM.getElementById("rodape").getClientHeight()), Unit.PX);
+			});
+
+			map.addZoomChangedListener(new ZoomChangedHandler() {
+				public void handle() {
+					boundsChangeAction();
 				}
-			}
-		});
-		
-		addResizeHandler();
+			});
+
+			DOM.getElementById("botao_tela_cheia").getStyle().setDisplay(Display.BLOCK);
+
+			Element btnSalvar = DOM.getElementById("btnTelaCheia");
+			Event.sinkEvents(btnSalvar, Event.ONCLICK);
+
+			Event.setEventListener(btnSalvar, new EventListener() {
+				public void onBrowserEvent(Event event) {
+					if (!DOM.getElementById("main").hasClassName("tela_cheia")) {
+						DOM.getElementById("main").addClassName("tela_cheia");
+
+						DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+						DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_sair.png");
+						DOM.getElementById("imgTelaCheia").setAttribute("alt", "Retrair o mapa");
+						DOM.getElementById("imgTelaCheia").setAttribute("title", "Retrair o mapa");
+
+						DOM.getElementById("logo").setAttribute("src", "imagens/simbolo.png");
+
+						DOM.getElementById("mapa").getStyle()
+								.setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight()
+										+ DOM.getElementById("rodape").getClientHeight()), Unit.PX);
+					} else {
+						DOM.getElementById("main").removeClassName("tela_cheia");
+
+						DOM.getElementById("btnTelaCheia").setAttribute("name", "Retrair o mapa");
+						DOM.getElementById("imgTelaCheia").setAttribute("src", "imagens/tela_cheia_entrar.png");
+						DOM.getElementById("imgTelaCheia").setAttribute("alt", "Expandir o mapa");
+						DOM.getElementById("imgTelaCheia").setAttribute("title", "Expandir o mapa");
+
+						DOM.getElementById("logo").setAttribute("src", "imagens/logo.png");
+
+						DOM.getElementById("mapa").getStyle()
+								.setHeight(Window.getClientHeight() - (DOM.getElementById("topo").getClientHeight()
+										+ DOM.getElementById("barra-brasil").getClientHeight()
+										+ DOM.getElementById("rodape").getClientHeight()), Unit.PX);
+					}
+				}
+			});
+
+			addResizeHandler();
+		}
+		else Window.alert(""+createdClusters());
 	}
-	
+
 	private void loadMarkers(final Date thisDate) {
 		int zoomLevel = (int) map.getZoom();
 
@@ -193,8 +202,7 @@ public class MapController {
 		};
 		BoundingBox bbox = new BoundingBox();
 		LatLngBounds bounds = map.getBounds();
-		bbox.setBounds(bounds.getSouthWest().lng(),
-				bounds.getSouthWest().lat(), bounds.getNorthEast().lng(),
+		bbox.setBounds(bounds.getSouthWest().lng(), bounds.getSouthWest().lat(), bounds.getNorthEast().lng(),
 				bounds.getNorthEast().lat());
 		// logger.info(bbox.toString());
 		setLoading(true);
@@ -272,10 +280,10 @@ public class MapController {
 		loading.getStyle().setPropertyPx("top", top);
 		loading.getStyle().setPosition(Position.ABSOLUTE);
 		loading.getStyle().setZIndex(5);
-		
+
 		DOM.getElementById(MAP_CONTAINER).insertFirst(loading);
 	}
-	
+
 	private void setLoading(boolean isLoading) {
 		if (loading == null) {
 			addLoadingBar();
@@ -307,7 +315,7 @@ public class MapController {
 	public void addResizeHandler() {
 		handleControl = Window.addResizeHandler(new ResizeHandler() {
 
-			//@Override
+			// @Override
 			public void onResize(ResizeEvent event) {
 				initFunction();
 			}
@@ -330,4 +338,26 @@ public class MapController {
 				});
 
 	}-*/;
+
+	public boolean createdClusters() {
+
+		AsyncCallback<Boolean> callbackCreatedClusters = new AsyncCallback<Boolean>() {
+
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+
+			}
+
+			public void onSuccess(Boolean result) {
+				logger.info(""+result);
+				if (result==false)
+					isCreated = false;
+				else
+					isCreated = true;
+
+			}
+		};
+		mapService.createdClusters(callbackCreatedClusters);
+		return isCreated;
+	}
 }

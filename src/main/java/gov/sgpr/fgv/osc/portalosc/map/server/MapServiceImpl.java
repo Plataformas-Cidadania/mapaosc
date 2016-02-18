@@ -21,7 +21,6 @@ import com.vividsolutions.jts.io.WKTReader;
 
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
@@ -802,25 +801,10 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 	public void clusterCalc(boolean all) {
 
+		boolean createdClusters = createdClusters();
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sqlConsult = "SELECT configuration, value FROM syst.tb_mapaosc_config WHERE configuration = 'Created_Clusters';";
-		boolean createdClusters = false;
-		try {
-			pstmt = conn.prepareStatement(sqlConsult);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				createdClusters = Boolean.parseBoolean(rs.getString("value"));
-			}
-		} catch (SQLException e) {
-			logger.severe(e.getMessage());
-			throw new RemoteException(e);
-		} finally {
-			releaseConnection(conn, pstmt);
-
-		}
-
+		
 		if (!createdClusters) {
 			logger.info("Calculation Clusters ...");
 			conn = getConnection();
@@ -908,5 +892,29 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			}
 		}
 
+	}
+	
+	public boolean createdClusters(){
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlConsult = "SELECT configuration, value FROM syst.tb_mapaosc_config WHERE configuration = 'Created_Clusters';";
+		boolean createdClusters = false;
+		try {
+			pstmt = conn.prepareStatement(sqlConsult);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				createdClusters = Boolean.parseBoolean(rs.getString("value"));
+			}
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+
+		}
+		
+		return createdClusters;
+		
 	}
 }

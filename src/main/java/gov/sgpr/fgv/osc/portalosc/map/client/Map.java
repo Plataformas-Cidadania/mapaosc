@@ -13,12 +13,13 @@ public class Map implements EntryPoint {
 	private MapController maps = new MapController();
 	private MenuController menu = new MenuController();
 	private SearchController search = new SearchController();
-	
+
 	public void onModuleLoad() {
 		logger.info("Iniciando carregamento do mapa");
 		maps.init();
-		menu.setMap(maps.getInstance(),search.getInstance());
+		menu.setMap(maps.getInstance(), search.getInstance());
 		menu.init();
 		search.init();
+
 	}
 }
