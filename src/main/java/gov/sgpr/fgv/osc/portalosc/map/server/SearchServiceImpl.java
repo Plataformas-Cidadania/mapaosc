@@ -89,8 +89,8 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 				   + "AND ("
 				   + "    similarity(bosc_nm_osc, ?) > 0.2 "
 				   + "    OR similarity(bosc_nm_fantasia_osc, ?) > 0.2 "
-				   + "    OR bosc_nr_identificacao = ? "
-				   + "    OR bosc_sq_osc = ? "
+				   + "    OR bosc_nr_identificacao::TEXT = ? "
+				   + "    OR bosc_sq_osc::TEXT = ? "
 				   + ") " 
 				   + "ORDER BY ts_rank(document, to_tsquery('portuguese_unaccent', ?)) DESC "
 				   + "LIMIT ?";
@@ -104,11 +104,12 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 			pstmt.setString(1, normalized_to_tsquery);
 			pstmt.setString(2, normalized);
 			pstmt.setString(3, normalized);
-			pstmt.setInt(4, Integer.parseInt(normalized));
-			pstmt.setInt(5, Integer.parseInt(normalized));
+			pstmt.setString(4, normalized);
+			pstmt.setString(5, normalized);
 			pstmt.setString(6, normalized_to_tsquery);
 			pstmt.setInt(7, limit);
 			rs = pstmt.executeQuery();
+			
 			List<SearchResult> result = new ArrayList<SearchResult>();
 			while (rs.next()) {
 				SearchResult sr = new SearchResult();
@@ -117,6 +118,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 				sr.setType(SearchResultType.OSC);
 				result.add(sr);
 			}
+			
 			return result;
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());

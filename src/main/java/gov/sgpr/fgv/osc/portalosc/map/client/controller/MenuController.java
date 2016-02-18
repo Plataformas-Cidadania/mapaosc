@@ -5,7 +5,6 @@ import gov.sgpr.fgv.osc.portalosc.map.client.components.MenuWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.OrganizationWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.Infographic;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
@@ -277,7 +276,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		localizationItem.setCssClass("dados clearfix");
 		localizationItem.addInfo("Latitude", String.valueOf(osc.getCoordinate().getY()));
 		localizationItem.addInfo("Longitude", String.valueOf(osc.getCoordinate().getX()));
-
+		
 		final KeyValueMenuItem publicResourcesItem = new KeyValueMenuItem(osc.getPublicResources());
 		publicResourcesItem.setItemTitle("Recursos públicos");
 		publicResourcesItem.setId("recursos");
@@ -332,23 +331,23 @@ public class MenuController implements ValueChangeHandler<String> {
 		
 		@SuppressWarnings("rawtypes")
 		List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
-
+		
 		menuItems.add(mainItem);
 		menuItems.add(publicResourcesItem);
 		menuItems.add(workRelationshipItem);
 		menuItems.add(certificationsItem);
 //		menuItems.add(documentsItem);
 		menuItems.add(committeesItem);
-		// menuItems.add(localizationItem);
-
+//		 menuItems.add(localizationItem);
+		
 		final OrganizationWidget oscInfo = new OrganizationWidget(menuInfo, menuItems);
-
+		
 		menuPanel.add(breadcrumb.getBreadcrumbHtml());
 		menuPanel.add(oscInfo);
-		// initFunction();
-
+//		 initFunction();
+				
 		centerMap(LatLng.create(osc.getCoordinate().getY(), osc.getCoordinate().getX()), 20.0);
-
+		
 		changeIcons(osc.getMain().getId());
 		
 		String oscBusca = DOM.getElementById("tooltip_").getInnerText();
@@ -699,7 +698,6 @@ public class MenuController implements ValueChangeHandler<String> {
 		breadcrumbIndicadores.add(breadcrumb.getBreadcrumbHtml());
 	}
 	
-	
 	private void processInfographic(String token) {
 		Infographic i = Infographic.get(token);
 		info.loadInfo(i);
@@ -707,7 +705,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		setupInfographics();
 		historyTokens.add(token);
 	}
-
+	
 	private void processPlace(String token, String tokenId) {
 		breadcrumb.clearBreadcrumb();
 		AsyncCallback<Place[]> callbackPlaces = new AsyncCallback<Place[]>() {
@@ -723,7 +721,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		
 		placeService.getPlaces(PlaceType.REGION, callbackPlaces);
 	}
-
+	
 	private void processOrganizations(String token, String tokenId) {
 		String email = Cookies.getCookie("oscUid");
 		Integer idToken = Integer.parseInt(tokenId);
@@ -774,7 +772,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Place[] result) {
 				if (result.length > 0)	breadcrumb.clearBreadcrumb();
 				
@@ -793,12 +791,12 @@ public class MenuController implements ValueChangeHandler<String> {
 		};
 		
 		placeService.getPlaceAncestorsInfo(idToken, callbackBreadcrumb);
-
+		
 		AsyncCallback<Place> callbackPlace = new AsyncCallback<Place>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Place result) {
 				fitBoundsMap(result.getBoundingBox());
 			}
@@ -811,7 +809,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				public void onFailure(Throwable caught) {
 					logger.log(Level.SEVERE, caught.getMessage());
 				}
-
+				
 				public void onSuccess(Place[] result) {
 					loadPlaces(result, false);
 				}
@@ -823,7 +821,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				public void onFailure(Throwable caught) {
 					logger.log(Level.SEVERE, caught.getMessage());
 				}
-
+				
 				public void onSuccess(SortedMap<String, Integer> result) {
 					loadOrganizations(result);
 				}
@@ -860,7 +858,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		if (UserController.hasLoggedUser() == true) oscService.setRecommendation(oscId, email, recommended, callback);
 		else  Window.Location.replace(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "User.html");
 	}
-
+	
 	public static String getHelpContent(DataSource[] dataSources) {
 		DateTimeFormat fmt = DateTimeFormat.getFormat("dd/MM/yyyy");
 		StringBuilder dsBuilder = new StringBuilder();
@@ -912,7 +910,7 @@ public class MenuController implements ValueChangeHandler<String> {
 
 	public void addResizeHandler() {
 		handleControl = Window.addResizeHandler(new ResizeHandler() {
-
+			
 			@Override
 			public void onResize(ResizeEvent event) {
 				initFunction();
