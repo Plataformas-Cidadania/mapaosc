@@ -104,6 +104,15 @@ public interface MapService extends RemoteService {
 	 */
 	Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all)
 			throws RemoteException;
-	
-	boolean createdClusters() throws RemoteException; 
+
+	/**
+	 * @return true se os clusters foram criados
+	 * @throws RemoteException
+	 */
+	/**
+	 * @return true se os clusters foram criados
+	 * @throws RemoteException
+	 */
+	boolean createdClusters();  
+
 }

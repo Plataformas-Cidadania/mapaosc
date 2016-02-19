@@ -895,6 +895,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 	}
 	
 	public boolean createdClusters(){
+		logger.info("MapServiceImpl.createdClusters()");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -906,6 +907,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			while (rs.next()) {
 				createdClusters = Boolean.parseBoolean(rs.getString("value"));
 			}
+			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -913,8 +915,6 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			releaseConnection(conn, pstmt);
 
 		}
-		
-		return createdClusters;
-		
+		return createdClusters;	
 	}
 }
