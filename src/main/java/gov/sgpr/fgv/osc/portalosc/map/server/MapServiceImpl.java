@@ -894,7 +894,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 	}
 	
-	public boolean createdClusters(){
+	public boolean createdClusters() throws RemoteException{
 		logger.info("MapServiceImpl.createdClusters()");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
