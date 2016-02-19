@@ -794,7 +794,7 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 				+ ", state =" + state;
 	}
 
-	@Override
+	
 	public Map<String, String> getContent() {
 		Map<String, String> content = new LinkedHashMap<String, String>();
 		//content.put("CNPJ", formattedCode);

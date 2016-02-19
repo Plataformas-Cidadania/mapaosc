@@ -113,6 +113,6 @@ public interface MapService extends RemoteService {
 	 * @return true se os clusters foram criados
 	 * @throws RemoteException
 	 */
-	boolean createdClusters() throws RemoteException;  
+	boolean createdClusters();  
 
 }

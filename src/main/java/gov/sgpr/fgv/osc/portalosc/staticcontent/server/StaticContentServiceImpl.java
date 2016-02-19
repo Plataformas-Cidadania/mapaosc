@@ -22,24 +22,27 @@ import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
  *
  */
 public class StaticContentServiceImpl extends RemoteServiceImpl implements StaticContentService {
-	
+
 	private String staticUrl;
 	private HashMap<String, Content> map;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
+
 	/**
 	 * 
 	 */
 
-	/* (non-Javadoc)
-	 * @see gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl#init(javax.servlet.ServletConfig)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl#init(javax.
+	 * servlet.ServletConfig)
 	 */
 	@Override
-	public void init(ServletConfig config)
-	{
+	public void init(ServletConfig config) {
 		super.init(config);
 		ServletContext context = getServletContext();
 		staticUrl = context.getInitParameter("STATIC_URL");
-		String configurationFile = context.getRealPath("/"+context.getInitParameter("STATIC_CONFIG")); 
+		String configurationFile = context.getRealPath("/" + context.getInitParameter("STATIC_CONFIG"));
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		map = new HashMap<String, Content>();
 		try {
@@ -47,9 +50,8 @@ public class StaticContentServiceImpl extends RemoteServiceImpl implements Stati
 			Document document = builder.parse(configurationFile);
 			Element root = document.getDocumentElement();
 			NodeList nodes = root.getElementsByTagName("site");
-			for(int i = 0; i < nodes.getLength(); i++)
-			{
-				Element site = (Element)nodes.item(i);
+			for (int i = 0; i < nodes.getLength(); i++) {
+				Element site = (Element) nodes.item(i);
 				String page = site.getElementsByTagName("page").item(0).getFirstChild().getNodeValue();
 				String title = site.getElementsByTagName("name").item(0).getFirstChild().getNodeValue();
 				String key = site.getElementsByTagName("key").item(0).getFirstChild().getNodeValue();
@@ -58,7 +60,7 @@ public class StaticContentServiceImpl extends RemoteServiceImpl implements Stati
 				content.setPage(page);
 				content.setTitle(title);
 				content.setCssClass(cssClass);
-				content.setUrl(staticUrl+page);
+				content.setUrl(staticUrl + page);
 				map.put(key, content);
 			}
 		} catch (Exception e) {
@@ -66,19 +68,18 @@ public class StaticContentServiceImpl extends RemoteServiceImpl implements Stati
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.StaticContentService#getContentFromHash(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see gov.sgpr.fgv.osc.portalosc.staticcontent.shared.interfaces.
+	 * StaticContentService#getContentFromHash(java.lang.String)
 	 */
-	@Override
-	public Content getContentFromParam(String param) throws RemoteException 
-	{
+
+	public Content getContentFromParam(String param) throws RemoteException {
 		Content content;
-		if(map.containsKey(param))
-		{
+		if (map.containsKey(param)) {
 			content = map.get(param);
-		}
-		else
-		{
+		} else {
 			content = new Content();
 			content.setUrl("");
 			content.setTitle("Unknown Page");

@@ -1,35 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.controller;
 
-<<<<<<< HEAD
-import gov.sgpr.fgv.osc.portalosc.map.client.components.BreadcrumbWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.MenuWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.OrganizationWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.Infographic;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.SimpleTextMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMain;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
-import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupChangePassword;
-import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
-import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
-import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
-
-=======
->>>>>>> MOSC-246
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -68,7 +38,6 @@ import gov.sgpr.fgv.osc.portalosc.map.client.components.MenuWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.OrganizationWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.Infographic;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
@@ -90,6 +59,7 @@ import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
 import vhmeirelles.gwtGeocluster.model.BoundingBox;
+
 /*
  * Eric Ferreira
  * Modified Date: 26/01/2016
@@ -116,53 +86,54 @@ public class MenuController implements ValueChangeHandler<String> {
 	private UserServiceAsync userService = GWT.create(UserService.class);
 	private PopupChangePassword changePassword = new PopupChangePassword();
 	private SearchWidget searchWidget = new SearchWidget();
-	
-	
+
 	public void setMap(MapController map, SearchController search) {
 		MenuController.map = map;
 		MenuController.search = search;
 	}
-	
+
 	public void init() {
 		logger.info("iniciando menu");
 		loadInfographicsMenu();
 		String initToken = History.getToken();
-		if (initToken.length() == 0) History.newItem(null);
-		else History.newItem(initToken);
-		
+		if (initToken.length() == 0)
+			History.newItem(null);
+		else
+			History.newItem(initToken);
+
 		History.addValueChangeHandler(this);
 		History.fireCurrentHistoryState();
-		
+
 		AsyncCallback<Place[]> callbackPlaces = new AsyncCallback<Place[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-			
+
 			public void onSuccess(Place[] result) {
 				loadPlaces(result, true);
 			}
 		};
 		placeService.getPlaces(PlaceType.REGION, callbackPlaces);
 	}
-	
+
 	private void loadPlaces(Place[] places, boolean clearBreadcrumb) {
 		String type = "P";
 		menuPanel.clear();
 		@SuppressWarnings("rawtypes")
 		List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
-		
+
 		for (Place place : places) {
 			placesList.add(place);
 			NumberFormat fmtCurrency = NumberFormat.getCurrencyFormat();
 			NumberFormat fmtNumber = NumberFormat.getDecimalFormat();
 			KeyValueMenuItem item = new KeyValueMenuItem();
-			String id = type+String.valueOf(place.getId());
-			
+			String id = type + String.valueOf(place.getId());
+
 			item.setId(id);
 			item.setCssClass("dados");
 			item.setItemTitle(place.getName());
 			item.setItemValue(id);
-			
+
 			for (Map.Entry<String, Double> entry : place.getIndicators().entrySet()) {
 				if (entry.getKey().contains("Valor"))
 					item.addInfo(entry.getKey(), fmtCurrency.format(entry.getValue()));
@@ -171,11 +142,13 @@ public class MenuController implements ValueChangeHandler<String> {
 			}
 			menuItems.add(item);
 		}
-		
+
 		MenuWidget menu = new MenuWidget(menuItems);
-		if (clearBreadcrumb) breadcrumb.clearBreadcrumb();
-		else menuPanel.add(breadcrumb.getBreadcrumbHtml());
-		
+		if (clearBreadcrumb)
+			breadcrumb.clearBreadcrumb();
+		else
+			menuPanel.add(breadcrumb.getBreadcrumbHtml());
+
 		HTML instruction = new HTML("<h3>Selecione a localização:</h3>");
 		menuPanel.add(instruction);
 		menuPanel.add(menu);
@@ -184,10 +157,11 @@ public class MenuController implements ValueChangeHandler<String> {
 
 	private void loadInfographicsMenu() {
 		StringBuilder igmBuilder = new StringBuilder();
-		//igmBuilder.append("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
+		// igmBuilder.append("<div id=\"breadcrumb_indicadores\">&nbsp;</div>");
 		igmBuilder.append("<h3>Selecione o infográfico:</h3>");
 		igmBuilder.append("<h4><a id=\"I01\" href=\"#I01\">OSCs em Números</a></h4>");
-		//igmBuilder.append("<h4><a id=\"I02\" href=\"#I02\">OSCs e os Recursos</a></h4>");
+		// igmBuilder.append("<h4><a id=\"I02\" href=\"#I02\">OSCs e os
+		// Recursos</a></h4>");
 		igmBuilder.append("<h4><a id=\"I03\" href=\"#I03\">OSCs Natureza jurídica/Faixas de vínculos</a></h4>");
 		igmBuilder.append("<h3>ou </h3>");
 		igmBuilder.append("<h4><a id=\"M0\" href=\"#M0\">Matriz de indicadores</a></h4>");
@@ -204,7 +178,6 @@ public class MenuController implements ValueChangeHandler<String> {
 		Event.sinkEvents(tabMapa, Event.ONCLICK);
 		Event.setEventListener(tabMapa, new EventListener() {
 
-			
 			public void onBrowserEvent(Event event) {
 				final Element divMapa = DOM.getElementById("mapa");
 
@@ -255,7 +228,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		if (!oscs.isEmpty()) {
 			@SuppressWarnings("rawtypes")
 			List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
-			
+
 			for (Map.Entry<String, Integer> osc : oscs.entrySet()) {
 				KeyValueMenuItem item = new KeyValueMenuItem();
 				item.setId("O" + osc.getValue());
@@ -264,15 +237,14 @@ public class MenuController implements ValueChangeHandler<String> {
 				item.setItemValue("O" + osc.getValue());
 				menuItems.add(item);
 			}
-			
+
 			MenuWidget menu = new MenuWidget(menuItems);
 			menuPanel.add(breadcrumb.getBreadcrumbHtml());
 			HTML instruction = new HTML("<h3>Selecione a entidade:</h3>");
 			menuPanel.add(instruction);
 			menuPanel.add(menu);
 			// initFunction();
-		} 
-		else {
+		} else {
 			menuPanel.add(breadcrumb.getBreadcrumbHtml());
 			HTML instruction = new HTML("<h3>Desculpe, mas não há entidades neste município.</h3>");
 			menuPanel.add(instruction);
@@ -283,7 +255,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		final OscMenuSummary menuInfo = new OscMenuSummary();
 		final KeyValueMenuItem mainItem = new KeyValueMenuItem(osc.getMain());
 		OscMain oscmain = osc.getMain();
-		
+
 		menuInfo.setTitle(oscmain.getName());
 		menuInfo.setOscId(oscmain.getId());
 		menuInfo.setLikeCounter(osc.getRecommendations());
@@ -291,20 +263,22 @@ public class MenuController implements ValueChangeHandler<String> {
 		mainItem.setItemTitle("Dados gerais");
 		mainItem.setId("dados_gerais");
 		mainItem.setCssClass("dados");
-		
+
 		if (osc.getMain().getDataSources().length > 0)
 			mainItem.setInfoSource(getHelpContent(oscmain.getDataSources()));
 
-//		final AnchorListMenuItem documentsItem = new AnchorListMenuItem();
-//		documentsItem.setItemTitle("Acesso à informação (Documentos)");
-//		documentsItem.setId("doc");
-//		documentsItem.setCssClass("dados documentos");
-//		documentsItem.addInfo("Prestação de contas", osc.getAccountabilityPath());
-//		documentsItem.addInfo("Estatuto", osc.getByLawPath());
-//		documentsItem.addInfo("Quadro de diretores", osc.getDirectorsBoardPath());
-//		documentsItem.addInfo("Convênios", osc.getTreatyPath());
-//		DataSource[] ds = { osc.getDocumentDataSource() };
-//		documentsItem.setInfoSource(getHelpContent(ds));
+		// final AnchorListMenuItem documentsItem = new AnchorListMenuItem();
+		// documentsItem.setItemTitle("Acesso à informação (Documentos)");
+		// documentsItem.setId("doc");
+		// documentsItem.setCssClass("dados documentos");
+		// documentsItem.addInfo("Prestação de contas",
+		// osc.getAccountabilityPath());
+		// documentsItem.addInfo("Estatuto", osc.getByLawPath());
+		// documentsItem.addInfo("Quadro de diretores",
+		// osc.getDirectorsBoardPath());
+		// documentsItem.addInfo("Convênios", osc.getTreatyPath());
+		// DataSource[] ds = { osc.getDocumentDataSource() };
+		// documentsItem.setInfoSource(getHelpContent(ds));
 
 		final KeyValueMenuItem localizationItem = new KeyValueMenuItem();
 		localizationItem.setItemTitle("Localização");
@@ -312,7 +286,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		localizationItem.setCssClass("dados clearfix");
 		localizationItem.addInfo("Latitude", String.valueOf(osc.getCoordinate().getY()));
 		localizationItem.addInfo("Longitude", String.valueOf(osc.getCoordinate().getX()));
-		
+
 		final KeyValueMenuItem publicResourcesItem = new KeyValueMenuItem(osc.getPublicResources());
 		publicResourcesItem.setItemTitle("Recursos públicos");
 		publicResourcesItem.setId("recursos");
@@ -320,9 +294,9 @@ public class MenuController implements ValueChangeHandler<String> {
 		String titleToolTip = "Os recursos públicos aqui apresentados são referentes </br>"
 				+ "às parcerias realizadas com o governo federal através do<br> SICONV e os recursos "
 				+ "obtidos através de Leis de Incentivo";
-		
+
 		publicResourcesItem.setTitleToolTip(titleToolTip);
-		
+
 		if (osc.getPublicResources().getDataSources().length > 0)
 			publicResourcesItem.setInfoSource(getHelpContent(osc.getPublicResources().getDataSources()));
 
@@ -342,7 +316,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			certificationsItem.setInfoSource(getHelpContent(osc.getCertifications().getDataSources()));
 
 		AbstractMenuItem<?> committeesItem = null;
-		
+
 		if (!osc.getCommittees().getCommittees().isEmpty()) {
 
 			final KeyValueMenuItem keyValueItem = new KeyValueMenuItem(osc.getCommittees());
@@ -350,13 +324,12 @@ public class MenuController implements ValueChangeHandler<String> {
 			keyValueItem.setItemTitle("Conselhos e comissões");
 			keyValueItem.setId("cons");
 			keyValueItem.setCssClass("dados");
-			
+
 			if (osc.getCommittees().getDataSources().length > 0)
 				keyValueItem.setInfoSource(getHelpContent(osc.getCommittees().getDataSources()));
-			
+
 			committeesItem = keyValueItem;
-		}
-		else {
+		} else {
 			final SimpleTextMenuItem textItem = new SimpleTextMenuItem();
 			textItem.setItemTitle("Conselhos e Comissões");
 			textItem.setId("cons");
@@ -364,107 +337,115 @@ public class MenuController implements ValueChangeHandler<String> {
 			textItem.setInfo("Esta Organização não participa de nenhum conselho ou comissão. ");
 			committeesItem = textItem;
 		}
-		
+
 		@SuppressWarnings("rawtypes")
 		List<AbstractMenuItem> menuItems = new ArrayList<AbstractMenuItem>();
-		
+
 		menuItems.add(mainItem);
 		menuItems.add(publicResourcesItem);
 		menuItems.add(workRelationshipItem);
 		menuItems.add(certificationsItem);
-//		menuItems.add(documentsItem);
+		// menuItems.add(documentsItem);
 		menuItems.add(committeesItem);
-//		 menuItems.add(localizationItem);
-		
+		// menuItems.add(localizationItem);
+
 		final OrganizationWidget oscInfo = new OrganizationWidget(menuInfo, menuItems);
-		
+
 		menuPanel.add(breadcrumb.getBreadcrumbHtml());
 		menuPanel.add(oscInfo);
-//		 initFunction();
-				
+		// initFunction();
+
 		centerMap(LatLng.create(osc.getCoordinate().getY(), osc.getCoordinate().getX()), 20.0);
-		
+
 		changeIcons(osc.getMain().getId());
-		
+
 		String oscBusca = DOM.getElementById("tooltip_").getInnerText();
 		searchWidget.setOscBox(oscBusca);
 	}
-	
+
 	public void onValueChange(ValueChangeEvent<String> event) {
 		final String token = event.getValue();
-		
+
 		if (!token.isEmpty()) {
 			resetAllIcons();
 			final String tokenType = String.valueOf(token.charAt(0));
 			final String tokenId = token.substring(1);
-			
-			if (isInteger(tokenId, 10)){
-				if (tokenType.equals("P") && !token.equals("P0"))	processPlaces(token, tokenId);
-				else if (tokenType.equals("O"))	processOrganizations(token, tokenId);
-				else if (token.equals("P0"))	processPlace(token, tokenId);
-				else if (tokenType.equals("I"))	processInfographic(token);
-				else if (tokenType.equals("M"))	processMatrix(tokenId);
-			}else if (tokenType.equals("T")) processToken(tokenId);
-			else if (tokenType.equals("C")) processPassword(tokenId);
-			
-			if(tokenType.equals("A")) processAddress(tokenId.split("&")[0].replace("?lat=", ""), tokenId.split("&")[1].replace("lon=", ""));
+
+			if (isInteger(tokenId, 10)) {
+				if (tokenType.equals("P") && !token.equals("P0"))
+					processPlaces(token, tokenId);
+				else if (tokenType.equals("O"))
+					processOrganizations(token, tokenId);
+				else if (token.equals("P0"))
+					processPlace(token, tokenId);
+				else if (tokenType.equals("I"))
+					processInfographic(token);
+				else if (tokenType.equals("M"))
+					processMatrix(tokenId);
+			} else if (tokenType.equals("T"))
+				processToken(tokenId);
+			else if (tokenType.equals("C"))
+				processPassword(tokenId);
+
+			if (tokenType.equals("A"))
+				processAddress(tokenId.split("&")[0].replace("?lat=", ""), tokenId.split("&")[1].replace("lon=", ""));
 		}
 	}
 
 	public static boolean isInteger(String s, int radix) {
-	    if(s.isEmpty()) return false;
-	    for(int i = 0; i < s.length(); i++) {
-	        if(i == 0 && s.charAt(i) == '-') {
-	            if(s.length() == 1) return false;
-	            else continue;
-	        }
-	        if(Character.digit(s.charAt(i),radix) < 0) return false;
-	    }
-	    return true;
+		if (s.isEmpty())
+			return false;
+		for (int i = 0; i < s.length(); i++) {
+			if (i == 0 && s.charAt(i) == '-') {
+				if (s.length() == 1)
+					return false;
+				else
+					continue;
+			}
+			if (Character.digit(s.charAt(i), radix) < 0)
+				return false;
+		}
+		return true;
 	}
-	
+
 	private void processPassword(String token) {
-		
+
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 
 			public void onSuccess(final Integer result) {
-				if(result != null){
+				if (result != null) {
 					changePassword.onModuleLoad();
 					changePassword.addSubmitListener(new EventListener() {
 
-						
 						public void onBrowserEvent(Event event) {
 							if (changePassword.isValid()) {
 								logger.info("Alterando senha do usuário");
-								changePassword(result,changePassword.getPassword());
+								changePassword(result, changePassword.getPassword());
 							}
 						}
 					});
 					changePassword.addSubmitcsenha(new EventListener() {
 
-						
 						public void onBrowserEvent(Event event) {
-							if(event.getKeyCode() == KeyCodes.KEY_ENTER){
+							if (event.getKeyCode() == KeyCodes.KEY_ENTER) {
 								if (changePassword.isValid()) {
 									logger.info("Alterando senha do usuário");
-									changePassword(result,changePassword.getPassword());
+									changePassword(result, changePassword.getPassword());
 								}
 							}
 						}
 					});
 					changePassword.addCancelListener(new EventListener() {
 
-						
 						public void onBrowserEvent(Event event) {
-								changePassword.close();
-							}
+							changePassword.close();
+						}
 					});
 					changePassword.addStopPropagation(new EventListener() {
 
-						
 						public void onBrowserEvent(Event event) {
 							event.stopPropagation();
 						}
@@ -476,12 +457,12 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 
 	private void changePassword(Integer idUser, String password) {
-		
+
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-	
+
 			public void onSuccess(Void result) {
 				logger.info("Senha alterada com sucesso!");
 				Element pop = DOM.getElementById("popup");
@@ -496,7 +477,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				a.setAttribute("href", "#");
 				Event.sinkEvents(a, Event.ONCLICK);
 				Event.setEventListener(a, new EventListener() {
-					
+
 					public void onBrowserEvent(Event event) {
 						changePassword.close();
 					}
@@ -510,7 +491,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		userService.setPassword(idUser, password, callback);
 		excluirToken(idUser);
 	}
-	
+
 	private void processToken(String token) {
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 			public void onFailure(Throwable caught) {
@@ -518,16 +499,16 @@ public class MenuController implements ValueChangeHandler<String> {
 			}
 
 			public void onSuccess(Integer result) {
-				if(result != null){
+				if (result != null) {
 					ativaUsuario(result);
 				}
-				
+
 			}
 		};
 		userService.getIdToken(token, callback);
 	}
-	
-	private void ativaUsuario(Integer result){
+
+	private void ativaUsuario(Integer result) {
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
@@ -535,14 +516,14 @@ public class MenuController implements ValueChangeHandler<String> {
 
 			public void onSuccess(Integer idUsuarioAtivo) {
 				retornaEmailUsuarioAtivo(idUsuarioAtivo);
-				logger.info( "Usuário ativado com sucesso!!!");
+				logger.info("Usuário ativado com sucesso!!!");
 			}
 		};
-		userService.usuarioAtivo(result,callback);
+		userService.usuarioAtivo(result, callback);
 		excluirToken(result);
 	}
-	
-	private void retornaEmailUsuarioAtivo(final Integer idUsuarioAtivo){
+
+	private void retornaEmailUsuarioAtivo(final Integer idUsuarioAtivo) {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
@@ -552,11 +533,11 @@ public class MenuController implements ValueChangeHandler<String> {
 				retornaSenhaUsuarioAtivo(idUsuarioAtivo, emailUsuarioAtivo);
 			}
 		};
-		
+
 		userService.getEmail(idUsuarioAtivo, callback);
 	}
-	
-	private void retornaSenhaUsuarioAtivo(Integer idUsuarioAtivo, final String emailUsuarioAtivo){
+
+	private void retornaSenhaUsuarioAtivo(Integer idUsuarioAtivo, final String emailUsuarioAtivo) {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
@@ -569,21 +550,21 @@ public class MenuController implements ValueChangeHandler<String> {
 		};
 		userService.getPassword(idUsuarioAtivo, callback);
 	}
-	
-	private void excluirToken(Integer result){
+
+	private void excluirToken(Integer result) {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 
 			public void onSuccess(Void result) {
-				logger.info( "Token excluido!");
+				logger.info("Token excluido!");
 			}
 		};
-		userService.deleteToken(result,callback);
+		userService.deleteToken(result, callback);
 	}
-	
-	private void getPassword(Integer result){
+
+	private void getPassword(Integer result) {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
@@ -593,77 +574,74 @@ public class MenuController implements ValueChangeHandler<String> {
 				logger.info("");
 			}
 		};
-		userService.getPassword(result,callback);
+		userService.getPassword(result, callback);
 	}
-	
-	private void getEmail(Integer result){
+
+	private void getEmail(Integer result) {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
 
 			public void onSuccess(String result) {
-				logger.info( "Email encontrado!");
+				logger.info("Email encontrado!");
 			}
 		};
-		userService.getEmail(result,callback);
+		userService.getEmail(result, callback);
 	}
-	
+
 	private void processMatrix(String tokenId) {
 		breadcrumbIndicadores.clear();
-		
+
 		matrix.loadMatrix(tokenId);
 		matrix.setVisible(true);
 		Element matrixHTML = DOM.getElementById("matrixBody");
 		String hash = Window.Location.getHash();
-		
-		if(matrixHTML!=null){
+
+		if (matrixHTML != null) {
 			initBreadcrumbMatrix(matrixHTML, hash);
-			
+
 		}
-		
+
 		setupMatrix();
 	}
 
-	private void initBreadcrumbMatrix(Element element, String hash){
+	private void initBreadcrumbMatrix(Element element, String hash) {
 		String type = "M";
 		breadcrumb.setType(type);
-		if(listURL.isEmpty()){
+		if (listURL.isEmpty()) {
 			BreadcrumbItem item = new BreadcrumbItem();
-			
-			if (hash.equals("#M0")){
-				//logger.log(Level.INFO, "HASH: #M0");
+
+			if (hash.equals("#M0")) {
+				// logger.log(Level.INFO, "HASH: #M0");
 				Cookies.removeCookie("breadcrumb");
-				Cookies.setCookie("breadcrumb","");
+				Cookies.setCookie("breadcrumb", "");
 				mountBreadcrumb(hash, element, false);
-			}
-			else {
-				//logger.log(Level.INFO, "HASH: "+hash);
-				
+			} else {
+				// logger.log(Level.INFO, "HASH: "+hash);
+
 				breadcrumb.clearBreadcrumb();
 				String vetBreadcrumb[] = Cookies.getCookie("breadcrumb").split(",");
-				
-				if(vetBreadcrumb!=null && !vetBreadcrumb.equals("")){
-					for(int s=1; s < vetBreadcrumb.length; s++){
+
+				if (vetBreadcrumb != null && !vetBreadcrumb.equals("")) {
+					for (int s = 1; s < vetBreadcrumb.length; s++) {
 						String itemId = vetBreadcrumb[s].split("#")[1].replaceAll(type, "");
 						String itemText = vetBreadcrumb[s].split("#")[0];
 						item = new BreadcrumbItem();
 						item.setItemId(itemId);
 						item.setItemText(itemText);
-						
-						logger.log(Level.INFO, "ITEM_ID: "+item.getItemId());
-						logger.log(Level.INFO, "ITEM_TEXT: "+item.getItemText());
-						
-						if(item.getItemId().length()==2){
+
+						logger.log(Level.INFO, "ITEM_ID: " + item.getItemId());
+						logger.log(Level.INFO, "ITEM_TEXT: " + item.getItemText());
+
+						if (item.getItemId().length() == 2) {
 							listURL.put(1, item);
 							listURL.remove(2);
 							listURL.remove(3);
-						}
-						else if(item.getItemId().length()==3){
+						} else if (item.getItemId().length() == 3) {
 							listURL.put(2, item);
 							listURL.remove(3);
-						}
-						else if(item.getItemId().length()>3){
+						} else if (item.getItemId().length() > 3) {
 							listURL.put(3, item);
 						}
 					}
@@ -671,69 +649,65 @@ public class MenuController implements ValueChangeHandler<String> {
 
 				mountBreadcrumb(hash, element, true);
 			}
-		}
-		else{
+		} else {
 			mountBreadcrumb(hash, element, true);
 		}
 	}
-	
-	
-	private void mountBreadcrumb(String hash, Element element, boolean loadFirst){
-		
-		if(loadFirst){
+
+	private void mountBreadcrumb(String hash, Element element, boolean loadFirst) {
+
+		if (loadFirst) {
 			NodeList<Element> links = element.getElementsByTagName("a");
-			
-			for(int i=0;i<links.getLength(); i++){
+
+			for (int i = 0; i < links.getLength(); i++) {
 				String link = links.getItem(i).getAttribute("href");
 				String textLink = links.getItem(i).getInnerText();
 				Integer tamLink = link.length();
-				
-				if(link.equals(hash)){
+
+				if (link.equals(hash)) {
 					BreadcrumbItem item = new BreadcrumbItem();
-					item.setItemId(hash.replace('#', ' ').replace(breadcrumb.getType(),"").trim());
+					item.setItemId(hash.replace('#', ' ').replace(breadcrumb.getType(), "").trim());
 					item.setItemText(textLink);
-					
-					if(tamLink==3){
+
+					if (tamLink == 3) {
 						listURL.put(1, item);
 						listURL.remove(2);
 						listURL.remove(3);
-					}
-					else if(tamLink==4){
+					} else if (tamLink == 4) {
 						listURL.put(2, item);
 						listURL.remove(3);
-					}
-					else if(tamLink>4){
+					} else if (tamLink > 4) {
 						listURL.put(3, item);
 					}
 				}
 			}
-			
+
 			breadcrumb.clearBreadcrumb();
-			
+
 			@SuppressWarnings("rawtypes")
 			Iterator it = listURL.entrySet().iterator();
-			while(it.hasNext()){
-				
+			while (it.hasNext()) {
+
 				@SuppressWarnings("unchecked")
-				Map.Entry<Integer, BreadcrumbItem> par = (Map.Entry<Integer, BreadcrumbItem>)it.next();
+				Map.Entry<Integer, BreadcrumbItem> par = (Map.Entry<Integer, BreadcrumbItem>) it.next();
 				BreadcrumbItem item = new BreadcrumbItem();
-				
+
 				item.setItemId(par.getValue().getItemId());
 				item.setItemText(par.getValue().getItemText());
 				breadcrumb.addItem(item);
-				
+
 				Cookies.removeCookie("breadcrumb");
-				Cookies.setCookie("breadcrumb",","+item.getItemText()+"#"+item.getItemId());
-				
-				if(hash.equals('#'+par.getValue().getItemId())){ 
-					break; 
+				Cookies.setCookie("breadcrumb", "," + item.getItemText() + "#" + item.getItemId());
+
+				if (hash.equals('#' + par.getValue().getItemId())) {
+					break;
 				}
 			}
 		}
-		
+
 		breadcrumbIndicadores.add(breadcrumb.getBreadcrumbHtml());
 	}
-	
+
 	private void processInfographic(String token) {
 		Infographic i = Infographic.get(token);
 		info.loadInfo(i);
@@ -741,7 +715,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		setupInfographics();
 		historyTokens.add(token);
 	}
-	
+
 	private void processPlace(String token, String tokenId) {
 		breadcrumb.clearBreadcrumb();
 		AsyncCallback<Place[]> callbackPlaces = new AsyncCallback<Place[]>() {
@@ -754,10 +728,10 @@ public class MenuController implements ValueChangeHandler<String> {
 				loadPlaces(result, true);
 			}
 		};
-		
+
 		placeService.getPlaces(PlaceType.REGION, callbackPlaces);
 	}
-	
+
 	private void processOrganizations(String token, String tokenId) {
 		String email = Cookies.getCookie("oscUid");
 		Integer idToken = Integer.parseInt(tokenId);
@@ -783,40 +757,43 @@ public class MenuController implements ValueChangeHandler<String> {
 							BreadcrumbItem item = new BreadcrumbItem();
 							item.setItemId(String.valueOf(place.getId()));
 							item.setItemText(place.getName());
-							
-							if (!breadcrumb.isItemOnBreadcrumb(item.getItemId())) breadcrumb.addItem(item);
-							else breadcrumb.removeLastItemUntil(item);
+
+							if (!breadcrumb.isItemOnBreadcrumb(item.getItemId()))
+								breadcrumb.addItem(item);
+							else
+								breadcrumb.removeLastItemUntil(item);
 						}
 
-						//verificação retirada segundo a tarefa MOSC-156
+						// verificação retirada segundo a tarefa MOSC-156
 						loadOrganization(resultOsc);
 					}
 				};
 				placeService.getPlaceAncestorsInfo(resultOsc.getMain().getCountyId(), callbackBreadcrumb);
 			}
 		};
-		
+
 		oscService.getDetail(idToken, email, callbackDetails);
 	}
-	
+
 	private void processPlaces(final String token, String tokenId) {
 		Integer idToken = Integer.parseInt(tokenId);
-		
+
 		breadcrumb.setType("P");
-		
+
 		AsyncCallback<Place[]> callbackBreadcrumb = new AsyncCallback<Place[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-			
+
 			public void onSuccess(Place[] result) {
-				if (result.length > 0)	breadcrumb.clearBreadcrumb();
-				
+				if (result.length > 0)
+					breadcrumb.clearBreadcrumb();
+
 				for (Place place : result) {
 					BreadcrumbItem item = new BreadcrumbItem();
 					item.setItemId(String.valueOf(place.getId()));
 					item.setItemText(place.getName());
-					
+
 					if (!breadcrumb.isItemOnBreadcrumb(item.getItemId()))
 						breadcrumb.addItem(item);
 					else
@@ -825,54 +802,53 @@ public class MenuController implements ValueChangeHandler<String> {
 				historyTokens.add(token);
 			}
 		};
-		
+
 		placeService.getPlaceAncestorsInfo(idToken, callbackBreadcrumb);
-		
+
 		AsyncCallback<Place> callbackPlace = new AsyncCallback<Place>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-			
+
 			public void onSuccess(Place result) {
 				fitBoundsMap(result.getBoundingBox());
 			}
 		};
-		
+
 		placeService.getPlaceInfo(idToken, callbackPlace);
-		
+
 		if (tokenId.length() != 7) {
 			AsyncCallback<Place[]> callbackPlaces = new AsyncCallback<Place[]>() {
 				public void onFailure(Throwable caught) {
 					logger.log(Level.SEVERE, caught.getMessage());
 				}
-				
+
 				public void onSuccess(Place[] result) {
 					loadPlaces(result, false);
 				}
 			};
 			placeService.getPlaces(idToken, callbackPlaces);
-		}
-		else {
+		} else {
 			AsyncCallback<SortedMap<String, Integer>> callbackOsc = new AsyncCallback<SortedMap<String, Integer>>() {
 				public void onFailure(Throwable caught) {
 					logger.log(Level.SEVERE, caught.getMessage());
 				}
-				
+
 				public void onSuccess(SortedMap<String, Integer> result) {
 					loadOrganizations(result);
 				}
 			};
-			
+
 			boolean all = UserController.isMasterUser();
-			
+
 			placeService.getOsc(idToken, all, callbackOsc);
 		}
 	}
-	
-	private void processAddress(String lat, String lon){
+
+	private void processAddress(String lat, String lon) {
 		centerMap(LatLng.create(Double.parseDouble(lat), Double.parseDouble(lon)), 19.0);
 	}
-	
+
 	/**
 	 * @param recommended
 	 *            recomendação do usuário Envia a recomendação para banco
@@ -889,19 +865,23 @@ public class MenuController implements ValueChangeHandler<String> {
 				logger.info("Recomendacao add com sucesso");
 			}
 		};
-		
-		//Verificação de usuário logado para poder recomendar uma OSC - MOSC-156
-		if (UserController.hasLoggedUser() == true) oscService.setRecommendation(oscId, email, recommended, callback);
-		else  Window.Location.replace(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "User.html");
+
+		// Verificação de usuário logado para poder recomendar uma OSC -
+		// MOSC-156
+		if (UserController.hasLoggedUser() == true)
+			oscService.setRecommendation(oscId, email, recommended, callback);
+		else
+			Window.Location.replace(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "User.html");
 	}
-	
+
 	public static String getHelpContent(DataSource[] dataSources) {
 		DateTimeFormat fmt = DateTimeFormat.getFormat("dd/MM/yyyy");
 		StringBuilder dsBuilder = new StringBuilder();
-		
+
 		for (DataSource ds : dataSources) {
-			if (ds == null) continue;
-			
+			if (ds == null)
+				continue;
+
 			dsBuilder.append("<p>");
 			dsBuilder.append("<a class=\"ajuda\" href='");
 			dsBuilder.append(ds.getSiteURL());
@@ -912,47 +892,42 @@ public class MenuController implements ValueChangeHandler<String> {
 			dsBuilder.append("</a>");
 			dsBuilder.append("<br>");
 			dsBuilder.append(ds.getName());
-			
+
 			if (ds.getAcquisitionDate() != null) {
 				dsBuilder.append("<br> Data de Aquisição:");
 				dsBuilder.append(fmt.format(ds.getAcquisitionDate()));
 			}
-			
+
 			dsBuilder.append("</p>");
 			dsBuilder.append("<br>");
 		}
 		return dsBuilder.toString();
 	}
-	
+
 	public static void fitBoundsMap(BoundingBox box) {
 		map.fitBoundsToView(box);
 	}
-	
+
 	public static void changeIcons(int oscId) {
 		map.changeToSelectedIcon(oscId);
 	}
-	
+
 	public static void centerMap(LatLng center, Double zoom) {
 		map.centerMap(center, zoom);
 	}
-	
+
 	public static void resetAllIcons() {
 		map.resetIcon();
 	}
 
 	public void removeResizeHandler() {
-		if (handleControl != null) handleControl.removeHandler();
+		if (handleControl != null)
+			handleControl.removeHandler();
 	}
 
 	public void addResizeHandler() {
 		handleControl = Window.addResizeHandler(new ResizeHandler() {
-<<<<<<< HEAD
-			
-			@Override
-=======
 
-			
->>>>>>> MOSC-246
 			public void onResize(ResizeEvent event) {
 				initFunction();
 			}
@@ -963,7 +938,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		$wnd.location.hash = '';
 		$wnd.history.pushState('', $wnd.document.title, $wnd.location.pathname);
 	}-*/;
-	
+
 	public static native void initFunction() /*-{
 		$wnd.jQuery($doc).ready(
 				function() {
@@ -1094,11 +1069,11 @@ public class MenuController implements ValueChangeHandler<String> {
 			});
 
 		}
-		
-		if($wnd.jQuery("#mapa.infograficos").length > 0) {
+
+		if ($wnd.jQuery("#mapa.infograficos").length > 0) {
 			$wnd.jQuery("#tab_indicadores").click();
 		}
-		
+
 		$wnd.jQuery("#contraste_normal").click(function() {
 			$wnd.chooseStyle('none');
 			$wnd.jQuery('.normal').show();

@@ -36,26 +36,25 @@ public class SearchController {
 	private Date changeDate;
 	private SearchResult searchResult = new SearchResult();
 	private Integer quantLetter = 0;
-	
+
 	public void init() {
 		searchDiv.add(searchWidget);
-		
+
 		searchWidget.addFocusListener(new EventListener() {
-			
+
 			public void onBrowserEvent(Event event) {
 				searchWidget.setValue("");
 			}
 		});
-		
+
 		searchWidget.addChangeListener(new EventListener() {
-			
+
 			public void onBrowserEvent(Event event) {
-				if(event.getKeyCode() == KeyCodes.KEY_DOWN || event.getKeyCode() == KeyCodes.KEY_UP){
-					if(DOM.getElementById("list1") != null) {
+				if (event.getKeyCode() == KeyCodes.KEY_DOWN || event.getKeyCode() == KeyCodes.KEY_UP) {
+					if (DOM.getElementById("list1") != null) {
 						DOM.getElementById("list1").focus();
 					}
-				}
-				else{
+				} else {
 					changeDate = new Date();
 					final Date thisDate = changeDate;
 					Timer t = new Timer() {
@@ -70,32 +69,32 @@ public class SearchController {
 				}
 			}
 		});
-		
+
 		searchWidget.addSearchClickListener(new EventListener() {
-			
+
 			public void onBrowserEvent(Event event) {
 				String criteria = searchWidget.getValue();
 				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-					
+
 					public void onFailure(Throwable caught) {
 						logger.log(Level.SEVERE, caught.getMessage());
 					}
-					
+
 					public void onSuccess(List<SearchResult> result) {
 						if (!result.isEmpty()) {
-							if (result.get(0).getType().equals(SearchResultType.STATE)){
+							if (result.get(0).getType().equals(SearchResultType.STATE)) {
 								History.newItem("P" + result.get(0).getId());
 							}
-							if (result.get(0).getType().equals(SearchResultType.COUNTY)){
+							if (result.get(0).getType().equals(SearchResultType.COUNTY)) {
 								History.newItem("P" + result.get(0).getId());
 							}
-							if (result.get(0).getType().equals(SearchResultType.OSC)){
+							if (result.get(0).getType().equals(SearchResultType.OSC)) {
 								History.newItem("O" + result.get(0).getId());
 							}
-							if (result.get(0).getType().equals(SearchResultType.ADDRESS)){
+							if (result.get(0).getType().equals(SearchResultType.ADDRESS)) {
 								History.newItem("A" + result.get(0).getId());
 							}
-							
+
 							searchWidget.close();
 						}
 					}
@@ -104,84 +103,92 @@ public class SearchController {
 			}
 		});
 	}
-	
+
 	private void search() {
 		String criteria = searchWidget.getValue();
-		
+
 		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-			
+
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-			
-			public void onSuccess(final List<SearchResult> result) {				
-				if(result.size() < LIMIT && searchWidget.getValue().length() > 3 && quantLetter != searchWidget.getValue().length()){
+
+			public void onSuccess(final List<SearchResult> result) {
+				if (result.size() < LIMIT && searchWidget.getValue().length() > 3
+						&& quantLetter != searchWidget.getValue().length()) {
 					String address = searchWidget.getValue();
-					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + ",brasil";
-					
+					String url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+							+ address.replace(" ", "+") + ",brasil";
+
 					quantLetter = searchWidget.getValue().length();
 					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
-					try{
+					try {
 						req.sendRequest(null, new RequestCallback() {
-							
-							@Override
+
 							public void onResponseReceived(Request request, Response response) {
 								Boolean flag = false;
-								for(String s : response.getText().split("\n")){
-									if(searchResult.getLongetude() != null) searchResult.setId(result.size() + 1);
+								for (String s : response.getText().split("\n")) {
+									if (searchResult.getLongetude() != null)
+										searchResult.setId(result.size() + 1);
 									searchResult.setType(SearchResultType.ADDRESS);
-									if(s.contains("formatted_address")) searchResult.setValue(s.split(": ")[1].split("\",")[0].replace("\"", ""));
-									if(s.contains("\"location\" :")) flag = true;
-									if(flag){
-										if(s.contains("lat")) searchResult.setLatitude(s.split(": ")[1].split(",")[0].replace("\"", ""));
-										else if(s.contains("lng")) searchResult.setLongetude(s.split(": ")[1].replace("\"", ""));
-										if(searchResult.getLatitude() != null && searchResult.getLongetude() != null) flag = false;
+									if (s.contains("formatted_address"))
+										searchResult.setValue(s.split(": ")[1].split("\",")[0].replace("\"", ""));
+									if (s.contains("\"location\" :"))
+										flag = true;
+									if (flag) {
+										if (s.contains("lat"))
+											searchResult.setLatitude(s.split(": ")[1].split(",")[0].replace("\"", ""));
+										else if (s.contains("lng"))
+											searchResult.setLongetude(s.split(": ")[1].replace("\"", ""));
+										if (searchResult.getLatitude() != null && searchResult.getLongetude() != null)
+											flag = false;
 									}
-									if(searchResult.getLongetude() != null){
-										if(!result.contains(searchResult)) result.add(searchResult);
+									if (searchResult.getLongetude() != null) {
+										if (!result.contains(searchResult))
+											result.add(searchResult);
 										searchResult = new SearchResult();
 									}
-									if(result.size() > LIMIT) break;
+									if (result.size() > LIMIT)
+										break;
 								}
 								onSuccess(result);
 							}
-							
-							@Override
+
 							public void onError(Request request, Throwable exception) {
 								logger.info("Erro na busca de endereço pelo Google");
 							}
 						});
-					}catch(Exception e){
+					} catch (Exception e) {
 						logger.info("Erro na busca de endereço pelo Google\n" + e);
 					}
 				}
-				
+
 				searchWidget.setItems(result);
-				
+
 				searchWidget.addFocus(new EventListener() {
-					
+
 					public void onBrowserEvent(Event event) {
-						if (event.getKeyCode() == KeyCodes.KEY_DOWN){
+						if (event.getKeyCode() == KeyCodes.KEY_DOWN) {
 							event.preventDefault();
 							searchWidget.count++;
-							if(searchWidget.count>searchWidget.result){
+							if (searchWidget.count > searchWidget.result) {
 								searchWidget.count = 5;
 							}
-							DOM.getElementById("list"+ searchWidget.count).focus();
-						}else{
-							if (event.getKeyCode() == KeyCodes.KEY_UP){
+							DOM.getElementById("list" + searchWidget.count).focus();
+						} else {
+							if (event.getKeyCode() == KeyCodes.KEY_UP) {
 								event.preventDefault();
 								searchWidget.count--;
-								if(searchWidget.count<1){
+								if (searchWidget.count < 1) {
 									searchWidget.count = 1;
 								}
-								DOM.getElementById("list"+ searchWidget.count).focus();
+								DOM.getElementById("list" + searchWidget.count).focus();
 							}
 						}
 					}
 				});
 				searchWidget.addresultBusca(new EventListener() {
-					
+
 					public void onBrowserEvent(Event event) {
 						searchWidget.close();
 					}
@@ -192,14 +199,14 @@ public class SearchController {
 			searchService.search(criteria, LIMIT, callbackSearch);
 		}
 	}
-	
+
 	/**
 	 * @return Instância da busca
 	 */
 	public SearchController getInstance() {
 		return this;
 	}
-	
+
 	/**
 	 * @param isVisible
 	 *            indica se a busca deve estar visível ou não.
