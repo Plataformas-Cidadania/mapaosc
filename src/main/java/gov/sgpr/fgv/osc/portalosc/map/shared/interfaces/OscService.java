@@ -1,6 +1,7 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.interfaces;
 
-import java.util.Map;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.Certifications;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.Committees;
@@ -11,9 +12,6 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.PublicResources;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.WorkRelationship;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
-
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
  * Interface do Serviço que busca informações sobre as OSCs

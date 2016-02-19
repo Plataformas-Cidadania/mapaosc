@@ -1,7 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +35,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.view.client.Range;
 import com.google.gwt.view.client.RowCountChangeEvent;
+
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
 
 /**
  * @author victor Componente gráfico que apresenta os Infográficos na tela.
@@ -175,7 +175,7 @@ public class MatrixWidget extends Composite {
 
 	public static void setupOnePageList(final AbstractHasData<?> cellTable) {
 		cellTable.addRowCountChangeHandler(new RowCountChangeEvent.Handler() {
-			@Override
+			
 			public void onRowCountChange(RowCountChangeEvent event) {
 				cellTable.setVisibleRange(new Range(0, event.getNewRowCount()));
 			}

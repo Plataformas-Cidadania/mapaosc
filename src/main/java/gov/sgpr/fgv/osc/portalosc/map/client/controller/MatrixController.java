@@ -1,11 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.controller;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.MatrixWidget;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +9,12 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.MatrixWidget;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.PlaceServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.PlaceType;
 
 /**
  * @author victor
@@ -57,7 +57,7 @@ public class MatrixController {
 		final MatrixWidget matrixWidget = new MatrixWidget(places);
 		EventListener indicatorListener = new EventListener() {
 
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 				String indicator = matrixWidget.getSelectedIndicator();
 				matrixWidget.updateTable(indicator);

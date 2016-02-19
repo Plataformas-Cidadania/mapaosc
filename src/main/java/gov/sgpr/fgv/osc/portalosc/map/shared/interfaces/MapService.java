@@ -1,18 +1,22 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.interfaces;
 
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Coordinate;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
+import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
+
 /**
  * @author victor
  * 
+ * Eric Ferreira
+ * Modified Date: 26/01/2016
+ * Change cluster and boundingbox classes to library GeoCluster
  *         Inteface de acesso às informações do mapa.
  * 
  */
@@ -100,4 +104,15 @@ public interface MapService extends RemoteService {
 	 */
 	Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all)
 			throws RemoteException;
+
+	/**
+	 * @return true se os clusters foram criados
+	 * @throws RemoteException
+	 */
+	/**
+	 * @return true se os clusters foram criados
+	 * @throws RemoteException
+	 */
+	boolean createdClusters() throws RemoteException;  
+
 }

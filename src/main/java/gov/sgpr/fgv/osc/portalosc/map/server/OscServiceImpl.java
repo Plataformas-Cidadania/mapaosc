@@ -1,19 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.server;
 
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Certifications;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Committees;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.DocumentType;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMain;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.PublicResources;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.WorkRelationship;
-import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
-import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
-
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,6 +22,20 @@ import javax.servlet.ServletContext;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
+
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Certifications;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.Committees;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.DocumentType;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMain;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.PublicResources;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.WorkRelationship;
+import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
+import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 
 /**
  * Implementação do Serviço que busca informações sobre as OSCs

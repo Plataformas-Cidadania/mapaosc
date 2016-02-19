@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/mapaosc-1.4.2-BETA/WEB-INF/classes" path="src/main/java">
+	<classpathentry kind="src" output="target/mapaosc-1.4.3-BETA/WEB-INF/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/mapaosc-1.4.2-BETA/WEB-INF/classes" path="src/main/resources">
+	<classpathentry excluding="**" kind="src" output="target/mapaosc-1.4.3-BETA/WEB-INF/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
@@ -33,6 +33,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
 		<attributes>
@@ -41,4 +42,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="target/mapaosc-1.4.2-BETA/WEB-INF/classes"/>
+=======
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/mapaosc-1.4.3-BETA/WEB-INF/classes"/>
+>>>>>>> MOSC-246
 </classpath>

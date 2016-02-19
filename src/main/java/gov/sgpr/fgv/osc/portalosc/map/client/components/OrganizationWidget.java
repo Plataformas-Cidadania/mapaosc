@@ -1,17 +1,13 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
-
 import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.History;
@@ -19,6 +15,10 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Panel;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
 
 public class OrganizationWidget extends Composite {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -77,7 +77,7 @@ public class OrganizationWidget extends Composite {
 
 			Event.sinkEvents(span, Event.ONMOUSEOUT);
 			Event.setEventListener(span, new EventListener() {
-				@Override
+				
 				public void onBrowserEvent(Event event) {
 					spanPopup.getStyle().setDisplay(Display.NONE);
 				}
@@ -85,7 +85,7 @@ public class OrganizationWidget extends Composite {
 			Event.sinkEvents(span, Event.ONMOUSEUP);
 			Event.sinkEvents(span, Event.ONMOUSEMOVE);
 			Event.setEventListener(span, new EventListener() {
-				@Override
+				
 				public void onBrowserEvent(Event event) {
 					final int left = event.getClientX() - 40;
 					final int bottom = event.getClientY();
@@ -102,7 +102,7 @@ public class OrganizationWidget extends Composite {
 		Event.sinkEvents(btnRecom, Event.ONCLICK);
 		Event.setEventListener(btnRecom, new EventListener() {
 
-			@Override
+			
 			public void onBrowserEvent(Event event) {
 
 				final Element likeCounter = DOM.getElementById("like_counter");

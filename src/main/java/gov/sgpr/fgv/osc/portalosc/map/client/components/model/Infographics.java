@@ -56,7 +56,7 @@ public class Infographics implements GraphRenderer {
 		return columnCount;
 	}
 
-	@Override
+	
 	public Widget getWidget() {
 		Grid grid = new Grid(getRowCount(), getColumnCount());
 		for (int i = 0; i < getRowCount(); i++) {

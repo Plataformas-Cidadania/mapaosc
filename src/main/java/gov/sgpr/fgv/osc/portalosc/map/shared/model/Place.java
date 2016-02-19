@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
+
 /**
  * Classe que representa um lugar.
  * 
  * @author victor
- * 
+ * Eric Ferreira
+ * Modified Date: 26/01/2016
+ * Change cluster and boundingbox classes to library GeoCluster
  */
 public class Place implements Serializable, Comparable<Place> {
 

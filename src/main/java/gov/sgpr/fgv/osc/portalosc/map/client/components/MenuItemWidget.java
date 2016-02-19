@@ -1,29 +1,14 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.BreadcrumbItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.ListMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.components.model.SimpleTextMenuItem;
-import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
-import gov.sgpr.fgv.osc.portalosc.map.server.OscServiceImpl;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscDetail;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.DOM;
 //import com.google.gwt.user.client.Element;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -31,6 +16,16 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AnchorListMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.KeyValueMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.ListMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.components.model.SimpleTextMenuItem;
+import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.OscServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.DataSource;
 
 public class MenuItemWidget extends Composite {
 
@@ -197,7 +192,7 @@ public class MenuItemWidget extends Composite {
 			Event.sinkEvents(spanPopup, Event.ONMOUSEOVER);
 			Event.sinkEvents(spanPopup, Event.ONMOUSEMOVE);
 			Event.setEventListener(spanPopup, new EventListener() {
-				@Override
+				
 				public void onBrowserEvent(Event event) {
 					final int left = event.getClientX() + 5;
 					final int bottom = event.getClientY() - span.getClientHeight() - 5;
@@ -215,7 +210,7 @@ public class MenuItemWidget extends Composite {
 			Event.sinkEvents(btnItem, Event.ONCLICK);
 			Event.setEventListener(btnItem, new EventListener() {
 
-				@Override
+				
 				public void onBrowserEvent(Event event) {
 					if (opened) {
 						btnItem.setClassName("dados");
@@ -235,7 +230,7 @@ public class MenuItemWidget extends Composite {
 			Event.sinkEvents(btnHelp, Event.ONCLICK);
 			Event.setEventListener(btnHelp, new EventListener() {
 
-				@Override
+				
 				public void onBrowserEvent(Event event) {
 					String tokenType = String.valueOf(item.getId().charAt(0));
 					PopupPanel helpPanel = new PopupPanel();

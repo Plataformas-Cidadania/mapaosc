@@ -1,11 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared;
 
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
-import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.BoundingBox;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.Coordinate;
-import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
-
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +8,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService;
+import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscCoordinate;
+import vhmeirelles.gwtGeocluster.model.BoundingBox;
+import vhmeirelles.gwtGeocluster.model.Coordinate;
 
 /**
  * GWT JUnit <b>integration</b> tests must extend GWTTestCase. Using
