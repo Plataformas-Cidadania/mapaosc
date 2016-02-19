@@ -238,8 +238,8 @@ public class OrganizationController {
 		p.add(picker);
 		p.show();
 		element.appendChild(picker.getElement());
-		Element date = DOM.getElementById(idElement + formularioWidget.proj);
-		date.setAttribute("required", "required");
+//		Element date = DOM.getElementById(idElement + formularioWidget.proj);
+//		date.setAttribute("required", "required");
 	}
 	
 	private HTML getHtmlProj(Integer proj, Integer count) {

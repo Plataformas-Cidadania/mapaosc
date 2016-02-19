@@ -8,7 +8,6 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.DatePickerLanguage;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.dom.client.SelectElement;
@@ -36,8 +35,7 @@ public class FormularioWidget extends Composite {
 	public Integer conv = 0;
 	public Integer count = 0;
 	public Boolean edit = true;
-	
-	
+		
 	public FormularioWidget(OrganizationModel organizationModel, Boolean editable){
 		initWidget(getHTML(organizationModel, editable));
 	}
@@ -430,12 +428,12 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador'>Data Início</strong>");
 				htmlBuilder.append("								<p id='data_inicio"+ proj +"' ></p>");
-//				htmlBuilder.append("								<p><input type='text' name='projeto_data_inicio' id='projeto_data_inicio"+ proj +"' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataInicio()) + "' " + (editable ? "" : "readonly") + "/></p>");
+				htmlBuilder.append("								<p><input type='hidden' name='projeto_data_inicio' id='projeto_data_inicio"+ proj +"' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataInicio()) + "' " + (editable ? "" : "readonly") + "/></p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador'>Data Final</strong>");
 				htmlBuilder.append("								<p id='data_final"+ proj +"' ></p>");
-//				htmlBuilder.append("								<p><input type='text' name='projeto_data_final' id='projeto_data_final"+ proj +"' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataFim()) + "' " + (editable ? "" : "readonly") + "/></p>");
+				htmlBuilder.append("								<p><input type='hidden' name='projeto_data_final' id='projeto_data_final"+ proj +"' placeholder='Informação não disponível' value='" + convertDateToString(p.getDataFim()) + "' " + (editable ? "" : "readonly") + "/></p>");
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("							<div class='col1_6'>");
 				htmlBuilder.append("								<strong class='separador'>Valor Total (R$)</strong>");
@@ -474,8 +472,13 @@ public class FormularioWidget extends Composite {
 						htmlBuilder.append("</span>");
 						htmlBuilder.append("</p>");
 					}
-				}else
-					htmlBuilder.append("									<p><a id='link"+ proj +"' href='http://" + p.getLink() + "' target='_blank' " + (editable ? "contenteditable='true'" : "contenteditable='false'") + " contenteditable='true' >" + p.getLink() + "</a></p>");
+				}else{
+					if(p.getLink() == null){
+						htmlBuilder.append("<p><input id='link"+ proj +"' name='link"+ proj +"' placeholder='Digite a página do projeto' /></p>");
+					}else{
+						htmlBuilder.append("<p><input id='link"+ proj +"' name='link"+ proj +"' value='" + p.getLink() + "' /></p>");
+					}
+				}
 				htmlBuilder.append("							</div>");
 				htmlBuilder.append("						</div>");
 				htmlBuilder.append("						<div class='clearfix linha'>");
@@ -643,10 +646,11 @@ public class FormularioWidget extends Composite {
 		
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</div>");
-		htmlBuilder.append("<div id='divbotoes' class='botoes'>");
-		htmlBuilder.append("<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='submit' value='Salvar' class='salvar' />");
-		htmlBuilder.append("</div>");
-		
+		if(editable){
+			htmlBuilder.append("<div id='divbotoes' class='botoes'>");
+			htmlBuilder.append("<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='submit' value='Salvar' class='salvar' />");
+			htmlBuilder.append("</div>");
+		}
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
@@ -747,12 +751,13 @@ public class FormularioWidget extends Composite {
 			}
 		}
 		org.setDiretores(diretorList);
-
+		
 		ArrayList<ProjetoModel> projetoList = new ArrayList<ProjetoModel>();
 		for(int i = 1;i <= proj; i++){
 			ProjetoModel projmodel = new ProjetoModel();
 			Element ele = DOM.getElementById("projeto_nome_projeto" + i);
 			String name = ele.getAttribute("name");
+			
 			if(name == "addProj"){
 				projmodel.setId(projmodel.getId());
 				projmodel.setTitulo(InputElement.as(DOM.getElementById("projeto_nome_projeto" + i)).getValue());
@@ -760,9 +765,10 @@ public class FormularioWidget extends Composite {
 				SelectElement selectStatus = status.getFirstChild().cast();
 				projmodel.setStatus(selectStatus.getValue());
 				String dtInicio = InputElement.as(DOM.getElementById("projeto_data_inicio" + i)).getValue();
-				projmodel.setDataInicio(getDate(dtInicio));
+				if(dtInicio.length() > 0) projmodel.setDataInicio(getDate(dtInicio));
 				String dtFinal = InputElement.as(DOM.getElementById("projeto_data_final" + i)).getValue();
-				projmodel.setDataFim(getDate(dtFinal));
+				if(dtFinal.length() > 0) projmodel.setDataFim(getDate(dtFinal));
+				
 				Element valor = DOM.getElementById("projeto_valor_total" + i);
 				String valorTotalvalue = InputElement.as(valor).getValue();
 				if(valorTotalvalue != null && valorTotalvalue != ""){
@@ -775,7 +781,7 @@ public class FormularioWidget extends Composite {
 				Element fonte = DOM.getElementById("projeto_fonte" + i);
 				SelectElement selectFonte = fonte.getFirstChild().cast();
 				projmodel.setFonteRecursos(selectFonte.getValue());
-				projmodel.setLink(AnchorElement.as(DOM.getElementById("link" + i)).getInnerText());
+				projmodel.setLink(InputElement.as(DOM.getElementById("link" + i)).getValue());
 				projmodel.setPublicoAlvo(TextAreaElement.as(DOM.getElementById("projeto_publico_alvo" + i)).getValue());
 				projmodel.setFinanciadores(TextAreaElement.as(DOM.getElementById("financiadores" + i)).getValue());
 				projmodel.setDescricao(TextAreaElement.as(DOM.getElementById("descprojeto" + i)).getValue());
@@ -787,9 +793,9 @@ public class FormularioWidget extends Composite {
 				SelectElement selectStatus = status.getFirstChild().cast();
 				projmodel.setStatus(selectStatus.getValue());
 				String dtInicio = InputElement.as(DOM.getElementById("projeto_data_inicio" + i)).getValue();
-				projmodel.setDataInicio(getDate(dtInicio));
+				if(dtInicio.length() > 0) projmodel.setDataInicio(getDate(dtInicio));
 				String dtFinal = InputElement.as(DOM.getElementById("projeto_data_final" + i)).getValue();
-				projmodel.setDataFim(getDate(dtFinal));
+				if(dtFinal.length() > 0) projmodel.setDataFim(getDate(dtFinal));
 				Element valor = DOM.getElementById("projeto_valor_total" + i);
 				String valorTotalvalue = InputElement.as(valor).getValue();
 				if(valorTotalvalue != null && valorTotalvalue != ""){
@@ -797,12 +803,13 @@ public class FormularioWidget extends Composite {
 					String valorReplace = valorSplit[0].replaceAll("[.,]", "");
 					Double valorTotal = Double.parseDouble(valorReplace);
 					projmodel.setValorTotal(valorTotal);
-				}else
+				}else{
 					projmodel.setValorTotal(-1.0);
+				}
 				Element fonte = DOM.getElementById("projeto_fonte" + i);
 				SelectElement selectFonte = fonte.getFirstChild().cast();
 				projmodel.setFonteRecursos(selectFonte.getValue());
-				projmodel.setLink(AnchorElement.as(DOM.getElementById("link" + i)).getInnerText());
+				projmodel.setLink(InputElement.as(DOM.getElementById("link" + i)).getValue());
 				projmodel.setPublicoAlvo(TextAreaElement.as(DOM.getElementById("projeto_publico_alvo" + i)).getValue());
 				projmodel.setFinanciadores(TextAreaElement.as(DOM.getElementById("financiadores" + i)).getValue());
 				projmodel.setDescricao(TextAreaElement.as(DOM.getElementById("descprojeto" + i)).getValue());
@@ -810,7 +817,6 @@ public class FormularioWidget extends Composite {
 			projetoList.add(projmodel);
 		}
 		org.setProjetos(projetoList);
-		
 		ArrayList<ConvenioModel> convList = new ArrayList<ConvenioModel>();
 		for(int i = 1;i <= conv; i++){
 			ConvenioModel convmodel = new ConvenioModel();
@@ -822,39 +828,37 @@ public class FormularioWidget extends Composite {
 			convList.add(convmodel);
 		}
 		org.setConvenios(convList);
-		
 		Integer voluntarios = Integer.parseInt(InputElement.as(DOM.getElementById("voluntarios")).getValue());
 		org.setVoluntarios(voluntarios);
-		
 		return org;
 	}
 	
 	public void addDate(OrganizationModel org,String ele, String idElement, String getDate, Boolean enabled){
-		logger.info("Adicionando Input Date");
 		String data = "";
 		Integer i = null;
 		for (int j = 0; j < org.getProjetos().size(); j++ ) {
-			if(getDate == "Inicio")
+			if(getDate == "Inicio"){
 				data = convertDateToString(org.getProjetos().get(j).getDataInicio());
-			else
-				if(getDate == "Final")
-					data = convertDateToString(org.getProjetos().get(j).getDataFim());
+			}else if(getDate == "Final"){
+				data = convertDateToString(org.getProjetos().get(j).getDataFim());
+			}
 			i = j + 1;
 			Element element = DOM.getElementById(ele + i);
 			PopupPanel popup = new PopupPanel();
 			DatePicker picker = new DatePicker();
-			Date dt = getDate(data);
 			picker.setEnabled(enabled);
 			picker.setSize("120px", "");
 			picker.setLanguage(DatePickerLanguage.PT_BR);
 			picker.setFormat("dd/mm/yyyy");
 			picker.setId(idElement + i);
-			picker.setValue(dt);
+			if(data.length() > 0){
+				picker.setValue(getDate(data));
+			}
 			popup.add(picker);
 			popup.show();
 			element.appendChild(picker.getElement());
-			Element date = DOM.getElementById(idElement + i);
-			date.setAttribute("required", "required");
+//			Element date = DOM.getElementById(idElement + i);
+//			date.setAttribute("required", "required");
 		} 
 	}
 	
