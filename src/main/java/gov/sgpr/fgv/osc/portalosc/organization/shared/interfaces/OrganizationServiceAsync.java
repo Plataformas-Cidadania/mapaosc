@@ -24,6 +24,13 @@ public interface OrganizationServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationService
      */
+    void removeDiretor( java.lang.Integer id, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationService
+     */
     void searchOSCbyUser( java.lang.Integer idUser, java.lang.Integer idOsc, AsyncCallback<java.lang.Boolean> callback );
 
 

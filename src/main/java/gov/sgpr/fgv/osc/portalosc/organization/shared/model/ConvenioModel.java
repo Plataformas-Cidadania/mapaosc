@@ -9,29 +9,29 @@ import java.util.Date;
  *         Modelo de um projeto
  * 
  */
-public class ProjetoModel implements Serializable {
-	private static final long serialVersionUID = -1519943302950461900L;
+public class ConvenioModel implements Serializable {
+	private static final long serialVersionUID = 2546767997069093925L;
 	
-	private int id = -1;
+	private Integer nConv = -1;
 	private String titulo = "";
 	private String status = "";
 	private Date dataInicio = null;
 	private Date dataFim = null;
 	private Double valorTotal = -1.0;
 	private String fonteRecursos = "";
-	private String link = "";
 	private String publicoAlvo = "";
 	private String abrangencia = "";
 	private String localizacao = "";
 	private String financiadores = "";
 	private String descricao = "";
 	
-	public int getId() {
-		return id;
+	public Integer getNConv() {
+		return nConv;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setNConv(Integer nConv) {
+		if(nConv != null){
+			this.nConv = nConv;
+		}
 	}
 	
 	public String getTitulo() {
@@ -70,12 +70,7 @@ public class ProjetoModel implements Serializable {
 	public void setFonteRecursos(String fonteRecursos) {
 		this.fonteRecursos = fonteRecursos;
 	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
+	
 	public String getPublicoAlvo() {
 		return publicoAlvo;
 	}

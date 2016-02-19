@@ -1302,7 +1302,7 @@ span.menuTooltip:hover  {
  }  
 span.menuTooltip span {
      z-index:1000;
-     display: none; 
+     display: none !important; 
      position:fixed;
      padding-top:5px;
      padding-bottom: 5px;
@@ -1321,7 +1321,7 @@ span.menuTooltip:hover span{
      text-shadow: 0 1px black;
      line-height: 15px;
      max-width:300px;
-	 display:block;
+	 display:block !important;
      position:fixed;
      overflow:hidden;
       }
@@ -2086,7 +2086,7 @@ button.recomendar:hover {
 	background-color: #E7AB37;
 }
 
-#mapa.organizacao form>.botoes {
+#mapa.organizacao form .gwt-HTML>.botoes {
 	width: 100%;
 	background-color: #ccc;
 	height: 80px;
@@ -4555,4 +4555,10 @@ ul.lista_certificados li {
 
 .institucional ol li {
 	list-style: decimal-leading-zero;
+}
+
+#mapa.organizacao div.tabela .dados input[type=number] {
+    background: #F2F2F2;
+    vertical-align: middle;
+    border: 1px solid #F2F2F2;
 }

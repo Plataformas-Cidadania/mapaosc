@@ -87,7 +87,7 @@ public class MapController {
 	public LatLng getCenter() {
 		return map.getCenter();
 	}
-
+	
 	public void init() {
 		initFunction();
 		// logger.info("Iniciando log");
@@ -195,7 +195,7 @@ public class MapController {
 		setLoading(true);
 		mapService.getOSCCoordinates(bbox, zoomLevel, all, callback);
 	}
-
+	
 	private void setMarkers(Coordinate[] locations, final Date thisDate) {
 		for (final Coordinate location : locations) {
 			if (!changeDate.equals(thisDate)) {
@@ -213,7 +213,7 @@ public class MapController {
 			}
 		}
 	}
-
+	
 	private void boundsChangeAction() {
 		cleanMap();
 		changeDate = new Date();
