@@ -116,6 +116,7 @@ public class SearchController {
 			public void onSuccess(final List<SearchResult> result) {
 				if (result.size() < LIMIT && searchWidget.getValue().length() > 3
 						&& quantLetter != searchWidget.getValue().length()) {
+					final Boolean flagResultZero = result.size() == 0;
 					String address = searchWidget.getValue();
 					String url = "https://maps.googleapis.com/maps/api/geocode/json?address="
 							+ address.replace(" ", "+") + ",brasil";
@@ -148,8 +149,8 @@ public class SearchController {
 											result.add(searchResult);
 										searchResult = new SearchResult();
 									}
-									if (result.size() > LIMIT)
-										break;
+									if(flagResultZero && result.size() >= LIMIT) break;
+									else if(result.size() > LIMIT) break;
 								}
 								onSuccess(result);
 							}
