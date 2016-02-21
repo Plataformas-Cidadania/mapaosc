@@ -279,7 +279,7 @@ public class OrganizationController {
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div class='col1_6'>");
 		htmlBuilder.append("<strong class='separador'>Valor Total (R$)</strong>");
-		htmlBuilder.append("<p><input type='text' name='projeto_valor_total' placeholder='1.200.000,00' id='projeto_valor_total"+proj+"'/></p>");
+		htmlBuilder.append("<p><input type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"'/></p>");
 		htmlBuilder.append("</div>");
 				
 		htmlBuilder.append("<div class='col1_6'>");
@@ -294,7 +294,7 @@ public class OrganizationController {
 		
 		htmlBuilder.append("<div class='col1_6'>");
 		htmlBuilder.append("<strong class='right-radius'>Link</strong>");
-		htmlBuilder.append("<p><a id='link"+ proj +"' placeholder='Digite o link' contenteditable='true'>link para página</a></p>");
+		htmlBuilder.append("<p><input id='link" + proj + "' name='link" + proj + "' placeholder='Digite a página do projeto' /></p>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("</div>");
 		

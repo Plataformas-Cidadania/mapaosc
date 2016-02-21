@@ -377,21 +377,23 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					pstmt.setInt(1, organization.getId());
 					pstmt.setString(2, organization.getProjetos().get(i).getTitulo());
 					pstmt.setString(3, organization.getProjetos().get(i).getStatus());
-					if(organization.getProjetos().get(i).getDataInicio() == null){
+					
+					Date dtInicio = organization.getProjetos().get(i).getDataInicio();
+					if(dtInicio == null){
 						pstmt.setDate(4, null);
 					}else{
-						Date dtInicio = organization.getProjetos().get(i).getDataInicio();
 						java.sql.Date sqlDateInicio = new java.sql.Date(dtInicio.getTime());
 						pstmt.setDate(4, sqlDateInicio);
 					}
 					
-					if(organization.getProjetos().get(i).getDataFim() == null){
+					Date dtFinal = organization.getProjetos().get(i).getDataFim();
+					if(dtFinal == null){
 						pstmt.setDate(5, null);
 					}else{
-						Date dtFinal = organization.getProjetos().get(i).getDataFim();
 						java.sql.Date sqlDateFinal = new java.sql.Date(dtFinal.getTime());
 						pstmt.setDate(5, sqlDateFinal);
 					}
+					
 					pstmt.setDouble(6, organization.getProjetos().get(i).getValorTotal());
 					pstmt.setString(7, organization.getProjetos().get(i).getFonteRecursos());
 					pstmt.setString(8, organization.getProjetos().get(i).getLink());
@@ -415,18 +417,18 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					pstmt.setString(2, organization.getProjetos().get(i).getTitulo());
 					pstmt.setString(3, organization.getProjetos().get(i).getStatus());
 					
-					if(organization.getProjetos().get(i).getDataInicio() == null){
+					Date dtInicio = organization.getProjetos().get(i).getDataInicio();
+					if(dtInicio == null){
 						pstmt.setDate(4, null);
 					}else{
-						Date dtInicio = organization.getProjetos().get(i).getDataInicio();
 						java.sql.Date sqlDateInicio = new java.sql.Date(dtInicio.getTime());
 						pstmt.setDate(4, sqlDateInicio);
 					}
 					
-					if(organization.getProjetos().get(i).getDataFim() == null){
+					Date dtFinal = organization.getProjetos().get(i).getDataFim();
+					if(dtFinal == null){
 						pstmt.setDate(5, null);
 					}else{
-						Date dtFinal = organization.getProjetos().get(i).getDataFim();
 						java.sql.Date sqlDateFinal = new java.sql.Date(dtFinal.getTime());
 						pstmt.setDate(5, sqlDateFinal);
 					}
