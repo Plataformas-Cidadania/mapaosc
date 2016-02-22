@@ -889,7 +889,7 @@ public class FormularioWidget extends Composite {
 					Event.sinkEvents(spanPopup, Event.ONMOUSEOVER);
 					Event.sinkEvents(spanPopup, Event.ONMOUSEMOVE);
 					Event.setEventListener(spanPopup, new EventListener() {
-						@Override
+						
 						public void onBrowserEvent(Event event) {
 							final int left = event.getClientX() + 5;
 							final int bottom = event.getClientY() - span.getClientHeight() - 5;
