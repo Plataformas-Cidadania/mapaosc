@@ -98,7 +98,9 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		try {	
 			pstmt = conn.prepareStatement(sql);
 			
-			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").replaceAll("[^A-Za-z0-9 ]", "");
+			while(normalized.startsWith("0")) normalized = normalized.substring(1, normalized.length());
+			
 			String normalized_to_tsquery = normalized.trim().toLowerCase().replace(" ", "&");
 			
 			pstmt.setString(1, normalized_to_tsquery);
