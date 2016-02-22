@@ -809,8 +809,8 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 			logger.info("Calculation Clusters ...");
 			conn = getConnection();
 			pstmt = null;
-			String sqlDrop = "DROP TABLE IF EXISTS portal.tb_osc_cluster;";
-			String sqlCreate = " CREATE TABLE portal.tb_osc_cluster("
+			String sqlDrop = "DELETE FROM portal.tb_osc_cluster;";
+			String sqlCreate = " CREATE TABLE IF NOT EXISTS portal.tb_osc_cluster("
 					+ "cluster_geometry geometry(Point,4674) NOT NULL, cluster_quantity INT NOT NULL,"
 					+ "zoom_level INT NOT NULL, cluster_boundingbox geometry(Polygon,4674) NOT NULL);";
 			try {
@@ -894,7 +894,7 @@ public class MapServiceImpl extends RemoteServiceImpl implements MapService {
 
 	}
 	
-	public boolean createdClusters() throws RemoteException{
+	public boolean createdClusters() {
 		logger.info("MapServiceImpl.createdClusters()");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
