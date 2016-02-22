@@ -1,6 +1,5 @@
 package gov.sgpr.fgv.osc.portalosc.map.shared.interfaces;
 
-
 import java.util.Set;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -14,10 +13,9 @@ import vhmeirelles.gwtGeocluster.model.Coordinate;
 /**
  * @author victor
  * 
- * Eric Ferreira
- * Modified Date: 26/01/2016
- * Change cluster and boundingbox classes to library GeoCluster
- *         Inteface de acesso às informações do mapa.
+ *         Eric Ferreira Modified Date: 26/01/2016 Change cluster and
+ *         boundingbox classes to library GeoCluster Inteface de acesso às
+ *         informações do mapa.
  * 
  */
 @RemoteServiceRelativePath("mapService")
@@ -32,8 +30,7 @@ public interface MapService extends RemoteService {
 	 * @throws RemoteException
 	 * @deprecated
 	 */
-	OscCoordinate[] getOSCCoordinates(int minValue, int maxValue)
-			throws RemoteException;
+	OscCoordinate[] getOSCCoordinates(int minValue, int maxValue) throws RemoteException;
 
 	/**
 	 * @return Quantidade de OSCs carregadas no servidor
@@ -53,8 +50,7 @@ public interface MapService extends RemoteService {
 	 * @throws RemoteException
 	 * @deprecated
 	 */
-	OscCoordinate[] getOSCCoordinates(int locationCode, int minValue,
-			int maxValue) throws RemoteException;
+	OscCoordinate[] getOSCCoordinates(int locationCode, int minValue, int maxValue) throws RemoteException;
 
 	/**
 	 * @param locationCode
@@ -78,8 +74,7 @@ public interface MapService extends RemoteService {
 	 *         apenas 1 elementos.
 	 * @throws RemoteException
 	 */
-	Coordinate[] getOSCCoordinates(BoundingBox bbox, int width, int height,
-			boolean all) throws RemoteException;
+	Coordinate[] getOSCCoordinates(BoundingBox bbox, int width, int height, boolean all) throws RemoteException;
 
 	/**
 	 * @param bbox
@@ -91,8 +86,7 @@ public interface MapService extends RemoteService {
 	 * @return Coleção de coordenadas
 	 * @throws RemoteException
 	 */
-	Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel,
-			boolean all) throws RemoteException;
+	Coordinate[] getOSCCoordinates(BoundingBox bbox, int zoomLevel, boolean all) throws RemoteException;
 
 	/**
 	 * @param bbox
@@ -102,17 +96,12 @@ public interface MapService extends RemoteService {
 	 * @return Coleção de Coordenadas de OSC
 	 * @throws RemoteException
 	 */
-	Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all)
-			throws RemoteException;
+	Set<OscCoordinate> getOSCCoordinates(BoundingBox bbox, boolean all) throws RemoteException;
 
 	/**
 	 * @return true se os clusters foram criados
-	 * @throws RemoteException
 	 */
-	/**
-	 * @return true se os clusters foram criados
-	 * @throws RemoteException
-	 */
-	boolean createdClusters();  
+
+	boolean createdClusters();
 
 }
