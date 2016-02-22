@@ -4562,3 +4562,34 @@ ul.lista_certificados li {
     vertical-align: middle;
     border: 1px solid #F2F2F2;
 }
+
+body.indisponivel {
+	background: #e1e1e1;
+}
+
+.centered-container {
+	background: white;
+	position: absolute;
+	width: 100%;
+	padding: 30px 30%;
+	top: 50%;
+	min-height: 100px;
+	margin-top: -100px;
+}
+
+.centered-container img {
+	margin-right: 15px;
+	height: 100px;
+}
+
+.centered-container div {
+	min-width: 300px;
+}
+
+.centered-container h1 {
+	font-size: 28px;
+}
+
+.left {
+	float: left;
+}
