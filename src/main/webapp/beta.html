@@ -1,65 +1,85 @@
 				
 						<p>A versão beta de um software é aquela que ainda se encontra em fase de desenvolvimento e testes. A plataforma que você pode usar agora é apenas uma parte de tudo que esperamos que ela seja. E queremos que você possa contribuir nessa construção, dando sugestões e críticas para que aperfeiçoemos ao máximo esse espaço, desenvolvido para a participação da sociedade.</p>
 
-						<h3><em>1</em> O que você encontra na versão Beta?</h3>
+						<h3><em>1</em> Notas da Versão </h3>
+						<div>
+							<p>Notas de lançamento da versão 1.5, ocorrida em fevereiro de 2016</p>
+							<ul>
+								<li>Reformulação da página com quadro-resumo de informações sobre a OSC</li>
+								<li>Modificação e atualização do infográfico sobre a distribuição das OSCs por natureza jurídica e por região</li>
+								<li>Atualização das informações sobre a metodologia de construção dos dados utilizados neste Mapa</li>
+								<li>Atualização da base de dados com os títulos de Utilidade Pública Federal conferidos às OSCs e das OSCs qualificadas como OSCIPs</li>
+								<li>Atualização da base de dados com informações sobre as OSCs detentoras do certificado CEBAS conferidos pelo Ministério da Saúde</li>
+								<li>Correção de erros na tela de configurações de uso</li>
+								<li>Instalação do gerador de estatísticas de acessos de usuários ao Mapa das OSC</li>
+								<li>Adição de um sumário na página "Dúvidas Frequentes"</li>
+								<li>Modificação das informações da seção "Sobre o Mapa"</li>
+								<li>Criação da página de acessibilidade como recomendado no EMAG 3.1</li>
+								<li>Correção do redimensionamento da página principal</li>
+								<li>Alteração da rotina de buscas para otimizar as consultas</li>
+								<li>Inclusão da possibilidade de buscar as OSCs por CNPJ</li>
+								<li>Implementação da escolha em lista utilizando o teclado e tecla “enter”, na rotina de busca</li>
+								<li>Correção da imagem associada ao nome do usuário logado no Mapa</li>
+								<li>Criação de ambiente de integração contínua</li>
+								<li>Migração do projeto para a tecnologia MAVEN 3</li>
+								<li>Migração do projeto para a tecnologia Java 1.8</li>
+								<li>Adaptação do projeto ao GWT Bootstrap 3</li>
+							</ul>
+
+							<p><a href="/static.html?page=release">Visualizar histórico de notas</a></p>
+						</div>
+						
+						<h3><em>2</em> O que você encontra na versão Beta?</h3>
 						<div>
 							<p>O Mapa das Organizações da Sociedade Civil está organizado em diversos tipos de ambiente:</p>
 
-							<p><strong>a. Mapa das Organizações</strong><br />
-							Mapa que contém a localização geográfica da sede das organizações, onde é possível verificar características regionais, visualizar a rua, verificar a vizinhança, entre outras funcionalidades. Experimente navegar pelo mapa.</p>
+							<p><strong>a. Mapa das Organizações</strong></p>
+							<p>O MOSC apresenta a localização geográfica das sedes das organizações da sociedade civil ativas no país. A localização dessas organizações aparecerá marcada com círculos individuais ou com clusters de entidades, quando houver mais de uma organização nas áreas exibidas.</p>
+							<p>Clicando-se nos clusters de organizações, o MOSC irá focalizar a área em que se localizam as organizações neles agrupadas. O clique nos marcadores individuais exibirá uma janela com informações referentes à organização de interesse, como tamanho da organização, endereço, títulos e certificações junto ao governo federal, recursos federais recebidos e participação em conselhos de políticas públicas. O clique no botão “Detalhes” do pop-up da OSC exibirá os dados da organização no menu lateral.</p>
 
-							<p>É a partir desse espaço que o usuário pode interagir com uma organização visualizando os seus dados e recomendando.</p>
-
-							<p><strong>b. Busca</strong><br />
-							Busca de uma organização no mapa. A busca pode ser feita por unidades da federação, municípios, nome ou CNPJ da organização. A própria busca te ajudará a encontrar o que deseja, buscando o resultado conforme a digitação.</p>
-
-							<p>Ao realizar a busca, o mapa irá focalizar a região desejada, ou a organização procurada.</p>
-
-							<p><strong>c. Janela da Organização no Mapa</strong><br />
-							Voltado para explorar o conteúdo do Mapa, seu objetivo é divulgar informações resumidas sobre a organização. </p>
-
-							<p><strong>d. Menu lateral</strong><br />
-							Permite que navegue no Mapa através das regiões, unidades da federação e municípios até achar a organização que deseja. Ao achar a organização, o usuário poderá visualizar informações mais detalhadas sobre a organização agrupadas por subitens.</p>
-
-							<p>O menu da organização é apresentado toda vez que ela estiver focalizada no mapa.</p>
+							<p><strong>b. Busca</strong></p>
+							<p>A barra de buscas permite encontrar organizações da sociedade civil, municípios e unidades da federação por meio do nome completo ou parcial deles e por meio de endereços. Em casos de buscas por meio do nome de uma organização, o MOSC procurará na base de dados a razão social da organização de interesse, não o seu nome fantasia (o nome que a empresa usa publicamente ou pelo qual ela é mais comumente conhecida). Em qualquer caso, o mecanismo de autocompletar da busca irá lhe ajudar a encontrar o que deseja.</p>
+							<p>Ao selecionar a localidade ou a organização do seu interesse na barra de buscas ou no menu lateral (ver abaixo), o MOSC irá focalizar a área em que ela se encontra.</p>
+							
+							<p><strong>c. Menu lateral</strong></p>
+							<p>Permite navegar pelo MOSC selecionando-se a região, o estado, o município, até encontrar a organização de interesse. O clique no nome da organização listada fará o MOSC focalizar a área em que ela se encontra e exibirá no menu informações detalhas sobre o perfil das organizações da sociedade civil, os recursos federais que ela recebe e sobre a sua participação em conselhos de políticas públicas.</p>
+							<p>O clique na seta exibirá os indicadores referentes à quantidade de organizações, vínculos de trabalho e parcerias com o governo federal de acordo com a localidade selecionada.</p>
+							
+							<p><strong>d. Indicadores</strong></p>
+							<p>A sessão de Indicadores, acessível pelo menu lateral, apresenta em tabelas e infográficos estáticos informações relativas aos três blocos de bases de dados que compõem o MOSC: (1) perfil das OSCs, (2) recursos públicos e (3) participação social.</p>
+							<p>A página da Matriz de Indicadores exibe tabelas com dados agregados sobre a quantidade de organizações civis ativas no país, o valor dos recursos federais recebidos por elas, a quantidade de parcerias com o governo federal e a quantidade de vínculos formais das organizações de acordo com a região, estados e municípios.</p>
+							<p>Para saber mais sobre as bases de dados e a construção da Matriz de Indicadores, consulte a <a href="/static.html?page=metodologia"> Metodologia</a> do MOSC.</p>
 														
-							<p><strong>e. Menu de acessibilidade</strong><br />
-							Permite que usuários com algum tipo de necessidade especial possa navegar no Mapa.</p>
+							<p><strong>e. Menu de acessibilidade</strong><p>
+							<p>Permite que usuários com algum tipo de necessidade especial possa navegar no MOSC.</p>
 
-							<p><strong>f. Cadastro de Usuário</strong><br />
-							O Mapa é acessível para qualquer usuário que deseje obter iinformação sobre OSCs. Entretanto, com o objetivo de formar uma rede de usuários de forma colaborativa, algumas funcionalidades só estarão acessíveis para usuários cadastrados. Cadastre-se no Portal e aproveite ao máximo as suas potencialidades.</p>
+							<p><strong>f. Cadastro de Usuário</strong></p>
+							<p>O MOSC é acessível para qualquer usuário que deseje obter informação sobre OSCs. O usuário pode se cadastrar no MOSC por meio da rede social Facebook ou por meio do email que possuir. O cadastro no MOSC permite ao usuário recomendar organizações.</p>
+							<p>O cadastro do usuário como representante da OSC permite que ele atualize alguns dos dados das OSCs na página da organização. Assim, o MOSC será uma construção coletiva e contará com a participação das OSCs.</p>
 
-							<p>Existem três tipos de usuário no Mapa. Usuários de redes sociais, Usuário padrão e Representante da Entidade.</p>
+							<p><strong>g. Página da organização</strong></p>
+							<p>Esse espaço apresenta informações detalhadas sobre a organização, os projetos que realiza, as parcerias com o governo federal etc. Também indicará como o usuário pode participar dos trabalhos da organização. A página da OSC poderá ser compartilhada pelo usuário em redes sociais como Facebook, Twitter, Google Plus e LinkedIn e atualizada permanentemente por representantes das OSCs.</p>
 
-							<p><strong>g. Indicadores</strong><br />
-							A sessão de Indicadores apresenta, de forma lúdica, informações obtidas durante a Pesquisa sobre as OSCs do Brasil realizada pela Fundação Getúlio Vargas. Neste menu podemos consultar a matriz de indicadores levantados durante a pesquisa.</p>
+							<p><strong>h. Atualização Diária do Siconv</strong></p>
+							<p>As informações do Sistema de Gestão de Convênios e Contratos de Repasse são atualizadas diariamente por meio de processos automatizados de carga de dados disponíveis no Portal de Convênios do Ministério do Planejamento, Orçamento e Gestão.</p>
 
 							<a href="#main" class="topo">Voltar para o topo</a>
 						</div>
 
-						<h3><em>2</em> O que mais vai ser lançado para a versão final?</h3>
+						<h3><em>3</em> O que mais vai ser lançado para a versão final?</h3>
 						<div>
 							<p>O Mapa ainda está em desenvolvimento e apresentará algumas novas funcionalidades no futuro:</p>
 
-							<p><strong>a. Página da Organização</strong><br />
-							Espaço apresenta a Organização em detalhes, incluindo a sua classificação, projetos realizados, Como Participar, etc. Esta funcionalidade permitirá ao representante da organização da sociedade civil incluir dados da organização que representa. O objetivo é tornar o mapa uma construção coletiva das instituições por ele responsáveis e pela sociedade.</p>
-
-							<p><strong>b. Usuário Representante da Organização</strong><br />
-							O cadastramento dos usuários representantes da Organização permite que informações da organização sejam atualizadas.</p>
-
-							<p><strong>c. Usuário de redes sociais</strong><br />
+							<p><strong>a. Usuário de redes sociais</strong><br />
 							Cadastramento de usuários a partir de redes sociais como o facebook, twitter, google plus, linkedin e outras, aproveitando dados dos usuários já cadastrados nestas redes e permitindo que se possa divulgar informações do mapa nas redes sociais.</p>
 
-							<p><strong>d. Dashboards dinâmicos</strong><br />
+							<p><strong>b. Dashboards dinâmicos</strong><br />
 							Embora já existam alguns infográficos disponíveis, o Mapa pretende incorporar gráficos dinâmicos e permitir construí-los a partir das variáveis disponíveis em nosso banco de dados, conforme o interesse do usuário.</p>
 
-							<p><strong>e. Atualização dinâmica dos dados</strong><br />
-							Os dados presentes neste mapa são fruto de uma pesquisa realizada em 14 bases de dados de diversos ministérios. Entretanto, serão desenvolvidas rotinas que permitam atualizar as bases dados de forma automatizada. O objetivo é manter as informações o mais atualizado possível.</p>
+							<p><strong>c. Integração com outras bases de dados geoespaciais</strong><br />
+							Está prevista também a inclusão de novas bases de informações geoespaciai que permitam ampliar informações sobre o contexto social e econômico de atuação de cada OSC e auxiliem estas no desenvolvimento de novos projetos. Este será o caso, por exemplo, da integração deste mapa com o atlas do desenvolvimento municipal (<a href="http://www.atlasbrasil.org.br/"> http://www.atlasbrasil.org.br/ </a>).</p>
 
-							<p><strong>f. Integração com outras bases de dados geoespaciais</strong><br />
-							Está prevista também a inclusão de novas bases de informações geoespaciai que permitam ampliar informações sobre o contexto social e econômico de atuação de cada OSC e auxiliem estas no desenvolvimento de novos projetos. Este será o caso, por exemplo, da integração deste mapa com o atlas do desenvolvimento municipal (http://www.atlasbrasil.org.br/).</p>
-
-							<p><strong>g. Plataforma interativa</strong><br />
+							<p><strong>d. Plataforma interativa</strong><br />
 							Tornar o mapa uma plataforma interativa que disponha não apenas das ações das OSCs, seu entorno e a cooperação com o poder público, mas disponibilize informações relevantes para as OSCs e o público interessado, entre a quais, manuais e cartilhas, chamamentos públicos e editais abertos, possibilidades de analisar prestações de contas das OSCs que atuam em parceria com os governos e outras. Sugestões são bem-vindas.</p>
 
 							<a href="#main" class="topo">Voltar para o topo</a>

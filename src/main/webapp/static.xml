@@ -36,4 +36,10 @@
 	  <page>termos.html</page>
 	  <class>sobre</class>
 	</site>
+	<site>
+	  <name>Notas de Versão</name>
+	  <key>release</key>
+	  <page>release.html</page>
+	  <class>release</class>
+	</site>
 </sites>
