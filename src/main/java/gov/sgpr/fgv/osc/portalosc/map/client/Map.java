@@ -41,7 +41,7 @@ public class Map implements EntryPoint {
 			}
 
 		};
-		mapService.createdClusters(callback);
+		mapService.isClusterCreated(callback);
 
 	}
 }

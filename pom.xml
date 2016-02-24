@@ -7,7 +7,7 @@
 	<groupId>gov.sgpr.fgv.osc</groupId>
 	<artifactId>mapaosc</artifactId>
 	<packaging>war</packaging>
-	<version>1.7.0-BETA</version>
+	<version>1.5.0-BETA</version>
 	<name>GWT Maven Archetype</name>
 	<scm>
 		<connection>scm:git:hades:portalOSC.git</connection>
@@ -111,7 +111,7 @@
 			<version>0.9.2</version>
 		</dependency>
 	    <dependency>
-	    	<groupId>vhmeirelles</groupId>
+	    	<groupId>com.github.vhmeirelles</groupId>
 	    	<artifactId>gwt-geocluster</artifactId>
 	    	<version>1.0.0</version>
 	    </dependency>
