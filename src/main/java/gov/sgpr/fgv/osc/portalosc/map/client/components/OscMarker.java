@@ -129,7 +129,7 @@ public class OscMarker {
 		 
 		if (summary.getGlobalValue() != null) {
 			NumberFormat fmtCurrency = NumberFormat.getCurrencyFormat();
-			oscCertifications.addKeyValue("Recursos públicos previstos para os projetos em curso",fmtCurrency.format(summary.getGlobalValue()));
+			oscCertifications.addKeyValue("Valor de Parcerias",fmtCurrency.format(summary.getGlobalValue()));
 		}
 		 
 		if (summary.getLength() != null) {
