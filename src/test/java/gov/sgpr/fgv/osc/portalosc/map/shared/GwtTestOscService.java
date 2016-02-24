@@ -65,11 +65,11 @@ public class GwtTestOscService extends GWTTestCase {
 		summary1.setRecomendations(1);
 		summary1.setLength("De 20 a 49");
 		summary1.setPartnerships(1);
-		summary1.setPartnershipGlobalValue(83572.54);
+		summary1.setGlobalValue(83572.54);
 		summary1.setLegalTypeDescription("Associação Privada");
 		summary1.setFoundationYear(0);
-		summary1.setCommitteeParticipant(false);
-		summary1.setEncourageLawValue(0.0);
+		//summary1.setCommitteeParticipant(false);
+		//summary1.setEncourageLawValue(0.0);
 
 		Certifications certification1 = new Certifications();
 		certification1.setCneaPublication(null);
@@ -128,11 +128,11 @@ public class GwtTestOscService extends GWTTestCase {
 		summary2.setRecomendations(0);
 		summary2.setLength("De 20 a 49");
 		summary2.setPartnerships(2);
-		summary2.setPartnershipGlobalValue(307050.0);
+		summary2.setGlobalValue(307050.0);
 		summary2.setLegalTypeDescription("Associação Privada");
 		summary2.setFoundationYear(0);
-		summary2.setCommitteeParticipant(false);
-		summary2.setEncourageLawValue(0.0);
+		//summary2.setCommitteeParticipant(false);
+		//summary2.setEncourageLawValue(0.0);
 
 		Certifications certification2 = new Certifications();
 		DataSource datasource2 = new DataSource();
@@ -192,11 +192,11 @@ public class GwtTestOscService extends GWTTestCase {
 		summary3.setRecomendations(0);
 		summary3.setLength("De 20 a 49");
 		summary3.setPartnerships(3);
-		summary3.setPartnershipGlobalValue(451630.0);
+		summary3.setGlobalValue(451630.0);
 		summary3.setLegalTypeDescription("Associação Privada");
 		summary3.setFoundationYear(0);
-		summary3.setCommitteeParticipant(false);
-		summary3.setEncourageLawValue(0.0);
+		//summary3.setCommitteeParticipant(false);
+		//summary3.setEncourageLawValue(0.0);
 
 		Certifications certification3 = new Certifications();
 		certification3.setCneaPublication(null);
