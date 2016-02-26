@@ -67,7 +67,7 @@ public interface MapServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.MapService
      */
-    void createdClusters( AsyncCallback<java.lang.Boolean> callback );
+    void isClusterCreated( AsyncCallback<java.lang.Boolean> callback );
 
 
     /**

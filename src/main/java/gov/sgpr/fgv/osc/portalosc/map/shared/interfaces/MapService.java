@@ -61,6 +61,7 @@ public interface MapService extends RemoteService {
 	 */
 	int getOSCCoordinatesSize(int locationCode) throws RemoteException;
 
+
 	/**
 	 * @param bbox
 	 *            Retângulo envolvente que delimita a busca
@@ -102,6 +103,6 @@ public interface MapService extends RemoteService {
 	 * @return true se os clusters foram criados
 	 */
 
-	boolean createdClusters();
+	Boolean isClusterCreated() throws RemoteException;
 
 }
