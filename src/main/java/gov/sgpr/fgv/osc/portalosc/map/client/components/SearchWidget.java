@@ -1,6 +1,7 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,19 +20,19 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
 
 public class SearchWidget extends Composite {
 	private List<SearchResult> items = new ArrayList<SearchResult>();
-	private Map<String, String> oscItems = new LinkedHashMap<String, String>();
+	private List<List<String>> oscItems = new ArrayList<List<String>>();
 	private Map<String, String> stateItems = new LinkedHashMap<String, String>();
-	private Map<String, String> countyItems = new LinkedHashMap<String, String>();
+	private List<List<String>> countyItems = new ArrayList<List<String>>();
 	private List<SearchResult> addressItems = new ArrayList<SearchResult>();
 	private Element searchTextField;
 	private PopupPanel searchResultsPanel = new PopupPanel();
 	public Integer result = 0;
 	public Integer count = 0;
-
+	
 	public SearchWidget() {
 		initWidget(getHtml());
 	}
-
+	
 	private HTML getSearchBoxHtml() {
 		oscItems.clear();
 		stateItems.clear();
@@ -45,9 +46,9 @@ public class SearchWidget extends Composite {
 				if (item.getType().equals(SearchResultType.STATE))
 					this.stateItems.put(item.getValue(), "P" + item.getId());
 				if (item.getType().equals(SearchResultType.COUNTY))
-					this.countyItems.put(item.getValue(), "P" + item.getId());
+					this.countyItems.add(Arrays.asList("P" + item.getId(), item.getValue()));
 				if (item.getType().equals(SearchResultType.OSC))
-					this.oscItems.put(item.getValue(), "O" + item.getId());
+					this.oscItems.add(Arrays.asList("O" + item.getId(), item.getValue()));
 				if (item.getType().equals(SearchResultType.ADDRESS))
 					this.addressItems.add(item);
 			}
@@ -65,9 +66,9 @@ public class SearchWidget extends Composite {
 							+ " encontrados</em></li>" + "</ul>");
 				htmlBuilder.append("<ul class=\"resultado\">");
 				
-				for (Map.Entry<String, String> entry : this.oscItems.entrySet()){
-					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.getValue()
-							+ "\">" + entry.getKey() + "</a></li>");
+				for (List<String> entry : this.oscItems){
+					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.get(0)
+							+ "\">" + entry.get(1) + "</a></li>");
 					count++;
 				}
 				
@@ -109,10 +110,9 @@ public class SearchWidget extends Composite {
 							+ " encontrados</em></li>" + "</ul>");
 				htmlBuilder.append("<ul class=\"resultado\">");
 				
-				for (Map.Entry<String, String> entry : this.countyItems
-						.entrySet()){
-					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.getValue()
-							+ "\">" + entry.getKey() + "</a></li>");
+				for (List<String> entry : this.countyItems){
+					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.get(0)
+							+ "\">" + entry.get(1) + "</a></li>");
 					count++;
 				}
 				

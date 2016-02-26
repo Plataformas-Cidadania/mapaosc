@@ -67,9 +67,17 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 			return result;
 		}
 		
-		// Busca por OSC
+		// Busca por OSC com lexema
 		newLimit = limit - result.size();
-		ret = searchOsc(criteria, newLimit);
+		ret = searchOscTsquery(criteria, newLimit);
+		result.addAll(ret);
+		if (result.size() == limit) {
+			return result;
+		}
+		
+		// Busca por OSC normal
+		newLimit = limit - result.size();
+		ret = searchOscNormal(criteria, newLimit);
 		result.addAll(ret);
 		if (result.size() == limit) {
 			return result;
@@ -78,7 +86,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		return result;
 	}
 	
-	private List<SearchResult> searchOsc(String name, int limit) throws RemoteException {
+	private List<SearchResult> searchOscTsquery(String name, int limit) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -110,6 +118,48 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 			pstmt.setString(5, normalized);
 			pstmt.setString(6, normalized_to_tsquery);
 			pstmt.setInt(7, limit);
+			rs = pstmt.executeQuery();
+			
+			List<SearchResult> result = new ArrayList<SearchResult>();
+			while (rs.next()) {
+				SearchResult sr = new SearchResult();
+				sr.setId(rs.getInt("bosc_sq_osc"));
+				sr.setValue(rs.getString("nome"));
+				sr.setType(SearchResultType.OSC);
+				result.add(sr);
+			}
+			return result;
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	private List<SearchResult> searchOscNormal(String name, int limit) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT bosc_sq_osc, COALESCE(bosc_nm_fantasia_osc, bosc_nm_osc) nome "
+				   + "FROM portal.search_index "
+				   + "WHERE UPPER(unaccent(bosc_nm_osc)) ILIKE ? "
+				   + "OR UPPER(unaccent(bosc_nm_fantasia_osc)) ILIKE ? "
+				   + "ORDER BY GREATEST(similarity(bosc_nm_osc, ?), similarity(bosc_nm_fantasia_osc, ?)) DESC "
+				   + "LIMIT ?";
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			
+			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String value = "%" + normalized.toUpperCase() + "%";
+			
+			pstmt.setString(1, value);
+			pstmt.setString(2, value);
+			pstmt.setString(3, normalized);
+			pstmt.setString(4, normalized);
+			pstmt.setInt(5, limit);
 			rs = pstmt.executeQuery();
 			
 			List<SearchResult> result = new ArrayList<SearchResult>();

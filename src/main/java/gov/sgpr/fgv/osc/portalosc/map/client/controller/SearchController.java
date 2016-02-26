@@ -106,13 +106,13 @@ public class SearchController {
 
 	private void search() {
 		String criteria = searchWidget.getValue();
-
+		
 		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-
+			
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(final List<SearchResult> result) {
 				if (result.size() < LIMIT && searchWidget.getValue().length() > 3
 						&& quantLetter != searchWidget.getValue().length()) {
@@ -120,12 +120,12 @@ public class SearchController {
 					String address = searchWidget.getValue();
 					String url = "https://maps.googleapis.com/maps/api/geocode/json?address="
 							+ address.replace(" ", "+") + ",brasil";
-
+					
 					quantLetter = searchWidget.getValue().length();
 					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
 					try {
 						req.sendRequest(null, new RequestCallback() {
-
+							
 							public void onResponseReceived(Request request, Response response) {
 								Boolean flag = false;
 								for (String s : response.getText().split("\n")) {
@@ -154,7 +154,7 @@ public class SearchController {
 								}
 								onSuccess(result);
 							}
-
+							
 							public void onError(Request request, Throwable exception) {
 								logger.info("Erro na busca de endereço pelo Google");
 							}
@@ -163,9 +163,9 @@ public class SearchController {
 						logger.info("Erro na busca de endereço pelo Google\n" + e);
 					}
 				}
-
+				
 				searchWidget.setItems(result);
-
+				
 				searchWidget.addFocus(new EventListener() {
 
 					public void onBrowserEvent(Event event) {
