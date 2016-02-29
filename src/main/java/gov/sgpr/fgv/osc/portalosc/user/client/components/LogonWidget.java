@@ -25,10 +25,10 @@ public class LogonWidget extends Composite {
 	}
 	
 	public LogonWidget(DefaultUser user) {
-		initWidget(getLoggedHtml(user.getName()));
+		initWidget(getLoggedHtml(user.getName(),false));
 	}
 	public LogonWidget(FacebookUser user) {
-		initWidget(getLoggedHtml(user.getName()));
+		initWidget(getLoggedHtml(user.getName(),true));
 	}
 
 	private HTML getHtml() {
@@ -58,11 +58,12 @@ public class LogonWidget extends Composite {
 
 	}
 
-	private HTML getLoggedHtml(String name) {
+	private HTML getLoggedHtml(String name, Boolean facebook) {
 		StringBuilder htmlBuilder = new StringBuilder();
 		
 		htmlBuilder.append("<div class='clearfix'>");
-		htmlBuilder.append("   <img id=\"netUserImage\" src=\"\" align= \"right\"/>");
+		if(facebook)
+			htmlBuilder.append("   <img id=\"netUserImage\" src=\"\" align= \"right\"/>");
 		htmlBuilder.append("	<ul>");
 		htmlBuilder.append("		<li><h2>");
 		htmlBuilder.append(name);
