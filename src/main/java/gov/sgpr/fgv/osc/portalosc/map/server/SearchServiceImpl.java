@@ -187,15 +187,19 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		String sql = "SELECT edre_cd_regiao, edre_nm_regiao "
 				   + "FROM spat.ed_regiao "
 				   + "WHERE similarity(edre_nm_regiao, ?) > 0.5 "
-				   + "ORDER BY edre_nm_regiao <-> ?"
+				   + "OR UPPER(unaccent(edre_nm_regiao)) ILIKE ? "
+				   + "ORDER BY similarity(edre_nm_regiao, ?) DESC "
 				   + "LIMIT ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalizedByIlike = "%" + normalized.toUpperCase() + "%";
+			
 			pstmt.setString(1, normalized);
-			pstmt.setString(2, normalized);
-			pstmt.setInt(3, limit);
+			pstmt.setString(2, normalizedByIlike);
+			pstmt.setString(3, normalized);
+			pstmt.setInt(4, limit);
 			rs = pstmt.executeQuery();
 			List<SearchResult> result = new ArrayList<SearchResult>();
 			while (rs.next()) {
@@ -221,15 +225,17 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		String sql = "SELECT eduf_cd_uf, eduf_nm_uf "
 				   + "FROM spat.ed_uf "
 				   + "WHERE similarity(eduf_nm_uf, ?) > 0.5 "
-				   + "OR UPPER(eduf_sg_uf) = ? "
-				   + "ORDER BY eduf_nm_uf <-> ?"
+				   + "OR UPPER(unaccent(eduf_nm_uf)) ILIKE ? "
+				   + "ORDER BY similarity(eduf_nm_uf, ?) DESC "
 				   + "LIMIT ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalizedByIlike = "%" + normalized.toUpperCase() + "%";
+			
 			pstmt.setString(1, normalized);
-			pstmt.setString(2, normalized);
+			pstmt.setString(2, normalizedByIlike);
 			pstmt.setString(3, normalized);
 			pstmt.setInt(4, limit);
 			rs = pstmt.executeQuery();
@@ -254,24 +260,30 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT edmu_cd_municipio, edmu_nm_municipio "
-				   + "FROM spat.ed_municipio "
+		String sql = "SELECT a.edmu_cd_municipio, (a.edmu_nm_municipio || ', ' || b.eduf_sg_uf) AS nm_municipio "
+				   + "FROM spat.ed_municipio AS a "
+				   + "INNER JOIN spat.ed_uf AS b "
+				   + "ON a.eduf_cd_uf = b.eduf_cd_uf "
 				   + "WHERE similarity(edmu_nm_municipio, ?) > 0.5 "
-				   + "ORDER BY edmu_nm_municipio <-> ?"
+				   + "OR UPPER(unaccent(edmu_nm_municipio)) ILIKE ? "
+				   + "ORDER BY similarity(edmu_nm_municipio, ?) DESC "
 				   + "LIMIT ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalizedByIlike = "%" + normalized.toUpperCase() + "%";
+			
 			pstmt.setString(1, normalized);
-			pstmt.setString(2, normalized);
-			pstmt.setInt(3, limit);
+			pstmt.setString(2, normalizedByIlike);
+			pstmt.setString(3, normalized);
+			pstmt.setInt(4, limit);
 			rs = pstmt.executeQuery();
 			List<SearchResult> result = new ArrayList<SearchResult>();
 			while (rs.next()) {
 				SearchResult sr = new SearchResult();
 				sr.setId(rs.getInt("edmu_cd_municipio"));
-				sr.setValue(rs.getString("edmu_nm_municipio"));
+				sr.setValue(rs.getString("nm_municipio"));
 				sr.setType(SearchResultType.COUNTY);
 				result.add(sr);
 			}
