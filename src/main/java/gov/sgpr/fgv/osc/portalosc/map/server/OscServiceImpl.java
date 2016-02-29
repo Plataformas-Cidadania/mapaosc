@@ -272,7 +272,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 					}
 				}
 				summary.setContacts(getContacts(oscId));
-				int[] dsCodes = { 1, 2, 5, 6, 8, 12, 13 };
+				int[] dsCodes = { 1, 13 };
 				DataSource[] dataSources = getDataSources(dsCodes, oscId);
 				summary.setDataSources(dataSources);
 
@@ -872,29 +872,39 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT b.mdfd_cd_fonte_dados, b.mdfd_sg_fonte_dados, b.mdfd_nm_fonte_dados, b.mdfd_dt_aquisicao, b.mdfd_ee_referencia "
-				+ "FROM syst.nm_osc_fonte_dados a "
-				+ "JOIN data.md_fonte_dados b on (a.mdfd_cd_fonte_dados = b.mdfd_cd_fonte_dados) "
-				+ "WHERE b.mdfd_cd_fonte_dados in (?";
+//		String sql = "SELECT b.mdfd_cd_fonte_dados, b.mdfd_sg_fonte_dados, b.mdfd_nm_fonte_dados, b.mdfd_dt_aquisicao, b.mdfd_ee_referencia "
+//				+ "FROM syst.nm_osc_fonte_dados a "
+//				+ "JOIN data.md_fonte_dados b on (a.mdfd_cd_fonte_dados = b.mdfd_cd_fonte_dados) "
+//				+ "WHERE b.mdfd_cd_fonte_dados in (?";
+//		for (int i = 1; i < dataSourceId.length; i++) {
+//			sql += ", ?";
+//		}
+//		sql += ") and a.bosc_sq_osc = ? ";
+		// logger.info(sql);
+		
+		String sql = "SELECT mdfd_sg_fonte_dados, mdfd_nm_fonte_dados, mdfd_dt_aquisicao, mdfd_ee_referencia "
+				+ "FROM data.md_fonte_dados WHERE  mdfd_cd_fonte_dados in (?";
+				
 		for (int i = 1; i < dataSourceId.length; i++) {
 			sql += ", ?";
 		}
-		sql += ") and a.bosc_sq_osc = ? ";
-		// logger.info(sql);
+		sql += ")";
+		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			for (int i = 0; i < dataSourceId.length; i++) {
 				pstmt.setInt(i + 1, dataSourceId[i]);
 			}
 
-			pstmt.setInt(dataSourceId.length + 1, oscId);
+			//pstmt.setInt(dataSourceId.length + 1, oscId);
 			rs = pstmt.executeQuery();
 
 			Set<DataSource> dsCol = new HashSet<DataSource>();
 			// int i = 0;
 			while (rs.next()) {
 				DataSource ds = new DataSource();
-				ds.setId(rs.getInt("mdfd_cd_fonte_dados"));
+				//ds.setId(rs.getInt("mdfd_cd_fonte_dados"));
 				ds.setAcronym(rs.getString("mdfd_sg_fonte_dados"));
 				ds.setName(rs.getString("mdfd_nm_fonte_dados"));
 				ds.setAcquisitionDate(rs.getDate("mdfd_dt_aquisicao"));
