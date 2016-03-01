@@ -152,7 +152,7 @@ a:hover {
 #topo {
 	height: 145px;
 	position: relative;
-	background: url(../imagens/topo.jpg) no-repeat center right;
+	background: #fff url(../imagens/topo.jpg) no-repeat center right;
 }
 
 #topo a {

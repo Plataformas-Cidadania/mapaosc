@@ -12,7 +12,7 @@ body.contraste_ativo {
 	background-image: none;
 }
 .contraste_ativo #topo {
-	background: url("../imagens/contraste/topo-contraste.jpg") no-repeat center right;
+	background: #000 url("../imagens/contraste/topo-contraste.jpg") no-repeat center right;
 }
 .contraste_ativo #topo_acessibilidade, .contraste_ativo  #topo_links, .contraste_ativo  #rodape, .contraste_ativo  #footer {
 	background-color: rgba(0,  0,  0,  0.8);
