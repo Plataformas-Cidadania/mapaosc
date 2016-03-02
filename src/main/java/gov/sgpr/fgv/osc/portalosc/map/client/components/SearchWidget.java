@@ -21,6 +21,7 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.SearchResultType;
 public class SearchWidget extends Composite {
 	private List<SearchResult> items = new ArrayList<SearchResult>();
 	private List<List<String>> oscItems = new ArrayList<List<String>>();
+	private Map<String, String> regionItems = new LinkedHashMap<String, String>();
 	private Map<String, String> stateItems = new LinkedHashMap<String, String>();
 	private List<List<String>> countyItems = new ArrayList<List<String>>();
 	private List<SearchResult> addressItems = new ArrayList<SearchResult>();
@@ -35,6 +36,7 @@ public class SearchWidget extends Composite {
 	
 	private HTML getSearchBoxHtml() {
 		oscItems.clear();
+		regionItems.clear();
 		stateItems.clear();
 		countyItems.clear();
 		addressItems.clear();
@@ -43,6 +45,8 @@ public class SearchWidget extends Composite {
 		StringBuilder htmlBuilder = new StringBuilder();
 		if (!this.items.isEmpty()) {
 			for (SearchResult item : this.items) {
+				if (item.getType().equals(SearchResultType.REGION))
+					this.regionItems.put(item.getValue(), "P" + item.getId());
 				if (item.getType().equals(SearchResultType.STATE))
 					this.stateItems.put(item.getValue(), "P" + item.getId());
 				if (item.getType().equals(SearchResultType.COUNTY))
@@ -74,6 +78,30 @@ public class SearchWidget extends Composite {
 				
 				htmlBuilder.append("</ul>" + "</div>");
 			}
+			
+			if (!regionItems.isEmpty()) {
+				if (this.regionItems.size() == 1)
+					htmlBuilder.append("<div>" + "<ul class=\"total\">"
+							+ "<li><strong>Regiões</strong></li>" + "<li><em>"
+							+ this.regionItems.size() + " encontrado</em></li>"
+							+ "</ul>");
+				else
+					htmlBuilder.append("<div>" + "<ul class=\"total\">"
+							+ "<li><strong>Regiões</strong></li>" + "<li><em>"
+							+ this.regionItems.size() + " encontrados</em></li>"
+							+ "</ul>");
+				htmlBuilder.append("<ul class=\"resultado\">");
+				
+				for (Map.Entry<String, String> entry : this.regionItems
+						.entrySet()){
+					htmlBuilder.append("<li><a id=\"list"+ count + "\" href=\"#" + entry.getValue()
+							+ "\">" + entry.getKey() + "</a></li>");
+					count++;
+				}
+				
+				htmlBuilder.append("</ul>" + "</div>");
+			}
+			
 			if (!stateItems.isEmpty()) {
 				if (this.stateItems.size() == 1)
 					htmlBuilder.append("<div>" + "<ul class=\"total\">"

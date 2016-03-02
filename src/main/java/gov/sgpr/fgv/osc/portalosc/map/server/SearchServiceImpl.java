@@ -186,7 +186,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		ResultSet rs = null;
 		String sql = "SELECT edre_cd_regiao, edre_nm_regiao "
 				   + "FROM spat.ed_regiao "
-				   + "WHERE similarity(edre_nm_regiao, ?) > 0.5 "
+				   + "WHERE similarity(edre_nm_regiao, ?) > 0.75 "
 				   + "OR UPPER(unaccent(edre_nm_regiao)) ILIKE ? "
 				   + "ORDER BY similarity(edre_nm_regiao, ?) DESC "
 				   + "LIMIT ?";
