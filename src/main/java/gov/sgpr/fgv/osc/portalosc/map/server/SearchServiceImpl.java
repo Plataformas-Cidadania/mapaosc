@@ -264,9 +264,9 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 				   + "FROM spat.ed_municipio AS a "
 				   + "INNER JOIN spat.ed_uf AS b "
 				   + "ON a.eduf_cd_uf = b.eduf_cd_uf "
-				   + "WHERE similarity(edmu_nm_municipio, ?) > 0.5 "
-				   + "OR UPPER(unaccent(edmu_nm_municipio)) ILIKE ? "
-				   + "ORDER BY similarity(edmu_nm_municipio, ?) DESC "
+				   + "WHERE similarity(a.edmu_nm_municipio, ?) > 0.5 "
+				   + "OR UPPER(unaccent(a.edmu_nm_municipio)) ILIKE ? "
+				   + "ORDER BY similarity(a.edmu_nm_municipio || ' ' || b.eduf_sg_uf, ?) DESC "
 				   + "LIMIT ?";
 		
 		try {
