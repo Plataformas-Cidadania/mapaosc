@@ -249,7 +249,7 @@ public class FormularioWidget extends Composite {
 		else
 			htmlBuilder.append("						<span>" + convertNumberToString(org.getTotalColaboradores()) + "</span>");
 //		htmlBuilder.append("						<input type='text' name='total_colaboradores' id='total_colaboradores' placeholder='Informação não disponível' value='" + convertNumberToString(org.getTotalColaboradores()) + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
+		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS e SUAS'></span>");
 		htmlBuilder.append("						<div id='recolherCol' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recCol' ><div></div></div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div id='recCol' class='collapse' >");
@@ -286,7 +286,7 @@ public class FormularioWidget extends Composite {
 		else
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasTotal()) + "</span>");
 //		htmlBuilder.append("						<input type='text' name='valor_total_parcerias' id='valor_total_parcerias' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasTotal()) + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte SINAFI'></span>");
+		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte Siconv e Finep'></span>");
 		htmlBuilder.append("						<div id='recolherParc' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recParc' ><div></div></div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div id='recParc' class='collapse'>");
