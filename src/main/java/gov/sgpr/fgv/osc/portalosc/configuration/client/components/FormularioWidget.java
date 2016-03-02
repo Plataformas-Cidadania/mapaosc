@@ -67,7 +67,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					</fieldset>");
 		htmlBuilder.append("					<p>");
 		htmlBuilder.append("						<input type='checkbox' name='inscrever' value='inscrever' id='inscrever' />");
-		htmlBuilder.append("						<label for='inscrever'>Desejo receber e-mail sobre as novidades do Portal das Organizações da Sociedade Civil.</label>");
+		htmlBuilder.append("						<label for='inscrever'>Desejo receber e-mail sobre as novidades do Mapa das Organizações da Sociedade Civil.</label>");
 		htmlBuilder.append("					</p>");
 		htmlBuilder.append("				</div>");
 		htmlBuilder.append("			</div>");
