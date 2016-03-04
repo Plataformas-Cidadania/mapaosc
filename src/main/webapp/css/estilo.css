@@ -1181,8 +1181,8 @@ ul.dados li.fonte em {
 }
 
 #rodape>div {
-	max-width: 1080px;
-	min-width: 1080px;
+	max-width: 960px;
+    min-width: 960px;
 	margin: 0 auto;
 }
 
@@ -1193,10 +1193,10 @@ ul.dados li.fonte em {
 }
 
 #rodape .celula01 {
-	width: 27%;
+	width: 30%;
 }
 #rodape .celula02 {
-	width: 42%;
+	width: 32%;
 }
 #rodape .celula03 {
 	width: 31%;
@@ -3188,6 +3188,7 @@ div#floatingLoginErrorList::after {
 .carousel-wrapper {
 	position: relative;
 	display:inline-block;
+	margin-left: 20px;
 }
 
 .carousel-item {
@@ -3206,6 +3207,7 @@ div#floatingLoginErrorList::after {
 .carousel-item.now {
 	opacity: 1;
 	z-index: 10;
+	width: 200px;
 }
 
 .text-list {
@@ -4591,4 +4593,39 @@ body.indisponivel {
 
 .left {
 	float: left;
+}
+
+.carousel {
+    position: static;
+}
+
+.carousel-control {
+    width: 0%;
+}
+
+#rodape .carousel-inner .item a {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+#rodape .carousel-inner .item img {
+    margin: auto;
+}
+
+
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {
+    width: 30px;
+    height: 30px;
+    margin-top: -25px;
+    font-size: 40px;
+}
+
+.carousel-control .icon-next, .carousel-control .icon-prev {
+    width: 20px;
+    height: 20px;
+    font-family: arial black;
+    line-height: 1;
+    color: #244196;
 }

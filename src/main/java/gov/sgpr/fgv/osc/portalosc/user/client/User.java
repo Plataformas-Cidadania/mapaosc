@@ -13,6 +13,7 @@ public class User implements EntryPoint {
 	public void onModuleLoad() {
 		logger.info("Iniciando carregamento de cadastro de Usuário");
 		user.init();
+		user.carousel();
 	}
 
 }

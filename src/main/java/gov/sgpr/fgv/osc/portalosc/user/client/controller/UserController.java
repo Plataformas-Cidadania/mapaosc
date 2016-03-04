@@ -23,6 +23,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.gwtbootstrap3.client.ui.Anchor;
+import org.gwtbootstrap3.client.ui.Carousel;
+import org.gwtbootstrap3.client.ui.CarouselControl;
+import org.gwtbootstrap3.client.ui.CarouselInner;
+import org.gwtbootstrap3.client.ui.CarouselSlide;
+import org.gwtbootstrap3.client.ui.Image;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -1037,5 +1044,69 @@ public class UserController {
 			}
 		};
 		organizationUserWidget.addResultItems(items, listener);
+	}
+	
+	public void carousel(){
+		Element div = DOM.getElementById("divcarousel");
+		Carousel carousel = new Carousel();
+		carousel.setId("carousel-basic");
+		carousel.setStyleName("carousel slide");
+		carousel.cycleCarousel();
+		CarouselInner inner = new CarouselInner();
+		inner.setStyleName("carousel-inner");
+		
+		CarouselSlide slideipea = new CarouselSlide();
+		slideipea.setActive(true);
+		slideipea.setVisible(true);
+		Anchor aipea = new Anchor();
+		aipea.setHref("http://www.ipea.gov.br/");
+		aipea.setTarget("_blank");
+		Image imgipea = new Image("imagens/logo_50anos.png");
+		imgipea.setStyleName("normal");
+		imgipea.setAltText("Ipea");
+		
+		CarouselSlide slidefgv = new CarouselSlide();
+		slidefgv.setActive(false);
+		slidefgv.setVisible(true);
+		Anchor afgv = new Anchor();
+		afgv.setHref("http://fgvprojetos.fgv.br/");
+		afgv.setTarget("_blank");
+		Image imgfgv = new Image("imagens/logo_fgv.png");
+		imgfgv.setStyleName("normal");
+		imgfgv.setAltText("FGV Projetos");
+		
+		CarouselSlide slidepnud = new CarouselSlide();
+		slidepnud.setActive(false);
+		slidepnud.setVisible(true);
+		Anchor apnud = new Anchor();
+		apnud.setHref("http://www.pnud.org.br/");
+		apnud.setTarget("_blank");
+		Image imgpnud = new Image("imagens/logo_pnud.png");
+		imgpnud.setStyleName("normal");
+		imgpnud.setAltText("PNUD");
+		
+		CarouselControl controlprev = new CarouselControl();
+		controlprev.setId("controlprev");
+		controlprev.setDataTarget("#carousel-basic");
+		controlprev.setPrev(true);
+		CarouselControl controlnext = new CarouselControl();
+		controlnext.setId("controlnext");
+		controlnext.setDataTarget("#carousel-basic");
+		controlnext.setNext(true);
+		
+		aipea.getElement().appendChild(imgipea.getElement());
+		afgv.getElement().appendChild(imgfgv.getElement());
+		apnud.getElement().appendChild(imgpnud.getElement());
+		slideipea.getElement().appendChild(aipea.getElement());
+		slidefgv.getElement().appendChild(afgv.getElement());
+		slidepnud.getElement().appendChild(apnud.getElement());
+		inner.getElement().appendChild(slideipea.getElement());
+		inner.getElement().appendChild(slidefgv.getElement());
+		inner.getElement().appendChild(slidepnud.getElement());
+		carousel.getElement().appendChild(inner.getElement());
+		carousel.getElement().appendChild(controlprev.getElement());
+		carousel.getElement().appendChild(controlnext.getElement());
+		div.appendChild(carousel.getElement());
+		
 	}
 }
