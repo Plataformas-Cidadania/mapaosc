@@ -35,11 +35,7 @@ public class SearchWidget extends Composite {
 	}
 	
 	private HTML getSearchBoxHtml() {
-		oscItems.clear();
-		regionItems.clear();
-		stateItems.clear();
-		countyItems.clear();
-		addressItems.clear();
+		clearResults();
 		
 		int count = 1;
 		StringBuilder htmlBuilder = new StringBuilder();
@@ -306,5 +302,13 @@ public class SearchWidget extends Composite {
 	
 	public void close(){
 		searchResultsPanel.hide();
+	}
+	
+	public void clearResults(){
+		oscItems.clear();
+		regionItems.clear();
+		stateItems.clear();
+		countyItems.clear();
+		addressItems.clear();
 	}
 }

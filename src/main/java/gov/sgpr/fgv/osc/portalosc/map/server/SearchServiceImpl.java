@@ -1,6 +1,3 @@
-/**
- * 
- */
 package gov.sgpr.fgv.osc.portalosc.map.server;
 
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService;
@@ -77,7 +74,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		
 		// Busca por OSC normal
 		newLimit = limit - result.size();
-		ret = searchOscNormal(criteria, newLimit);
+		ret = searchOscNormal(criteria, newLimit, result);
 		result.addAll(ret);
 		if (result.size() == limit) {
 			return result;
@@ -100,24 +97,26 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 				   + "    OR bosc_nr_identificacao::TEXT = ? "
 				   + "    OR bosc_sq_osc::TEXT = ? "
 				   + ") " 
-				   + "ORDER BY ts_rank(document, to_tsquery('portuguese_unaccent', ?)) DESC "
+				   + "ORDER BY GREATEST(similarity(bosc_nm_osc, ?), similarity(bosc_nm_fantasia_osc, ?)) DESC "
 				   + "LIMIT ?";
 		
 		try {	
 			pstmt = conn.prepareStatement(sql);
 			
-			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").replaceAll("[^A-Za-z0-9 ]", "");
+			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^A-Za-z0-9 ]", "").trim();
+			while(normalized.contains("  ")) normalized = normalized.replace("  ", " ");
 			while(normalized.startsWith("0")) normalized = normalized.substring(1, normalized.length());
 			
-			String normalized_to_tsquery = normalized.trim().toLowerCase().replace(" ", "&");
+			String normalized_to_tsquery = normalized.toLowerCase().replace(" ", "&");
 			
 			pstmt.setString(1, normalized_to_tsquery);
 			pstmt.setString(2, normalized);
 			pstmt.setString(3, normalized);
 			pstmt.setString(4, normalized);
 			pstmt.setString(5, normalized);
-			pstmt.setString(6, normalized_to_tsquery);
-			pstmt.setInt(7, limit);
+			pstmt.setString(6, normalized);
+			pstmt.setString(7, normalized);
+			pstmt.setInt(8, limit);
 			rs = pstmt.executeQuery();
 			
 			List<SearchResult> result = new ArrayList<SearchResult>();
@@ -137,29 +136,40 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		}
 	}
 	
-	private List<SearchResult> searchOscNormal(String name, int limit) throws RemoteException {
+	private List<SearchResult> searchOscNormal(String name, int limit, List<SearchResult> resultTsquery) throws RemoteException {
+		List<Integer> idTsquery = new ArrayList<Integer>();
+		for(SearchResult sr : resultTsquery) idTsquery.add(sr.getId());
+		while(idTsquery.size() < 5) idTsquery.add(-1);
+		
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		String sql = "SELECT bosc_sq_osc, COALESCE(bosc_nm_fantasia_osc, bosc_nm_osc) nome "
 				   + "FROM portal.search_index "
-				   + "WHERE UPPER(unaccent(bosc_nm_osc)) ILIKE ? "
-				   + "OR UPPER(unaccent(bosc_nm_fantasia_osc)) ILIKE ? "
+				   + "WHERE ("
+				   + "	UPPER(unaccent(bosc_nm_osc)) ILIKE ? "
+				   + "	OR UPPER(unaccent(bosc_nm_fantasia_osc)) ILIKE ?"
+				   + ") "
+				   + "AND bosc_sq_osc NOT IN (?, ?, ?, ?, ?) "
 				   + "ORDER BY GREATEST(similarity(bosc_nm_osc, ?), similarity(bosc_nm_fantasia_osc, ?)) DESC "
 				   + "LIMIT ?";
 		
 		try {	
 			pstmt = conn.prepareStatement(sql);
 			
-			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^A-Za-z0-9 ]", "").trim();
+			while(normalized.contains("  ")) normalized = normalized.replace("  ", " ");
 			String value = "%" + normalized.toUpperCase() + "%";
 			
 			pstmt.setString(1, value);
 			pstmt.setString(2, value);
-			pstmt.setString(3, normalized);
-			pstmt.setString(4, normalized);
-			pstmt.setInt(5, limit);
+			for(int i = 3; i <= 7; i++){
+				pstmt.setInt(i, idTsquery.get(i - 3));
+			}
+			pstmt.setString(8, normalized);
+			pstmt.setString(9, normalized);
+			pstmt.setInt(10, limit);
 			rs = pstmt.executeQuery();
 			
 			List<SearchResult> result = new ArrayList<SearchResult>();
@@ -193,7 +203,8 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^A-Za-z0-9 ]", "").trim();
+			while(normalized.contains("  ")) normalized = normalized.replace("  ", " ");
 			String normalizedByIlike = "%" + normalized.toUpperCase() + "%";
 			
 			pstmt.setString(1, normalized);
@@ -231,7 +242,8 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^A-Za-z0-9 ]", "").trim();
+			while(normalized.contains("  ")) normalized = normalized.replace("  ", " ");
 			String normalizedByIlike = "%" + normalized.toUpperCase() + "%";
 			
 			pstmt.setString(1, normalized);
@@ -271,7 +283,8 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+			String normalized = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^A-Za-z0-9 ]", "").trim();
+			while(normalized.contains("  ")) normalized = normalized.replace("  ", " ");
 			String normalizedByIlike = "%" + normalized.toUpperCase() + "%";
 			
 			pstmt.setString(1, normalized);
