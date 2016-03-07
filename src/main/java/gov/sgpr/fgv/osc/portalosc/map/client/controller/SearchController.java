@@ -35,20 +35,18 @@ public class SearchController {
 	private static int LIMIT = 5;
 	private Date changeDate;
 	private SearchResult searchResult = new SearchResult();
-	private Integer quantLetter = 0;
-
+	private String searchText = "";
+	
 	public void init() {
 		searchDiv.add(searchWidget);
-
+		
 		searchWidget.addFocusListener(new EventListener() {
-
 			public void onBrowserEvent(Event event) {
 				searchWidget.setValue("");
 			}
 		});
-
+		
 		searchWidget.addChangeListener(new EventListener() {
-
 			public void onBrowserEvent(Event event) {
 				if (event.getKeyCode() == KeyCodes.KEY_DOWN || event.getKeyCode() == KeyCodes.KEY_UP) {
 					if (DOM.getElementById("list1") != null) {
@@ -58,10 +56,10 @@ public class SearchController {
 					changeDate = new Date();
 					final Date thisDate = changeDate;
 					Timer t = new Timer() {
-						@Override
 						public void run() {
-							if (changeDate.equals(thisDate)) {
-								search();
+							if (changeDate.equals(thisDate) && searchText != searchWidget.getValue()) {
+								searchText = searchWidget.getValue();
+								if(searchWidget.getValue().length() > 0) search();
 							}
 						}
 					};
@@ -69,17 +67,16 @@ public class SearchController {
 				}
 			}
 		});
-
+		
 		searchWidget.addSearchClickListener(new EventListener() {
-
 			public void onBrowserEvent(Event event) {
 				String criteria = searchWidget.getValue();
 				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-
+					
 					public void onFailure(Throwable caught) {
 						logger.log(Level.SEVERE, caught.getMessage());
 					}
-
+					
 					public void onSuccess(List<SearchResult> result) {
 						if (!result.isEmpty()) {
 							if (result.get(0).getType().equals(SearchResultType.STATE)) {
@@ -94,7 +91,6 @@ public class SearchController {
 							if (result.get(0).getType().equals(SearchResultType.ADDRESS)) {
 								History.newItem("A" + result.get(0).getId());
 							}
-
 							searchWidget.close();
 						}
 					}
@@ -103,7 +99,7 @@ public class SearchController {
 			}
 		});
 	}
-
+	
 	private void search() {
 		String criteria = searchWidget.getValue();
 		
@@ -114,45 +110,35 @@ public class SearchController {
 			}
 			
 			public void onSuccess(final List<SearchResult> result) {
-				if (result.size() < LIMIT && searchWidget.getValue().length() > 3
-						&& quantLetter != searchWidget.getValue().length()) {
-					final Boolean flagResultZero = result.size() == 0;
+				if (result.size() < LIMIT && searchWidget.getValue().length() > 3) {
 					String address = searchWidget.getValue();
-					String url = "https://maps.googleapis.com/maps/api/geocode/json?address="
-							+ address.replace(" ", "+") + ",brasil";
+					String normalized = address.replaceAll("[^A-Za-z0-9 ,-]", "").trim();
+					while(normalized.contains("  ")) normalized = normalized.replace("  ", " ");
 					
-					quantLetter = searchWidget.getValue().length();
+					String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + normalized.replace(" ", "+") + ",brasil";
+					
 					RequestBuilder req = new RequestBuilder(RequestBuilder.GET, url);
 					try {
 						req.sendRequest(null, new RequestCallback() {
-							
 							public void onResponseReceived(Request request, Response response) {
 								Boolean flag = false;
 								for (String s : response.getText().split("\n")) {
-									if (searchResult.getLongetude() != null)
-										searchResult.setId(result.size() + 1);
+									if (searchResult.getLongetude() != null) searchResult.setId(result.size() + 1);
 									searchResult.setType(SearchResultType.ADDRESS);
-									if (s.contains("formatted_address"))
-										searchResult.setValue(s.split(": ")[1].split("\",")[0].replace("\"", ""));
-									if (s.contains("\"location\" :"))
-										flag = true;
+									if (s.contains("formatted_address")) searchResult.setValue(s.split(": ")[1].split("\",")[0].replace("\"", ""));
+									if (s.contains("\"location\" :")) flag = true;
 									if (flag) {
-										if (s.contains("lat"))
-											searchResult.setLatitude(s.split(": ")[1].split(",")[0].replace("\"", ""));
-										else if (s.contains("lng"))
-											searchResult.setLongetude(s.split(": ")[1].replace("\"", ""));
-										if (searchResult.getLatitude() != null && searchResult.getLongetude() != null)
-											flag = false;
+										if (s.contains("lat")) searchResult.setLatitude(s.split(": ")[1].split(",")[0].replace("\"", ""));
+										else if (s.contains("lng")) searchResult.setLongetude(s.split(": ")[1].replace("\"", ""));
+										if (searchResult.getLatitude() != null && searchResult.getLongetude() != null) flag = false;
 									}
 									if (searchResult.getLongetude() != null) {
-										if (!result.contains(searchResult))
-											result.add(searchResult);
+										if (!result.contains(searchResult)) result.add(searchResult);
 										searchResult = new SearchResult();
 									}
-									if(flagResultZero && result.size() >= LIMIT) break;
-									else if(result.size() > LIMIT) break;
+									if(result.size() >= LIMIT) break;
 								}
-								onSuccess(result);
+								addResult(result);
 							}
 							
 							public void onError(Request request, Throwable exception) {
@@ -163,7 +149,10 @@ public class SearchController {
 						logger.info("Erro na busca de endereço pelo Google\n" + e);
 					}
 				}
-				
+				addResult(result);
+			}
+			
+			public void addResult(final List<SearchResult> result){
 				searchWidget.setItems(result);
 				
 				searchWidget.addFocus(new EventListener() {
@@ -200,14 +189,14 @@ public class SearchController {
 			searchService.search(criteria, LIMIT, callbackSearch);
 		}
 	}
-
+	
 	/**
 	 * @return Instância da busca
 	 */
 	public SearchController getInstance() {
 		return this;
 	}
-
+	
 	/**
 	 * @param isVisible
 	 *            indica se a busca deve estar visível ou não.
