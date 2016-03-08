@@ -28,6 +28,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -50,11 +51,12 @@ public class MatrixWidget extends Composite {
 
 	/**
 	 * Construtor
+	 * @param breadcrumbIndicadores 
 	 */
-	public MatrixWidget(Place[] places) {
+	public MatrixWidget(Place[] places, HTMLPanel breadcrumbIndicadores) {
 		this.places = places;
 		indicatorListBox = new ListBox();
-		initWidget(getHtml());
+		initWidget(getHtml(breadcrumbIndicadores));
 	}
 
 	@Override
@@ -98,11 +100,13 @@ public class MatrixWidget extends Composite {
 		Window.scrollTo(0, 0);
 	}
 
-	private HTML getHtml() {
+	private HTML getHtml(HTMLPanel breadcrumbIndicadores) {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<h2> Matriz de Indicadores");
 		htmlBuilder.append("</h2>");
-		htmlBuilder.append("<div id=\"matrixBody\"></div>");
+		htmlBuilder.append("<div id=\"matrixBody\">");
+		htmlBuilder.append(breadcrumbIndicadores);
+		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}

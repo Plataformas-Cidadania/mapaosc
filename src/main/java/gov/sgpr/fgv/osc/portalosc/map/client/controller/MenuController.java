@@ -167,7 +167,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		igmBuilder.append("<h4><a id=\"M0\" href=\"#M0\">Matriz de indicadores</a></h4>");
 
 		HTML menu = new HTML(igmBuilder.toString());
-		indicatorsPanel.add(breadcrumbIndicadores);
+		// indicatorsPanel.add(breadcrumbIndicadores);
 		indicatorsPanel.add(menu);
 		info = new InfographicsController();
 		info.setVisible(false);
@@ -593,8 +593,6 @@ public class MenuController implements ValueChangeHandler<String> {
 	private void processMatrix(String tokenId) {
 		breadcrumbIndicadores.clear();
 
-		matrix.loadMatrix(tokenId);
-		matrix.setVisible(true);
 		Element matrixHTML = DOM.getElementById("matrixBody");
 		String hash = Window.Location.getHash();
 
@@ -602,6 +600,9 @@ public class MenuController implements ValueChangeHandler<String> {
 			initBreadcrumbMatrix(matrixHTML, hash);
 
 		}
+
+		matrix.loadMatrix(tokenId, breadcrumbIndicadores);
+		matrix.setVisible(true);
 
 		setupMatrix();
 	}
@@ -611,12 +612,12 @@ public class MenuController implements ValueChangeHandler<String> {
 		breadcrumb.setType(type);
 		if (listURL.isEmpty()) {
 			BreadcrumbItem item = new BreadcrumbItem();
-
 			if (hash.equals("#M0")) {
 				// logger.log(Level.INFO, "HASH: #M0");
 				Cookies.removeCookie("breadcrumb");
 				Cookies.setCookie("breadcrumb", "");
 				mountBreadcrumb(hash, element, false);
+
 			} else {
 				// logger.log(Level.INFO, "HASH: "+hash);
 
