@@ -30,7 +30,7 @@ public class RepresentantLocalityController {
 	private final RootPanel formPanel = RootPanel.get("form_representant_locality");
 	private RepresentantLocalityFormWidget formWidget = new RepresentantLocalityFormWidget();
 	private PopupPassword popupPassword = new PopupPassword();
-	private UserServiceAsync userService = GWT.create(UserService.class);
+//	private UserServiceAsync userService = GWT.create(UserService.class);
 	private RepresentantLocalityServiceAsync representantLocalityService = GWT.create(RepresentantLocalityService.class);
 	private static byte[] desKey;
 	
@@ -40,7 +40,7 @@ public class RepresentantLocalityController {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Byte[] result) {
 				logger.info("Chave de criptografia encontrada");
 				desKey = new byte[result.length];
@@ -48,9 +48,8 @@ public class RepresentantLocalityController {
 					desKey[i] = result[i];
 				}
 			}
-
 		};
-		userService.getEncryptKey(callback);
+		representantLocalityService.getEncryptKey(callback);
 		
 		if (formPanel != null) {
 			addFormWidget();
@@ -64,9 +63,9 @@ public class RepresentantLocalityController {
 		
 		formWidget.addSubmitListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
-				logger.info("Validando cadastro de usuário padrão");
+				logger.info("Validando cadastro de representante de localidade");
 				if (formWidget.isValid()) {
-					logger.info("Buscando dados do cadastro de usuário padrão");
+					logger.info("Buscando dados do cadastro de representante de localidade");
 					validateRepresentantLocality(formWidget.getUser());
 				}
 			}
@@ -75,9 +74,9 @@ public class RepresentantLocalityController {
 		formWidget.addSubmitform(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				if (event.getKeyCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando cadastro de usuário padrão");
+					logger.info("Validando cadastro de representante de localidade");
 					if (formWidget.isValid()) {
-						logger.info("Buscando dados do cadastro de usuário padrão");
+						logger.info("Buscando dados do cadastro de representante de localidade");
 						validateRepresentantLocality(formWidget.getUser());
 					}
 				}
@@ -86,7 +85,7 @@ public class RepresentantLocalityController {
 		
 		formWidget.addCancelListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
-				logger.info("Fechando janela de cadastro de representantes de estados e munícipios");
+				logger.info("Fechando janela de cadastro de representante de localidade");
 				formWidget.close();
 				Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
 			}
@@ -94,7 +93,7 @@ public class RepresentantLocalityController {
 	}
 	
 	private void addRepresentantLocalityUser(final RepresentantLocalityUser user) {
-		logger.info("Adicionando representante da OSC");
+		logger.info("Adicionando representante de localidades");
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
@@ -151,7 +150,7 @@ public class RepresentantLocalityController {
 				}
 			}
 		};
-		userService.getUser(email, callback);
+		representantLocalityService.getUser(email, callback);
 	}
 	
 	private void statusUserPassword(final String email, final Integer idUser){
@@ -159,7 +158,7 @@ public class RepresentantLocalityController {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(Boolean result) {
 				if(result == true){
 					addTokenPassword(idUser);
@@ -168,7 +167,7 @@ public class RepresentantLocalityController {
 				}
 			}
 		};
-		userService.getStatus(email, callback);
+		representantLocalityService.getStatus(email, callback);
 	}
 	
 	public void addTokenPassword(Integer idUser) {
@@ -202,16 +201,16 @@ public class RepresentantLocalityController {
 				pop.appendChild(div);
 			}
 		};
-		userService.addTokenPassword(idUser, callback);
+		representantLocalityService.addTokenPassword(idUser, callback);
 	}
 	
 	private void validateRepresentantLocality(final RepresentantLocalityUser user) {
-		logger.info("Validando usuário padrão");
+		logger.info("Validando representa de localidades");
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
 			}
-
+			
 			public void onSuccess(DefaultUser result) {
 				logger.info("Usuário encontrado");
 				if (result != null) {
@@ -220,10 +219,10 @@ public class RepresentantLocalityController {
 				validateCpf(user);
 			}
 		};
-		userService.getUser(user.getEmail(), callback);
+		representantLocalityService.getUser(user.getEmail(), callback);
 	}
 	
-	private void validateCpf(final DefaultUser user) {
+	private void validateCpf(final RepresentantLocalityUser user) {
 		logger.info("Validando CPF");
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
@@ -235,53 +234,13 @@ public class RepresentantLocalityController {
 				if (result != null) {
 					formWidget.addInvalidCpf(String.valueOf(user.getCpf()));
 				}
-				logger.info("Validando usuário padrão");
+				logger.info(" 2 ");
 				if (formWidget.isValid()){
 					addRepresentantLocalityUser(user);
 				}
 			}
 		};
-		userService.getUser(user.getCpf(), callback);
-	}
-	
-	private void addRepresentantLocalityUser(final DefaultUser user) {
-		logger.info("Adicionando usuário");
-		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
-			public void onFailure(Throwable caught) {
-				logger.log(Level.SEVERE, caught.getMessage());
-			}
-			
-			public void onSuccess(Void result) {
-				logger.info("Fechando tela de cadastro");
-				formWidget.close();
-				
-				popupPassword.onModuleLoad();
-				Element pop = DOM.getElementById("popup");
-				pop.removeAllChildren();
-				Element header = DOM.createElement("h2");
-				header.setInnerText("Cadastre-se no Mapa");
-				Element div = DOM.createDiv();
-				Element p = DOM.createElement("p");
-				p.setInnerText("Um e-mail foi enviado com as instruções para confirmação do seu cadastro.");
-				Element a = DOM.createAnchor();
-				a.setInnerText("Ok");
-				a.setAttribute("href", "#");
-				Event.sinkEvents(a, Event.ONCLICK);
-				Event.setEventListener(a, new EventListener() {
-					public void onBrowserEvent(Event event) {
-						popupPassword.close();
-						logger.info("Redirecionando para tela principal");
-						String url = GWT.getHostPageBaseURL() + "Map.html";
-						Window.Location.replace(url);
-					}
-				});
-				div.appendChild(p);
-				div.appendChild(a);
-				pop.appendChild(header);
-				pop.appendChild(div);
-			}
-		};
-		userService.addUser(user, callback);
+		representantLocalityService.getUser(user.getCpf(), callback);
 	}
 	
 	public static String encrypt(String passwd) {

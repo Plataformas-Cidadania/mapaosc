@@ -5,17 +5,17 @@ import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 public class RepresentantLocalityUser extends DefaultUser {
 	private static final long serialVersionUID = -870848362681079195L;
 	
-	private String uf;
+	private String state;
 	private String county;
 	private String organ;
 	private String function;
 	private String phone;
 	
-	public String getUf() {
-		return uf;
+	public String getState() {
+		return state;
 	}
-	public void setUf(String uf) {
-		this.uf = uf;
+	public void setState(String state) {
+		this.state = state;
 	}
 	public String getCounty() {
 		return county;

@@ -4,46 +4,29 @@ import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.Representant
 import gov.sgpr.fgv.osc.portalosc.representantlocality.client.controller.RepresentantLocalityController;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.gwt.dom.client.InputElement;
+import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.TextBox;
 
 public class RepresentantLocalityFormWidget extends Composite {
 	private final Logger logger = Logger.getLogger(this.getClass().getName());
-	private Button okButton;
-	private Anchor cancelButton;
-	private TextBox email;
-	private PasswordTextBox passwd;
-	private PasswordTextBox passConfirm;
-	private TextBox name;
-	private TextBox cpf;
-	private CheckBox mailing;
-
+	
 	public RepresentantLocalityFormWidget() {
 		initWidget(getHtml());
 	}
-
+	
 	public RepresentantLocalityFormWidget(RepresentantLocalityUser user) {
 		initWidget(getHtml());
 		setUser(user);
 	}
-
-	/**
-	 * @param listener
-	 *            Controla o evento de click do botão de cadastrar usuário.
-	 */
+	
 	public void addSubmitListener(EventListener listener) {
 		Element btnFillIn = DOM.getElementById("btnCadastro");
 		Event.sinkEvents(btnFillIn, Event.ONCLICK);
@@ -57,71 +40,101 @@ public class RepresentantLocalityFormWidget extends Composite {
 		Element ccsenha = DOM.getElementById("ccsenha");
 		Element cnome = DOM.getElementById("cnome");
 		Element ccpf = DOM.getElementById("ccpf");
+		Element cest = DOM.getElementById("cest");
+		Element cmun = DOM.getElementById("cmun");
+		Element corgao = DOM.getElementById("corgao");
+		Element ccargo = DOM.getElementById("ccargo");
+		Element ctel = DOM.getElementById("ctel");
+		
 		Event.sinkEvents(cemail, Event.ONKEYPRESS);
 		Event.sinkEvents(csenha, Event.ONKEYPRESS);
 		Event.sinkEvents(ccsenha, Event.ONKEYPRESS);
 		Event.sinkEvents(cnome, Event.ONKEYPRESS);
 		Event.sinkEvents(ccpf, Event.ONKEYPRESS);
+		Event.sinkEvents(cest, Event.ONKEYPRESS);
+		Event.sinkEvents(cmun, Event.ONKEYPRESS);
+		Event.sinkEvents(corgao, Event.ONKEYPRESS);
+		Event.sinkEvents(ccargo, Event.ONKEYPRESS);
+		Event.sinkEvents(ctel, Event.ONKEYPRESS);
+		
 		Event.setEventListener(cemail, listener);
 		Event.setEventListener(csenha, listener);
 		Event.setEventListener(ccsenha, listener);
 		Event.setEventListener(cnome, listener);
 		Event.setEventListener(ccpf, listener);
+		Event.setEventListener(cest, listener);
+		Event.setEventListener(cmun, listener);
+		Event.setEventListener(corgao, listener);
+		Event.setEventListener(ccargo, listener);
+		Event.setEventListener(ctel, listener);
+		
 		validate();
 	}
-
-	/**
-	 * @param listener
-	 *            Controla o evento de click do botão de cadastrar usuário.
-	 */
+	
 	public void addCancelListener(EventListener listener) {
 		Element btnCancel = DOM.getElementById("btnCancelar");
 		Event.sinkEvents(btnCancel, Event.ONCLICK);
 		Event.setEventListener(btnCancel, listener);
 	}
-
-	/**
-	 * @return Usuário a ser cadastrado.
-	 */
+	
 	public RepresentantLocalityUser getUser() {
 		InputElement email = InputElement.as(DOM.getElementById("cemail"));
 		InputElement passwd = InputElement.as(DOM.getElementById("csenha"));
 		InputElement name = InputElement.as(DOM.getElementById("cnome"));
 		InputElement cpf = InputElement.as(DOM.getElementById("ccpf"));
-		boolean mailingListMember = DOM.getElementById("cinscrever").getPropertyBoolean("checked");
+		SelectElement state = SelectElement.as(DOM.getElementById("cest"));
+		SelectElement county = SelectElement.as(DOM.getElementById("cmun"));
+		InputElement organ = InputElement.as(DOM.getElementById("corgao"));
+		InputElement function = InputElement.as(DOM.getElementById("ccargo"));
+		InputElement phone = InputElement.as(DOM.getElementById("ctel"));
+		InputElement mailingListMember = InputElement.as(DOM.getElementById("cinscrever"));
+		
 		RepresentantLocalityUser user = new RepresentantLocalityUser();
+		
 		user.setEmail(email.getValue());
-		String password = RepresentantLocalityController.encrypt(passwd.getValue());
-		user.setPassword(password);
+		user.setPassword(RepresentantLocalityController.encrypt(passwd.getValue()));
 		user.setName(name.getValue());
-		long ncpf = Long.valueOf(cpf.getValue().replaceAll("\\D", ""));
-		user.setCpf(ncpf);
-		user.setMailingListMember(mailingListMember);
-		user.setType(UserType.DEFAULT);
+		user.setCpf(Long.valueOf(cpf.getValue().replaceAll("\\D", "")));
+		user.setState(state.getValue());
+		user.setCounty(county.getValue());
+		
+		user.setOrgan(organ.getValue());
+		user.setFunction(function.getValue());
+		user.setPhone(phone.getValue());
+		user.setMailingListMember(mailingListMember.getPropertyBoolean("checked"));
+		user.setType(UserType.LOCALITY_AGENT);
+		
 		return user;
 	}
-
-	/**
-	 * @return Usuário a ser cadastrado.
-	 */
+	
 	public void setUser(RepresentantLocalityUser user) {
-		
-		if (DOM.getElementById("ctermo").getPropertyBoolean("checked"))
-		{
+		if (DOM.getElementById("ctermo").getPropertyBoolean("checked")){
 			InputElement email = InputElement.as(DOM.getElementById("cemail"));
 			InputElement passwd = InputElement.as(DOM.getElementById("csenha"));
 			InputElement cpasswd = InputElement.as(DOM.getElementById("ccsenha"));
 			InputElement name = InputElement.as(DOM.getElementById("cnome"));
 			InputElement cpf = InputElement.as(DOM.getElementById("ccpf"));
+			SelectElement state = SelectElement.as(DOM.getElementById("cest"));
+			SelectElement county = SelectElement.as(DOM.getElementById("cmun"));
+			InputElement organ = InputElement.as(DOM.getElementById("corgao"));
+			InputElement function = InputElement.as(DOM.getElementById("ccargo"));
+			InputElement phone = InputElement.as(DOM.getElementById("ctel"));
+			InputElement mailingListMember = InputElement.as(DOM.getElementById("cinscrever"));
+			
 			email.setValue(user.getEmail());
 			passwd.setValue(user.getPassword());
 			cpasswd.setValue(user.getPassword());
 			name.setValue(user.getName());
 			cpf.setValue(String.valueOf(user.getCpf()));
-			DOM.getElementById("cinscrever").setPropertyBoolean("checked", user.isMailingListMember());
+			state.setValue(user.getState());
+			county.setValue(user.getCounty());
+			organ.setValue(user.getOrgan());
+			function.setValue(user.getFunction());
+			phone.setValue(user.getPhone());
+			mailingListMember.setPropertyBoolean("checked", user.isMailingListMember());
 		}
 	}
-
+	
 	private HTML getHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
 		
@@ -135,50 +148,48 @@ public class RepresentantLocalityFormWidget extends Composite {
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div style='float:left; margin-left: 15px;'>");
 		htmlBuilder.append("		<label for='cest'>UF:</label><select id='cest' name='cest' required='required'>");
-		htmlBuilder.append("											<option checked disabled></option>");
-		htmlBuilder.append("											<option value='AC'>AC</option>");
-		htmlBuilder.append("											<option value='AL'>AL</option>");
-		htmlBuilder.append("											<option value='AP'>AP</option>");
-		htmlBuilder.append("											<option value='AM'>AM</option>");
-		htmlBuilder.append("											<option value='BA'>BA</option>");
-		htmlBuilder.append("											<option value='CE'>CE</option>");
-		htmlBuilder.append("											<option value='DF'>DF</option>");
-		htmlBuilder.append("											<option value='ES'>ES</option>");
-		htmlBuilder.append("											<option value='GO'>GO</option>");
-		htmlBuilder.append("											<option value='MA'>MA</option>");
-		htmlBuilder.append("											<option value='MT'>MT</option>");
-		htmlBuilder.append("											<option value='MS'>MS</option>");
-		htmlBuilder.append("											<option value='MG'>MG</option>");
-		htmlBuilder.append("											<option value='PA'>PA</option>");
-		htmlBuilder.append("											<option value='PB'>PB</option>");
-		htmlBuilder.append("											<option value='PR'>PR</option>");
-		htmlBuilder.append("											<option value='PE'>PE</option>");
-		htmlBuilder.append("											<option value='PI'>PI</option>");
-		htmlBuilder.append("											<option value='RJ'>RJ</option>");
-		htmlBuilder.append("											<option value='RN'>RN</option>");
-		htmlBuilder.append("											<option value='RS'>RS</option>");
-		htmlBuilder.append("											<option value='RO'>RO</option>");
-		htmlBuilder.append("											<option value='RR'>RR</option>");
-		htmlBuilder.append("											<option value='SC'>SC</option>");
-		htmlBuilder.append("											<option value='SP'>SP</option>");
-		htmlBuilder.append("											<option value='SE'>SE</option>");
-		htmlBuilder.append("											<option value='TO'>TO</option>");
+		htmlBuilder.append("											<option disabled selected></option>");
+		htmlBuilder.append("											<option value='12'>AC</option>");
+		htmlBuilder.append("											<option value='27'>AL</option>");
+		htmlBuilder.append("											<option value='13'>AM</option>");
+		htmlBuilder.append("											<option value='16'>AP</option>");
+		htmlBuilder.append("											<option value='29'>BA</option>");
+		htmlBuilder.append("											<option value='23'>CE</option>");
+		htmlBuilder.append("											<option value='53'>DF</option>");
+		htmlBuilder.append("											<option value='32'>ES</option>");
+		htmlBuilder.append("											<option value='52'>GO</option>");
+		htmlBuilder.append("											<option value='21'>MA</option>");
+		htmlBuilder.append("											<option value='31'>MG</option>");
+		htmlBuilder.append("											<option value='50'>MS</option>");
+		htmlBuilder.append("											<option value='51'>MT</option>");
+		htmlBuilder.append("											<option value='15'>PA</option>");
+		htmlBuilder.append("											<option value='25'>PB</option>");
+		htmlBuilder.append("											<option value='26'>PE</option>");
+		htmlBuilder.append("											<option value='22'>PI</option>");
+		htmlBuilder.append("											<option value='41'>PR</option>");
+		htmlBuilder.append("											<option value='33'>RJ</option>");
+		htmlBuilder.append("											<option value='24'>RN</option>");
+		htmlBuilder.append("											<option value='11'>RO</option>");
+		htmlBuilder.append("											<option value='14'>RR</option>");
+		htmlBuilder.append("											<option value='43'>RS</option>");
+		htmlBuilder.append("											<option value='42'>SC</option>");
+		htmlBuilder.append("											<option value='28'>SE</option>");
+		htmlBuilder.append("											<option value='35'>SP</option>");
+		htmlBuilder.append("											<option value='17'>TO</option>");
 		htmlBuilder.append("										</select>");
 		htmlBuilder.append("		<label for='cmun'>Município:</label><select id='cmun' name='cmun' required='required'>");
-		
 			htmlBuilder.append("												<option>Rio de Janeiro</option>");
-		
 		htmlBuilder.append("											</select>");
 		htmlBuilder.append("		<label for='corgao'>Orgão:</label><input type='text' name='corgao' id='corgao' placeholder='Orgão' class='nome' required='required' />");
 		htmlBuilder.append("		<label for='ccargo'>Função:</label><input type='text' name='ccargo' id='ccargo' placeholder='Função' class='nome' required='required' />");
 		htmlBuilder.append("		<label for='ctel'>Telefone (com DDD):</label><input type='text' name='ctel' id='ctel' placeholder='(xx) yyyy-yyyy' class='nome' required='required' />");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='clearfix' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
-		htmlBuilder.append("		<span>Concordo com os <a href='termos.html'>termos de uso</a></span><input type='checkbox' name='cinscrever' value='cinscrever' /> ");
+		htmlBuilder.append("		<span>Concordo com os <a href='termos.html'>termos de uso</a></span><input type='checkbox' name='cinscrever' id='cinscrever' /> ");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='botoes' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
 		htmlBuilder.append("		<div style='display: inline-block; width:auto; float: none; '>");
-		htmlBuilder.append("			<a href='#' class='cancelar'>Cancelar</a> ou <input style='background-position: -2px -57px;' type='submit' value='Finalizar cadastro' />");
+		htmlBuilder.append("			<a href='#' class='cancelar'>Cancelar</a> ou <input style='background-position: -2px -57px;' type='submit' id='btnCadastro' value='Finalizar cadastro' />");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</form>");
@@ -187,7 +198,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 		return html;
 
 	}
-
+	
 	public native void close() /*-{
 		$wnd.jQuery.fancybox.close();
 	}-*/;
@@ -314,7 +325,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 			},
 		});
 	}-*/;
-
+	
 	/**
 	 * Verifica se o formulário é valido.
 	 * 
@@ -323,7 +334,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 	public native boolean isValid() /*-{
 		return $wnd.jQuery('#form_cadastro').valid();
 	}-*/;
-
+	
 	/**
 	 * Adiciona regra para email inválido.
 	 * 
@@ -337,7 +348,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 			}
 		});
 	}-*/;
-
+	
 	/**
 	 * Adiciona regra para cpf inválido.
 	 * 
@@ -351,5 +362,4 @@ public class RepresentantLocalityFormWidget extends Composite {
 			}
 		});
 	}-*/;
-
 }

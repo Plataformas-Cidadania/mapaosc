@@ -1,10 +1,11 @@
 package gov.sgpr.fgv.osc.portalosc.representantlocality.server;
 
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityService;
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityUser;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.Email;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.ValidationException;
-import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.FacebookUser;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.RepresentantUser;
@@ -26,7 +27,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
-public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implements UserService {
+public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implements RepresentantLocalityService {
 	private static final long serialVersionUID = -7836597805845364122L;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private Byte[] desKey;
@@ -35,7 +36,6 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 	@Override
 	public void init(ServletConfig config) {
 		super.init(config);
-		// logger.info("OscServiceImpl.init()");
 		ServletContext context = getServletContext();
 		String key[] = context.getInitParameter("CHAVE_CRIPTOGRAFIA").split(",");
 		desKey = new Byte[key.length];
@@ -53,13 +53,15 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		email = new Email(serverSMTP, authSMTP, portSMTP, fromAddress, nameAddress);
 	}
 	
-	public void addUser(DefaultUser user) throws RemoteException {
+	public void addUser(RepresentantLocalityUser user) throws RemoteException {
+		logger.info("Adicionando representante de localidades");
+		
 		validate(user);
 		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+				   + "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -300,14 +302,7 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		enableUser(idUser);
 		return idUser;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.UserService#getUser(
-	 * java.lang.String)
-	 */
+	
 	public DefaultUser getUser(String email) throws RemoteException {
 		logger.info("Buscando usuário na base pelo email");
 		Connection conn = getConnection();
@@ -315,12 +310,13 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		ResultSet rs = null;
 		String sql = "SELECT tusu_sq_usuario, tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
 				   + 		"tusu_nr_cpf, tusu_in_lista_email "
-				   + "FROM portal.tb_usuario  WHERE tusu_ee_email = ?";
+				   + "FROM portal.tb_usuario WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			DefaultUser user = null;
+			logger.info(pstmt.toString());
 			if (rs.next()) {
 				UserType type = UserType.get(rs.getInt("tpus_cd_tipo_usuario"));
 				int userId = rs.getInt("tusu_sq_usuario"); 
@@ -405,14 +401,7 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 			releaseConnection(conn, pstmt, rs);
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.UserService#updateUser
-	 * (gov.sgpr.fgv.osc.portalosc.map.shared.model.User)
-	 */
+	
 	public void updateUser(DefaultUser user) throws RemoteException {
 		validate(user);
 		Connection conn = getConnection();
@@ -450,7 +439,8 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 	}
 
 	private void validate(DefaultUser user) throws RemoteException {
-		logger.info("Validando usuário padrão");
+		logger.info("Validando representantes de localidades");
+		
 		try {
 			CpfValidator cpfValidator = new CpfValidator();
 			if (!cpfValidator.validate(user.getCpf())) {
@@ -540,7 +530,7 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 			releaseConnection(conn, pstmt, rs);
 		}
 	}
-
+	
 	public void addRepresentantUser(RepresentantUser user) throws RemoteException {
 		validateRepresentant(user);
 		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package gov.sgpr.fgv.osc.portalosc.user.shared.model;
 
 /**
@@ -13,17 +10,18 @@ public enum UserType {
 	MASTER(1),
 	DEFAULT(2),
 	FACEBOOK(3),
-	OSC_AGENT(4);
+	OSC_AGENT(4),
+	LOCALITY_AGENT(5);
 	
 	private final int id;
 	UserType(int id) {
 		this.id = id;
 	}
-
+	
 	public int id() {
 		return id;
 	}
-
+	
 	public static UserType get(int id) {
 		for (UserType type: values()){
 			if (type.id == id){
@@ -32,5 +30,4 @@ public enum UserType {
 		}
 		return null;
 	}
-
 }
