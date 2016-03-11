@@ -2551,6 +2551,7 @@ button.recomendar:hover {
 	width: 100%;
 	height: 100px;
 	margin: 15px 0;
+	padding-top: 60px;
 }
 
 #mapa.organizacao .social .recomendacoes span {
@@ -2590,6 +2591,12 @@ button.recomendar:hover {
 
 #mapa.organizacao ul.dados,.classificacao ul.dados {
 	position: relative;
+}
+
+.multiline {
+	width: 350px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 ul.dados li a.excluir {

@@ -57,10 +57,10 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<img src='imagens/osc/" + (org.getGoogle() != "" ? org.getGoogle() + "' alt='" + org.getRazaoSocial() + "' width='160' height='160'" : "org_indisponivel.jpg'") + " />");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
-		htmlBuilder.append("			<a href='" + (org.getGoogle() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-google' name='redes' title='Google' class='tooltip'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getFacebook() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-facebook' name='redes' title='Facebook' class='tooltip'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getLinkedin() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn' class='tooltip' ></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getTwitter() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-twitter' name='redes' title='Twitter' class='tooltip'></button></a>");
+		htmlBuilder.append("			<a href='" + (org.getGoogle() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-google' name='redes' title='Google'></button></a>");
+		htmlBuilder.append("			<a href='" + (org.getFacebook() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-facebook' name='redes' title='Facebook'></button></a>");
+		htmlBuilder.append("			<a href='" + (org.getLinkedin() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button></a>");
+		htmlBuilder.append("			<a href='" + (org.getTwitter() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-twitter' name='redes' title='Twitter'></button></a>");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<a href='" + (org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString()) + "' class='participar box'>Como Participar</a>");
 		htmlBuilder.append("		<div class='recomendacoes'>");
