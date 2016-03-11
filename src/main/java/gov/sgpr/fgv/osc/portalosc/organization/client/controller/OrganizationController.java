@@ -75,6 +75,10 @@ public class OrganizationController {
 		organizationService.getOrganizationByID(id, callback);
 	}
 	
+	private void addRecomendacao(Integer idOSC, Integer idUser){
+		
+	}
+	
 	private void setOrganization(OrganizationModel organizationModel){
 		logger.info("Salvando dados da organização");
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
@@ -131,6 +135,14 @@ public class OrganizationController {
 		formularioElement.add(formularioWidget);
 		formularioWidget.addDate(organization,"data_inicio","projeto_data_inicio","Inicio",editable);
 		formularioWidget.addDate(organization,"data_final","projeto_data_final","Final", editable);
+		
+		formularioWidget.addRecomendar(new EventListener() {
+			public void onBrowserEvent(Event event) {
+				logger.info("Recomendando OSC");
+				addRecomendacao(formularioWidget.getOrg().getId(), 0);
+				Window.Location.reload();
+			}
+		});
 		
 		formularioWidget.addSalvarListener(new EventListener() {
 			public void onBrowserEvent(Event event) {

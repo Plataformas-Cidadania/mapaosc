@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -227,7 +228,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
-			ArrayList<String> certificacao = new ArrayList<String>();			
+			HashMap<String, String> certificacao = new HashMap<String, String>();			
 			while (rs.next()) {
 				Date now = new Date(new java.util.Date().getTime());
 				
@@ -235,7 +236,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				if(strDateCNAE != null){
 					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCNAE);
 					if(now.after(date)){
-						certificacao.add("CNAE");
+						certificacao.put("CNAE", "CNAE");
 					}
 				}
 				String strDateInicioCebasMec = rs.getString("cebas_mec_dt_inicio_validade");
@@ -244,7 +245,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					Date dateInicioCebasMec = new SimpleDateFormat("yyyy-mm-dd").parse(strDateInicioCebasMec);
 					Date dateFimCebasMec = new SimpleDateFormat("yyyy-mm-dd").parse(strDateFimCebasMec);
 					if(now.after(dateInicioCebasMec) && now.before(dateFimCebasMec)){
-						certificacao.add("CEBAS/MEC");
+						certificacao.put("CEBAS/MEC", "MEC");
 					}
 				}
 				String strDateInicioCebasSaude = rs.getString("cebas_saude_dt_inicio_validade");
@@ -253,21 +254,21 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					Date dateInicioCebasSaude = new SimpleDateFormat("yyyy-mm-dd").parse(strDateInicioCebasSaude);
 					Date dateFimCebasSaude = new SimpleDateFormat("yyyy-mm-dd").parse(strDateFimCebasSaude);
 					if(now.after(dateInicioCebasSaude) && now.before(dateFimCebasSaude)){
-						certificacao.add("CEBAS/Saúde");
+						certificacao.put("CEBAS/Saúde", "SUS");
 					}
 				}
 				String strDateCnesOscip = rs.getString("cnes_oscip_dt_publicacao");
 				if(strDateCnesOscip != null){
 					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCnesOscip);
 					if(now.after(date)){
-						certificacao.add("CNES/OSCIP");
+						certificacao.put("CNES/OSCIP", "CNES");
 					}
 				}
-				String strDateCnesUfp = rs.getString("cnes_upf_dt_declaracao");
-				if(strDateCnesUfp != null){
-					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCnesUfp);
+				String strDateCnesUpf = rs.getString("cnes_upf_dt_declaracao");
+				if(strDateCnesUpf != null){
+					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCnesUpf);
 					if(now.after(date)){
-						certificacao.add("CNES/UFP");
+						certificacao.put("Utilidade Pública Federal", "CNES");
 					}
 				}
 				String strDateInicioCebasMds = rs.getString("cebas_mds_dt_inicio_validade");
@@ -276,7 +277,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					Date dateInicioCebasMds = new SimpleDateFormat("yyyy-mm-dd").parse(strDateInicioCebasMds);
 					Date dateFimCebasMds = new SimpleDateFormat("yyyy-mm-dd").parse(strDateFimCebasMds);
 					if(now.after(dateInicioCebasMds) && now.before(dateFimCebasMds)){
-						certificacao.add("CEBAS/MDS");
+						certificacao.put("CEBAS/MDS", "CEBAS");
 					}
 				}
 			}
@@ -293,7 +294,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		} finally {
 			releaseConnection(conn, pstmt, rs);
 		}
-		
 		return organization;
 	}
 	
