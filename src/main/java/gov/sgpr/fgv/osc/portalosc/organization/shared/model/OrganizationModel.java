@@ -2,6 +2,7 @@ package gov.sgpr.fgv.osc.portalosc.organization.shared.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author vagnerpraia
@@ -48,7 +49,7 @@ public class OrganizationModel implements Serializable {
 	private ArrayList<String> classificacao = new ArrayList<String>();
 	private ArrayList<String> certificadosFederais = new ArrayList<String>();
 	private ArrayList<ProjetoModel> projetos = new ArrayList<ProjetoModel>();
-	private ArrayList<String> certificacao = new ArrayList<String>();
+	private HashMap<String, String> certificacao = new HashMap<String, String>();
 	
 	public Integer getId() {
 		return id;
@@ -357,12 +358,10 @@ public class OrganizationModel implements Serializable {
 		}
 	}
 	
-	public ArrayList<String> getCertificacao() {
+	public HashMap<String, String> getCertificacao() {
 		return certificacao;
 	}
-	public void setCertificacao(ArrayList<String> certificacao) {
-		if(certificacao != null){
-			this.certificacao = certificacao;
-		}
+	public void setCertificacao(HashMap<String, String> certificacao) {
+		this.certificacao = certificacao;
 	}
 }

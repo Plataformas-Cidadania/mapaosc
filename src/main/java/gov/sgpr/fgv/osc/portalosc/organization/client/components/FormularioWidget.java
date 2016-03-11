@@ -2,6 +2,7 @@ package gov.sgpr.fgv.osc.portalosc.organization.client.components;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
@@ -63,9 +64,9 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<a href='" + (org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString()) + "' class='participar box'>Como Participar</a>");
 		htmlBuilder.append("		<div class='recomendacoes'>");
-		htmlBuilder.append("			<span class='tooltip' title='" + org.getRecomendacoes() + " recomendações'>" + org.getRecomendacoes() + "</span>");
+		htmlBuilder.append("			<span class='tooltip' data-hasqtip='4' title='" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + " recomendações'>" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + "</span>");
 		htmlBuilder.append("		</div>");
-//		htmlBuilder.append("		<button type='button' class='recomendar'>Recomendar</button>");
+		htmlBuilder.append("		<button type='button' class='recomendar'>Recomendar</button>");
 //		htmlBuilder.append("		<div class='classificacao'>");
 //		htmlBuilder.append("			<h3>Classificação</h3>");
 //		htmlBuilder.append("			<ul class='dados'>");
@@ -128,7 +129,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>CNAE:</strong>");
+		htmlBuilder.append("						<strong>Atividade econômica (CNAE):</strong>");
 		if(org.getCnae() == null || org.getCnae() == "")
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		else
@@ -254,7 +255,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div id='recCol' class='collapse' >");
 		htmlBuilder.append("						<div>");
-		htmlBuilder.append("							<strong>Trabalhadores:</strong>");
+		htmlBuilder.append("							<strong>Trabalhadores com vínculo:</strong>");
 		if(org.getTrabalhadores() == null || org.getTrabalhadores() == -1)
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		else
@@ -344,10 +345,13 @@ public class FormularioWidget extends Composite {
 		if(org.getCertificacao().size() == 0){
 			htmlBuilder.append("					<li>Organização sem certificados</li>");
 		}else{
-			for (String s : org.getCertificacao()) {
-				htmlBuilder.append("					<li>" + s + "</li>");
-//				htmlBuilder.append("					<li class='fonte'><em>Fonte:</em> SICONV</li>");
+			String source = "";
+			for (HashMap.Entry<String, String> entry : org.getCertificacao().entrySet()) {
+				htmlBuilder.append("					<li>" + entry.getKey() + "</li>");
+				source += entry.getValue() + ", ";
 			}
+			source = source.substring(0, source.length() - 2);
+			htmlBuilder.append("					<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte " + source + "'></span>");
 		}
 		htmlBuilder.append("				</ul>");
 		htmlBuilder.append("			</div>");
@@ -401,17 +405,14 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("<p id='projeto_status"+ proj +"' >");
 				htmlBuilder.append("<select " + (editable ? "" : "disabled") + ">");
 				if(p.getStatus() == "Planejado"){
-//					htmlBuilder.append("<option value='' ></option>");
 					htmlBuilder.append("<option value='Planejado' selected='selected'> Planejado </option>");
 					htmlBuilder.append("<option value='Em Execução' > Em Execução </option>");
 					htmlBuilder.append("<option value='Finalizado' > Finalizado </option>");
 				}else if(p.getStatus() == "Em Execução"){
-//					htmlBuilder.append("<option value='' ></option>");
 					htmlBuilder.append("<option value='Planejado' > Planejado </option>");
 					htmlBuilder.append("<option value='Em Execução' selected='selected' > Em Execução </option>");
 					htmlBuilder.append("<option value='Finalizado' > Finalizado </option>");
 				}else if(p.getStatus() == "Finalizado"){
-//					htmlBuilder.append("<option value='' ></option>");
 					htmlBuilder.append("<option value='Planejado' > Planejado </option>");
 					htmlBuilder.append("<option value='Em Execução' > Em Execução </option>");
 					htmlBuilder.append("<option value='Finalizado' selected='selected' > Finalizado </option>");
@@ -442,11 +443,9 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("<strong class='separador'>Fonte de recurso</strong>");
 				htmlBuilder.append("<p id='projeto_fonte"+ proj +"' ><select  " + (editable ? "" : "disabled") + ">");
 				if(p.getFonteRecursos() == "Público"){
-//					htmlBuilder.append("<option value='' >Informação não disponível</option>");
 					htmlBuilder.append("<option value='Público' selected='selected' > Público </option>");
 					htmlBuilder.append("<option value='Privado' > Privado </option>");
 				}else if(p.getFonteRecursos() == "Privado"){
-//					htmlBuilder.append("<option value='' ></option>");
 					htmlBuilder.append("<option value='Público' > Público </option>");
 					htmlBuilder.append("<option value='Privado' selected='selected' > Privado </option>");
 				}else{
@@ -708,6 +707,12 @@ public class FormularioWidget extends Composite {
 	
 	public void addEditar(EventListener listener) {
 		Element edicao = DOM.getElementById("edicao");
+		Event.sinkEvents(edicao, Event.ONCLICK);
+		Event.setEventListener(edicao, listener);
+	}
+	
+	public void addRecomendar(EventListener listener) {
+		Element edicao = DOM.getElementById("recomendar");
 		Event.sinkEvents(edicao, Event.ONCLICK);
 		Event.setEventListener(edicao, listener);
 	}
