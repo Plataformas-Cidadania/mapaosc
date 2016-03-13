@@ -51,6 +51,18 @@ public class FormularioWidget extends Composite {
 	private HTML getHTML(OrganizationModel org, Boolean editable){
 		StringBuilder htmlBuilder = new StringBuilder();
 		edit = editable;
+		htmlBuilder.append("<form id='entidade_edicao' name='entidade_edicao' method='post'>");
+		
+		htmlBuilder.append("<div class='titulo'>");
+		htmlBuilder.append("	<h1><em>&nbsp;</em> ");
+		htmlBuilder.append(org.getRazaoSocial() == null ? "Organização" : org.getRazaoSocial());
+		htmlBuilder.append("</h1>");
+//		htmlBuilder.append("	<div class='botoes'>");
+//		htmlBuilder.append("		<a href='exportar.html' class='botao exportar box_exportar'>Exportar</a>");
+//		htmlBuilder.append("		<a class='botao' href='organizacao_edicao.html'>Edição</a>");
+//		htmlBuilder.append("	</div>");
+		htmlBuilder.append("</div>");
+		
 		htmlBuilder.append("<div class='container'>");
 		htmlBuilder.append("	<div class='social'>");
 		htmlBuilder.append("		<div class='imagem'>");
@@ -82,17 +94,17 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<h2>Dados gerais</h2>");
 		htmlBuilder.append("			<div class='gerais'>");
 		htmlBuilder.append("				<fieldset>");
+//		htmlBuilder.append("					<div>");
+//		htmlBuilder.append("						<strong>Razão social:</strong>");
+//		if(org.getRazaoSocial() == null || org.getRazaoSocial() == "")
+//			htmlBuilder.append("						<span>Informação não disponível</span>");
+//		else
+//			htmlBuilder.append("						<span>" + org.getRazaoSocial() + "</span>");
+////		htmlBuilder.append("						<input type='text' name='razao_social' id='razao_social' placeholder='Informação não disponível' value='" + org.getRazaoSocial() + "' " + (editable ? "" : "readonly") + "/>");
+//		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
+//		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Razão Social:</strong>");
-		if(org.getRazaoSocial() == null || org.getRazaoSocial() == "")
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + org.getRazaoSocial() + "</span>");
-//		htmlBuilder.append("						<input type='text' name='razao_social' id='razao_social' placeholder='Informação não disponível' value='" + org.getRazaoSocial() + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
-		htmlBuilder.append("					</div>");
-		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Nome Fantasia:</strong>");
+		htmlBuilder.append("						<strong>Nome fantasia:</strong>");
 		htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
@@ -120,7 +132,7 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 //		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Natureza Jurídica:</strong>");
+		htmlBuilder.append("						<strong>Natureza jurídica:</strong>");
 		if(org.getNaturezaJuridica() == null || org.getNaturezaJuridica() == "")
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		else
@@ -138,7 +150,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Responsável Legal:</strong>");
+		htmlBuilder.append("						<strong>Responsável legal:</strong>");
 		if(org.getResponsavel() == null || org.getResponsavel() == "")
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		else
@@ -147,12 +159,12 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Descrição do Projeto:</strong>");
-		htmlBuilder.append("						<textarea name='descricao_projeto' id='descricao_projeto' placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
+		htmlBuilder.append("						<strong>Descrição da OSC:</strong>");
+		htmlBuilder.append("						<textarea name='descricao_osc' id='descricao_osc' placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Ano de Fundação:</strong>");
+		htmlBuilder.append("						<strong>Ano de fundação:</strong>");
 		htmlBuilder.append("						<input type='number' name='ano_fundacao' id='ano_fundacao' placeholder='Informação não disponível' value='" + convertNumberToString(org.getAnoFundacao()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
@@ -244,7 +256,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Total de Colaboradores:</strong>");
+		htmlBuilder.append("						<strong>Total de colaboradores:</strong>");
 		if(org.getTotalColaboradores() == null || org.getTotalColaboradores() == -1)
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		else
@@ -339,7 +351,7 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("					<li class='fonte'><em>Fonte:</em> SICONV</li>");
 //		htmlBuilder.append("				</ul>");
 //		htmlBuilder.append("			</div>");
-		htmlBuilder.append("			<h2>Certificados federais</h2>");
+		htmlBuilder.append("			<h2>Titulações e certificações federais</h2>");
 		htmlBuilder.append("			<div>");
 		htmlBuilder.append("				<ul class='dados checklist'>");
 		if(org.getCertificacao().size() == 0){
@@ -646,6 +658,9 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("<div id='divbotoes' class='botoes'>");
 		htmlBuilder.append("<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='submit' value='Salvar' class='salvar' />");
 		htmlBuilder.append("</div>");
+		
+		htmlBuilder.append("</form>");
+		
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
@@ -723,7 +738,7 @@ public class FormularioWidget extends Composite {
 		Integer anofundacao = Integer.parseInt(InputElement.as(DOM.getElementById("ano_fundacao")).getValue());
 		org.setId(Integer.parseInt(History.getToken().substring(1)));
 		org.setNomeFantasia(InputElement.as(DOM.getElementById("nome_fantasia")).getValue());
-		org.setDescricaoProjeto(TextAreaElement.as(DOM.getElementById("descricao_projeto")).getValue());
+		org.setDescricaoProjeto(TextAreaElement.as(DOM.getElementById("descricao_osc")).getValue());
 		org.setAnoFundacao(anofundacao);
 		org.setSite(InputElement.as(DOM.getElementById("site")).getValue());
 		org.setEmail(InputElement.as(DOM.getElementById("email")).getValue());
