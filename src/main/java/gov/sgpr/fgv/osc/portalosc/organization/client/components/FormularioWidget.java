@@ -54,7 +54,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("<div class='container'>");
 		htmlBuilder.append("	<div class='social'>");
 		htmlBuilder.append("		<div class='imagem'>");
-		htmlBuilder.append("			<img src='imagens/osc/" + (org.getGoogle() != "" ? org.getGoogle() + "' alt='" + org.getRazaoSocial() + "' width='160' height='160'" : "org_indisponivel.jpg'") + " />");
+		htmlBuilder.append("			<img src='imagens/" + (org.getGoogle() != "" ? org.getGoogle() + "' alt='" + org.getRazaoSocial() + "' width='160' height='160'" : "org_indisponivel.jpg'") + " />");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
 		htmlBuilder.append("			<a href='" + (org.getGoogle() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-google' name='redes' title='Google'></button></a>");
