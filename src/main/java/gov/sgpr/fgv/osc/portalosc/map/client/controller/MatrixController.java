@@ -55,18 +55,19 @@ public class MatrixController {
 	}
 
 	private void loadPlaces(Place[] places, HTMLPanel breadcrumbIndicadores) {
-		final MatrixWidget matrixWidget = new MatrixWidget(places,breadcrumbIndicadores);
+		final MatrixWidget matrixWidget = new MatrixWidget(places, breadcrumbIndicadores);
 		EventListener indicatorListener = new EventListener() {
 
-			
 			public void onBrowserEvent(Event event) {
 				String indicator = matrixWidget.getSelectedIndicator();
 				matrixWidget.updateTable(indicator);
 			}
 		};
+
 		matrixWidget.addIndicatorChangeListener(indicatorListener);
+
 		matrixDiv.clear();
-		matrixDiv.add(matrixWidget);	
+		matrixDiv.add(matrixWidget);
 	}
 
 	/**
@@ -80,7 +81,7 @@ public class MatrixController {
 
 	public void setBreadcrumb(HTMLPanel breadcrumbIndicadores) {
 		matrixDiv.add(breadcrumbIndicadores);
-		
+
 	}
 
 }
