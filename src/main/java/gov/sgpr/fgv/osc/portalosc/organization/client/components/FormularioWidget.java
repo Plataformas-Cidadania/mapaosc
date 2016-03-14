@@ -66,7 +66,11 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("<div class='container'>");
 		htmlBuilder.append("	<div class='social'>");
 		htmlBuilder.append("		<div class='imagem'>");
-		htmlBuilder.append("			<img src='imagens/" + (org.getGoogle() != "" ? org.getGoogle() + "' alt='" + org.getRazaoSocial() + "' width='160' height='160'" : "org_indisponivel.jpg'") + " />");
+		if(org.getImagem().length() == 0){
+			htmlBuilder.append("		<img src='imagens/org_indisponivel.jpg' />");
+		}else{
+			htmlBuilder.append("		<img src='imagens/" + org.getImagem() + "' width='160' height='160' />");
+		}
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
 		
@@ -770,17 +774,17 @@ public class FormularioWidget extends Composite {
 		org.setEmail(InputElement.as(DOM.getElementById("email")).getValue());
 		org.setSite(InputElement.as(DOM.getElementById("site")).getValue());
 		
-		org.setGoogle(InputElement.as(DOM.getElementById("google")).getValue());
-		if(org.getGoogle().substring(0, 7) != "https://") org.setGoogle("https://" + org.getGoogle());
+		String google = InputElement.as(DOM.getElementById("google")).getValue();
+		if(google.substring(0, 7) != "https://" && google.length() > 0) org.setGoogle("https://" + google);
 		
-		org.setFacebook(InputElement.as(DOM.getElementById("facebook")).getValue());
-		if(org.getFacebook().substring(0, 7) != "https://") org.setFacebook("https://" + org.getFacebook());
+		String facebook = InputElement.as(DOM.getElementById("facebook")).getValue();
+		if(facebook.substring(0, 7) != "https://" && facebook.length() > 0) org.setFacebook("https://" + facebook);
 		
-		org.setLinkedin(InputElement.as(DOM.getElementById("linkedin")).getValue());
-		if(org.getLinkedin().substring(0, 7) != "https://") org.setLinkedin("https://" + org.getLinkedin());
+		String linkedin = InputElement.as(DOM.getElementById("linkedin")).getValue();
+		if(linkedin.substring(0, 7) != "https://") org.setLinkedin("https://" + linkedin);
 		
-		org.setTwitter(InputElement.as(DOM.getElementById("twitter")).getValue());
-		if(org.getTwitter().substring(0, 7) != "https://") org.setTwitter("https://" + org.getTwitter());
+		String twitter = InputElement.as(DOM.getElementById("twitter")).getValue();
+		if(twitter.substring(0, 7) != "https://" && twitter.length() > 0) org.setTwitter("https://" + twitter);
 		
 		ArrayList<DiretorModel> diretorList = new ArrayList<DiretorModel>();
 		for(int i = 1;i <= dir; i++){
