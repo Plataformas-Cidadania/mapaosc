@@ -48,22 +48,22 @@ public class OrganizationWidget extends Composite {
 		menuInfo.setImageUrl("imagens/org_indisponivel.jpg");
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<div class='organizacao'>");
-		htmlBuilder.append("	<img src='" + menuInfo.getImageUrl() + "' alt='" + menuInfo.getTitle() + "' />");
-//		htmlBuilder.append("	<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
-		htmlBuilder.append("		<span id='tooltip_' title='' class='menuTooltip'>" + menuInfo.getTitle() + "</span>");
-//		htmlBuilder.append("	</a>");
-		htmlBuilder.append("	<div id='like_counter' title='" + menuInfo.getLikeCounter() + " recomendaram esta organização.' class='tip_recomendacao'>");
-		htmlBuilder.append(			menuInfo.getLikeCounter());
-		htmlBuilder.append("	</div>");
+		htmlBuilder.append("<img src='" + menuInfo.getImageUrl() + "' alt='" + menuInfo.getTitle() + "' />");
+//		htmlBuilder.append("<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
+		htmlBuilder.append("<span id='tooltip_' title='' class='menuTooltip'>" + menuInfo.getTitle() + "</span>");
+//		htmlBuilder.append("</a>");
+		htmlBuilder.append("<div id='like_counter' title='" + menuInfo.getLikeCounter() + " recomendaram esta organização.' class='tip_recomendacao'>");
+		htmlBuilder.append(menuInfo.getLikeCounter());
+		htmlBuilder.append("</div>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div id='menu_itens'></div>");
-		htmlBuilder.append("	<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
-		htmlBuilder.append("		<button type='button' name='Ver detalhes' id='org_detalhes'>Ver detalhes</button>");
-		htmlBuilder.append("	</a>");
+		htmlBuilder.append("<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
+		htmlBuilder.append("<button type='button' name='Ver detalhes' id='org_detalhes'>Ver detalhes</button>");
+		htmlBuilder.append("</a>");
 		String btnText = menuInfo.isRecommended() ? "Recomendar (desfazer)" : "Recomendar";
 		
 		htmlBuilder.append("<button type=\"button\" name=\"Recomendar\" id=\"org_recomendar\">" + btnText + "</button>");
-
+		
 		return htmlBuilder.toString();
 	}
 
