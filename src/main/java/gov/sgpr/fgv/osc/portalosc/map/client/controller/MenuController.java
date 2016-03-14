@@ -209,7 +209,8 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 
 	private void setupMatrix() {
-		//final Element divBreadcrumb = DOM.getElementById("breadcrumb_indicadores");
+		// final Element divBreadcrumb =
+		// DOM.getElementById("breadcrumb_indicadores");
 		final Element divMapa = DOM.getElementById("mapa");
 		map.setVisible(false);
 		search.setVisible(false);
@@ -217,7 +218,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		matrix.setVisible(true);
 		divMapa.getStyle().setDisplay(Display.INLINE);
 		divMapa.setClassName("infograficos");
-		//divBreadcrumb.getStyle().setDisplay(Display.INLINE);
+		// divBreadcrumb.getStyle().setDisplay(Display.INLINE);
 		initFunction();
 		map.removeResizeHandler();
 		addResizeHandler();
@@ -620,9 +621,12 @@ public class MenuController implements ValueChangeHandler<String> {
 
 			} else {
 				// logger.log(Level.INFO, "HASH: "+hash);
-
 				breadcrumb.clearBreadcrumb();
-				String vetBreadcrumb[] = Cookies.getCookie("breadcrumb").split(",");
+				String vetBreadcrumb[];
+				if (Cookies.getCookie("breadcrumb") != null)
+					vetBreadcrumb = Cookies.getCookie("breadcrumb").split(",");
+				else
+					vetBreadcrumb = null;
 
 				if (vetBreadcrumb != null && !vetBreadcrumb.equals("")) {
 					for (int s = 1; s < vetBreadcrumb.length; s++) {

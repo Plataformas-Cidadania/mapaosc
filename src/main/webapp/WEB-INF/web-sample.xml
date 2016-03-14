@@ -108,6 +108,14 @@
     <param-value> </param-value>
   </context-param>
   <context-param>
+    <param-name>STATIC_URL</param-name>
+    <param-value>/</param-value>
+  </context-param>
+  <context-param>
+    <param-name>STATIC_CONFIG</param-name>
+    <param-value>static.xml</param-value>
+  </context-param>
+  <context-param>
 		<param-name>SERVER_SMTP</param-name>
 		<param-value> </param-value>
 	</context-param>
@@ -167,7 +175,7 @@
   </servlet>
   <servlet>
     <servlet-name>remoteService</servlet-name>
-    <servlet-class>gov.sgpr.fgv.osc.portalosc.configuration.server.RemoteServiceImpl</servlet-class>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>searchOSCConfigService</servlet-name>
@@ -175,17 +183,17 @@
   </servlet>
   
   <servlet>
+    <servlet-name>staticContentService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.staticcontent.server.StaticContentServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>organizationService</servlet-name>
     <servlet-class>gov.sgpr.fgv.osc.portalosc.organization.server.OrganizationServiceImpl</servlet-class>
   </servlet>
-  
   <servlet>
     <servlet-name>jUnitHostImpl</servlet-name>
     <servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
   </servlet>
-  
-  
-  
   <!-- Servlets mappings -->
   <servlet-mapping>
     <servlet-name>remoteLogging</servlet-name>
@@ -266,6 +274,32 @@
     <url-pattern>/Organization/organizationService</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>remoteService</servlet-name>
+    <url-pattern>/Organization/remoteService</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>remoteLogging</servlet-name>
+    <url-pattern>/StaticContent/remote_logging</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>staticContentService</servlet-name>
+    <url-pattern>/StaticContent/staticContentService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userService</servlet-name>
+    <url-pattern>/StaticContent/userService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>socialNetworkService</servlet-name>
+    <url-pattern>/StaticContent/socialNetworkService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>jUnitHostImpl</servlet-name>
+    <url-pattern>/StaticContent/junithost/*</url-pattern>
+  </servlet-mapping> 
+
   <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
     <url-pattern>/Prototype/junithost/*</url-pattern>
