@@ -36,7 +36,7 @@ public class FormularioWidget extends Composite {
 	public Integer conv = 0;
 	public Integer count = 0;
 	public Boolean edit = true;
-		
+	
 	public FormularioWidget(OrganizationModel organizationModel, Boolean editable){
 		initWidget(getHTML(organizationModel, editable));
 	}
@@ -51,22 +51,47 @@ public class FormularioWidget extends Composite {
 	private HTML getHTML(OrganizationModel org, Boolean editable){
 		StringBuilder htmlBuilder = new StringBuilder();
 		edit = editable;
+		htmlBuilder.append("<form id='entidade_edicao' name='entidade_edicao' method='post'>");
+		
+		htmlBuilder.append("<div class='titulo'>");
+		htmlBuilder.append("	<h1><em>&nbsp;</em> ");
+		htmlBuilder.append(org.getRazaoSocial() == null ? "Organização" : org.getRazaoSocial());
+		htmlBuilder.append("	</h1>");
+//		htmlBuilder.append("	<div class='botoes'>");
+//		htmlBuilder.append("		<a href='exportar.html' class='botao exportar box_exportar'>Exportar</a>");
+//		htmlBuilder.append("		<a class='botao' href='organizacao_edicao.html'>Edição</a>");
+//		htmlBuilder.append("	</div>");
+		htmlBuilder.append("</div>");
+		
 		htmlBuilder.append("<div class='container'>");
 		htmlBuilder.append("	<div class='social'>");
 		htmlBuilder.append("		<div class='imagem'>");
-		htmlBuilder.append("			<img src='imagens/osc/" + (org.getGoogle() != "" ? org.getGoogle() + "' alt='" + org.getRazaoSocial() + "' width='160' height='160'" : "org_indisponivel.jpg'") + " />");
+		if(org.getImagem().length() == 0){
+			htmlBuilder.append("		<img src='imagens/org_indisponivel.jpg' />");
+		}else{
+			htmlBuilder.append("		<img src='imagens/" + org.getImagem() + "' width='160' height='160' />");
+		}
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
-		htmlBuilder.append("			<a href='" + (org.getGoogle() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-google' name='redes' title='Google'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getFacebook() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-facebook' name='redes' title='Facebook'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getLinkedin() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getTwitter() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-twitter' name='redes' title='Twitter'></button></a>");
+		
+		if(org.getGoogle().length() == 0) htmlBuilder.append("<button type='button' id='b-google' name='redes' title='Google'></button>");
+		else htmlBuilder.append("<a href='" + org.getGoogle() + "'><button type='button' id='b-google' name='redes' title='Google'></button></a>");
+		
+		if(org.getFacebook().length() == 0) htmlBuilder.append("<button type='button' id='b-facebook' name='redes' title='Facebook'></button>");
+		else htmlBuilder.append("<a href='" + org.getFacebook() + "'><button type='button' id='b-facebook' name='redes' title='Facebook'></button></a>");
+		
+		if(org.getLinkedin().length() == 0) htmlBuilder.append("<button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button>");
+		else htmlBuilder.append("<a href='" + org.getLinkedin() + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button></a>");
+		
+		if(org.getTwitter().length() == 0) htmlBuilder.append("<button type='button' id='b-twitter' name='redes' title='Twitter'></button>");
+		else htmlBuilder.append("<a href='" + org.getTwitter() + "'><button type='button' id='b-twitter' name='redes' title='Twitter'></button></a>");
+		
 		htmlBuilder.append("		</div>");
-		htmlBuilder.append("		<a href='" + (org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString()) + "' class='participar box'>Como Participar</a>");
+		htmlBuilder.append("		<a href='" + org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString() + "' class='participar box'>Como Participar</a>");
 		htmlBuilder.append("		<div class='recomendacoes'>");
 		htmlBuilder.append("			<span class='tooltip' data-hasqtip='4' title='" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + " recomendações'>" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + "</span>");
 		htmlBuilder.append("		</div>");
-		htmlBuilder.append("		<button type='button' class='recomendar'>Recomendar</button>");
+		htmlBuilder.append("		<button type='button' class='recomendar' id='recomendar'>Recomendar</button>");
 //		htmlBuilder.append("		<div class='classificacao'>");
 //		htmlBuilder.append("			<h3>Classificação</h3>");
 //		htmlBuilder.append("			<ul class='dados'>");
@@ -83,34 +108,25 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<div class='gerais'>");
 		htmlBuilder.append("				<fieldset>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Razão Social:</strong>");
-		if(org.getRazaoSocial() == null || org.getRazaoSocial() == "")
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + org.getRazaoSocial() + "</span>");
-//		htmlBuilder.append("						<input type='text' name='razao_social' id='razao_social' placeholder='Informação não disponível' value='" + org.getRazaoSocial() + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
-		htmlBuilder.append("					</div>");
-		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Nome Fantasia:</strong>");
+		htmlBuilder.append("						<strong>Nome fantasia:</strong>");
 		htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>CNPJ:</strong>");
-		if(org.getCnpj() == null || org.getCnpj() == -1L)
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + convertNumberToString(org.getCnpj()) + "</span>");
-//		htmlBuilder.append("						<input type='text' name='cnpj' id='cnpj' placeholder='Informação não disponível' value='" + convertNumberToString(org.getCnpj()) + "' " + (editable ? "" : "readonly") + "/>");
+		if(org.getCnpj() == null || org.getCnpj() == -1L){
+			htmlBuilder.append("					<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("					<span>" + convertNumberToString(org.getCnpj()) + "</span>");
+		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Endereço:</strong>");
 		if(org.getEndereco() == null || org.getEndereco() == ""){
-			htmlBuilder.append("						<span id='endereco' title='Endereço'>Informação não disponível</span>");
+			htmlBuilder.append("					<span id='endereco' title='Endereço'>Informação não disponível</span>");
 		}else{
-			htmlBuilder.append("						<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "'><span id='endereco' title='Endereço'>" + org.getEndereco() + "</span></a>");
+			htmlBuilder.append("					<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "'><span id='endereco' title='Endereço'>" + org.getEndereco() + "</span></a>");
 		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
@@ -120,45 +136,40 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 //		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Natureza Jurídica:</strong>");
-		if(org.getNaturezaJuridica() == null || org.getNaturezaJuridica() == "")
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + org.getNaturezaJuridica() + "</span>");
-//		htmlBuilder.append("						<input type='text' name='natureza_juridica' id='natureza_juridica' placeholder='Informação não disponível' value='" + org.getNaturezaJuridica() + "' " + (editable ? "" : "readonly") + "/>");
+		htmlBuilder.append("						<strong>Natureza jurídica:</strong>");
+		if(org.getNaturezaJuridica() == null || org.getNaturezaJuridica() == ""){
+			htmlBuilder.append("					<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("					<span>" + org.getNaturezaJuridica() + "</span>");
+		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Atividade econômica (CNAE):</strong>");
-		if(org.getCnae() == null || org.getCnae() == "")
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + org.getCnae() + "</span>");
-//		htmlBuilder.append("						<input type='text' name='cnae' id='cnae' placeholder='Informação não disponível' value='" + org.getCnae() + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("					<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
-		htmlBuilder.append("					</div>");
-		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Responsável Legal:</strong>");
-		if(org.getResponsavel() == null || org.getResponsavel() == "")
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + org.getResponsavel() + "</span>");
-//		htmlBuilder.append("						<input type='text' name='responsavel' id='responsavel' placeholder='Informação não disponível' value='" + org.getResponsavel() + "' " + (editable ? "" : "readonly") + "/>");
+		if(org.getCnae() == null || org.getCnae() == ""){
+			htmlBuilder.append("					<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("					<span>" + org.getCnae() + "</span>");
+		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Descrição do Projeto:</strong>");
-		htmlBuilder.append("						<textarea name='descricao_projeto' id='descricao_projeto' placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
+		htmlBuilder.append("						<strong>Responsável legal:</strong>");
+		if(org.getResponsavel() == null || org.getResponsavel() == ""){
+			htmlBuilder.append("					<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("					<span>" + org.getResponsavel() + "</span>");
+		}
+		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte RAIS'></span>");
+		htmlBuilder.append("					</div>");
+		htmlBuilder.append("					<div>");
+		htmlBuilder.append("						<strong>Descrição da OSC:</strong>");
+		htmlBuilder.append("						<textarea name='descricao_osc' id='descricao_osc' placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Ano de Fundação:</strong>");
+		htmlBuilder.append("						<strong>Ano de fundação:</strong>");
 		htmlBuilder.append("						<input type='number' name='ano_fundacao' id='ano_fundacao' placeholder='Informação não disponível' value='" + convertNumberToString(org.getAnoFundacao()) + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
-		htmlBuilder.append("					</div>");
-		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Site:</strong>");
-		htmlBuilder.append("						<input type='text' name='site' id='site' placeholder='Informação não disponível' value='" + org.getSite() + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
@@ -166,7 +177,33 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						<input type='text' name='email' id='email' placeholder='Informação não disponível' value='" + org.getEmail() + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
-		
+		htmlBuilder.append("					<div>");
+		htmlBuilder.append("						<strong>Site:</strong>");
+		htmlBuilder.append("						<input type='text' name='site' id='site' placeholder='Informação não disponível' value='" + org.getSite() + "' " + (editable ? "" : "readonly") + "/>");
+		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+		htmlBuilder.append("					</div>");
+		if(editable){
+			htmlBuilder.append("				<div>");
+			htmlBuilder.append("					<strong>Google+:</strong>");
+			htmlBuilder.append("					<input type='text' name='google' id='google' placeholder='Informação não disponível' value='" + org.getGoogle() + "' />");
+			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("				</div>");
+			htmlBuilder.append("				<div>");
+			htmlBuilder.append("					<strong>Facebook:</strong>");
+			htmlBuilder.append("					<input type='text' name='facebook' id='facebook' placeholder='Informação não disponível' value='" + org.getFacebook() + "' />");
+			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("				</div>");
+			htmlBuilder.append("				<div>");
+			htmlBuilder.append("					<strong>Linkedin:</strong>");
+			htmlBuilder.append("					<input type='text' name='linkedin' id='linkedin' placeholder='Informação não disponível' value='" + org.getLinkedin() + "' />");
+			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("				</div>");
+			htmlBuilder.append("				<div>");
+			htmlBuilder.append("					<strong>Twitter:</strong>");
+			htmlBuilder.append("					<input type='text' name='twitter' id='twitter' placeholder='Informação não disponível' value='" + org.getTwitter() + "' />");
+			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("				</div>");
+		}
 //		htmlBuilder.append("					<div>");
 //		htmlBuilder.append("						<strong>Participação social:</strong>");
 //		htmlBuilder.append("						<ul id='social' class='participacao'>");
@@ -219,60 +256,60 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</fieldset>");
 		htmlBuilder.append("			</div>");
-		
-		htmlBuilder.append(" <h2>Quadro de Diretores <button type='button' class='adicionar' id='addDiretor' style='float:right;margin-top:3px;margin-right: 3px;'>Adicionar</button></h2>");
-		htmlBuilder.append(" <fieldset>");
-		htmlBuilder.append(" <div id='diretores' class='diretores'>");
+		htmlBuilder.append("			<h2>Quadro de Diretores <button type='button' class='adicionar' id='addDiretor' style='float:right;margin-top:3px;margin-right: 3px;'>Adicionar</button></h2>");
+		htmlBuilder.append("			<fieldset>");
+		htmlBuilder.append("				<div id='diretores' class='diretores'>");
 		if(org.getDiretores().size() == 0){
-			htmlBuilder.append(" <div style='margin: 10px;'>");
-			htmlBuilder.append(" <span id='indDir' >Informação não disponível</span>");
-			htmlBuilder.append(" </div>");
+			htmlBuilder.append("				<div style='margin: 10px;'>");
+			htmlBuilder.append("					<span id='indDir' >Informação não disponível</span>");
+			htmlBuilder.append("				</div>");
 		}else{
 			for (DiretorModel d : org.getDiretores()){
 				dir++;
-				htmlBuilder.append(" <div id='incluirDir'>");
-				htmlBuilder.append("<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " />");
-				htmlBuilder.append("<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " />");
-				htmlBuilder.append("<div class='botoes'><button id='removedir"+ dir +"' value='"+ d.getId() +"' type='button' class='excluir participacao'>Excluir</button></div>");
-				htmlBuilder.append(" </div>");
+				htmlBuilder.append("			<div id='incluirDir'>");
+				htmlBuilder.append("				<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " />");
+				htmlBuilder.append("				<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " />");
+				htmlBuilder.append("				<div class='botoes'>");
+				htmlBuilder.append("					<button id='removedir"+ dir +"' value='"+ d.getId() +"' type='button' class='excluir participacao'>Excluir</button>");
+				htmlBuilder.append("				</div>");
+				htmlBuilder.append("			</div>");
 			}
 		}	
-		htmlBuilder.append(" </div>");
-		htmlBuilder.append(" </fieldset>");
-		
+		htmlBuilder.append("				</div>");
+		htmlBuilder.append("			</fieldset>");
 		htmlBuilder.append("			<h2>Colaboradores</h2>");
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Total de Colaboradores:</strong>");
-		if(org.getTotalColaboradores() == null || org.getTotalColaboradores() == -1)
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + convertNumberToString(org.getTotalColaboradores()) + "</span>");
-//		htmlBuilder.append("						<input type='text' name='total_colaboradores' id='total_colaboradores' placeholder='Informação não disponível' value='" + convertNumberToString(org.getTotalColaboradores()) + "' " + (editable ? "" : "readonly") + "/>");
+		htmlBuilder.append("						<strong>Total de colaboradores:</strong>");
+		if(org.getTotalColaboradores() == null || org.getTotalColaboradores() == -1){
+			htmlBuilder.append("					<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("					<span>" + convertNumberToString(org.getTotalColaboradores()) + "</span>");
+		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS e SUAS'></span>");
 		htmlBuilder.append("						<div id='recolherCol' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recCol' ><div></div></div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div id='recCol' class='collapse' >");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Trabalhadores com vínculo:</strong>");
-		if(org.getTrabalhadores() == null || org.getTrabalhadores() == -1)
+		if(org.getTrabalhadores() == null || org.getTrabalhadores() == -1){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
+		}else{
 			htmlBuilder.append("						<span>" + convertNumberToString(org.getTrabalhadores()) + "</span>");
-//		htmlBuilder.append("							<input type='text' name='trabalhadores' id='trabalhadores' placeholder='Informação não disponível' value='" + convertNumberToString(org.getTrabalhadores()) + "' " + (editable ? "" : "readonly") + "/>");
+		}
+		htmlBuilder.append("						</div>");
+		htmlBuilder.append("						<div>");
+		htmlBuilder.append("							<strong>Colaboradores portadores de deficiência:</strong>");
+		if(org.getPortadoresDeficiencia() == null || org.getPortadoresDeficiencia() == -1){
+			htmlBuilder.append("						<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("						<span>" + convertNumberToString(org.getPortadoresDeficiencia()) + "</span>");
+		}
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Voluntários:</strong>");
 		htmlBuilder.append("							<input type='number' name='voluntarios' id='voluntarios' placeholder='Informação não disponível' value='" + convertNumberToString(org.getVoluntarios()) + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						</div>");
-		htmlBuilder.append("						<div>");
-		htmlBuilder.append("							<strong>Colaboradores portadores de deficiência:</strong>");
-		if(org.getPortadoresDeficiencia() == null || org.getPortadoresDeficiencia() == -1)
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + convertNumberToString(org.getPortadoresDeficiencia()) + "</span>");
-//		htmlBuilder.append("							<input type='text' name='colaboradores_portadores_deficiencia' id='colaboradores_portadores_deficiencia' placeholder='Informação não disponível' value='" + convertNumberToString(org.getPortadoresDeficiencia()) + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
@@ -282,38 +319,38 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Valor total das parcerias (R$):</strong>");
-		if(org.getValorParceriasTotal() == null || org.getValorParceriasTotal() == -1.0)
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
-			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasTotal()) + "</span>");
-//		htmlBuilder.append("						<input type='text' name='valor_total_parcerias' id='valor_total_parcerias' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasTotal()) + "' " + (editable ? "" : "readonly") + "/>");
+		if(org.getValorParceriasTotal() == null || org.getValorParceriasTotal() == -1.0){
+			htmlBuilder.append("					<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("					<span>" + convertNumberToCurrencyString(org.getValorParceriasTotal()) + "</span>");
+		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte Siconv e Finep'></span>");
 		htmlBuilder.append("						<div id='recolherParc' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recParc' ><div></div></div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div id='recParc' class='collapse'>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias federais (R$):</strong>");
-		if(org.getValorParceriasFederal() == null || org.getValorParceriasFederal() == -1.0)
+		if(org.getValorParceriasFederal() == null || org.getValorParceriasFederal() == -1.0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
+		}else{
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasFederal()) + "</span>");
-//		htmlBuilder.append("							<input type='text' name='valor_parcerias_federais' id='valor_parcerias_federais' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasFederal()) + "' " + (editable ? "" : "readonly") + "/>");
+		}
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias estaduais (R$):</strong>");
-		if(org.getValorParceriasEstadual() == null || org.getValorParceriasEstadual() == -1.0)
+		if(org.getValorParceriasEstadual() == null || org.getValorParceriasEstadual() == -1.0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
+		}else{
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasEstadual()) + "</span>");
-//		htmlBuilder.append("							<input type='text' name='valor_parcerias_estaduais' id='valor_parcerias_estaduais' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasEstadual()) + "' " + (editable ? "" : "readonly") + "/>");
+		}
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias municipais (R$):</strong>");
-		if(org.getValorParceriasMunicipal() == null || org.getValorParceriasMunicipal() == -1.0)
+		if(org.getValorParceriasMunicipal() == null || org.getValorParceriasMunicipal() == -1.0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
-		else
+		}else{
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasMunicipal()) + "</span>");
-//		htmlBuilder.append("							<input type='text' name='valor_parcerias_municipais' id='valor_parcerias_municipais' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(org.getValorParceriasMunicipal()) + "' " + (editable ? "" : "readonly") + "/>");
+		}
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
@@ -339,28 +376,27 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("					<li class='fonte'><em>Fonte:</em> SICONV</li>");
 //		htmlBuilder.append("				</ul>");
 //		htmlBuilder.append("			</div>");
-		htmlBuilder.append("			<h2>Certificados federais</h2>");
+		htmlBuilder.append("			<h2>Titulações e certificações federais</h2>");
 		htmlBuilder.append("			<div>");
 		htmlBuilder.append("				<ul class='dados checklist'>");
 		if(org.getCertificacao().size() == 0){
-			htmlBuilder.append("					<li>Organização sem certificados</li>");
+			htmlBuilder.append("				<li>Organização sem certificados</li>");
 		}else{
 			String source = "";
 			for (HashMap.Entry<String, String> entry : org.getCertificacao().entrySet()) {
-				htmlBuilder.append("					<li>" + entry.getKey() + "</li>");
+				htmlBuilder.append("			<li>" + entry.getKey() + "</li>");
 				source += entry.getValue() + ", ";
 			}
 			source = source.substring(0, source.length() - 2);
-			htmlBuilder.append("					<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte " + source + "'></span>");
+			htmlBuilder.append("				<span class='fonte_de_dados dado_oficial' title='Dado Oficial, fonte " + source + "'></span>");
 		}
 		htmlBuilder.append("				</ul>");
 		htmlBuilder.append("			</div>");
 		htmlBuilder.append("		</div>");
-		
 		htmlBuilder.append("		<div id='addFormProj' class='projetos'>");
 		htmlBuilder.append("			<div class='titulo'>");
 		htmlBuilder.append("				<h2>Projetos</h2>");
-		htmlBuilder.append("					<button id='addProjetos' type='button' class='adicionar'>Adicionar</button>");
+		htmlBuilder.append("				<button id='addProjetos' type='button' class='adicionar'>Adicionar</button>");
 //		htmlBuilder.append("				<div class='filtro'>");
 //		htmlBuilder.append("					<span>Fontes:</span>");
 //		htmlBuilder.append("					<span>");
@@ -379,113 +415,118 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			</div>");
 		
 		if(org.getProjetos().size() == 0 && org.getConvenios().size() == 0){
-			htmlBuilder.append("			<div class='clearfix projeto collapsable'>");
-			htmlBuilder.append("				<span id='indProj' title='projeto'>Informação não disponível</span>");
-			htmlBuilder.append("			</div>");
+			htmlBuilder.append("		<div class='clearfix projeto collapsable'>");
+			htmlBuilder.append("			<span id='indProj' title='projeto'>Informação não disponível</span>");
+			htmlBuilder.append("		</div>");
 		}else{
 			for (ProjetoModel p : org.getProjetos()){
 				proj++;
-				htmlBuilder.append("			<div class='clearfix projeto collapsable'>");
-				htmlBuilder.append("				<div class='projeto_header'>");
-				htmlBuilder.append("					<div id='recolherProj' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recProj"+ proj +"' ><div></div></div>");
-				htmlBuilder.append("						<div class='nome'>");	
-				htmlBuilder.append("							<span class='no_margin_right'>" + (org.getProjetos().indexOf(p) + 1) + " |</span>");
-				if(p.getTitulo() == null)
-					htmlBuilder.append("							<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' value='' " + (editable ? "" : "readonly") + "/></span>");
-				else
-					htmlBuilder.append("							<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' value='" + p.getTitulo() + "' " + (editable ? "" : "readonly") + "/></span>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("						<span class='clear_both'></span>");
-				htmlBuilder.append("					</div>");
-				htmlBuilder.append("					<div id='recProj"+ proj +"' class='collapse'>");
-				htmlBuilder.append("						<div class='linha clearfix'>");
-				
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador left-radius'>Status</strong>");
-				htmlBuilder.append("<p id='projeto_status"+ proj +"' >");
-				htmlBuilder.append("<select " + (editable ? "" : "disabled") + ">");
+				htmlBuilder.append("	<div class='clearfix projeto collapsable'>");
+				htmlBuilder.append("		<div class='projeto_header'>");
+				htmlBuilder.append("			<div id='recolherProj' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recProj"+ proj +"' ><div></div></div>");
+				htmlBuilder.append("				<div class='nome'>");	
+				htmlBuilder.append("					<span class='no_margin_right'>" + (org.getProjetos().indexOf(p) + 1) + " |</span>");
+				if(p.getTitulo() == null){
+					htmlBuilder.append("				<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' value='' " + (editable ? "" : "readonly") + "/></span>");
+				}else{
+					htmlBuilder.append("				<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' value='" + p.getTitulo() + "' " + (editable ? "" : "readonly") + "/></span>");
+				}
+				htmlBuilder.append("				</div>");
+				htmlBuilder.append("				<span class='clear_both'></span>");
+				htmlBuilder.append("			</div>");
+				htmlBuilder.append("			<div id='recProj"+ proj +"' class='collapse'>");
+				htmlBuilder.append("				<div class='linha clearfix'>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador left-radius'>Status</strong>");
+				htmlBuilder.append("						<p id='projeto_status"+ proj +"' >");
+				htmlBuilder.append("							<select " + (editable ? "" : "disabled") + ">");
 				if(p.getStatus() == "Planejado"){
-					htmlBuilder.append("<option value='Planejado' selected='selected'> Planejado </option>");
-					htmlBuilder.append("<option value='Em Execução' > Em Execução </option>");
-					htmlBuilder.append("<option value='Finalizado' > Finalizado </option>");
+					htmlBuilder.append("							<option value='Planejado' selected='selected'> Planejado </option>");
+					htmlBuilder.append("							<option value='Em Execução' > Em Execução </option>");
+					htmlBuilder.append("							<option value='Finalizado' > Finalizado </option>");
 				}else if(p.getStatus() == "Em Execução"){
-					htmlBuilder.append("<option value='Planejado' > Planejado </option>");
-					htmlBuilder.append("<option value='Em Execução' selected='selected' > Em Execução </option>");
-					htmlBuilder.append("<option value='Finalizado' > Finalizado </option>");
+					htmlBuilder.append("							<option value='Planejado' > Planejado </option>");
+					htmlBuilder.append("							<option value='Em Execução' selected='selected' > Em Execução </option>");
+					htmlBuilder.append("							<option value='Finalizado' > Finalizado </option>");
 				}else if(p.getStatus() == "Finalizado"){
-					htmlBuilder.append("<option value='Planejado' > Planejado </option>");
-					htmlBuilder.append("<option value='Em Execução' > Em Execução </option>");
-					htmlBuilder.append("<option value='Finalizado' selected='selected' > Finalizado </option>");
+					htmlBuilder.append("							<option value='Planejado' > Planejado </option>");
+					htmlBuilder.append("							<option value='Em Execução' > Em Execução </option>");
+					htmlBuilder.append("							<option value='Finalizado' selected='selected' > Finalizado </option>");
 				}else{
-					htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
-					htmlBuilder.append("<option value='Planejado' > Planejado </option>");
-					htmlBuilder.append("<option value='Em Execução' > Em Execução </option>");
-					htmlBuilder.append("<option value='Finalizado' > Finalizado </option>");
+					htmlBuilder.append("							<option value='' disabled selected>Informação não disponível</option>");
+					htmlBuilder.append("							<option value='Planejado' > Planejado </option>");
+					htmlBuilder.append("							<option value='Em Execução' > Em Execução </option>");
+					htmlBuilder.append("							<option value='Finalizado' > Finalizado </option>");
 				}
-				htmlBuilder.append("</select>");
-				htmlBuilder.append("</p>");
-				htmlBuilder.append("</div>");
+				htmlBuilder.append("							</select>");
+				htmlBuilder.append("						</p>");
+				htmlBuilder.append("					</div>");
 				
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador'>Data Início</strong>");
-				htmlBuilder.append("								<p id='data_inicio"+ proj +"' ></p>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador'>Data Final</strong>");
-				htmlBuilder.append("								<p id='data_final"+ proj +"' ></p>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador'>Valor Total (R$)</strong>");
-				htmlBuilder.append("								<p><input type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(p.getValorTotal()) + "'  " + (editable ? "" : "readonly") + " /></p>");
-				htmlBuilder.append("							</div>");
-				
-				htmlBuilder.append("<div class='col1_6'>");
-				htmlBuilder.append("<strong class='separador'>Fonte de recurso</strong>");
-				htmlBuilder.append("<p id='projeto_fonte"+ proj +"' ><select  " + (editable ? "" : "disabled") + ">");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Data Início</strong>");
+				htmlBuilder.append("						<p id='data_inicio"+ proj +"' ></p>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Data Final</strong>");
+				htmlBuilder.append("						<p id='data_final"+ proj +"' ></p>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Valor Total (R$)</strong>");
+				htmlBuilder.append("						<p><input type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(p.getValorTotal()) + "'  " + (editable ? "" : "readonly") + " /></p>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Fonte de recurso</strong>");
+				htmlBuilder.append("						<p id='projeto_fonte"+ proj +"' >");
+				htmlBuilder.append("							<select  " + (editable ? "" : "disabled") + ">");
 				if(p.getFonteRecursos() == "Público"){
-					htmlBuilder.append("<option value='Público' selected='selected' > Público </option>");
-					htmlBuilder.append("<option value='Privado' > Privado </option>");
+					htmlBuilder.append("							<option value='Público' selected='selected' > Público </option>");
+					htmlBuilder.append("							<option value='Privado' > Privado </option>");
 				}else if(p.getFonteRecursos() == "Privado"){
-					htmlBuilder.append("<option value='Público' > Público </option>");
-					htmlBuilder.append("<option value='Privado' selected='selected' > Privado </option>");
+					htmlBuilder.append("							<option value='Público' > Público </option>");
+					htmlBuilder.append("							<option value='Privado' selected='selected' > Privado </option>");
 				}else{
-					htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
-					htmlBuilder.append("<option value='Público' > Público </option>");
-					htmlBuilder.append("<option value='Privado' > Privado </option>");
+					htmlBuilder.append("							<option value='' disabled selected>Informação não disponível</option>");
+					htmlBuilder.append("							<option value='Público' > Público </option>");
+					htmlBuilder.append("							<option value='Privado' > Privado </option>");
 				}
-				htmlBuilder.append("</select>");
-				htmlBuilder.append("</p>");
-				htmlBuilder.append("</div>");
-				
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='right-radius'>Link</strong>");					
+				htmlBuilder.append("							</select>");
+				htmlBuilder.append("						</p>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='right-radius'>Link</strong>");					
 				if(editable == false){
-					if(p.getLink() == "link para página" || p.getLink() == "" || p.getLink() == null)
-						htmlBuilder.append("<span>Informação não disponível</span>");
-					else{
-						htmlBuilder.append("<p>");
-						htmlBuilder.append("<span id='linkproj"+proj+"' title='' class='menuTooltip'><span>Você será redirecionado para a página do Projeto</span>");
-						htmlBuilder.append("<a id='link"+ proj +"' href='http://" + p.getLink() + "' target='_blank' " + (editable ? "contenteditable='true'" : "contenteditable='false'") + " contenteditable='true' >link para página</a>");
-						htmlBuilder.append("</span>");
-						htmlBuilder.append("</p>");
+					if(p.getLink() == "link para página" || p.getLink() == "" || p.getLink() == null){
+						htmlBuilder.append("				<span>Informação não disponível</span>");
+					}else{
+						htmlBuilder.append("				<p>");
+						htmlBuilder.append("					<span id='linkproj"+proj+"' title='' class='menuTooltip'>");
+						htmlBuilder.append("						<span>Você será redirecionado para a página do Projeto</span>");
+						htmlBuilder.append("						<a id='link"+ proj +"' href='http://" + p.getLink() + "' target='_blank' " + (editable ? "contenteditable='true'" : "contenteditable='false'") + " contenteditable='true' >link para página</a>");
+						htmlBuilder.append("					</span>");
+						htmlBuilder.append("				</p>");
 					}
 				}else{
 					if(p.getLink() == null){
-						htmlBuilder.append("<p><input id='link"+ proj +"' name='link"+ proj +"' placeholder='Digite a página do projeto' /></p>");
+						htmlBuilder.append("				<p>");
+						htmlBuilder.append("					<input id='link"+ proj +"' name='link"+ proj +"' placeholder='Digite a página do projeto' />");
+						htmlBuilder.append("				</p>");
 					}else{
-						htmlBuilder.append("<p><input id='link"+ proj +"' name='link"+ proj +"' value='" + p.getLink() + "' /></p>");
+						htmlBuilder.append("				<p>");
+						htmlBuilder.append("					<input id='link"+ proj +"' name='link"+ proj +"' value='" + p.getLink() + "' />");
+						htmlBuilder.append("				</p>");
 					}
 				}
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("						<div class='clearfix linha'>");
-				htmlBuilder.append("							<div class='col1_3'>");
-				htmlBuilder.append("								<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
-				if(p.getPublicoAlvo() == null)
-					htmlBuilder.append("								<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
-				else
-					htmlBuilder.append("								<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getPublicoAlvo() + "</textarea>");
-				htmlBuilder.append("							</div>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("				</div>");
+				htmlBuilder.append("				<div class='clearfix linha'>");
+				htmlBuilder.append("					<div class='col1_3'>");
+				htmlBuilder.append("						<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
+				if(p.getPublicoAlvo() == null){
+					htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				}else{
+					htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getPublicoAlvo() + "</textarea>");
+				}
+				htmlBuilder.append("					</div>");
 //				htmlBuilder.append("							<div class='col1_6'>");
 //				htmlBuilder.append("								<strong class='separador'>Abrangência</strong>");
 //				htmlBuilder.append("								<p>");
@@ -505,147 +546,152 @@ public class FormularioWidget extends Composite {
 //				htmlBuilder.append("									</ul>");
 //				htmlBuilder.append("								</div>");
 //				htmlBuilder.append("							</div>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("						<div class='clearfix linha'>");
-				htmlBuilder.append("							<div class='col1_3'>");
-				htmlBuilder.append("								<strong class='left-radius separador'>Financiadores do Projeto</strong>");
-				if(p.getFinanciadores() == null)
-					htmlBuilder.append("								<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
-				else
-					htmlBuilder.append("								<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getFinanciadores() + "</textarea>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("							<div class='col2_3'>");
-				htmlBuilder.append("								<strong class='right-radius'>Descrição do Projeto</strong>");
-				if(p.getDescricao() == null)
-					htmlBuilder.append("								<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
-				else
-					htmlBuilder.append("								<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getDescricao() + "</textarea>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("						</div>");						
-				htmlBuilder.append("					</div>");
 				htmlBuilder.append("				</div>");
-				htmlBuilder.append("			<hr />");
+				htmlBuilder.append("				<div class='clearfix linha'>");
+				htmlBuilder.append("					<div class='col1_3'>");
+				htmlBuilder.append("						<strong class='left-radius separador'>Financiadores do Projeto</strong>");
+				if(p.getFinanciadores() == null){
+					htmlBuilder.append("					<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				}else{
+					htmlBuilder.append("					<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getFinanciadores() + "</textarea>");
+				}
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col2_3'>");
+				htmlBuilder.append("						<strong class='right-radius'>Descrição do Projeto</strong>");
+				if(p.getDescricao() == null){
+					htmlBuilder.append("					<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				}else{
+					htmlBuilder.append("					<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getDescricao() + "</textarea>");
+				}
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("				</div>");						
+				htmlBuilder.append("			</div>");
+				htmlBuilder.append("		</div>");
+				htmlBuilder.append("	<hr />");
 			}
 			
 			for (ConvenioModel c : org.getConvenios()){
 				conv++;
 				count = proj + conv;
 				String link = "https://www.convenios.gov.br/siconv/ConsultarProposta/ResultadoDaConsultaDeConvenioSelecionarConvenio.do?sequencialConvenio="+c.getNConv()+"&Usr=guest&Pwd=guest";
-				htmlBuilder.append("			<div class='clearfix projeto collapsable'>");
-				htmlBuilder.append("				<div class='projeto_header'>");
-				htmlBuilder.append("					<div id='recolherConv' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recConv"+ conv +"' ><div></div></div>");
-				htmlBuilder.append("						<div class='nome'>");
-				
-				htmlBuilder.append("							<span class='no_margin_right'>" + count  + " |</span>");
-				htmlBuilder.append("<span class='no_margin numero_convenio'> Parceria nº "+ c.getNConv() +" </span>");
-				if(c.getTitulo() == null || c.getTitulo() == "")
-					htmlBuilder.append("<span class='no_margin titulo_convenio'>Informação não disponível</span>");
-				else
-					htmlBuilder.append("<span class='no_margin titulo_convenio'>" + c.getTitulo() + "</span>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("						<span class='clear_both'></span>");
+				htmlBuilder.append("	<div class='clearfix projeto collapsable'>");
+				htmlBuilder.append("		<div class='projeto_header'>");
+				htmlBuilder.append("			<div id='recolherConv' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recConv"+ conv +"' ><div></div></div>");
+				htmlBuilder.append("				<div class='nome'>");
+				htmlBuilder.append("					<span class='no_margin_right'>" + count  + " |</span>");
+				htmlBuilder.append("					<span class='no_margin numero_convenio'> Parceria nº "+ c.getNConv() +" </span>");
+				if(c.getTitulo() == null || c.getTitulo() == ""){
+					htmlBuilder.append("				<span class='no_margin titulo_convenio'>Informação não disponível</span>");
+				}else{
+					htmlBuilder.append("				<span class='no_margin titulo_convenio'>" + c.getTitulo() + "</span>");
+				}
+				htmlBuilder.append("				</div>");
+				htmlBuilder.append("				<span class='clear_both'></span>");
+				htmlBuilder.append("			</div>");
+				htmlBuilder.append("			<div id='recConv"+ conv +"' class='collapse'>");
+				htmlBuilder.append("				<div class='linha clearfix'>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador left-radius'>Status</strong>");
+				htmlBuilder.append("						<p id='convenio_status"+ conv +"' >");
+				if(c.getStatus() == null || c.getStatus() == ""){
+					htmlBuilder.append("					<span>Informação não disponível</span>");
+				}else{
+					htmlBuilder.append("					<span>"+ c.getStatus() +"</span>");
+				}
 				htmlBuilder.append("					</div>");
-				htmlBuilder.append("					<div id='recConv"+ conv +"' class='collapse'>");
-				htmlBuilder.append("						<div class='linha clearfix'>");
-				
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador left-radius'>Status</strong>");
-				htmlBuilder.append("								<p id='convenio_status"+ conv +"' >");
-				if(c.getStatus() == null || c.getStatus() == "")
-					htmlBuilder.append("<span>Informação não disponível</span>");
-				else
-					htmlBuilder.append("<span>"+ c.getStatus() +"</span>");
-				htmlBuilder.append("</div>");
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador'>Data Início</strong>");
-				htmlBuilder.append("								<p><span name='projeto_data_inicio' id='convenio_data_inicio' >" + convertDateToString(c.getDataInicio()) + "</span></p>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador'>Data Final</strong>");
-				htmlBuilder.append("								<p><span name='projeto_data_final' id='convenio_data_final' >" + convertDateToString(c.getDataFim()) + "</span></p>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='separador'>Valor Total</strong>");
-				htmlBuilder.append("								<p><span name='projeto_valor_total' id='convenio_valor_total' > R$ " + convertNumberToCurrencyString(c.getValorTotal()) + "</span></p>");
-				htmlBuilder.append("							</div>");
-				
-				htmlBuilder.append("<div class='col1_6'>");
-				htmlBuilder.append("<strong class='separador'>Fonte de recurso</strong>");
-				htmlBuilder.append("<p id='convenio_fonte"+ conv +"' >");
-				htmlBuilder.append("<span>Público</span>");
-//				if(c.getFonteRecursos() == null || c.getFonteRecursos() == "")
-//					htmlBuilder.append("<span>Informação não disponível</span>");
-//				else
-//					htmlBuilder.append("<span>"+ c.getFonteRecursos() +"</span>");
-				htmlBuilder.append("</div>");
-				htmlBuilder.append("							<div class='col1_6'>");
-				htmlBuilder.append("								<strong class='right-radius'>Link</strong>");
-				htmlBuilder.append("<p>");
-				htmlBuilder.append("<span id='linkconv"+conv+"' title='' class='menuTooltip'><span>Você será redirecionado para a página SICONV. Nesta página são apresentados estatuto, quadro de diretores, instrumento do convênio e prestação de contas</span>");
-				htmlBuilder.append("<a href="+ link +" target='_blank' contenteditable='false'>Sobre a Parceria</a>");
-				htmlBuilder.append("</span>");
-				htmlBuilder.append("</p>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("						<div class='clearfix linha'>");
-				htmlBuilder.append("							<div class='col1_3'>");
-				htmlBuilder.append("								<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
-				
-				if(c.getPublicoAlvo() == null)
-					htmlBuilder.append("								<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
-				else
-					htmlBuilder.append("								<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + c.getPublicoAlvo() + "</textarea>");
-				
-				htmlBuilder.append("							</div>");
-//				htmlBuilder.append("							<div class='col1_6'>");
-//				htmlBuilder.append("								<strong class='separador'>Abrangência</strong>");
-//				htmlBuilder.append("								<p>");
-//				htmlBuilder.append("									<select " + (editable ? "" : "disabled='disabled'") + ">");
-//				htmlBuilder.append("										<option value='nacional' checked='checked'> Nacional </option>");
-//				htmlBuilder.append("										<option value='regional' checked='checked'> Regional </option>");
-//				htmlBuilder.append("										<option value='estadual' checked='checked'> Estadual </option>");
-//				htmlBuilder.append("										<option value='municipal' checked='checked'> Municipal </option>");
-//				htmlBuilder.append("									</select>");
-//				htmlBuilder.append("								</p>");
-//				htmlBuilder.append("							</div>");
-//				htmlBuilder.append("<div class='col1_2'>");
-//				htmlBuilder.append("<strong class='right-radius'>Localização do Projeto</strong>");
-//				htmlBuilder.append("<div class='localizacao_projeto'>");
-//				htmlBuilder.append("<ul class='locais'>");
-//				htmlBuilder.append("<li><a href='mapa.html#5'>Nordeste</a></li>");
-//				htmlBuilder.append("<li><a href='mapa.html#4'>Norte</a></li>");
-//				htmlBuilder.append("</ul>");
-//				htmlBuilder.append("</div>");
-//				htmlBuilder.append("</div>");
-				htmlBuilder.append("						</div>");
-				htmlBuilder.append("						<div class='clearfix linha'>");
-				htmlBuilder.append("							<div class='col1_3'>");
-				htmlBuilder.append("								<strong class='left-radius separador'>Financiadores do Projeto</strong>");
-				if(c.getFinanciadores() == null || c.getFinanciadores() == "")
-					htmlBuilder.append("<span>Informação não disponível</span>");
-				else
-					htmlBuilder.append("<span>"+ c.getFinanciadores() +"</span>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("							<div class='col2_3'>");
-				htmlBuilder.append("								<strong class='right-radius'>Descrição do Projeto</strong>");
-				if(c.getDescricao() == null || c.getDescricao() == "")
-					htmlBuilder.append("<span>Informação não disponível</span>");
-				else
-					htmlBuilder.append("<span>"+ c.getDescricao() +"</span>");
-				htmlBuilder.append("							</div>");
-				htmlBuilder.append("						</div>");						
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Data Início</strong>");
+				htmlBuilder.append("						<p><span name='projeto_data_inicio' id='convenio_data_inicio' >" + convertDateToString(c.getDataInicio()) + "</span></p>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Data Final</strong>");
+				htmlBuilder.append("						<p><span name='projeto_data_final' id='convenio_data_final' >" + convertDateToString(c.getDataFim()) + "</span></p>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Valor Total</strong>");
+				htmlBuilder.append("						<p><span name='projeto_valor_total' id='convenio_valor_total' > R$ " + convertNumberToCurrencyString(c.getValorTotal()) + "</span></p>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='separador'>Fonte de recurso</strong>");
+				htmlBuilder.append("						<p id='convenio_fonte"+ conv +"' >");
+				htmlBuilder.append("						<span>Público</span>");
+//				if(c.getFonteRecursos() == null || c.getFonteRecursos() == ""){
+//					htmlBuilder.append("					<span>Informação não disponível</span>");
+//				}else{
+//					htmlBuilder.append("					<span>"+ c.getFonteRecursos() +"</span>");
+//				}
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='col1_6'>");
+				htmlBuilder.append("						<strong class='right-radius'>Link</strong>");
+				htmlBuilder.append("						<p>");
+				htmlBuilder.append("							<span id='linkconv"+conv+"' title='' class='menuTooltip'>");
+				htmlBuilder.append("								<span>Você será redirecionado para a página SICONV. Nesta página são apresentados estatuto, quadro de diretores, instrumento do convênio e prestação de contas</span>");
+				htmlBuilder.append("								<a href="+ link +" target='_blank' contenteditable='false'>Sobre a Parceria</a>");
+				htmlBuilder.append("							</span>");
+				htmlBuilder.append("						</p>");
 				htmlBuilder.append("					</div>");
 				htmlBuilder.append("				</div>");
-				htmlBuilder.append("			<hr />");
+				htmlBuilder.append("				<div class='clearfix linha'>");
+				htmlBuilder.append("					<div class='col1_3'>");
+				htmlBuilder.append("						<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
+				if(c.getPublicoAlvo() == null){
+					htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				}else{
+					htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + c.getPublicoAlvo() + "</textarea>");
+				}
+				htmlBuilder.append("					</div>");
+//				htmlBuilder.append("					<div class='col1_6'>");
+//				htmlBuilder.append("						<strong class='separador'>Abrangência</strong>");
+//				htmlBuilder.append("						<p>");
+//				htmlBuilder.append("							<select " + (editable ? "" : "disabled='disabled'") + ">");
+//				htmlBuilder.append("								<option value='nacional' checked='checked'> Nacional </option>");
+//				htmlBuilder.append("								<option value='regional' checked='checked'> Regional </option>");
+//				htmlBuilder.append("								<option value='estadual' checked='checked'> Estadual </option>");
+//				htmlBuilder.append("								<option value='municipal' checked='checked'> Municipal </option>");
+//				htmlBuilder.append("							</select>");
+//				htmlBuilder.append("						</p>");
+//				htmlBuilder.append("					</div>");
+//				htmlBuilder.append("					<div class='col1_2'>");
+//				htmlBuilder.append("						<strong class='right-radius'>Localização do Projeto</strong>");
+//				htmlBuilder.append("						<div class='localizacao_projeto'>");
+//				htmlBuilder.append("							<ul class='locais'>");
+//				htmlBuilder.append("								<li><a href='mapa.html#5'>Nordeste</a></li>");
+//				htmlBuilder.append("								<li><a href='mapa.html#4'>Norte</a></li>");
+//				htmlBuilder.append("							</ul>");
+//				htmlBuilder.append("						</div>");
+//				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					</div>");
+				htmlBuilder.append("					<div class='clearfix linha'>");
+				htmlBuilder.append("						<div class='col1_3'>");
+				htmlBuilder.append("							<strong class='left-radius separador'>Financiadores do Projeto</strong>");
+				if(c.getFinanciadores() == null || c.getFinanciadores() == ""){
+					htmlBuilder.append("						<span>Informação não disponível</span>");
+				}else{
+					htmlBuilder.append("						<span>"+ c.getFinanciadores() +"</span>");
+				}
+				htmlBuilder.append("						</div>");
+				htmlBuilder.append("						<div class='col2_3'>");
+				htmlBuilder.append("							<strong class='right-radius'>Descrição do Projeto</strong>");
+				if(c.getDescricao() == null || c.getDescricao() == ""){
+					htmlBuilder.append("						<span>Informação não disponível</span>");
+				}else{
+					htmlBuilder.append("						<span>"+ c.getDescricao() +"</span>");
+				}
+				htmlBuilder.append("						</div>");
+				htmlBuilder.append("					</div>");						
+				htmlBuilder.append("				</div>");
+				htmlBuilder.append("			</div>");
+				htmlBuilder.append("		<hr />");
 			}
 		}
+		htmlBuilder.append("			</div>");
 		htmlBuilder.append("		</div>");
-		
 		htmlBuilder.append("	</div>");
-		htmlBuilder.append("</div>");
-		htmlBuilder.append("<div id='divbotoes' class='botoes'>");
-		htmlBuilder.append("<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='submit' value='Salvar' class='salvar' />");
-		htmlBuilder.append("</div>");
+		htmlBuilder.append("	<div id='divbotoes' class='botoes'>");
+		htmlBuilder.append("		<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='submit' value='Salvar' class='salvar' />");
+		htmlBuilder.append("	</div>");
+		htmlBuilder.append("</form>");
+		
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
@@ -712,9 +758,9 @@ public class FormularioWidget extends Composite {
 	}
 	
 	public void addRecomendar(EventListener listener) {
-		Element edicao = DOM.getElementById("recomendar");
-		Event.sinkEvents(edicao, Event.ONCLICK);
-		Event.setEventListener(edicao, listener);
+		Element recomendar = DOM.getElementById("recomendar");
+		Event.sinkEvents(recomendar, Event.ONCLICK);
+		Event.setEventListener(recomendar, listener);
 	}
 	
 	public OrganizationModel getOrg() {
@@ -723,10 +769,22 @@ public class FormularioWidget extends Composite {
 		Integer anofundacao = Integer.parseInt(InputElement.as(DOM.getElementById("ano_fundacao")).getValue());
 		org.setId(Integer.parseInt(History.getToken().substring(1)));
 		org.setNomeFantasia(InputElement.as(DOM.getElementById("nome_fantasia")).getValue());
-		org.setDescricaoProjeto(TextAreaElement.as(DOM.getElementById("descricao_projeto")).getValue());
+		org.setDescricaoProjeto(TextAreaElement.as(DOM.getElementById("descricao_osc")).getValue());
 		org.setAnoFundacao(anofundacao);
-		org.setSite(InputElement.as(DOM.getElementById("site")).getValue());
 		org.setEmail(InputElement.as(DOM.getElementById("email")).getValue());
+		org.setSite(InputElement.as(DOM.getElementById("site")).getValue());
+		
+		String google = InputElement.as(DOM.getElementById("google")).getValue();
+		if(google.substring(0, 7) != "https://" && google.length() > 0) org.setGoogle("https://" + google);
+		
+		String facebook = InputElement.as(DOM.getElementById("facebook")).getValue();
+		if(facebook.substring(0, 7) != "https://" && facebook.length() > 0) org.setFacebook("https://" + facebook);
+		
+		String linkedin = InputElement.as(DOM.getElementById("linkedin")).getValue();
+		if(linkedin.substring(0, 7) != "https://") org.setLinkedin("https://" + linkedin);
+		
+		String twitter = InputElement.as(DOM.getElementById("twitter")).getValue();
+		if(twitter.substring(0, 7) != "https://" && twitter.length() > 0) org.setTwitter("https://" + twitter);
 		
 		ArrayList<DiretorModel> diretorList = new ArrayList<DiretorModel>();
 		for(int i = 1;i <= dir; i++){
@@ -791,6 +849,7 @@ public class FormularioWidget extends Composite {
 			
 			projetoList.add(projmodel);
 		}
+		
 		org.setProjetos(projetoList);
 		ArrayList<ConvenioModel> convList = new ArrayList<ConvenioModel>();
 		for(int i = 1;i <= conv; i++){
@@ -841,9 +900,9 @@ public class FormularioWidget extends Composite {
 	public void removeDir(EventListener listener) {
 		for(int i = 1;i<=dir; i++){
 			Element removeDir = DOM.getElementById("removedir"+ i);
-			if(edit == false)
+			if(edit == false){
 				removeDir.setAttribute("style", "display: none");
-			else{
+			}else{
 				removeDir.setAttribute("style", "display: block");
 				Event.sinkEvents(removeDir, Event.ONCLICK);
 				Event.setEventListener(removeDir, listener);
@@ -865,9 +924,9 @@ public class FormularioWidget extends Composite {
 
 	public void addDiretor(EventListener listener) {
 		Element addDiretor = DOM.getElementById("addDiretor");
-		if(edit == false)
+		if(edit == false){
 			addDiretor.setAttribute("style", "display: none");
-		else{
+		}else{
 			addDiretor.setAttribute("style", "float:right;margin-top:3px;margin-right: 3px;display: block;");
 			Event.sinkEvents(addDiretor, Event.ONCLICK);
 			Event.setEventListener(addDiretor, listener);
@@ -876,9 +935,9 @@ public class FormularioWidget extends Composite {
 	
 	public void addProjetos(EventListener listener) {
 		Element addProjetos = DOM.getElementById("addProjetos");
-		if(edit == false)
+		if(edit == false){
 			addProjetos.setAttribute("style", "display: none");
-		else{
+		}else{
 			addProjetos.setAttribute("style", "display: block");
 			Event.sinkEvents(addProjetos, Event.ONCLICK);
 			Event.setEventListener(addProjetos, listener);
@@ -894,7 +953,6 @@ public class FormularioWidget extends Composite {
 					Event.sinkEvents(spanPopup, Event.ONMOUSEOVER);
 					Event.sinkEvents(spanPopup, Event.ONMOUSEMOVE);
 					Event.setEventListener(spanPopup, new EventListener() {
-						
 						public void onBrowserEvent(Event event) {
 							final int left = event.getClientX() + 5;
 							final int bottom = event.getClientY() - span.getClientHeight() - 5;
@@ -904,8 +962,6 @@ public class FormularioWidget extends Composite {
 					});
 				}
 			}
-		}
-		
+		}	
 	}
-
 }

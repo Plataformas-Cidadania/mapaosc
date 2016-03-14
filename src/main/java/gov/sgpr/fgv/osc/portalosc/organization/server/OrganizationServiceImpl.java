@@ -306,7 +306,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		
 		try {
 			sql = "UPDATE portal.vm_osc_principal " 
-				+ "SET bosc_nm_fantasia_osc = ?, ospr_tx_descricao = ?, ospr_dt_ano_fundacao = ?, ospr_ee_site = ? "
+				+ "SET bosc_nm_fantasia_osc = ?, ospr_tx_descricao = ?, ospr_dt_ano_fundacao = ?, ospr_ee_site = ?, "
+				+ "ee_google = ?, ee_facebook = ?, ee_linkedin = ?, ee_twitter = ? "
 				+ "WHERE bosc_sq_osc = ?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -314,7 +315,11 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.setString(2, organization.getDescricaoProjeto());
 			pstmt.setInt(3, organization.getAnoFundacao());
 			pstmt.setString(4, organization.getSite());
-			pstmt.setLong(5, organization.getId());
+			pstmt.setString(5, organization.getGoogle());
+			pstmt.setString(6, organization.getFacebook());
+			pstmt.setString(7, organization.getLinkedin());
+			pstmt.setString(8, organization.getTwitter());
+			pstmt.setLong(9, organization.getId());
 			pstmt.execute();
 			pstmt.close();
 			
