@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.DatePickerLanguage;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.Cookies;
@@ -32,10 +31,9 @@ public class OrganizationController {
 	private static Logger logger = Logger.getLogger(OrganizationController.class.getName());
 	private OrganizationServiceAsync organizationService = com.google.gwt.core.shared.GWT.create(OrganizationService.class);
 	private FormularioWidget formularioWidget = null;
+	private OrganizationModel organization = new OrganizationModel();
 	private final RootPanel formularioElement = RootPanel.get("modal_formulario");
 	private static byte[] desKey;
-	
-	private OrganizationModel organization = new OrganizationModel();
 	
 	public void init() {
 		logger.info("Iniciando módulo de configuração");
@@ -87,7 +85,7 @@ public class OrganizationController {
 			}
 			public void onSuccess(Void result) {
 				logger.info("Dados salvos");
-				Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
+				Window.Location.reload();
 			}
 		};
 		organizationService.setOrganization(organizationModel, callback);
@@ -148,7 +146,6 @@ public class OrganizationController {
 			public void onBrowserEvent(Event event) {
 				logger.info("Salvando os Dados");
 				setOrganization(formularioWidget.getOrg());
-				Window.Location.reload();
 			}
 		});
 		
