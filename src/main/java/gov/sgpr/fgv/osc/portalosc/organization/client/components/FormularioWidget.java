@@ -69,12 +69,21 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<img src='imagens/" + (org.getGoogle() != "" ? org.getGoogle() + "' alt='" + org.getRazaoSocial() + "' width='160' height='160'" : "org_indisponivel.jpg'") + " />");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
-		htmlBuilder.append("			<a href='" + (org.getGoogle() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-google' name='redes' title='Google'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getFacebook() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-facebook' name='redes' title='Facebook'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getLinkedin() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button></a>");
-		htmlBuilder.append("			<a href='" + (org.getTwitter() != "" ? org.getGoogle() : "#O" + org.getId().toString()) + "'><button type='button' id='b-twitter' name='redes' title='Twitter'></button></a>");
+		
+		if(org.getGoogle().length() == 0) htmlBuilder.append("<button type='button' id='b-google' name='redes' title='Google'></button>");
+		else htmlBuilder.append("<a href='" + org.getGoogle() + "'><button type='button' id='b-google' name='redes' title='Google'></button></a>");
+		
+		if(org.getFacebook().length() == 0) htmlBuilder.append("<button type='button' id='b-facebook' name='redes' title='Facebook'></button>");
+		else htmlBuilder.append("<a href='" + org.getFacebook() + "'><button type='button' id='b-facebook' name='redes' title='Facebook'></button></a>");
+		
+		if(org.getLinkedin().length() == 0) htmlBuilder.append("<button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button>");
+		else htmlBuilder.append("<a href='" + org.getLinkedin() + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button></a>");
+		
+		if(org.getTwitter().length() == 0) htmlBuilder.append("<button type='button' id='b-twitter' name='redes' title='Twitter'></button>");
+		else htmlBuilder.append("<a href='" + org.getTwitter() + "'><button type='button' id='b-twitter' name='redes' title='Twitter'></button></a>");
+		
 		htmlBuilder.append("		</div>");
-		htmlBuilder.append("		<a href='" + (org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString()) + "' class='participar box'>Como Participar</a>");
+		htmlBuilder.append("		<a href='" + org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString() + "' class='participar box'>Como Participar</a>");
 		htmlBuilder.append("		<div class='recomendacoes'>");
 		htmlBuilder.append("			<span class='tooltip' data-hasqtip='4' title='" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + " recomendações'>" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + "</span>");
 		htmlBuilder.append("		</div>");
@@ -169,16 +178,37 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Site:</strong>");
-		htmlBuilder.append("						<input type='text' name='site' id='site' placeholder='Informação não disponível' value='" + org.getSite() + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
-		htmlBuilder.append("					</div>");
-		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>E-mail:</strong>");
 		htmlBuilder.append("						<input type='text' name='email' id='email' placeholder='Informação não disponível' value='" + org.getEmail() + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
-		
+		htmlBuilder.append("					<div>");
+		htmlBuilder.append("						<strong>Site:</strong>");
+		htmlBuilder.append("						<input type='text' name='site' id='site' placeholder='Informação não disponível' value='" + org.getSite() + "' " + (editable ? "" : "readonly") + "/>");
+		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+		htmlBuilder.append("					</div>");
+		if(editable){
+			htmlBuilder.append("					<div>");
+			htmlBuilder.append("						<strong>Google+:</strong>");
+			htmlBuilder.append("						<input type='text' name='google' id='google' placeholder='Informação não disponível' value='" + org.getGoogle() + "' />");
+			htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("					</div>");
+			htmlBuilder.append("					<div>");
+			htmlBuilder.append("						<strong>Facebook:</strong>");
+			htmlBuilder.append("						<input type='text' name='facebook' id='facebook' placeholder='Informação não disponível' value='" + org.getFacebook() + "' />");
+			htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("					</div>");
+			htmlBuilder.append("					<div>");
+			htmlBuilder.append("						<strong>Linkedin:</strong>");
+			htmlBuilder.append("						<input type='text' name='linkedin' id='linkedin' placeholder='Informação não disponível' value='" + org.getLinkedin() + "' />");
+			htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("					</div>");
+			htmlBuilder.append("					<div>");
+			htmlBuilder.append("						<strong>Twitter:</strong>");
+			htmlBuilder.append("						<input type='text' name='twitter' id='twitter' placeholder='Informação não disponível' value='" + org.getTwitter() + "' />");
+			htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
+			htmlBuilder.append("					</div>");
+		}
 //		htmlBuilder.append("					<div>");
 //		htmlBuilder.append("						<strong>Participação social:</strong>");
 //		htmlBuilder.append("						<ul id='social' class='participacao'>");
@@ -740,8 +770,12 @@ public class FormularioWidget extends Composite {
 		org.setNomeFantasia(InputElement.as(DOM.getElementById("nome_fantasia")).getValue());
 		org.setDescricaoProjeto(TextAreaElement.as(DOM.getElementById("descricao_osc")).getValue());
 		org.setAnoFundacao(anofundacao);
-		org.setSite(InputElement.as(DOM.getElementById("site")).getValue());
 		org.setEmail(InputElement.as(DOM.getElementById("email")).getValue());
+		org.setSite(InputElement.as(DOM.getElementById("site")).getValue());
+		org.setGoogle(InputElement.as(DOM.getElementById("google")).getValue());
+		org.setFacebook(InputElement.as(DOM.getElementById("facebook")).getValue());
+		org.setLinkedin(InputElement.as(DOM.getElementById("linkedin")).getValue());
+		org.setTwitter(InputElement.as(DOM.getElementById("twitter")).getValue());
 		
 		ArrayList<DiretorModel> diretorList = new ArrayList<DiretorModel>();
 		for(int i = 1;i <= dir; i++){
