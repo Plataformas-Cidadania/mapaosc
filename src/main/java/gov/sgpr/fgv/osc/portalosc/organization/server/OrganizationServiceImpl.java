@@ -56,9 +56,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		
 		try {
 			sql = "SELECT bosc_nm_osc, bosc_nm_fantasia_osc, bosc_nr_identificacao, ospr_ds_endereco, dcnj_nm_natureza_juridica, "
-				+ "		  dcsc_nm_subclasse, ospr_tx_descricao, ospr_dt_ano_fundacao, ospr_ee_site, "
-				+ "		  vl_valor_parcerias_federal, vl_valor_parcerias_estadual, vl_valor_parcerias_municipal, ee_facebook, "
-				+ "		  ee_google, ee_linkedin, ee_twitter, im_imagem, ee_como_participar "
+				+ 		 "dcsc_nm_subclasse, ospr_tx_descricao, ospr_dt_ano_fundacao, ospr_ee_site, "
+				+ 		 "vl_valor_parcerias_federal, vl_valor_parcerias_estadual, vl_valor_parcerias_municipal, ee_facebook, "
+				+ 		 "ee_google, ee_linkedin, ee_twitter, im_imagem, ee_como_participar "
 				+ "FROM portal.vm_osc_principal "
 				+ "WHERE bosc_sq_osc = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -91,7 +91,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			rs.close();
 			pstmt.close();
 			
-			sql = "SELECT tdir_sq_diretor,cargo,nome FROM data.tb_osc_diretor WHERE bosc_sq_osc = ?";
+			sql = "SELECT tdir_sq_diretor,cargo,nome "
+				+ "FROM data.tb_osc_diretor "
+				+ "WHERE bosc_sq_osc = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -123,7 +125,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			
 			sql = "SELECT cont_ds_contato "
 				+ "FROM portal.tb_osc_contato "
-				+ "WHERE bosc_sq_osc = ?"
+				+ "WHERE bosc_sq_osc = ? "
 				+ "AND cont_ds_tipo_contato = 'Email'";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
@@ -166,9 +168,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 			sql = "SELECT proj_cd_projetos, titulo, status, data_inicio, data_fim, valor_total, fonte_recurso, link, publico_alvo, "
-					+ "		  abrangencia, localizacao, financiadores, descricao "
-					+ "FROM data.tb_osc_projeto "
-					+ "WHERE bosc_sq_osc = ?";
+				+ 		 "abrangencia, localizacao, financiadores, descricao "
+				+ "FROM data.tb_osc_projeto "
+				+ "WHERE bosc_sq_osc = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -195,9 +197,10 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			rs.close();
 			pstmt.close();
 				
-			sql = "SELECT nr_convenio, tx_objeto_convenio, tx_situacao, dt_inicio_vigencia, dt_fim_vigencia, vl_global, nm_orgao_concedente, tx_objeto_convenio, conv_publico_alvo "
-					+ "FROM data.tb_osc_convenios "
-					+ "WHERE bosc_sq_osc = ?";
+			sql = "SELECT nr_convenio, tx_objeto_convenio, tx_situacao, dt_inicio_vigencia, dt_fim_vigencia, vl_global, nm_orgao_concedente, "
+				+ 		 "tx_objeto_convenio, conv_publico_alvo "
+				+ "FROM data.tb_osc_convenios "
+				+ "WHERE bosc_sq_osc = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -282,6 +285,27 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				}
 			}
 			organization.setCertificacao(certificacao);
+			
+			
+			
+			for(ConvenioModel c : conveniosList){
+				organization.setValorParceriasFederal(organization.getValorParceriasFederal() + c.getValorTotal());
+			}
+//			sql = "SELECT lic_vl_captado "
+//				+ "FROM data.tb_osc_lic "
+//				+ "WHERE bosc_sq_osc = ?";
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, id);
+//			rs = pstmt.executeQuery();
+//			if (rs.next()) {
+//				organization.setValorParceriasFederal(organization.getValorParceriasFederal() + rs.getInt("lic_vl_captado"));
+//			}
+//			rs.close();
+//			pstmt.close();
+			organization.setValorParceriasTotal(organization.getValorParceriasFederal());
+			
+			
+			
 			rs.close();
 			pstmt.close();
 			
@@ -307,7 +331,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		try {
 			sql = "UPDATE portal.vm_osc_principal " 
 				+ "SET bosc_nm_fantasia_osc = ?, ospr_tx_descricao = ?, ospr_dt_ano_fundacao = ?, ospr_ee_site = ?, "
-				+ "ee_google = ?, ee_facebook = ?, ee_linkedin = ?, ee_twitter = ? "
+				+ 	  "ee_google = ?, ee_facebook = ?, ee_linkedin = ?, ee_twitter = ? "
 				+ "WHERE bosc_sq_osc = ?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -371,8 +395,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			}
 			pstmt.close();
 			
-			sql = "INSERT INTO data.tb_osc_projeto (bosc_sq_osc, titulo, status, data_inicio, data_fim, "
-				+ "valor_total, fonte_recurso, link, publico_alvo, financiadores, descricao) "
+			sql = "INSERT INTO data.tb_osc_projeto (bosc_sq_osc, titulo, status, data_inicio, data_fim, valor_total, "
+				+ 		 	  					   "fonte_recurso, link, publico_alvo, financiadores, descricao) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -411,8 +435,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 			sql = "UPDATE data.tb_osc_projeto SET bosc_sq_osc = ?, titulo = ?, status = ?, data_inicio = ?, data_fim = ?, "
-				+ "valor_total = ?, fonte_recurso = ?, "
-				+ "link = ?, publico_alvo = ?, financiadores = ?, descricao = ? "
+				+ 		 "valor_total = ?, fonte_recurso = ?, "
+				+ 		 "link = ?, publico_alvo = ?, financiadores = ?, descricao = ? "
 				+ "WHERE proj_cd_projetos = ?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -450,7 +474,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			}
 			pstmt.close();
 			
-			sql = "UPDATE data.tb_osc_convenios SET conv_publico_alvo = ? "
+			sql = "UPDATE data.tb_osc_convenios "
+				+ "SET conv_publico_alvo = ? "
 				+ "WHERE nr_convenio = ?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -475,7 +500,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		logger.info("Removendo Diretor");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM data.tb_osc_diretor where tdir_sq_diretor=?";
+		String sql = "DELETE FROM data.tb_osc_diretor "
+				   + "WHERE tdir_sq_diretor=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
@@ -499,7 +525,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		Boolean result = false;
 		String sql = "SELECT bosc_sq_osc "
 				   + "FROM portal.tb_usuario "
-				   + "WHERE tusu_sq_usuario = ?"
+				   + "WHERE tusu_sq_usuario = ? "
 				   + "AND bosc_sq_osc = ?";
 		
 		try {
