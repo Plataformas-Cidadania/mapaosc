@@ -71,16 +71,16 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		<div class='redes'>");
 		
 		if(org.getGoogle().length() == 0) htmlBuilder.append("<i class='fa fa-google-plus-square fa-3x'></i>");
-		else htmlBuilder.append("<a href='" + org.getGoogle() + "'><i class='fa fa-google-plus-square fa-3x'></i></a>");
+		else htmlBuilder.append("<a href='" + org.getGoogle() + "' target='_blank'><i class='fa fa-google-plus-square fa-3x'></i></a>");
 		
 		if(org.getFacebook().length() == 0) htmlBuilder.append("<i class='fa fa-facebook-square fa-3x' id='b-facebook' name='redes' title='Facebook' ></i>");
-		else htmlBuilder.append("<a href='" + org.getFacebook() + "'><i class='fa fa-facebook-square fa-3x' id='b-facebook' name='redes' title='Facebook' ></i></a>");
+		else htmlBuilder.append("<a href='" + org.getFacebook() + "' target='_blank'><i class='fa fa-facebook-square fa-3x' id='b-facebook' name='redes' title='Facebook' ></i></a>");
 		
 		if(org.getLinkedin().length() == 0) htmlBuilder.append("<i class='fa fa-linkedin-square fa-3x' id='b-linkedin' name='redes' title='Linkedin' ></i>");
-		else htmlBuilder.append("<a href='" + org.getLinkedin() + "'><i class='fa fa-linkedin-square fa-3x' id='b-linkedin' name='redes' title='Linkedin' ></i></a>");
+		else htmlBuilder.append("<a href='" + org.getLinkedin() + "' target='_blank'><i class='fa fa-linkedin-square fa-3x' id='b-linkedin' name='redes' title='Linkedin' ></i></a>");
 		
 		if(org.getTwitter().length() == 0) htmlBuilder.append("<i class='fa fa-twitter-square fa-3x' id='b-twitter' name='redes' title='Twitter' ></i>");
-		else htmlBuilder.append("<a href='" + org.getTwitter() + "'><i class='fa fa-twitter-square fa-3x' id='b-twitter' name='redes' title='Twitter' ></i></a>");
+		else htmlBuilder.append("<a href='" + org.getTwitter() + "' target='_blank'><i class='fa fa-twitter-square fa-3x' id='b-twitter' name='redes' title='Twitter' ></i></a>");
 		
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<a href='" + org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString() + "' class='participar box'>Como Participar</a>");
