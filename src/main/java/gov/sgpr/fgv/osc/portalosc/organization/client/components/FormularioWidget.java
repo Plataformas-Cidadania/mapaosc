@@ -89,7 +89,12 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<a href='" + org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString() + "' class='participar box'>Como Participar</a>");
 		htmlBuilder.append("		<div class='recomendacoes'>");
-		htmlBuilder.append("			<span class='tooltip' data-hasqtip='4' title='" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + " recomendações'>" + org.getRecomendacoes() == null ? '0' : org.getRecomendacoes() + "</span>");
+		htmlBuilder.append("			<span class='tooltip' data-hasqtip='4' title='");
+		htmlBuilder.append(org.getRecomendacoes() == null ? "0" : org.getRecomendacoes());
+		htmlBuilder.append(org.getRecomendacoes() == 1 ? " recomendação' " : " recomendações' ");
+		htmlBuilder.append("id='like_counter' >");
+		htmlBuilder.append(org.getRecomendacoes() == null ? "0" : org.getRecomendacoes());
+		htmlBuilder.append("</span>");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<button type='button' class='recomendar' id='recomendar'>Recomendar</button>");
 //		htmlBuilder.append("		<div class='classificacao'>");
@@ -256,7 +261,7 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</fieldset>");
 		htmlBuilder.append("			</div>");
-		htmlBuilder.append("			<h2>Quadro de Diretores <button type='button' class='adicionar' id='addDiretor' style='float:right;margin-top:3px;margin-right: 3px;'>Adicionar</button></h2>");
+		htmlBuilder.append("			<h2>Quadro de diretores <button type='button' class='adicionar' id='addDiretor' style='float:right;margin-top:3px;margin-right: 3px;'>Adicionar</button></h2>");
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div id='diretores' class='diretores'>");
 		if(org.getDiretores().size() == 0){

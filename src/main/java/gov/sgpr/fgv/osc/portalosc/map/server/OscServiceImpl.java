@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -182,6 +181,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			return null;
 		}
 	}
+	
 	public OscSummary getSummary(int oscId) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;

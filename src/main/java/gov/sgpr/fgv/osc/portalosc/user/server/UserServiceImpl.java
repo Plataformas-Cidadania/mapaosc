@@ -664,4 +664,98 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			releaseConnection(conn, pstmt, rs);
 		}
 	}
+	
+	public Boolean searchUserReccomend(Integer idUser, Integer idOsc) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Boolean result = false;
+		String sql = "SELECT osus_in_recomendacao "
+				   + "FROM portal.nm_osc_usuario "
+				   + "WHERE bosc_sq_osc = ?"
+				   + "AND tusu_sq_usuario = ?"
+				   + "AND osus_in_recomendacao = true";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			pstmt.setInt(2, idOsc);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = true;
+			}
+			return result;
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
+	public void insertRecommendation(Integer idOSC, Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "INSERT INTO portal.nm_osc_usuario(bosc_sq_osc, tusu_sq_usuario, osus_in_recomendacao) "
+				   + "VALUES (?, ?, true)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idOSC);
+			pstmt.setInt(2, idUser);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+		}
+	}
+	
+	public void deleteRecommendation(Integer idOSC, Integer idUser) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM portal.nm_osc_usuario "
+				   + "WHERE bosc_sq_osc = ? "
+				   + "AND tusu_sq_usuario = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idOSC);
+			pstmt.setInt(2, idUser);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+		}
+	}
+	
+	public Integer getRecommendations(Integer idOSC) throws RemoteException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT count(*) qt_recomendation "
+				   + "FROM portal.nm_osc_usuario "
+				   + "WHERE bosc_sq_osc = ? "
+				   + "AND osus_in_recomendacao = true";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idOSC);
+			rs = pstmt.executeQuery();
+
+			int qt_recomendation;
+			if (rs.next()) {
+				qt_recomendation = rs.getInt("qt_recomendation");
+				return qt_recomendation;
+			}
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+		return null;
+	}
 }

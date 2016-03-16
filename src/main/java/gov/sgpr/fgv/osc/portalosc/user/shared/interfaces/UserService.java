@@ -154,4 +154,9 @@ public interface UserService extends RemoteService {
 	 *           representante OSC a ser cadastrado
 	 */
 	public void addRepresentantUser(RepresentantUser user) throws RemoteException;
+	
+	public Boolean searchUserReccomend(Integer idUser, Integer idOsc) throws RemoteException;
+	public void insertRecommendation(Integer idOSC, Integer idUser) throws RemoteException;
+	public void deleteRecommendation(Integer idOSC, Integer idUser) throws RemoteException;
+	public Integer getRecommendations(Integer idOSC) throws RemoteException;
 }
