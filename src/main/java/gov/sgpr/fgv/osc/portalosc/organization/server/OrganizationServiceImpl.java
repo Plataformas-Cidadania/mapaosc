@@ -239,7 +239,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				if(strDateCNAE != null){
 					Date date = new SimpleDateFormat("yyyy-mm-dd").parse(strDateCNAE);
 					if(now.after(date)){
-						certificacao.put("CNEA", "MMA");
+						certificacao.put("Entidade Ambientalista", "CNEA/MMA");
 					}
 				}
 				String strDateInicioCebasMec = rs.getString("cebas_mec_dt_inicio_validade");
