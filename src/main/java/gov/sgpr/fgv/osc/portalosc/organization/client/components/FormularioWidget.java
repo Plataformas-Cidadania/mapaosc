@@ -57,10 +57,6 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("	<h1><em>&nbsp;</em> ");
 		htmlBuilder.append(org.getRazaoSocial() == null ? "Organização" : org.getRazaoSocial());
 		htmlBuilder.append("	</h1>");
-//		htmlBuilder.append("	<div class='botoes'>");
-//		htmlBuilder.append("		<a href='exportar.html' class='botao exportar box_exportar'>Exportar</a>");
-//		htmlBuilder.append("		<a class='botao' href='organizacao_edicao.html'>Edição</a>");
-//		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</div>");
 		
 		htmlBuilder.append("<div class='container'>");
@@ -74,17 +70,17 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
 		
-		if(org.getGoogle().length() == 0) htmlBuilder.append("<button type='button' id='b-google' name='redes' title='Google'></button>");
-		else htmlBuilder.append("<a href='" + org.getGoogle() + "'><button type='button' id='b-google' name='redes' title='Google'></button></a>");
+		if(org.getGoogle().length() == 0) htmlBuilder.append("<i class='fa fa-google-plus-square fa-3x'></i>");
+		else htmlBuilder.append("<a href='" + org.getGoogle() + "'><i class='fa fa-google-plus-square fa-3x'></i></a>");
 		
-		if(org.getFacebook().length() == 0) htmlBuilder.append("<button type='button' id='b-facebook' name='redes' title='Facebook'></button>");
-		else htmlBuilder.append("<a href='" + org.getFacebook() + "'><button type='button' id='b-facebook' name='redes' title='Facebook'></button></a>");
+		if(org.getFacebook().length() == 0) htmlBuilder.append("<i class='fa fa-facebook-square fa-3x' id='b-facebook' name='redes' title='Facebook' ></i>");
+		else htmlBuilder.append("<a href='" + org.getFacebook() + "'><i class='fa fa-facebook-square fa-3x' id='b-facebook' name='redes' title='Facebook' ></i></a>");
 		
-		if(org.getLinkedin().length() == 0) htmlBuilder.append("<button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button>");
-		else htmlBuilder.append("<a href='" + org.getLinkedin() + "'><button type='button' id='b-linkedin' name='redes' title='LinkedIn'></button></a>");
+		if(org.getLinkedin().length() == 0) htmlBuilder.append("<i class='fa fa-linkedin-square fa-3x' id='b-linkedin' name='redes' title='Linkedin' ></i>");
+		else htmlBuilder.append("<a href='" + org.getLinkedin() + "'><i class='fa fa-linkedin-square fa-3x' id='b-linkedin' name='redes' title='Linkedin' ></i></a>");
 		
-		if(org.getTwitter().length() == 0) htmlBuilder.append("<button type='button' id='b-twitter' name='redes' title='Twitter'></button>");
-		else htmlBuilder.append("<a href='" + org.getTwitter() + "'><button type='button' id='b-twitter' name='redes' title='Twitter'></button></a>");
+		if(org.getTwitter().length() == 0) htmlBuilder.append("<i class='fa fa-twitter-square fa-3x' id='b-twitter' name='redes' title='Twitter' ></i>");
+		else htmlBuilder.append("<a href='" + org.getTwitter() + "'><i class='fa fa-twitter-square fa-3x' id='b-twitter' name='redes' title='Twitter' ></i></a>");
 		
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<a href='" + org.getComoParticipar() != "" ? org.getComoParticipar() : "#O" + org.getId().toString() + "' class='participar box'>Como Participar</a>");
@@ -190,22 +186,22 @@ public class FormularioWidget extends Composite {
 		if(editable){
 			htmlBuilder.append("				<div>");
 			htmlBuilder.append("					<strong>Google+:</strong>");
-			htmlBuilder.append("					<input type='text' name='google' id='google' placeholder='Informação não disponível' value='" + org.getGoogle() + "' />");
+			htmlBuilder.append("					<input type='text' name='google' id='google' placeholder='Informação não disponível' value='" + (org.getGoogle().contains("://") ? org.getGoogle().split("://")[1] : org.getGoogle()) + "' />");
 			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 			htmlBuilder.append("				</div>");
 			htmlBuilder.append("				<div>");
 			htmlBuilder.append("					<strong>Facebook:</strong>");
-			htmlBuilder.append("					<input type='text' name='facebook' id='facebook' placeholder='Informação não disponível' value='" + org.getFacebook() + "' />");
+			htmlBuilder.append("					<input type='text' name='facebook' id='facebook' placeholder='Informação não disponível' value='" + (org.getFacebook().contains("://") ? org.getFacebook().split("://")[1] : org.getFacebook()) + "' />");
 			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 			htmlBuilder.append("				</div>");
 			htmlBuilder.append("				<div>");
 			htmlBuilder.append("					<strong>Linkedin:</strong>");
-			htmlBuilder.append("					<input type='text' name='linkedin' id='linkedin' placeholder='Informação não disponível' value='" + org.getLinkedin() + "' />");
+			htmlBuilder.append("					<input type='text' name='linkedin' id='linkedin' placeholder='Informação não disponível' value='" + (org.getLinkedin().contains("://") ? org.getLinkedin().split("://")[1] : org.getLinkedin()) + "' />");
 			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 			htmlBuilder.append("				</div>");
 			htmlBuilder.append("				<div>");
 			htmlBuilder.append("					<strong>Twitter:</strong>");
-			htmlBuilder.append("					<input type='text' name='twitter' id='twitter' placeholder='Informação não disponível' value='" + org.getTwitter() + "' />");
+			htmlBuilder.append("					<input type='text' name='twitter' id='twitter' placeholder='Informação não disponível' value='" + (org.getTwitter().contains("://") ? org.getTwitter().split("://")[1] : org.getTwitter()) + "' />");
 			htmlBuilder.append("					<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 			htmlBuilder.append("				</div>");
 		}
@@ -780,16 +776,16 @@ public class FormularioWidget extends Composite {
 		org.setSite(InputElement.as(DOM.getElementById("site")).getValue());
 		
 		String google = InputElement.as(DOM.getElementById("google")).getValue();
-		if(google.substring(0, 7) != "https://" && google.length() > 0) org.setGoogle("https://" + google);
+		if(google.length() > 0) org.setGoogle("https://" + (google.contains("://") ? google.split("://")[1] : google));
 		
 		String facebook = InputElement.as(DOM.getElementById("facebook")).getValue();
-		if(facebook.substring(0, 7) != "https://" && facebook.length() > 0) org.setFacebook("https://" + facebook);
+		if(facebook.length() > 0) org.setFacebook("https://" + (facebook.contains("://") ? facebook.split("://")[1] : facebook));
 		
 		String linkedin = InputElement.as(DOM.getElementById("linkedin")).getValue();
-		if(linkedin.substring(0, 7) != "https://") org.setLinkedin("https://" + linkedin);
+		if(linkedin.length() > 0) org.setLinkedin("https://" + (linkedin.contains("://") ? linkedin.split("://")[1] : linkedin));
 		
 		String twitter = InputElement.as(DOM.getElementById("twitter")).getValue();
-		if(twitter.substring(0, 7) != "https://" && twitter.length() > 0) org.setTwitter("https://" + twitter);
+		if(twitter.length() > 0) org.setTwitter("https://" + (twitter.contains("://") ? twitter.split("://")[1] : twitter));
 		
 		ArrayList<DiretorModel> diretorList = new ArrayList<DiretorModel>();
 		for(int i = 1;i <= dir; i++){
