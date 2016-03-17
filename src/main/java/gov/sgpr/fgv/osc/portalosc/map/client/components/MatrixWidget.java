@@ -28,6 +28,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -42,19 +43,21 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.Place;
  * @author victor Componente gráfico que apresenta os Infográficos na tela.
  */
 public class MatrixWidget extends Composite {
-	//private Logger logger = Logger.getLogger(this.getClass().getName());
+	// private Logger logger = Logger.getLogger(this.getClass().getName());
 	private Place[] places;
-	//private boolean ignoreClick;
+	// private boolean ignoreClick;
 	private ListBox indicatorListBox;
 	private Grid grid;
 
 	/**
 	 * Construtor
+	 * 
+	 * @param breadcrumbIndicadores
 	 */
-	public MatrixWidget(Place[] places) {
+	public MatrixWidget(Place[] places, HTMLPanel breadcrumbIndicadores) {
 		this.places = places;
 		indicatorListBox = new ListBox();
-		initWidget(getHtml());
+		initWidget(getHtml(breadcrumbIndicadores));
 	}
 
 	@Override
@@ -63,24 +66,25 @@ public class MatrixWidget extends Composite {
 		final Element div = DOM.getElementById("matrixBody");
 		grid = new Grid(1, 3);
 		Set<String> indicators = places[0].getIndicators().keySet();
-		// List 
+		// List
 		for (String ind : indicators) {
 			indicatorListBox.addItem(ind);
 		}
-		/*indicatorListBox.addItem("Quantidade de organizações");
-		indicatorListBox.addItem("Valor dos Recursos");
-		indicatorListBox.addItem("Quantidade de parcerias");
-		indicatorListBox.addItem("Quantidade de vínculos");*/
+		/*
+		 * indicatorListBox.addItem("Quantidade de organizações");
+		 * indicatorListBox.addItem("Valor dos Recursos");
+		 * indicatorListBox.addItem("Quantidade de parcerias");
+		 * indicatorListBox.addItem("Quantidade de vínculos");
+		 */
 		int count = places.length > 50 ? 50 : places.length;
-		indicatorListBox.setVisibleItemCount(count+1);
+		indicatorListBox.setVisibleItemCount(count + 1);
 		String listHeight = (indicators.size() * 30) + "px";
-		//String listHeight = (3 * 30) + "px";
+		// String listHeight = (3 * 30) + "px";
 		indicatorListBox.setHeight(listHeight);
 		grid.setWidget(0, 0, indicatorListBox.asWidget());
 
 		// Table
-		String indicator = (String) places[0].getIndicators().keySet()
-				.toArray()[0];
+		String indicator = (String) places[0].getIndicators().keySet().toArray()[0];
 		ScrollPanel scrollPanel = new ScrollPanel(getTable(indicator));
 		int height = calculateHeight();
 		scrollPanel.setHeight(height + "px");
@@ -88,8 +92,7 @@ public class MatrixWidget extends Composite {
 		grid.setWidget(0, 2, scrollPanel);
 
 		HTMLTable.CellFormatter formatter = grid.getCellFormatter();
-		formatter.setHorizontalAlignment(0, 2,
-				HasHorizontalAlignment.ALIGN_CENTER);
+		formatter.setHorizontalAlignment(0, 2, HasHorizontalAlignment.ALIGN_CENTER);
 		formatter.setVerticalAlignment(0, 2, HasVerticalAlignment.ALIGN_TOP);
 
 		grid.setHeight(height + "px");
@@ -98,17 +101,19 @@ public class MatrixWidget extends Composite {
 		Window.scrollTo(0, 0);
 	}
 
-	private HTML getHtml() {
+	private HTML getHtml(HTMLPanel breadcrumbIndicadores) {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<h2> Matriz de Indicadores");
 		htmlBuilder.append("</h2>");
-		htmlBuilder.append("<div id=\"matrixBody\"></div>");
+		htmlBuilder.append("<div id=\"matrixBody\">");
+		htmlBuilder.append(breadcrumbIndicadores);
+		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
 
 	public void addIndicatorChangeListener(EventListener listener) {
-		Event.sinkEvents(indicatorListBox.getElement(), Event.ONCLICK);
+		Event.sinkEvents(indicatorListBox.getElement(), Event.ONCLICK | Event.ONKEYPRESS);
 		Event.setEventListener(indicatorListBox.getElement(), listener);
 	}
 
@@ -119,8 +124,7 @@ public class MatrixWidget extends Composite {
 			double value = 0.0;
 			if (place.getIndicators().containsKey(indicator))
 				value = place.getIndicators().get(indicator);
-			IndicatorTableValue line = new IndicatorTableValue(place.getId(),
-					place.getName(), value);
+			IndicatorTableValue line = new IndicatorTableValue(place.getId(), place.getName(), value);
 			values.add(line);
 			total += value;
 		}
@@ -143,8 +147,7 @@ public class MatrixWidget extends Composite {
 				if (obj.placeCode == -1 || obj.placeCode == cod) {
 					html = "<strong>" + obj.placeName + "<st)rong>";
 				} else {
-					html = "<a href=\"#M" + obj.placeCode + "\">"
-							+ obj.placeName + "</a>";
+					html = "<a href=\"#M" + obj.placeCode + "\">" + obj.placeName + "</a>";
 				}
 				sb.appendHtmlConstant(html);
 				return sb.toSafeHtml();
@@ -159,8 +162,7 @@ public class MatrixWidget extends Composite {
 				return NumberFormat.getDecimalFormat().format(object.value);
 			}
 		};
-		table.addColumn(valueColumn, indicator, NumberFormat.getDecimalFormat()
-				.format(total));
+		table.addColumn(valueColumn, indicator, NumberFormat.getDecimalFormat().format(total));
 		// Set the total row count. This isn't strictly necessary, but it
 		// affects
 		// paging calculations, so its good habit to keep the row count up to
@@ -175,7 +177,7 @@ public class MatrixWidget extends Composite {
 
 	public static void setupOnePageList(final AbstractHasData<?> cellTable) {
 		cellTable.addRowCountChangeHandler(new RowCountChangeEvent.Handler() {
-			
+
 			public void onRowCountChange(RowCountChangeEvent event) {
 				cellTable.setVisibleRange(new Range(0, event.getNewRowCount()));
 			}
@@ -190,16 +192,14 @@ public class MatrixWidget extends Composite {
 	}
 
 	public String getSelectedIndicator() {
-		return indicatorListBox
-				.getItemText(indicatorListBox.getSelectedIndex());
+		return indicatorListBox.getItemText(indicatorListBox.getSelectedIndex());
 	}
 
 	private int calculateHeight() {
 		int headerHeight = DOM.getElementById("barra-brasil").getClientHeight()
 				+ DOM.getElementById("topo").getClientHeight();
 		int footerHeight = DOM.getElementById("rodape").getClientHeight();
-		int height = Window.getClientHeight() - headerHeight - footerHeight
-				- 100;
+		int height = Window.getClientHeight() - headerHeight - footerHeight - 100;
 		return height;
 	}
 
@@ -242,7 +242,7 @@ public class MatrixWidget extends Composite {
 			 */
 			@SafeHtmlTemplates.Template("<a href=\"{0}\">{1}</a>")
 			SafeHtml messageWithLink(String url, SafeHtml message);
-			//SafeHtml cell(SafeStyles styles, SafeHtml value);
+			// SafeHtml cell(SafeStyles styles, SafeHtml value);
 		}
 
 		/**
@@ -266,7 +266,8 @@ public class MatrixWidget extends Composite {
 			SafeHtml safeValue = SafeHtmlUtils.fromString(value);
 
 			// Use the template to create the Cell's html.
-			//SafeStyles styles = SafeStylesUtils.forTrustedColor(safeValue.asString());
+			// SafeStyles styles =
+			// SafeStylesUtils.forTrustedColor(safeValue.asString());
 			String url = safeValue.asString();
 			SafeHtml rendered = templates.messageWithLink(url, safeValue);
 			sb.append(rendered);

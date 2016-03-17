@@ -8,6 +8,7 @@ import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import gov.sgpr.fgv.osc.portalosc.map.client.components.MatrixWidget;
@@ -32,7 +33,7 @@ public class MatrixController {
 		// infographicsDiv.getElement().getStyle().setZIndex(101);
 	}
 
-	public void loadMatrix(String placeCode) {
+	public void loadMatrix(String placeCode, final HTMLPanel breadcrumbIndicadores) {
 		logger.info("Carregando Matriz de Indicadores");
 		AsyncCallback<Place[]> callback = new AsyncCallback<Place[]>() {
 
@@ -41,7 +42,7 @@ public class MatrixController {
 			}
 
 			public void onSuccess(Place[] result) {
-				loadPlaces(result);
+				loadPlaces(result, breadcrumbIndicadores);
 			}
 		};
 		if (placeCode.equals("0")) {
@@ -53,17 +54,18 @@ public class MatrixController {
 
 	}
 
-	private void loadPlaces(Place[] places) {
-		final MatrixWidget matrixWidget = new MatrixWidget(places);
+	private void loadPlaces(Place[] places, HTMLPanel breadcrumbIndicadores) {
+		final MatrixWidget matrixWidget = new MatrixWidget(places, breadcrumbIndicadores);
 		EventListener indicatorListener = new EventListener() {
 
-			
 			public void onBrowserEvent(Event event) {
 				String indicator = matrixWidget.getSelectedIndicator();
 				matrixWidget.updateTable(indicator);
 			}
 		};
+
 		matrixWidget.addIndicatorChangeListener(indicatorListener);
+
 		matrixDiv.clear();
 		matrixDiv.add(matrixWidget);
 	}
@@ -75,6 +77,11 @@ public class MatrixController {
 	protected void setVisible(boolean isVisible) {
 		Display display = isVisible ? Display.BLOCK : Display.NONE;
 		matrixDiv.getElement().getStyle().setDisplay(display);
+	}
+
+	public void setBreadcrumb(HTMLPanel breadcrumbIndicadores) {
+		matrixDiv.add(breadcrumbIndicadores);
+
 	}
 
 }

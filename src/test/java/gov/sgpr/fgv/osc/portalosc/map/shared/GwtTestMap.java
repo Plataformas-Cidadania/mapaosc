@@ -9,7 +9,7 @@ public class GwtTestMap extends GWTTestSuite {
 	  public static Test suite() {
 	    TestSuite suite = new TestSuite("Test for a Maps Application");
 	    suite.addTestSuite(GwtTestMapService.class); 
-	    suite.addTestSuite(GwtTestOscService.class); 
+	    //suite.addTestSuite(GwtTestOscService.class); 
 	    suite.addTestSuite(GwtTestPlaceService.class); 
 	    suite.addTestSuite(GwtTestSearchService.class); 
 	    return suite;

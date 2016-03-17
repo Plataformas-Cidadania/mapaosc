@@ -6,15 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -182,6 +179,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			return null;
 		}
 	}
+	
 	public OscSummary getSummary(int oscId) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -210,7 +208,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				summary.setCode(code);
 				int type = rs.getInt("dcti_cd_tipo");
 				if (type == 1) {
-					summary.setFormattedCode(formatCNPJ(code));
+					summary.setFormattedCode(String.valueOf(code));
 				} else {
 					summary.setFormattedCode(String.valueOf(code));
 				}
@@ -503,7 +501,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				main.setCode(code);
 				int type = rs.getInt("dcti_cd_tipo");
 				if (type == 1) {
-					main.setFormattedCode(formatCNPJ(code));
+					main.setFormattedCode(String.valueOf(code));
 				} else {
 					main.setFormattedCode(String.valueOf(code));
 				}
@@ -923,16 +921,4 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			releaseConnection(conn, pstmt, rs);
 		}
 	}
-
-	private String formatCNPJ(long cnpj) {
-		DecimalFormat df = new DecimalFormat("00000000000000");
-		String cnpjStr = df.format(cnpj);
-		Pattern pattern = Pattern
-				.compile("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})");
-		Matcher matcher = pattern.matcher(cnpjStr);
-		if (matcher.matches())
-			cnpjStr = matcher.replaceAll("XXX.$2.xxx/$4-$5");
-		return cnpjStr;
-	}
-
 }

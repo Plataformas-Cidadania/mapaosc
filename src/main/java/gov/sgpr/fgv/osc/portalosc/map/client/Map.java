@@ -31,13 +31,15 @@ public class Map implements EntryPoint {
 			}
 
 			public void onSuccess(Boolean result) {
-				if (result) {
+				if (!result) {
+					Window.Location.assign(GWT.getHostPageBaseURL() + "manutencao.html");
+				} else {
 					maps.init();
 					menu.setMap(maps.getInstance(), search.getInstance());
 					menu.init();
 					search.init();
-				} else
-					Window.Location.replace(GWT.getHostPageBaseURL() + "manutencao.html");
+				}
+
 			}
 
 		};

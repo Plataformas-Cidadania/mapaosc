@@ -133,6 +133,34 @@ public interface UserServiceAsync
 
 
     /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void searchUserReccomend( java.lang.Integer idUser, java.lang.Integer idOsc, AsyncCallback<java.lang.Boolean> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void insertRecommendation( java.lang.Integer idOSC, java.lang.Integer idUser, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void deleteRecommendation( java.lang.Integer idOSC, java.lang.Integer idUser, AsyncCallback<Void> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService
+     */
+    void getRecommendations( java.lang.Integer idOSC, AsyncCallback<java.lang.Integer> callback );
+
+
+    /**
      * Utility class to get the RPC Async interface from client-side code
      */
     public static final class Util 

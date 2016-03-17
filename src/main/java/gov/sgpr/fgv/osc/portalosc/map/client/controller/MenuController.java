@@ -167,7 +167,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		igmBuilder.append("<h4><a id=\"M0\" href=\"#M0\">Matriz de indicadores</a></h4>");
 
 		HTML menu = new HTML(igmBuilder.toString());
-		indicatorsPanel.add(breadcrumbIndicadores);
+		// indicatorsPanel.add(breadcrumbIndicadores);
 		indicatorsPanel.add(menu);
 		info = new InfographicsController();
 		info.setVisible(false);
@@ -209,7 +209,8 @@ public class MenuController implements ValueChangeHandler<String> {
 	}
 
 	private void setupMatrix() {
-		final Element divBreadcrumb = DOM.getElementById("breadcrumb_indicadores");
+		// final Element divBreadcrumb =
+		// DOM.getElementById("breadcrumb_indicadores");
 		final Element divMapa = DOM.getElementById("mapa");
 		map.setVisible(false);
 		search.setVisible(false);
@@ -217,7 +218,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		matrix.setVisible(true);
 		divMapa.getStyle().setDisplay(Display.INLINE);
 		divMapa.setClassName("infograficos");
-		divBreadcrumb.getStyle().setDisplay(Display.INLINE);
+		// divBreadcrumb.getStyle().setDisplay(Display.INLINE);
 		initFunction();
 		map.removeResizeHandler();
 		addResizeHandler();
@@ -593,8 +594,6 @@ public class MenuController implements ValueChangeHandler<String> {
 	private void processMatrix(String tokenId) {
 		breadcrumbIndicadores.clear();
 
-		matrix.loadMatrix(tokenId);
-		matrix.setVisible(true);
 		Element matrixHTML = DOM.getElementById("matrixBody");
 		String hash = Window.Location.getHash();
 
@@ -602,6 +601,9 @@ public class MenuController implements ValueChangeHandler<String> {
 			initBreadcrumbMatrix(matrixHTML, hash);
 
 		}
+
+		matrix.loadMatrix(tokenId, breadcrumbIndicadores);
+		matrix.setVisible(true);
 
 		setupMatrix();
 	}
@@ -611,17 +613,20 @@ public class MenuController implements ValueChangeHandler<String> {
 		breadcrumb.setType(type);
 		if (listURL.isEmpty()) {
 			BreadcrumbItem item = new BreadcrumbItem();
-
 			if (hash.equals("#M0")) {
 				// logger.log(Level.INFO, "HASH: #M0");
 				Cookies.removeCookie("breadcrumb");
 				Cookies.setCookie("breadcrumb", "");
 				mountBreadcrumb(hash, element, false);
+
 			} else {
 				// logger.log(Level.INFO, "HASH: "+hash);
-
 				breadcrumb.clearBreadcrumb();
-				String vetBreadcrumb[] = Cookies.getCookie("breadcrumb").split(",");
+				String vetBreadcrumb[];
+				if (Cookies.getCookie("breadcrumb") != null)
+					vetBreadcrumb = Cookies.getCookie("breadcrumb").split(",");
+				else
+					vetBreadcrumb = null;
 
 				if (vetBreadcrumb != null && !vetBreadcrumb.equals("")) {
 					for (int s = 1; s < vetBreadcrumb.length; s++) {

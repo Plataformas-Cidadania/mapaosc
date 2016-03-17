@@ -800,6 +800,9 @@ public class UserController {
 		}
 		Cookies.setCookie("oscUid", user.getEmail());
 		Cookies.setCookie("idUser", String.valueOf(user.getId()));
+		if(String.valueOf(user.getCpf()).length() > 1){
+			Cookies.setCookie("typeUser", "recommend_user");
+		}
 	}
 
 	private void logonFacebokUser(final FacebookUser user) {
@@ -859,6 +862,7 @@ public class UserController {
 		Cookies.removeCookie("idUser");
 		Cookies.removeCookie("oscUid");
 		Cookies.removeCookie("oscSnUid");
+		Cookies.removeCookie("typeUser");
 		currentUser = null;
 		Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
 	}

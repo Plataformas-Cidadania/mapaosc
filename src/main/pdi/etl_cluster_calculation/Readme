@@ -1,0 +1,5 @@
+Para se executar o ETL, os seguintes passos devem ser seguidos:
+-No passo 2, alterar a conexão com a base de dados correta.
+-No passo 3, alterar o script shell passando o caminho onde o jar "clusterCalcularion.jar" estará.
+-Baixar o arquivo web.xml que está na nuvem e colocar no mesmo diretório do .jar 
+-Alterar o arquivo web.xml com as configurações da base de dados.

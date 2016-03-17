@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.DatePickerLanguage;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.Cookies;
@@ -27,15 +26,20 @@ import gov.sgpr.fgv.osc.portalosc.organization.client.components.FormularioWidge
 import gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationService;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.OrganizationModel;
+import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupPassword;
+import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
+import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
 
 public class OrganizationController {
 	private static Logger logger = Logger.getLogger(OrganizationController.class.getName());
 	private OrganizationServiceAsync organizationService = com.google.gwt.core.shared.GWT.create(OrganizationService.class);
+	private UserServiceAsync userService = com.google.gwt.core.shared.GWT.create(UserService.class);
+	private PopupPassword popupPassword = new PopupPassword();
 	private FormularioWidget formularioWidget = null;
+	private OrganizationModel organization = new OrganizationModel();
 	private final RootPanel formularioElement = RootPanel.get("modal_formulario");
 	private static byte[] desKey;
-	
-	private OrganizationModel organization = new OrganizationModel();
+	private Integer idOSC;
 	
 	public void init() {
 		logger.info("Iniciando módulo de configuração");
@@ -57,7 +61,8 @@ public class OrganizationController {
 		logger.info("Buscando Chave de criptografia");
 		organizationService.getEncryptKey(callback);
 		
-		getOrganization(Integer.parseInt(History.getToken().substring(1)));
+		idOSC = Integer.parseInt(History.getToken().substring(1));
+		getOrganization(idOSC);
 	}
 	
 	private void getOrganization(Integer id){
@@ -83,7 +88,7 @@ public class OrganizationController {
 			}
 			public void onSuccess(Void result) {
 				logger.info("Dados salvos");
-				Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
+				Window.Location.reload();
 			}
 		};
 		organizationService.setOrganization(organizationModel, callback);
@@ -115,6 +120,7 @@ public class OrganizationController {
 				}else{
 					addFormularioWidget(false);
 				}
+				searchUserReccomendInit();
 			}
 		};
 		String userId = Cookies.getCookie("idUser");
@@ -125,6 +131,50 @@ public class OrganizationController {
 		}
 	}
 	
+	private void searchUserReccomendInit(){
+		String idUser = Cookies.getCookie("idUser");
+		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+			public void onSuccess(Boolean result) {
+				Element btnRecomendar = DOM.getElementById("recomendar");
+				if(result){
+					btnRecomendar.setInnerText("Recomendar (desfazer)");
+				}else{
+					btnRecomendar.setInnerText("Recomendar");
+				}
+			}
+		};		
+		if(idUser != null) {
+			userService.searchUserReccomend(idOSC, Integer.parseInt(idUser), callback);
+		}
+	}
+	
+	private void insertReccomendation(Integer idOSC, Integer idUser){
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+			public void onSuccess(Void result) {
+				logger.info("OSC recomendada");
+			}
+		};
+		userService.insertRecommendation(idOSC, idUser, callback);
+	}
+	
+	private void deleteReccomendation(Integer idOSC, Integer idUser){
+		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+			}
+			public void onSuccess(Void result) {
+				logger.info("Recomendação excluída");
+			}
+		};
+		userService.deleteRecommendation(idOSC, idUser, callback);
+	}
+	
 	private void addFormularioWidget(Boolean editable) {
 		logger.info("Adicionando widget do formulário");
 		formularioWidget = new FormularioWidget(organization, editable);
@@ -132,11 +182,43 @@ public class OrganizationController {
 		formularioWidget.addDate(organization,"data_inicio","projeto_data_inicio","Inicio",editable);
 		formularioWidget.addDate(organization,"data_final","projeto_data_final","Final", editable);
 		
+		formularioWidget.addRecomendar(new EventListener() {
+			public void onBrowserEvent(Event event) {
+				String idUser = Cookies.getCookie("idUser");
+				String typeUser = Cookies.getCookie("typeUser");
+				if(idUser != null) {
+					if(typeUser == "recommend_user"){
+						Element likeCounter = DOM.getElementById("like_counter");
+						Element btnRecomendar = DOM.getElementById("recomendar");
+						Integer count = Integer.valueOf(likeCounter.getInnerText());
+						if(btnRecomendar.getInnerText() == "Recomendar"){
+							logger.info("Adicionando recomendação");
+							count++;
+							likeCounter.setInnerText(count.toString());
+							likeCounter.setTitle(count.toString() + (count == 1 ? " recomendação" : " recomendações"));
+							btnRecomendar.setInnerText("Recomendar (desfazer)");
+							insertReccomendation(idOSC, Integer.parseInt(idUser));
+						}else{
+							logger.info("Removendo recomendação");
+							count--;
+							likeCounter.setInnerText(count.toString());
+							likeCounter.setTitle(count.toString() + (count == 1 ? " recomendação" : " recomendações"));
+							btnRecomendar.setInnerText("Recomendar");
+							deleteReccomendation(idOSC, Integer.parseInt(idUser));
+						}
+					}else{
+						openPopup("É preciso ter cadastrado o CPF", "Para recomendar uma OSC é necessário ter o CPF cadastrado no sistema.");
+					}
+				}else{
+					openPopup("É preciso estar logado", "Para recomendar uma OSC é necessário estar logado no sistema.");
+				}
+			}
+		});
+		
 		formularioWidget.addSalvarListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				logger.info("Salvando os Dados");
 				setOrganization(formularioWidget.getOrg());
-				Window.Location.reload();
 			}
 		});
 		
@@ -224,6 +306,30 @@ public class OrganizationController {
 //			social.appendChild(getHtmlRec().getElement());
 //		}
 //	});
+	}
+	
+	private void openPopup(String title, String message){
+		popupPassword.onModuleLoad();
+		Element pop = DOM.getElementById("popup");
+		pop.removeAllChildren();
+		Element header = DOM.createElement("h2");
+		header.setInnerText(title);
+		Element div = DOM.createDiv();
+		Element p = DOM.createElement("p");
+		p.setInnerText(message);
+		Element a = DOM.createAnchor();
+		a.setInnerText("Ok");
+		a.setAttribute("href", "#");
+		Event.sinkEvents(a, Event.ONCLICK);
+		Event.setEventListener(a, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				popupPassword.close();
+			}
+		});
+		div.appendChild(p);
+		div.appendChild(a);
+		pop.appendChild(header);
+		pop.appendChild(div);
 	}
 	
 	private void addDate(String ele, String idElement){
