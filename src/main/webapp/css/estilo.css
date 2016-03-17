@@ -2565,6 +2565,7 @@ button.recomendar:hover {
 	white-space: nowrap;
 	overflow: hidden;
 	cursor: default;
+	opacity: 1;
 }
 
 #mapa.organizacao .social .imagem {
@@ -2591,6 +2592,15 @@ button.recomendar:hover {
 
 #mapa.organizacao ul.dados,.classificacao ul.dados {
 	position: relative;
+}
+
+.social .redes .fa {
+	margin: 3px;
+	cursor: pointer;
+}
+
+.social .redes .fa:hover {
+	color: black;
 }
 
 .multiline {
@@ -4084,6 +4094,7 @@ width:60px;
 white-space:nowrap;
 overflow:hidden;
 cursor:default;
+opacity: 1;
 }
 
 #mapa.organizacao .social .imagem {
