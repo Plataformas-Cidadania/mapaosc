@@ -1658,7 +1658,8 @@ display:none!important;
 width:800px;
 }
 #mapa.config .instrucoes,
-#mapa.institucional .wrapper {
+#mapa.institucional .wrapper,
+#mapa.contato .wrapper {
 margin-left:40px;
 margin-top:15px;
 margin-bottom: 50px;

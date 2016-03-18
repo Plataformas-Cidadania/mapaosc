@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Portal das Organizações da Sociedade Civil - Contato</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+	<![endif]-->
+	
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">document.documentElement.className += " js";</script>
+
+
+</head>
+
+<body>
+
+	<div id="main">
+		<div id="barra-brasil">
+			<div class="barra">
+				<ul>
+					<li><a href="http://www.acessoainformacao.gov.br" class="ai" title="Acesso à informação">Acesso à informação</a></li>
+					<li><a href="http://www.brasil.gov.br" class="brasilgov" title="Portal de Estado do Brasil">Portal de Estado do Brasil</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="topo">
+			<div id="topo_acessibilidade">
+				<ul id="nav1">
+					<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+					<li>Ir para o <a href="#topo_links" accesskey="2">Menu 2</a></li>					
+					<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+				</ul>
+				<ul id="nav2">
+					<li><a href="#">Acessibilidade</a></li>
+					<li><a href="#">Mapa do site</a></li>
+					<li id="contraste">Contraste
+						<a id="contraste_normal" href="#"><img src="imagens/09_contraste1.png" alt="Contraste normal" width="13" height="14" /></a>
+						<a id="alto_contraste" href="#"><img src="imagens/10_contraste2.png" alt="Alto contraste" width="13" height="14" /></a></li>
+						<li>Tamanho do texto
+							<a href="#" title="Aumentar fonte" class="inc-font">A+</a>
+							<a href="#" title="Fonte padrão" class="res-font">A</a>
+							<a href="#" title="Diminuir fonte" class="dec-font">A-</a></li>
+						</ul>
+					</div>
+
+					<div id="topo_links">
+						<a href="sobre.html" id="sobre">Sobre o portal</a>
+						<a href="faq.html" id="duvidas">Dúvidas frequentes</a>
+					</div>
+
+					<div id="topo_acesso" class="deslogado">
+						<form name="Acesso">
+							<label for="email" class="esconder">Email</label>
+							<input type="text" name="email" id="email" placeholder="Email"  />
+							<label for="senha" class="esconder">Senha</label>
+							<input type="password" name="senha" id="senha" placeholder="Senha"  />
+							<div>
+								<a href="esqueci_senha.html" class="box_frame">Esqueci a senha</a>
+								<a href="cadastro.html">Registrar-se</a>  
+							</div>
+							<input type="submit" name="entrar" id="entrar" value="Entrar" onclick="$('#topo_acesso.deslogado').hide(); $('#topo_acesso.logado').show();" />  <!--- JS adicionado para simular o acesso. Remover -->
+						</form>
+					</div>
+
+					<div id="topo_acesso" class="logado">
+						<div class="clearfix">
+							<ul>
+								<li><h2>Carlos Silva</h2></li>
+								<li><a href="#">Configurações</a></li>
+							</ul>
+
+							<a href="#"><img src="imagens/usuario.jpg" alt="Sua imagem de perfil" /></a>
+						</div>
+						
+						<input type="submit" name="sair" id="sair" value="Sair" onclick="$('#topo_acesso.logado').hide(); $('#topo_acesso.deslogado').show();" /> <!--- JS adicionado para simular o acesso. Remover -->
+					</div>
+
+					<a href="index.html">
+						<img class="normal" id="logo" src="imagens/logo.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial"  title="Ir para página inicial" />
+						<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Portal das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+					</a>
+				</div>
+
+				<div id="mapa" class="contato">
+
+					<h1><em>&nbsp;</em> Contato </h1>
+					<div class="wrapper clearfix" >
+						<form>
+							<div>
+								<label>Nome:</label>
+								<input type=text />
+							</div>
+							<div>
+								<label>Email:</label>
+								<input type=text />
+							</div>
+							<div>
+								<label>Assunto:</label>
+								<select>
+									<option>Sugestão ou Elogio</option>
+									<option>Minha OSC não se encontra no mapa</option>
+									<option>Dados errados sobre a minha OSC</option>
+								</select>
+							</div>
+							<div>
+								<label>CNPJ:</label>
+								<input type=text />
+							</div>
+							<div>
+								<label>Mensagem:</label>
+							</div>
+							<div>
+								<textarea rows="15" cols=""></textarea>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div id="rodape" class="clearfix">
+					<div class="clearfix">
+						<div class="celula01">
+							<h2 class="tooltip" title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Portal das Organizações da Sociedade Civil &copy; 2013</h2>
+							<a href="beta.html" class="beta">Versão BETA?</a>
+						</div>
+						<div class="celula02">
+							<span>Apoio</span>
+							<img class="normal" src="imagens/logo_fgv.png" alt="FGV Projetos" />
+							<img class="contraste" src="imagens/contraste/logo_fgv.png" alt="FGV Projetos" />
+						</div>
+						<div class="celula03">
+							<span>Realização</span>
+							<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+							<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+						</div>
+					</div>
+				</div>
+
+				<div id="footer" class="clearfix">
+					<div id="doormat-container" class="columns-4 clearfix">
+						<div class="doormatColumn column-0">
+							
+							<dl class="doormatSection"><dt class="doormatSectionHeader">O Portal</dt>
+								<dd class="doormatSectionBody">
+									<a href="#">OSCs em números</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Dúvidas Frequentes</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">MROSC</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Análise sobre Parcerias com a União</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Editais Públicos</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Capacitações</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Biblioteca Virtual</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Legislação</a>
+									
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Links relacionados</a>
+									
+								</dd>
+								
+							</dl></div>
+							
+							<div class="doormatColumn column-1">
+								
+								<dl class="doormatSection"><dt class="doormatSectionHeader">Contato</dt>
+									<dd class="doormatSectionBody">
+										<a href="#">Lorem Ipsum</a>
+										
+									</dd>
+									<dd class="doormatSectionBody">
+										<a href="#">Dolor sit amet</a>
+										
+									</dd>
+									
+								</dl></div>
+								<div class="doormatColumn column-2">
+									
+									<dl class="doormatSection"><dt class="doormatSectionHeader">Redes sociais</dt>
+										<dd class="doormatSectionBody">
+											<a href="#">Facebook</a>
+											
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">Twitter</a>
+											
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">YouTube</a>
+											
+										</dd>
+										<dd class="doormatSectionBody">
+											<a href="#">Flickr</a>
+											
+										</dd>
+									</dl></div>
+
+									<div class="doormatColumn column-3">
+										<dl class="doormatSection">
+											<dt class="doormatSectionHeader">Mapa do site</dt>
+											<dd></dd> 
+										</dl>
+									</div>
+
+									<div class="doormatColumn column-4">
+										
+										<dl class="doormatSection"><dt class="doormatSectionHeader">RSS</dt>
+											<dd class="doormatSectionBody">
+												<a href="#">O que é RSS?</a>
+												
+											</dd>
+											<dd class="doormatSectionBody">
+												<a href="#">Assine nosso RSS</a>
+												
+											</dd>
+										</dl></div>
+										
+									</div>
+
+									
+									
+									<div class="footer-logos">
+										<div>
+											<a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+											<a href="http://www.brasil.gov.br/" class="logo-brasil"><img src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+
+							
+							<script type="text/javascript" src="js/acessibilidade.js"></script>
+							<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+							<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
+							<script type="text/javascript" src="js/scripts_min.js"></script>
+	
+</body>
+
+</html>
