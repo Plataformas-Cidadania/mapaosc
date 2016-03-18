@@ -5,6 +5,8 @@ import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 
 public class User implements EntryPoint {
 	private final Logger logger = Logger.getLogger(this.getClass().getName());
@@ -12,8 +14,13 @@ public class User implements EntryPoint {
 
 	public void onModuleLoad() {
 		logger.info("Iniciando carregamento de cadastro de Usuário");
-		user.init();
-		user.carousel();
+		try{
+			user.init();
+			user.carousel();
+		}catch(Exception e){
+			logger.info("Ocoreu um erro na classe " + this.getClass().getName() + ": " + e.getMessage());
+			Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
+		}
 	}
 
 }

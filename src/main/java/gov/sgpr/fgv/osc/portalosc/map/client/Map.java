@@ -23,27 +23,29 @@ public class Map implements EntryPoint {
 
 	public void onModuleLoad() {
 		logger.info("Iniciando carregamento do mapa");
-		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
-
-			public void onFailure(Throwable caught) {
-				logger.log(Level.SEVERE, caught.getMessage());
-
-			}
-
-			public void onSuccess(Boolean result) {
-				if (!result) {
-					Window.Location.assign(GWT.getHostPageBaseURL() + "manutencao.html");
-				} else {
-					maps.init();
-					menu.setMap(maps.getInstance(), search.getInstance());
-					menu.init();
-					search.init();
+		try{
+			AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
+				public void onFailure(Throwable caught) {
+					logger.log(Level.SEVERE, caught.getMessage());
+	
 				}
-
-			}
-
-		};
-		mapService.isClusterCreated(callback);
-
+				
+				public void onSuccess(Boolean result) {
+					if (!result) {
+						Window.Location.assign(GWT.getHostPageBaseURL() + "manutencao.html");
+					} else {
+						maps.init();
+						menu.setMap(maps.getInstance(), search.getInstance());
+						menu.init();
+						search.init();
+					}
+				}
+	
+			};
+			mapService.isClusterCreated(callback);
+		}catch(Exception e){
+			logger.info("Ocoreu um erro na classe " + this.getClass().getName() + ": " + e.getMessage());
+			Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
+		}
 	}
 }
