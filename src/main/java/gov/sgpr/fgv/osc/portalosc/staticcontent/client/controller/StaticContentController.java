@@ -3,6 +3,7 @@ package gov.sgpr.fgv.osc.portalosc.staticcontent.client.controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.*;
 import com.google.gwt.http.client.*;
 import com.google.gwt.user.client.DOM;
@@ -31,6 +32,7 @@ public class StaticContentController
 		AsyncCallback<Content> callback = new AsyncCallback<Content>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Content result) {

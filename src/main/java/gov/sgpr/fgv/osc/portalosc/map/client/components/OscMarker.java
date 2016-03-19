@@ -14,6 +14,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -69,6 +70,7 @@ public class OscMarker {
 		AsyncCallback<OscSummary> callbackSummary = new AsyncCallback<OscSummary>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(OscSummary result) {

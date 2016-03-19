@@ -27,7 +27,7 @@ public class Map implements EntryPoint {
 			AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 				public void onFailure(Throwable caught) {
 					logger.log(Level.SEVERE, caught.getMessage());
-	
+					Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 				}
 				
 				public void onSuccess(Boolean result) {

@@ -107,6 +107,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Place[]> callbackPlaces = new AsyncCallback<Place[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Place[] result) {
@@ -414,6 +415,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(final Integer result) {
@@ -462,6 +464,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Void result) {
@@ -497,6 +500,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Integer result) {
@@ -513,6 +517,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Integer idUsuarioAtivo) {
@@ -528,6 +533,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(String emailUsuarioAtivo) {
@@ -542,6 +548,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(String senhaUsuarioAtivo) {
@@ -556,6 +563,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Void result) {
@@ -569,6 +577,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(String result) {
@@ -582,6 +591,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(String result) {
@@ -727,6 +737,7 @@ public class MenuController implements ValueChangeHandler<String> {
 
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Place[] result) {
@@ -745,6 +756,7 @@ public class MenuController implements ValueChangeHandler<String> {
 
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(final OscDetail resultOsc) {
@@ -752,6 +764,7 @@ public class MenuController implements ValueChangeHandler<String> {
 				AsyncCallback<Place[]> callbackBreadcrumb = new AsyncCallback<Place[]>() {
 					public void onFailure(Throwable caught) {
 						logger.log(Level.SEVERE, caught.getMessage());
+						Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 					}
 
 					public void onSuccess(Place[] result) {
@@ -788,6 +801,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Place[]> callbackBreadcrumb = new AsyncCallback<Place[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Place[] result) {
@@ -813,6 +827,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		AsyncCallback<Place> callbackPlace = new AsyncCallback<Place>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Place result) {
@@ -826,6 +841,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			AsyncCallback<Place[]> callbackPlaces = new AsyncCallback<Place[]>() {
 				public void onFailure(Throwable caught) {
 					logger.log(Level.SEVERE, caught.getMessage());
+					Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 				}
 
 				public void onSuccess(Place[] result) {
@@ -837,6 +853,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			AsyncCallback<SortedMap<String, Integer>> callbackOsc = new AsyncCallback<SortedMap<String, Integer>>() {
 				public void onFailure(Throwable caught) {
 					logger.log(Level.SEVERE, caught.getMessage());
+					Window.Location.assign(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "error.html");
 				}
 
 				public void onSuccess(SortedMap<String, Integer> result) {

@@ -17,6 +17,7 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -75,6 +76,7 @@ public class SearchController {
 					
 					public void onFailure(Throwable caught) {
 						logger.log(Level.SEVERE, caught.getMessage());
+						Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 					}
 					
 					public void onSuccess(List<SearchResult> result) {
@@ -107,6 +109,7 @@ public class SearchController {
 			
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(final List<SearchResult> result) {

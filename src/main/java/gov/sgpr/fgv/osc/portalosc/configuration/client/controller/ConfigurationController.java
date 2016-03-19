@@ -44,6 +44,7 @@ public class ConfigurationController {
 		AsyncCallback<Byte[]> callback = new AsyncCallback<Byte[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(Byte[] result) {
@@ -106,6 +107,7 @@ public class ConfigurationController {
 //				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
 //					public void onFailure(Throwable caught) {
 //						logger.log(Level.SEVERE, caught.getMessage());
+//						Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 //					}
 //					public void onSuccess(List<SearchResult> result) {
 //						if (!result.isEmpty()) {
@@ -146,6 +148,7 @@ public class ConfigurationController {
 		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(List<SearchResult> result) {
 				if (!result.isEmpty()) {
@@ -178,6 +181,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
@@ -193,6 +197,7 @@ public class ConfigurationController {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(String result) {
 				logger.info("Organização encontrado");
@@ -207,6 +212,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
@@ -223,6 +229,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
@@ -240,6 +247,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(ConfigurationModel result) {
