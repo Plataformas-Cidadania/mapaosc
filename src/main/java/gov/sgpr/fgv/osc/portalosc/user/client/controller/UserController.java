@@ -76,6 +76,7 @@ public class UserController {
 		AsyncCallback<Byte[]> callback = new AsyncCallback<Byte[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Byte[] result) {
@@ -307,6 +308,7 @@ public class UserController {
 //				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
 //					public void onFailure(Throwable caught) {
 //						logger.log(Level.SEVERE, caught.getMessage());
+//						Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 //					}
 //					public void onSuccess(List<SearchResult> result) {
 //						if (!result.isEmpty()) {
@@ -343,6 +345,7 @@ public class UserController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Void result) {
@@ -383,6 +386,7 @@ public class UserController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Void result) {
@@ -406,6 +410,7 @@ public class UserController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(Void result) {
@@ -446,6 +451,7 @@ public class UserController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(Void result) {
@@ -480,6 +486,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(DefaultUser result) {
@@ -500,6 +507,7 @@ public class UserController {
 		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Boolean result) {
@@ -519,6 +527,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(DefaultUser result) {
@@ -542,6 +551,7 @@ public class UserController {
 		AsyncCallback<RepresentantUser> callback = new AsyncCallback<RepresentantUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(RepresentantUser result) {
@@ -561,6 +571,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(DefaultUser result) {
@@ -582,6 +593,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(DefaultUser result) {
@@ -607,6 +619,7 @@ public class UserController {
 		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(Boolean result) {
@@ -639,6 +652,7 @@ public class UserController {
 		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Boolean result) {
@@ -661,6 +675,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(DefaultUser result) {
@@ -675,6 +690,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(DefaultUser result) {
@@ -693,6 +709,7 @@ public class UserController {
 		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Boolean result) {
@@ -717,6 +734,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(DefaultUser result) {
@@ -742,6 +760,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(DefaultUser result) {
@@ -872,6 +891,7 @@ public class UserController {
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(DefaultUser result) {
@@ -897,6 +917,7 @@ public class UserController {
 		AsyncCallback<FacebookUser> callback = new AsyncCallback<FacebookUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(FacebookUser user) {
@@ -971,6 +992,7 @@ public class UserController {
 		AsyncCallback<FacebookUser> callback = new AsyncCallback<FacebookUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(FacebookUser user) {
@@ -986,6 +1008,7 @@ public class UserController {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(String appId) {
@@ -1026,6 +1049,7 @@ public class UserController {
 		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(List<SearchResult> result) {
 				if (!result.isEmpty()) {

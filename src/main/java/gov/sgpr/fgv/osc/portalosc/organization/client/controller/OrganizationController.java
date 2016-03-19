@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.DatePickerLanguage;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.Cookies;
@@ -47,6 +48,7 @@ public class OrganizationController {
 		AsyncCallback<Byte[]> callback = new AsyncCallback<Byte[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(Byte[] result) {
@@ -70,6 +72,7 @@ public class OrganizationController {
 		AsyncCallback<OrganizationModel> callback = new AsyncCallback<OrganizationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(OrganizationModel result) {
 				logger.info("Organização encontrada");
@@ -85,6 +88,7 @@ public class OrganizationController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(Void result) {
 				logger.info("Dados salvos");
@@ -99,6 +103,7 @@ public class OrganizationController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(Void result) {
 				logger.info("Diretor Removido");
@@ -112,6 +117,7 @@ public class OrganizationController {
 		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(Boolean result) {
 				logger.info("Organização encontrado");
@@ -136,6 +142,7 @@ public class OrganizationController {
 		AsyncCallback<Boolean> callback = new AsyncCallback<Boolean>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(Boolean result) {
 				Element btnRecomendar = DOM.getElementById("recomendar");
@@ -155,6 +162,7 @@ public class OrganizationController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(Void result) {
 				logger.info("OSC recomendada");
@@ -167,6 +175,7 @@ public class OrganizationController {
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(Void result) {
 				logger.info("Recomendação excluída");

@@ -189,6 +189,7 @@ public class MapController {
 		AsyncCallback<Coordinate[]> callback = new AsyncCallback<Coordinate[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(Coordinate[] result) {

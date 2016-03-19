@@ -24,6 +24,7 @@ import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.ConfigurationS
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.ConfigurationServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.ConfigurationModel;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.SearchResult;
+import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupChangePassword;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.SearchService;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.SearchServiceAsync;
 
@@ -37,6 +38,7 @@ public class ConfigurationController {
 	private static final int DELAY = 500;
 	private static int LIMIT = 5;
 	private SearchServiceAsync searchService = GWT.create(SearchService.class);
+	private PopupChangePassword popup = new PopupChangePassword();
 	
 	public void init() {
 		logger.info("Iniciando módulo de configuração");
@@ -44,6 +46,7 @@ public class ConfigurationController {
 		AsyncCallback<Byte[]> callback = new AsyncCallback<Byte[]>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(Byte[] result) {
@@ -62,7 +65,6 @@ public class ConfigurationController {
 		
 		logger.info("Buscando Cookies");
 		Integer idUser = Integer.valueOf(Cookies.getCookie("idUser"));
-		logger.info(" ========== " + String.valueOf(idUser) + " ==========");
 		if(idUser != null){
 			setConfiguration(idUser);
 		}
@@ -106,6 +108,7 @@ public class ConfigurationController {
 //				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
 //					public void onFailure(Throwable caught) {
 //						logger.log(Level.SEVERE, caught.getMessage());
+//						Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 //					}
 //					public void onSuccess(List<SearchResult> result) {
 //						if (!result.isEmpty()) {
@@ -146,6 +149,7 @@ public class ConfigurationController {
 		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(List<SearchResult> result) {
 				if (!result.isEmpty()) {
@@ -178,6 +182,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
@@ -193,6 +198,7 @@ public class ConfigurationController {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(String result) {
 				logger.info("Organização encontrado");
@@ -207,6 +213,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
@@ -223,6 +230,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
@@ -240,6 +248,7 @@ public class ConfigurationController {
 		AsyncCallback<ConfigurationModel> callback = new AsyncCallback<ConfigurationModel>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(ConfigurationModel result) {
@@ -252,32 +261,59 @@ public class ConfigurationController {
 				}
 			}
 		};
-		configurationService.readConfigurationByCPF(configuration.getCPF(), configuration.getId(), callback);
+		if(configuration.getCPF() > 0L){
+			configurationService.readConfigurationByCPF(configuration.getCPF(), configuration.getId(), callback);
+		}else{
+			updateConfiguration(configuration);
+		}
 	}
 	
 	private void updateConfiguration(final ConfigurationModel configuration) {
 		logger.info("Atualizando usuário");
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
-				DOM.getElementById("cnome").setAttribute("value", "Failure");
 				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 			
 			public void onSuccess(Void result) {
-				DOM.getElementById("cemail").setAttribute("value", "Sucess");
-				logger.info("Redirecionando para tela principal");
 				if(configuration.getTipoUsuario() != 3){
 					Cookies.setCookie("oscUid", configuration.getEmail());
 				}
 				else if(configuration.getTipoUsuario() == 3){
 					Cookies.setCookie("oscSnUid", configuration.getEmail());
 				}
-				setConfiguration(configuration.getId());
-				String url = GWT.getHostPageBaseURL() + "Map.html";
-				Window.Location.replace(url);
+				if(configuration.getCPF() > 0L){
+					Cookies.setCookie("typeUser", "recommend_user");
+				}
+				openPopup("Dados atualizados", "Os dados foram atualizados com sucesso.");
 			}
 		};
 		configurationService.updateConfiguration(configuration, formularioWidget.getEmail(), callback);
+	}
+	
+	private void openPopup(String title, String message){
+		popup.onModuleLoad();
+		Element pop = DOM.getElementById("popup");
+		pop.removeAllChildren();
+		Element header = DOM.createElement("h2");
+		header.setInnerText(title);
+		Element div = DOM.createDiv();
+		Element p = DOM.createElement("p");
+		p.setInnerText(message);
+		Element a = DOM.createAnchor();
+		a.setInnerText("Ok");
+		a.setAttribute("href", "#");
+		Event.sinkEvents(a, Event.ONCLICK);
+		Event.setEventListener(a, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				popup.close();
+			}
+		});
+		div.appendChild(p);
+		div.appendChild(a);
+		pop.appendChild(header);
+		pop.appendChild(div);
 	}
 	
 	public static String encrypt(String passwd) {
