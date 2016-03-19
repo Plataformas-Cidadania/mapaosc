@@ -2,17 +2,7 @@ package gov.sgpr.fgv.osc.portalosc.configuration.shared.model;
 
 import java.io.Serializable;
 
-/**
- * @author vagnerpraia
- * 
- *         Modelo de uma userpage
- * 
- */
 public class ConfigurationModel implements Serializable {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -436498762969230574L;
 	
 	private Integer id = 0;
@@ -23,8 +13,6 @@ public class ConfigurationModel implements Serializable {
 	private Boolean listaEmail = false;
 	private Integer tipoUsuario = 0;
 	private Integer idOsc = 0;
-	
-	
 	
 	public Integer getId() {
 		return id;

@@ -152,7 +152,10 @@ public class FormularioWidget extends Composite {
 		}
 		user.setId(Integer.valueOf(InputElement.as(DOM.getElementById("cid")).getValue()));
 		user.setNome(InputElement.as(DOM.getElementById("cnome")).getValue());
-		user.setCPF(Long.valueOf(InputElement.as(DOM.getElementById("ccpf")).getValue().replaceAll("\\D", "")));
+		String cpf = InputElement.as(DOM.getElementById("ccpf")).getValue();
+		if(cpf.length() > 0){
+			user.setCPF(Long.valueOf(cpf.replaceAll("\\D", "")));
+		}
 		user.setEmail(InputElement.as(DOM.getElementById("cemail")).getValue());
 		user.setSenha(ConfigurationController.encrypt(InputElement.as(DOM.getElementById("csenha")).getValue()));
 		if(DOM.getElementById("inscrever").getPropertyBoolean("checked")){
@@ -169,7 +172,9 @@ public class FormularioWidget extends Composite {
 		DOM.getElementById("ctipo").setAttribute("value", String.valueOf(user.getTipoUsuario()));
 		DOM.getElementById("cid").setAttribute("value", String.valueOf(user.getId()));
 		DOM.getElementById("cnome").setAttribute("value", user.getNome());
-		DOM.getElementById("ccpf").setAttribute("value", String.valueOf(user.getCPF()));
+		if(user.getCPF() > 0L){
+			DOM.getElementById("ccpf").setAttribute("value", String.valueOf(user.getCPF()));
+		}
 		DOM.getElementById("cemail").setAttribute("value", user.getEmail());
 		DOM.getElementById("csenha").setAttribute("value", ConfigurationController.decrypt(user.getSenha()));
 		DOM.getElementById("ccsenha").setAttribute("value", ConfigurationController.decrypt(user.getSenha()));
@@ -242,6 +247,7 @@ public class FormularioWidget extends Composite {
 				.addMethod(
 						"verificaCPF",
 						function(value, element) {
+							if(value.length == 0) return true;
 							value = value.replace('.', '');
 							value = value.replace('.', '');
 							cpf = value.replace('-', '');
@@ -290,7 +296,7 @@ public class FormularioWidget extends Composite {
 				},
 				ccpf : {
 					verificaCPF : true,
-					required : true
+					required : false
 				},
 				csenha : {
 					required : true,
