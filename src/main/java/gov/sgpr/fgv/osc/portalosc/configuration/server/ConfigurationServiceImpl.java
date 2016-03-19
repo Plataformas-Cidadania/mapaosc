@@ -56,7 +56,20 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 		PreparedStatement pstmt = null;
 		
 		try {
-			if(configuration.getTipoUsuario() == 2){
+			if(configuration.getCPF() <= 0L){
+				String sql = "UPDATE portal.tb_usuario "
+						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
+						   + "tusu_cd_senha = ?, bosc_sq_osc = null, tusu_in_lista_email = ?, tusu_dt_atualizacao = ? "
+						   + "WHERE tusu_sq_usuario = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, configuration.getTipoUsuario());
+				pstmt.setString(2, configuration.getEmail());
+				pstmt.setString(3, configuration.getNome());
+				pstmt.setString(4, configuration.getSenha());
+				pstmt.setBoolean(5, configuration.getListaEmail());
+				pstmt.setDate(6, sqlDate);
+				pstmt.setLong(7, configuration.getId());
+			}else if(configuration.getTipoUsuario() == 2){
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
 						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = null, tusu_in_lista_email = ?, tusu_dt_atualizacao = ? "
@@ -296,10 +309,12 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 	private void validate(ConfigurationModel configuration) throws RemoteException {
 		logger.info("Validando configuracao");
 		try {
-			CpfValidator cpfValidator = new CpfValidator();
-			if (!cpfValidator.validate(configuration.getCPF())) {
-				logger.info("CPF inválido");
-				throw new ValidationException("CPF inválido");
+			if(configuration.getCPF() > 0L){
+				CpfValidator cpfValidator = new CpfValidator();
+				if (!cpfValidator.validate(configuration.getCPF())) {
+					logger.info("CPF inválido");
+					throw new ValidationException("CPF inválido");
+				}
 			}
 			EmailValidator emailValidator = new EmailValidator();
 			if (!emailValidator.validate(configuration.getEmail())) {
