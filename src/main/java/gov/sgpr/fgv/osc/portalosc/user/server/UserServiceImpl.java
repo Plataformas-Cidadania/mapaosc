@@ -71,7 +71,8 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+				+ 								   "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -1,11 +1,6 @@
-/**
- * 
- */
 package gov.sgpr.fgv.osc.portalosc.user.shared.model;
 
 import java.io.Serializable;
-
-import com.restfb.Facebook;
 
 /**
  * @author victor
@@ -14,10 +9,6 @@ import com.restfb.Facebook;
  * 
  */
 public class DefaultUser implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4196896517937267335L;
 	
 	private int id;

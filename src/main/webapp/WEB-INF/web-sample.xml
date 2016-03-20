@@ -191,6 +191,10 @@
     <servlet-class>gov.sgpr.fgv.osc.portalosc.organization.server.OrganizationServiceImpl</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>representantLocalityService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.representantlocality.server.RepresentantLocalityServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>jUnitHostImpl</servlet-name>
     <servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
   </servlet>
@@ -273,7 +277,6 @@
     <servlet-name>organizationService</servlet-name>
     <url-pattern>/Organization/organizationService</url-pattern>
   </servlet-mapping>
-  
   <servlet-mapping>
     <servlet-name>remoteService</servlet-name>
     <url-pattern>/Organization/remoteService</url-pattern>
@@ -301,6 +304,19 @@
   </servlet-mapping> 
 
   <servlet-mapping>
+    <servlet-name>remoteLogging</servlet-name>
+    <url-pattern>/RepresentantLocality/remote_logging</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>representantLocalityService</servlet-name>
+    <url-pattern>/RepresentantLocality/representantLocalityService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userService</servlet-name>
+    <url-pattern>/RepresentantLocality/userService</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
     <url-pattern>/Prototype/junithost/*</url-pattern>
   </servlet-mapping>
@@ -319,6 +335,10 @@
   <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
     <url-pattern>/Organization/junithost/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>jUnitHostImpl</servlet-name>
+    <url-pattern>/representantLocality/junithost/*</url-pattern>
   </servlet-mapping>
   <!-- Default page to serve -->
   <welcome-file-list>
