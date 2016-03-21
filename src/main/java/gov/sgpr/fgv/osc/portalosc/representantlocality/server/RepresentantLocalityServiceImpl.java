@@ -1,7 +1,7 @@
 package gov.sgpr.fgv.osc.portalosc.representantlocality.server;
 
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityService;
-import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityUser;
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.Email;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
@@ -49,16 +49,17 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		email = new Email(serverSMTP, authSMTP, portSMTP, fromAddress, nameAddress);
 	}
 	
-	public void addUser(RepresentantLocalityUser user) throws RemoteException {
+	public void addRepresentantLocality(RepresentantLocalityModel user) throws RemoteException {
 		logger.info("Adicionando representante de localidades");
 		validate(user);
 		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				   + 							   "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) "
-				   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+		String sql = "";
 		try {
+			sql = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
+					   + 					    "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) "
+					   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
 			pstmt.setString(2, user.getEmail());
@@ -69,6 +70,22 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 			pstmt.setBoolean(7, false);
 			pstmt.setDate(8, sqlDate);
 			pstmt.execute();
+			pstmt.close();
+			
+			logger.info("Usuário adicionado");
+			
+			sql = "INSERT INTO portal.tb_representante_localidade (tusu_sq_usuario, eduf_cd_uf, edmu_cd_municipio, trlo_orgao, trlo_funcao, trlo_telefone) "
+				+ "VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, user.getCpf());
+			pstmt.setInt(2, user.getState() > 0 ? user.getState() : null);
+			pstmt.setInt(3, user.getCounty() > 0 ? user.getCounty() : null);
+			pstmt.setString(4, user.getOrgan());
+			pstmt.setString(5, user.getFunction());
+			pstmt.setInt(6, user.getPhone() > 0 ? user.getPhone() : null);
+			pstmt.execute();
+			pstmt.close();
+			
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
@@ -84,14 +101,13 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String token = null;
-		String sql = "SELECT tokn_cd_token FROM portal.tb_token WHERE tusu_sq_usuario = (SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?)";
-		
+		String sql = "SELECT tokn_cd_token FROM portal.tb_token "
+				   + "WHERE tusu_sq_usuario = (SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, cpf);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				
 				token = rs.getString("tokn_cd_token");
 			}
 			return token;
@@ -112,7 +128,6 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		java.sql.Date sqlDate = new java.sql.Date(c.getTime().getTime());   
 		String token = md5(new Date().toString() + cpf);
 		PreparedStatement pstmt = null;
-
 		String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) "
 				   + "VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
 		try {
@@ -121,6 +136,7 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 			pstmt.setString(2, token);
 			pstmt.setDate(3, sqlDate);
 			pstmt.execute();
+			pstmt.close();
 		} catch (SQLException e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);

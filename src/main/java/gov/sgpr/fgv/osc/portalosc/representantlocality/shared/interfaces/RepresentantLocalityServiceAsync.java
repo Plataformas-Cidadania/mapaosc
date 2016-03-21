@@ -10,7 +10,7 @@ public interface RepresentantLocalityServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityService
      */
-    void addUser( gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityUser user, AsyncCallback<Void> callback );
+    void addRepresentantLocality( gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel user, AsyncCallback<Void> callback );
 
 
     /**

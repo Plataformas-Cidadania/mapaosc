@@ -2,25 +2,25 @@ package gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model;
 
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 
-public class RepresentantLocalityUser extends DefaultUser {
+public class RepresentantLocalityModel extends DefaultUser {
 	private static final long serialVersionUID = -870848362681079195L;
 	
-	private String state;
-	private String county;
+	private Integer state;
+	private Integer county;
 	private String organ;
 	private String function;
-	private String phone;
+	private Integer phone;
 	
-	public String getState() {
+	public Integer getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
-	public String getCounty() {
+	public Integer getCounty() {
 		return county;
 	}
-	public void setCounty(String county) {
+	public void setCounty(Integer county) {
 		this.county = county;
 	}
 	public String getOrgan() {
@@ -35,10 +35,10 @@ public class RepresentantLocalityUser extends DefaultUser {
 	public void setFunction(String function) {
 		this.function = function;
 	}
-	public String getPhone() {
+	public Integer getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
-	}	
+	}
 }

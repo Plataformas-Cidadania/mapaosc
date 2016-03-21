@@ -1,6 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.representantlocality.client.components;
 
-import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityUser;
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.client.controller.RepresentantLocalityController;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 
@@ -65,7 +65,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 		htmlBuilder.append("											<option value='17'>TO</option>");
 		htmlBuilder.append("										</select>");
 		htmlBuilder.append("		<label for='cmun'>Município:</label><select id='cmun' name='cmun' required='required'>");
-		htmlBuilder.append("												<option>Rio de Janeiro</option>");
+		htmlBuilder.append("												<option value='1'>Rio de Janeiro</option>");
 		htmlBuilder.append("											</select>");
 		htmlBuilder.append("		<label for='corgao'>Orgão:</label><input type='text' name='corgao' id='corgao' placeholder='Orgão' class='nome' />");
 		htmlBuilder.append("		<label for='ccargo'>Função:</label><input type='text' name='ccargo' id='ccargo' placeholder='Função' class='nome' />");
@@ -132,7 +132,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 		validate();
 	}
 	
-	public RepresentantLocalityUser getUser() {
+	public RepresentantLocalityModel getUser() {
 		InputElement email = InputElement.as(DOM.getElementById("cemail"));
 		InputElement passwd = InputElement.as(DOM.getElementById("csenha"));
 		InputElement name = InputElement.as(DOM.getElementById("cnome"));
@@ -143,16 +143,16 @@ public class RepresentantLocalityFormWidget extends Composite {
 		InputElement function = InputElement.as(DOM.getElementById("ccargo"));
 		InputElement phone = InputElement.as(DOM.getElementById("ctel"));
 		
-		RepresentantLocalityUser user = new RepresentantLocalityUser();
+		RepresentantLocalityModel user = new RepresentantLocalityModel();
 		user.setEmail(email.getValue());
 		user.setPassword(RepresentantLocalityController.encrypt(passwd.getValue()));
 		user.setName(name.getValue());
 		user.setCpf(Long.valueOf(cpf.getValue().replaceAll("\\D", "")));
-		user.setState(state.getValue());
-		user.setCounty(county.getValue());
+		user.setState(Integer.valueOf(state.getValue().length() == 0 ? "0" : state.getValue()));
+		user.setCounty(Integer.valueOf(county.getValue().length() == 0 ? "0" : county.getValue()));
 		user.setOrgan(organ.getValue());
 		user.setFunction(function.getValue());
-		user.setPhone(phone.getValue());
+		user.setPhone(Integer.valueOf(phone.getValue().length() == 0 ? "0" : phone.getValue()));
 		user.setType(UserType.LOCALITY_AGENT);
 		
 		return user;

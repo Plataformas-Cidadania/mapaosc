@@ -1,6 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces;
 
-import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityUser;
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -15,7 +15,7 @@ public interface RepresentantLocalityService extends RemoteService {
 	 * @param user
 	 *            usuário a ser adicionado
 	 */
-	public void addUser(RepresentantLocalityUser user) throws RemoteException;
+	public void addRepresentantLocality(RepresentantLocalityModel user) throws RemoteException;
 	
 	/**
 	 * Adiciona o token no banco de dados

@@ -3,7 +3,7 @@ package gov.sgpr.fgv.osc.portalosc.representantlocality.client.controller;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.client.components.RepresentantLocalityFormWidget;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityService;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityServiceAsync;
-import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityUser;
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupPassword;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
@@ -82,8 +82,8 @@ public class RepresentantLocalityController {
 		});
 	}
 	
-	private void validateEmail(final RepresentantLocalityUser user) {
-		logger.info("Validando representa de localidades");
+	private void validateEmail(final RepresentantLocalityModel user) {
+		logger.info("Validando email");
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
@@ -99,7 +99,7 @@ public class RepresentantLocalityController {
 		userService.getUser(user.getEmail(), callback);
 	}
 	
-	private void validateCpf(final RepresentantLocalityUser user) {
+	private void validateCpf(final RepresentantLocalityModel user) {
 		logger.info("Validando CPF");
 		AsyncCallback<DefaultUser> callback = new AsyncCallback<DefaultUser>() {
 			public void onFailure(Throwable caught) {
@@ -118,7 +118,7 @@ public class RepresentantLocalityController {
 		userService.getUser(user.getCpf(), callback);
 	}
 	
-	private void addRepresentantLocalityUser(final RepresentantLocalityUser user) {
+	private void addRepresentantLocalityUser(final RepresentantLocalityModel user) {
 		logger.info("Adicionando representante de localidades");
 		AsyncCallback<Void> callback = new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
@@ -129,7 +129,7 @@ public class RepresentantLocalityController {
 				openPopup("Confirme o cadastro", "Um e-mail foi enviado com as instruções para confirmação do seu cadastro.");
 			}
 		};
-		representantLocalityService.addUser(user, callback);
+		representantLocalityService.addRepresentantLocality(user, callback);
 	}
 	
 	private void openPopup(String title, String message){
