@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Mapa das Organizações da Sociedade Civil - Cadastro</title>
+	<!--[if IE]><link rel="shortcut icon" href="/imagens/favicon.ico" type="image/x-icon" /><![endif]-->
+	<link rel="icon" href="/imagens/fav.png">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" media="all" />
+	<link rel="alternate stylesheet" type="text/css" href="css/contraste.css" title="contrast" />
+	<link rel="stylesheet" type="text/css" href="js/jquery.qtip.css" />
+	<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+	
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" />
+	<![endif]-->
+	
+	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">document.documentElement.className += " js";</script>
+	<script type="text/javascript" src="UploadLocality/UploadLocality.nocache.js"></script>
+</head>
+
+<body>
+
+	<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+	<noscript>
+		<div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+			O seu browser precisa ter o java script habilitado para que o Mapa funcione corretamente.
+		</div>
+	</noscript>
+	
+	<div id="main">
+		<div id="barra-brasil">
+			<ul id="menu-barra-temp" >
+				<li><a id="link-portal" href="http://brasil.gov.br">Portal do Governo Brasileiro</a></li>
+				<li><a id= "atualizar-barra" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
+			</ul>
+		</div>
+		
+		<div id="topo">
+			<div id="topo_acessibilidade">
+				<ul id="nav1">
+					<li>Ir para o <a href="#topo" accesskey="1">Conteúdo 1</a></li>
+					<li>Ir para o <a href="#topo_links" accesskey="2">Menu 2</a></li>
+					<li>Ir para o <a href="#rodape" accesskey="3">Rodapé 3</a></li>
+				</ul>
+				<ul id="nav2">
+					<li><a href="static.html?page=acessibilidade" target="_blank">Acessibilidade</a></li>
+					<li id="contraste">Contraste <a id="contraste_normal" href="#"><img
+							src="imagens/09_contraste1.png" alt="Contraste normal" width="13"
+							height="14" /></a> <a id="alto_contraste" href="#"><img
+							src="imagens/10_contraste2.png" alt="Alto contraste" width="13"
+							height="14" /></a></li>
+					<li>Tamanho do texto <a href="#" title="Aumentar fonte"
+						class="inc-font">A+</a> <a href="#" title="Fonte padrão"
+						class="res-font">A</a> <a href="#" title="Diminuir fonte"
+						class="dec-font">A-</a></li>
+				</ul>
+			</div>
+			
+			<div id="topo_links">
+				<a href="static.html?page=sobre" id="sobre">Sobre o portal</a>
+				<a href="static.html?page=faq" id="duvidas">Dúvidas frequentes</a>
+			</div>
+			
+			<div id="topo_acesso"></div>
+			
+			<a href="Map.html">
+				<img class="normal" id="logo" src="imagens/logo.jpg" alt="Mapa das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+				<img class="contraste" id="logo_contraste" src="imagens/contraste/logo-contraste.jpg" alt="Mapa das Organizações da Sociedade Civil - Página inicial" title="Ir para página inicial" />
+			</a>
+		</div>
+		
+		<div id="mapa" class="cadastro">
+			<h1><em>&nbsp;</em>Cadastro</h1>
+			<div class="instrucoes clearfix" style="height:auto;">
+				<div id="modal_localidade" class="formulario" style="width: 100%; float:none;">
+					<h3 style="border-bottom: 2px solid #1F3D93; font-size: 18px; font-family: 'RobotoBold'; padding-bottom: 5px; margin-bottom: 5px; color: #1F3D93;">Serviço de envio de dados</h3>
+					<div style="width: 100%; float:none;">
+						<form id="form_upload" name="form_upload_locality" method="post" style="display: block; clear:both;">
+							<fieldset>
+								<div style="margin-top:20px;">
+									<p><a href="/formato_de_dados.html">Verifique as regras para envio dos dados clicando aqui</a></p>
+								</div>
+								<div id="dados">
+									<div>
+										<p>Tipo de Entrada</p>
+										<label for="denvio_arquivo">Arquivo</label>
+										<input name="dentrada" type="radio" value="arquivo" id="denvio_arquivo" checked />
+										<label for="denvio_servico">Web Service</label>
+										<input name="dentrada" type="radio" value="servico" id="denvio_servico" />
+									</div>
+									<div id="form_upload_locality"></div>
+								</div>
+								<input type='submit' id='btnEnviar' value='Enviar Dados' />
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div style="height: 20px;"></div>
+		</div>
+		
+		<div class="bg-01"></div>
+		<div class="bg-02"></div>
+	</div>
+		<div id="rodape" class="clearfix">
+			<div class="clearfix">
+				<div class="celula01">
+					<h2 class="tooltip"
+						title="Melhor visualizado nos seguintes navegadores: Internet Explorer 8 ou superior, Firefox, Chrome, Opera ou Safari">Mapa
+						das Organizações da Sociedade Civil &copy; 2016</h2>
+					<a href="static.html?page=versao" class="beta">Versão BETA</a>
+				</div>
+				<div class="celula02">
+					<span>Apoio</span>
+					<div class='carousel-wrapper'>
+						<div id='divcarousel' class='carousel-item now'></div>
+					</div>
+				</div>
+				<div class="celula03">
+					<span>Realização</span>
+					<img class="normal" src="imagens/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+					<img class="contraste" src="imagens/contraste/logo_secretaria.png" alt="Secretaria-Geral da Presidência da República" />
+				</div>
+			</div>
+		</div>
+
+		<!-- ////////// -->
+		
+		<div id="footer" class="clearfix">
+					<div id="doormat-container" class="columns-4 clearfix">
+					
+						<div class="doormatColumn column-1">
+							<dl class="doormatSection">
+								<dt class="doormatSectionHeader">O Mapa</dt>
+								<dd class="doormatSectionBody">
+								<a href="Map.html#I01">OSCs em números</a>
+		<!-- 							<span id="menuFooter"><a href="#I01">OSCs em números</a></span> -->
+								</dd>
+								<dd class="doormatSectionBody"> 
+		 							<a href="static.html?page=faq">Dúvidas Frequentes</a>
+		 						</dd> 
+								<dd class="doormatSectionBody">
+									<a href="http://www.secretariageral.gov.br/mrosc" target="_blank">Marco Legal das OSC</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="static.html?page=metodologia" target="_blank">Metodologia</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="mailto:mapaosc@ipea.gov.br">Contato e Sugestões</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="static.html?page=termos">Termos de Uso</a>
+								</dd>
+							</dl>
+						</div>
+						
+						<div class="doormatColumn column-0">
+							<dl class="doormatSection">
+								<dt class="doormatSectionHeader">Bases de Dados</dt>
+								<dd class="doormatSectionBody">
+									<a href="http://portal.mte.gov.br/" target="_blank">Ministério do Trabalho e Emprego</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.justica.gov.br/" target="_blank">Ministério da Justiça</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.mec.gov.br/" target="_blank">Ministério da Educação e Cultura</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.mds.gov.br/" target="_blank">Ministério do Desenvolvimento Social</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.mma.gov.br/" target="_blank">Ministério do Meio Ambiente</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.cultura.gov.br/" target="_blank">Ministério da Cultura</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.cidades.gov.br/" target="_blank">Ministério das Cidades</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://portalsaude.saude.gov.br/" target="_blank">Ministério da Saúde</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.mcti.gov.br/" target="_blank">Ministério de Ciência e Tecnologia</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.planejamento.gov.br/" target="_blank">Ministério do Planejamento</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.esporte.gov.br/" target="_blank">Ministério dos Esportes</a>
+								</dd>
+							</dl>
+						</div>
+						
+						<div class="doormatColumn column-2">
+							<dl class="doormatSection">
+								<dt class="doormatSectionHeader">Links Úteis</dt>
+								<dd class="doormatSectionBody">
+									<a href="http://www.convenios.gov.br/portal/" target="_blank">Portal dos Convênios</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.brasil.gov.br/" target="_blank">Portal Brasil</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.secretariageral.gov.br/atuacao/mrosc/estudos-e-pesquisas">Biblioteca do Marco Legal das OSC</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="https://www.facebook.com/mroscs?ref=hl">Facebook do Marco Legal das OSC</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="https://www.youtube.com/watch?v=DqTZShCHmxY">Entenda o novo Marco Legal das OSC</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.participa.br/">Participa.br</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.participatorio.juventude.gov.br" target="_blank">Participatório da Juventude</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="http://www.atlasbrasil.org.br/" target="_blank">Atlas do Desenvolvimento Humano no Brasil</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="https://observatoriosc.wordpress.com/" target="_blank">Observatório das Organizações da Sociedade Civil</a>
+								</dd>
+								<dd class="doormatSectionBody">
+								    <a href="http://culturaeduca.cc" target="_blank">Culturaeduca.cc</a>
+								</dd>
+								<dd class="doormatSectionBody">
+								    <a href="http://sniic.cultura.gov.br" target="_blank">Sniic - Sistema Nacional de Informações e Indicadores Culturais</a>
+								</dd>
+							</dl>
+						</div>
+						
+						<div class="doormatColumn column-2" style="display:none">
+							<dl class="doormatSection">
+								<dt class="doormatSectionHeader">Redes Sociais</dt>
+								<dd class="doormatSectionBody">
+									<a href="#">Facebook</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Twitter</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">YouTube</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Flickr</a>
+								</dd>
+							</dl>
+						</div>
+		
+						<div class="doormatColumn column-3" style="display:none">
+							<dl class="doormatSection">
+								<dt class="doormatSectionHeader">Mapa do site</dt>
+							</dl>
+						</div>
+						
+						<div class="doormatColumn column-4" style="display:none">
+							<dl class="doormatSection">
+								<dt class="doormatSectionHeader">RSS</dt>
+								<dd class="doormatSectionBody">
+									<a href="#">O que é RSS?</a>
+								</dd>
+								<dd class="doormatSectionBody">
+									<a href="#">Assine nosso RSS</a>
+								</dd>
+							</dl>
+						</div>
+					
+					</div>
+					
+					<div class="footer-logos">
+						<div>
+							<a href="http://www.acessoainformacao.gov.br/" class="logo-acesso"><img
+								src="imagens/acesso-a-informacao.png" alt="Acesso a Informação" /></a>
+							<a href="http://www.brasil.gov.br/" class="logo-brasil"><img
+								src="imagens/brasil2.png" alt="Brasil - Governo Federal" /></a>
+						</div>
+					</div>
+				</div>
+			
+		<!-- ////////// -->
+			</div>
+
+	<script type="text/javascript" src="js/acessibilidade.js"></script>
+	<script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+	<script type="text/javascript"
+		src="js/fancybox/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="js/scripts_min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".box").fancybox({
+				type : 'inline',
+				closeClick : false,
+				openEffect : 'none',
+				closeEffect : 'none',
+				padding : 0,
+				helpers : {
+					overlay : {
+						css : {
+							'background' : 'rgba(180, 180, 180, 0.8)'
+						}
+					}
+				},
+// 				keys:{
+// 					close:[null]
+// 				}
+				tpl : {
+					closeBtn : '<div class="modal_fechar"  >X</div>'
+				}
+			});
+
+
+			redimensionarTela();
+
+		});
+		
+		$(window).resize(function() {
+			
+			redimensionarTela();
+			
+			
+		});
+
+		/* Redimensionar o mapa e o menu no resize da janela */
+		function redimensionarTela() {
+			if ($(window).height() < 600) {
+				var newh = parseInt($(window).height()) - alturaTopo
+						- alturaRodape;
+				if (newh < 370)
+					newh = 370;
+				if (newh < 600) {
+					$('#mapa.cadastro').css('height', newh + 'px');
+				}
+			} else {
+				$('#mapa.cadastro').css(
+						'height',
+						parseInt($(window).height()) - alturaTopo
+								- alturaRodape); // volta à altura original
+			}
+		}
+	</script>
+
+	<!--[if lte IE 8]>
+					<script>
+						$("#modal_redes input[type=submit]").click(function(event) {
+							event.preventDefault();
+							 $("#modal_redes form").submit();
+						});
+						$("#modal_cadastro input[type=submit]").click(function(event) {
+							event.preventDefault();
+							 $("#modal_cadastro form").submit();
+						});
+						$("#modal_entidade input[type=submit]").click(function(event) {
+							event.preventDefault();
+							 $("#modal_entidade form").submit();
+						});
+
+						$("div.b-redes label").click(function() {
+							$("div.b-redes label").css('background-color','#000');
+							$(this).css('background-color','#1F3D93')
+						});
+
+					</script>
+					<![endif]-->
+					
+</body>
+
+</html>
