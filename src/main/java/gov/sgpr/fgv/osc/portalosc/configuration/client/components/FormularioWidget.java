@@ -54,7 +54,6 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<fieldset>");
 		htmlBuilder.append("						<input type='hidden' name='eid' id='eid' class='entidade' value='0' />");
 		htmlBuilder.append("						<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade' class='entidade' editable='false' />");
-		
 		htmlBuilder.append("						<div id='entity_name' style='display:none'>");
 		htmlBuilder.append("							<p></p><p>Representante da organização:</p>");
 		htmlBuilder.append("							<label><strong><span id='oscName' name='oscName'></span></strong></label>");
@@ -63,7 +62,6 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						<div id='botoes' style='display:none'>");
 		htmlBuilder.append("							<input type='button' name='cancelarOSC' id='cancelarOSC' value='Cancelar' class='localizar' alt='Cancelar ser representante de OSC' />");
 		htmlBuilder.append("						</div>");
-		
 		htmlBuilder.append("					</fieldset>");
 		htmlBuilder.append("					<p>");
 		htmlBuilder.append("						<input type='checkbox' name='inscrever' value='inscrever' id='inscrever' />");
@@ -99,16 +97,6 @@ public class FormularioWidget extends Composite {
 		Event.sinkEvents(elem, Event.ONKEYDOWN);
 		Event.setEventListener(elem, listener);
 	}
-	
-//	/**
-//	 * @param listener
-//	 *            Controla o evento de click do botão "Localizar".
-//	 */
-//	public void addSearchClickListener(EventListener listener) {
-//		final Element elem = DOM.getElementById("localizarOSC");
-//		Event.sinkEvents(elem, Event.ONCLICK);
-//		Event.setEventListener(elem, listener);
-//	}
 	
 	/**
 	 * @param listener

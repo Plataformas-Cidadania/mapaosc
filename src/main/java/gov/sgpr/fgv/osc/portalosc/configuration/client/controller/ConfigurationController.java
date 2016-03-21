@@ -14,6 +14,7 @@ import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.googlecode.gwt.crypto.bouncycastle.DataLengthException;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
@@ -101,27 +102,6 @@ public class ConfigurationController {
 			}
 		});
 		
-//		formularioWidget.addSearchClickListener(new EventListener() {
-//			public void onBrowserEvent(Event event) {
-//				logger.info("entityUser.addSearchClickListener");
-//				String criteria = formularioWidget.getValue();
-//				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-//					public void onFailure(Throwable caught) {
-//						logger.log(Level.SEVERE, caught.getMessage());
-//						Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
-//					}
-//					public void onSuccess(List<SearchResult> result) {
-//						if (!result.isEmpty()) {
-//							formularioWidget.showOrganization(result.get(0).getValue(), String.valueOf(result.get(0).getId()));
-//						}
-//					}
-//				};
-//				if (!criteria.trim().isEmpty()){
-//					searchService.search(criteria, LIMIT, callbackSearch);
-//				}
-//			}
-//		});
-		
 		formularioWidget.addCancelOSCClickListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				formularioWidget.clearOSC();
@@ -187,6 +167,7 @@ public class ConfigurationController {
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
 				formularioWidget.setUser(result);
+				Anchor.wrap(DOM.getElementById("oscName")).setHref("/Organization.html#O" + String.valueOf(result.getIdOsc()));
 				setOrganization(Integer.valueOf(result.getIdOsc()));
 			}
 		};
