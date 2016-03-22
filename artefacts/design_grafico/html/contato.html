@@ -98,32 +98,41 @@
 
 					<h1><em>&nbsp;</em> Contato </h1>
 					<div class="wrapper clearfix" >
-						<form>
+						<form action="" method="POST" enctype="multipart/form-data">
 							<div>
-								<label>Nome:</label>
+								<label>Nome*:</label>
 								<input type=text />
 							</div>
 							<div>
-								<label>Email:</label>
+								<label>Email*:</label>
 								<input type=text />
 							</div>
 							<div>
-								<label>Assunto:</label>
+								<label>Assunto*:</label>
 								<select>
-									<option>Sugestão ou Elogio</option>
-									<option>Minha OSC não se encontra no mapa</option>
-									<option>Dados errados sobre a minha OSC</option>
+									<option></option>
+									<option>Dúvida, sugestão ou feedback</option>
+									<option>Ausência de OSC no Mapa</option>
+									<option>Correção de dados de OSC</option>
+									<option>Problemas com a minha conta</option>
+									<option>Problemas técnicos</option>
 								</select>
 							</div>
 							<div>
-								<label>CNPJ:</label>
-								<input type=text />
+								<p class="info-text">Lembre-se de incluir na mensagem os dados necessários para a resolução do seu problema, como CNPJ da Organização e/ou CPF da sua Conta. </p>
 							</div>
 							<div>
-								<label>Mensagem:</label>
+								<label>Mensagem*:</label>
 							</div>
 							<div>
 								<textarea rows="15" cols=""></textarea>
+							</div>
+							<div>
+								<label>Anexo:</label>
+								<input type="file" name="anexo"/>
+							</div>
+							<div class="botoes">
+								<input type="submit" value="Enviar" class="salvar" />
 							</div>
 						</form>
 					</div>

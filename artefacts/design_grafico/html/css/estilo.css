@@ -3399,3 +3399,72 @@ body.indisponivel {
 .left {
 	float: left;
 }
+
+#mapa.contato h1 {
+	padding-left: 65px;
+}
+
+#mapa.contato .wrapper {
+	margin: 0;
+	padding: 15px 0 25px;
+	/*background: url("../imagens/fundo_teste.jpg");
+	background-position: center center;*/
+	background-color: #02103A;
+}
+
+.contato .wrapper form {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 25px;
+	border-radius: 5px;
+	background: #f0f0f0;
+}
+
+.contato label {
+	display: block;
+	margin: 10px 0 5px;
+}
+
+.contato input, .contato select, .contato textarea {
+	min-width: 300px;
+	max-width: 750px;
+	width: 100%;
+}
+
+.contato .info-text {
+	margin: 15px 0;
+	color: #333;
+	font-size: 11px;
+	text-align: justify;
+}
+
+.contato #attachment {
+	text-align: right;
+}
+
+.contato #attachment div {
+	margin: 7px 0;
+}
+
+.contato #attachment .delete-attach {
+	margin-left: 10px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.contato .botoes {
+	margin-top: 20px;
+}
+
+.contato .botoes input {
+	padding: 15px;
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.contato .botoes input:hover {
+	background-color:#1F3D93;
+}
