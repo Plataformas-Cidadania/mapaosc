@@ -56,7 +56,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade' class='entidade' editable='false' />");
 		htmlBuilder.append("						<div id='entity_name' style='display:none'>");
 		htmlBuilder.append("							<p></p><p>Representante da organização:</p>");
-		htmlBuilder.append("							<label><strong><span id='oscName' name='oscName'></span></strong></label>");
+		htmlBuilder.append("							<label><a href='#' id='anchorOscName'><strong><span id='oscName' name='oscName'></span></strong></a></label>");
 		htmlBuilder.append("							<input type='hidden' name='oscCode' id='oscCode' value='0' />");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div id='botoes' style='display:none'>");
