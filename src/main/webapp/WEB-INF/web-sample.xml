@@ -190,6 +190,14 @@
     <servlet-name>organizationService</servlet-name>
     <servlet-class>gov.sgpr.fgv.osc.portalosc.organization.server.OrganizationServiceImpl</servlet-class>
   </servlet>
+<!--   <servlet> -->
+<!--     <servlet-name>representantLocalityService</servlet-name> -->
+<!--     <servlet-class>gov.sgpr.fgv.osc.portalosc.representantlocality.server.RepresentantLocalityServiceImpl</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet> -->
+<!--     <servlet-name>uploadLocalityService</servlet-name> -->
+<!--     <servlet-class>gov.sgpr.fgv.osc.portalosc.uploadlocality.server.UploadLocalityServiceImpl</servlet-class> -->
+<!--   </servlet> -->
   <servlet>
     <servlet-name>representantLocalityService</servlet-name>
     <servlet-class>gov.sgpr.fgv.osc.portalosc.representantlocality.server.RepresentantLocalityServiceImpl</servlet-class>
@@ -307,6 +315,40 @@
     <url-pattern>/StaticContent/junithost/*</url-pattern>
   </servlet-mapping> 
 
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>remoteLogging</servlet-name> -->
+<!--     <url-pattern>/RepresentantLocality/remote_logging</url-pattern> -->
+<!--   </servlet-mapping> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>representantLocalityService</servlet-name> -->
+<!--     <url-pattern>/RepresentantLocality/representantLocalityService</url-pattern> -->
+<!--   </servlet-mapping> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>userService</servlet-name> -->
+<!--     <url-pattern>/RepresentantLocality/userService</url-pattern> -->
+<!--   </servlet-mapping> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>remoteService</servlet-name> -->
+<!--     <url-pattern>/RepresentantLocality/remoteService</url-pattern> -->
+<!--   </servlet-mapping> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>jUnitHostImpl</servlet-name> -->
+<!--     <url-pattern>/RepresentantLocality/junithost/*</url-pattern> -->
+<!--   </servlet-mapping>  -->
+  
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>remoteLogging</servlet-name> -->
+<!--     <url-pattern>/UploadLocality/remote_logging</url-pattern> -->
+<!--   </servlet-mapping> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>uploadLocalityService</servlet-name> -->
+<!--     <url-pattern>/UploadLocality/uploadLocalityService</url-pattern> -->
+<!--   </servlet-mapping> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>userService</servlet-name> -->
+<!--     <url-pattern>/UploadLocality/userService</url-pattern> -->
+<!--   </servlet-mapping> -->
+  
   <servlet-mapping>
     <servlet-name>remoteLogging</servlet-name>
     <url-pattern>/RepresentantLocality/remote_logging</url-pattern>

@@ -74,16 +74,6 @@ public class RepresentantFormWidget extends Composite {
 		validate();
 	}
 	
-//	/**
-//	 * @param listener
-//	 *            Controla o evento de click do botão "Localizar".
-//	 */
-//	public void addSearchClickListener(EventListener listener) {
-//		final Element elem = DOM.getElementById("localizarOSC");
-//		Event.sinkEvents(elem, Event.ONCLICK);
-//		Event.setEventListener(elem, listener);
-//	}
-
 	/**
 	 * @param listener
 	 *            Controla o evento de click do botão de cadastrar usuário.
@@ -172,32 +162,19 @@ public class RepresentantFormWidget extends Composite {
 		htmlBuilder.append("			<div>");
 		htmlBuilder.append("				<form>");
 		htmlBuilder.append("					Verifique se a organização já está cadastrada no Mapa, informando o nome ou CNPJ: ");
-		htmlBuilder.append("					<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade required='required' class='entidade' />");
+		htmlBuilder.append("					<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade' required='required' class='entidade' />");
 		htmlBuilder.append("					<div class='botoes'>");
-//		htmlBuilder.append("						<input type='button' name='localizarOSC' id='localizarOSC' value='Buscar' class='buscar' />");
 		htmlBuilder.append("						<label><strong><span id='oscCode' name='oscCode'></span></strong></label>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</form>");
 		htmlBuilder.append("			</div>");
 		htmlBuilder.append("		</div>");
-//		htmlBuilder.append("		<div id='cert_digital' style='display:none'>");
-//		htmlBuilder.append("			<img src='imagens/cadastro_02.png' width='20' height='20' alt='Etapa 2'>");
-//		htmlBuilder.append("			<div class='clearfix'>");
-//		htmlBuilder.append("				<strong>Informe seu certificado digital</strong><br/>");
-//		htmlBuilder.append("				Se você ainda não possui um, contacte sua organização para saber como obtê-lo.");
-//		htmlBuilder.append("			</div>");			
-//		htmlBuilder.append("		</div>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div id = 'entity_name' style=' display:none'>");
 		htmlBuilder.append("		<img src='imagens/cadastro_01.png' width='20' height='20' alt='Etapa 1'>");
 		htmlBuilder.append("		<label><strong><span id='oscName' name='oscName'></span></strong></label>");
 		htmlBuilder.append("		<img src='imagens/cadastro_check.png'  alt='Cadastro check'></p>");
 		htmlBuilder.append("	</div>");
-//		htmlBuilder.append("	<div id='cert_digital_ok' style='display:none'>");
-//		htmlBuilder.append("		<img src='imagens/cadastro_02.png' width='20' height='20' alt='Etapa 2'>");
-//		htmlBuilder.append("		<label><strong>  Certificado Digital  </strong></label>");
-//		htmlBuilder.append("		<img src='imagens/cadastro_check.png'  alt='Cadastro check'></p>");
-//		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<form id='form_representante' name='form_representante' method='post' class='entidade_validacao'>");
 		htmlBuilder.append("		<div id='cadastro_rep' style='display:none'>");
 		htmlBuilder.append("			<img src='imagens/cadastro_02.png' width='20' height='20' alt='Etapa 3'>");
@@ -249,7 +226,6 @@ public class RepresentantFormWidget extends Composite {
 	public void showOrganization(String oscInfo, String oscId) {
 		final Element searchWidget = DOM.getElementById("resultado_busca");
 		final Element representant = DOM.getElementById("div-representant");
-//		final Element certDigital = DOM.getElementById("cert_digital_ok");
 		final Element fieldOscName = DOM.getElementById("oscName");
 		final Element fieldOscCode = DOM.getElementById("oscCode");
 		final Element representantName = DOM.getElementById("entity_name");
@@ -259,7 +235,6 @@ public class RepresentantFormWidget extends Composite {
 
 		representant.getStyle().setDisplay(Display.NONE);
 		searchWidget.getStyle().setDisplay(Display.NONE);
-		//certDigital.getStyle().setDisplay(Display.BLOCK);
 		representantName.getStyle().setDisplay(Display.BLOCK);
 		cadastroRepresent.getStyle().setDisplay(Display.BLOCK);
 	}
