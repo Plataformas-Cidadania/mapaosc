@@ -112,7 +112,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			
 			sql = "SELECT count(bosc_sq_osc) AS sum "
 				+ "FROM portal.nm_osc_usuario "
-				+ "WHERE bosc_sq_osc = ?";
+				+ "WHERE bosc_sq_osc = ? "
+				+ "AND osus_in_recomendacao = true";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
