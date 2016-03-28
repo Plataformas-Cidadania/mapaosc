@@ -80,7 +80,7 @@ public class PopupChangePassword implements EntryPoint {
 		htmlBuilder.append("<div id='popup' class='alterar_senha pop_up_alert clearfix'>");
 		htmlBuilder.append("<h2> Alterar Senha</h2>");
 		htmlBuilder.append("<div>");
-		htmlBuilder.append("<p>Olá, <br/> por favor prencha com sua nova senha abaixo para que ela seja redefinida.</p>");
+		htmlBuilder.append("<p>Olá, <br/> por favor preencha os campos para que sua senha seja redefinida.</p>");
 		htmlBuilder.append("<form id='form_alterar_senha' name='form_alterar_senha' method='post'>");
 		htmlBuilder.append("<div class='small_form'>");
 		htmlBuilder.append("<div class='coluna_1'>");

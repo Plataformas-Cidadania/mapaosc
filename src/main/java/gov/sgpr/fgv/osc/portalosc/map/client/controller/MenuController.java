@@ -888,12 +888,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			}
 		};
 
-		// Verificação de usuário logado para poder recomendar uma OSC -
-		// MOSC-156
-		if (UserController.hasLoggedUser() == true)
-			oscService.setRecommendation(oscId, email, recommended, callback);
-		else
-			Window.Location.replace(com.google.gwt.core.client.GWT.getHostPageBaseURL() + "User.html");
+		oscService.setRecommendation(oscId, email, recommended, callback);
 	}
 
 	public static String getHelpContent(DataSource[] dataSources) {

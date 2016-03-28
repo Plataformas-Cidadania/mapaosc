@@ -27,15 +27,15 @@ import gov.sgpr.fgv.osc.portalosc.organization.client.components.FormularioWidge
 import gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationService;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.interfaces.OrganizationServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.OrganizationModel;
-import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupPassword;
+import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 
 public class OrganizationController {
 	private static Logger logger = Logger.getLogger(OrganizationController.class.getName());
 	private OrganizationServiceAsync organizationService = com.google.gwt.core.shared.GWT.create(OrganizationService.class);
 	private UserServiceAsync userService = com.google.gwt.core.shared.GWT.create(UserService.class);
-	private PopupPassword popupPassword = new PopupPassword();
 	private FormularioWidget formularioWidget = null;
 	private OrganizationModel organization = new OrganizationModel();
 	private final RootPanel formularioElement = RootPanel.get("modal_formulario");
@@ -194,9 +194,8 @@ public class OrganizationController {
 		formularioWidget.addRecomendar(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				String idUser = Cookies.getCookie("idUser");
-				String typeUser = Cookies.getCookie("typeUser");
 				if(idUser != null) {
-					if(typeUser == "recommend_user"){
+					if (UserController.getCurrentUser().getType() == UserType.DEFAULT || UserController.getCurrentUser().getType() == UserType.OSC_AGENT){
 						Element likeCounter = DOM.getElementById("like_counter");
 						Element btnRecomendar = DOM.getElementById("recomendar");
 						Integer count = Integer.valueOf(likeCounter.getInnerText());
@@ -216,10 +215,10 @@ public class OrganizationController {
 							deleteReccomendation(idOSC, Integer.parseInt(idUser));
 						}
 					}else{
-						openPopup("É preciso ter cadastrado o CPF", "Para recomendar uma OSC é necessário ter o CPF cadastrado no sistema.");
+						openPopup("Recomendar Organização", "Para recomendar uma Organização é necessário ter o CPF cadastrado no sistema. Para cadastrar seu CPF entre em Configurações.");
 					}
 				}else{
-					openPopup("É preciso estar logado", "Para recomendar uma OSC é necessário estar logado no sistema.");
+					openPopup("Recomendar Organização", "Para recomendar uma Organização é necessário realizar o Login.");
 				}
 			}
 		});
@@ -318,27 +317,18 @@ public class OrganizationController {
 	}
 	
 	private void openPopup(String title, String message){
-		popupPassword.onModuleLoad();
-		Element pop = DOM.getElementById("popup");
-		pop.removeAllChildren();
-		Element header = DOM.createElement("h2");
-		header.setInnerText(title);
-		Element div = DOM.createDiv();
-		Element p = DOM.createElement("p");
-		p.setInnerText(message);
-		Element a = DOM.createAnchor();
-		a.setInnerText("Ok");
-		a.setAttribute("href", "#");
-		Event.sinkEvents(a, Event.ONCLICK);
-		Event.setEventListener(a, new EventListener() {
+		final PopupPanel popup = new PopupPanel();
+		popup.setStyleName("overlay");
+		popup.add(getHtmlPopup(title,message));
+		popup.show();
+		
+		Element ok = DOM.getElementById("ok");
+		Event.sinkEvents(ok, Event.ONCLICK);
+		Event.setEventListener(ok, new EventListener() {
 			public void onBrowserEvent(Event event) {
-				popupPassword.close();
+				popup.hide();
 			}
 		});
-		div.appendChild(p);
-		div.appendChild(a);
-		pop.appendChild(header);
-		pop.appendChild(div);
 	}
 	
 	private void addDate(String ele, String idElement){
@@ -355,6 +345,24 @@ public class OrganizationController {
 		element.appendChild(picker.getElement());
 //		Element date = DOM.getElementById(idElement + formularioWidget.proj);
 //		date.setAttribute("required", "required");
+	}
+	
+	private static HTML getHtmlPopup(String titulo, String msg) {
+		StringBuilder htmlBuilder = new StringBuilder();
+		htmlBuilder.append("<div  id='popup' class='pop_up_alert clearfix'>");
+		htmlBuilder.append("<h2>"+ titulo +"</h2>");
+		htmlBuilder.append("<div>");
+		htmlBuilder.append("<p>"+ msg +"</p>");
+		htmlBuilder.append("<form id='form_esqueci_senha' method='post'>");
+		htmlBuilder.append("<div class='botoes'>");
+		htmlBuilder.append("<input type='button' name='ok' id='ok'  value='Ok' style='margin-left: 180px;' /></div>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("</form>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("</div>");
+	
+		HTML html = new HTML(htmlBuilder.toString());
+		return html;
 	}
 	
 	private HTML getHtmlProj(Integer proj, Integer count) {

@@ -109,8 +109,8 @@ public class UserController {
 			addDefaultUserWidget();
 		}
 		if (socialNetPanel != null) {
-			socialNetPanel.add(unavailableSocialNet);
-			//addSocialNetUserWidget();
+			//socialNetPanel.add(unavailableSocialNet);
+			addSocialNetUserWidget();
 		}
 		if (organizationUserPanel != null) {
 			addOrganizationUserWidget();
@@ -268,6 +268,18 @@ public class UserController {
 				}
 			}
 		});
+		
+		socialNetUser.addSubmitform(new EventListener() {
+			public void onBrowserEvent(Event event) {
+				if(event.getKeyCode() == KeyCodes.KEY_ENTER){
+					logger.info("Validando cadastro de usuário de rede social");
+					if (socialNetUser.isValid()) {
+						validateNetUser();
+					}
+				}
+			}
+		});
+		
 	}
 	
 	private void addOrganizationUserWidget() {
@@ -804,7 +816,10 @@ public class UserController {
 	private void logon(final DefaultUser user) {
 		logger.info("Realizando logon do usuário padrão");
 		logon.getElement().removeFromParent();
-		logon = new LogonWidget(user);
+		if(user.getType() == UserType.FACEBOOK)
+			logon = new LogonWidget(user,true);
+		else
+			logon = new LogonWidget(user,false);
 		Element logonDiv = Document.get().getElementById(LOGON_CONTAINER);
 		if(logonDiv != null){
 			addLoggedInWidget(logonDiv);
@@ -1008,7 +1023,7 @@ public class UserController {
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.log(Level.SEVERE, caught.getMessage());
-				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
+				//Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 			}
 
 			public void onSuccess(String appId) {

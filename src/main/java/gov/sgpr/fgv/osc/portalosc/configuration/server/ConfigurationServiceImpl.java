@@ -69,7 +69,7 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				pstmt.setBoolean(5, configuration.getListaEmail());
 				pstmt.setDate(6, sqlDate);
 				pstmt.setLong(7, configuration.getId());
-			}else if(configuration.getTipoUsuario() == 2){
+			}else if(configuration.getTipoUsuario() == 2 || configuration.getTipoUsuario() == 3){
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
 						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = null, tusu_in_lista_email = ?, tusu_dt_atualizacao = ? "
@@ -79,7 +79,13 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				pstmt.setString(2, configuration.getEmail());
 				pstmt.setString(3, configuration.getNome());
 				pstmt.setString(4, configuration.getSenha());
-				pstmt.setLong(5, configuration.getCPF());
+				if(configuration.getTipoUsuario() == 3){
+					if(configuration.getCPF() == 0)
+						pstmt.setLong(5, -1);
+					else
+						pstmt.setLong(5, configuration.getCPF());
+				}else
+					pstmt.setLong(5, configuration.getCPF());
 				pstmt.setBoolean(6, configuration.getListaEmail());
 				pstmt.setDate(7, sqlDate);
 				pstmt.setLong(8, configuration.getId());
@@ -309,7 +315,7 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 	private void validate(ConfigurationModel configuration) throws RemoteException {
 		logger.info("Validando configuracao");
 		try {
-			if(configuration.getCPF() > 0L){
+			if(configuration.getTipoUsuario() != 3){
 				CpfValidator cpfValidator = new CpfValidator();
 				if (!cpfValidator.validate(configuration.getCPF())) {
 					logger.info("CPF inválido");

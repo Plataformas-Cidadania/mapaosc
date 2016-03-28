@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +25,7 @@ import javax.servlet.ServletContext;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.exception.FacebookException;
+import com.restfb.Parameter;
 import com.restfb.types.User;
 
 public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
@@ -59,12 +60,13 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 
 	public void addUser(FacebookUser user) throws RemoteException {
 		validate(user);
+		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 
 		String sqlTableUser = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_nr_cpf, tusu_in_lista_email) VALUES (?, ?, ?, ?, ?, ?)";
+				+ "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		String sqlTableNetUser = "INSERT INTO portal.tb_usuario_rede_social(ures_nm_login, reso_cd_rede_social, ures_cd_token, tusu_sq_usuario) "
 				+ "VALUES (?, ?, ?, (SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_ee_email = ?))";
 
@@ -77,6 +79,8 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 			pstmt.setString(4, user.getPassword());
 			pstmt.setLong(5, user.getCpf());
 			pstmt.setBoolean(6, user.isMailingListMember());
+			pstmt.setBoolean(7, true);
+			pstmt.setDate(8, sqlDate);
 			pstmt.execute();
 
 			pstmt2 = conn.prepareStatement(sqlTableNetUser);
@@ -98,11 +102,11 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 	}
 
 	private void validate(FacebookUser user) throws RemoteException {
-		try {
-			facebookClient.fetchObject(user.getUid(), User.class);
-		} catch (FacebookException e) {
-			throw new ValidationException("Usuário de facebook inválido.");
-		}
+//		try {
+//			facebookClient.fetchObject(user.getUid(), User.class);
+//		} catch (FacebookException e) {
+//			throw new ValidationException("Usuário de facebook inválido.");
+//		}
 		if (hasUser(user)) {
 			throw new ValidationException(
 					"Usuário já existe na base de dados do Mapa.");
@@ -186,7 +190,10 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 			FacebookUser fbUser = new FacebookUser();
 			FacebookClient facebookClient = new DefaultFacebookClient(
 					accesstoken);
-			User user = facebookClient.fetchObject("me", User.class);
+			//User user = facebookClient.fetchObject("me", User.class);
+			
+			User user = facebookClient.fetchObject("me", User.class,
+				     Parameter.with("fields", "id,name,email"));
 
 			fbUser.setEmail(user.getEmail());
 			fbUser.setName(user.getName());

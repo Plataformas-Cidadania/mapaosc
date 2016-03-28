@@ -1,7 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.map.client.components;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
@@ -13,15 +12,18 @@ import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 import gov.sgpr.fgv.osc.portalosc.map.client.components.model.AbstractMenuItem;
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
 import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscMenuSummary;
+import gov.sgpr.fgv.osc.portalosc.user.client.controller.UserController;
+import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 
 public class OrganizationWidget extends Composite {
-	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private OscMenuSummary menuInfo;
 	private List<AbstractMenuItem> menuItems;
 
@@ -104,27 +106,69 @@ public class OrganizationWidget extends Composite {
 
 			
 			public void onBrowserEvent(Event event) {
-
-				final Element likeCounter = DOM.getElementById("like_counter");
-
-				menuInfo.setRecommended(!menuInfo.isRecommended());
-				String btnText = menuInfo.isRecommended() ? "Recomendar (desfazer)"
-						: "Recomendar";
-				btnRecom.setInnerText(btnText);
-
-				controller.RecommendationManager(menuInfo.isRecommended(),
-						menuInfo.getOscId());
-				int increment = menuInfo.isRecommended() ? 1 : -1;
-
-				menuInfo.setLikeCounter(menuInfo.getLikeCounter() + increment);
-				likeCounter.setInnerText(String.valueOf(menuInfo
-						.getLikeCounter()));
-				likeCounter.setTitle(menuInfo.getLikeCounter()
-						+ " Recomendaram esta organização!");
+				
+				if(UserController.hasLoggedUser() == true){
+					if (UserController.getCurrentUser().getType() == UserType.DEFAULT || UserController.getCurrentUser().getType() == UserType.OSC_AGENT){
+						final Element likeCounter = DOM.getElementById("like_counter");
+		
+						menuInfo.setRecommended(!menuInfo.isRecommended());
+						String btnText = menuInfo.isRecommended() ? "Recomendar (desfazer)"
+								: "Recomendar";
+						btnRecom.setInnerText(btnText);
+						
+						controller.RecommendationManager(menuInfo.isRecommended(),
+								menuInfo.getOscId());
+						int increment = menuInfo.isRecommended() ? 1 : -1;
+		
+						menuInfo.setLikeCounter(menuInfo.getLikeCounter() + increment);
+						likeCounter.setInnerText(String.valueOf(menuInfo
+								.getLikeCounter()));
+						likeCounter.setTitle(menuInfo.getLikeCounter()
+								+ " Recomendaram esta organização!");
+				
+					}else{
+						popup("Recomendar Organização", "Para recomendar uma Organização é necessário ter o CPF cadastrado no sistema. Para cadastrar seu CPF entre em Configurações.");
+					}
+				}else{
+					popup("Recomendar Organização", "Para recomendar uma Organização é necessário realizar o Login.");
+				}
 			}
 
 		});
 
+	}
+	
+	private void popup(String titulo, String msg){
+		final PopupPanel popup = new PopupPanel();
+		popup.setStyleName("overlay");
+		popup.add(getHtmlPopup(titulo,msg));
+		popup.show();
+		
+		Element ok = DOM.getElementById("ok");
+		Event.sinkEvents(ok, Event.ONCLICK);
+		Event.setEventListener(ok, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				popup.hide();
+			}
+		});
+	}
+	
+	private static HTML getHtmlPopup(String titulo, String msg) {
+		StringBuilder htmlBuilder = new StringBuilder();
+		htmlBuilder.append("<div  id='popup' class='pop_up_alert clearfix'>");
+		htmlBuilder.append("<h2>"+ titulo +"</h2>");
+		htmlBuilder.append("<div>");
+		htmlBuilder.append("<p>"+ msg +"</p>");
+		htmlBuilder.append("<form id='form_esqueci_senha' method='post'>");
+		htmlBuilder.append("<div class='botoes'>");
+		htmlBuilder.append("<input type='button' name='ok' id='ok'  value='Ok' style='margin-left: 180px;' /></div>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("</form>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("</div>");
+	
+		HTML html = new HTML(htmlBuilder.toString());
+		return html;
 	}
 
 }

@@ -15,6 +15,8 @@ import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.googlecode.gwt.crypto.bouncycastle.DataLengthException;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
@@ -25,21 +27,19 @@ import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.ConfigurationS
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.ConfigurationServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.ConfigurationModel;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.SearchResult;
-import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupChangePassword;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.SearchService;
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.interfaces.SearchServiceAsync;
 
 public class ConfigurationController {
 	private static Logger logger = Logger.getLogger(ConfigurationController.class.getName());
 	private ConfigurationServiceAsync configurationService = com.google.gwt.core.shared.GWT.create(ConfigurationService.class);
-	private FormularioWidget formularioWidget = new FormularioWidget();
+	private FormularioWidget formularioWidget = null;
 	private final RootPanel formularioElement = RootPanel.get("modal_formulario");
 	private static byte[] desKey;
 	private Date changeDate;
 	private static final int DELAY = 500;
 	private static int LIMIT = 5;
 	private SearchServiceAsync searchService = GWT.create(SearchService.class);
-	private PopupChangePassword popup = new PopupChangePassword();
 	
 	public void init() {
 		logger.info("Iniciando módulo de configuração");
@@ -62,7 +62,7 @@ public class ConfigurationController {
 		logger.info("Buscando Chave de criptografia");
 		configurationService.getEncryptKey(callback);
 		
-		addFormularioWidget();
+		//addFormularioWidget();
 		
 		logger.info("Buscando Cookies");
 		Integer idUser = Integer.valueOf(Cookies.getCookie("idUser"));
@@ -71,8 +71,9 @@ public class ConfigurationController {
 		}
 	}
 	
-	private void addFormularioWidget() {
+	private void addFormularioWidget(Boolean userNet){
 		logger.info("Adicionando widget do formulário");
+		formularioWidget = new FormularioWidget(userNet);
 		
 		formularioElement.add(formularioWidget);
 		
@@ -166,6 +167,32 @@ public class ConfigurationController {
 			}
 			public void onSuccess(ConfigurationModel result) {
 				logger.info("Usuário encontrado");
+				if(result.getTipoUsuario() == 3){
+					addFormularioWidget(true);
+					final Element cpfYes = DOM.getElementById("rcpf_sim");
+					final Element cpfNo = DOM.getElementById("rcpf_nao");
+			
+					Event.sinkEvents(cpfYes, Event.ONCLICK);
+					Event.setEventListener(cpfYes, new EventListener() {
+						public void onBrowserEvent(Event event) {
+							formularioWidget.addValidateCpf();
+							Element div = DOM.getElementById("divrepres");
+							DOM.getElementById("ctipo").setAttribute("value", "2");
+							div.setAttribute("style", "display: block");
+						}
+					});
+					Event.sinkEvents(cpfNo, Event.ONCLICK);
+					Event.setEventListener(cpfNo, new EventListener() {
+						public void onBrowserEvent(Event event) {
+							formularioWidget.removeValidateCpf();
+							Element div = DOM.getElementById("divrepres");
+							DOM.getElementById("ctipo").setAttribute("value", "3");
+							div.setAttribute("style", "display: none");
+						}
+					});
+				}
+				else
+					addFormularioWidget(false);
 				formularioWidget.setUser(result);
 				AnchorElement.as(DOM.getElementById("anchorOscName")).setHref("Organization.html#O" + String.valueOf(result.getIdOsc()));
 				setOrganization(Integer.valueOf(result.getIdOsc()));
@@ -218,7 +245,11 @@ public class ConfigurationController {
 				if (result != null) {
 					formularioWidget.addInvalidEmail(user.getEmail());
 				}
-				validateCpf(user);
+				
+				if(user.getTipoUsuario() == 3)
+					updateConfiguration(user);
+				else
+					validateCpf(user);
 			}
 		};
 		configurationService.readConfigurationByEmail(user.getEmail(), user.getId(), callback);
@@ -242,11 +273,8 @@ public class ConfigurationController {
 				}
 			}
 		};
-		if(configuration.getCPF() > 0L){
-			configurationService.readConfigurationByCPF(configuration.getCPF(), configuration.getId(), callback);
-		}else{
-			updateConfiguration(configuration);
-		}
+		
+		configurationService.readConfigurationByCPF(configuration.getCPF(), configuration.getId(), callback);
 	}
 	
 	private void updateConfiguration(final ConfigurationModel configuration) {
@@ -264,7 +292,7 @@ public class ConfigurationController {
 				else if(configuration.getTipoUsuario() == 3){
 					Cookies.setCookie("oscSnUid", configuration.getEmail());
 				}
-				if(configuration.getCPF() > 0L){
+				if(configuration.getCPF() != -1){
 					Cookies.setCookie("typeUser", "recommend_user");
 				}
 				openPopup("Dados atualizados", "Os dados foram atualizados com sucesso.");
@@ -274,27 +302,36 @@ public class ConfigurationController {
 	}
 	
 	private void openPopup(String title, String message){
-		popup.onModuleLoad();
-		Element pop = DOM.getElementById("popup");
-		pop.removeAllChildren();
-		Element header = DOM.createElement("h2");
-		header.setInnerText(title);
-		Element div = DOM.createDiv();
-		Element p = DOM.createElement("p");
-		p.setInnerText(message);
-		Element a = DOM.createAnchor();
-		a.setInnerText("Ok");
-		a.setAttribute("href", "#");
-		Event.sinkEvents(a, Event.ONCLICK);
-		Event.setEventListener(a, new EventListener() {
+		final PopupPanel popup = new PopupPanel();
+		popup.setStyleName("overlay");
+		popup.add(getHtmlPopup(title,message));
+		popup.show();
+		
+		Element ok = DOM.getElementById("ok");
+		Event.sinkEvents(ok, Event.ONCLICK);
+		Event.setEventListener(ok, new EventListener() {
 			public void onBrowserEvent(Event event) {
-				popup.close();
+				popup.hide();
 			}
 		});
-		div.appendChild(p);
-		div.appendChild(a);
-		pop.appendChild(header);
-		pop.appendChild(div);
+	}
+	
+	private static HTML getHtmlPopup(String titulo, String msg) {
+		StringBuilder htmlBuilder = new StringBuilder();
+		htmlBuilder.append("<div  id='popup' class='pop_up_alert clearfix'>");
+		htmlBuilder.append("<h2>"+ titulo +"</h2>");
+		htmlBuilder.append("<div>");
+		htmlBuilder.append("<p>"+ msg +"</p>");
+		htmlBuilder.append("<form id='form_esqueci_senha' method='post'>");
+		htmlBuilder.append("<div class='botoes'>");
+		htmlBuilder.append("<input type='button' name='ok' id='ok'  value='Ok' style='margin-left: 180px;' /></div>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("</form>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("</div>");
+	
+		HTML html = new HTML(htmlBuilder.toString());
+		return html;
 	}
 	
 	public static String encrypt(String passwd) {

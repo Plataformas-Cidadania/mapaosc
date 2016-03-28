@@ -1738,25 +1738,35 @@ div.b-redes input[type=radio]:checked+label.tooltip {
 input#b-google+label.tooltip,button#b-google {
 	background-position: -15px -316px;
 	cursor:default;
+	opacity: initial;
+	position: static;
 }
 
 input#b-facebook+label.tooltip,button#b-facebook {
 	background-position: -3px -357px;
+	opacity: initial;
+	position: static;
 }
 
 input#b-linkedin+label.tooltip,button#b-linkedin {
 	background-position: -11px -390px;
 	cursor:default;
+	opacity: initial;
+	position: static;
 }
 
 input#b-yahoo+label.tooltip,button#b-yahoo {
 	background-position: -12px -418px;
 	cursor:default;
+	opacity: initial;
+	position: static;
 }
 
 input#b-twitter+label.tooltip,button#b-twitter {
 	background-position: -10px -447px;
 	cursor:default;
+	opacity: initial;
+	position: static;
 }
 
 .formulario .botoes {

@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.ui.Anchor;
@@ -94,6 +94,19 @@ public class SocialNetFormWidget extends Composite {
 		Event.sinkEvents(btnCancel, Event.ONCLICK);
 		Event.setEventListener(btnCancel, listener);
 	}
+	
+	public void addSubmitform(EventListener listener) {
+		Element csenha = DOM.getElementById("rsenha");
+		Element ccsenha = DOM.getElementById("ecsenha");
+		Element ccpf = DOM.getElementById("rcpf");
+		Event.sinkEvents(csenha, Event.ONKEYPRESS);
+		Event.sinkEvents(ccsenha, Event.ONKEYPRESS);
+		Event.sinkEvents(ccpf, Event.ONKEYPRESS);
+		Event.setEventListener(csenha, listener);
+		Event.setEventListener(ccsenha, listener);
+		Event.setEventListener(ccpf, listener);
+		validate();
+	}
 
 	/**
 	 * @return Usuário a ser cadastrado.
@@ -150,13 +163,13 @@ public class SocialNetFormWidget extends Composite {
 				.append("<label for=\"b-facebook\" title=\"Facebook\" class=\"tooltip\"></label> ");
 		 htmlBuilder.append("<span class=\"esconder\">Linkedin</span> ");
 		 htmlBuilder.append("<input type=\"radio\" id=\"b-linkedin\" name=\"redes\" value=\"false\" /> ");
-		 htmlBuilder.append("<label for=\"b-linkedin\" title=\"Linkedin\" class=\"tooltip\"></label> ");
+		 htmlBuilder.append("<label for=\"b-linkedin\" title=\"Linkedin\" class=\"tooltip\" style='background-color: #5e5e5e;' ></label> ");
 		 htmlBuilder.append("<span class=\"esconder\">Google</span> ");
 		 htmlBuilder.append("<input type=\"radio\" id=\"b-google\" name=\"redes\" value=\"false\" /> ");
-		 htmlBuilder.append("<label for=\"b-google\" title=\"Google\" class=\"tooltip\"></label> ");
+		 htmlBuilder.append("<label for=\"b-google\" title=\"Google\" class=\"tooltip\" style='background-color: #5e5e5e;' ></label> ");
 		 htmlBuilder.append("<span class=\"esconder\">Twitter</span>");
 		 htmlBuilder.append("<input type=\"radio\" id=\"b-twitter\" name=\"redes\" value=\"false\" />");
-		 htmlBuilder.append("<label for=\"b-twitter\" title=\"Twitter\" class=\"tooltip\"></label> ");
+		 htmlBuilder.append("<label for=\"b-twitter\" title=\"Twitter\" class=\"tooltip\" style='background-color: #5e5e5e;' ></label> ");
 		htmlBuilder.append("</div> ");
 		htmlBuilder.append("<div id=\"infoUser\" name=\"infoUser\" class=\"clearfix \" > ");
 		htmlBuilder.append("<span id=\"userAlreadyExistis\" ;></span> ");
@@ -171,7 +184,7 @@ public class SocialNetFormWidget extends Composite {
 		htmlBuilder.append("</td>");
 		htmlBuilder.append("</tr>");
 		htmlBuilder.append("</table>");
-		htmlBuilder.append("<label  for=\"rsenha\">Minha senha é:</label> ");
+		htmlBuilder.append("<label  for=\"rsenha\">Senha:</label> ");
 		htmlBuilder
 				.append("<input type=\"password\" name=\"rsenha\" id=\"rsenha\" placeholder=\"Senha\" class=\"senha\" />");
 		htmlBuilder.append("<label for=\"ecsenha\">Confirmar senha:</label>");
@@ -181,9 +194,7 @@ public class SocialNetFormWidget extends Composite {
 		
 		htmlBuilder.append("<h4>Gostaria de se cadastrar no Mapa?</h4>");
 		htmlBuilder
-				.append("Informando seu CPF você será cadastrado e poderá avaliar as ");
-		htmlBuilder
-				.append("organizações e definir suas preferências no mapa.");
+				.append("Informando seu CPF você será cadastrado e poderá avaliar as organizações.");
 
 		htmlBuilder.append("<div class=\"cadastro_cpf clearfix\">");
 		htmlBuilder.append("<div>");
@@ -201,8 +212,7 @@ public class SocialNetFormWidget extends Composite {
 		htmlBuilder
 				.append("<input type=\"radio\" name=\"rcadastro_cpf\" id=\"rcpf_nao\" ");
 		htmlBuilder
-				.append("value=\"nao\" required=\"required\" /> <label for=\"rcpf_nao\">Não,");
-		htmlBuilder.append("quero apenas efetuar o login</label>");
+				.append("value=\"nao\" required=\"required\" /> <label for=\"rcpf_nao\">Não desejo informar meu CPF. </label>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("</div>");
 

@@ -694,12 +694,50 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		}
 	}
 	
+	private Boolean setRecommendation(int oscId, Integer idUser)
+			throws RemoteException {
+
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT bosc_sq_osc, tusu_sq_usuario "
+				+ "FROM portal.nm_osc_usuario "
+				+ "WHERE bosc_sq_osc = ? AND tusu_sq_usuario = ?";
+
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oscId);
+			pstmt.setInt(2, idUser);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) 
+				return true;
+			else
+				return false;
+
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
 	public void insertRecommendation(Integer idOSC, Integer idUser) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
-		
-		String sql = "INSERT INTO portal.nm_osc_usuario(bosc_sq_osc, tusu_sq_usuario, osus_in_recomendacao) "
-				   + "VALUES (?, ?, true)";
+		String sql = "";
+		if(setRecommendation(idOSC, idUser)){
+			sql = "UPDATE portal.nm_osc_usuario "
+				+ "SET osus_in_recomendacao = true "
+				+ "WHERE bosc_sq_osc = ? "
+				+ "AND tusu_sq_usuario = ?";
+		}else{
+			sql = "INSERT INTO portal.nm_osc_usuario(bosc_sq_osc, tusu_sq_usuario, osus_in_recomendacao) "
+				+ "VALUES (?, ?, true)";	
+		}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idOSC);
@@ -717,9 +755,10 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "DELETE FROM portal.nm_osc_usuario "
-				   + "WHERE bosc_sq_osc = ? "
-				   + "AND tusu_sq_usuario = ?";
+		String sql = "UPDATE portal.nm_osc_usuario "
+				+ "SET osus_in_recomendacao = false "
+				+ "WHERE bosc_sq_osc = ? "
+				+ "AND tusu_sq_usuario = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idOSC);

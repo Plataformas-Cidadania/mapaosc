@@ -24,8 +24,8 @@ public class LogonWidget extends Composite {
 		initWidget(getHtml());
 	}
 	
-	public LogonWidget(DefaultUser user) {
-		initWidget(getLoggedHtml(user.getName(),false));
+	public LogonWidget(DefaultUser user, Boolean facebook) {
+		initWidget(getLoggedHtml(user.getName(),facebook));
 	}
 	public LogonWidget(FacebookUser user) {
 		initWidget(getLoggedHtml(user.getName(),true));
@@ -62,8 +62,9 @@ public class LogonWidget extends Composite {
 		StringBuilder htmlBuilder = new StringBuilder();
 		
 		htmlBuilder.append("<div class='clearfix'>");
-		if(facebook)
+		if(facebook){
 			htmlBuilder.append("   <img id=\"netUserImage\" src=\"\" align= \"right\"/>");
+		}
 		htmlBuilder.append("	<ul>");
 		htmlBuilder.append("		<li><h2>");
 		htmlBuilder.append(name);

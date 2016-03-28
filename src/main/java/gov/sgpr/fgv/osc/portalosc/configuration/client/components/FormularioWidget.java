@@ -22,8 +22,8 @@ public class FormularioWidget extends Composite {
 	private SearchWidget searchWidget = new SearchWidget();
 	private Element searchTextField;
 	
-	public FormularioWidget(){
-		initWidget(getHTML());
+	public FormularioWidget(Boolean userNet){
+		initWidget(getHTML(userNet));
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class FormularioWidget extends Composite {
 		searchTextField = DOM.getElementById("enome");
 	}
 	
-	private HTML getHTML(){
+	private HTML getHTML(Boolean userNet){
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<div class='configuracao clearfix'>");
 		htmlBuilder.append("	<form id='form_cadastro_config' name='form_cadastro_config' method='post'>");
@@ -44,12 +44,30 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<input type='hidden' name='ctipo' id='ctipo' class='nome' />");
 		htmlBuilder.append("					<input type='hidden' name='cid' id='cid' class='nome' />");
 		htmlBuilder.append("					<label for='cnome'>Nome:</label> <input type='text' required='required' name='cnome' id='cnome' placeholder='Nome' class='nome' />");
-		htmlBuilder.append("					<label for='ccpf'>CPF</label> <input type='text' required='required' name='ccpf' id='ccpf' placeholder='CPF' class='cpf' />");
+		if(userNet == false){
+			htmlBuilder.append("					<label for='rcpf'>CPF</label> <input type='text' name='rcpf' id='rcpf' placeholder='CPF' class='cpf' />");
+		}
 		htmlBuilder.append("					<label for='cemail'>Email:</label> <input type='text' required='required' name='cemail' id='cemail'  placeholder='E-mail' class='email' />");
 		htmlBuilder.append("					<label for='csenha'>Senha:</label> <input required='required' type='password' name='csenha' id='csenha' placeholder='Senha' class='senha' />");
 		htmlBuilder.append("					<label for='ccsenha'>Confirmar Senha:</label> <input type='password' required='required' name='ccsenha' id='ccsenha' placeholder='Confirmar Senha' class='senha' />");
+		if(userNet){
+			htmlBuilder.append("<div class='cadastro_cpf clearfix'>");
+			htmlBuilder.append("<div>");
+			htmlBuilder.append("<input type='radio' name='rcadastro_cpf' id='rcpf_sim'");
+			htmlBuilder.append("value='sim' required='required' class='cpf_sim' checked='checked'/> <label");
+			htmlBuilder.append("for='rcpf_sim'>Sim, meu CPF é:</label> <input type='text'");
+			htmlBuilder.append("name='rcpf' id='rcpf' placeholder='CPF' maxlength='14'");
+			htmlBuilder.append("class='cpf' />");
+			htmlBuilder.append("</div>");
+			htmlBuilder.append("<div>");
+			htmlBuilder.append("<input type='radio' name='rcadastro_cpf' id='rcpf_nao' ");
+			htmlBuilder.append("value='nao' required='required' /> <label for='rcpf_nao'>Não desejo informar meu CPF</label>");
+			htmlBuilder.append("</div>");
+			htmlBuilder.append("</div>");
+		}
 		htmlBuilder.append("				</fieldset>");
 		htmlBuilder.append("				<div>");
+		htmlBuilder.append("				<div id='divrepres' >");
 		htmlBuilder.append("					<h3>Para se tornar representante de uma organização ou mudar a organização da qual é representante, localize a organização.</h3>");
 		htmlBuilder.append("					<fieldset>");
 		htmlBuilder.append("						<input type='hidden' name='eid' id='eid' class='entidade' value='0' />");
@@ -63,6 +81,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("							<input type='button' name='cancelarOSC' id='cancelarOSC' value='Cancelar' class='localizar' alt='Cancelar ser representante de OSC' />");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("					</fieldset>");
+		htmlBuilder.append("				</div>");
 		htmlBuilder.append("					<p>");
 		htmlBuilder.append("						<input type='checkbox' name='inscrever' value='inscrever' id='inscrever' />");
 		htmlBuilder.append("						<label for='inscrever'>Desejo receber e-mail sobre as novidades do Mapa das Organizações da Sociedade Civil.</label>");
@@ -132,15 +151,18 @@ public class FormularioWidget extends Composite {
 	public ConfigurationModel getUser() {
 		ConfigurationModel user = new ConfigurationModel();
 		String oscCode = InputElement.as(DOM.getElementById("oscCode")).getValue();
-		if(oscCode == "0"){
+		String usetTipo = user.getTipoUsuario().toString();
+		if(oscCode == "0" && usetTipo == "2"){
 			user.setTipoUsuario(2);
-		}
-		else{
+		}else if(oscCode == "0" && usetTipo == "3"){
+			user.setTipoUsuario(3);
+
+		}else{
 			user.setTipoUsuario(Integer.valueOf(InputElement.as(DOM.getElementById("ctipo")).getValue()));
 		}
 		user.setId(Integer.valueOf(InputElement.as(DOM.getElementById("cid")).getValue()));
 		user.setNome(InputElement.as(DOM.getElementById("cnome")).getValue());
-		String cpf = InputElement.as(DOM.getElementById("ccpf")).getValue();
+		String cpf = InputElement.as(DOM.getElementById("rcpf")).getValue();
 		if(cpf.length() > 0){
 			user.setCPF(Long.valueOf(cpf.replaceAll("\\D", "")));
 		}
@@ -157,11 +179,14 @@ public class FormularioWidget extends Composite {
 	}
 	
 	public void setUser(ConfigurationModel user) {
-		DOM.getElementById("ctipo").setAttribute("value", String.valueOf(user.getTipoUsuario()));
+		if(user.getTipoUsuario() == 3)
+			DOM.getElementById("ctipo").setAttribute("value", "2");
+		else
+			DOM.getElementById("ctipo").setAttribute("value", String.valueOf(user.getTipoUsuario()));
 		DOM.getElementById("cid").setAttribute("value", String.valueOf(user.getId()));
 		DOM.getElementById("cnome").setAttribute("value", user.getNome());
-		if(user.getCPF() > 0L){
-			DOM.getElementById("ccpf").setAttribute("value", String.valueOf(user.getCPF()));
+		if( user.getCPF() != -1){
+			DOM.getElementById("rcpf").setAttribute("value", String.valueOf(user.getCPF()));
 		}
 		DOM.getElementById("cemail").setAttribute("value", user.getEmail());
 		DOM.getElementById("csenha").setAttribute("value", ConfigurationController.decrypt(user.getSenha()));
@@ -282,9 +307,9 @@ public class FormularioWidget extends Composite {
 					required : true,
 					minlength : 5
 				},
-				ccpf : {
+				rcpf : {
 					verificaCPF : true,
-					required : false
+					required : true
 				},
 				csenha : {
 					required : true,
@@ -315,7 +340,7 @@ public class FormularioWidget extends Composite {
 					required : 'Campo obrigatório.',
 					minlength : 'O nome deve conter ao menos {0} caracteres.'
 				},
-				ccpf : {
+				rcpf : {
 					verificaCPF : 'CPF inválido.',
 					required : 'Informe seu CPF.'
 				}
@@ -329,6 +354,20 @@ public class FormularioWidget extends Composite {
 		});
 	}-*/;
 	
+	public native void addValidateCpf() /*-{
+		$wnd.jQuery('#rcpf').rules('add', {
+			verificaCPF : true,
+			required : true,
+			messages : {
+				verificaCPF : 'CPF inválido.',
+				required : 'Informe seu CPF.'
+			}
+		});
+	}-*/;
+	
+	public native void removeValidateCpf() /*-{
+		$wnd.jQuery('#rcpf').rules('remove');
+	}-*/;
 	/**
 	 * Verifica se o formulário é valido.
 	 * 
@@ -358,7 +397,7 @@ public class FormularioWidget extends Composite {
 	 * @param email
 	 */
 	public native void addInvalidCpf(String invalidCpf) /*-{
-		$wnd.jQuery('#ccpf').rules('add', {
+		$wnd.jQuery('#rcpf').rules('add', {
 			notEqualCPF : invalidCpf,
 			messages : {
 				notEqualCPF : "Este CPF já esta cadastrado no Mapa"
