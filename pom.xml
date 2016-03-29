@@ -7,7 +7,7 @@
 	<groupId>gov.sgpr.fgv.osc</groupId>
 	<artifactId>mapaosc</artifactId>
 	<packaging>war</packaging>
-	<version>1.6.3-BETA</version>
+	<version>1.6.4-BETA</version>
 	<name>GWT Maven Archetype</name>
 	<scm>
 		<connection>scm:git:hades:portalOSC.git</connection>

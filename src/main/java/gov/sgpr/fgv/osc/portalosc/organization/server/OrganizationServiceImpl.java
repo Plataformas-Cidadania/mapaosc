@@ -91,6 +91,23 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			rs.close();
 			pstmt.close();
 			
+			sql = "SELECT a.loca_ds_endereco || ', '  || b.edmu_nm_municipio || ', '  || c.eduf_sg_uf AS endereco "
+				+ "FROM data.tb_localizacao a "
+				+ "LEFT JOIN spat.ed_municipio b "
+				+ "ON a.edmu_cd_municipio = b.edmu_cd_municipio "
+				+ "LEFT JOIN spat.ed_uf c "
+				+ "ON b.eduf_cd_uf = c.eduf_cd_uf "
+				+ "WHERE a.bosc_sq_osc = ? "
+				+ "AND a.mdfd_cd_fonte_dados = 1";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();	
+			if (rs.next()) {
+				organization.setEndereco(rs.getString("endereco"));
+			}
+			rs.close();
+			pstmt.close();
+			
 			sql = "SELECT tdir_sq_diretor,cargo,nome "
 				+ "FROM data.tb_osc_diretor "
 				+ "WHERE bosc_sq_osc = ?";
@@ -367,7 +384,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 			sql = "INSERT INTO data.tb_osc_diretor (bosc_sq_osc,cargo, nome) "
-				+ "VALUES (?, ?, ?);";
+				+ "VALUES (?, ?, ?)";
 						
 			pstmt = conn.prepareStatement(sql);
 			for (int i = 0; i < organization.getDiretores().size(); i++ ) {
