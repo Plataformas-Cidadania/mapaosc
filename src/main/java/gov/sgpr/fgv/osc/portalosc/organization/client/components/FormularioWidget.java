@@ -689,7 +689,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div id='divbotoes' class='botoes'>");
-		htmlBuilder.append("		<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='submit' value='Salvar' class='salvar' />");
+		htmlBuilder.append("		<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='button' value='Salvar' class='salvar' />");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</form>");
 		
@@ -767,7 +767,15 @@ public class FormularioWidget extends Composite {
 	public OrganizationModel getOrg() {
 		logger.info("Get Organization");
 		OrganizationModel org = new OrganizationModel();
-		Integer anofundacao = Integer.parseInt(InputElement.as(DOM.getElementById("ano_fundacao")).getValue());
+		String anoFundacaoString = InputElement.as(DOM.getElementById("ano_fundacao")).getValue();
+		Integer anofundacao = -1;
+		if(anoFundacaoString.length() > 0){
+			try{
+				anofundacao = Integer.parseInt(anoFundacaoString);
+			}catch(NumberFormatException e){
+				logger.severe(e.getMessage());
+			}
+		}
 		org.setId(Integer.parseInt(History.getToken().substring(1)));
 		org.setNomeFantasia(InputElement.as(DOM.getElementById("nome_fantasia")).getValue());
 		org.setDescricaoProjeto(TextAreaElement.as(DOM.getElementById("descricao_osc")).getValue());
@@ -824,7 +832,7 @@ public class FormularioWidget extends Composite {
 			}
 			projmodel.setTitulo(InputElement.as(DOM.getElementById("projeto_nome_projeto" + i)).getValue());
 			Element status = DOM.getElementById("projeto_status" + i);
-			SelectElement selectStatus = status.getFirstChild().cast();
+			SelectElement selectStatus = status.getFirstChildElement().cast();
 			projmodel.setStatus(selectStatus.getValue());
 			String dtInicio = InputElement.as(DOM.getElementById("projeto_data_inicio" + i)).getValue();
 			if(dtInicio.length() > 0) projmodel.setDataInicio(getDate(dtInicio));
@@ -841,7 +849,7 @@ public class FormularioWidget extends Composite {
 				projmodel.setValorTotal(-1.0);
 			}
 			Element fonte = DOM.getElementById("projeto_fonte" + i);
-			SelectElement selectFonte = fonte.getFirstChild().cast();
+			SelectElement selectFonte = fonte.getFirstChildElement().cast();
 			projmodel.setFonteRecursos(selectFonte.getValue());
 			projmodel.setLink(InputElement.as(DOM.getElementById("link" + i)).getValue());
 			projmodel.setPublicoAlvo(TextAreaElement.as(DOM.getElementById("projeto_publico_alvo" + i)).getValue());

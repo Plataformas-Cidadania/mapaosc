@@ -2080,6 +2080,12 @@ button.participar,#mapa.organizacao a.participar {
 	padding: 4px 8px;
 }
 
+#mapa.organizacao input[type=button].salvar {
+    background-image: none;
+    font-size: inherit;
+    padding: 4px 8px;
+}
+
 #mapa.organizacao button.excluir,#mapa.organizacao button.adicionar,#mapa.organizacao button.carregar
 	{
 	font-size: .9em;
