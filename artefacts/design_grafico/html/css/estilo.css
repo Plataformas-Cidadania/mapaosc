@@ -3466,5 +3466,5 @@ body.indisponivel {
 }
 
 .contato .botoes input:hover {
-	background-color:#1F3D93;
+	background: url('../imagens/bolinhas_fundo.png') no-repeat bottom left;
 }
