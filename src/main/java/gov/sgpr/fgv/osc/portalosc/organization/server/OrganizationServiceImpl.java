@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -45,6 +46,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 	}
 	
 	public OrganizationModel getOrganizationByID(Integer id) throws RemoteException {
+		
 		logger.info("Buscando organização no banco de dados pelo ID " + id.toString());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -328,10 +330,14 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 		} catch (SQLException e) {
-			logger.severe(e.getMessage());
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: getOrganizationByID(Integer id)");
+			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 			throw new RemoteException(e);
 		} catch (ParseException e) {
-			logger.severe(e.getMessage());
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: getOrganizationByID(Integer id)");
+			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt, rs);
@@ -507,7 +513,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 		} catch (SQLException e) {
-			logger.severe(e.getMessage());
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: setOrganization(OrganizationModel organization)");
+			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt);
@@ -525,7 +533,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.setInt(1, id);
 			pstmt.execute();
 		} catch (SQLException e) {
-			logger.severe(e.getMessage());
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: removeDiretor(Integer id)");
+			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt);
@@ -556,7 +566,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			}
 			return result;
 		} catch (SQLException e) {
-			logger.severe(e.getMessage());
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: searchOSCbyUser(Integer idUser, Integer idOsc)");
+			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt, rs);
