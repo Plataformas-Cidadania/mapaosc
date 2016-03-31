@@ -91,14 +91,19 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 			try {
 				datasource.getConnection();
 				logger.log(Level.INFO, "Conexão " + url + " iniciada com sucesso.");
-			} catch (SQLException ex) {
+			} catch (SQLException e) {
 				String message = "Could not find our DataSource in DBManager. We're about to have problems.";
 				logger.log(Level.SEVERE, message);
+				logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: init(ServletConfig config)");
+				logger.log(Level.SEVERE, e.getMessage());
+				e.printStackTrace();
 
 			}
 			copyFile("src/main/webapp/WEB-INF/web.xml", "src/main/webapp/WEB-INF/web-sample.xml");
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: init(ServletConfig config)");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -106,7 +111,9 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 		try {
 			return datasource.getConnection();
 		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: getConnection()");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -115,7 +122,9 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 		try {
 			conn.close();
 		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: releaseConnection(Connection conn)");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -131,7 +140,9 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 			}
 			conn.close();
 		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: releaseConnection(Connection conn, Statement stmt, ResultSet rs)");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -141,7 +152,9 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 			stmt = null;
 			conn.close();
 		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: releaseConnection(Connection conn, Statement stmt)");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -157,7 +170,9 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 			}
 			conn.close();
 		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: releaseConnection(Connection conn, PreparedStatement pstmt, ResultSet rs)");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -169,7 +184,9 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 			}
 			conn.close();
 		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: releaseConnection(Connection conn, PreparedStatement pstmt) ");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -185,7 +202,9 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 			}
 			conn.close();
 		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: releaseConnection(Connection conn, PreparedStatement pstmt, PreparedStatement pstmt2");
 			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -282,8 +301,10 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 
 			logger.info("web-sample.xml was created.");
 
-		} catch (TransformerException tfe) {
-			tfe.printStackTrace();
+		} catch (TransformerException e) {
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: alterFile()");
+			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
