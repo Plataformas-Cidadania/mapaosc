@@ -3407,9 +3407,6 @@ body.indisponivel {
 #mapa.contato .wrapper {
 	margin: 0;
 	padding: 15px 0 25px;
-	/*background: url("../imagens/fundo_teste.jpg");
-	background-position: center center;*/
-	background-color: #02103A;
 }
 
 .contato .wrapper form {
@@ -3465,6 +3462,7 @@ body.indisponivel {
 	cursor: pointer;
 }
 
-.contato .botoes input:hover {
-	background: url('../imagens/bolinhas_fundo.png') no-repeat bottom left;
+#mapa.contato {
+	    background: url('../imagens/bolinhas_fundo.png') no-repeat bottom left;
+}
 }
