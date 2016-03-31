@@ -1,6 +1,7 @@
 package gov.sgpr.fgv.osc.portalosc.representantlocality.server;
 
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityService;
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.CountyModel;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.Email;
 import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
@@ -17,8 +18,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
@@ -96,6 +100,34 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
 	}
 	
+	public List<CountyModel> getCounty(Integer idState){
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<CountyModel> result = new ArrayList<CountyModel>();
+		String sql = "SELECT edmu_cd_municipio, edmu_nm_municipio "
+				   + "FROM spat.ed_municipio "
+				   + "WHERE eduf_cd_uf = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idState);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CountyModel place = new CountyModel();
+				place.setId(rs.getInt("edmu_cd_municipio"));
+				place.setName(rs.getString("edmu_nm_municipio"));
+				result.add(place);
+			}
+			return result;
+		} catch (SQLException e) {
+			logger.log(Level.SEVERE, e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt, rs);
+		}
+	}
+	
 	private String getToken(long cpf) throws RemoteException {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -119,7 +151,7 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		}
 	}
 	
-	public void addToken(long cpf) throws RemoteException {
+	private void addToken(long cpf) throws RemoteException {
 		logger.info("Adicionando token");
 		Connection conn = getConnection();
 		Calendar c = Calendar.getInstance();

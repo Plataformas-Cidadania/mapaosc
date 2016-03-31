@@ -64,65 +64,30 @@ public class RepresentantLocalityFormWidget extends Composite {
 		htmlBuilder.append("											<option value='35'>SP</option>");
 		htmlBuilder.append("											<option value='17'>TO</option>");
 		htmlBuilder.append("										</select>");
-		htmlBuilder.append("		<label for='cmun'>Município:</label><select id='cmun' name='cmun' required='required'>");
-		htmlBuilder.append("												<option value='1'>Rio de Janeiro</option>");
+		htmlBuilder.append("		<label for='cmun'>Município:</label><select id='cmun' name='cmun' required='required' disabled=''>");
+		htmlBuilder.append("												<option disabled selected></option>");
 		htmlBuilder.append("											</select>");
 		htmlBuilder.append("		<label for='corgao'>Orgão:</label><input type='text' name='corgao' id='corgao' placeholder='Orgão' class='nome' />");
 		htmlBuilder.append("		<label for='ccargo'>Função:</label><input type='text' name='ccargo' id='ccargo' placeholder='Função' class='nome' />");
 		htmlBuilder.append("		<label for='ctel'>Telefone (com DDD):</label><input type='text' name='ctel' id='ctel' placeholder='(xx) xxxx-xxxx' class='nome' />");
 		htmlBuilder.append("	</div>");
+		htmlBuilder.append("	<div>");
+		htmlBuilder.append("		<p>Tipo de Representante:</p>");
+		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_estado' id='tipo_representante_estado' checked >Estado</input>");
+		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_municipio' id='tipo_representante_municipio'>Município</input>");
+		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='clearfix' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
-		htmlBuilder.append("		<span>Concordo com os <a href='termos.html'>termos de uso</a></span><input type='checkbox' name='ctermo' id='ctermo' /> ");
+		htmlBuilder.append("		<span>Concordo com os <a href='static.html?page=termos 'target='_blank'>termos de uso</a></span><input type='checkbox' name='ctermo' id='ctermo' /> ");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='botoes' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
 		htmlBuilder.append("		<div style='display: inline-block; width:auto; float: none; '>");
-		htmlBuilder.append("			<a href='/Map.html' class='cancelar'>Cancelar</a> ou <input style='background-position: -2px -57px;' type='submit' id='btnCadastro' value='Finalizar cadastro' />");
+		htmlBuilder.append("			<a href='/Map.html' class='cancelar'>Cancelar</a> ou <input style='background-position: -2px -57px;' type='button' id='btnCadastro' value='Finalizar cadastro' />");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</form>");
 		
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
-	}
-	
-	public void addSubmitform(EventListener listener) {
-		Element cemail = DOM.getElementById("cemail");
-		Element csenha = DOM.getElementById("csenha");
-		Element ccsenha = DOM.getElementById("ccsenha");
-		Element cnome = DOM.getElementById("cnome");
-		Element ccpf = DOM.getElementById("ccpf");
-		Element cest = DOM.getElementById("cest");
-		Element cmun = DOM.getElementById("cmun");
-		Element corgao = DOM.getElementById("corgao");
-		Element ccargo = DOM.getElementById("ccargo");
-		Element ctel = DOM.getElementById("ctel");
-		Element ctermo = DOM.getElementById("ctermo");
-		
-		Event.sinkEvents(cemail, Event.ONKEYPRESS);
-		Event.sinkEvents(csenha, Event.ONKEYPRESS);
-		Event.sinkEvents(ccsenha, Event.ONKEYPRESS);
-		Event.sinkEvents(cnome, Event.ONKEYPRESS);
-		Event.sinkEvents(ccpf, Event.ONKEYPRESS);
-		Event.sinkEvents(cest, Event.ONKEYPRESS);
-		Event.sinkEvents(cmun, Event.ONKEYPRESS);
-		Event.sinkEvents(corgao, Event.ONKEYPRESS);
-		Event.sinkEvents(ccargo, Event.ONKEYPRESS);
-		Event.sinkEvents(ctel, Event.ONKEYPRESS);
-		Event.sinkEvents(ctermo, Event.ONKEYPRESS);
-		
-		Event.setEventListener(cemail, listener);
-		Event.setEventListener(csenha, listener);
-		Event.setEventListener(ccsenha, listener);
-		Event.setEventListener(cnome, listener);
-		Event.setEventListener(ccpf, listener);
-		Event.setEventListener(cest, listener);
-		Event.setEventListener(cmun, listener);
-		Event.setEventListener(corgao, listener);
-		Event.setEventListener(ccargo, listener);
-		Event.setEventListener(ctel, listener);
-		Event.setEventListener(ctermo, listener);
-		
-		validate();
 	}
 	
 	public void addSubmitListener(EventListener listener) {
@@ -153,7 +118,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 		user.setOrgan(organ.getValue());
 		user.setFunction(function.getValue());
 		user.setPhone(Integer.valueOf(phone.getValue().length() == 0 ? "0" : phone.getValue()));
-		user.setType(UserType.LOCALITY_AGENT);
+		user.setType(UserType.LOCALITY_AGENT_STATE);
 		
 		return user;
 	}
@@ -252,6 +217,9 @@ public class RepresentantLocalityFormWidget extends Composite {
 				},
 				ctermo : {
 					required : true
+				},
+				ctipo_representante : {
+					required : true
 				}
 			},
 			messages : {
@@ -283,6 +251,9 @@ public class RepresentantLocalityFormWidget extends Composite {
 				},
 				ctermo : {
 					required : 'É necessário acertar os termos de uso.'
+				},
+				ctipo_representante : {
+					required : 'Campo obrigatório.'
 				}
 			},
 			

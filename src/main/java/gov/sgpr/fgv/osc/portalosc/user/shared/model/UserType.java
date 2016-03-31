@@ -11,7 +11,8 @@ public enum UserType {
 	DEFAULT(2),
 	FACEBOOK(3),
 	OSC_AGENT(4),
-	LOCALITY_AGENT(5);
+	LOCALITY_AGENT_STATE(5),
+	LOCALITY_AGENT_COUNTY(6);
 	
 	private final int id;
 	UserType(int id) {

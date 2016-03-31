@@ -190,6 +190,65 @@
     <servlet-name>organizationService</servlet-name>
     <servlet-class>gov.sgpr.fgv.osc.portalosc.organization.server.OrganizationServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>jUnitHostImpl</servlet-name>
+    <servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
+  </servlet>
+  <!-- Servlets mappings -->
+  <servlet>
+    <servlet-name>remoteLogging</servlet-name>
+    <servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>mapService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.map.server.MapServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>oscService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.map.server.OscServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>placeService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.map.server.PlaceServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>searchService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.map.server.SearchServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>searchOSCService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.user.server.SearchServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>userService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.user.server.UserServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>socialNetworkService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.user.server.SocialNetworkServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>configurationService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.configuration.server.ConfigurationServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>remoteService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>searchOSCConfigService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.configuration.server.SearchServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>staticContentService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.staticcontent.server.StaticContentServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>organizationService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.organization.server.OrganizationServiceImpl</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>representantLocalityService</servlet-name>

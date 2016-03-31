@@ -3,16 +3,21 @@ package gov.sgpr.fgv.osc.portalosc.representantlocality.client.controller;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.client.components.RepresentantLocalityFormWidget;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityService;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityServiceAsync;
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.CountyModel;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.user.client.components.PopupPassword;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserService;
 import gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.UserServiceAsync;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
+
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.OptionElement;
+import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
@@ -51,9 +56,7 @@ public class RepresentantLocalityController {
 		};
 		representantLocalityService.getEncryptKey(callback);
 		
-		if (formPanel != null) {
-			addFormWidget();
-		}
+		addFormWidget();
 	}
 	
 	private void addFormWidget() {
@@ -61,23 +64,45 @@ public class RepresentantLocalityController {
 		
 		formPanel.add(formWidget);
 		
-		formWidget.addSubmitform(new EventListener() {
-			public void onBrowserEvent(Event event) {
-				if (event.getKeyCode() == KeyCodes.KEY_ENTER){
-					logger.info("Validando cadastro de representante de localidade");
-					if (formWidget.isValid()) {
-						validateEmail(formWidget.getUser());
-					}
-				}
-			}
-		});
-		
 		formWidget.addSubmitListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				logger.info("Validando cadastro de representante de localidade");
 				if (formWidget.isValid()) {
 					validateEmail(formWidget.getUser());
 				}
+				if (event.getKeyCode() == KeyCodes.KEY_ENTER){
+					validateEmail(formWidget.getUser());
+				}
+			}
+		});
+		
+		final SelectElement municipio = SelectElement.as(DOM.getElementById("cmun"));
+		
+		final Element tipo_representante_estado = DOM.getElementById("tipo_representante_estado");
+		Event.sinkEvents(tipo_representante_estado, Event.ONCHANGE);
+		Event.setEventListener(tipo_representante_estado, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				logger.info("Habilitando município");
+				municipio.setSelectedIndex(0);
+				municipio.setAttribute("disabled", "");
+			}
+		});
+		
+		final Element tipo_representante_municipio = DOM.getElementById("tipo_representante_municipio");
+		Event.sinkEvents(tipo_representante_municipio, Event.ONCHANGE);
+		Event.setEventListener(tipo_representante_municipio, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				logger.info("Habilitando município");
+				municipio.removeAttribute("disabled");
+			}
+		});
+		
+		final SelectElement estado = SelectElement.as(DOM.getElementById("cest"));
+		Event.sinkEvents(estado, Event.ONCHANGE);
+		Event.setEventListener(estado, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				logger.info("Buscando municípios do estado");
+				addCounty(Integer.valueOf(estado.getValue()));
 			}
 		});
 	}
@@ -130,6 +155,29 @@ public class RepresentantLocalityController {
 			}
 		};
 		representantLocalityService.addRepresentantLocality(user, callback);
+	}
+	
+	private void addCounty(final Integer idState) {
+		logger.info("Adicionando representante de localidades");
+		AsyncCallback<List<CountyModel>> callback = new AsyncCallback<List<CountyModel>>() {
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
+			}
+			public void onSuccess(List<CountyModel> result) {
+				SelectElement municipio = SelectElement.as(DOM.getElementById("cmun"));
+				OptionElement o = municipio.getOptions().getItem(0);
+				municipio.clear();
+				municipio.add(o, null);
+				for(CountyModel p : result){
+					OptionElement opt = OptionElement.as(DOM.createOption());
+					opt.setText(String.valueOf(p.getName()));
+					opt.setValue(String.valueOf(p.getId()));
+					municipio.add(opt, null);
+				}
+			}
+		};
+		representantLocalityService.getCounty(idState, callback);
 	}
 	
 	private void openPopup(String title, String message){

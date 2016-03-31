@@ -17,7 +17,7 @@ public interface RepresentantLocalityServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces.RepresentantLocalityService
      */
-    void addToken( long cpf, AsyncCallback<Void> callback );
+    void getCounty( java.lang.Integer idState, AsyncCallback<java.util.List<gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.CountyModel>> callback );
 
 
     /**

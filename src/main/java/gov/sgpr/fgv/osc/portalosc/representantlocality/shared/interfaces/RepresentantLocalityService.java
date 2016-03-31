@@ -1,5 +1,8 @@
 package gov.sgpr.fgv.osc.portalosc.representantlocality.shared.interfaces;
 
+import java.util.List;
+
+import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.CountyModel;
 import gov.sgpr.fgv.osc.portalosc.representantlocality.shared.model.RepresentantLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 
@@ -17,13 +20,7 @@ public interface RepresentantLocalityService extends RemoteService {
 	 */
 	public void addRepresentantLocality(RepresentantLocalityModel user) throws RemoteException;
 	
-	/**
-	 * Adiciona o token no banco de dados
-	 * 
-	 * @param cpf
-	 *            
-	 */
-	public void addToken(long cpf) throws RemoteException;
+	public List<CountyModel> getCounty(Integer idState) throws RemoteException;
 	
 	/**
 	 * @return Chave de criptografia
