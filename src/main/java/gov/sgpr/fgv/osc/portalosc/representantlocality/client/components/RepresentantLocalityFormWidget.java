@@ -77,7 +77,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_municipio' id='tipo_representante_municipio'>Município</input>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='clearfix' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
-		htmlBuilder.append("		<span>Concordo com os <a href='static.html?page=termos 'target='_blank'>termos de uso</a></span><input type='checkbox' name='ctermo' id='ctermo' /> ");
+		htmlBuilder.append("		<span>Concordo com os <a href='static.html?page=termos' target='_blank' >termos de uso</a></span><input type='checkbox' name='ctermo' id='ctermo' /> ");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='botoes' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
 		htmlBuilder.append("		<div style='display: inline-block; width:auto; float: none; '>");

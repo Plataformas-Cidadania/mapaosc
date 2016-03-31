@@ -156,7 +156,7 @@ public class UserFormWidget extends Composite {
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div>");
 		htmlBuilder.append("<input type='checkbox' name='ctermo' value='ctermo' />");
-		htmlBuilder.append("Concordo com os <a href='termos.html'>termos de uso</a>");
+		htmlBuilder.append("Concordo com os <a href='static.html?page=termos' target='_blank' >termos de uso</a>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div>");
 		htmlBuilder
