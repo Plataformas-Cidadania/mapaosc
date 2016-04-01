@@ -111,7 +111,7 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 			releaseConnection(conn, pstmt);
 			addToken(user.getCpf());
 		}
-//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
 	}
 	
 	public List<CountyModel> getCounty(Integer idState){
