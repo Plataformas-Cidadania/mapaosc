@@ -10,7 +10,7 @@ public class RepresentantLocalityModel extends DefaultUser {
 	private Integer county;
 	private String organ;
 	private String function;
-	private Integer phone;
+	private Long phone;
 	private UserType typeRepresentant;
 	
 	public Integer getState() {
@@ -37,10 +37,10 @@ public class RepresentantLocalityModel extends DefaultUser {
 	public void setFunction(String function) {
 		this.function = function;
 	}
-	public Integer getPhone() {
+	public Long getPhone() {
 		return phone;
 	}
-	public void setPhone(Integer phone) {
+	public void setPhone(Long phone) {
 		this.phone = phone;
 	}
 	public UserType getTypeRepresentant() {

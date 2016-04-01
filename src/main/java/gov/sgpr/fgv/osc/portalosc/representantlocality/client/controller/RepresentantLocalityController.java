@@ -82,9 +82,9 @@ public class RepresentantLocalityController {
 		Event.sinkEvents(tipo_representante_estado, Event.ONCHANGE);
 		Event.setEventListener(tipo_representante_estado, new EventListener() {
 			public void onBrowserEvent(Event event) {
-				logger.info("Habilitando município");
 				municipio.setSelectedIndex(0);
 				municipio.setAttribute("disabled", "");
+				municipio.removeAttribute("required");
 			}
 		});
 		
@@ -92,8 +92,8 @@ public class RepresentantLocalityController {
 		Event.sinkEvents(tipo_representante_municipio, Event.ONCHANGE);
 		Event.setEventListener(tipo_representante_municipio, new EventListener() {
 			public void onBrowserEvent(Event event) {
-				logger.info("Habilitando município");
 				municipio.removeAttribute("disabled");
+				municipio.setAttribute("required", "required");
 			}
 		});
 		
@@ -101,7 +101,6 @@ public class RepresentantLocalityController {
 		Event.sinkEvents(estado, Event.ONCHANGE);
 		Event.setEventListener(estado, new EventListener() {
 			public void onBrowserEvent(Event event) {
-				logger.info("Buscando municípios do estado");
 				addCounty(Integer.valueOf(estado.getValue()));
 			}
 		});
@@ -166,8 +165,10 @@ public class RepresentantLocalityController {
 			}
 			public void onSuccess(List<CountyModel> result) {
 				SelectElement municipio = SelectElement.as(DOM.getElementById("cmun"));
-				OptionElement o = municipio.getOptions().getItem(0);
 				municipio.clear();
+				OptionElement o = OptionElement.as(DOM.createOption());
+				o.setAttribute("disabled", "disabled");
+				o.setAttribute("selected", "selected");
 				municipio.add(o, null);
 				for(CountyModel p : result){
 					OptionElement opt = OptionElement.as(DOM.createOption());

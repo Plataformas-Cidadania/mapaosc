@@ -27,11 +27,11 @@ public class RepresentantLocalityFormWidget extends Composite {
 		
 		htmlBuilder.append("<form id='form_cadastro_representant_locality' name='form_cadastro_representant_locality' method='post' style='display: block; clear:both;'>");
 		htmlBuilder.append("	<div style='float:left'>");
-		htmlBuilder.append("		<label for='cemail'>Email:</label><input type='text' name='cemail' id='cemail'  placeholder='E-mail' class='email' required='required' />");
-		htmlBuilder.append("		<label for='csenha'>Senha:</label><input type='password' name='csenha' id='csenha' placeholder='Senha' class='senha' required='required' />");
-		htmlBuilder.append("		<label for='ccsenha'>Confirmar Senha:</label><input type='password' name='ccsenha' id='ccsenha' placeholder='Confirmar Senha' required='required' class='senha' />");
-		htmlBuilder.append("		<label for='cnome'>Nome:</label><input type='text' name='cnome' id='cnome' placeholder='Nome' class='nome' required='required' />");
-		htmlBuilder.append("		<label for='ccpf'>CPF</label><input type='text' name='ccpf' id='ccpf' placeholder='CPF' class='cpf' required='required' />");
+		htmlBuilder.append("		<label for='cemail'>Email:</label><input type='text' name='cemail' id='cemail'  placeholder='E-mail' class='email' required='required' value='123@456.com' />");
+		htmlBuilder.append("		<label for='csenha'>Senha:</label><input type='password' name='csenha' id='csenha' placeholder='Senha' class='senha' required='required' value='123456' />");
+		htmlBuilder.append("		<label for='ccsenha'>Confirmar Senha:</label><input type='password' name='ccsenha' id='ccsenha' placeholder='Confirmar Senha' required='required' class='senha' value='123456' />");
+		htmlBuilder.append("		<label for='cnome'>Nome:</label><input type='text' name='cnome' id='cnome' placeholder='Nome' class='nome' required='required' value='teste' />");
+		htmlBuilder.append("		<label for='ccpf'>CPF</label><input type='text' name='ccpf' id='ccpf' placeholder='CPF' class='cpf' required='required' value='94699085628' />");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div style='float:left; margin-left: 15px;'>");
 		htmlBuilder.append("		<label for='cest'>UF:</label><select id='cest' name='cest' required='required'>");
@@ -64,20 +64,20 @@ public class RepresentantLocalityFormWidget extends Composite {
 		htmlBuilder.append("											<option value='35'>SP</option>");
 		htmlBuilder.append("											<option value='17'>TO</option>");
 		htmlBuilder.append("										</select>");
-		htmlBuilder.append("		<label for='cmun'>Município:</label><select id='cmun' name='cmun' required='required' disabled=''>");
+		htmlBuilder.append("		<label for='cmun'>Município:</label><select id='cmun' name='cmun' disabled=''>");
 		htmlBuilder.append("												<option disabled selected></option>");
 		htmlBuilder.append("											</select>");
-		htmlBuilder.append("		<label for='corgao'>Orgão:</label><input type='text' name='corgao' id='corgao' placeholder='Orgão' class='nome' />");
-		htmlBuilder.append("		<label for='ccargo'>Função:</label><input type='text' name='ccargo' id='ccargo' placeholder='Função' class='nome' />");
-		htmlBuilder.append("		<label for='ctel'>Telefone (com DDD):</label><input type='text' name='ctel' id='ctel' placeholder='(xx) xxxx-xxxx' class='nome' />");
+		htmlBuilder.append("		<label for='corgao'>Orgão:</label><input type='text' name='corgao' id='corgao' placeholder='Orgão' class='nome' value='blablabla' />");
+		htmlBuilder.append("		<label for='ccargo'>Função:</label><input type='text' name='ccargo' id='ccargo' placeholder='Função' class='nome' value='blablabla' />");
+		htmlBuilder.append("		<label for='ctel'>Telefone (com DDD):</label><input type='text' name='ctel' id='ctel' placeholder='(xx) xxxx-xxxx' class='nome' value='21991714590' />");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div>");
 		htmlBuilder.append("		<p>Tipo de Representante:</p>");
-		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_estado' id='tipo_representante_estado' checked >Estado</input>");
+		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_estado' id='tipo_representante_estado' checked='checked' >Estado</input>");
 		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_municipio' id='tipo_representante_municipio'>Município</input>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='clearfix' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
-		htmlBuilder.append("		<span>Concordo com os <a href='static.html?page=termos' target='_blank' >termos de uso</a></span><input type='checkbox' name='ctermo' id='ctermo' /> ");
+		htmlBuilder.append("		<span>Concordo com os <a href='static.html?page=termos' target='_blank' >termos de uso</a></span><input type='checkbox' name='ctermo' id='ctermo' checked /> ");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='botoes' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
 		htmlBuilder.append("		<div style='display: inline-block; width:auto; float: none; '>");
@@ -107,6 +107,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 		InputElement organ = InputElement.as(DOM.getElementById("corgao"));
 		InputElement function = InputElement.as(DOM.getElementById("ccargo"));
 		InputElement phone = InputElement.as(DOM.getElementById("ctel"));
+		InputElement typeRepresentantState = InputElement.as(DOM.getElementById("tipo_representante_estado"));
 		
 		RepresentantLocalityModel user = new RepresentantLocalityModel();
 		user.setEmail(email.getValue());
@@ -117,9 +118,12 @@ public class RepresentantLocalityFormWidget extends Composite {
 		user.setCounty(Integer.valueOf(county.getValue().length() == 0 ? "0" : county.getValue()));
 		user.setOrgan(organ.getValue());
 		user.setFunction(function.getValue());
-		user.setPhone(Integer.valueOf(phone.getValue().length() == 0 ? "0" : phone.getValue()));
-		user.setType(UserType.LOCALITY_AGENT_STATE);
-		
+		user.setPhone(Long.valueOf(phone.getValue()));
+		if(typeRepresentantState.isChecked()){
+			user.setType(UserType.LOCALITY_AGENT_STATE);
+		}else{
+			user.setType(UserType.LOCALITY_AGENT_COUNTY);
+		}
 		return user;
 	}
 	
@@ -212,13 +216,10 @@ public class RepresentantLocalityFormWidget extends Composite {
 				cest : {
 					required : true
 				},
-				cmun : {
-					required : true
-				},
 				ctermo : {
 					required : true
 				},
-				ctipo_representante : {
+				ctiporepresentante : {
 					required : true
 				}
 			},
@@ -252,7 +253,7 @@ public class RepresentantLocalityFormWidget extends Composite {
 				ctermo : {
 					required : 'É necessário acertar os termos de uso.'
 				},
-				ctipo_representante : {
+				ctiporepresentante : {
 					required : 'Campo obrigatório.'
 				}
 			},

@@ -8,6 +8,7 @@ import gov.sgpr.fgv.osc.portalosc.user.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.ValidationException;
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
+import gov.sgpr.fgv.osc.portalosc.user.shared.model.UserType;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.CpfValidator;
 import gov.sgpr.fgv.osc.portalosc.user.shared.validate.EmailValidator;
 
@@ -76,28 +77,41 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 			pstmt.execute();
 			pstmt.close();
 			
-			logger.info("Usuário adicionado");
-			
-			sql = "INSERT INTO portal.tb_representante_localidade (tusu_sq_usuario, eduf_cd_uf, edmu_cd_municipio, trlo_orgao, trlo_funcao, trlo_telefone) "
-				+ "VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, user.getCpf());
-			pstmt.setInt(2, user.getState() > 0 ? user.getState() : null);
-			pstmt.setInt(3, user.getCounty() > 0 ? user.getCounty() : null);
-			pstmt.setString(4, user.getOrgan());
-			pstmt.setString(5, user.getFunction());
-			pstmt.setInt(6, user.getPhone() > 0 ? user.getPhone() : null);
-			pstmt.execute();
-			pstmt.close();
+			if(user.getType() == UserType.LOCALITY_AGENT_STATE){
+				sql = "INSERT INTO portal.tb_representante_localidade (tusu_sq_usuario, eduf_cd_uf, trlo_nm_orgao, trlo_nm_funcao, trlo_tx_telefone) "
+					+ "VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?, ?, ?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setLong(1, user.getCpf());
+				pstmt.setInt(2, user.getState());
+				pstmt.setString(3, user.getOrgan());
+				pstmt.setString(4, user.getFunction());
+				pstmt.setLong(5, user.getPhone());
+				pstmt.execute();
+				pstmt.close();
+			}else{
+				sql = "INSERT INTO portal.tb_representante_localidade (tusu_sq_usuario, eduf_cd_uf, edmu_cd_municipio, trlo_nm_orgao, trlo_nm_funcao, trlo_tx_telefone) "
+					+ "VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?, ?, ?, ?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setLong(1, user.getCpf());
+				pstmt.setInt(2, user.getState());
+				pstmt.setInt(3, user.getCounty());
+				pstmt.setString(4, user.getOrgan());
+				pstmt.setString(5, user.getFunction());
+				pstmt.setLong(6, user.getPhone());
+				pstmt.execute();
+				pstmt.close();
+			}
 			
 		} catch (SQLException e) {
-			logger.severe(e.getMessage());
+			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: addRepresentantLocality(RepresentantLocalityModel user)");
+			logger.log(Level.SEVERE, e.getMessage());
+			e.printStackTrace();
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt);
 			addToken(user.getCpf());
 		}
-		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
 	}
 	
 	public List<CountyModel> getCounty(Integer idState){
