@@ -57,7 +57,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		String sql = "";
 		
 		try {
-			sql = "SELECT bosc_nm_osc, bosc_nm_fantasia_osc, bosc_nr_identificacao, ospr_ds_endereco, dcnj_nm_natureza_juridica, "
+			sql = "SELECT bosc_nm_osc, bosc_nm_fantasia_osc, dcti_cd_tipo, bosc_nr_identificacao, ospr_ds_endereco, dcnj_nm_natureza_juridica, "
 				+ 		 "dcsc_nm_subclasse, ospr_tx_descricao, ospr_dt_ano_fundacao, ospr_ee_site, "
 				+ 		 "vl_valor_parcerias_federal, vl_valor_parcerias_estadual, vl_valor_parcerias_municipal, ee_facebook, "
 				+ 		 "ee_google, ee_linkedin, ee_twitter, im_imagem, ee_como_participar "
@@ -69,7 +69,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			if (rs.next()) {
 				organization.setRazaoSocial(rs.getString("bosc_nm_osc"));
 				organization.setNomeFantasia(rs.getString("bosc_nm_fantasia_osc"));
-				organization.setCnpj(rs.getLong("bosc_nr_identificacao"));
+				organization.setTipoIdentificacao(rs.getInt("dcti_cd_tipo"));
+				organization.setNumeroIdentificacao(rs.getLong("bosc_nr_identificacao"));
 				organization.setEndereco(rs.getString("ospr_ds_endereco"));
 				organization.setNaturezaJuridica(rs.getString("dcnj_nm_natureza_juridica"));
 				organization.setCnae(rs.getString("dcsc_nm_subclasse"));

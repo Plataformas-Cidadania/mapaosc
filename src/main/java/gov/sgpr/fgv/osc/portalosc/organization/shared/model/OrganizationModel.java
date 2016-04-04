@@ -16,7 +16,8 @@ public class OrganizationModel implements Serializable {
 	private Integer id = -1;
 	private String razaoSocial = "";
 	private String nomeFantasia = "";
-	private Long cnpj = -1L;
+	private Integer tipoIdentificacao = -1;
+	private Long numeroIdentificacao = -1L;
 	private String endereco = "";
 	private String naturezaJuridica = "";
 	private String cnae = "";
@@ -72,19 +73,27 @@ public class OrganizationModel implements Serializable {
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}
+	
 	public void setNomeFantasia(String nomeFantasia) {
 		if(nomeFantasia != null){
 			this.nomeFantasia = nomeFantasia;
 		}
 	}
 	
-	public Long getCnpj() {
-		return cnpj;
+	public Integer getTipoIdentificacao() {
+		return tipoIdentificacao;
 	}
-	public void setCnpj(Long cnpj) {
-		if(cnpj != null){
-			this.cnpj = cnpj;
-		}
+	
+	public void setTipoIdentificacao(Integer tipoIdentificacao) {
+		this.tipoIdentificacao = tipoIdentificacao;
+	}
+	
+	public Long getNumeroIdentificacao() {
+		return numeroIdentificacao;
+	}
+	
+	public void setNumeroIdentificacao(Long numeroIdentificacao) {
+		this.numeroIdentificacao = numeroIdentificacao;
 	}
 	
 	public String getEndereco() {

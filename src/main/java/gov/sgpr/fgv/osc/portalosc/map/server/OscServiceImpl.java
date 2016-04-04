@@ -208,7 +208,9 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				summary.setCode(code);
 				int type = rs.getInt("dcti_cd_tipo");
 				if (type == 1) {
-					summary.setFormattedCode(String.valueOf(code));
+					summary.setFormattedCNPJ(String.valueOf(code));
+				} else if (type == 2) {
+					summary.setFormattedCEI(String.valueOf(code));
 				} else {
 					summary.setFormattedCode(String.valueOf(code));
 				}
@@ -501,7 +503,9 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				main.setCode(code);
 				int type = rs.getInt("dcti_cd_tipo");
 				if (type == 1) {
-					main.setFormattedCode(String.valueOf(code));
+					main.setFormattedCNPJ(String.valueOf(code));
+				} else if (type == 2) {
+					main.setFormattedCEI(String.valueOf(code));
 				} else {
 					main.setFormattedCode(String.valueOf(code));
 				}

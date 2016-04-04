@@ -357,6 +357,12 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 	public void setFormattedCode(String formattedCode) {
 		this.formattedCode = formattedCode;
 	}
+	public void setFormattedCNPJ(String formattedCode) {
+		this.formattedCode = formatCNPJ(formattedCode);
+	}
+	public void setFormattedCEI(String formattedCode) {
+		this.formattedCode = formatCEI(formattedCode);
+	}
 
 	/**
 	 * @return Nome da OSC
@@ -797,7 +803,7 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 	
 	public Map<String, String> getContent() {
 		Map<String, String> content = new LinkedHashMap<String, String>();
-		//content.put("CNPJ", formattedCode);
+		//content.put("CNPJ/CEI", formattedCode);
 		content.put("Endereço", address);
 		content.put("Área(s) de Atuação", cnaeDescription);
 		content.put("Natureza Juridica", legalTypeDescription);
@@ -813,5 +819,35 @@ public class OscSummary implements Serializable, KeyValueRenderer<String, String
 		}
 		return content;
 	}
-
+	
+	private String formatCNPJ(String cnpj) {
+		while(cnpj.length() <= 14){
+			cnpj = "0" + cnpj;
+		}
+		
+		String bloco1 = cnpj.substring(0, 2);
+		String bloco2 = cnpj.substring(2, 5);
+		String bloco3 = cnpj.substring(5, 8);
+		String bloco4 = cnpj.substring(8, 12);
+		String bloco5 = cnpj.substring(12, 14);
+		
+		cnpj = bloco1 + "." + bloco2 + "." + bloco3 + "/" + bloco4 + "-" + bloco5;
+		
+		return cnpj;
+	}
+	
+	private String formatCEI(String cei) {
+		while(cei.length() <= 12){
+			cei = "0" + cei;
+		}
+		
+		String bloco1 = cei.substring(0, 2);
+		String bloco2 = cei.substring(2, 5);
+		String bloco3 = cei.substring(5, 10);
+		String bloco4 = cei.substring(10, 12);
+		
+		cei = bloco1 + "." + bloco2 + "." + bloco3 + "/" + bloco4;
+		
+		return cei;
+	}
 }

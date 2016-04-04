@@ -61,13 +61,13 @@ public class FormularioWidget extends Composite {
 		
 		htmlBuilder.append("<div class='container'>");
 		htmlBuilder.append("	<div class='social'>");
-		htmlBuilder.append("		<div class='imagem'>");
-		if(org.getImagem().length() == 0){
-			htmlBuilder.append("		<img src='imagens/org_indisponivel.jpg' />");
-		}else{
-			htmlBuilder.append("		<img src='imagens/" + org.getImagem() + "' width='160' height='160' />");
-		}
-		htmlBuilder.append("		</div>");
+//		htmlBuilder.append("		<div class='imagem'>");
+//		if(org.getImagem().length() == 0){
+//			htmlBuilder.append("		<img src='imagens/org_indisponivel.jpg' />");
+//		}else{
+//			htmlBuilder.append("		<img src='imagens/" + org.getImagem() + "' width='160' height='160' />");
+//		}
+//		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div class='redes'>");
 		
 		if(org.getGoogle().length() == 0) htmlBuilder.append("<i class='fa fa-google-plus-square fa-3x'></i>");
@@ -111,14 +111,20 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Nome fantasia:</strong>");
 		htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
+		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>CNPJ:</strong>");
-		if(org.getCnpj() == null || org.getCnpj() == -1L){
+		htmlBuilder.append("						<strong>CNPJ/CEI:</strong>");
+		if(org.getNumeroIdentificacao() == null || org.getNumeroIdentificacao() == -1L){
 			htmlBuilder.append("					<span>Informação não disponível</span>");
 		}else{
-			htmlBuilder.append("					<span>" + convertNumberToString(org.getCnpj()) + "</span>");
+			if(org.getTipoIdentificacao() == 1){
+				htmlBuilder.append("					<span>" + formatCNPJ(org.getNumeroIdentificacao()) + "</span>");
+			}else if(org.getTipoIdentificacao() == 2){
+				htmlBuilder.append("					<span>" + formatCEI(org.getNumeroIdentificacao()) + "</span>");
+			}else{
+				htmlBuilder.append("					<span>Informação não disponível</span>");
+			}
 		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
@@ -734,6 +740,41 @@ public class FormularioWidget extends Composite {
 	private Date getDate(String data) {
 		Date date = DateTimeFormat.getFormat("dd/MM/yyyy").parse(data);
 	    return date;
+	}
+	
+	private String formatCNPJ(Number number) {
+		String cnpj = convertNumberToString(number);
+		
+		while(cnpj.length() <= 14){
+			cnpj = "0" + cnpj;
+		}
+		
+		String bloco1 = cnpj.substring(0, 2);
+		String bloco2 = cnpj.substring(2, 5);
+		String bloco3 = cnpj.substring(5, 8);
+		String bloco4 = cnpj.substring(8, 12);
+		String bloco5 = cnpj.substring(12, 14);
+		
+		cnpj = bloco1 + "." + bloco2 + "." + bloco3 + "/" + bloco4 + "-" + bloco5;
+		
+		return cnpj;
+	}
+	
+	private String formatCEI(Number number) {
+		String cei = convertNumberToString(number);
+		
+		while(cei.length() <= 12){
+			cei = "0" + cei;
+		}
+		
+		String bloco1 = cei.substring(0, 2);
+		String bloco2 = cei.substring(2, 5);
+		String bloco3 = cei.substring(5, 10);
+		String bloco4 = cei.substring(10, 12);
+		
+		cei = bloco1 + "." + bloco2 + "." + bloco3 + "/" + bloco4;
+		
+		return cei;
 	}
 	
 	/**
