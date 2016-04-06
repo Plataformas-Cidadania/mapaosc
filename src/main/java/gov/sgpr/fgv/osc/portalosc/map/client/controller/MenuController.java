@@ -276,7 +276,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		// documentsItem.addInfo("Prestação de contas",
 		// osc.getAccountabilityPath());
 		// documentsItem.addInfo("Estatuto", osc.getByLawPath());
-		// documentsItem.addInfo("Quadro de diretores",
+		// documentsItem.addInfo("Quadro de dirigentes",
 		// osc.getDirectorsBoardPath());
 		// documentsItem.addInfo("Convênios", osc.getTreatyPath());
 		// DataSource[] ds = { osc.getDocumentDataSource() };

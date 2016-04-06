@@ -321,7 +321,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
 		htmlBuilder.append("			</fieldset>");
-		htmlBuilder.append("			<h2>Recursos públicos</h2>");
+		htmlBuilder.append("			<h2>Recursos</h2>");
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
@@ -508,14 +508,14 @@ public class FormularioWidget extends Composite {
 						htmlBuilder.append("				<p>");
 						htmlBuilder.append("					<span id='linkproj"+proj+"' title='' class='menuTooltip'>");
 						htmlBuilder.append("						<span>Você será redirecionado para a página do Projeto</span>");
-						htmlBuilder.append("						<a id='link"+ proj +"' href='http://" + p.getLink() + "' target='_blank' " + (editable ? "contenteditable='true'" : "contenteditable='false'") + " contenteditable='true' >link para página</a>");
+						htmlBuilder.append("						<a id='link"+ proj +"' href='http://" + p.getLink() + "' target='_blank' " + (editable ? "contenteditable='true'" : "contenteditable='false'") + " contenteditable='true' >Link</a>");
 						htmlBuilder.append("					</span>");
 						htmlBuilder.append("				</p>");
 					}
 				}else{
 					if(p.getLink() == null){
 						htmlBuilder.append("				<p>");
-						htmlBuilder.append("					<input id='link"+ proj +"' name='link"+ proj +"' placeholder='Digite a página do projeto' />");
+						htmlBuilder.append("					<input id='link"+ proj +"' name='link"+ proj +"' placeholder='Informação não disponível' />");
 						htmlBuilder.append("				</p>");
 					}else{
 						htmlBuilder.append("				<p>");
