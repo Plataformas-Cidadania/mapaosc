@@ -80,7 +80,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				Double parceriasFederal = rs.getDouble("vl_valor_parcerias_federal");
 				Double parceriasEstadual = rs.getDouble("vl_valor_parcerias_estadual");
 				Double parceriasMunicipal = rs.getDouble("vl_valor_parcerias_municipal");
-				organization.setValorParceriasTotal(parceriasFederal + parceriasEstadual + parceriasMunicipal);
+				organization.setValorRecursosTotal(parceriasFederal + parceriasEstadual + parceriasMunicipal);
 				organization.setValorParceriasFederal(parceriasFederal);
 				organization.setValorParceriasEstadual(parceriasEstadual);
 				organization.setValorParceriasMunicipal(parceriasMunicipal);
@@ -323,7 +323,15 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 //			}
 //			rs.close();
 //			pstmt.close();
-			organization.setValorParceriasTotal(organization.getValorParceriasFederal());
+			organization.setValorRecursosTotal(organization.getValorParceriasFederal());
+			
+			
+			
+			for(ProjetoModel p : projetoList){
+				if(organization.getValorRecursosPrivados() == -1.0) organization.setValorRecursosPrivados(0.0); 
+				organization.setValorRecursosPrivados(organization.getValorRecursosPrivados() + p.getValorTotal());
+			}
+			organization.setValorRecursosTotal(organization.getValorRecursosTotal() + organization.getValorRecursosPrivados());
 			
 			
 			

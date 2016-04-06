@@ -36,10 +36,11 @@ public class OrganizationModel implements Serializable {
 	private Integer trabalhadores = -1;
 	private Integer voluntarios = -1;
 	private Integer portadoresDeficiencia = -1;
-	private Double valorParceriasTotal = -1.0;
+	private Double valorRecursosTotal = -1.0;
 	private Double valorParceriasFederal = -1.0;
 	private Double valorParceriasEstadual = -1.0;
 	private Double valorParceriasMunicipal = -1.0;
+	private Double valorRecursosPrivados = -1.0;
 	private String imagem = "";
 	private String facebook = "";
 	private String google = "";
@@ -241,13 +242,11 @@ public class OrganizationModel implements Serializable {
 		}
 	}
 	
-	public Double getValorParceriasTotal() {
-		return valorParceriasTotal;
+	public Double getValorRecursosTotal() {
+		return valorRecursosTotal;
 	}
-	public void setValorParceriasTotal(Double valorParceriasTotal) {
-		if(valorParceriasTotal != null){
-			this.valorParceriasTotal = valorParceriasTotal;
-		}
+	public void setValorRecursosTotal(Double valorRecursosTotal) {
+		this.valorRecursosTotal = valorRecursosTotal;
 	}
 	
 	public Double getValorParceriasFederal() {
@@ -274,6 +273,15 @@ public class OrganizationModel implements Serializable {
 	public void setValorParceriasMunicipal(Double valorParceriasMunicipal) {
 		if(valorParceriasMunicipal != null){
 			this.valorParceriasMunicipal = valorParceriasMunicipal;
+		}
+	}
+	
+	public Double getValorRecursosPrivados() {
+		return valorRecursosPrivados;
+	}
+	public void setValorRecursosPrivados(Double valorRecursosPrivados) {
+		if(valorRecursosPrivados != null){
+			this.valorRecursosPrivados = valorRecursosPrivados;
 		}
 	}
 	

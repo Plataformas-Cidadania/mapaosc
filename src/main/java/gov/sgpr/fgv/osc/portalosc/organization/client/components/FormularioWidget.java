@@ -325,11 +325,11 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>Valor total das parcerias (R$):</strong>");
-		if(org.getValorParceriasTotal() == null || org.getValorParceriasTotal() == -1.0){
+		htmlBuilder.append("						<strong>Valor total dos recursos (R$):</strong>");
+		if(org.getValorRecursosTotal() == null || org.getValorRecursosTotal() == -1.0){
 			htmlBuilder.append("					<span>Informação não disponível</span>");
 		}else{
-			htmlBuilder.append("					<span>" + convertNumberToCurrencyString(org.getValorParceriasTotal()) + "</span>");
+			htmlBuilder.append("					<span>" + convertNumberToCurrencyString(org.getValorRecursosTotal()) + "</span>");
 		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte Siconv e Finep'></span>");
 		htmlBuilder.append("						<div id='recolherParc' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recParc' ><div></div></div>");
@@ -359,6 +359,24 @@ public class FormularioWidget extends Composite {
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasMunicipal()) + "</span>");
 		}
 		htmlBuilder.append("						</div>");
+		
+		
+		
+		
+		
+		htmlBuilder.append("						<div>");
+		htmlBuilder.append("							<strong>Valor dos recursos privados (R$):</strong>");
+		if(org.getValorRecursosPrivados() == null || org.getValorRecursosPrivados() == -1.0){
+			htmlBuilder.append("						<span>Informação não disponível</span>");
+		}else{
+			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorRecursosPrivados()) + "</span>");
+		}
+		htmlBuilder.append("						</div>");
+		
+		
+		
+		
+		
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
 		htmlBuilder.append("			</fieldset>");
@@ -723,8 +741,6 @@ public class FormularioWidget extends Composite {
 		String result = "";
 		if(number.longValue() >= 0){
 			result = NumberFormat.getFormat("###,###,##0.00").format(number);
-//			NumberFormat fmt = NumberFormat.getDecimalFormat();
-//			result = fmt.format(number);
 		}
 		return result;
 	}
