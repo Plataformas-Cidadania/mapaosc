@@ -745,7 +745,7 @@ public class FormularioWidget extends Composite {
 	private String formatCNPJ(Number number) {
 		String cnpj = convertNumberToString(number);
 		
-		while(cnpj.length() <= 14){
+		while(cnpj.length() < 14){
 			cnpj = "0" + cnpj;
 		}
 		

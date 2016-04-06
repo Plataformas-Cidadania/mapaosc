@@ -2165,7 +2165,8 @@ button.recomendar:hover {
 	width: 180px;
 	display: inline-block;
 	vertical-align: top;
-	background-color: #eef7fc;
+/* 	background-color: #eef7fc; */
+	background-color: #ffffff;
 	min-height: 600px;
 	float: left;
 	padding: 7px 0;
@@ -3747,7 +3748,8 @@ position:relative;
 width:180px;
 display:inline-block;
 vertical-align:top;
-background-color:#eef7fc;
+/* background-color:#eef7fc; */
+background-color:#ffffff;
 min-height:600px;
 float:left;
 padding:7px 0;
