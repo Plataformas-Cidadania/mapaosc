@@ -3,6 +3,7 @@ package gov.sgpr.fgv.osc.portalosc.organization.client.components;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
@@ -26,15 +27,22 @@ import com.google.gwt.user.client.ui.PopupPanel;
 
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ConvenioModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.DiretorModel;
+import gov.sgpr.fgv.osc.portalosc.organization.shared.model.LocalizacaoModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.OrganizationModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ProjetoModel;
+import gov.sgpr.fgv.osc.portalosc.user.client.components.SearchWidget;
+import gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResult;
 
 public class FormularioWidget extends Composite {
 	private final Logger logger = Logger.getLogger(this.getClass().getName());
+	private SearchWidget searchWidget = new SearchWidget();
+	private Element searchTextField;
 	public Integer dir = 0;
 	public Integer proj = 0;
 	public Integer conv = 0;
 	public Integer count = 0;
+	public Integer addLocalProj = 0;
+	public Integer addLocalConv = 0;
 	public Boolean edit = true;
 	
 	public FormularioWidget(OrganizationModel organizationModel, Boolean editable){
@@ -46,6 +54,17 @@ public class FormularioWidget extends Composite {
 		super.onAttach();
 		magneticLink(conv, "linkconv");
 		magneticLink(proj, "linkproj");
+	}
+	
+	public void addResultItems(List<SearchResult> items, EventListener listener, String idElement) {
+		searchWidget.setItems(items, true, idElement);
+		searchWidget.addSearchListener(listener);
+	}
+	
+	public void showOrganization(String oscInfo, String oscId, String idElement) {
+		InputElement enome = DOM.getElementById(idElement).cast();
+		enome.setValue(oscInfo);
+		searchWidget.hideItens();
 	}
 	
 	private HTML getHTML(OrganizationModel org, Boolean editable){
@@ -133,7 +152,7 @@ public class FormularioWidget extends Composite {
 		if(org.getEndereco() == null || org.getEndereco() == ""){
 			htmlBuilder.append("					<span id='endereco' title='Endereço'>Informação não disponível</span>");
 		}else{
-			htmlBuilder.append("					<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "'><span id='endereco' title='Endereço'>" + org.getEndereco() + "</span></a>");
+			htmlBuilder.append("					<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' target='_blank' ><span id='endereco' title='Endereço'>" + org.getEndereco() + "</span></a>");
 		}
 		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
@@ -263,7 +282,7 @@ public class FormularioWidget extends Composite {
 //		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</fieldset>");
 		htmlBuilder.append("			</div>");
-		htmlBuilder.append("			<h2>Quadro de diretores <button type='button' class='adicionar' id='addDiretor' style='float:right;margin-top:3px;margin-right: 3px;'>Adicionar</button></h2>");
+		htmlBuilder.append("			<h2>Quadro de dirigentes <button type='button' class='adicionar' id='addDiretor' style='float:right;margin-top:3px;margin-right: 3px;'>Adicionar</button></h2>");
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div id='diretores' class='diretores'>");
 		if(org.getDiretores().size() == 0){
@@ -360,10 +379,6 @@ public class FormularioWidget extends Composite {
 		}
 		htmlBuilder.append("						</div>");
 		
-		
-		
-		
-		
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor dos recursos privados (R$):</strong>");
 		if(org.getValorRecursosPrivados() == null || org.getValorRecursosPrivados() == -1.0){
@@ -372,10 +387,6 @@ public class FormularioWidget extends Composite {
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorRecursosPrivados()) + "</span>");
 		}
 		htmlBuilder.append("						</div>");
-		
-		
-		
-		
 		
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
@@ -552,26 +563,69 @@ public class FormularioWidget extends Composite {
 					htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getPublicoAlvo() + "</textarea>");
 				}
 				htmlBuilder.append("					</div>");
-//				htmlBuilder.append("							<div class='col1_6'>");
-//				htmlBuilder.append("								<strong class='separador'>Abrangência</strong>");
-//				htmlBuilder.append("								<p>");
-//				htmlBuilder.append("									<select " + (editable ? "" : "disabled='disabled'") + ">");
-//				htmlBuilder.append("										<option value='nacional' " + (p.getAbrangencia() == "nacional" ? "checked='checked'" : "") + "> Nacional </option>");
-//				htmlBuilder.append("										<option value='regional' " + (p.getAbrangencia() == "regional" ? "checked='checked'" : "") + "> Regional </option>");
-//				htmlBuilder.append("										<option value='estadual' " + (p.getAbrangencia() == "estadual" ? "checked='checked'" : "") + "> Estadual </option>");
-//				htmlBuilder.append("										<option value='municipal' " + (p.getAbrangencia() == "municipal" ? "checked='checked'" : "") + "> Municipal </option>");
-//				htmlBuilder.append("									</select>");
-//				htmlBuilder.append("								</p>");
-//				htmlBuilder.append("							</div>");
-//				htmlBuilder.append("							<div class='col1_2'>");
-//				htmlBuilder.append("								<strong class='right-radius'>Localização do Projeto</strong>");
-//				htmlBuilder.append("								<div class='localizacao_projet'>");
-//				htmlBuilder.append("									<ul class='locais'>");
-//				htmlBuilder.append("										<li><a href='mapa.html#5'>Nordeste</a></li>");
-//				htmlBuilder.append("									</ul>");
-//				htmlBuilder.append("								</div>");
-//				htmlBuilder.append("							</div>");
-				htmlBuilder.append("				</div>");
+				htmlBuilder.append("<div class='col1_6'>");
+				htmlBuilder.append("<strong class='separador'>Abrangência</strong>");
+				htmlBuilder.append("<p id='projeto_abrang"+ proj +"' >");
+				htmlBuilder.append("<select  " + (editable ? "" : "disabled") + ">");
+				if(p.getAbrangencia() == "Nacional"){
+					htmlBuilder.append("<option value='Nacional' selected='selected'> Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}else if(p.getAbrangencia() == "Regional"){
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' selected='selected'> Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}else if(p.getAbrangencia() == "Estadual"){
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' selected='selected'> Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}else if(p.getAbrangencia() == "Municipal"){
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' selected='selected'> Municipal </option>");
+				}else{
+					htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}
+				htmlBuilder.append("</select>");
+				htmlBuilder.append("</p>");
+				htmlBuilder.append("</div>");
+				
+				htmlBuilder.append("<div class='col1_2'>");
+				htmlBuilder.append("<strong class='right-radius'>Localização do Projeto</strong>");
+				htmlBuilder.append("<div class='localizacao_projeto'>");
+				htmlBuilder.append("<ul id='locais"+proj+"' class='locais'>");
+				for(LocalizacaoModel l : p.getLocalizacao()){
+					if(l.getMunicipio() != null){
+						addLocalProj++;
+						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdMunicipio() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdMunicipio() +"' target='_blank' >"+ l.getMunicipio() +"</a></li>");
+					}
+					if(l.getRegiao()!= null){
+						addLocalProj++;
+						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdRegiao() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdRegiao() +"' target='_blank' >"+ l.getRegiao() +"</a></li>");
+					}
+					if(l.getUf()!= null){
+						addLocalProj++;
+						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdUf() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdUf() +"' target='_blank' >"+ l.getUf() +"</a></li>");
+					}
+				}
+				htmlBuilder.append("</ul>");
+				
+				htmlBuilder.append("<div id='buscarProj"+proj+"' >");
+				htmlBuilder.append("<label for='campobusca' class='esconder' style='background: none;'>Buscar localização</label>");
+				htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ proj +"' placeholder='Informe a localização desejada...'>");
+				htmlBuilder.append("<button type='button' name='adicionar' id='adicionar"+proj+"' class='adicionar'>Adicionar</button>");
+				htmlBuilder.append("<button type='button' name='ajuda' class='ajuda' id='ajuda"+proj+"' style='padding: 5px 8px;' >?</button></div>");
+				htmlBuilder.append("</div>");
+				htmlBuilder.append("</div>");
+				htmlBuilder.append("</div>");
 				htmlBuilder.append("				<div class='clearfix linha'>");
 				htmlBuilder.append("					<div class='col1_3'>");
 				htmlBuilder.append("						<strong class='left-radius separador'>Financiadores do Projeto</strong>");
@@ -665,27 +719,69 @@ public class FormularioWidget extends Composite {
 					htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + c.getPublicoAlvo() + "</textarea>");
 				}
 				htmlBuilder.append("					</div>");
-//				htmlBuilder.append("					<div class='col1_6'>");
-//				htmlBuilder.append("						<strong class='separador'>Abrangência</strong>");
-//				htmlBuilder.append("						<p>");
-//				htmlBuilder.append("							<select " + (editable ? "" : "disabled='disabled'") + ">");
-//				htmlBuilder.append("								<option value='nacional' checked='checked'> Nacional </option>");
-//				htmlBuilder.append("								<option value='regional' checked='checked'> Regional </option>");
-//				htmlBuilder.append("								<option value='estadual' checked='checked'> Estadual </option>");
-//				htmlBuilder.append("								<option value='municipal' checked='checked'> Municipal </option>");
-//				htmlBuilder.append("							</select>");
-//				htmlBuilder.append("						</p>");
-//				htmlBuilder.append("					</div>");
-//				htmlBuilder.append("					<div class='col1_2'>");
-//				htmlBuilder.append("						<strong class='right-radius'>Localização do Projeto</strong>");
-//				htmlBuilder.append("						<div class='localizacao_projeto'>");
-//				htmlBuilder.append("							<ul class='locais'>");
-//				htmlBuilder.append("								<li><a href='mapa.html#5'>Nordeste</a></li>");
-//				htmlBuilder.append("								<li><a href='mapa.html#4'>Norte</a></li>");
-//				htmlBuilder.append("							</ul>");
-//				htmlBuilder.append("						</div>");
-//				htmlBuilder.append("					</div>");
-				htmlBuilder.append("					</div>");
+				htmlBuilder.append("<div class='col1_6'>");
+				htmlBuilder.append("<strong class='separador'>Abrangência</strong>");
+				htmlBuilder.append("<p id='conv_abrang"+ conv +"' >");
+				htmlBuilder.append("<select " + (editable ? "" : "disabled") + ">");
+				if(c.getAbrangencia() == "Nacional"){
+					htmlBuilder.append("<option value='Nacional' selected='selected'> Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}else if(c.getAbrangencia() == "Regional"){
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' selected='selected'> Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}else if(c.getAbrangencia() == "Estadual"){
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' selected='selected'> Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}else if(c.getAbrangencia() == "Municipal"){
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' selected='selected'> Municipal </option>");
+
+				}else{
+					htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
+					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
+					htmlBuilder.append("<option value='Regional' > Regional </option>");
+					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
+					htmlBuilder.append("<option value='Municipal' > Municipal </option>");
+				}
+				htmlBuilder.append("</select>");
+				htmlBuilder.append("</p>");
+				htmlBuilder.append("</div>");
+				
+				htmlBuilder.append("<div class='col1_2'>");
+				htmlBuilder.append("<strong class='right-radius'>Localização do Projeto</strong>");
+				htmlBuilder.append("<div class='localizacao_projeto'>");
+				htmlBuilder.append("<ul id='locaisConv"+conv+"' class='locais'>");
+				for(LocalizacaoModel l : c.getLocalizacao()){
+					if(l.getMunicipio() != null){
+						addLocalConv++;
+						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdMunicipio() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdMunicipio() +"' >"+ l.getMunicipio() +"</a></li>");
+					}
+					if(l.getRegiao()!= null){
+						addLocalConv++;
+						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdRegiao() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdRegiao() +"' >"+ l.getRegiao() +"</a></li>");
+					}
+					if(l.getUf()!= null){
+						addLocalConv++;
+						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdUf() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdUf() +"' >"+ l.getUf() +"</a></li>");
+					}
+				}
+				htmlBuilder.append("</ul>");
+				htmlBuilder.append("<div id='buscarConv"+conv+"'>");
+				htmlBuilder.append("<label for='campobusca' class='esconder' style='background: none;'>Buscar localização</label>");
+				htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ count +"' placeholder='Informe a localização desejada...'>");
+				htmlBuilder.append("<button type='button' name='addLocalConv' id='addLocalConv"+conv+"' class='adicionar'>Adicionar</button>");
+				htmlBuilder.append("<button type='button' name='ajuda' class='ajuda' id='ajuda"+count+"' style='padding: 5px 8px;'>?</button></div>");
+				htmlBuilder.append("</div>");
+				htmlBuilder.append("</div>");
+				htmlBuilder.append("</div>");
 				htmlBuilder.append("					<div class='clearfix linha'>");
 				htmlBuilder.append("						<div class='col1_3'>");
 				htmlBuilder.append("							<strong class='left-radius separador'>Financiadores do Projeto</strong>");
@@ -713,7 +809,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div id='divbotoes' class='botoes'>");
-		htmlBuilder.append("		<a href='" + GWT.getHostPageBaseURL() + "Map.html#O" + org.getId().toString() + "' >Cancelar</a> ou <input id='btnSalvar' type='button' value='Salvar' class='salvar' />");
+		htmlBuilder.append("		<a href='#O"+ org.getId().toString() +"' id='cancelar' >Cancelar</a> ou <input id='btnSalvar' type='button' value='Salvar' class='salvar' />");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</form>");
 		
@@ -758,6 +854,14 @@ public class FormularioWidget extends Composite {
 	    return date;
 	}
 	
+	public void valorTotal(EventListener listener) {
+		for(int i=1; i<=proj; i++){
+			Element valorTotal = DOM.getElementById("projeto_valor_total"+ i);
+			Event.sinkEvents(valorTotal, Event.ONBLUR);
+			Event.setEventListener(valorTotal, listener);
+		}
+	}
+	
 	private String formatCNPJ(Number number) {
 		String cnpj = convertNumberToString(number);
 		
@@ -799,14 +903,22 @@ public class FormularioWidget extends Composite {
 	 */
 	public void addSalvarListener(EventListener listener) {
 		Element div = DOM.getElementById("divbotoes");
-		if(edit == false)
+		if(edit == false){
 			div.setAttribute("style", "display: none");
-		else{
+			Element form = DOM.getElementById("addFormProj");
+			form.setAttribute("style", "margin-bottom: 30px;");
+		}else{
 			div.setAttribute("style", "display: block");
 			Element btnSalvar = DOM.getElementById("btnSalvar");
 			Event.sinkEvents(btnSalvar, Event.ONCLICK);
 			Event.setEventListener(btnSalvar, listener);
 		}
+	}
+	
+	public void addCancelListener(EventListener listener) {
+		Element cancelar = DOM.getElementById("cancelar");
+		Event.sinkEvents(cancelar, Event.ONCLICK);
+		Event.setEventListener(cancelar, listener);
 	}
 	
 	public void addEditar(EventListener listener) {
@@ -819,6 +931,14 @@ public class FormularioWidget extends Composite {
 		Element recomendar = DOM.getElementById("recomendar");
 		Event.sinkEvents(recomendar, Event.ONCLICK);
 		Event.setEventListener(recomendar, listener);
+	}
+	
+	public void ajuda(EventListener listener) {
+		for(int i=1; i<=count; i++){
+			Element recomendar = DOM.getElementById("ajuda"+i);
+			Event.sinkEvents(recomendar, Event.ONCLICK);
+			Event.setEventListener(recomendar, listener);
+		}
 	}
 	
 	public OrganizationModel getOrg() {
@@ -910,6 +1030,29 @@ public class FormularioWidget extends Composite {
 			projmodel.setFonteRecursos(selectFonte.getValue());
 			projmodel.setLink(InputElement.as(DOM.getElementById("link" + i)).getValue());
 			projmodel.setPublicoAlvo(TextAreaElement.as(DOM.getElementById("projeto_publico_alvo" + i)).getValue());
+			Element abrangencia = DOM.getElementById("projeto_abrang" + i);
+			SelectElement selectAbrang = abrangencia.getFirstChild().cast();
+			projmodel.setAbrangencia(selectAbrang.getValue());
+			
+			ArrayList<LocalizacaoModel> localizacaoList = new ArrayList<LocalizacaoModel>();
+			for(int j = 1;j <= addLocalProj; j++){
+				LocalizacaoModel localmodel = new LocalizacaoModel();
+				Element eleLocal = DOM.getElementById("localizacaoProj" + i + j);
+				if(eleLocal != null){
+					Element local = eleLocal.getParentElement().getFirstChildElement();
+					if(local.getAttribute("name").toString() == "addLocal"){
+						String idLocal = local.getAttribute("value");
+						if(idLocal.length() == 7)
+							localmodel.setIdMunicipio(Integer.parseInt(idLocal));
+						if(idLocal.length() == 1)
+							localmodel.setIdRegiao(Integer.parseInt(idLocal));
+						if(idLocal.length() == 2)
+							localmodel.setIdUf(Integer.parseInt(idLocal));
+						localizacaoList.add(localmodel);
+					}
+				}
+			}
+			projmodel.setLocalizacao(localizacaoList);
 			projmodel.setFinanciadores(TextAreaElement.as(DOM.getElementById("financiadores" + i)).getValue());
 			projmodel.setDescricao(TextAreaElement.as(DOM.getElementById("descprojeto" + i)).getValue());
 			
@@ -925,6 +1068,30 @@ public class FormularioWidget extends Composite {
 			Integer id = Integer.parseInt(name);
 			convmodel.setNConv(id);
 			convmodel.setPublicoAlvo(TextAreaElement.as(ele).getValue());
+			Element abrangenciaconv = DOM.getElementById("conv_abrang" + i);
+			SelectElement selectAbrangconv = abrangenciaconv.getFirstChild().cast();
+			convmodel.setAbrangencia(selectAbrangconv.getValue());
+			
+			ArrayList<LocalizacaoModel> localizacaoList = new ArrayList<LocalizacaoModel>();
+			for(int j = 1;j <= addLocalConv; j++){
+				LocalizacaoModel localmodel = new LocalizacaoModel();
+				Element eleLocal = DOM.getElementById("localizacaoConv" + i + j);
+				if(eleLocal != null){
+					Element local = eleLocal.getParentElement().getFirstChildElement();
+					if(local.getAttribute("name").toString() == "addLocal"){
+						String idLocal = local.getAttribute("value");
+						if(idLocal.length() == 7)
+							localmodel.setIdMunicipio(Integer.parseInt(idLocal));
+						if(idLocal.length() == 1)
+							localmodel.setIdRegiao(Integer.parseInt(idLocal));
+						if(idLocal.length() == 2)
+							localmodel.setIdUf(Integer.parseInt(idLocal));
+						
+						localizacaoList.add(localmodel);
+					}
+				}
+			}
+			convmodel.setLocalizacao(localizacaoList);
 			convList.add(convmodel);
 		}
 		org.setConvenios(convList);
@@ -958,8 +1125,6 @@ public class FormularioWidget extends Composite {
 			popup.add(picker);
 			popup.show();
 			element.appendChild(picker.getElement());
-//			Element date = DOM.getElementById(idElement + i);
-//			date.setAttribute("required", "required");
 		} 
 	}
 	
@@ -974,6 +1139,58 @@ public class FormularioWidget extends Composite {
 				Event.setEventListener(removeDir, listener);
 			}
 		}
+	}
+	
+	public void removeLocalProj(EventListener listener) {
+		for(int i=1; i<=addLocalProj; i++){
+			Element excluirProj = DOM.getElementById("excluirLocal"+i);
+			if(edit == false){
+				excluirProj.setAttribute("style", "display: none");
+			}else{
+				excluirProj.setAttribute("style", "display: inline-block");
+				Event.sinkEvents(excluirProj, Event.ONCLICK);
+				Event.setEventListener(excluirProj, listener);
+			}
+		}
+	}
+	
+	public void removeLocalConv(EventListener listener) {
+		for(int i=1; i<=addLocalConv; i++){
+			Element excluirConv = DOM.getElementById("excluirLocalConv"+i);
+			if(edit == false){
+				excluirConv.setAttribute("style", "display: none");
+			}else{
+				excluirConv.setAttribute("style", "display: inline-block");
+				Event.sinkEvents(excluirConv, Event.ONCLICK);
+				Event.setEventListener(excluirConv, listener);
+			}
+		}
+	}
+	
+	public void addFocusListener(EventListener listener) {
+		for(int i=1; i<=count; i++){
+			final Element elem = DOM.getElementById("enome"+i);
+			Event.sinkEvents(elem, Event.ONFOCUS);
+			Event.setEventListener(elem, listener);
+		}
+	}
+	
+	public void addSearchChangeListener(EventListener listener) {
+		for(int i=1; i<=count; i++){
+			final Element elem = DOM.getElementById("enome"+i);
+			Event.sinkEvents(elem, Event.ONKEYDOWN);
+			Event.setEventListener(elem, listener);
+		}
+	}
+	
+	public void setValue(String ele, String value) {
+		searchTextField = DOM.getElementById(ele);
+		searchTextField.setAttribute("value", value);
+	}
+	
+	public String getValue(String ele) {
+		searchTextField = DOM.getElementById(ele);
+		return searchTextField.getPropertyString("value");
 	}
 	
 //	public void addSocial(EventListener listener) {
@@ -1007,6 +1224,34 @@ public class FormularioWidget extends Composite {
 			addProjetos.setAttribute("style", "display: block");
 			Event.sinkEvents(addProjetos, Event.ONCLICK);
 			Event.setEventListener(addProjetos, listener);
+		}
+	}
+	
+	public void addLocalProj(EventListener listener) {
+		for(int i=1; i<=proj; i++){
+			Element locaisProj = DOM.getElementById("buscarProj"+i);
+			if(edit == false){
+				locaisProj.setAttribute("style", "display: none");
+			}else{
+				locaisProj.setAttribute("style", "display: block");
+				Element addLocalizacao = DOM.getElementById("adicionar"+i);
+				Event.sinkEvents(addLocalizacao, Event.ONCLICK);
+				Event.setEventListener(addLocalizacao, listener);
+			}
+		}
+	}
+	
+	public void addLocalConv(EventListener listener) {
+		for(int i=1; i<=conv; i++){
+			Element locaisConv = DOM.getElementById("buscarConv"+i);
+			if(edit == false){
+				locaisConv.setAttribute("style", "display: none");
+			}else{
+				locaisConv.setAttribute("style", "display: block");
+				Element addLocalizacao = DOM.getElementById("addLocalConv"+i);
+				Event.sinkEvents(addLocalizacao, Event.ONCLICK);
+				Event.setEventListener(addLocalizacao, listener);
+			}
 		}
 	}
 	

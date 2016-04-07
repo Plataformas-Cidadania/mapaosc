@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import javax.servlet.ServletContext;
 
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ConvenioModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.DiretorModel;
+import gov.sgpr.fgv.osc.portalosc.organization.shared.model.LocalizacaoModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.OrganizationModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ProjetoModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.exception.RemoteException;
@@ -46,7 +49,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 	}
 	
 	public OrganizationModel getOrganizationByID(Integer id) throws RemoteException {
-		
 		logger.info("Buscando organização no banco de dados pelo ID " + id.toString());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
@@ -189,7 +191,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 			sql = "SELECT proj_cd_projetos, titulo, status, data_inicio, data_fim, valor_total, fonte_recurso, link, publico_alvo, "
-				+ 		 "abrangencia, localizacao, financiadores, descricao "
+				+ 		 "abrangencia, financiadores, descricao "
 				+ "FROM data.tb_osc_projeto "
 				+ "WHERE bosc_sq_osc = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -208,7 +210,6 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				projeto.setLink(rs.getString("link"));
 				projeto.setPublicoAlvo(rs.getString("publico_alvo"));
 				projeto.setAbrangencia(rs.getString("abrangencia"));
-				projeto.setLocalizacao(rs.getString("localizacao"));
 				projeto.setFinanciadores(rs.getString("financiadores"));
 				projeto.setDescricao(rs.getString("descricao"));
 				
@@ -217,9 +218,39 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			organization.setProjetos(projetoList);
 			rs.close();
 			pstmt.close();
+			
+			sql = "SELECT proj_sq_loc, ed_municipio.edmu_cd_municipio, edmu_nm_municipio, ed_regiao.edre_cd_regiao, edre_nm_regiao, ed_uf.eduf_cd_uf,  eduf_nm_uf "
+					+ "FROM data.tb_osc_projeto_loc LEFT JOIN spat.ed_municipio ON (tb_osc_projeto_loc.edmu_cd_municipio = ed_municipio.edmu_cd_municipio) "
+					+ "LEFT JOIN spat.ed_regiao ON (tb_osc_projeto_loc.edre_cd_regiao = ed_regiao.edre_cd_regiao) "
+					+ "LEFT JOIN spat.ed_uf ON (tb_osc_projeto_loc.eduf_cd_uf = ed_uf.eduf_cd_uf) "
+					+ "WHERE tb_osc_projeto_loc.proj_cd_projetos = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i< organization.getProjetos().size(); i++){
+				pstmt.setInt(1, organization.getProjetos().get(i).getId());
+				rs = pstmt.executeQuery();
+				ArrayList<LocalizacaoModel> localizacaoList = new ArrayList<LocalizacaoModel>();
+				while (rs.next()) {
+					
+					LocalizacaoModel localizacao = new LocalizacaoModel();
+					localizacao.setIdLocal(rs.getInt("proj_sq_loc"));
+					localizacao.setIdMunicipio(rs.getInt("edmu_cd_municipio"));
+					localizacao.setMunicipio(rs.getString("edmu_nm_municipio"));
+					localizacao.setIdRegiao(rs.getInt("edre_cd_regiao"));
+					localizacao.setRegiao(rs.getString("edre_nm_regiao"));
+					localizacao.setIdUf(rs.getInt("eduf_cd_uf"));
+					localizacao.setUf(rs.getString("eduf_nm_uf"));
+					localizacaoList.add(localizacao);
+					
+				}
+				organization.getProjetos().get(i).setLocalizacao(localizacaoList);
+			}
+			rs.close();
+			pstmt.close();
 				
 			sql = "SELECT nr_convenio, tx_objeto_convenio, tx_situacao, dt_inicio_vigencia, dt_fim_vigencia, vl_global, nm_orgao_concedente, "
-				+ 		 "tx_objeto_convenio, conv_publico_alvo "
+				+ 		 "tx_objeto_convenio, conv_publico_alvo, abrangencia "
 				+ "FROM data.tb_osc_convenios "
 				+ "WHERE bosc_sq_osc = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -237,10 +268,39 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				convenio.setFinanciadores(rs.getString("nm_orgao_concedente"));
 				convenio.setDescricao(rs.getString("tx_objeto_convenio"));
 				convenio.setPublicoAlvo(rs.getString("conv_publico_alvo"));
+				convenio.setAbrangencia(rs.getString("abrangencia"));
 				
 				conveniosList.add(convenio);
 			}
 			organization.setConvenios(conveniosList);
+			rs.close();
+			pstmt.close();
+			
+			sql = "SELECT conv_sq_loc, ed_municipio.edmu_cd_municipio, edmu_nm_municipio, ed_regiao.edre_cd_regiao, edre_nm_regiao, ed_uf.eduf_cd_uf,  eduf_nm_uf "
+					+ "FROM data.tb_osc_convenios_loc LEFT JOIN spat.ed_municipio ON (tb_osc_convenios_loc.edmu_cd_municipio = ed_municipio.edmu_cd_municipio) "
+					+ "LEFT JOIN spat.ed_regiao ON (tb_osc_convenios_loc.edre_cd_regiao = ed_regiao.edre_cd_regiao) "
+					+ "LEFT JOIN spat.ed_uf ON (tb_osc_convenios_loc.eduf_cd_uf = ed_uf.eduf_cd_uf) "
+					+ "WHERE tb_osc_convenios_loc.nr_convenio = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i< organization.getConvenios().size(); i++){
+				pstmt.setInt(1, organization.getConvenios().get(i).getNConv());
+				rs = pstmt.executeQuery();
+				ArrayList<LocalizacaoModel> localizacaoList = new ArrayList<LocalizacaoModel>();
+				while (rs.next()) {
+					LocalizacaoModel localizacao = new LocalizacaoModel();
+					localizacao.setIdLocal(rs.getInt("conv_sq_loc"));
+					localizacao.setIdMunicipio(rs.getInt("edmu_cd_municipio"));
+					localizacao.setMunicipio(rs.getString("edmu_nm_municipio"));
+					localizacao.setIdRegiao(rs.getInt("edre_cd_regiao"));
+					localizacao.setRegiao(rs.getString("edre_nm_regiao"));
+					localizacao.setIdUf(rs.getInt("eduf_cd_uf"));
+					localizacao.setUf(rs.getString("eduf_nm_uf"));
+					localizacaoList.add(localizacao);
+				}
+				organization.getConvenios().get(i).setLocalizacao(localizacaoList);;
+			}
 			rs.close();
 			pstmt.close();
 			
@@ -358,8 +418,11 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 		logger.info("Atualizando informações da organização " + organization.getId().toString() + " no banco de dados");
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
+		Connection conn2 = getConnection();
+		PreparedStatement pstmt2 = null;
 		
 		String sql = "";
+		String sql2 = "";
 		
 		try {
 			sql = "UPDATE portal.vm_osc_principal " 
@@ -429,10 +492,14 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 			sql = "INSERT INTO data.tb_osc_projeto (bosc_sq_osc, titulo, status, data_inicio, data_fim, valor_total, "
-				+ 		 	  					   "fonte_recurso, link, publico_alvo, financiadores, descricao) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ 		 	  					   "fonte_recurso, link, publico_alvo, abrangencia, financiadores, descricao) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+			sql2 = "INSERT INTO data.tb_osc_projeto_loc (proj_cd_projetos, edmu_cd_municipio, edre_cd_regiao, eduf_cd_uf) "
+					+ "VALUES (?, ?, ?, ?);";
 			
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			pstmt2 = conn2.prepareStatement(sql2);
 			
 			for (int i = 0; i < organization.getProjetos().size(); i++ ) {
 				if(organization.getProjetos().get(i).getId() == -1){
@@ -460,19 +527,50 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					pstmt.setString(7, organization.getProjetos().get(i).getFonteRecursos());
 					pstmt.setString(8, organization.getProjetos().get(i).getLink());
 					pstmt.setString(9, organization.getProjetos().get(i).getPublicoAlvo());
-					pstmt.setString(10, organization.getProjetos().get(i).getFinanciadores());
-					pstmt.setString(11, organization.getProjetos().get(i).getDescricao());
+					pstmt.setString(10, organization.getProjetos().get(i).getAbrangencia());
+					pstmt.setString(11, organization.getProjetos().get(i).getFinanciadores());
+					pstmt.setString(12, organization.getProjetos().get(i).getDescricao());
 					pstmt.executeUpdate();
+					
+					ResultSet rs = pstmt.getGeneratedKeys();
+					int id = -1;
+					while (rs.next()) {
+						id = rs.getInt(2);
+		            } 
+		            rs.close();
+					
+					for (int j = 0; j < organization.getProjetos().get(i).getLocalizacao().size(); j++ ) {
+						pstmt2.setInt(1, id);
+						if(organization.getProjetos().get(i).getLocalizacao().get(j).getIdMunicipio() == -1)
+							pstmt2.setNull(2, Types.INTEGER);
+						else
+							pstmt2.setInt(2,organization.getProjetos().get(i).getLocalizacao().get(j).getIdMunicipio());
+						if(organization.getProjetos().get(i).getLocalizacao().get(j).getIdRegiao() == -1)
+							pstmt2.setNull(3, Types.INTEGER);
+						else
+							pstmt2.setInt(3,organization.getProjetos().get(i).getLocalizacao().get(j).getIdRegiao());
+						if(organization.getProjetos().get(i).getLocalizacao().get(j).getIdUf() == -1)
+							pstmt2.setNull(4, Types.INTEGER);
+						else
+							pstmt2.setInt(4,organization.getProjetos().get(i).getLocalizacao().get(j).getIdUf());
+						pstmt2.executeUpdate();
+					}
 				}
 			}
 			pstmt.close();
+			pstmt2.close();
 			
 			sql = "UPDATE data.tb_osc_projeto SET bosc_sq_osc = ?, titulo = ?, status = ?, data_inicio = ?, data_fim = ?, "
-				+ 		 "valor_total = ?, fonte_recurso = ?, "
-				+ 		 "link = ?, publico_alvo = ?, financiadores = ?, descricao = ? "
-				+ "WHERE proj_cd_projetos = ?";
+					+ 		 "valor_total = ?, fonte_recurso = ?, "
+					+ 		 "link = ?, publico_alvo = ?, abrangencia = ?, financiadores = ?, descricao = ? "
+					+ "WHERE proj_cd_projetos = ?";
+				
+			sql2 = "INSERT INTO data.tb_osc_projeto_loc (proj_cd_projetos, edmu_cd_municipio, edre_cd_regiao, eduf_cd_uf) "
+					+ "VALUES (?, ?, ?, ?);";
 			
 			pstmt = conn.prepareStatement(sql);
+			pstmt2 = conn2.prepareStatement(sql2);
+				
 			for (int i = 0; i < organization.getProjetos().size(); i++ ) {
 				if(organization.getProjetos().get(i).getId() != -1){			
 					pstmt.setInt(1, organization.getId() );
@@ -499,23 +597,67 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					pstmt.setString(7, organization.getProjetos().get(i).getFonteRecursos());
 					pstmt.setString(8, organization.getProjetos().get(i).getLink());
 					pstmt.setString(9, organization.getProjetos().get(i).getPublicoAlvo());
-					pstmt.setString(10, organization.getProjetos().get(i).getFinanciadores());
-					pstmt.setString(11, organization.getProjetos().get(i).getDescricao());
-					pstmt.setInt(12, organization.getProjetos().get(i).getId());
+					pstmt.setString(10, organization.getProjetos().get(i).getAbrangencia());
+					
+					for (int j = 0; j < organization.getProjetos().get(i).getLocalizacao().size(); j++ ) {
+						pstmt2.setInt(1, organization.getProjetos().get(i).getId());
+						if(organization.getProjetos().get(i).getLocalizacao().get(j).getIdMunicipio() == -1)
+							pstmt2.setNull(2, Types.INTEGER);
+						else
+							pstmt2.setInt(2,organization.getProjetos().get(i).getLocalizacao().get(j).getIdMunicipio());
+						if(organization.getProjetos().get(i).getLocalizacao().get(j).getIdRegiao() == -1)
+							pstmt2.setNull(3, Types.INTEGER);
+						else
+							pstmt2.setInt(3,organization.getProjetos().get(i).getLocalizacao().get(j).getIdRegiao());
+						if(organization.getProjetos().get(i).getLocalizacao().get(j).getIdUf() == -1)
+							pstmt2.setNull(4, Types.INTEGER);
+						else
+							pstmt2.setInt(4,organization.getProjetos().get(i).getLocalizacao().get(j).getIdUf());
+						pstmt2.executeUpdate();
+					}
+					pstmt.setString(11, organization.getProjetos().get(i).getFinanciadores());
+					pstmt.setString(12, organization.getProjetos().get(i).getDescricao());
+					pstmt.setInt(13, organization.getProjetos().get(i).getId());
 					pstmt.executeUpdate();
 				}
 			}
 			pstmt.close();
+			pstmt2.close();
 			
 			sql = "UPDATE data.tb_osc_convenios "
-				+ "SET conv_publico_alvo = ? "
-				+ "WHERE nr_convenio = ?";
+					+ "SET conv_publico_alvo = ?, abrangencia = ? "
+					+ "WHERE nr_convenio = ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			for (int i = 0; i < organization.getConvenios().size(); i++ ) {
 				if(organization.getConvenios().get(i).getNConv() != -1){			
 					pstmt.setString(1,organization.getConvenios().get(i).getPublicoAlvo());
-					pstmt.setInt(2,organization.getConvenios().get(i).getNConv());
+					pstmt.setString(2, organization.getConvenios().get(i).getAbrangencia());
+					pstmt.setInt(3,organization.getConvenios().get(i).getNConv());
+					pstmt.executeUpdate();
+				}
+			}
+			pstmt.close();
+			
+			sql = "INSERT INTO data.tb_osc_convenios_loc (nr_convenio, edmu_cd_municipio, edre_cd_regiao, eduf_cd_uf) "
+					+ "VALUES (?, ?, ?, ?);";
+							
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < organization.getConvenios().size(); i++ ) {
+				for (int j = 0; j < organization.getConvenios().get(i).getLocalizacao().size(); j++ ) {					
+					pstmt.setInt(1, organization.getConvenios().get(i).getNConv());
+					if(organization.getConvenios().get(i).getLocalizacao().get(j).getIdMunicipio() == -1)
+						pstmt.setNull(2, Types.INTEGER);
+					else
+						pstmt.setInt(2,organization.getConvenios().get(i).getLocalizacao().get(j).getIdMunicipio());
+					if(organization.getConvenios().get(i).getLocalizacao().get(j).getIdRegiao() == -1)
+						pstmt.setNull(3, Types.INTEGER);
+					else
+						pstmt.setInt(3,organization.getConvenios().get(i).getLocalizacao().get(j).getIdRegiao());
+					if(organization.getConvenios().get(i).getLocalizacao().get(j).getIdUf() == -1)
+						pstmt.setNull(4, Types.INTEGER);
+					else
+						pstmt.setInt(4,organization.getConvenios().get(i).getLocalizacao().get(j).getIdUf());
 					pstmt.executeUpdate();
 				}
 			}
@@ -545,6 +687,42 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: removeDiretor(Integer id)");
 			logger.log(Level.SEVERE, e.getMessage());
 			e.printStackTrace();
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+		}
+	}
+	
+	public void removeLocalProj(Integer id) throws RemoteException {
+		logger.info("Removendo localização");
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM data.tb_osc_projeto_loc "
+				   + "WHERE proj_sq_loc = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
+			throw new RemoteException(e);
+		} finally {
+			releaseConnection(conn, pstmt);
+		}
+	}
+	
+	public void removeLocalConv(Integer id) throws RemoteException {
+		logger.info("Removendo localização");
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM data.tb_osc_convenios_loc "
+				   + "WHERE conv_sq_loc = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.execute();
+		} catch (SQLException e) {
+			logger.severe(e.getMessage());
 			throw new RemoteException(e);
 		} finally {
 			releaseConnection(conn, pstmt);

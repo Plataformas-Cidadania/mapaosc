@@ -24,5 +24,5 @@ public interface SearchService extends RemoteService {
 	 * @return
 	 * @throws RemoteException
 	 */
-	List<SearchResult> search(String criteria, int resultLimit) throws RemoteException;
+	List<SearchResult> search(String criteria, Boolean oscConfig, int resultLimit) throws RemoteException;
 }

@@ -47,9 +47,9 @@
 
 	/* Tooltips */
 	function tooltips_padrao(){
-		$(document).on('mouseover', '.tooltip', function(event) {
+		$(document).on('mouseover', '.tooltip:not([data-hasqtip])', function(event) {
 			$(this).qtip({
-				overwrite: true,
+				overwrite: false,
 				show: {
 					event: event.type,
 					ready: true

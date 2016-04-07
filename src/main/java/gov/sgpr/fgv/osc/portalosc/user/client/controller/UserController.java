@@ -365,29 +365,7 @@ public class UserController {
 				defaultUser.close();
 				
 				popupPassword.onModuleLoad();
-				Element pop = DOM.getElementById("popup");
-				pop.removeAllChildren();
-				Element header = DOM.createElement("h2");
-				header.setInnerText("Cadastre-se no Mapa");
-				Element div = DOM.createDiv();
-				Element p = DOM.createElement("p");
-				p.setInnerText("Um e-mail foi enviado com as instruções para confirmação do seu cadastro.");
-				Element a = DOM.createAnchor();
-				a.setInnerText("Ok");
-				a.setAttribute("href", "#");
-				Event.sinkEvents(a, Event.ONCLICK);
-				Event.setEventListener(a, new EventListener() {
-					public void onBrowserEvent(Event event) {
-						popupPassword.close();
-						logger.info("Redirecionando para tela principal");
-						String url = GWT.getHostPageBaseURL() + "Map.html";
-						Window.Location.replace(url);
-					}
-				});
-				div.appendChild(p);
-				div.appendChild(a);
-				pop.appendChild(header);
-				pop.appendChild(div);
+				popup("Cadastre-se no Mapa", "Um e-mail foi enviado com as instruções para confirmação do seu cadastro.", false);
 			}
 		};
 		userService.addUser(user, callback);
@@ -430,29 +408,7 @@ public class UserController {
 				organizationUserWidget.close();
 				
 				popupPassword.onModuleLoad();
-				Element pop = DOM.getElementById("popup");
-				pop.removeAllChildren();
-				Element header = DOM.createElement("h2");
-				header.setInnerText("Cadastre-se no Mapa");
-				Element div = DOM.createDiv();
-				Element p = DOM.createElement("p");
-				p.setInnerText("Um e-mail foi enviado com as instruções para confirmação do seu cadastro. Outro e-mail foi enviado a OSC informando o seu cadastro.");
-				Element a = DOM.createAnchor();
-				a.setInnerText("Ok");
-				a.setAttribute("href", "#");
-				Event.sinkEvents(a, Event.ONCLICK);
-				Event.setEventListener(a, new EventListener() {
-					public void onBrowserEvent(Event event) {
-						popupPassword.close();
-						logger.info("Redirecionando para tela principal");
-						String url = GWT.getHostPageBaseURL() + "Map.html";
-						Window.Location.replace(url);
-					}
-				});
-				div.appendChild(p);
-				div.appendChild(a);
-				pop.appendChild(header);
-				pop.appendChild(div);
+				popup("Cadastre-se no Mapa", "Um e-mail foi enviado com as instruções para confirmação do seu cadastro. Outro e-mail foi enviado a OSC informando o seu cadastro.", false);
 			}
 		};
 		userService.addRepresentantUser(user, callback);
@@ -468,29 +424,40 @@ public class UserController {
 			
 			public void onSuccess(Void result) {
 				logger.info("Token Adicionado");
-				Element pop = DOM.getElementById("popup");
-				pop.removeAllChildren();
-				Element header = DOM.createElement("h2");
-				header.setInnerText("Esqueceu a senha?");
-				Element div = DOM.createDiv();
-				Element p = DOM.createElement("p");
-				p.setInnerText("Um e-mail foi enviado para você com instruções para redefinir sua senha.");
-				Element a = DOM.createAnchor();
-				a.setInnerText("Ok");
-				a.setAttribute("href", "#");
-				Event.sinkEvents(a, Event.ONCLICK);
-				Event.setEventListener(a, new EventListener() {
-					public void onBrowserEvent(Event event) {
-						popupPassword.close();
-					}
-				});
-				div.appendChild(p);
-				div.appendChild(a);
-				pop.appendChild(header);
-				pop.appendChild(div);
+				popup("Esqueceu a senha?", "Um e-mail foi enviado para você com instruções para redefinir sua senha.", true);
 			}
 		};
 		userService.addTokenPassword(idUser, callback);
+	}
+	
+	private void popup(String titulo, String msg, final Boolean token){	
+		Element pop = DOM.getElementById("popup");
+		pop.removeAllChildren();
+		Element header = DOM.createElement("h2");
+		header.setInnerText(titulo);
+		Element div = DOM.createDiv();
+		Element p = DOM.createElement("p");
+		p.setInnerText(msg);
+		Element input = DOM.createInputText();
+		input.setAttribute("type", "button");
+		input.setAttribute("style", "margin-left: 280px;");
+		input.setAttribute("value", "Ok");
+		input.setId("ok");
+		Event.sinkEvents(input, Event.ONCLICK);
+		Event.setEventListener(input, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				popupPassword.close();
+				if(!token){
+					logger.info("Redirecionando para tela principal");
+					String url = GWT.getHostPageBaseURL() + "Map.html";
+					Window.Location.replace(url);
+				}
+			}
+		});
+		div.appendChild(p);
+		div.appendChild(input);
+		pop.appendChild(header);
+		pop.appendChild(div);
 	}
 	
 	private void validateEmail(final String email) {
@@ -787,27 +754,7 @@ public class UserController {
 				logon(result);
 				
 				popupPassword.onModuleLoad();
-				Element pop = DOM.getElementById("popup");
-				pop.removeAllChildren();
-				Element header = DOM.createElement("h2");
-				header.setInnerText("Cadastre-se no Mapa");
-				Element div = DOM.createDiv();
-				Element p = DOM.createElement("p");
-				p.setInnerText("Cadastro confirmado com sucesso!");
-				Element a = DOM.createAnchor();
-				a.setInnerText("Ok");
-				a.setAttribute("href", "#");
-				Event.sinkEvents(a, Event.ONCLICK);
-				Event.setEventListener(a, new EventListener() {
-					public void onBrowserEvent(Event event) {
-						popupPassword.close();
-						Window.Location.replace(GWT.getHostPageBaseURL() + "Map.html");
-					}
-				});
-				div.appendChild(p);
-				div.appendChild(a);
-				pop.appendChild(header);
-				pop.appendChild(div);
+				popup("Cadastre-se no Mapa", "Cadastro confirmado com sucesso!", false);
 			}
 		};
 		userService.getUser(email, callback);
@@ -1073,7 +1020,7 @@ public class UserController {
 			}
 		};
 		if (!criteria.trim().isEmpty()){
-			searchService.search(criteria, LIMIT, callbackSearch);
+			searchService.search(criteria, false, LIMIT, callbackSearch);
 		}
 	}
 	
@@ -1081,9 +1028,9 @@ public class UserController {
 		logger.info("Adicionando resultados da busca");
 		EventListener listener = new EventListener() {
 			public void onBrowserEvent(Event event) {
-				Element elem = Element.as(event.getCurrentEventTarget());
+				Element elem = Element.as(event.getCurrentTarget().getParentElement());
 				final String oscId = elem.getAttribute("value");
-				organizationUserWidget.showOrganization(elem.getInnerText(), oscId);
+				organizationUserWidget.showOrganization(elem.getInnerText(), oscId.substring(1));
 			}
 		};
 		organizationUserWidget.addResultItems(items, listener);

@@ -625,7 +625,7 @@ a.ajuda {
 
 #resultado_busca .total {
 	padding-left: 10px;
-	width: 30%;
+	width: 35%;
 }
 
 #resultado_busca .resultado {
@@ -3401,7 +3401,7 @@ div#floatingLoginErrorList::after {
 }
 
 .overlay {
-    position: fixed;
+    position: fixed !important;
     width: 100%;
     height: 100%;
     z-index: 999999999;
@@ -4145,11 +4145,12 @@ visibility:hidden;
 background:#F2F2F2 url(../imagens/sprite_organizacao.png) no-repeat -3px -180px;
 display:inline-block;
 height:0;
-left:0;
+left:-2px;
 overflow:hidden;
 padding:15px 0 0;
 position:absolute;
 width:12px;
+opacity: 1;
 }
 
 ul.dados li:hover a.excluir, ul.locais li:hover a.excluir {

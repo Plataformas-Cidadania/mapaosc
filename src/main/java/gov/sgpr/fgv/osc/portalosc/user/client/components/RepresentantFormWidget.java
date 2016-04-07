@@ -219,7 +219,7 @@ public class RepresentantFormWidget extends Composite {
 	}
 	
 	public void addResultItems(List<SearchResult> items, EventListener listener) {
-		searchWidget.setItems(items);
+		searchWidget.setItems(items,false,null);
 		searchWidget.addSearchListener(listener);
 	}
 	

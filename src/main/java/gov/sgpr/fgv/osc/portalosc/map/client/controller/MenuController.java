@@ -476,18 +476,19 @@ public class MenuController implements ValueChangeHandler<String> {
 				Element div = DOM.createDiv();
 				Element p = DOM.createElement("p");
 				p.setInnerText("Senha alterada com sucesso!");
-				Element a = DOM.createAnchor();
-				a.setInnerText("Ok");
-				a.setAttribute("href", "#");
-				Event.sinkEvents(a, Event.ONCLICK);
-				Event.setEventListener(a, new EventListener() {
-
+				Element input = DOM.createInputText();
+				input.setAttribute("type", "button");
+				input.setAttribute("style", "margin-left: 280px;");
+				input.setAttribute("value", "Ok");
+				input.setId("ok");
+				Event.sinkEvents(input, Event.ONCLICK);
+				Event.setEventListener(input, new EventListener() {
 					public void onBrowserEvent(Event event) {
 						changePassword.close();
 					}
 				});
 				div.appendChild(p);
-				div.appendChild(a);
+				div.appendChild(input);
 				pop.appendChild(header);
 				pop.appendChild(div);
 			}
