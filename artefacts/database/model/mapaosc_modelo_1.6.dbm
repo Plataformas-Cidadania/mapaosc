@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.8.1" last-position="0,0" last-zoom="1"
+<dbmodel pgmodeler-ver="0.8.1" last-position="204,1998" last-zoom="0.8"
 	 default-schema="public" default-owner="postgres">
 <role name="i3geo"
       superuser="true"
@@ -2693,7 +2693,7 @@ END;
 	<schema name="data"/>
 	<role name="i3geo"/>
 	<comment><![CDATA[Tabela de convenios cadastrados no SICONV de organizacoes que tem parceria com governo federal.]]></comment>
-	<position x="1076.38" y="2357.86"/>
+	<position x="1207.38" y="2355.86"/>
 	<column name="bosc_sq_osc" not-null="true">
 		<type name="integer"/>
 		<comment><![CDATA[Chave estrangeira para relacionamento com a tabela tb_osc_siconv ]]></comment>
@@ -4649,7 +4649,7 @@ END;
 <table name="tb_localizacao_convenios">
 	<schema name="data"/>
 	<role name="i3geo"/>
-	<position x="1556" y="2575.42"/>
+	<position x="1626" y="2583.42"/>
 	<column name="loca_sq_conv" not-null="true" default-value="nextval('data.tb_localizacao_convenios_loca_sq_conv_seq'::regclass)">
 		<type name="integer"/>
 	</column>
@@ -4728,7 +4728,7 @@ END;
 <table name="tb_osc_projeto">
 	<schema name="data"/>
 	<role name="i3geo"/>
-	<position x="759.154" y="2425.35"/>
+	<position x="795.154" y="2363.35"/>
 	<column name="bosc_sq_osc" not-null="true">
 		<type name="integer"/>
 	</column>
@@ -4941,6 +4941,54 @@ END;
 	<column name="ipca_variacao">
 		<type name="double precision"/>
 	</column>
+</table>
+
+<table name="tb_osc_projeto_loc">
+	<schema name="data"/>
+	<role name="i3geo"/>
+	<position x="807.333" y="2682"/>
+	<column name="proj_sq_loc" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="proj_cd_projetos" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="edre_cd_regiao">
+		<type name="numeric"/>
+	</column>
+	<column name="eduf_cd_uf">
+		<type name="numeric" length="2" precision="0"/>
+	</column>
+	<column name="edmu_cd_municipio">
+		<type name="numeric" length="7" precision="0"/>
+	</column>
+	<constraint name="pk_proj_loc" type="pk-constr" table="data.tb_osc_projeto_loc">
+		<columns names="proj_sq_loc" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tb_osc_convenios_loc">
+	<schema name="data"/>
+	<role name="i3geo"/>
+	<position x="1258.33" y="2688.33"/>
+	<column name="conv_sq_loc" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nr_convenio" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="edre_cd_regiao">
+		<type name="numeric"/>
+	</column>
+	<column name="eduf_cd_uf">
+		<type name="numeric" length="2" precision="0"/>
+	</column>
+	<column name="edmu_cd_municipio">
+		<type name="numeric" length="7" precision="0"/>
+	</column>
+	<constraint name="pk_conv_loc" type="pk-constr" table="data.tb_osc_convenios_loc">
+		<columns names="conv_sq_loc" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <constraint name="fk_bosc_osco" type="fk-constr" comparison-type="MATCH FULL"
@@ -5405,6 +5453,54 @@ END;
 	<columns names="bosc_sq_osc,proj_cd_projetos" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="fk_proj_loc" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="data.tb_osc_projeto" table="data.tb_osc_projeto_loc">
+	<columns names="proj_cd_projetos" ref-type="src-columns"/>
+	<columns names="proj_cd_projetos" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ed_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="spat.ed_municipio" table="data.tb_osc_projeto_loc">
+	<columns names="edmu_cd_municipio" ref-type="src-columns"/>
+	<columns names="edmu_cd_municipio" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ed_regiao" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="spat.ed_regiao" table="data.tb_osc_projeto_loc">
+	<columns names="edre_cd_regiao" ref-type="src-columns"/>
+	<columns names="edre_cd_regiao" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ed_uf" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="spat.ed_uf" table="data.tb_osc_projeto_loc">
+	<columns names="eduf_cd_uf" ref-type="src-columns"/>
+	<columns names="eduf_cd_uf" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_conv_loc" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="data.tb_osc_convenios" table="data.tb_osc_convenios_loc">
+	<columns names="nr_convenio" ref-type="src-columns"/>
+	<columns names="nr_convenio" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ed_municipio" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="spat.ed_municipio" table="data.tb_osc_convenios_loc">
+	<columns names="edmu_cd_municipio" ref-type="src-columns"/>
+	<columns names="edmu_cd_municipio" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ed_regiao" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="spat.ed_regiao" table="data.tb_osc_convenios_loc">
+	<columns names="edre_cd_regiao" ref-type="src-columns"/>
+	<columns names="edre_cd_regiao" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ed_uf" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="spat.ed_uf" table="data.tb_osc_convenios_loc">
+	<columns names="eduf_cd_uf" ref-type="src-columns"/>
+	<columns names="eduf_cd_uf" ref-type="dst-columns"/>
+</constraint>
+
 <relationship name="rel_nm_osc_conselho_tb_osc" type="relfk"
 	 custom-color="#a239f5"
 	 src-table="data.nm_osc_conselho"
@@ -5867,7 +5963,11 @@ END;
 	 custom-color="#cd9073"
 	 src-table="data.tb_osc_projeto"
 	 dst-table="data.tb_osc"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <relationship name="rel_tb_loca_projetos_tb_osc_projeto" type="relfk"
 	 custom-color="#adf5fb"
@@ -5879,6 +5979,9 @@ END;
 	 src-table="spat.ed_uf"
 	 dst-table="spat.ed_regiao"
 	 src-required="false" dst-required="false">
+	<label ref-type="dst-label">
+		<position x="0.97" y="2.2"/>
+	</label>
 	<label ref-type="name-label">
 		<position x="37.6257" y="-57.5485"/>
 	</label>
@@ -5888,6 +5991,86 @@ END;
 	 src-table="olap.ft_municipio"
 	 dst-table="spat.ed_municipio"
 	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_tb_osc_projeto_loc_tb_osc_projeto" type="relfk"
+	 src-table="data.tb_osc_projeto_loc"
+	 dst-table="data.tb_osc_projeto"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="778.154" y="2724.6"/>
+	</line>
+</relationship>
+
+<relationship name="rel_tb_osc_projeto_loc_ed_municipio" type="relfk"
+	 src-table="data.tb_osc_projeto_loc"
+	 dst-table="spat.ed_municipio"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="789.333" y="2988.74"/>
+	</line>
+</relationship>
+
+<relationship name="rel_tb_osc_projeto_loc_ed_regiao" type="relfk"
+	 src-table="data.tb_osc_projeto_loc"
+	 dst-table="spat.ed_regiao"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1093.03" y="2865.4"/>
+	<position x="1452.62" y="2865.4"/>
+	</line>
+	<label ref-type="dst-label">
+		<position x="9.97" y="0.2"/>
+	</label>
+</relationship>
+
+<relationship name="rel_tb_osc_projeto_loc_ed_uf" type="relfk"
+	 src-table="data.tb_osc_projeto_loc"
+	 dst-table="spat.ed_uf"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1192.78" y="2752.6"/>
+	</line>
+	<label ref-type="src-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="rel_tb_osc_convenios_loc_tb_osc_convenios" type="relfk"
+	 src-table="data.tb_osc_convenios_loc"
+	 dst-table="data.tb_osc_convenios"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1190.38" y="2730.93"/>
+	</line>
+</relationship>
+
+<relationship name="rel_tb_osc_convenios_loc_ed_municipio" type="relfk"
+	 src-table="data.tb_osc_convenios_loc"
+	 dst-table="spat.ed_municipio"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1240.33" y="2881.84"/>
+	<position x="522.777" y="2881.84"/>
+	</line>
+</relationship>
+
+<relationship name="rel_tb_osc_convenios_loc_ed_regiao" type="relfk"
+	 src-table="data.tb_osc_convenios_loc"
+	 dst-table="spat.ed_regiao"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1798.32" y="2745.93"/>
+	</line>
+</relationship>
+
+<relationship name="rel_tb_osc_convenios_loc_ed_uf" type="relfk"
+	 src-table="data.tb_osc_convenios_loc"
+	 dst-table="spat.ed_uf"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1240.33" y="2992.82"/>
+	</line>
+</relationship>
 
 <permission>
 	<object name="data.update_interacao()" type="function"/>
