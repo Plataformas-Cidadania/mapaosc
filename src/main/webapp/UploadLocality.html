@@ -83,22 +83,22 @@
 				<div id="modal_localidade" class="formulario" style="width: 100%; float:none;">
 					<h3 style="border-bottom: 2px solid #1F3D93; font-size: 18px; font-family: 'RobotoBold'; padding-bottom: 5px; margin-bottom: 5px; color: #1F3D93;">Serviço de envio de dados</h3>
 					<div style="width: 100%; float:none;">
-						<form id="form_upload" name="form_upload_locality" method="post" style="display: block; clear:both;">
+						<form id="form_upload" name="form_upload_locality" action="/uploadFile" method="post" enctype="multipart/form-data" style="display: block; clear:both;">
 							<fieldset>
 								<div style="margin-top:20px;">
 									<p><a href="/formato_de_dados.html">Verifique as regras para envio dos dados clicando aqui</a></p>
 								</div>
 								<div id="dados">
-									<div>
-										<p>Tipo de Entrada</p>
-										<label for="denvio_arquivo">Arquivo</label>
-										<input name="dentrada" type="radio" value="arquivo" id="denvio_arquivo" checked />
-										<label for="denvio_servico">Web Service</label>
-										<input name="dentrada" type="radio" value="servico" id="denvio_servico" />
-									</div>
+<!-- 									<div> -->
+<!-- 										<p>Tipo de Entrada</p> -->
+<!-- 										<label for="denvio_arquivo">Arquivo</label> -->
+<!-- 										<input name="dentrada" type="radio" value="arquivo" id="denvio_arquivo" checked /> -->
+<!-- 										<label for="denvio_servico">Web Service</label> -->
+<!-- 										<input name="dentrada" type="radio" value="servico" id="denvio_servico" /> -->
+<!-- 									</div> -->
 									<div id="form_upload_locality"></div>
 								</div>
-								<input type='submit' id='btnEnviar' value='Enviar Dados' />
+								<input type="button" id="btnEnviar" value="Enviar Dados" />
 							</fieldset>
 						</form>
 					</div>

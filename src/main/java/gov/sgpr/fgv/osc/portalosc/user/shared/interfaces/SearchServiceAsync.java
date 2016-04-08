@@ -10,7 +10,7 @@ public interface SearchServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see gov.sgpr.fgv.osc.portalosc.user.shared.interfaces.SearchService
      */
-    void search( java.lang.String criteria, int resultLimit, AsyncCallback<java.util.List<gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResult>> callback );
+    void search( java.lang.String criteria, java.lang.Boolean oscConfig, int resultLimit, AsyncCallback<java.util.List<gov.sgpr.fgv.osc.portalosc.user.shared.model.SearchResult>> callback );
 
 
     /**
