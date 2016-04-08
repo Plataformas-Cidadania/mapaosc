@@ -26,6 +26,13 @@ public class RepresentantLocalityFormWidget extends Composite {
 		StringBuilder htmlBuilder = new StringBuilder();
 		
 		htmlBuilder.append("<form id='form_cadastro_representant_locality' name='form_cadastro_representant_locality' method='post' style='display: block; clear:both;'>");
+		htmlBuilder.append("	<div id='div_estado_municipio'>");
+		htmlBuilder.append("		<span>Tipo de Representante:</span>");
+		htmlBuilder.append("		<label class='label_estado_municipio'>Estadual</label>");
+		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_estado' id='tipo_representante_estado' checked='checked' />");
+		htmlBuilder.append("		<label class='label_estado_municipio'>Municipal</label>");
+		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_municipio' id='tipo_representante_municipio' />");
+		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div style='float:left'>");
 		htmlBuilder.append("		<label for='cemail'>Email:</label><input type='text' name='cemail' id='cemail'  placeholder='E-mail' class='email' required='required' />");
 		htmlBuilder.append("		<label for='csenha'>Senha:</label><input type='password' name='csenha' id='csenha' placeholder='Senha' class='senha' required='required' />");
@@ -70,11 +77,6 @@ public class RepresentantLocalityFormWidget extends Composite {
 		htmlBuilder.append("		<label for='corgao'>Orgão:</label><input type='text' name='corgao' id='corgao' placeholder='Orgão' class='nome' />");
 		htmlBuilder.append("		<label for='ccargo'>Função:</label><input type='text' name='ccargo' id='ccargo' placeholder='Função' class='nome' />");
 		htmlBuilder.append("		<label for='ctel'>Telefone (com DDD):</label><input type='text' name='ctel' id='ctel' placeholder='(xx) xxxx-xxxx' class='nome' />");
-		htmlBuilder.append("	</div>");
-		htmlBuilder.append("	<div>");
-		htmlBuilder.append("		<p>Tipo de Representante:</p>");
-		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_estado' id='tipo_representante_estado' checked='checked' >Estado</input>");
-		htmlBuilder.append("		<input name='ctiporepresentante' type='radio' value='tipo_representante_municipio' id='tipo_representante_municipio'>Município</input>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='clearfix' style='clear:both; float: none; width: auto; text-align: center; margin:10px'>");
 		htmlBuilder.append("		<span>Concordo com os <a href='static.html?page=termos' target='_blank' >termos de uso</a></span><input type='checkbox' name='ctermo' id='ctermo' /> ");

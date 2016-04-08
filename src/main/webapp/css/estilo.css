@@ -1470,7 +1470,6 @@ span.magneticTooltip:hover span{
 
 #mapa.cadastro .instrucoes div {
 	float: left;
-	width: 300px;
 	line-height: 20px;
 }
 
@@ -4665,4 +4664,18 @@ body.indisponivel {
     font-family: arial black;
     line-height: 1;
     color: #244196;
+}
+
+#div_estado_municipio {
+	float: none;
+	width: 100%;
+}
+
+.formulario form label.label_estado_municipio {
+	float: none;
+}
+
+input[type=checkbox], input[type=radio] {
+	margin: 0;
+	vertical-align: middle;
 }

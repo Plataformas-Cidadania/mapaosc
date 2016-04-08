@@ -68,10 +68,6 @@
     <param-value>18</param-value>
   </context-param>
   <context-param>
-    <param-name>MaxClusterZoomLevelCalc</param-name>
-    <param-value>6</param-value>
-  </context-param>
-  <context-param>
     <param-name>PastaDocumentos</param-name>
     <param-value>documentos</param-value>
   </context-param>
@@ -107,34 +103,6 @@
     <param-name>CHAVE_CRIPTOGRAFIA</param-name>
     <param-value> </param-value>
   </context-param>
-  <context-param>
-    <param-name>STATIC_URL</param-name>
-    <param-value>/</param-value>
-  </context-param>
-  <context-param>
-    <param-name>STATIC_CONFIG</param-name>
-    <param-value>static.xml</param-value>
-  </context-param>
-  <context-param>
-		<param-name>SERVER_SMTP</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>SMTP_AUTH</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>SMTP_PORT</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>FROM_ADDRESS</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>NAME_ADDRESS</param-name>
-		<param-value> </param-value>
-	</context-param>
   <!-- Servlets -->
   <servlet>
     <servlet-name>remoteLogging</servlet-name>
