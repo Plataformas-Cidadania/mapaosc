@@ -602,19 +602,24 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("<strong class='right-radius'>Localização do Projeto</strong>");
 				htmlBuilder.append("<div class='localizacao_projeto'>");
 				htmlBuilder.append("<ul id='locais"+proj+"' class='locais'>");
-				for(LocalizacaoModel l : p.getLocalizacao()){
-					if(l.getMunicipio() != null){
-						addLocalProj++;
-						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdMunicipio() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdMunicipio() +"' target='_blank' >"+ l.getMunicipio() +"</a></li>");
+				if( p.getLocalizacao().size() >  0){
+					for(LocalizacaoModel l : p.getLocalizacao()){
+						if(l.getMunicipio() != null){
+							addLocalProj++;
+							htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdMunicipio() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdMunicipio() +"' target='_blank' >"+ l.getMunicipio() +"</a></li>");
+						}
+						if(l.getRegiao()!= null){
+							addLocalProj++;
+							htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdRegiao() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdRegiao() +"' target='_blank' >"+ l.getRegiao() +"</a></li>");
+						}
+						if(l.getUf()!= null){
+							addLocalProj++;
+							htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdUf() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdUf() +"' target='_blank' >"+ l.getUf() +"</a></li>");
+						}
 					}
-					if(l.getRegiao()!= null){
-						addLocalProj++;
-						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdRegiao() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdRegiao() +"' target='_blank' >"+ l.getRegiao() +"</a></li>");
-					}
-					if(l.getUf()!= null){
-						addLocalProj++;
-						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocal"+addLocalProj+"' name='"+ l.getIdUf() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoProj"+ proj + addLocalProj +"' href='Map.html#P"+ l.getIdUf() +"' target='_blank' >"+ l.getUf() +"</a></li>");
-					}
+				}else{
+					if(!editable)
+						htmlBuilder.append("<div style='margin-top: 3px;' >Informação não disponível</div>");
 				}
 				htmlBuilder.append("</ul>");
 				
@@ -759,19 +764,24 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("<strong class='right-radius'>Localização do Projeto</strong>");
 				htmlBuilder.append("<div class='localizacao_projeto'>");
 				htmlBuilder.append("<ul id='locaisConv"+conv+"' class='locais'>");
-				for(LocalizacaoModel l : c.getLocalizacao()){
-					if(l.getMunicipio() != null){
-						addLocalConv++;
-						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdMunicipio() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdMunicipio() +"' >"+ l.getMunicipio() +"</a></li>");
+				if( c.getLocalizacao().size() >  0){
+					for(LocalizacaoModel l : c.getLocalizacao()){
+						if(l.getMunicipio() != null){
+							addLocalConv++;
+							htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdMunicipio() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdMunicipio() +"' >"+ l.getMunicipio() +"</a></li>");
+						}
+						if(l.getRegiao()!= null){
+							addLocalConv++;
+							htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdRegiao() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdRegiao() +"' >"+ l.getRegiao() +"</a></li>");
+						}
+						if(l.getUf()!= null){
+							addLocalConv++;
+							htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdUf() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdUf() +"' >"+ l.getUf() +"</a></li>");
+						}
 					}
-					if(l.getRegiao()!= null){
-						addLocalConv++;
-						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdRegiao() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdRegiao() +"' >"+ l.getRegiao() +"</a></li>");
-					}
-					if(l.getUf()!= null){
-						addLocalConv++;
-						htmlBuilder.append("<li style='margin-top: 3px;' ><a id='excluirLocalConv"+addLocalConv+"' name='"+ l.getIdUf() +"' value='"+ l.getIdLocal() +"' class='excluir tooltip' title='Excluir'>Excluir</a> <a id='localizacaoConv"+ addLocalConv +"' href='Map.html#P"+ l.getIdUf() +"' >"+ l.getUf() +"</a></li>");
-					}
+				}else{
+					if(!editable)
+						htmlBuilder.append("<div style='margin-top: 3px;' >Informação não disponível</div>");
 				}
 				htmlBuilder.append("</ul>");
 				htmlBuilder.append("<div id='buscarConv"+conv+"'>");

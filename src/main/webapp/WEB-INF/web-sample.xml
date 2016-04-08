@@ -116,25 +116,25 @@
     <param-value>static.xml</param-value>
   </context-param>
   <context-param>
-	<param-name>SERVER_SMTP</param-name>
-	<param-value> </param-value>
-  </context-param>
-  <context-param>
-	<param-name>SMTP_AUTH</param-name>
-	<param-value> </param-value>
-  </context-param>
-  <context-param>
-	<param-name>SMTP_PORT</param-name>
-	<param-value> </param-value>
-  </context-param>
-  <context-param>
-	<param-name>FROM_ADDRESS</param-name>
-	<param-value> </param-value>
-  </context-param>
-  <context-param>
-	<param-name>NAME_ADDRESS</param-name>
-	<param-value> </param-value>
-  </context-param>
+		<param-name>SERVER_SMTP</param-name>
+		<param-value> </param-value>
+	</context-param>
+	<context-param>
+		<param-name>SMTP_AUTH</param-name>
+		<param-value> </param-value>
+	</context-param>
+	<context-param>
+		<param-name>SMTP_PORT</param-name>
+		<param-value> </param-value>
+	</context-param>
+	<context-param>
+		<param-name>FROM_ADDRESS</param-name>
+		<param-value> </param-value>
+	</context-param>
+	<context-param>
+		<param-name>NAME_ADDRESS</param-name>
+		<param-value> </param-value>
+	</context-param>
   <!-- Servlets -->
   <servlet>
     <servlet-name>remoteLogging</servlet-name>
@@ -298,6 +298,10 @@
     <url-pattern>/User/searchOSCService</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>searchOSCService</servlet-name>
+    <url-pattern>/Organization/searchOSCService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>userService</servlet-name>
     <url-pattern>/User/userService</url-pattern>
   </servlet-mapping>
@@ -347,11 +351,12 @@
     <servlet-name>organizationService</servlet-name>
     <url-pattern>/Organization/organizationService</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>remoteService</servlet-name>
     <url-pattern>/Organization/remoteService</url-pattern>
   </servlet-mapping>
-  
+
   <servlet-mapping>
     <servlet-name>remoteLogging</servlet-name>
     <url-pattern>/StaticContent/remote_logging</url-pattern>
@@ -371,8 +376,7 @@
   <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
     <url-pattern>/StaticContent/junithost/*</url-pattern>
-  </servlet-mapping>
-  
+  </servlet-mapping> 
   <servlet-mapping>
     <servlet-name>remoteLogging</servlet-name>
     <url-pattern>/RepresentantLocality/remote_logging</url-pattern>
