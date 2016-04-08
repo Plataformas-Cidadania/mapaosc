@@ -14,7 +14,7 @@ public class OrganizationServiceImplTests extends TestCase {
 	}
 	
 	public void testGetOrganizationByID() {
-		Long cnpj = service.getOrganizationByID(699098).getCnpj();
+		Long cnpj = service.getOrganizationByID(699098).getNumeroIdentificacao();
 		assertEquals(new Long("5923642000186"), cnpj);
 	}
 }
