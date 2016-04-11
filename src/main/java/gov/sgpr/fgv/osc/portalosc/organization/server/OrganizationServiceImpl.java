@@ -367,12 +367,13 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			}
 			organization.setCertificacao(certificacao);
 			
+						
 			
-			
-			if(organization.getValorParceriasFederal() == -1.0) organization.setValorParceriasFederal(0.0);
 			for(ConvenioModel c : conveniosList){
 				organization.setValorParceriasFederal(organization.getValorParceriasFederal() + c.getValorTotal());
 			}
+			if(organization.getValorParceriasFederal() < 0) organization.setValorParceriasFederal(0.0);
+			
 //			sql = "SELECT lic_vl_captado "
 //				+ "FROM data.tb_osc_lic "
 //				+ "WHERE bosc_sq_osc = ?";
@@ -388,10 +389,10 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			
 			
 			
-			if(organization.getValorRecursosPrivados() == -1.0) organization.setValorRecursosPrivados(0.0);
 			for(ProjetoModel p : projetoList){
 				organization.setValorRecursosPrivados(organization.getValorRecursosPrivados() + p.getValorTotal());
 			}
+			if(organization.getValorRecursosPrivados() < 0) organization.setValorRecursosPrivados(0.0);
 			organization.setValorRecursosTotal(organization.getValorRecursosTotal() + organization.getValorRecursosPrivados());
 			
 			

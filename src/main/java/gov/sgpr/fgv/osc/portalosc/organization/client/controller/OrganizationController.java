@@ -731,9 +731,15 @@ public class OrganizationController {
 	private HTML getHtmlDir(Integer dir) {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<div id='incluirDir" + dir + " '>");
-		htmlBuilder.append("<input type='text' name='addDir' id='cargo" + dir + "' placeholder='Informação não disponível'>");
-		htmlBuilder.append("<input type='text' name='addDir' id='nome" + dir + "' placeholder='Informação não disponível' />");
-		htmlBuilder.append("<div class='botoes'><button id='removedir"+ dir +"' type='button' class='excluir participacao'>Excluir</button></div>");
+		htmlBuilder.append("	<div id='div_cargo_diretor'>");
+		htmlBuilder.append("		<strong>Cargo:</strong>");
+		htmlBuilder.append("		<input type='text' name='addDir' id='cargo" + dir + "' >");
+		htmlBuilder.append("	</div>");
+		htmlBuilder.append("	<div id='div_nome_diretor'>");
+		htmlBuilder.append("		<strong>Nome:</strong>");
+		htmlBuilder.append("		<input type='text' name='addDir' id='nome" + dir + "' />");
+		htmlBuilder.append("	</div>");
+		htmlBuilder.append("	<div class='botoes'><button id='removedir"+ dir +"' type='button' class='excluir participacao'>Excluir</button></div>");
 		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;

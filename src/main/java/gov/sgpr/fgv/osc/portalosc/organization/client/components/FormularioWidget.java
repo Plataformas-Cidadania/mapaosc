@@ -293,8 +293,14 @@ public class FormularioWidget extends Composite {
 			for (DiretorModel d : org.getDiretores()){
 				dir++;
 				htmlBuilder.append("			<div id='incluirDir'>");
-				htmlBuilder.append("				<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " />");
-				htmlBuilder.append("				<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " />");
+				htmlBuilder.append("				<div id='div_cargo_diretor'>");
+				htmlBuilder.append("					<strong>Cargo:</strong>");
+				htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
+				htmlBuilder.append("				</div>");
+				htmlBuilder.append("				<div id='div_nome_diretor'>");
+				htmlBuilder.append("					<strong>Nome:</strong>");
+				htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
+				htmlBuilder.append("				</div>");
 				htmlBuilder.append("				<div class='botoes'>");
 				htmlBuilder.append("					<button id='removedir"+ dir +"' value='"+ d.getId() +"' type='button' class='excluir participacao'>Excluir</button>");
 				htmlBuilder.append("				</div>");
@@ -356,38 +362,20 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<div id='recParc' class='collapse'>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias federais (R$):</strong>");
-		if(org.getValorParceriasFederal() == null || org.getValorParceriasFederal() < 0){
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		}else{
-			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasFederal()) + "</span>");
-		}
+		htmlBuilder.append("							<span>" + convertNumberToCurrencyString(org.getValorParceriasFederal()) + "</span>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias estaduais (R$):</strong>");
-		if(org.getValorParceriasEstadual() == null || org.getValorParceriasEstadual() < 0){
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		}else{
-			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasEstadual()) + "</span>");
-		}
+		htmlBuilder.append("							<span>" + convertNumberToCurrencyString(org.getValorParceriasEstadual()) + "</span>");
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias municipais (R$):</strong>");
-		if(org.getValorParceriasMunicipal() == null || org.getValorParceriasMunicipal() < 0){
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		}else{
-			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasMunicipal()) + "</span>");
-		}
+		htmlBuilder.append("							<span>" + convertNumberToCurrencyString(org.getValorParceriasMunicipal()) + "</span>");
 		htmlBuilder.append("						</div>");
-		
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor dos recursos privados (R$):</strong>");
-		if(org.getValorRecursosPrivados() == null || org.getValorRecursosPrivados() < 0){
-			htmlBuilder.append("						<span>Informação não disponível</span>");
-		}else{
-			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorRecursosPrivados()) + "</span>");
-		}
+		htmlBuilder.append("							<span>" + convertNumberToCurrencyString(org.getValorRecursosPrivados()) + "</span>");
 		htmlBuilder.append("						</div>");
-		
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("				</div>");
 		htmlBuilder.append("			</fieldset>");
