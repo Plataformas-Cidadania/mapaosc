@@ -308,7 +308,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Total de colaboradores:</strong>");
-		if(org.getTotalColaboradores() == null || org.getTotalColaboradores() == -1){
+		if(org.getTotalColaboradores() == null || org.getTotalColaboradores() < 0){
 			htmlBuilder.append("					<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("					<span>" + convertNumberToString(org.getTotalColaboradores()) + "</span>");
@@ -319,15 +319,15 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<div id='recCol' class='collapse' >");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Trabalhadores com vínculo:</strong>");
-		if(org.getTrabalhadores() == null || org.getTrabalhadores() == -1){
+		if(org.getTrabalhadores() == null || org.getTrabalhadores() < 0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("						<span>" + convertNumberToString(org.getTrabalhadores()) + "</span>");
 		}
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
-		htmlBuilder.append("							<strong>Colaboradores portadores de deficiência:</strong>");
-		if(org.getPortadoresDeficiencia() == null || org.getPortadoresDeficiencia() == -1){
+		htmlBuilder.append("							<strong>Trabalhadores com deficiência:</strong>");
+		if(org.getPortadoresDeficiencia() == null || org.getPortadoresDeficiencia() < 0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("						<span>" + convertNumberToString(org.getPortadoresDeficiencia()) + "</span>");
@@ -345,7 +345,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Valor total dos recursos (R$):</strong>");
-		if(org.getValorRecursosTotal() == null || org.getValorRecursosTotal() == -1.0){
+		if(org.getValorRecursosTotal() == null || org.getValorRecursosTotal() < 0){
 			htmlBuilder.append("					<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("					<span>" + convertNumberToCurrencyString(org.getValorRecursosTotal()) + "</span>");
@@ -356,7 +356,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<div id='recParc' class='collapse'>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias federais (R$):</strong>");
-		if(org.getValorParceriasFederal() == null || org.getValorParceriasFederal() == -1.0){
+		if(org.getValorParceriasFederal() == null || org.getValorParceriasFederal() < 0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasFederal()) + "</span>");
@@ -364,7 +364,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias estaduais (R$):</strong>");
-		if(org.getValorParceriasEstadual() == null || org.getValorParceriasEstadual() == -1.0){
+		if(org.getValorParceriasEstadual() == null || org.getValorParceriasEstadual() < 0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasEstadual()) + "</span>");
@@ -372,7 +372,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("						</div>");
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor das parcerias municipais (R$):</strong>");
-		if(org.getValorParceriasMunicipal() == null || org.getValorParceriasMunicipal() == -1.0){
+		if(org.getValorParceriasMunicipal() == null || org.getValorParceriasMunicipal() < 0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorParceriasMunicipal()) + "</span>");
@@ -381,7 +381,7 @@ public class FormularioWidget extends Composite {
 		
 		htmlBuilder.append("						<div>");
 		htmlBuilder.append("							<strong>Valor dos recursos privados (R$):</strong>");
-		if(org.getValorRecursosPrivados() == null || org.getValorRecursosPrivados() == -1.0){
+		if(org.getValorRecursosPrivados() == null || org.getValorRecursosPrivados() < 0){
 			htmlBuilder.append("						<span>Informação não disponível</span>");
 		}else{
 			htmlBuilder.append("						<span>" + convertNumberToCurrencyString(org.getValorRecursosPrivados()) + "</span>");
