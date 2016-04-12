@@ -6,28 +6,16 @@ import gov.sgpr.fgv.osc.portalosc.uploadlocality.shared.interfaces.UploadLocalit
 
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.FormElement;
-import com.google.gwt.dom.client.InputElement;
-import com.google.gwt.dom.client.SelectElement;
-import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.http.client.Request;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FileUpload;
-import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class UploadLocalityController {
 	private static Logger logger = Logger.getLogger(UploadLocalityController.class.getName());
@@ -57,7 +45,9 @@ public class UploadLocalityController {
 		FileUpload fileUpload = new FileUpload();
 		fileUpload.setName("Selecionar arquivo");
 		Label typeLabel = new Label("Tipo de Arquivo:");
+		
 		final ListBox typeListBox = new ListBox();
+		typeListBox.setName("dtipo_arquivo");
 		typeListBox.addItem("CSV");
 		typeListBox.addItem("XLS");
 		
