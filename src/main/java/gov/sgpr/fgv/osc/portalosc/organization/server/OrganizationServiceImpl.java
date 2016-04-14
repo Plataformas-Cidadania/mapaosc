@@ -190,17 +190,17 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			rs.close();
 			pstmt.close();
 			
-			sql = "SELECT proj_cd_projetos, titulo, status, data_inicio, data_fim, valor_total, fonte_recurso, link, publico_alvo, "
+			sql = "SELECT proj_cd_projeto, titulo, status, data_inicio, data_fim, valor_total, fonte_recurso, link, publico_alvo, "
 				+ 		 "abrangencia, financiadores, descricao "
 				+ "FROM data.tb_osc_projeto "
-				+ "WHERE bosc_sq_osc = ?";
+				+ "WHERE proj_cd_projeto = (SELECT proj_cd_projeto FROM data.tb_ternaria_projeto WHERE bosc_sq_osc = ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 			ArrayList<ProjetoModel> projetoList = new ArrayList<ProjetoModel>();
 			while (rs.next()) {
 				ProjetoModel projeto = new ProjetoModel();
-				projeto.setId(rs.getInt("proj_cd_projetos"));
+				projeto.setId(rs.getInt("proj_cd_projeto"));
 				projeto.setTitulo(rs.getString("titulo"));
 				projeto.setStatus(rs.getString("status"));
 				projeto.setDataInicio(rs.getDate("data_inicio"));
@@ -627,6 +627,24 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			}
 			pstmt.close();
 			pstmt2.close();
+			
+			
+			
+			sql = "INSERT INTO data.tb_ternaria_projeto (bosc_sq_osc, proj_cd_projeto) "
+				+ "VALUES (?, ?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < organization.getConvenios().size(); i++ ) {
+				if(organization.getConvenios().get(i).getNConv() != -1){			
+					pstmt.setString(1,organization.getConvenios().get(i).getPublicoAlvo());
+					pstmt.setString(2, organization.getConvenios().get(i).getAbrangencia());
+					pstmt.setInt(3,organization.getConvenios().get(i).getNConv());
+					pstmt.executeUpdate();
+				}
+			}
+			pstmt.close();
+			
+			
 			
 			sql = "UPDATE data.tb_osc_convenios "
 					+ "SET conv_publico_alvo = ?, abrangencia = ? "
