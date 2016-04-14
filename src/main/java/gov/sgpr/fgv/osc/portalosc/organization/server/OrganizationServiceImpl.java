@@ -370,6 +370,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 						
 			
 			for(ConvenioModel c : conveniosList){
+				if(organization.getValorParceriasFederal() < 0) organization.setValorParceriasFederal(0.0);
 				organization.setValorParceriasFederal(organization.getValorParceriasFederal() + c.getValorTotal());
 			}
 			if(organization.getValorParceriasFederal() < 0) organization.setValorParceriasFederal(0.0);
@@ -390,6 +391,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			
 			
 			for(ProjetoModel p : projetoList){
+				if(organization.getValorRecursosPrivados() < 0) organization.setValorRecursosPrivados(0.0);
 				organization.setValorRecursosPrivados(organization.getValorRecursosPrivados() + p.getValorTotal());
 			}
 			if(organization.getValorRecursosPrivados() < 0) organization.setValorRecursosPrivados(0.0);
