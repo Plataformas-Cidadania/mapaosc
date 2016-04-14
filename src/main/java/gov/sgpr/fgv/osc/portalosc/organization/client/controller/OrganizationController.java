@@ -630,7 +630,7 @@ public class OrganizationController {
 		htmlBuilder.append("<div class='projeto_header'>");
 		htmlBuilder.append("<div class='nome'>");	
 		htmlBuilder.append("<span class='no_margin_right'>"+ count +" |</span>");
-		htmlBuilder.append("<span class='no_margin titulo_projeto'><input type='text' name='addProj' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' /></span>");
+		htmlBuilder.append("<span class='no_margin titulo_projeto'><input type='text' name='addProj' id='projeto_nome_projeto"+ proj +"' placeholder='Indique o título do projeto, atividade e/ou programa' /></span>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<span class='clear_both'></span>");
 		htmlBuilder.append("</div>");
@@ -641,7 +641,7 @@ public class OrganizationController {
 		htmlBuilder.append("<strong class='separador left-radius'>Status</strong>");
 		htmlBuilder.append("<p id='projeto_status"+ proj +"' >");
 		htmlBuilder.append("<select>");
-		htmlBuilder.append("<option value=''></option>");
+		htmlBuilder.append("<option value=''>Indique o status</option>");
 		htmlBuilder.append("<option value='Planejado'> Planejado </option>");
 		htmlBuilder.append("<option value='Em Execução' > Em Execução </option>");
 		htmlBuilder.append("<option value='Finalizado'> Finalizado </option>");
@@ -659,13 +659,13 @@ public class OrganizationController {
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div class='col1_6'>");
 		htmlBuilder.append("<strong class='separador'>Valor Total (R$)</strong>");
-		htmlBuilder.append("<p><input type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"'/></p>");
+		htmlBuilder.append("<p><input placeholder='Indique o valor total' type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"'/></p>");
 		htmlBuilder.append("</div>");
 				
 		htmlBuilder.append("<div class='col1_6'>");
 		htmlBuilder.append("<strong class='separador'>Fonte de recurso</strong>");
 		htmlBuilder.append("<p id='projeto_fonte"+ proj +"' ><select>");
-		htmlBuilder.append("<option value='' selected='selected'></option>");
+		htmlBuilder.append("<option value='' selected='selected'>Indique a fonte de recurso</option>");
 		htmlBuilder.append("<option value='Público' > Público </option>");
 		htmlBuilder.append("<option value='Privado' > Privado </option>");
 		htmlBuilder.append("</select>");
@@ -674,21 +674,21 @@ public class OrganizationController {
 		
 		htmlBuilder.append("<div class='col1_6'>");
 		htmlBuilder.append("<strong class='right-radius'>Link</strong>");
-		htmlBuilder.append("<p><input id='link" + proj + "' name='link" + proj + "' placeholder='Informação não disponível' /></p>");
+		htmlBuilder.append("<p><input id='link" + proj + "' name='link" + proj + "' placeholder='Indique o link ' /></p>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("</div>");
 		
 		htmlBuilder.append("<div class='clearfix linha'>");
 		htmlBuilder.append("<div class='col1_3'>");
-		htmlBuilder.append("<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
-		htmlBuilder.append("<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível'></textarea>");
+		htmlBuilder.append("<strong class='separador left-radius'>Público Beneficiado</strong>");
+		htmlBuilder.append("<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Indique o público beneficiado'></textarea>");
 		htmlBuilder.append("</div>");
 
 		htmlBuilder.append("<div class='col1_6'>");
 		htmlBuilder.append("<strong class='separador'>Abrangência</strong>");
 		htmlBuilder.append("<p id='projeto_abrang"+ proj +"' >");
 		htmlBuilder.append("<select>");
-		htmlBuilder.append("<option value='' selected='selected'></option>");
+		htmlBuilder.append("<option value='' selected='selected'>Indique Abrangência</option>");
 		htmlBuilder.append("<option value='Nacional' > Nacional </option>");
 		htmlBuilder.append("<option value='Regional' > Regional </option>");
 		htmlBuilder.append("<option value='Estadual' > Estadual </option>");
@@ -704,7 +704,7 @@ public class OrganizationController {
 		htmlBuilder.append("</ul>");
 		htmlBuilder.append("<div>");
 		htmlBuilder.append("<label for='campobusca' class='esconder' style='background: none;'>Buscar localização</label>");
-		htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ count +"' placeholder='Informe a localização desejada...'>");
+		htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ count +"' placeholder='Indique a localização desejada...'>");
 		htmlBuilder.append("<button type='button' name='adicionar' id='adicionar"+proj+"' class='adicionar'>Adicionar</button>");
 		htmlBuilder.append("<button type='button' name='ajuda' class='ajuda' id='ajuda"+count+"' style='padding: 5px 8px;' >?</button></div>");
 		htmlBuilder.append("</div>");
@@ -714,11 +714,11 @@ public class OrganizationController {
 		htmlBuilder.append("<div class='clearfix linha'>");
 		htmlBuilder.append("<div class='col1_3'>");
 		htmlBuilder.append("<strong class='separador left-radius'>Financiadores do Projeto</strong>");
-		htmlBuilder.append("<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível'></textarea>");
+		htmlBuilder.append("<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Indique os financiadores'></textarea>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div class='col2_3'>");
-		htmlBuilder.append("<strong class='right-radius'>Descrição do Projeto</strong>");
-		htmlBuilder.append("<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível'></textarea>");
+		htmlBuilder.append("<strong class='right-radius'>Descrição do projeto, atividade e/ou programa</strong>");
+		htmlBuilder.append("<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Apresentar os objetivos de maneira sucinta'></textarea>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("</div>");						
 		htmlBuilder.append("</div>");
@@ -733,11 +733,11 @@ public class OrganizationController {
 		htmlBuilder.append("<div id='incluirDir" + dir + " '>");
 		htmlBuilder.append("	<div id='div_cargo_diretor'>");
 		htmlBuilder.append("		<strong>Cargo:</strong>");
-		htmlBuilder.append("		<input type='text' name='addDir' id='cargo" + dir + "' >");
+		htmlBuilder.append("		<input placeholder='Indique cada cargo previsto no seu estatuto social' type='text' name='addDir' id='cargo" + dir + "' >");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div id='div_nome_diretor'>");
 		htmlBuilder.append("		<strong>Nome:</strong>");
-		htmlBuilder.append("		<input type='text' name='addDir' id='nome" + dir + "' />");
+		htmlBuilder.append("		<input placeholder='Relacione o nome completo do dirigente' type='text' name='addDir' id='nome" + dir + "' />");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div class='botoes'><button id='removedir"+ dir +"' type='button' class='excluir participacao'>Excluir</button></div>");
 		htmlBuilder.append("</div>");

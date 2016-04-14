@@ -129,11 +129,14 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("				<fieldset>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Nome fantasia:</strong>");
-		htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
+		if(editable)
+			htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Nome pelo qual a organização é conhecida' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
+		else
+			htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado Oficial, Fonte RAIS'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
-		htmlBuilder.append("						<strong>CNPJ/CEI:</strong>");
+		htmlBuilder.append("						<strong>CNPJ:</strong>");
 		if(org.getNumeroIdentificacao() == null || org.getNumeroIdentificacao() == -1L){
 			htmlBuilder.append("					<span>Informação não disponível</span>");
 		}else{
@@ -190,7 +193,10 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>Descrição da OSC:</strong>");
-		htmlBuilder.append("						<textarea name='descricao_osc' id='descricao_osc' placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
+		if(editable)
+			htmlBuilder.append("						<textarea name='descricao_osc' id='descricao_osc' placeholder='Apresentar os objetivos da organização de maneira sucinta' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
+		else
+			htmlBuilder.append("						<textarea name='descricao_osc' id='descricao_osc' placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + org.getDescricaoProjeto() + "</textarea>");
 		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
@@ -295,11 +301,17 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("			<div id='incluirDir'>");
 				htmlBuilder.append("				<div id='div_cargo_diretor'>");
 				htmlBuilder.append("					<strong>Cargo:</strong>");
-				htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
+				if(editable)
+					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " placeholder='Indique cada cargo previsto no seu estatuto social' />");
+				else
+					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
 				htmlBuilder.append("				</div>");
 				htmlBuilder.append("				<div id='div_nome_diretor'>");
 				htmlBuilder.append("					<strong>Nome:</strong>");
-				htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
+				if(editable)
+					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " placeholder='Relacione o nome completo do dirigente' />");
+				else
+					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
 				htmlBuilder.append("				</div>");
 				htmlBuilder.append("				<div class='botoes'>");
 				htmlBuilder.append("					<button id='removedir"+ dir +"' value='"+ d.getId() +"' type='button' class='excluir participacao'>Excluir</button>");
@@ -309,7 +321,7 @@ public class FormularioWidget extends Composite {
 		}	
 		htmlBuilder.append("				</div>");
 		htmlBuilder.append("			</fieldset>");
-		htmlBuilder.append("			<h2>Colaboradores</h2>");
+		htmlBuilder.append("			<h2>Relações de Trabalho</h2>");
 		htmlBuilder.append("			<fieldset>");
 		htmlBuilder.append("				<div class='recursos collapsable'>");
 		htmlBuilder.append("					<div>");
@@ -419,7 +431,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div id='addFormProj' class='projetos'>");
 		htmlBuilder.append("			<div class='titulo'>");
-		htmlBuilder.append("				<h2>Projetos</h2>");
+		htmlBuilder.append("				<h2>Projetos, atividades e/ou programas</h2>");
 		htmlBuilder.append("				<button id='addProjetos' type='button' class='adicionar'>Adicionar</button>");
 //		htmlBuilder.append("				<div class='filtro'>");
 //		htmlBuilder.append("					<span>Fontes:</span>");
@@ -450,10 +462,13 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("			<div id='recolherProj' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recProj"+ proj +"' ><div></div></div>");
 				htmlBuilder.append("				<div class='nome'>");	
 				htmlBuilder.append("					<span class='no_margin_right'>" + (org.getProjetos().indexOf(p) + 1) + " |</span>");
-				if(p.getTitulo() == null){
-					htmlBuilder.append("				<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' value='' " + (editable ? "" : "readonly") + "/></span>");
+				if(p.getTitulo() == null || p.getTitulo() == ""){
+					if(editable)
+						htmlBuilder.append("				<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Indique o título do projeto, atividade e/ou programa' value='' " + (editable ? "" : "readonly") + "/></span>");
+					else
+						htmlBuilder.append("				<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' value='' " + (editable ? "" : "readonly") + "/></span>");
 				}else{
-					htmlBuilder.append("				<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Informação não disponível' value='" + p.getTitulo() + "' " + (editable ? "" : "readonly") + "/></span>");
+					htmlBuilder.append("				<span class='no_margin titulo_projeto'><input type='text' name='"+ p.getId() +"' id='projeto_nome_projeto"+ proj +"' placeholder='Indique o título do projeto, atividade e/ou programa' value='" + p.getTitulo() + "' " + (editable ? "" : "readonly") + "/></span>");
 				}
 				htmlBuilder.append("				</div>");
 				htmlBuilder.append("				<span class='clear_both'></span>");
@@ -477,7 +492,10 @@ public class FormularioWidget extends Composite {
 					htmlBuilder.append("							<option value='Em Execução' > Em Execução </option>");
 					htmlBuilder.append("							<option value='Finalizado' selected='selected' > Finalizado </option>");
 				}else{
-					htmlBuilder.append("							<option value='' disabled selected>Informação não disponível</option>");
+					if(editable)
+						htmlBuilder.append("							<option value='' disabled selected>Indique o status</option>");
+					else
+						htmlBuilder.append("							<option value='' disabled selected>Informação não disponível</option>");
 					htmlBuilder.append("							<option value='Planejado' > Planejado </option>");
 					htmlBuilder.append("							<option value='Em Execução' > Em Execução </option>");
 					htmlBuilder.append("							<option value='Finalizado' > Finalizado </option>");
@@ -496,7 +514,10 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("					</div>");
 				htmlBuilder.append("					<div class='col1_6'>");
 				htmlBuilder.append("						<strong class='separador'>Valor Total (R$)</strong>");
-				htmlBuilder.append("						<p><input type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(p.getValorTotal()) + "'  " + (editable ? "" : "readonly") + " /></p>");
+				if(editable)
+					htmlBuilder.append("						<p><input type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"' placeholder='Indique o valor total' value='" + convertNumberToCurrencyString(p.getValorTotal()) + "'  " + (editable ? "" : "readonly") + " /></p>");
+				else
+					htmlBuilder.append("						<p><input type='text' name='projeto_valor_total' id='projeto_valor_total"+proj+"' placeholder='Informação não disponível' value='" + convertNumberToCurrencyString(p.getValorTotal()) + "'  " + (editable ? "" : "readonly") + " /></p>");
 				htmlBuilder.append("					</div>");
 				htmlBuilder.append("					<div class='col1_6'>");
 				htmlBuilder.append("						<strong class='separador'>Fonte de recurso</strong>");
@@ -509,7 +530,10 @@ public class FormularioWidget extends Composite {
 					htmlBuilder.append("							<option value='Público' > Público </option>");
 					htmlBuilder.append("							<option value='Privado' selected='selected' > Privado </option>");
 				}else{
-					htmlBuilder.append("							<option value='' disabled selected>Informação não disponível</option>");
+					if(editable)
+						htmlBuilder.append("							<option value='' disabled selected>Indique a fonte de recurso</option>");
+					else
+						htmlBuilder.append("							<option value='' disabled selected>Informação não disponível</option>");
 					htmlBuilder.append("							<option value='Público' > Público </option>");
 					htmlBuilder.append("							<option value='Privado' > Privado </option>");
 				}
@@ -544,11 +568,14 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("				</div>");
 				htmlBuilder.append("				<div class='clearfix linha'>");
 				htmlBuilder.append("					<div class='col1_3'>");
-				htmlBuilder.append("						<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
-				if(p.getPublicoAlvo() == null){
-					htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				htmlBuilder.append("						<strong class='separador left-radius'>Público Beneficiado</strong>");
+				if(p.getPublicoAlvo() == null || p.getPublicoAlvo() == ""){
+					if(editable)
+						htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Indique o público beneficiado' " + (editable ? "" : "readonly") + "></textarea>");
+					else
+						htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
 				}else{
-					htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getPublicoAlvo() + "</textarea>");
+					htmlBuilder.append("					<textarea name='projeto_publico_alvo' id='projeto_publico_alvo"+ proj +"'  placeholder='Indique o público beneficiado' " + (editable ? "" : "readonly") + ">" + p.getPublicoAlvo() + "</textarea>");
 				}
 				htmlBuilder.append("					</div>");
 				htmlBuilder.append("<div class='col1_6'>");
@@ -576,7 +603,10 @@ public class FormularioWidget extends Composite {
 					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
 					htmlBuilder.append("<option value='Municipal' selected='selected'> Municipal </option>");
 				}else{
-					htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
+					if(editable)
+						htmlBuilder.append("<option value='' disabled selected>Indique Abrangência</option>");
+					else
+						htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
 					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
 					htmlBuilder.append("<option value='Regional' > Regional </option>");
 					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
@@ -613,7 +643,7 @@ public class FormularioWidget extends Composite {
 				
 				htmlBuilder.append("<div id='buscarProj"+proj+"' >");
 				htmlBuilder.append("<label for='campobusca' class='esconder' style='background: none;'>Buscar localização</label>");
-				htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ proj +"' placeholder='Informe a localização desejada...'>");
+				htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ proj +"' placeholder='Indique a localização desejada...'>");
 				htmlBuilder.append("<button type='button' name='adicionar' id='adicionar"+proj+"' class='adicionar'>Adicionar</button>");
 				htmlBuilder.append("<button type='button' name='ajuda' class='ajuda' id='ajuda"+proj+"' style='padding: 5px 8px;' >?</button></div>");
 				htmlBuilder.append("</div>");
@@ -622,18 +652,24 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("				<div class='clearfix linha'>");
 				htmlBuilder.append("					<div class='col1_3'>");
 				htmlBuilder.append("						<strong class='left-radius separador'>Financiadores do Projeto</strong>");
-				if(p.getFinanciadores() == null){
-					htmlBuilder.append("					<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				if(p.getFinanciadores() == null || p.getFinanciadores() == ""){
+					if(editable)
+						htmlBuilder.append("					<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Indique os financiadores' " + (editable ? "" : "readonly") + "></textarea>");
+					else
+						htmlBuilder.append("					<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
 				}else{
-					htmlBuilder.append("					<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getFinanciadores() + "</textarea>");
+					htmlBuilder.append("					<textarea name='financiadores' id='financiadores"+ proj +"'  placeholder='Indique os financiadores' " + (editable ? "" : "readonly") + ">" + p.getFinanciadores() + "</textarea>");
 				}
 				htmlBuilder.append("					</div>");
 				htmlBuilder.append("					<div class='col2_3'>");
-				htmlBuilder.append("						<strong class='right-radius'>Descrição do Projeto</strong>");
-				if(p.getDescricao() == null){
-					htmlBuilder.append("					<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				htmlBuilder.append("						<strong class='right-radius'>Descrição do projeto, atividade e/ou programa</strong>");
+				if(p.getDescricao() == null || p.getDescricao() == ""){
+					if(editable)
+						htmlBuilder.append("					<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Apresentar os objetivos de maneira sucinta' " + (editable ? "" : "readonly") + "></textarea>");
+					else
+						htmlBuilder.append("					<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
 				}else{
-					htmlBuilder.append("					<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + p.getDescricao() + "</textarea>");
+					htmlBuilder.append("					<textarea name='descprojeto' id='descprojeto"+ proj +"'  placeholder='Apresentar os objetivos de maneira sucinta' " + (editable ? "" : "readonly") + ">" + p.getDescricao() + "</textarea>");
 				}
 				htmlBuilder.append("					</div>");
 				htmlBuilder.append("				</div>");						
@@ -705,11 +741,14 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("				</div>");
 				htmlBuilder.append("				<div class='clearfix linha'>");
 				htmlBuilder.append("					<div class='col1_3'>");
-				htmlBuilder.append("						<strong class='separador left-radius'>Público Alvo do Projeto</strong>");
-				if(c.getPublicoAlvo() == null){
-					htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
+				htmlBuilder.append("						<strong class='separador left-radius'>Público Beneficiado</strong>");
+				if(c.getPublicoAlvo() == null || c.getPublicoAlvo() == ""){
+					if(editable)
+						htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Indique o público beneficiado' " + (editable ? "" : "readonly") + "></textarea>");
+					else
+						htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + "></textarea>");
 				}else{
-					htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Informação não disponível' " + (editable ? "" : "readonly") + ">" + c.getPublicoAlvo() + "</textarea>");
+					htmlBuilder.append("					<textarea name='"+ c.getNConv() +"' id='convenio_publico_alvo"+ conv +"'  placeholder='Indique o público beneficiado' " + (editable ? "" : "readonly") + ">" + c.getPublicoAlvo() + "</textarea>");
 				}
 				htmlBuilder.append("					</div>");
 				htmlBuilder.append("<div class='col1_6'>");
@@ -738,7 +777,10 @@ public class FormularioWidget extends Composite {
 					htmlBuilder.append("<option value='Municipal' selected='selected'> Municipal </option>");
 
 				}else{
-					htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
+					if(editable)
+						htmlBuilder.append("<option value='' disabled selected>Indique Abrangência</option>");
+					else
+						htmlBuilder.append("<option value='' disabled selected>Informação não disponível</option>");
 					htmlBuilder.append("<option value='Nacional' > Nacional </option>");
 					htmlBuilder.append("<option value='Regional' > Regional </option>");
 					htmlBuilder.append("<option value='Estadual' > Estadual </option>");
@@ -774,7 +816,7 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("</ul>");
 				htmlBuilder.append("<div id='buscarConv"+conv+"'>");
 				htmlBuilder.append("<label for='campobusca' class='esconder' style='background: none;'>Buscar localização</label>");
-				htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ count +"' placeholder='Informe a localização desejada...'>");
+				htmlBuilder.append("<input title='Campo de Busca para a Localização do Projeto' type='text' name='campobusca' id='enome"+ count +"' placeholder='Indique a localização desejada...'>");
 				htmlBuilder.append("<button type='button' name='addLocalConv' id='addLocalConv"+conv+"' class='adicionar'>Adicionar</button>");
 				htmlBuilder.append("<button type='button' name='ajuda' class='ajuda' id='ajuda"+count+"' style='padding: 5px 8px;'>?</button></div>");
 				htmlBuilder.append("</div>");
@@ -790,7 +832,7 @@ public class FormularioWidget extends Composite {
 				}
 				htmlBuilder.append("						</div>");
 				htmlBuilder.append("						<div class='col2_3'>");
-				htmlBuilder.append("							<strong class='right-radius'>Descrição do Projeto</strong>");
+				htmlBuilder.append("							<strong class='right-radius'>Descrição do projeto, atividade e/ou programa</strong>");
 				if(c.getDescricao() == null || c.getDescricao() == ""){
 					htmlBuilder.append("						<span>Informação não disponível</span>");
 				}else{
