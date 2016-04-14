@@ -193,7 +193,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			sql = "SELECT proj_cd_projeto, titulo, status, data_inicio, data_fim, valor_total, fonte_recurso, link, publico_alvo, "
 				+ 		 "abrangencia, financiadores, descricao "
 				+ "FROM data.tb_osc_projeto "
-				+ "WHERE proj_cd_projeto = (SELECT proj_cd_projeto FROM data.tb_ternaria_projeto WHERE bosc_sq_osc = ?)";
+				+ "WHERE proj_cd_projeto IN (SELECT proj_cd_projeto FROM data.tb_ternaria_projeto WHERE bosc_sq_osc = ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
@@ -223,7 +223,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					+ "FROM data.tb_osc_projeto_loc LEFT JOIN spat.ed_municipio ON (tb_osc_projeto_loc.edmu_cd_municipio = ed_municipio.edmu_cd_municipio) "
 					+ "LEFT JOIN spat.ed_regiao ON (tb_osc_projeto_loc.edre_cd_regiao = ed_regiao.edre_cd_regiao) "
 					+ "LEFT JOIN spat.ed_uf ON (tb_osc_projeto_loc.eduf_cd_uf = ed_uf.eduf_cd_uf) "
-					+ "WHERE tb_osc_projeto_loc.proj_cd_projetos = ?";
+					+ "WHERE tb_osc_projeto_loc.proj_cd_projeto = ?";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -420,6 +420,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 	
 	public void setOrganization(OrganizationModel organization) throws RemoteException {
 		logger.info("Atualizando informações da organização " + organization.getId().toString() + " no banco de dados");
+		ArrayList<Integer> projetoList = new ArrayList<Integer>();
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		Connection conn2 = getConnection();
@@ -495,51 +496,51 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			}
 			pstmt.close();
 			
-			sql = "INSERT INTO data.tb_osc_projeto (bosc_sq_osc, titulo, status, data_inicio, data_fim, valor_total, "
+			sql = "INSERT INTO data.tb_osc_projeto (titulo, status, data_inicio, data_fim, valor_total, "
 					+ 		 	  					   "fonte_recurso, link, publico_alvo, abrangencia, financiadores, descricao) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				
-			sql2 = "INSERT INTO data.tb_osc_projeto_loc (proj_cd_projetos, edmu_cd_municipio, edre_cd_regiao, eduf_cd_uf) "
+			sql2 = "INSERT INTO data.tb_osc_projeto_loc (proj_cd_projeto, edmu_cd_municipio, edre_cd_regiao, eduf_cd_uf) "
 					+ "VALUES (?, ?, ?, ?);";
 			
 			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt2 = conn2.prepareStatement(sql2);
 			
-			for (int i = 0; i < organization.getProjetos().size(); i++ ) {
+			for(int i = 0; i < organization.getProjetos().size(); i++){
 				if(organization.getProjetos().get(i).getId() == -1){
-					pstmt.setInt(1, organization.getId());
-					pstmt.setString(2, organization.getProjetos().get(i).getTitulo());
-					pstmt.setString(3, organization.getProjetos().get(i).getStatus());
+					pstmt.setString(1, organization.getProjetos().get(i).getTitulo());
+					pstmt.setString(2, organization.getProjetos().get(i).getStatus());
 					
 					Date dtInicio = organization.getProjetos().get(i).getDataInicio();
 					if(dtInicio == null){
-						pstmt.setDate(4, null);
+						pstmt.setDate(3, null);
 					}else{
 						java.sql.Date sqlDateInicio = new java.sql.Date(dtInicio.getTime());
-						pstmt.setDate(4, sqlDateInicio);
+						pstmt.setDate(3, sqlDateInicio);
 					}
 					
 					Date dtFinal = organization.getProjetos().get(i).getDataFim();
 					if(dtFinal == null){
-						pstmt.setDate(5, null);
+						pstmt.setDate(4, null);
 					}else{
 						java.sql.Date sqlDateFinal = new java.sql.Date(dtFinal.getTime());
-						pstmt.setDate(5, sqlDateFinal);
+						pstmt.setDate(4, sqlDateFinal);
 					}
 					
-					pstmt.setDouble(6, organization.getProjetos().get(i).getValorTotal());
-					pstmt.setString(7, organization.getProjetos().get(i).getFonteRecursos());
-					pstmt.setString(8, organization.getProjetos().get(i).getLink());
-					pstmt.setString(9, organization.getProjetos().get(i).getPublicoAlvo());
-					pstmt.setString(10, organization.getProjetos().get(i).getAbrangencia());
-					pstmt.setString(11, organization.getProjetos().get(i).getFinanciadores());
-					pstmt.setString(12, organization.getProjetos().get(i).getDescricao());
+					pstmt.setDouble(5, organization.getProjetos().get(i).getValorTotal());
+					pstmt.setString(6, organization.getProjetos().get(i).getFonteRecursos());
+					pstmt.setString(7, organization.getProjetos().get(i).getLink());
+					pstmt.setString(8, organization.getProjetos().get(i).getPublicoAlvo());
+					pstmt.setString(9, organization.getProjetos().get(i).getAbrangencia());
+					pstmt.setString(10, organization.getProjetos().get(i).getFinanciadores());
+					pstmt.setString(11, organization.getProjetos().get(i).getDescricao());
 					pstmt.executeUpdate();
 					
 					ResultSet rs = pstmt.getGeneratedKeys();
 					int id = -1;
 					while (rs.next()) {
-						id = rs.getInt(2);
+						id = rs.getInt(1);
+						projetoList.add(id);
 		            } 
 		            rs.close();
 					
@@ -564,44 +565,43 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			pstmt2.close();
 			
-			sql = "UPDATE data.tb_osc_projeto SET bosc_sq_osc = ?, titulo = ?, status = ?, data_inicio = ?, data_fim = ?, "
+			sql = "UPDATE data.tb_osc_projeto SET titulo = ?, status = ?, data_inicio = ?, data_fim = ?, "
 					+ 		 "valor_total = ?, fonte_recurso = ?, "
 					+ 		 "link = ?, publico_alvo = ?, abrangencia = ?, financiadores = ?, descricao = ? "
-					+ "WHERE proj_cd_projetos = ?";
+					+ "WHERE proj_cd_projeto = ?";
 				
-			sql2 = "INSERT INTO data.tb_osc_projeto_loc (proj_cd_projetos, edmu_cd_municipio, edre_cd_regiao, eduf_cd_uf) "
+			sql2 = "INSERT INTO data.tb_osc_projeto_loc (proj_cd_projeto, edmu_cd_municipio, edre_cd_regiao, eduf_cd_uf) "
 					+ "VALUES (?, ?, ?, ?);";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt2 = conn2.prepareStatement(sql2);
 				
 			for (int i = 0; i < organization.getProjetos().size(); i++ ) {
-				if(organization.getProjetos().get(i).getId() != -1){			
-					pstmt.setInt(1, organization.getId() );
-					pstmt.setString(2, organization.getProjetos().get(i).getTitulo());
-					pstmt.setString(3, organization.getProjetos().get(i).getStatus());
+				if(organization.getProjetos().get(i).getId() != -1){
+					pstmt.setString(1, organization.getProjetos().get(i).getTitulo());
+					pstmt.setString(2, organization.getProjetos().get(i).getStatus());
 					
 					Date dtInicio = organization.getProjetos().get(i).getDataInicio();
 					if(dtInicio == null){
-						pstmt.setDate(4, null);
+						pstmt.setDate(3, null);
 					}else{
 						java.sql.Date sqlDateInicio = new java.sql.Date(dtInicio.getTime());
-						pstmt.setDate(4, sqlDateInicio);
+						pstmt.setDate(3, sqlDateInicio);
 					}
 					
 					Date dtFinal = organization.getProjetos().get(i).getDataFim();
 					if(dtFinal == null){
-						pstmt.setDate(5, null);
+						pstmt.setDate(4, null);
 					}else{
 						java.sql.Date sqlDateFinal = new java.sql.Date(dtFinal.getTime());
-						pstmt.setDate(5, sqlDateFinal);
+						pstmt.setDate(4, sqlDateFinal);
 					}
 					
-					pstmt.setDouble(6, organization.getProjetos().get(i).getValorTotal());
-					pstmt.setString(7, organization.getProjetos().get(i).getFonteRecursos());
-					pstmt.setString(8, organization.getProjetos().get(i).getLink());
-					pstmt.setString(9, organization.getProjetos().get(i).getPublicoAlvo());
-					pstmt.setString(10, organization.getProjetos().get(i).getAbrangencia());
+					pstmt.setDouble(5, organization.getProjetos().get(i).getValorTotal());
+					pstmt.setString(6, organization.getProjetos().get(i).getFonteRecursos());
+					pstmt.setString(7, organization.getProjetos().get(i).getLink());
+					pstmt.setString(8, organization.getProjetos().get(i).getPublicoAlvo());
+					pstmt.setString(9, organization.getProjetos().get(i).getAbrangencia());
 					
 					for (int j = 0; j < organization.getProjetos().get(i).getLocalizacao().size(); j++ ) {
 						pstmt2.setInt(1, organization.getProjetos().get(i).getId());
@@ -619,9 +619,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 							pstmt2.setInt(4,organization.getProjetos().get(i).getLocalizacao().get(j).getIdUf());
 						pstmt2.executeUpdate();
 					}
-					pstmt.setString(11, organization.getProjetos().get(i).getFinanciadores());
-					pstmt.setString(12, organization.getProjetos().get(i).getDescricao());
-					pstmt.setInt(13, organization.getProjetos().get(i).getId());
+					pstmt.setString(10, organization.getProjetos().get(i).getFinanciadores());
+					pstmt.setString(11, organization.getProjetos().get(i).getDescricao());
+					pstmt.setInt(12, organization.getProjetos().get(i).getId());
 					pstmt.executeUpdate();
 				}
 			}
@@ -634,13 +634,10 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				+ "VALUES (?, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
-			for (int i = 0; i < organization.getConvenios().size(); i++ ) {
-				if(organization.getConvenios().get(i).getNConv() != -1){			
-					pstmt.setString(1,organization.getConvenios().get(i).getPublicoAlvo());
-					pstmt.setString(2, organization.getConvenios().get(i).getAbrangencia());
-					pstmt.setInt(3,organization.getConvenios().get(i).getNConv());
-					pstmt.executeUpdate();
-				}
+			for(Integer id : projetoList){			
+				pstmt.setInt(1,organization.getId());
+				pstmt.setInt(2, id);
+				pstmt.executeUpdate();
 			}
 			pstmt.close();
 			
