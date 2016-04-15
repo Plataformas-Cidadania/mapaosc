@@ -194,7 +194,7 @@
     <servlet-name>jUnitHostImpl</servlet-name>
     <servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
   </servlet>
-  <!-- Servlets -->
+  <!-- Servlets mappings -->
   <servlet>
     <servlet-name>remoteLogging</servlet-name>
     <servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
@@ -249,6 +249,21 @@
     <servlet-name>organizationService</servlet-name>
     <servlet-class>gov.sgpr.fgv.osc.portalosc.organization.server.OrganizationServiceImpl</servlet-class>
   </servlet>
+
+  <servlet>
+    <servlet-name>representantLocalityService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.representantlocality.server.RepresentantLocalityServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>uploadLocalityService</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.uploadlocality.server.UploadLocalityServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>UploadFile</servlet-name>
+    <servlet-class>gov.sgpr.fgv.osc.portalosc.uploadlocality.server.UploadFile</servlet-class>
+  </servlet>
+
   <servlet>
     <servlet-name>jUnitHostImpl</servlet-name>
     <servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
@@ -281,6 +296,10 @@
   <servlet-mapping>
     <servlet-name>searchOSCService</servlet-name>
     <url-pattern>/User/searchOSCService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>searchOSCService</servlet-name>
+    <url-pattern>/Organization/searchOSCService</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>userService</servlet-name>
@@ -332,11 +351,12 @@
     <servlet-name>organizationService</servlet-name>
     <url-pattern>/Organization/organizationService</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>remoteService</servlet-name>
     <url-pattern>/Organization/remoteService</url-pattern>
   </servlet-mapping>
-  
+
   <servlet-mapping>
     <servlet-name>remoteLogging</servlet-name>
     <url-pattern>/StaticContent/remote_logging</url-pattern>
@@ -356,8 +376,42 @@
   <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
     <url-pattern>/StaticContent/junithost/*</url-pattern>
+  </servlet-mapping> 
+  <servlet-mapping>
+    <servlet-name>remoteLogging</servlet-name>
+    <url-pattern>/RepresentantLocality/remote_logging</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>representantLocalityService</servlet-name>
+    <url-pattern>/RepresentantLocality/representantLocalityService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userService</servlet-name>
+    <url-pattern>/RepresentantLocality/userService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>remoteService</servlet-name>
+    <url-pattern>/RepresentantLocality/remoteService</url-pattern>
+  </servlet-mapping>
+    
+  <servlet-mapping>
+    <servlet-name>remoteLogging</servlet-name>
+    <url-pattern>/UploadLocality/remote_logging</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>uploadLocalityService</servlet-name>
+    <url-pattern>/UploadLocality/uploadLocalityService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userService</servlet-name>
+    <url-pattern>/UploadLocality/userService</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>UploadFile</servlet-name>
+    <url-pattern>/uploadFile</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
     <url-pattern>/Prototype/junithost/*</url-pattern>
@@ -377,6 +431,14 @@
   <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
     <url-pattern>/Organization/junithost/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>jUnitHostImpl</servlet-name>
+    <url-pattern>/RepresentantLocality/junithost/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>jUnitHostImpl</servlet-name>
+    <url-pattern>/UploadLocality/junithost/*</url-pattern>
   </servlet-mapping>
   <!-- Default page to serve -->
   <welcome-file-list>

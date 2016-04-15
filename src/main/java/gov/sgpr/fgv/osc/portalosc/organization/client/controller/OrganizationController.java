@@ -110,7 +110,7 @@ public class OrganizationController {
 			}
 			public void onSuccess(Void result) {
 				logger.info("Dados salvos");
-				openPopup("Página OSC", "Dados Salvos com sucesso!");
+				openPopup("Página OSC", "Dados Salvos com sucesso!", true);
 			}
 		};
 		organizationService.setOrganization(organizationModel, callback);
@@ -261,10 +261,10 @@ public class OrganizationController {
 							deleteReccomendation(idOSC, Integer.parseInt(idUser));
 						}
 					}else{
-						openPopup("Recomendar Organização", "Para recomendar uma Organização é necessário ter o CPF cadastrado no sistema. Para cadastrar seu CPF entre em Configurações.");
+						openPopup("Recomendar Organização", "Para recomendar uma Organização é necessário ter o CPF cadastrado no sistema. Para cadastrar seu CPF entre em Configurações.", false);
 					}
 				}else{
-					openPopup("Recomendar Organização", "Para recomendar uma Organização é necessário realizar o Login.");
+					openPopup("Recomendar Organização", "Para recomendar uma Organização é necessário realizar o Login.", false);
 				}
 			}
 		});
@@ -577,18 +577,22 @@ public class OrganizationController {
 		formularioWidget.addResultItems(items, listener, idElement);
 	}
 	
-	private void openPopup(String title, String message){
+	private void openPopup(String title, String message, Boolean reloadPage){
 		final PopupPanel popup = new PopupPanel();
 		popup.setStyleName("overlay");
 		popup.add(getHtmlPopup(title,message));
 		popup.show();
+		
+		final Boolean reload = reloadPage;
 		
 		Element ok = DOM.getElementById("ok");
 		Event.sinkEvents(ok, Event.ONCLICK);
 		Event.setEventListener(ok, new EventListener() {
 			public void onBrowserEvent(Event event) {
 				popup.hide();
-				Window.Location.reload();
+				if(reload){
+					Window.Location.reload();
+				}
 			}
 		});
 	}
@@ -732,15 +736,15 @@ public class OrganizationController {
 	private HTML getHtmlDir(Integer dir) {
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<div id='incluirDir" + dir + " '>");
-		htmlBuilder.append("	<div id='div_cargo_diretor'>");
+		htmlBuilder.append("	<div class='botoes'><button id='removedir"+ dir +"' type='button' class='excluir participacao'>Excluir</button></div>");
+		htmlBuilder.append("	<div class='div_cargo_diretor'>");
 		htmlBuilder.append("		<strong>Cargo:</strong>");
 		htmlBuilder.append("		<input placeholder='Indique cada cargo previsto no seu estatuto social' type='text' name='addDir' id='cargo" + dir + "' >");
 		htmlBuilder.append("	</div>");
-		htmlBuilder.append("	<div id='div_nome_diretor'>");
+		htmlBuilder.append("	<div class='div_nome_diretor'>");
 		htmlBuilder.append("		<strong>Nome:</strong>");
 		htmlBuilder.append("		<input placeholder='Relacione o nome completo do dirigente' type='text' name='addDir' id='nome" + dir + "' />");
 		htmlBuilder.append("	</div>");
-		htmlBuilder.append("	<div class='botoes'><button id='removedir"+ dir +"' type='button' class='excluir participacao'>Excluir</button></div>");
 		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;

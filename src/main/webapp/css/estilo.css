@@ -4679,3 +4679,7 @@ input[type=checkbox], input[type=radio] {
 	margin: 0;
 	vertical-align: middle;
 }
+
+.diretores .botoes {
+float: right;
+}

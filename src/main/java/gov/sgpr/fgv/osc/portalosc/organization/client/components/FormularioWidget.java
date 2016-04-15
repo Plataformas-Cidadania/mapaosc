@@ -299,22 +299,22 @@ public class FormularioWidget extends Composite {
 			for (DiretorModel d : org.getDiretores()){
 				dir++;
 				htmlBuilder.append("			<div id='incluirDir'>");
-				htmlBuilder.append("				<div id='div_cargo_diretor'>");
+				htmlBuilder.append("				<div class='botoes'>");
+				htmlBuilder.append("					<button id='removedir"+ dir +"' value='"+ d.getId() +"' type='button' class='excluir participacao'>Excluir</button>");
+				htmlBuilder.append("				</div>");
+				htmlBuilder.append("				<div class='div_cargo_diretor'>");
 				htmlBuilder.append("					<strong>Cargo:</strong>");
 				if(editable)
 					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " placeholder='Indique cada cargo previsto no seu estatuto social' />");
 				else
 					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='cargo"+ dir +"' value='"+ d.getCargo() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
 				htmlBuilder.append("				</div>");
-				htmlBuilder.append("				<div id='div_nome_diretor'>");
+				htmlBuilder.append("				<div class='div_nome_diretor'>");
 				htmlBuilder.append("					<strong>Nome:</strong>");
 				if(editable)
 					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " placeholder='Relacione o nome completo do dirigente' />");
 				else
 					htmlBuilder.append("					<input type='text' name='"+ d.getId() +"' id='nome"+ dir +"' value='"+ d.getNome() +"'  " + (editable ? "" : "readonly") + " placeholder='Informação não disponível' />");
-				htmlBuilder.append("				</div>");
-				htmlBuilder.append("				<div class='botoes'>");
-				htmlBuilder.append("					<button id='removedir"+ dir +"' value='"+ d.getId() +"' type='button' class='excluir participacao'>Excluir</button>");
 				htmlBuilder.append("				</div>");
 				htmlBuilder.append("			</div>");
 			}
