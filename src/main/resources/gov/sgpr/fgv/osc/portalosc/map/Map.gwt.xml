@@ -33,6 +33,7 @@
 	<set-property-fallback name="locale" value="pt_BR"/>
 	
 	<servlet path='/mapService' class='gov.sgpr.fgv.osc.portalosc.map.server.MapServiceImpl'></servlet>
+	<servlet path='/configService' class='gov.sgpr.fgv.osc.portalosc.map.server.ConfigServiceImpl'></servlet>
 	<servlet path='/oscService' class='gov.sgpr.fgv.osc.portalosc.map.server.OscServiceImpl'></servlet>
 	<servlet path='/placeService' class='gov.sgpr.fgv.osc.portalosc.map.server.PlaceServiceImpl'></servlet>
 	<servlet path='/searchService' class='gov.sgpr.fgv.osc.portalosc.map.server.SearchServiceImpl'></servlet>
