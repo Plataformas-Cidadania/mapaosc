@@ -1,6 +1,6 @@
 package gov.sgpr.fgv.osc.portalosc.uploadlocality.shared.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 
@@ -9,6 +9,7 @@ public class AgreementLocalityModel extends DefaultUser {
 	
 	private Integer numeroConvenio;
 	private Date dataInicio;
+	private Date dataPublicacao;
 	private Date dataConclusao;
 	private String situacaoParceria;
 	private String tipoParceria;
@@ -35,6 +36,12 @@ public class AgreementLocalityModel extends DefaultUser {
 	}
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
+	}
+	public Date getDataPublicacao() {
+		return dataPublicacao;
+	}
+	public void setDataPublicacao(Date dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
 	}
 	public Date getDataConclusao() {
 		return dataConclusao;

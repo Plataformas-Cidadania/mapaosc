@@ -1,8 +1,14 @@
 package gov.sgpr.fgv.osc.portalosc.uploadlocality.server;
 
+import gov.sgpr.fgv.osc.portalosc.uploadlocality.shared.model.AgreementLocalityModel;
+
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +30,10 @@ public class UploadFile extends HttpServlet {
 	private String tempPath;
 	private String fileName;
 	private String contentType;
+	
+	private String msg = "";
+	
+	private ArrayList<AgreementLocalityModel> convenios = new ArrayList<AgreementLocalityModel>();
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		fileType = request.getParameter("dtipo_arquivo");
@@ -51,9 +61,9 @@ public class UploadFile extends HttpServlet {
 			List<?> fileItems = upload.parseRequest(request);
 			Iterator<?> i = fileItems.iterator();
 			
-			while (i.hasNext ()){
-				FileItem fi = (FileItem)i.next();
-				if (!fi.isFormField ()){
+			while(i.hasNext()){
+				FileItem fi = (FileItem) i.next();
+				if (!fi.isFormField()){
 					fileName = fi.getName();
 					contentType = fi.getContentType();
 					if(fileName.lastIndexOf("/") >= 0){
@@ -80,20 +90,96 @@ public class UploadFile extends HttpServlet {
 		}
 	}
 	
-	private void readCSV(){
-		BufferedReader br;
+	private Boolean readCSV(){
+		Boolean result = true;
+		
 		try {
-			br = new BufferedReader(new FileReader(filePath + "/" + fileName));
+			BufferedReader br = new BufferedReader(new FileReader(filePath + "/" + fileName));
 			String lineCSV = null;
 			while ((lineCSV = br.readLine()) != null) {
 			    String[] cols = lineCSV.split(",");
-//			    System.out.println("Coulmn 4= " + cols[4] + " , Column 5=" + cols[5]);
+			    
+			    if(cols.length < 12){
+			    	msg = "Há colunas faltando.";
+			    }else{
+			    	AgreementLocalityModel conv = new AgreementLocalityModel();
+			    	
+			    	DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			    	
+			    	try{
+			    		conv.setNumeroConvenio(Integer.parseInt(cols[0].trim()));
+			    	}catch(NumberFormatException e){
+			    		msg = "A coluna de \"Número do Convênio\" não foi validada.";
+			    	}
+			    	
+			    	try{
+			    		conv.setDataInicio(df.parse(cols[1].trim()));
+			    	}catch(ParseException e){
+			    		msg = "A coluna de \"Data de início\" não foi validada.";
+			    	}
+				    
+			    	try{
+			    		conv.setDataPublicacao(df.parse(cols[2].trim()));
+			    	}catch(ParseException e){
+			    		msg = "A coluna de \"Data de publicação\" não foi validada.";
+			    	}
+			    	
+			    	try{
+			    		conv.setDataConclusao(df.parse(cols[3].trim()));
+			    	}catch(ParseException e){
+			    		msg = "A coluna de \"Data de Conclusão\" não foi validada.";
+			    	}
+			    			    	
+				    conv.setSituacaoParceria(cols[4].trim());
+				    
+				    try{
+			    		conv.setValorTotal(Double.parseDouble(cols[5].trim()));
+			    	}catch(NumberFormatException e){
+			    		msg = "A coluna de \"Valor Global\" não foi validada.";
+			    	}
+				    
+				    try{
+			    		conv.setValorPago(Double.parseDouble(cols[6].trim()));
+			    	}catch(NumberFormatException e){
+			    		msg = "A coluna de \"Valor Pago\" não foi validada.";
+			    	}
+				    
+				    conv.setOrgaoConcedente(cols[7].trim());
+				    
+				    try{
+			    		conv.setCnpjProponente(Long.parseLong(cols[8].trim()));
+			    	}catch(NumberFormatException e){
+			    		msg = "A coluna de \"CNPJ do Proponente\" não foi validada.";
+			    	}
+				    
+				    conv.setRazaoSocialProponente(cols[9].trim());
+				    conv.setMunicipioProponente(cols[10].trim());
+				    conv.setObjetoParceria(cols[11].trim());
+				    
+				    if(cols.length == 13){
+				    	conv.setNomeFantasiaProponente(cols[12].trim());
+				    }else if(cols.length == 14){
+				    	conv.setEnderecoProponente(cols[13].trim());
+				    }else if(cols.length == 15){
+				    	try{
+				    		conv.setValorContrapartidaFinanceira(Double.parseDouble(cols[14].trim()));
+				    	}catch(NumberFormatException e){
+				    		msg = "A coluna de \"Valor da Contrapartida financeira\" não foi validada.";
+				    	}
+				    }
+			    }
+			    
+			    if(msg != ""){
+			    	result = false;
+			    	break;
+			    }
 			}
-		} catch (FileNotFoundException e) {
-			
-		} catch (IOException e){
-			
+			br.close();
+		}catch (Exception e){
+			msg = "Ocorreu um erro no momento da leitura do arquivo.";
+			result = false;
 		}
+		return result;
 	}
 	
 	private void createDirectory(String... directories) {

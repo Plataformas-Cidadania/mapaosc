@@ -1,144 +1,141 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
-
-<web-app>
-	<context-param>
-		<param-name>TestMode</param-name>
-		<param-value>FALSE</param-value>
-	</context-param>
-	<context-param>
-		<param-name>DriverName</param-name>
-		<param-value>org.postgresql.Driver</param-value>
-	</context-param>
-	<context-param>
-		<param-name>DBMS</param-name>
-		<param-value>postgresql</param-value>
-	</context-param>
-	<context-param>
-		<param-name>ServerName</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>Port</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>DatabaseName</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>UserName</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>Password</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>InitialPoolSize</param-name>
-		<param-value>10</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MaxActiveConnections</param-name>
-		<param-value>100</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MaxWaitConnections</param-name>
-		<param-value>10000</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MaxIdleConnections</param-name>
-		<param-value>30</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MinIdleConnections</param-name>
-		<param-value>10</param-value>
-	</context-param>
-	<context-param>
-		<param-name>InitialClusterZoomLevel</param-name>
-		<param-value>4</param-value>
-	</context-param>
-	<context-param>
-		<param-name>ClusterGridSize</param-name>
-		<param-value>100</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MinClusterZoomLevel</param-name>
-		<param-value>4</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MaxClusterZoomLevel</param-name>
-		<param-value>18</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MaxClusterZoomLevelCalc</param-name>
-		<param-value>9</param-value>
-	</context-param>
-	<context-param>
-		<param-name>PastaDocumentos</param-name>
-		<param-value>documentos</param-value>
-	</context-param>
-	<context-param>
-		<param-name>PastaEstatutos</param-name>
-		<param-value>arquivos_estatuto</param-value>
-	</context-param>
-	<context-param>
-		<param-name>PastaQuadroDirigentes</param-name>
-		<param-value>arquivos_quadro_dirigentes</param-value>
-	</context-param>
-	<context-param>
-		<param-name>PastaConvenios</param-name>
-		<param-value>arquivos_convenios</param-value>
-	</context-param>
-	<context-param>
-		<param-name>PastaPrestacaoContas</param-name>
-		<param-value>arquivos_prestacao_contas</param-value>
-	</context-param>
-	<context-param>
-		<param-name>FACEBOOK_APP_ID</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>FACEBOOK_APP_SECRET</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>FACEBOOK_APP_TOKEN</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>CHAVE_CRIPTOGRAFIA</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>STATIC_URL</param-name>
-		<param-value>/</param-value>
-	</context-param>
-	<context-param>
-		<param-name>STATIC_CONFIG</param-name>
-		<param-value>static.xml</param-value>
-	</context-param>
-	<context-param>
-		<param-name>SERVER_SMTP</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>SMTP_AUTH</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>SMTP_PORT</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>FROM_ADDRESS</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<context-param>
-		<param-name>NAME_ADDRESS</param-name>
-		<param-value> </param-value>
-	</context-param>
-	<!-- Servlets -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><web-app>
+  <context-param>
+    <param-name>TestMode</param-name>
+    <param-value>FALSE</param-value>
+  </context-param>
+  <context-param>
+    <param-name>DriverName</param-name>
+    <param-value>org.postgresql.Driver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>DBMS</param-name>
+    <param-value>postgresql</param-value>
+  </context-param>
+  <context-param>
+    <param-name>ServerName</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>Port</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>DatabaseName</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>UserName</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>Password</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>InitialPoolSize</param-name>
+    <param-value>10</param-value>
+  </context-param>
+  <context-param>
+    <param-name>MaxActiveConnections</param-name>
+    <param-value>100</param-value>
+  </context-param>
+  <context-param>
+    <param-name>MaxWaitConnections</param-name>
+    <param-value>10000</param-value>
+  </context-param>
+  <context-param>
+    <param-name>MaxIdleConnections</param-name>
+    <param-value>30</param-value>
+  </context-param>
+  <context-param>
+    <param-name>MinIdleConnections</param-name>
+    <param-value>10</param-value>
+  </context-param>
+  <context-param>
+    <param-name>InitialClusterZoomLevel</param-name>
+    <param-value>4</param-value>
+  </context-param>
+  <context-param>
+    <param-name>ClusterGridSize</param-name>
+    <param-value>100</param-value>
+  </context-param>
+  <context-param>
+    <param-name>MinClusterZoomLevel</param-name>
+    <param-value>4</param-value>
+  </context-param>
+  <context-param>
+    <param-name>MaxClusterZoomLevel</param-name>
+    <param-value>18</param-value>
+  </context-param>
+  <context-param>
+    <param-name>MaxClusterZoomLevelCalc</param-name>
+    <param-value>6</param-value>
+  </context-param>
+  <context-param>
+    <param-name>PastaDocumentos</param-name>
+    <param-value>documentos</param-value>
+  </context-param>
+  <context-param>
+    <param-name>PastaEstatutos</param-name>
+    <param-value>arquivos_estatuto</param-value>
+  </context-param>
+  <context-param>
+    <param-name>PastaQuadroDirigentes</param-name>
+    <param-value>arquivos_quadro_dirigentes</param-value>
+  </context-param>
+  <context-param>
+    <param-name>PastaConvenios</param-name>
+    <param-value>arquivos_convenios</param-value>
+  </context-param>
+  <context-param>
+    <param-name>PastaPrestacaoContas</param-name>
+    <param-value>arquivos_prestacao_contas</param-value>
+  </context-param>
+  <context-param>
+    <param-name>FACEBOOK_APP_ID</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>FACEBOOK_APP_SECRET</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>FACEBOOK_APP_TOKEN</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>CHAVE_CRIPTOGRAFIA</param-name>
+    <param-value> </param-value>
+  </context-param>
+  <context-param>
+    <param-name>STATIC_URL</param-name>
+    <param-value>/</param-value>
+  </context-param>
+  <context-param>
+    <param-name>STATIC_CONFIG</param-name>
+    <param-value>static.xml</param-value>
+  </context-param>
+  <context-param>
+	<param-name>SERVER_SMTP</param-name>
+	<param-value> </param-value>
+  </context-param>
+  <context-param>
+	<param-name>SMTP_AUTH</param-name>
+	<param-value> </param-value>
+  </context-param>
+  <context-param>
+	<param-name>SMTP_PORT</param-name>
+	<param-value> </param-value>
+  </context-param>
+  <context-param>
+	<param-name>FROM_ADDRESS</param-name>
+	<param-value> </param-value>
+  </context-param>
+  <context-param>
+	<param-name>NAME_ADDRESS</param-name>
+	<param-value> </param-value>
+  </context-param>
+  <!-- Servlets -->
 	<servlet>
 		<servlet-name>remoteLogging</servlet-name>
 		<servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>

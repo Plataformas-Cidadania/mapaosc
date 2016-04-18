@@ -1,22 +1,19 @@
 package gov.sgpr.fgv.osc.portalosc.uploadlocality.server;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
 import gov.sgpr.fgv.osc.portalosc.configuration.server.RemoteServiceImpl;
-import gov.sgpr.fgv.osc.portalosc.uploadlocality.shared.interfaces.UploadLocalityService;
 import gov.sgpr.fgv.osc.portalosc.uploadlocality.shared.model.AgreementLocalityModel;
-import gov.sgpr.fgv.osc.portalosc.user.client.components.Email;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
-import gov.sgpr.fgv.osc.portalosc.user.shared.model.DefaultUser;
 
 //public class UploadLocalityServiceImpl extends RemoteServiceImpl implements UploadLocalityService {
 public class UploadLocalityServiceImpl extends RemoteServiceImpl {
@@ -37,7 +34,6 @@ public class UploadLocalityServiceImpl extends RemoteServiceImpl {
 	}
 	
 	public void uploadFile(ArrayList<AgreementLocalityModel> convenioList) throws RemoteException {
-		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -119,8 +115,8 @@ public class UploadLocalityServiceImpl extends RemoteServiceImpl {
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, idParceriaTernaria);
-				pstmt.setDate(2, convenio.getDataInicio());
-				pstmt.setDate(3, convenio.getDataConclusao());
+				pstmt.setDate(2, new Date(convenio.getDataInicio().getTime()));
+				pstmt.setDate(3, new Date(convenio.getDataConclusao().getTime()));
 				pstmt.setString(4, convenio.getSituacaoParceria());
 				pstmt.setString(5, convenio.getTipoParceria());
 				pstmt.setDouble(6, convenio.getValorTotal());
