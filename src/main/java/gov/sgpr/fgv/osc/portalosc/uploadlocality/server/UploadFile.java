@@ -35,16 +35,12 @@ public class UploadFile extends HttpServlet {
 	
 	private ArrayList<AgreementLocalityModel> convenios = new ArrayList<AgreementLocalityModel>();
 	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fileType = request.getParameter("dtipo_arquivo");
 		
 		isMultipart = ServletFileUpload.isMultipartContent(request);
 		if(!isMultipart){
-			try {
-				response.sendRedirect("/UploadLocality.html");
-			} catch (IOException e) {
-				
-			}
+			msg = "Arquivo não encontrado.";
 		}
 		
 		filePath = getServletContext().getRealPath("/WEB-INF/locality");
@@ -74,7 +70,7 @@ public class UploadFile extends HttpServlet {
 					fi.write(file);
 				}
 			}
-			response.sendRedirect("/UploadLocality.html");
+			
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
@@ -88,6 +84,12 @@ public class UploadFile extends HttpServlet {
 		}else if(fileType == "JSON"){
 			
 		}
+		
+		for(File file : new File(tempPath).listFiles()){
+			file.delete();
+		}
+		
+		response.sendRedirect("/UploadLocality.html");
 	}
 	
 	private Boolean readCSV(){
@@ -95,9 +97,9 @@ public class UploadFile extends HttpServlet {
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filePath + "/" + fileName));
+			
 			String lineCSV = null;
-			while ((lineCSV = br.readLine()) != null) {
-			    String[] cols = lineCSV.split(",");
+			while ((lineCSV = br.readLine()) != null) {String[] cols = lineCSV.split(",");
 			    
 			    if(cols.length < 12){
 			    	msg = "Há colunas faltando.";
@@ -167,9 +169,11 @@ public class UploadFile extends HttpServlet {
 				    		msg = "A coluna de \"Valor da Contrapartida financeira\" não foi validada.";
 				    	}
 				    }
+				    convenios.add(conv);
 			    }
 			    
 			    if(msg != ""){
+			    	convenios.clear();
 			    	result = false;
 			    	break;
 			    }
@@ -178,6 +182,11 @@ public class UploadFile extends HttpServlet {
 		}catch (Exception e){
 			msg = "Ocorreu um erro no momento da leitura do arquivo.";
 			result = false;
+		}
+		System.out.println(" ========== TESTE: " + convenios.size() + " ========== ");
+		System.out.println(" ========== MSG: " + msg + " ========== ");
+		for(AgreementLocalityModel a : convenios){
+			System.out.println(a.getNomeFantasiaProponente());
 		}
 		return result;
 	}
