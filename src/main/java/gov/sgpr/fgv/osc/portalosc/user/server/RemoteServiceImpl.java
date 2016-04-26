@@ -99,7 +99,7 @@ public abstract class RemoteServiceImpl extends RemoteServiceServlet {
 				e.printStackTrace();
 
 			}
-			copyFile("src/main/webapp/WEB-INF/web.xml", "src/main/webapp/WEB-INF/web-sample.xml");
+			//copyFile("src/main/webapp/WEB-INF/web.xml", "src/main/webapp/WEB-INF/web-sample.xml");
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Class: " + this.getClass().getName() + " / Method: init(ServletConfig config)");
 			logger.log(Level.SEVERE, e.getMessage());
