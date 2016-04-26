@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/mapaosc-1.7.0-BETA/WEB-INF/classes" path="src/main/java">
+	<classpathentry kind="src" output="target/mapaosc-1.7.1-BETA/WEB-INF/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/mapaosc-1.7.0-BETA/WEB-INF/classes" path="src/main/resources">
+	<classpathentry excluding="**" kind="src" output="target/mapaosc-1.7.1-BETA/WEB-INF/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
@@ -34,5 +34,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-	<classpathentry kind="output" path="target/mapaosc-1.7.0-BETA/WEB-INF/classes"/>
+	<classpathentry kind="output" path="target/mapaosc-1.7.1-BETA/WEB-INF/classes"/>
 </classpath>
