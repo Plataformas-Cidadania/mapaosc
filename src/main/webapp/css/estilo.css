@@ -1473,6 +1473,10 @@ span.magneticTooltip:hover span{
 	line-height: 20px;
 }
 
+#mapa.cadastro .instrucoes div.maxWidth {
+	width: 300px;
+}
+
 #mapa.cadastro .instrucoes ul {
 	float: right;
 	width: 300px;
