@@ -87,7 +87,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT bosc_sq_osc, COALESCE(bosc_nm_fantasia_osc, bosc_nm_osc) nome "
+		String sql = "SELECT bosc_sq_osc, COALESCE(NULLIF(bosc_nm_fantasia_osc, ''), bosc_nm_osc) nome "
 				   + "FROM portal.search_index "
 				   + "WHERE document @@ to_tsquery('portuguese_unaccent', ?) "
 				   + "AND ("
@@ -144,7 +144,7 @@ public class SearchServiceImpl extends RemoteServiceImpl implements SearchServic
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT bosc_sq_osc, COALESCE(bosc_nm_fantasia_osc, bosc_nm_osc) nome "
+		String sql = "SELECT bosc_sq_osc, COALESCE(NULLIF(bosc_nm_fantasia_osc, ''), bosc_nm_osc) nome "
 				   + "FROM portal.search_index "
 				   + "WHERE ("
 				   + "	UPPER(unaccent(bosc_nm_osc)) ILIKE ? "
