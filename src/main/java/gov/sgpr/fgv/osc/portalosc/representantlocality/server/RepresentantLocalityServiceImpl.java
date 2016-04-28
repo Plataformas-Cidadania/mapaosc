@@ -121,7 +121,8 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 		List<CountyModel> result = new ArrayList<CountyModel>();
 		String sql = "SELECT edmu_cd_municipio, edmu_nm_municipio "
 				   + "FROM spat.ed_municipio "
-				   + "WHERE eduf_cd_uf = ?";
+				   + "WHERE eduf_cd_uf = ?"
+				   + "ORDER BY edmu_nm_municipio";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
