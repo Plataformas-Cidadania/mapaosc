@@ -138,6 +138,10 @@ public class OscMarker {
 			oscCertifications.addKeyValue("Vínculos de Trabalho", summary.getLength());
 		}
 		
+		if (summary.getGlobalValue() != null) {
+			oscCertifications.addKeyValue("Correção de Inflação", "Os valores exibidos estão corrigidos pela inflação do mês e ano correntes");
+		}
+		
 /*		oscCertifications.setSectionTitle("Dados");//Certificações");
 		Certifications cert = summary.getCertifications();
 		boolean oscip = cert.getOscipPublication() != null;
