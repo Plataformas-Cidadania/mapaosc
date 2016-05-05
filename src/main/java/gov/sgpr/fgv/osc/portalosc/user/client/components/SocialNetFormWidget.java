@@ -127,7 +127,7 @@ public class SocialNetFormWidget extends Composite {
 			user.setCpf(ncpf);
 			user.setType(UserType.DEFAULT);
 		} else{
-			user.setCpf(-1);
+			//user.setCpf(-1);
 			user.setType(UserType.FACEBOOK);
 		}
 		return user;

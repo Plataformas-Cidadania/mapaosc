@@ -80,9 +80,7 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				pstmt.setString(3, configuration.getNome());
 				pstmt.setString(4, configuration.getSenha());
 				if(configuration.getTipoUsuario() == 3){
-					if(configuration.getCPF() == 0)
-						pstmt.setLong(5, -1);
-					else
+					if(configuration.getCPF() != null)
 						pstmt.setLong(5, configuration.getCPF());
 				}else
 					pstmt.setLong(5, configuration.getCPF());

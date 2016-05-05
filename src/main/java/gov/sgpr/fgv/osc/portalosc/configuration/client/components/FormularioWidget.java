@@ -185,7 +185,7 @@ public class FormularioWidget extends Composite {
 			DOM.getElementById("ctipo").setAttribute("value", String.valueOf(user.getTipoUsuario()));
 		DOM.getElementById("cid").setAttribute("value", String.valueOf(user.getId()));
 		DOM.getElementById("cnome").setAttribute("value", user.getNome());
-		if( user.getCPF() != -1){
+		if( user.getCPF() != null && user.getCPF() != 0){
 			DOM.getElementById("rcpf").setAttribute("value", String.valueOf(user.getCPF()));
 		}
 		DOM.getElementById("cemail").setAttribute("value", user.getEmail());

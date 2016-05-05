@@ -292,7 +292,7 @@ public class ConfigurationController {
 				else if(configuration.getTipoUsuario() == 3){
 					Cookies.setCookie("oscSnUid", configuration.getEmail());
 				}
-				if(configuration.getCPF() != -1){
+				if(configuration.getCPF() != null){
 					Cookies.setCookie("typeUser", "recommend_user");
 				}
 				openPopup("Dados atualizados", "Os dados foram atualizados com sucesso.");
