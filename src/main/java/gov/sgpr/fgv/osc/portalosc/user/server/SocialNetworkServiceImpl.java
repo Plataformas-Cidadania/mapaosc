@@ -66,7 +66,7 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 		PreparedStatement pstmt2 = null;
 
 		String sqlTableUser = "INSERT INTO portal.tb_usuario(tpus_cd_tipo_usuario, tusu_ee_email, tusu_nm_usuario, tusu_cd_senha, "
-				+ "tusu_nr_cpf, tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+				+ "tusu_in_lista_email, tusu_in_ativo, tusu_dt_cadastro) VALUES (?, ?, ?, ?, ?, ?, ?);";
 		String sqlTableNetUser = "INSERT INTO portal.tb_usuario_rede_social(ures_nm_login, reso_cd_rede_social, ures_cd_token, tusu_sq_usuario) "
 				+ "VALUES (?, ?, ?, (SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_ee_email = ?))";
 
@@ -77,10 +77,10 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 			pstmt.setString(2, user.getEmail());
 			pstmt.setString(3, user.getName());
 			pstmt.setString(4, user.getPassword());
-			pstmt.setLong(5, user.getCpf());
-			pstmt.setBoolean(6, user.isMailingListMember());
-			pstmt.setBoolean(7, true);
-			pstmt.setDate(8, sqlDate);
+			//pstmt.setLong(5, user.getCpf());
+			pstmt.setBoolean(5, user.isMailingListMember());
+			pstmt.setBoolean(6, true);
+			pstmt.setDate(7, sqlDate);
 			pstmt.execute();
 
 			pstmt2 = conn.prepareStatement(sqlTableNetUser);
