@@ -350,6 +350,10 @@
 		<servlet-name>searchOSCConfigService</servlet-name>
 		<url-pattern>/Configuration/searchOSCConfigService</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>socialNetworkService</servlet-name>
+		<url-pattern>/Configuration/socialNetworkService</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>remoteLogging</servlet-name>
