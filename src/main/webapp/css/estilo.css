@@ -3419,10 +3419,10 @@ div#floatingLoginErrorList::after {
 #botao_tela_cheia {
 	background-color: #eee;
     position: absolute;
-    bottom: 22px;
+    bottom: 60px;
     right: 10px;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     z-index: 5;
     margin: 0;
 	padding: 0;
@@ -3433,8 +3433,8 @@ div#floatingLoginErrorList::after {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	width: 30px;
-    height: 30px;
+	width: 28px;
+    height: 28px;
 }
 
 .configuracao {
