@@ -375,7 +375,7 @@ public class PublicResources implements Serializable,
 				fmtCurrency.format(culturalApprovedValue));
 		content.put("Valor Captado (Incentivo)",
 				fmtCurrency.format(culturalRaisedValue));
-		/*content.put("Correção de Inflação", 
+		content.put("Correção de Inflação", 
 				"Os valores exibidos estão corrigidos pela inflação do mês e ano correntes");		
 		
 		/*content.put("Proponente (P&D)",
