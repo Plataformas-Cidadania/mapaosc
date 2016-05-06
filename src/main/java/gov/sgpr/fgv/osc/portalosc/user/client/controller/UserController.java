@@ -109,8 +109,8 @@ public class UserController {
 			addDefaultUserWidget();
 		}
 		if (socialNetPanel != null) {
-			//socialNetPanel.add(unavailableSocialNet);
-			addSocialNetUserWidget();
+			socialNetPanel.add(unavailableSocialNet);
+			//addSocialNetUserWidget();
 		}
 		if (organizationUserPanel != null) {
 			addOrganizationUserWidget();
