@@ -206,13 +206,13 @@
 			var newh = parseInt($(window).height())-alturaTopo-alturaRodape;
 			if(newh<370) newh = 370;	// 370 px é a altura mínima do mapa		
 			if(newh<600) {
-				$('#mapa:not(.infograficos)').css('height', newh + 'px');
-				$("#mapa_navegacao").css('height',newh-110);
+				$('#mapa:not(.infograficos)').css('min-height', newh + 'px');
+				$("#mapa_navegacao").css('min-height',newh-110);
 			}
 		}
 		else {
-			$('#mapa:not(.infograficos)').css('height', parseInt($(window).height())-alturaTopo-alturaRodape); // volta à altura original
-			$("#mapa_navegacao").css('height',parseInt($(window).height())-alturaTopo-alturaRodape-110);
+			$('#mapa:not(.infograficos)').css('min-height', parseInt($(window).height())-alturaTopo-alturaRodape); // volta à altura original
+			$("#mapa_navegacao").css('min-height',parseInt($(window).height())-alturaTopo-alturaRodape-110);
 		}
 	}
 

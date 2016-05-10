@@ -98,7 +98,11 @@
 				<form>
 					<fieldset>
 						<div id="localidade" style="margin-top:20px;">
-							<p><a href="formato_de_dados.html">Verifique as regras para envio dos dados clicando aqui</a></p>
+							<ol class="numbers">
+								<li><p><a href="perguntas_localidade.html#pergunta1">Por que enviar a base de dados das parcerias do governo com as organizações da sociedade civil (também chamadas de ONGs)?</a></p></li>
+								<li><p><a href="perguntas_localidade.html#pergunta2">Quais dados obrigatórios devo enviar?</a></p></li>
+								<li><p><a href="perguntas_localidade.html#pergunta3">Quais outros dados posso enviar?</a></p></li>
+							</ol>
 							<!--  <div>
 								<p>Tipo de Localidade</p>
 								<input name="dlocalidade" type="radio" value="uf" id="dtipo_uf" onchange="
@@ -147,13 +151,33 @@
 							<label for="denvio_arquivo">Arquivo</label>
 							</div>
 							<div id="envio_de_arquivo">
+								<div class="description">
+									<p>Ao selecionar a opção “Arquivo” no “Tipo de Entrada”, você optará por enviar uma planilha com os dados das parcerias. Essa planilha deve ser preenchida com os campos solicitados e os dados devem estar no formato requisitado. Essas informações estão disponíveis no link.</p> 
+									<p>Ao optar pelo “Arquivo”, os formatos suportados são *.xls e *csv. Para entender melhor cada formato, você pode acessar <a href="DadosEstadosMunicipios.xlsx">este link</a>.</p>
+									<p>O arquivo disponível no link abaixo vai orientá-lo na produção do arquivo *.xls ou *.csv. Sugere-se que:</p>
+									<p>Passo 1) Faça o download <a href="DadosEstadosMunicipios.xlsx">deste arquivo</a>. Abra em seu computador  e preencha os campos solicitados para cada convênio. Atente para o formato em que devem estar os dados (link para o formato).</p>
+									<p>Os campos obrigatórios devem ser necessariamente preenchidos. Já o preenchimento dos campos desejáveis é opcional. Mas ressaltamos que é muito importante que a OSC envie o maior número de informações possível.</p> 
+									<p>Passo 2) Salve o arquivo no formato desejado (*.xls ou *.csv)  </p>
+									<p>Passo 3) Faça o upload no campo específico, após completar o seu preenchimento.</p> 
+									<p>Passo 4) O sistema irá analisar os dados enviados. Caso estejam no padrão exigido, serão incorporados pelo Mapa. Caso haja alguma imprecisão, indicaremos os possíveis erros e solicitaremos um novo carregamento.</p>
+									<br />
+									<p>Importante: os campos estão pré-configurados para aceitar determinados tipos específicos de dados. Por exemplo: o campo “data de início da parceria” só aceita dados em formato de data DD/MM/AAAA.</p> 
+									
+								</div>
 								<div class="input"><label for="darquivo">Arquivo Enviado:</label> <input type="file" name="darquivo" id="darquivo"></div><div><label>Selecione o arquivo a ser enviado</label></div> 
 								<div class="input"><label for="dtipo_arquivo">Tipo de Arquivo: </label> <select name="dtipo_arquivo" id="dtipo_arquivo">
 									<option>CSV</option>
 									<option>XLS</option>
 								</select></div><div><label>Selecione o tipo de arquivo a ser enviado</label></div>
+								<div class='clearfix'></div>
 							</div>
 							<div id="envio_de_servico">
+								<div class="description">
+									<p>Ao selecionar a opção “Web Service” no “Tipo de Entrada”, você optará por enviar a URL do seu Web Service. O Web Service é uma forma de comunicação de aplicações através da Internet, permitindo a disponibilização de dados interativos na Web.</p> 
+									<p>Caso tenha interesse em transmitir os dados através de um Web Service, este deve ser criado seguindo as diretrizes do <a href="#">arquivo abaixo</a>.</p> 
+									<p>Ao optar pelo “Web Service”, os formatos suportados são *.csv, *.xml e *.json. Para entender melhor cada formato, você pode acessar <a href="perguntas_localidade.html#pergunta5">este link</a>.</p>
+									<p>Lembre-se de indicar a periodicidade com que os dados do seu Web Service devem ser acessados. Esse passo é fundamental para garantir a atualização de seus dados.</p>
+								</div>
 								<div class="input"><label for="dservico">Endereço do Serviço:</label> <input type="text" name="dservico" id="dservico"></div><div><label>Indique o endereço de acesso(url) do webservice</label></div>
 								<div class="input"><label for="dtipo_servico">Arquivo Retornado: </label> <select name="dtipo_servico" id="dtipo_servico">
 									<option>XML</option>
@@ -169,6 +193,7 @@
 									<option>Meses</option>
 								</select>
 							</div><div><label>Indique a periodicidade com a qual o Mapa deve atualizar os dados</label></div>
+							<div class='clearfix'></div>
 						</div>
 						<input type='submit' value="Enviar Dados" disabled="disabled" />
 					</fieldset>

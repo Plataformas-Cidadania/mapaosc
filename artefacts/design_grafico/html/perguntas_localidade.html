@@ -73,26 +73,75 @@
 
 				<div id="mapa" class="institucional">
 
-					<div><h1>Formato dos Dados</h1>
+					<div><h1>Perguntas Localidade</h1>
 
-					<div class="metodologia wrapper clearfix">
+					<div class="faq wrapper clearfix">
 						
-						<h2>CSV</h2>
-						<p>O formato CSV(<strong>C</strong>omma <strong>S</strong>eparated <strong>V</strong>alues) é um dos formatos mais utilizados para a troca de dados entre duas bases. Sua utilização tão abrangente se deve ao fato de poder ser lido, editado e gerado a partir tanto de bases de dados no formato SQL quanto de arquivos do Excel. A principal característica do formato é o fato de ser formado imitando uma tabela, com um cabeçalho contendo o nome das colunas, seguido de uma tripa de dados de um registro a cada linha. Como o nome já indica cada par de valores, tanto no cabeçalho quanto nas colunas, é separado por vírgulas(<em>,</em>) ou pontos e vírgulas(<em>;</em>) portanto é necessário que esses caracteres não apareçam nas variáveis do arquivo.</p>
-						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo CSV</a></p>
-						<p>Esse formato pode ser utilizado com ambos os tipos de envio.</p>  
-						<h2>XLS</h2>
-						<p>Formato padrão do Microsoft Excel, o XLS(<strong>X</strong>m<strong>L</strong> <strong>S</strong>preadsheet) tem uma qualidade razoável e é simples de ser gerado pela ubiquidade do microsoft office.</p>
-						<p>Esse formato é exclusivo para uso com Upload de Arquivo.</p>
-						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo XLS</a></p>
-						<h2>XML</h2>
-						<p>O formato XML (e<strong>X</strong>tensible <strong>M</strong>arkup <strong>L</strong>anguage) é popularmente utilizado para a tranferência de dados binários nos quais é necessária um maior controle do dado recebido. Foi substituído pelo JSON para boa parte das aplicações mais simples já que adicionava uma complexidade alta e por vezes desnecessária ao processo. Sua principal vantagem é a quantidade de maneiras através das quais é possível verificar a veracidade do dado disponível. </p>
-						<p>Esse formato é exclusivo para uso com WebServices.</p>
-						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo XML</a></p>
-						<h2>JSON</h2>
-						<p>O formato JSON (<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation) é um formato de transferência de dados que apresenta cada elemento como um objeto com diversos atributos. Sua utilização cresce bastante ao longo do tempo, em especial pela sua simplicidade e fácil compreensão. Uma outra vantagem é que para os formatos utilizados em WebServices ele é mais leve que o outro formato popular, o xml.</p> 
-						<p>Esse formato é exclusivo para uso com WebServices.</p>
-						<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo JSON</a></p>
+						<ol class="numbers">
+							<li id="pergunta1">
+								<h2>Por que enviar a base de dados da parceria do Estado/município com OSCs para o Mapa das Organizações da Sociedade Civil?</h3>
+								<p>O Mapa das OSC está reunindo um volume expressivo de dados sobre as parcerias das OSCs (ou entidades sem fins lucrativos) com os governos federal, estaduais e municipais. Esses dados auxiliam gestores governamentais, a população e as próprias OSCs a dar transparência no uso dos recursos públicos e nas ações de cada organização. Lembre-se: este Mapa é um canal simples para que cada governo disponibilize de forma simples e georreferenciada as parcerias celebradas com OSCs e permite à população se informar.</p>
+								<p>Se houver dúvidas, solicitamos que sejam encaminhadas para <a href="mailto: mapaosc@ipea.gov.br">mapaosc@ipea.gov.br</a>.</p>
+							</li>
+							<li id="pergunta2">
+								<h2>Quais são os dados obrigatórios que devo enviar?</h3>
+								<p>O arquivo-modelo é dividido nos grandes grupos: “Campos obrigatórios” e “Campos não-obrigatórios, mas desejáveis”. Os “Campos obrigatórios” são indispensáveis para que base de dados possa ser carregada no Mapa. Lembre-se: a base deve conter TODOS os <strong>campos obrigatórios</strong>. Os campos não precisam ter o mesmo nome, mas devem apresentar o tipo de informação demandada. Por isso, explicamos abaixo que tipo de informação desejamos em cada campo.</p>
+								<p>Observamos que o termo “PROPONENTE”, presente nos campos solicitados, deve ser entendido como a OSC com a qual o governo celebra a parceria.</p>
+								<p>Segue abaixo uma orientação detalhada do tipo de informação solicitada nos “<strong>Campos Obrigatórios</strong>”:</p>
+								<ol class="numbers">
+									<li><strong>Número da parceria</strong>: Código numérico que identifica a parceria assinada. Apenas números. Podem aparecer terminologias distintas, como “número de empenho”, “número do processo” ou “transferência”. O importante é que o campo contenha um código que identifique um único convênio, mesmo que seja o valor de apenas uma de suas parcelas pagas (neste caso, o número deve se repetir em outras parcelas pagas para o mesmo convênio).</li>
+									<li><strong>Data de início</strong>: Data em que o convênio foi assinado ou publicado no formato DD/MM/AAAA. Desejamos aqui saber quando a parceria foi iniciada.</li>
+									<li><strong>Data de conclusão</strong>: Data oficialmente prevista de conclusão do convênio, no formato DD/MM/AAAA.</li>
+									<li><strong>Situação da parceria</strong>: Este campo refere-se ao status da parceria: se ela está em execução, foi finalizada, foi cancelada, está suspensa etc. Embora possamos saber a data de início e finalização, é usual que as bases apresentem também outras etapas do processo, como as referentes à análise da prestação de contas por parte da OSC.</li>
+									<li><strong>Tipo de parceria</strong>: O instrumento de parceria estabelecido entre o governo e a OSC pode variar, dependendo da finalidade da parceria, da natureza da OSC e da legislação de referência. Podem ser “Convênio”, “Termo de parceria”, “Contrato de gestão”, “Termo de fomento”, “Termo de colaboração”, “Acordo de cooperação”, entre outros.</li>
+									<li><strong>Valor total</strong>: Valor total aprovado da parceria. Este campo deve conter APENAS números e vírgula (ou ponto), para indicar os centavos. Não é necessário indicar a moeda.</li>
+									<li><strong>Valor pago</strong>: Valor desembolsado para a execução da parceria, acumulado até a data da extração da base de dados. Este campo deve conter APENAS números e vírgula/ponto para indicar os centavos. Não é necessário indicar a moeda.</li>
+									<li><strong>Órgão concedente</strong>: Nome do órgão público estadual/municipal responsável por realizar a parceria com a OSC. Se o nome não for abreviado, melhor. Verificou-se que alguns portais da transparência usam a seguinte terminologia alternativa: “Concedente”, “Unidade”, “Unidade Gestora”, “Órgão”, entre outros. </li>
+									<li><strong>CNPJ do proponente</strong>: CNPJ da OSC proponente, devendo conter 14 dígitos numéricos. Não devem ser incluídos pontos (“.”), barras (“/”) ou quaisquer outros dígitos.  Esse campo é fundamental. É por meio dele que todas as outras informações das OSCs são conectadas, no MAPA.</li>
+									<li><strong>Razão social do proponente</strong>: Razão social da OSC lucrativos proponente.</li>
+								</ol>
+							</li>
+							<li id="pergunta3">
+								<h2>Quais outros dados posso enviar?</h3>
+								<p>O arquivo modelo está  dividido em “Campos obrigatórios” e “Campos não-obrigatórios, mas desejáveis”. Os “Campos obrigatórios” são indispensáveis para que base de dados possa ser carregada no Mapa.</p>
+								<p>O campo “PROPONENTE” deve indicar a OSC com a qual o governo celebra parceria. Há várias denominações possíveis, mas está é a mais usual.</p>
+								<p>Segue abaixo uma orientação detalhada do tipo de informação solicitada nos “<strong>Campos Desejáveis</strong>”:</p>
+								<ol>
+									<li><strong>Nome fantasia do proponente</strong>: Nome fantasia da OSC.</li>
+									<li><strong>Município do proponente</strong>: Município ou código do IBGE do Município em que está sediada a OSC</li>
+									<li><strong>Endereço do proponente</strong>: Endereço em que está sediada a OSC. Preferencialmente, use o formato LOGRADOURO NÚMERO BAIRRO CIDADE UF CEP.</li>
+									<li><strong>Valor total da contrapartida financeira</strong>: Valor total que deve ser aportado pelo proponente para realização da parceria, devendo ser representado APENAS com números e vírgula/ponto para indicar os centavos. Não é necessário indicar a moeda.</li>
+									<li><strong>Objeto da parceria</strong>: Pequeno texto contendo os objetivos ou razões para celebração da parceria com a OSC. As terminologias adotadas também podem ser “Elemento de Despesa”, “Objeto Resumido” e “Justificativa”.</li>
+								</ol>
+								<p>Além dos campos obrigatórios e desejáveis, quaisquer outros campos que eventualmente estejam disponíveis serão muito bem vindos, pois assim o conjunto das informações a disponibilizar no Mapa será mais amplo e detalhado.</p>
+							</li>
+							<li id="pergunta4">
+								<h2>Formatos de arquivo para upload</h2>
+								<h3>CSV</h3>
+								<p>O formato CSV(<strong>C</strong>omma <strong>S</strong>eparated <strong>V</strong>alues) é um dos formatos mais utilizados para a troca de dados entre duas bases. Sua utilização tão abrangente se deve ao fato de poder ser lido, editado e gerado a partir tanto de bases de dados no formato SQL quanto de arquivos do Excel. A principal característica do formato é o fato de ser formado imitando uma tabela, com um cabeçalho contendo o nome das colunas, seguido de uma tripa de dados de um registro a cada linha. Como o nome já indica cada par de valores, tanto no cabeçalho quanto nas colunas, é separado por vírgulas(<em>,</em>) ou pontos e vírgulas(<em>;</em>) portanto é necessário que esses caracteres não apareçam nas variáveis do arquivo.</p>
+								<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="DadosEstadosMunicipios.xlsx">Modelo CSV</a></p>
+								<p>Esse formato pode ser utilizado com ambos os tipos de envio.</p>  
+								<h3>XLS</h3>
+								<p>Formato padrão do Microsoft Excel, o XLS(<strong>X</strong>m<strong>L</strong> <strong>S</strong>preadsheet) tem uma qualidade razoável e é simples de ser gerado pelo amplo uso do Microsoft Office.</p>
+								<p>Esse formato é exclusivo para uso com Upload de Arquivo.</p>
+								<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="DadosEstadosMunicipios.xlsx">Modelo XLS</a></p>
+							</li>
+							<li id="pergunta5">
+								<h2>Formatos de Web Service suportados</h2>
+								<h3>CSV</h3>
+								<p>O formato CSV(<strong>C</strong>omma <strong>S</strong>eparated <strong>V</strong>alues) é um dos formatos mais utilizados para a troca de dados entre duas bases. Sua utilização tão abrangente se deve ao fato de poder ser lido, editado e gerado a partir tanto de bases de dados no formato SQL quanto de arquivos do Excel. A principal característica do formato é o fato de ser formado imitando uma tabela, com um cabeçalho contendo o nome das colunas, seguido de uma tripa de dados de um registro a cada linha. Como o nome já indica cada par de valores, tanto no cabeçalho quanto nas colunas, é separado por vírgulas(<em>,</em>) ou pontos e vírgulas(<em>;</em>) portanto é necessário que esses caracteres não apareçam nas variáveis do arquivo.</p>
+								<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="DadosEstadosMunicipios.xlsx">>Modelo CSV</a></p>
+								<p>Esse formato pode ser utilizado com ambos os tipos de envio.</p>  
+								<h3>XML</h3>
+								<p>O formato XML (e<strong>X</strong>tensible <strong>M</strong>arkup <strong>L</strong>anguage) é popularmente utilizado para a tranferência de dados binários nos quais é necessária um maior controle do dado recebido. Foi substituído pelo JSON para boa parte das aplicações mais simples já que adicionava uma complexidade alta e por vezes desnecessária ao processo. Sua principal vantagem é a quantidade de maneiras através das quais é possível verificar a veracidade do dado disponível. </p>
+								<p>Esse formato é exclusivo para uso com WebServices.</p>
+								<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo XML</a></p>
+								<h3>JSON</h3>
+								<p>O formato JSON (<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation) é um formato de transferência de dados que apresenta cada elemento como um objeto com diversos atributos. Sua utilização cresce bastante ao longo do tempo, em especial pela sua simplicidade e fácil compreensão. Uma outra vantagem é que para os formatos utilizados em WebServices ele é mais leve que o outro formato popular, o xml.</p> 
+								<p>Esse formato é exclusivo para uso com WebServices.</p>
+								<p>Para utilizar esse formato é necessário que se utilize o modelo apresentado a seguir: <a href="#">Modelo JSON</a></p>
+							</li>
+						</ol>
 					</div>
 				</div>
 
