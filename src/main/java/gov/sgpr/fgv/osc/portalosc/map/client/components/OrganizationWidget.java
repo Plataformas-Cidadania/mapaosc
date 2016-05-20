@@ -47,10 +47,10 @@ public class OrganizationWidget extends Composite {
 
 	public String getHtml() {
 		// TODO: Remover imagem hardcoded
-		menuInfo.setImageUrl("imagens/org_indisponivel.jpg");
+//		menuInfo.setImageUrl("imagens/org_indisponivel.jpg");
 		StringBuilder htmlBuilder = new StringBuilder();
 		htmlBuilder.append("<div class='organizacao'>");
-		htmlBuilder.append("<img src='" + menuInfo.getImageUrl() + "' alt='" + menuInfo.getTitle() + "' />");
+//		htmlBuilder.append("<img src='" + menuInfo.getImageUrl() + "' alt='" + menuInfo.getTitle() + "' />");
 //		htmlBuilder.append("<a href='" + GWT.getHostPageBaseURL() + "Organization.html#" + History.getToken() + "'>");
 		htmlBuilder.append("<span id='tooltip_' title='' class='menuTooltip'>" + menuInfo.getTitle() + "</span>");
 //		htmlBuilder.append("</a>");
