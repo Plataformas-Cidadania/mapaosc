@@ -467,7 +467,7 @@ public class OscMain implements Serializable, KeyValueRenderer<String, String> {
 	}
 	
 	private String formatCNPJ(String cnpj) {
-		while(cnpj.length() <= 14){
+		while(cnpj.length() < 14){
 			cnpj = "0" + cnpj;
 		}
 		
@@ -483,7 +483,7 @@ public class OscMain implements Serializable, KeyValueRenderer<String, String> {
 	}
 	
 	private String formatCEI(String cei) {
-		while(cei.length() <= 12){
+		while(cei.length() < 12){
 			cei = "0" + cei;
 		}
 		

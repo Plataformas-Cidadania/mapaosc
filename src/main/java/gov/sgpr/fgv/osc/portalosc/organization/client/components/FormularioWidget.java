@@ -926,7 +926,7 @@ public class FormularioWidget extends Composite {
 	private String formatCEI(Number number) {
 		String cei = convertNumberToString(number);
 		
-		while(cei.length() <= 12){
+		while(cei.length() < 12){
 			cei = "0" + cei;
 		}
 		
