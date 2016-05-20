@@ -454,12 +454,12 @@ public class OscMain implements Serializable, KeyValueRenderer<String, String> {
 		content.put("Endereço", address);
 		content.put("Atividade Econômica", cnaeDescription);
 		content.put("Natureza Juridica", legalTypeDescription);
-		content.put("Descrição entidade", description != null ? description
+		content.put("Descrição da OSC", (description != null && description != "") ? description
 				: "Não disponível");
 		content.put("Ano de fundação",
-				foundationYear.equals("0") ? String.valueOf(foundationYear)
-						: "Não disponível");
-		content.put("Website", site != null ? site : "Não disponível");
+				foundationYear.equals("0") ? "Não disponível"
+						: String.valueOf(foundationYear));
+		content.put("Website", (site != null && site != "") ? site : "Não disponível");
 		for (Map.Entry<String, String> entry : contacts.entrySet()) {
 			content.put(entry.getKey(), entry.getValue());
 		}

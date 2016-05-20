@@ -488,7 +488,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		String sql = "SELECT bosc_nr_identificacao, dcti_cd_tipo, bosc_nm_osc, bosc_nm_fantasia_osc, ospr_ds_endereco, "
 				+ "ospr_ds_endereco_complemento, ospr_nm_bairro, ospr_nm_municipio, ospr_sg_uf, ospr_nm_cep, "
 				+ "dcsc_cd_alpha_subclasse, dcsc_nm_subclasse, ST_AsText(ospr_geometry) wkt, dcnj_cd_alpha_natureza_juridica, "
-				+ "dcnj_nm_natureza_juridica, ospr_dt_ano_fundacao, ospr_ee_site, ospr_cd_municipio "
+				+ "dcnj_nm_natureza_juridica, ospr_dt_ano_fundacao, ospr_ee_site, ospr_cd_municipio, ospr_tx_descricao "
 				+ "FROM portal.vm_osc_principal WHERE bosc_sq_osc = ?";
 
 		// logger.info(sql);
@@ -563,6 +563,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				int[] dsCodes = { 1, 2, 5, 6, 8, 12, 13 };
 				DataSource[] dataSources = getDataSources(dsCodes, oscId);
 				main.setDataSources(dataSources);
+				
+				main.setDescription(rs.getString("ospr_tx_descricao"));
 
 				return main;
 			}
