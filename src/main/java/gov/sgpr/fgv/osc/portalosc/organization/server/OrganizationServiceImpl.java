@@ -388,16 +388,27 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 //			pstmt.close();
 			organization.setValorRecursosTotal(organization.getValorParceriasFederal());
 			
-			
-			
 			for(ProjetoModel p : projetoList){
 				if(organization.getValorRecursosPrivados() < 0) organization.setValorRecursosPrivados(0.0);
-				organization.setValorRecursosPrivados(organization.getValorRecursosPrivados() + p.getValorTotal());
+				if(organization.getValorParceriasFederal() < 0) organization.setValorParceriasFederal(0.0);
+				if(organization.getValorParceriasEstadual() < 0) organization.setValorParceriasEstadual(0.0);
+				if(organization.getValorParceriasMunicipal() < 0) organization.setValorParceriasMunicipal(0.0);
+				
+				if(p.getFonteRecursos().contains("Federal")){
+					organization.setValorParceriasFederal(organization.getValorParceriasFederal() + p.getValorTotal());
+				}else if(p.getFonteRecursos().contains("Estadual")){
+					organization.setValorParceriasEstadual(organization.getValorParceriasEstadual() + p.getValorTotal());
+				}else if(p.getFonteRecursos().contains("Municipal")){
+					organization.setValorParceriasMunicipal(organization.getValorParceriasMunicipal() + p.getValorTotal());
+				}else{
+					organization.setValorRecursosPrivados(organization.getValorRecursosPrivados() + p.getValorTotal());
+				}
 			}
 			if(organization.getValorRecursosPrivados() < 0) organization.setValorRecursosPrivados(0.0);
+			if(organization.getValorParceriasFederal() < 0) organization.setValorParceriasFederal(0.0);
+			if(organization.getValorParceriasEstadual() < 0) organization.setValorParceriasEstadual(0.0);
+			if(organization.getValorParceriasMunicipal() < 0) organization.setValorParceriasMunicipal(0.0);
 			organization.setValorRecursosTotal(organization.getValorRecursosTotal() + organization.getValorRecursosPrivados());
-			
-			
 			
 			rs.close();
 			pstmt.close();

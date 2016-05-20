@@ -524,8 +524,11 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("						<p id='projeto_fonte"+ proj +"' >");
 				htmlBuilder.append("							<select  " + (editable ? "" : "disabled") + ">");
 				if(p.getFonteRecursos() == "Público"){
-					htmlBuilder.append("							<option value='Público' selected='selected' > Público </option>");
+					htmlBuilder.append("							<option value='Público Federal' selected='selected' > Público Federal </option>");
+					htmlBuilder.append("							<option value='Público Estadual' selected='selected' > Público Estadual </option>");
+					htmlBuilder.append("							<option value='Público Municipal' selected='selected' > Público Municipal </option>");
 					htmlBuilder.append("							<option value='Privado' > Privado </option>");
+					htmlBuilder.append("							<option value='Próprio' > Próprio </option>");
 				}else if(p.getFonteRecursos() == "Privado"){
 					htmlBuilder.append("							<option value='Público' > Público </option>");
 					htmlBuilder.append("							<option value='Privado' selected='selected' > Privado </option>");
