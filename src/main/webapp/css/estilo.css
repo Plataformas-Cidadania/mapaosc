@@ -791,6 +791,8 @@ a.ajuda {
 	vertical-align: middle;
 	width: 110px;
 	line-height: 1.2em;
+	margin-left: 100px;
+    margin-top: 25px;
 }
 
 #mapa_navegacao .organizacao img {
