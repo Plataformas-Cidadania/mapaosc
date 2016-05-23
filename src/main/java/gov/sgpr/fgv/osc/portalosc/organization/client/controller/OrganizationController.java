@@ -671,8 +671,12 @@ public class OrganizationController {
 		htmlBuilder.append("<strong class='separador'>Fonte de recurso</strong>");
 		htmlBuilder.append("<p id='projeto_fonte"+ proj +"' ><select>");
 		htmlBuilder.append("<option value='' selected='selected'>Indique a fonte de recurso</option>");
-		htmlBuilder.append("<option value='Público' > Público </option>");
+		htmlBuilder.append("<option value='Público Federal' > Público Federal </option>");
+		htmlBuilder.append("<option value='Público Estadual' > Público Estadual </option>");
+		htmlBuilder.append("<option value='Público Municipal' > Público Municipal </option>");
 		htmlBuilder.append("<option value='Privado' > Privado </option>");
+		htmlBuilder.append("<option value='Próprio' > Próprio </option>");
+		
 		htmlBuilder.append("</select>");
 		htmlBuilder.append("</p>");
 		htmlBuilder.append("</div>");
