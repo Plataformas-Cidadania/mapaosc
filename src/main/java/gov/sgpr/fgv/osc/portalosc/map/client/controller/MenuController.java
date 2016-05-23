@@ -265,6 +265,8 @@ public class MenuController implements ValueChangeHandler<String> {
 		mainItem.setItemTitle("Dados gerais");
 		mainItem.setId("dados_gerais");
 		mainItem.setCssClass("dados");
+		String toolTipDadosgerais = " Informações gerais da organização, como CNPJ, endereço, área de atuação e contatos.";
+		mainItem.setTitleToolTip(toolTipDadosgerais);
 
 		if (osc.getMain().getDataSources().length > 0)
 			mainItem.setInfoSource(getHelpContent(oscmain.getDataSources()));
@@ -293,10 +295,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		publicResourcesItem.setItemTitle("Recursos públicos");
 		publicResourcesItem.setId("recursos");
 		publicResourcesItem.setCssClass("dados");
-		String titleToolTip = "Os recursos públicos aqui apresentados são referentes </br>"
-				+ "às parcerias realizadas com o governo federal através do<br> SICONV e os recursos "
-				+ "obtidos através de Leis de Incentivo";
-
+		String titleToolTip = "Valores de recursos repassados à organização pela administração pública dos níveis federal, estadual e/ou municipal.";
 		publicResourcesItem.setTitleToolTip(titleToolTip);
 
 		if (osc.getPublicResources().getDataSources().length > 0)
@@ -306,13 +305,18 @@ public class MenuController implements ValueChangeHandler<String> {
 		workRelationshipItem.setItemTitle("Relações de trabalho");
 		workRelationshipItem.setId("trab");
 		workRelationshipItem.setCssClass("dados");
+		String toolTipRelationship = "Número de colaboradores com vínculos formais, voluntários e outros tipos de relações de trabalho da organização.";
+		workRelationshipItem.setTitleToolTip(toolTipRelationship);
+		
 		if (osc.getWorkRelationship().getDataSources().length > 0)
 			workRelationshipItem.setInfoSource(getHelpContent(osc.getWorkRelationship().getDataSources()));
 
 		KeyValueMenuItem certificationsItem = new KeyValueMenuItem(osc.getCertifications());
-		certificationsItem.setItemTitle("Certificações");
+		certificationsItem.setItemTitle("Certificações e qualificações");
 		certificationsItem.setId("cert");
 		certificationsItem.setCssClass("dados");
+		String toolTipcertifications = "Certificados e qualificações concedidos pela administração pública federal para a organização.";
+		certificationsItem.setTitleToolTip(toolTipcertifications);
 
 		if (osc.getCertifications().getDataSources().length > 0)
 			certificationsItem.setInfoSource(getHelpContent(osc.getCertifications().getDataSources()));
@@ -326,6 +330,8 @@ public class MenuController implements ValueChangeHandler<String> {
 			keyValueItem.setItemTitle("Conselhos e comissões");
 			keyValueItem.setId("cons");
 			keyValueItem.setCssClass("dados");
+			String toolTipConselhos = "Assento em instâncias participativas de nível federal, como conselhos, comissões, fóruns etc.";
+			keyValueItem.setTitleToolTip(toolTipConselhos);
 
 			if (osc.getCommittees().getDataSources().length > 0)
 				keyValueItem.setInfoSource(getHelpContent(osc.getCommittees().getDataSources()));
@@ -336,6 +342,8 @@ public class MenuController implements ValueChangeHandler<String> {
 			textItem.setItemTitle("Conselhos e Comissões");
 			textItem.setId("cons");
 			textItem.setCssClass("dados");
+			String toolTipConselhos = "Assento em instâncias participativas de nível federal, como conselhos, comissões, fóruns etc.";
+			textItem.setTitleToolTip(toolTipConselhos);
 			textItem.setInfo("Esta Organização não participa de nenhum conselho ou comissão. ");
 			committeesItem = textItem;
 		}
