@@ -344,7 +344,7 @@ public class MenuController implements ValueChangeHandler<String> {
 			textItem.setCssClass("dados");
 			String toolTipConselhos = "Assento em instâncias participativas de nível federal, como conselhos, comissões, fóruns etc.";
 			textItem.setTitleToolTip(toolTipConselhos);
-			textItem.setInfo("Esta Organização não participa de nenhum conselho ou comissão.");
+			textItem.setInfo("Esta Organização não participa de nenhum conselho ou comissão. ");
 			committeesItem = textItem;
 		}
 

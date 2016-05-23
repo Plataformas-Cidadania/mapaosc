@@ -169,7 +169,7 @@ public class MagnetPaperClipWidget extends Composite {
 				htmlBuilder.append(sectionContent);
 			}
 			
-			htmlBuilder.append("<div  align = \"right\" >"+windowInfo.getFooter());
+			htmlBuilder.append("<div  align = \"right\">"+windowInfo.getFooter());
 			htmlBuilder.append(getHelpButton()+"</div>");
 			htmlBuilder.append("</div>");
 			htmlBuilder.append("</div>");
