@@ -125,6 +125,7 @@ public class OscMarker {
 		PaperClipCheckListSection oscCertifications = new PaperClipCheckListSection();
 		oscCertifications.setSectionTitle("");
 
+		
 //		if (summary.getPartnerships() != null) {
 //			oscCertifications.addKeyValue("Projetos em curso",String.valueOf(summary.getPartnerships()));
 //	        }
