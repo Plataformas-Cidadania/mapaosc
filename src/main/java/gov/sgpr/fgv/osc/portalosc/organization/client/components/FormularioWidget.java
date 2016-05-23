@@ -523,22 +523,46 @@ public class FormularioWidget extends Composite {
 				htmlBuilder.append("						<strong class='separador'>Fonte de recurso</strong>");
 				htmlBuilder.append("						<p id='projeto_fonte"+ proj +"' >");
 				htmlBuilder.append("							<select  " + (editable ? "" : "disabled") + ">");
-				if(p.getFonteRecursos() == "Público"){
+				if(p.getFonteRecursos() == "Público Federal"){
 					htmlBuilder.append("							<option value='Público Federal' selected='selected' > Público Federal </option>");
+					htmlBuilder.append("							<option value='Público Estadual' > Público Estadual </option>");
+					htmlBuilder.append("							<option value='Público Municipal' > Público Municipal </option>");
+					htmlBuilder.append("							<option value='Privado' > Privado </option>");
+					htmlBuilder.append("							<option value='Próprio' > Próprio </option>");
+				}else if(p.getFonteRecursos() == "Público Estadual"){
+					htmlBuilder.append("							<option value='Público Federal' > Público Federal </option>");
 					htmlBuilder.append("							<option value='Público Estadual' selected='selected' > Público Estadual </option>");
+					htmlBuilder.append("							<option value='Público Municipal' > Público Municipal </option>");
+					htmlBuilder.append("							<option value='Privado' > Privado </option>");
+					htmlBuilder.append("							<option value='Próprio' > Próprio </option>");
+				}else if(p.getFonteRecursos() == "Público Municipal"){
+					htmlBuilder.append("							<option value='Público Federal' > Público Federal </option>");
+					htmlBuilder.append("							<option value='Público Estadual' > Público Estadual </option>");
 					htmlBuilder.append("							<option value='Público Municipal' selected='selected' > Público Municipal </option>");
 					htmlBuilder.append("							<option value='Privado' > Privado </option>");
 					htmlBuilder.append("							<option value='Próprio' > Próprio </option>");
 				}else if(p.getFonteRecursos() == "Privado"){
-					htmlBuilder.append("							<option value='Público' > Público </option>");
+					htmlBuilder.append("							<option value='Público Federal' > Público Federal </option>");
+					htmlBuilder.append("							<option value='Público Estadual' > Público Estadual </option>");
+					htmlBuilder.append("							<option value='Público Municipal' > Público Municipal </option>");
 					htmlBuilder.append("							<option value='Privado' selected='selected' > Privado </option>");
-				}else{
+					htmlBuilder.append("							<option value='Próprio' > Próprio </option>");
+				}else if(p.getFonteRecursos() == "Próprio"){
+					htmlBuilder.append("							<option value='Público Federal' > Público Federal </option>");
+					htmlBuilder.append("							<option value='Público Estadual' > Público Estadual </option>");
+					htmlBuilder.append("							<option value='Público Municipal' > Público Municipal </option>");
+					htmlBuilder.append("							<option value='Privado' > Privado </option>");
+					htmlBuilder.append("							<option value='Próprio' selected='selected' > Próprio </option>");
+				}else {
 					if(editable)
 						htmlBuilder.append("							<option value='' disabled selected>Indique a fonte de recurso</option>");
 					else
 						htmlBuilder.append("							<option value='' disabled selected>Informação não disponível</option>");
-					htmlBuilder.append("							<option value='Público' > Público </option>");
+					htmlBuilder.append("							<option value='Público Federal' > Público Federal </option>");
+					htmlBuilder.append("							<option value='Público Estadual' > Público Estadual </option>");
+					htmlBuilder.append("							<option value='Público Municipal' > Público Municipal </option>");
 					htmlBuilder.append("							<option value='Privado' > Privado </option>");
+					htmlBuilder.append("							<option value='Próprio' > Próprio </option>");
 				}
 				htmlBuilder.append("							</select>");
 				htmlBuilder.append("						</p>");
