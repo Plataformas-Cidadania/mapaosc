@@ -137,7 +137,7 @@ public class MenuController implements ValueChangeHandler<String> {
 
 			for (Map.Entry<String, Double> entry : place.getIndicators().entrySet()) {
 				if (entry.getKey().contains("Valor"))
-					item.addInfo(entry.getKey(), fmtCurrency.format(entry.getValue()));
+					item.addInfo(entry.getKey() + "*", fmtCurrency.format(entry.getValue()));
 				else
 					item.addInfo(entry.getKey(), fmtNumber.format(entry.getValue()));
 			}
@@ -153,6 +153,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		HTML instruction = new HTML("<h3>Selecione a localização:</h3>");
 		menuPanel.add(instruction);
 		menuPanel.add(menu);
+		menuPanel.add(new HTML("<br><i style='font-size: 0.85em; line-height: 1em;'>* Nota</i>: <i style='font-size: 0.85em; line-height: 1em;'>Valores deflacionados pelo Índice Nacional de Preços ao Consumidor Amplo (IPCA) do mês corrente.</i>"));
 		// initFunction();
 	}
 
@@ -292,7 +293,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		localizationItem.addInfo("Longitude", String.valueOf(osc.getCoordinate().getX()));
 
 		final KeyValueMenuItem publicResourcesItem = new KeyValueMenuItem(osc.getPublicResources());
-		publicResourcesItem.setItemTitle("Recursos públicos *");
+		publicResourcesItem.setItemTitle("Recursos públicos*");
 		publicResourcesItem.setId("recursos");
 		publicResourcesItem.setCssClass("dados");
 		String titleToolTip = "Valores de recursos repassados à organização pela administração pública dos níveis federal, estadual e/ou municipal.";
