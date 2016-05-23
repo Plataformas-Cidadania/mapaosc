@@ -770,17 +770,67 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT siconv_qt_parceria_finalizada, siconv_qt_parceria_execucao, siconv_vl_global, siconv_vl_repasse, "
-				+ "siconv_vl_contrapartida_financeira, siconv_vl_contrapartida_outras, siconv_vl_empenhado, siconv_vl_desembolsado, "
-				+ "finep_qt_projetos_proponente, finep_qt_projetos_executor, finep_qt_projetos_coexecutor, "
-				+ "finep_qt_projetos_interveniente, lic_vl_solicitado, lic_vl_aprovado, lic_vl_captado "
-				+ "FROM  data.tb_osc LEFT JOIN data.tb_osc_siconv ON (tb_osc.bosc_sq_osc = tb_osc_siconv.bosc_sq_osc) "
-				+ "LEFT JOIN data.tb_osc_finep ON (tb_osc.bosc_sq_osc = tb_osc_finep.bosc_sq_osc) "
-				+ "LEFT JOIN data.tb_osc_lic ON (tb_osc.bosc_sq_osc = tb_osc_lic.bosc_sq_osc) "
-				+ "WHERE tb_osc.bosc_sq_osc = ?";
+		String sql = "";
 
 		// logger.info(sql);
 		try {
+			sql = "SELECT COUNT(*) FROM data.tb_osc_projeto "
+				+ "WHERE proj_cd_projeto "
+				+ "IN (SELECT proj_cd_projeto FROM data.tb_ternaria_projeto WHERE bosc_sq_osc = ?) "
+				+ "AND fonte_recurso like '%blico%' AND status = 'Finalizado'";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oscId);
+			rs = pstmt.executeQuery();
+			
+			int parc_finalizada_projeto = 0;
+			while (rs.next()) {
+				parc_finalizada_projeto = rs.getInt(1);
+            } 
+            rs.close();
+            pstmt.close();
+			
+			sql = "SELECT COUNT(*) FROM data.tb_osc_projeto "
+				+ "WHERE proj_cd_projeto "
+				+ "IN (SELECT proj_cd_projeto FROM data.tb_ternaria_projeto WHERE bosc_sq_osc = ?) "
+				+ "AND fonte_recurso like '%blico%' AND status = 'Em Execução'";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oscId);
+			rs = pstmt.executeQuery();
+			
+			int parc_exec_projeto = 0;
+			while (rs.next()) {
+				parc_exec_projeto = rs.getInt(1);
+            } 
+            rs.close();
+            pstmt.close();
+			
+			sql = "SELECT SUM(valor_total) FROM data.tb_osc_projeto "
+				+ "WHERE proj_cd_projeto "
+				+ "IN (SELECT proj_cd_projeto FROM data.tb_ternaria_projeto WHERE bosc_sq_osc = ?) "
+				+ "AND fonte_recurso like '%blico%' AND (status = 'Finalizado' OR status = 'Em Execução')";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oscId);
+			rs = pstmt.executeQuery();
+			
+			Double vl_global_projeto = 0.0;
+			while (rs.next()) {
+				vl_global_projeto = rs.getDouble(1);
+            } 
+            rs.close();
+            pstmt.close();
+			
+			sql = "SELECT siconv_qt_parceria_finalizada, siconv_qt_parceria_execucao, siconv_vl_global, siconv_vl_repasse, "
+					+ "siconv_vl_contrapartida_financeira, siconv_vl_contrapartida_outras, siconv_vl_empenhado, siconv_vl_desembolsado, "
+					+ "finep_qt_projetos_proponente, finep_qt_projetos_executor, finep_qt_projetos_coexecutor, "
+					+ "finep_qt_projetos_interveniente, lic_vl_solicitado, lic_vl_aprovado, lic_vl_captado "
+					+ "FROM  data.tb_osc LEFT JOIN data.tb_osc_siconv ON (tb_osc.bosc_sq_osc = tb_osc_siconv.bosc_sq_osc) "
+					+ "LEFT JOIN data.tb_osc_finep ON (tb_osc.bosc_sq_osc = tb_osc_finep.bosc_sq_osc) "
+					+ "LEFT JOIN data.tb_osc_lic ON (tb_osc.bosc_sq_osc = tb_osc_lic.bosc_sq_osc) "
+					+ "WHERE tb_osc.bosc_sq_osc = ?";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, oscId);
 			rs = pstmt.executeQuery();
@@ -788,10 +838,10 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			PublicResources resources = new PublicResources();
 			if (rs.next()) {
 				resources.setPartnershipsEnded(rs
-						.getInt("siconv_qt_parceria_finalizada"));
+						.getInt("siconv_qt_parceria_finalizada") +  parc_finalizada_projeto);
 				resources.setInExecutionPartnership(rs
-						.getInt("siconv_qt_parceria_execucao"));
-				resources.setGlobalValue(rs.getDouble("siconv_vl_global"));
+						.getInt("siconv_qt_parceria_execucao") + parc_exec_projeto);
+				resources.setGlobalValue(rs.getDouble("siconv_vl_global") + vl_global_projeto);
 				resources.setTransferValue(rs.getDouble("siconv_vl_repasse"));
 				resources.setFinancialCounterpartValue(rs
 						.getDouble("siconv_vl_contrapartida_financeira"));
