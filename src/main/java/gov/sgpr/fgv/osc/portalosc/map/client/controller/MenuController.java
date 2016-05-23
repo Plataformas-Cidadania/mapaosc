@@ -292,7 +292,7 @@ public class MenuController implements ValueChangeHandler<String> {
 		localizationItem.addInfo("Longitude", String.valueOf(osc.getCoordinate().getX()));
 
 		final KeyValueMenuItem publicResourcesItem = new KeyValueMenuItem(osc.getPublicResources());
-		publicResourcesItem.setItemTitle("Recursos públicos");
+		publicResourcesItem.setItemTitle("Recursos públicos *");
 		publicResourcesItem.setId("recursos");
 		publicResourcesItem.setCssClass("dados");
 		String titleToolTip = "Valores de recursos repassados à organização pela administração pública dos níveis federal, estadual e/ou municipal.";
