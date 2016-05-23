@@ -897,8 +897,13 @@ a.ajuda {
 
 .mapa_organizacao div {
 	float: left;
-	width: 50%;
-	line-height: 17px;
+    /* width: 50%; */
+    margin-top: 20px;
+    line-height: 17px;
+}
+
+.mapa_organizacao div[align=right] {
+    float: right;
 }
 
 .mapa_organizacao .coluna2 {
@@ -4270,7 +4275,7 @@ padding-bottom:30px;
 }
 
 .mapa_organizacao .coluna1 {
-    border-right: 1px solid #aaa;
+/*     border-right: 1px solid #aaa; */
 }
 
 .linha div {

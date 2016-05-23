@@ -150,9 +150,10 @@ public class MagnetPaperClipWidget extends Composite {
 		for (PaperClipAbstractSection section : sections) {
 			if (sections.indexOf(section) == 0) {
 				htmlBuilder.append("<div class=\"coluna1\">");
-			} else {
-				htmlBuilder.append("<div class=\"coluna2\">");
-			}
+			} 
+//			else {
+//				htmlBuilder.append("<div class=\"coluna2\">");
+//			}
 			
 			htmlBuilder.append("<strong>" + section.getSectionTitle()
 					+ "</strong>");
@@ -168,14 +169,12 @@ public class MagnetPaperClipWidget extends Composite {
 				htmlBuilder.append(sectionContent);
 			}
 			
+			htmlBuilder.append("<div  align = \"right\">"+windowInfo.getFooter());
+			htmlBuilder.append(getHelpButton()+"</div>");
+			htmlBuilder.append("</div>");
 			htmlBuilder.append("</div>");
 		}
 		
-		
-		htmlBuilder.append("<h3 ><div  align = \"right\">"+windowInfo.getFooter());
-		htmlBuilder.append(getHelpButton()+"</div>");
-		htmlBuilder.append("</h3>");
-		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}

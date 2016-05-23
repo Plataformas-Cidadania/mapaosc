@@ -125,22 +125,22 @@ public class OscMarker {
 		PaperClipCheckListSection oscCertifications = new PaperClipCheckListSection();
 		oscCertifications.setSectionTitle("");
 
-		if (summary.getPartnerships() != null) {
-			oscCertifications.addKeyValue("Projetos em curso",String.valueOf(summary.getPartnerships()));
-	        }
-		 
-		if (summary.getGlobalValue() != null) {
-			NumberFormat fmtCurrency = NumberFormat.getCurrencyFormat();
-			oscCertifications.addKeyValue("Valor de Parcerias",fmtCurrency.format(summary.getGlobalValue()));
-		}
-		 
-		if (summary.getLength() != null) {
-			oscCertifications.addKeyValue("Vínculos de Trabalho", summary.getLength());
-		}
-		
-		if (summary.getGlobalValue() != null) {
-			oscCertifications.addKeyValue("Correção de Inflação", "Os valores exibidos estão corrigidos pela inflação do mês e ano correntes");
-		}
+//		if (summary.getPartnerships() != null) {
+//			oscCertifications.addKeyValue("Projetos em curso",String.valueOf(summary.getPartnerships()));
+//	        }
+//		 
+//		if (summary.getGlobalValue() != null) {
+//			NumberFormat fmtCurrency = NumberFormat.getCurrencyFormat();
+//			oscCertifications.addKeyValue("Valor de Parcerias",fmtCurrency.format(summary.getGlobalValue()));
+//		}
+//		 
+//		if (summary.getLength() != null) {
+//			oscCertifications.addKeyValue("Vínculos de Trabalho", summary.getLength());
+//		}
+//		
+//		if (summary.getGlobalValue() != null) {
+//			oscCertifications.addKeyValue("Correção de Inflação", "Os valores exibidos estão corrigidos pela inflação do mês e ano correntes");
+//		}
 		
 /*		oscCertifications.setSectionTitle("Dados");//Certificações");
 		Certifications cert = summary.getCertifications();
