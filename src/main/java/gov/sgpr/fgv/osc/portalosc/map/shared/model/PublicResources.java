@@ -361,7 +361,7 @@ public class PublicResources implements Serializable,
 				fmtNumber.format(inExecutionPartnership));
 		content.put("Parcerias finalizadas",
 				fmtNumber.format(partnershipsEnded));
-		content.put("Valor global", fmtCurrency.format(globalValue));
+		content.put("Valor total aprovado", fmtCurrency.format(globalValue));
 		content.put("Valor de repasse", fmtCurrency.format(transferValue));
 		content.put("Valor empenhado", fmtCurrency.format(committedValue));
 		content.put("Valor desembolsado", fmtCurrency.format(disbursedValue));
@@ -376,7 +376,8 @@ public class PublicResources implements Serializable,
 		content.put("Valor Captado (Incentivo)",
 				fmtCurrency.format(culturalRaisedValue));
 		content.put("Correção de Inflação", 
-				"Os valores exibidos estão corrigidos pela inflação do mês e ano correntes");		
+				"Os valores exibidos estão corrigidos pelo IPCA do mês corrente.");		
+				
 		/*content.put("Proponente (P&D)",
 				fmtNumber.format(technologicalAsProposer));
 		content.put("Executor (P&D)",
