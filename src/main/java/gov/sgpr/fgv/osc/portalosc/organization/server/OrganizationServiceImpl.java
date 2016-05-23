@@ -386,7 +386,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 //			}
 //			rs.close();
 //			pstmt.close();
-			organization.setValorRecursosTotal(organization.getValorParceriasFederal());
+			
 			
 			for(ProjetoModel p : projetoList){
 				if(organization.getValorRecursosPrivados() < 0) organization.setValorRecursosPrivados(0.0);
@@ -408,7 +408,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			if(organization.getValorParceriasFederal() < 0) organization.setValorParceriasFederal(0.0);
 			if(organization.getValorParceriasEstadual() < 0) organization.setValorParceriasEstadual(0.0);
 			if(organization.getValorParceriasMunicipal() < 0) organization.setValorParceriasMunicipal(0.0);
-			organization.setValorRecursosTotal(organization.getValorRecursosTotal() + organization.getValorRecursosPrivados());
+			
+			organization.setValorRecursosTotal(organization.getValorParceriasFederal() + organization.getValorParceriasEstadual() + organization.getValorParceriasMunicipal() + organization.getValorRecursosPrivados());
 			
 			rs.close();
 			pstmt.close();
