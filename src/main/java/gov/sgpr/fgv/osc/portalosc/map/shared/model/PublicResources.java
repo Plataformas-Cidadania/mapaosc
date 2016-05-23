@@ -375,8 +375,8 @@ public class PublicResources implements Serializable,
 				fmtCurrency.format(culturalApprovedValue));
 		content.put("Valor Captado (Incentivo)",
 				fmtCurrency.format(culturalRaisedValue));
-		content.put("Correção de Inflação", 
-				"Os valores exibidos estão corrigidos pelo IPCA do mês corrente.");		
+		content.put("<i>* Correção de Inflação</i>", 
+				"<i>Os valores exibidos estão corrigidos pelo IPCA do mês corrente.</i>");
 		
 		/*content.put("Proponente (P&D)",
 				fmtNumber.format(technologicalAsProposer));
