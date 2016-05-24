@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.ConvenioModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.DiretorModel;
 import gov.sgpr.fgv.osc.portalosc.organization.shared.model.LocalizacaoModel;
@@ -450,14 +452,14 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				+ "WHERE bosc_sq_osc = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, organization.getNomeFantasia());
-			pstmt.setString(2, organization.getDescricaoProjeto());
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(organization.getNomeFantasia()));
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(organization.getDescricaoProjeto()));
 			pstmt.setInt(3, organization.getAnoFundacao());
-			pstmt.setString(4, organization.getSite());
-			pstmt.setString(5, organization.getGoogle());
-			pstmt.setString(6, organization.getFacebook());
-			pstmt.setString(7, organization.getLinkedin());
-			pstmt.setString(8, organization.getTwitter());
+			pstmt.setString(4, SafeHtmlUtils.htmlEscape(organization.getSite()));
+			pstmt.setString(5, SafeHtmlUtils.htmlEscape(organization.getGoogle()));
+			pstmt.setString(6, SafeHtmlUtils.htmlEscape(organization.getFacebook()));
+			pstmt.setString(7, SafeHtmlUtils.htmlEscape(organization.getLinkedin()));
+			pstmt.setString(8, SafeHtmlUtils.htmlEscape(organization.getTwitter()));
 			pstmt.setLong(9, organization.getId());
 			pstmt.execute();
 			pstmt.close();
@@ -475,7 +477,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				+ "WHERE bosc_sq_osc = ?";
 						
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, organization.getEmail());
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(organization.getEmail()));
 			pstmt.setInt(2, organization.getId());
 			pstmt.execute();
 			pstmt.close();
@@ -487,8 +489,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			for (int i = 0; i < organization.getDiretores().size(); i++ ) {
 				if(organization.getDiretores().get(i).getId() == -1){
 					pstmt.setInt(1,  organization.getId());
-					pstmt.setString(2,organization.getDiretores().get(i).getCargo());
-					pstmt.setString(3,organization.getDiretores().get(i).getNome());
+					pstmt.setString(2, SafeHtmlUtils.htmlEscape(organization.getDiretores().get(i).getCargo()));
+					pstmt.setString(3, SafeHtmlUtils.htmlEscape(organization.getDiretores().get(i).getNome()));
 					pstmt.executeUpdate();
 				}
 			}
@@ -502,9 +504,9 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			for (int i = 0; i < organization.getDiretores().size(); i++ ) {
 				if(organization.getDiretores().get(i).getId() != -1){
 					pstmt.setInt(1,  organization.getId());
-					pstmt.setString(2,organization.getDiretores().get(i).getCargo());
-					pstmt.setString(3,organization.getDiretores().get(i).getNome());
-					pstmt.setInt(4,organization.getDiretores().get(i).getId());
+					pstmt.setString(2, SafeHtmlUtils.htmlEscape(organization.getDiretores().get(i).getCargo()));
+					pstmt.setString(3, SafeHtmlUtils.htmlEscape(organization.getDiretores().get(i).getNome()));
+					pstmt.setInt(4, organization.getDiretores().get(i).getId());
 					pstmt.executeUpdate();
 				}
 			}
@@ -522,8 +524,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			
 			for(int i = 0; i < organization.getProjetos().size(); i++){
 				if(organization.getProjetos().get(i).getId() == -1){
-					pstmt.setString(1, organization.getProjetos().get(i).getTitulo());
-					pstmt.setString(2, organization.getProjetos().get(i).getStatus());
+					pstmt.setString(1, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getTitulo()));
+					pstmt.setString(2, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getStatus()));
 					
 					Date dtInicio = organization.getProjetos().get(i).getDataInicio();
 					if(dtInicio == null){
@@ -542,12 +544,12 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					}
 					
 					pstmt.setDouble(5, organization.getProjetos().get(i).getValorTotal());
-					pstmt.setString(6, organization.getProjetos().get(i).getFonteRecursos());
-					pstmt.setString(7, organization.getProjetos().get(i).getLink());
-					pstmt.setString(8, organization.getProjetos().get(i).getPublicoAlvo());
-					pstmt.setString(9, organization.getProjetos().get(i).getAbrangencia());
-					pstmt.setString(10, organization.getProjetos().get(i).getFinanciadores());
-					pstmt.setString(11, organization.getProjetos().get(i).getDescricao());
+					pstmt.setString(6, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getFonteRecursos()));
+					pstmt.setString(7, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getLink()));
+					pstmt.setString(8, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getPublicoAlvo()));
+					pstmt.setString(9, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getAbrangencia()));
+					pstmt.setString(10, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getFinanciadores()));
+					pstmt.setString(11, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getDescricao()));
 					pstmt.executeUpdate();
 					
 					ResultSet rs = pstmt.getGeneratedKeys();
@@ -592,8 +594,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				
 			for (int i = 0; i < organization.getProjetos().size(); i++ ) {
 				if(organization.getProjetos().get(i).getId() != -1){
-					pstmt.setString(1, organization.getProjetos().get(i).getTitulo());
-					pstmt.setString(2, organization.getProjetos().get(i).getStatus());
+					pstmt.setString(1, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getTitulo()));
+					pstmt.setString(2, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getStatus()));
 					
 					Date dtInicio = organization.getProjetos().get(i).getDataInicio();
 					if(dtInicio == null){
@@ -612,10 +614,10 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 					}
 					
 					pstmt.setDouble(5, organization.getProjetos().get(i).getValorTotal());
-					pstmt.setString(6, organization.getProjetos().get(i).getFonteRecursos());
-					pstmt.setString(7, organization.getProjetos().get(i).getLink());
-					pstmt.setString(8, organization.getProjetos().get(i).getPublicoAlvo());
-					pstmt.setString(9, organization.getProjetos().get(i).getAbrangencia());
+					pstmt.setString(6, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getFonteRecursos()));
+					pstmt.setString(7, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getLink()));
+					pstmt.setString(8, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getPublicoAlvo()));
+					pstmt.setString(9, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getAbrangencia()));
 					
 					for (int j = 0; j < organization.getProjetos().get(i).getLocalizacao().size(); j++ ) {
 						pstmt2.setInt(1, organization.getProjetos().get(i).getId());
@@ -633,8 +635,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 							pstmt2.setInt(4,organization.getProjetos().get(i).getLocalizacao().get(j).getIdUf());
 						pstmt2.executeUpdate();
 					}
-					pstmt.setString(10, organization.getProjetos().get(i).getFinanciadores());
-					pstmt.setString(11, organization.getProjetos().get(i).getDescricao());
+					pstmt.setString(10, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getFinanciadores()));
+					pstmt.setString(11, SafeHtmlUtils.htmlEscape(organization.getProjetos().get(i).getDescricao()));
 					pstmt.setInt(12, organization.getProjetos().get(i).getId());
 					pstmt.executeUpdate();
 				}
@@ -664,8 +666,8 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt = conn.prepareStatement(sql);
 			for (int i = 0; i < organization.getConvenios().size(); i++ ) {
 				if(organization.getConvenios().get(i).getNConv() != -1){			
-					pstmt.setString(1,organization.getConvenios().get(i).getPublicoAlvo());
-					pstmt.setString(2, organization.getConvenios().get(i).getAbrangencia());
+					pstmt.setString(1, SafeHtmlUtils.htmlEscape(organization.getConvenios().get(i).getPublicoAlvo()));
+					pstmt.setString(2, SafeHtmlUtils.htmlEscape(organization.getConvenios().get(i).getAbrangencia()));
 					pstmt.setInt(3,organization.getConvenios().get(i).getNConv());
 					pstmt.executeUpdate();
 				}

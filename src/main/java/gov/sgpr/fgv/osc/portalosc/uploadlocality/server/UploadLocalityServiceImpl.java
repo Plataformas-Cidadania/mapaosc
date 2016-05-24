@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+
 import gov.sgpr.fgv.osc.portalosc.configuration.server.RemoteServiceImpl;
 import gov.sgpr.fgv.osc.portalosc.uploadlocality.shared.model.AgreementLocalityModel;
 import gov.sgpr.fgv.osc.portalosc.user.shared.exception.RemoteException;
@@ -63,8 +65,8 @@ public class UploadLocalityServiceImpl extends RemoteServiceImpl {
 						
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setLong(1, convenio.getCnpjProponente());
-					pstmt.setString(2, convenio.getRazaoSocialProponente());
-					pstmt.setString(3, convenio.getNomeFantasiaProponente());
+					pstmt.setString(2, SafeHtmlUtils.htmlEscape(convenio.getRazaoSocialProponente()));
+					pstmt.setString(3, SafeHtmlUtils.htmlEscape(convenio.getNomeFantasiaProponente()));
 					pstmt.execute();
 					pstmt.close();
 					
@@ -117,15 +119,15 @@ public class UploadLocalityServiceImpl extends RemoteServiceImpl {
 				pstmt.setInt(1, idParceriaTernaria);
 				pstmt.setDate(2, new Date(convenio.getDataInicio().getTime()));
 				pstmt.setDate(3, new Date(convenio.getDataConclusao().getTime()));
-				pstmt.setString(4, convenio.getSituacaoParceria());
-				pstmt.setString(5, convenio.getTipoParceria());
+				pstmt.setString(4, SafeHtmlUtils.htmlEscape(convenio.getSituacaoParceria()));
+				pstmt.setString(5, SafeHtmlUtils.htmlEscape(convenio.getTipoParceria()));
 				pstmt.setDouble(6, convenio.getValorTotal());
 				pstmt.setDouble(7, convenio.getValorPago());
 				pstmt.setDouble(8, convenio.getValorContrapartidaFinanceira());
-				pstmt.setString(9, convenio.getOrgaoConcedente());
-				pstmt.setString(10, convenio.getMunicipioProponente());
-				pstmt.setString(11, convenio.getEnderecoProponente());
-				pstmt.setString(12, convenio.getObjetoParceria());
+				pstmt.setString(9, SafeHtmlUtils.htmlEscape(convenio.getOrgaoConcedente()));
+				pstmt.setString(10, SafeHtmlUtils.htmlEscape(convenio.getMunicipioProponente()));
+				pstmt.setString(11, SafeHtmlUtils.htmlEscape(convenio.getEnderecoProponente()));
+				pstmt.setString(12, SafeHtmlUtils.htmlEscape(convenio.getObjetoParceria()));
 				pstmt.execute();
 				pstmt.close();
 			}

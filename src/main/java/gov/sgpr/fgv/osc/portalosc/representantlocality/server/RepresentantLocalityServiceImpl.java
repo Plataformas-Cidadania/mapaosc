@@ -29,6 +29,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+
 public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implements RepresentantLocalityService {
 	private static final long serialVersionUID = -7836597805845364122L;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -67,9 +69,9 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 					   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
-			pstmt.setString(2, user.getEmail());
-			pstmt.setString(3, user.getName());
-			pstmt.setString(4, user.getPassword());
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(user.getEmail()));
+			pstmt.setString(3, SafeHtmlUtils.htmlEscape(user.getName()));
+			pstmt.setString(4, SafeHtmlUtils.htmlEscape(user.getPassword()));
 			pstmt.setLong(5, user.getCpf());
 			pstmt.setBoolean(6, false);
 			pstmt.setBoolean(7, false);
@@ -83,8 +85,8 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setLong(1, user.getCpf());
 				pstmt.setInt(2, user.getState());
-				pstmt.setString(3, user.getOrgan());
-				pstmt.setString(4, user.getFunction());
+				pstmt.setString(3, SafeHtmlUtils.htmlEscape(user.getOrgan()));
+				pstmt.setString(4, SafeHtmlUtils.htmlEscape(user.getFunction()));
 				pstmt.setLong(5, user.getPhone());
 				pstmt.execute();
 				pstmt.close();
@@ -95,8 +97,8 @@ public class RepresentantLocalityServiceImpl extends RemoteServiceImpl implement
 				pstmt.setLong(1, user.getCpf());
 				pstmt.setInt(2, user.getState());
 				pstmt.setInt(3, user.getCounty());
-				pstmt.setString(4, user.getOrgan());
-				pstmt.setString(5, user.getFunction());
+				pstmt.setString(4, SafeHtmlUtils.htmlEscape(user.getOrgan()));
+				pstmt.setString(5, SafeHtmlUtils.htmlEscape(user.getFunction()));
 				pstmt.setLong(6, user.getPhone());
 				pstmt.execute();
 				pstmt.close();
