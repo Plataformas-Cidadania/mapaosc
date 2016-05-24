@@ -92,7 +92,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			releaseConnection(conn, pstmt);
 			addToken(user.getCpf());
 		}
-		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
 	}
 	
 	public void addToken(long cpf) throws RemoteException {
@@ -103,19 +103,43 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		java.sql.Date sqlDate = new java.sql.Date(c.getTime().getTime());   
 		String token = md5(new Date().toString() + cpf);
 		PreparedStatement pstmt = null;
-
-		String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
+		ResultSet rs = null;
+		Integer idUser = null;
+		
+		String sql = "";
 		try {
+			sql = "SELECT tusu_sq_usuario FROM portal.tb_token WHERE tusu_nr_cpf = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, cpf);
-			pstmt.setString(2, token);
-			pstmt.setDate(3, sqlDate);
-			pstmt.execute();
-		} catch (SQLException e) {
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				idUser = rs.getInt("tusu_sq_usuario");
+			}
+			rs.close();
+			pstmt.close();
+			
+			if(idUser == null){
+				sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setLong(1, cpf);
+				pstmt.setString(2, token);
+				pstmt.setDate(3, sqlDate);
+				pstmt.execute();
+				pstmt.close();
+			}else{
+				sql = "UPDATE portal.tb_token SET tokn_cd_token = ?, tokn_data_token = ? WHERE tusu_sq_usuario = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, token);
+				pstmt.setDate(2, sqlDate);
+				pstmt.setInt(3, idUser);
+				pstmt.execute();
+				pstmt.close();
+			}
+		} catch(Exception e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
 		} finally {
-			releaseConnection(conn, pstmt);
+			releaseConnection(conn, pstmt, rs);
 		}
 	}
 	
@@ -127,21 +151,47 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		java.sql.Date sqlDate = new java.sql.Date(c.getTime().getTime());   
 		String token = md5(new Date().toString() + idUser);
 		PreparedStatement pstmt = null;
-
-		String sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES (?, ?, ?);";
+		
+		Integer idResult = null;
+		ResultSet rs = null;
+		
+		String sql = "";
 		try {
+			sql = "SELECT tusu_sq_usuario FROM portal.tb_token WHERE tusu_sq_usuario = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idUser);
-			pstmt.setString(2, token);
-			pstmt.setDate(3, sqlDate);
-			pstmt.execute();
-		} catch (SQLException e) {
+			pstmt.setLong(1, idUser);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				idResult = rs.getInt("tusu_sq_usuario");
+			}
+			rs.close();
+			pstmt.close();
+			
+			if(idResult == null){
+				sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES (?, ?, ?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, idUser);
+				pstmt.setString(2, token);
+				pstmt.setDate(3, sqlDate);
+				pstmt.execute();
+				pstmt.close();
+			}else{
+				sql = "UPDATE portal.tb_token SET tokn_cd_token = ?, tokn_data_token = ? WHERE tusu_sq_usuario = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, token);
+				pstmt.setDate(2, sqlDate);
+				pstmt.setInt(3, idUser);
+				pstmt.execute();
+				pstmt.close();
+			}
+		} catch(Exception e) {
 			logger.severe(e.getMessage());
 			throw new RemoteException(e);
 		} finally {
-			releaseConnection(conn, pstmt);
+			releaseConnection(conn, pstmt, rs);
 		}
-		email.send(getEmail(idUser), "Alterar Senha", email.changePassword(getName(idUser), token));
+		
+//		email.send(getEmail(idUser), "Alterar Senha", email.changePassword(getName(idUser), token));
 	}
 	
 	public void deleteToken(Integer idUser) throws RemoteException {
@@ -306,7 +356,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} finally {
 			releaseConnection(conn, pstmt);
 		}
-		email.send(getEmail(idUser), "Cadastro Confirmado!" , email.welcome(getName(idUser)));
+//		email.send(getEmail(idUser), "Cadastro Confirmado!" , email.welcome(getName(idUser)));
 	}
 	
 	public Integer usuarioAtivo(Integer idUser) throws RemoteException {
@@ -583,11 +633,11 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			releaseConnection(conn, pstmt);
 			addToken(user.getCpf());
 		}
-		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
 		
 		String emailOSC = searchEmailById(user.getOscId());
 		logger.info("Enviando e-mail para " + emailOSC + ".");
-		email.send(emailOSC, "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(user, searchNameOSCByOSC(user.getOscId())));
+//		email.send(emailOSC, "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(user, searchNameOSCByOSC(user.getOscId())));
 	}
 	
 	private void validateRepresentant(RepresentantUser user) throws RemoteException {
