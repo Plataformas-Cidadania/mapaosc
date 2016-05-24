@@ -92,7 +92,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			releaseConnection(conn, pstmt);
 			addToken(user.getCpf());
 		}
-//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
 	}
 	
 	public void addToken(long cpf) throws RemoteException {
@@ -191,7 +191,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			releaseConnection(conn, pstmt, rs);
 		}
 		
-//		email.send(getEmail(idUser), "Alterar Senha", email.changePassword(getName(idUser), token));
+		email.send(getEmail(idUser), "Alterar Senha", email.changePassword(getName(idUser), token));
 	}
 	
 	public void deleteToken(Integer idUser) throws RemoteException {
@@ -356,7 +356,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		} finally {
 			releaseConnection(conn, pstmt);
 		}
-//		email.send(getEmail(idUser), "Cadastro Confirmado!" , email.welcome(getName(idUser)));
+		email.send(getEmail(idUser), "Cadastro Confirmado!" , email.welcome(getName(idUser)));
 	}
 	
 	public Integer usuarioAtivo(Integer idUser) throws RemoteException {
@@ -633,11 +633,11 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			releaseConnection(conn, pstmt);
 			addToken(user.getCpf());
 		}
-//		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
+		email.send(user.getEmail(), "Confirmação de Cadastro Mapa das Organizações da Sociedade Civil", email.confirmation(user.getName(), getToken(user.getCpf())));
 		
 		String emailOSC = searchEmailById(user.getOscId());
 		logger.info("Enviando e-mail para " + emailOSC + ".");
-//		email.send(emailOSC, "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(user, searchNameOSCByOSC(user.getOscId())));
+		email.send(emailOSC, "Informação de Cadastro Mapa das Organizações da Sociedade Civil", email.informationOSC(user, searchNameOSCByOSC(user.getOscId())));
 	}
 	
 	private void validateRepresentant(RepresentantUser user) throws RemoteException {
