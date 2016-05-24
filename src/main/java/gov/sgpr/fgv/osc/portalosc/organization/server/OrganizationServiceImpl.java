@@ -394,14 +394,16 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 				if(organization.getValorParceriasEstadual() < 0) organization.setValorParceriasEstadual(0.0);
 				if(organization.getValorParceriasMunicipal() < 0) organization.setValorParceriasMunicipal(0.0);
 				
-				if(p.getFonteRecursos().contains("Federal")){
-					organization.setValorParceriasFederal(organization.getValorParceriasFederal() + p.getValorTotal());
-				}else if(p.getFonteRecursos().contains("Estadual")){
-					organization.setValorParceriasEstadual(organization.getValorParceriasEstadual() + p.getValorTotal());
-				}else if(p.getFonteRecursos().contains("Municipal")){
-					organization.setValorParceriasMunicipal(organization.getValorParceriasMunicipal() + p.getValorTotal());
-				}else{
-					organization.setValorRecursosPrivados(organization.getValorRecursosPrivados() + p.getValorTotal());
+				if(p.getValorTotal() >= 0.0){
+					if(p.getFonteRecursos().contains("Federal")){
+						organization.setValorParceriasFederal(organization.getValorParceriasFederal() + p.getValorTotal());
+					}else if(p.getFonteRecursos().contains("Estadual")){
+						organization.setValorParceriasEstadual(organization.getValorParceriasEstadual() + p.getValorTotal());
+					}else if(p.getFonteRecursos().contains("Municipal")){
+						organization.setValorParceriasMunicipal(organization.getValorParceriasMunicipal() + p.getValorTotal());
+					}else{
+						organization.setValorRecursosPrivados(organization.getValorRecursosPrivados() + p.getValorTotal());
+					}
 				}
 			}
 			if(organization.getValorRecursosPrivados() < 0) organization.setValorRecursosPrivados(0.0);
