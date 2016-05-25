@@ -25,6 +25,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
 /**
@@ -79,9 +81,9 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
-			pstmt.setString(2, SafeHtmlUtils.htmlEscape(user.getEmail()));
-			pstmt.setString(3, SafeHtmlUtils.htmlEscape(user.getName()));
-			pstmt.setString(4, SafeHtmlUtils.htmlEscape(user.getPassword()));
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getEmail())));
+			pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getName())));
+			pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getPassword())));
 			pstmt.setLong(5, user.getCpf());
 			pstmt.setBoolean(6, user.isMailingListMember());
 			pstmt.setBoolean(7, false);
@@ -331,7 +333,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		String sql = "UPDATE portal.tb_usuario SET tusu_cd_senha=?, tusu_dt_atualizacao=? WHERE tusu_sq_usuario=?"; 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(password));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(password)));
 			pstmt.setDate(2, sqlDate);
 			pstmt.setInt(3, idUser);
 			pstmt.execute();
@@ -383,7 +385,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				   + "FROM portal.tb_usuario  WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			rs = pstmt.executeQuery();
 			DefaultUser user = null;
 			if (rs.next()) {
@@ -424,7 +426,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		String sql = "SELECT tusu_in_ativo FROM portal.tb_usuario WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				status = rs.getBoolean("tusu_in_ativo");
@@ -486,9 +488,9 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
-			pstmt.setString(2, SafeHtmlUtils.htmlEscape(user.getEmail()));
-			pstmt.setString(3, SafeHtmlUtils.htmlEscape(user.getName()));
-			pstmt.setString(4, SafeHtmlUtils.htmlEscape(user.getPassword()));
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getEmail())));
+			pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getName())));
+			pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getPassword())));
 			pstmt.setLong(5, user.getCpf());
 			pstmt.setBoolean(6, user.isMailingListMember());
 			pstmt.setInt(7, user.getId());
@@ -583,7 +585,7 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 				   + "FROM portal.tb_usuario WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			rs = pstmt.executeQuery();
 			RepresentantUser user = null;
 			if (rs.next()) {
@@ -619,9 +621,9 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getType().id());
-			pstmt.setString(2, SafeHtmlUtils.htmlEscape(user.getEmail()));
-			pstmt.setString(3, SafeHtmlUtils.htmlEscape(user.getName()));
-			pstmt.setString(4, SafeHtmlUtils.htmlEscape(user.getPassword()));
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getEmail())));
+			pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getName())));
+			pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getPassword())));
 			pstmt.setLong(5, user.getCpf());
 			pstmt.setLong(6, user.getOscId());
 			pstmt.setBoolean(7, user.isMailingListMember());

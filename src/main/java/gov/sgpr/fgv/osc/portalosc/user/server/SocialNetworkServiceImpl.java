@@ -23,6 +23,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -75,9 +77,9 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sqlTableUser);
 			pstmt.setInt(1, user.getType().id());
-			pstmt.setString(2, SafeHtmlUtils.htmlEscape(user.getEmail()));
-			pstmt.setString(3, SafeHtmlUtils.htmlEscape(user.getName()));
-			pstmt.setString(4, SafeHtmlUtils.htmlEscape(user.getPassword()));
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getEmail())));
+			pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getName())));
+			pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getPassword())));
 			//pstmt.setLong(5, user.getCpf());
 			pstmt.setBoolean(5, user.isMailingListMember());
 			pstmt.setBoolean(6, true);
@@ -85,10 +87,10 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 			pstmt.execute();
 
 			pstmt2 = conn.prepareStatement(sqlTableNetUser);
-			pstmt2.setString(1, SafeHtmlUtils.htmlEscape(user.getUid()));
+			pstmt2.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getUid())));
 			pstmt2.setInt(2, 2);
-			pstmt2.setString(3, SafeHtmlUtils.htmlEscape(user.getAccessToken()));
-			pstmt2.setString(4, SafeHtmlUtils.htmlEscape(user.getEmail()));
+			pstmt2.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getAccessToken())));
+			pstmt2.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getEmail())));
 			pstmt2.execute();
 
 			conn.commit();
@@ -122,7 +124,7 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 		String sql = "SELECT ures_nm_login FROM portal.tb_usuario_rede_social WHERE ures_nm_login = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(user.getUid()));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(user.getUid())));
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -146,7 +148,7 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 		String sql = "SELECT tusu_sq_usuario FROM portal.tb_usuario  WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				return true;
@@ -233,7 +235,7 @@ public class SocialNetworkServiceImpl extends RemoteServiceImpl implements
 				+ "FROM portal.tb_usuario  WHERE tusu_ee_email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			rs = pstmt.executeQuery();
 			FacebookUser user = null;
 			if (rs.next()) {

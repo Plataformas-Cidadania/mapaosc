@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
@@ -311,7 +313,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				DocumentType.TREATY));
 		detail.setAccountabilityPath(getDocumentPath(main.getCode(),
 				DocumentType.ACCOUNTABILITY));
-		detail.setRecommended(getRecommendation(oscId, SafeHtmlUtils.htmlEscape(email)));
+		detail.setRecommended(getRecommendation(oscId, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email))));
 		detail.setRecommendations(getRecommendations(oscId));
 		return detail;
 	}
@@ -331,7 +333,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, oscId);
-			pstmt.setString(2, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			rs = pstmt.executeQuery();
 			boolean recommendation;
 
@@ -370,7 +372,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, oscId);
-			pstmt.setString(2, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			pstmt.setBoolean(3, value);
 			pstmt.executeUpdate();
 
@@ -390,7 +392,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		email = SafeHtmlUtils.htmlEscape(email);
+		email = SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email));
 		
 		String sql = "SELECT a.bosc_sq_osc,a.tusu_sq_usuario "
 				+ "FROM portal.nm_osc_usuario a "
@@ -431,7 +433,7 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setBoolean(1, value);
 			pstmt.setInt(2, oscId);
-			pstmt.setString(3, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 
 			pstmt.executeUpdate();
 
