@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
 import gov.sgpr.fgv.osc.portalosc.configuration.shared.model.ConfigurationModel;
@@ -65,9 +67,9 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 						   + "WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
-				pstmt.setString(2, SafeHtmlUtils.htmlEscape(configuration.getEmail()));
-				pstmt.setString(3, SafeHtmlUtils.htmlEscape(configuration.getNome()));
-				pstmt.setString(4, SafeHtmlUtils.htmlEscape(configuration.getSenha()));
+				pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getEmail())));
+				pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getNome())));
+				pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getSenha())));
 				pstmt.setBoolean(5, configuration.getListaEmail());
 				pstmt.setDate(6, sqlDate);
 				pstmt.setLong(7, configuration.getId());
@@ -78,9 +80,9 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 						   + "WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
-				pstmt.setString(2, SafeHtmlUtils.htmlEscape(configuration.getEmail()));
-				pstmt.setString(3, SafeHtmlUtils.htmlEscape(configuration.getNome()));
-				pstmt.setString(4, SafeHtmlUtils.htmlEscape(configuration.getSenha()));
+				pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getEmail())));
+				pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getNome())));
+				pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getSenha())));
 				if(configuration.getTipoUsuario() == 3){
 					if(configuration.getCPF() != null)
 						pstmt.setLong(5, configuration.getCPF());
@@ -97,9 +99,9 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 						   + "WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
-				pstmt.setString(2, SafeHtmlUtils.htmlEscape(configuration.getEmail()));
-				pstmt.setString(3, SafeHtmlUtils.htmlEscape(configuration.getNome()));
-				pstmt.setString(4, SafeHtmlUtils.htmlEscape(configuration.getSenha()));
+				pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getEmail())));
+				pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getNome())));
+				pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getSenha())));
 				pstmt.setLong(5, configuration.getCPF());
 				pstmt.setInt(6, configuration.getIdOsc());
 				pstmt.setBoolean(7, configuration.getListaEmail());
@@ -259,7 +261,7 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 				   + "AND tusu_sq_usuario != ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, SafeHtmlUtils.htmlEscape(email));
+			pstmt.setString(1, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(email)));
 			pstmt.setInt(2, id);
 			rs = pstmt.executeQuery();
 			ConfigurationModel configuration = null;
