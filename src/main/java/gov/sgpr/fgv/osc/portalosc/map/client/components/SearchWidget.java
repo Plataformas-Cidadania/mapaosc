@@ -218,7 +218,7 @@ public class SearchWidget extends Composite {
 	
 	private HTML getHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<form name=\"Busca\">");
+		htmlBuilder.append("<form id='formbusca' name=\"Busca\">");
 		htmlBuilder.append("	<label for=\"campobusca\" class=\"esconder\">Buscar organização</label>");
 		htmlBuilder.append("	<input type=\"text\" name=\"campobusca\" id=\"campobusca\" placeholder=\"Informe a localização ou a organização desejada...\"  />");
 		htmlBuilder.append("	<button type=\"button\" name=\"buscar\" id=\"buscar\" class=\"buscar\">Buscar</button>");
@@ -310,4 +310,10 @@ public class SearchWidget extends Composite {
 		countyItems.clear();
 		addressItems.clear();
 	}
+	
+	public native void formPreventDefault() /*-{
+		$wnd.jQuery('#formbusca').submit(function (event){
+			event.preventDefault();
+		});
+	}-*/;
 }
