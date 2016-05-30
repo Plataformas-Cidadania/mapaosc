@@ -54,52 +54,62 @@ public class SearchController {
 						DOM.getElementById("list1").focus();
 					}
 				} else {
-					changeDate = new Date();
-					final Date thisDate = changeDate;
-					Timer t = new Timer() {
-						public void run() {
-							if (changeDate.equals(thisDate) && searchText != searchWidget.getValue()) {
-								searchText = searchWidget.getValue();
-								if(searchWidget.getValue().length() > 0) search();
+					if(event.getKeyCode() == KeyCodes.KEY_ENTER){
+						clickBusca();
+					}else {
+						changeDate = new Date();
+						final Date thisDate = changeDate;
+						Timer t = new Timer() {
+							public void run() {
+								if (changeDate.equals(thisDate) && searchText != searchWidget.getValue()) {
+									searchText = searchWidget.getValue();
+									if(searchWidget.getValue().length() > 0) search();
+								}
 							}
-						}
-					};
-					t.schedule(DELAY);
+						};
+						t.schedule(DELAY);
+					}
 				}
 			}
 		});
 		
+		searchWidget.formPreventDefault();
+		
 		searchWidget.addSearchClickListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
-				String criteria = searchWidget.getValue();
-				AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
-					
-					public void onFailure(Throwable caught) {
-						logger.log(Level.SEVERE, caught.getMessage());
-						Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
-					}
-					
-					public void onSuccess(List<SearchResult> result) {
-						if (!result.isEmpty()) {
-							if (result.get(0).getType().equals(SearchResultType.STATE)) {
-								History.newItem("P" + result.get(0).getId());
-							}
-							if (result.get(0).getType().equals(SearchResultType.COUNTY)) {
-								History.newItem("P" + result.get(0).getId());
-							}
-							if (result.get(0).getType().equals(SearchResultType.OSC)) {
-								History.newItem("O" + result.get(0).getId());
-							}
-							if (result.get(0).getType().equals(SearchResultType.ADDRESS)) {
-								History.newItem("A" + result.get(0).getId());
-							}
-							searchWidget.close();
-						}
-					}
-				};
-				searchService.search(criteria, LIMIT, callbackSearch);
+				clickBusca();
 			}
 		});
+	}
+	
+	private void clickBusca(){
+		String criteria = searchWidget.getValue();
+		AsyncCallback<List<SearchResult>> callbackSearch = new AsyncCallback<List<SearchResult>>() {
+			
+			public void onFailure(Throwable caught) {
+				logger.log(Level.SEVERE, caught.getMessage());
+				Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
+			}
+			
+			public void onSuccess(List<SearchResult> result) {
+				if (!result.isEmpty()) {
+					if (result.get(0).getType().equals(SearchResultType.STATE)) {
+						History.newItem("P" + result.get(0).getId());
+					}
+					if (result.get(0).getType().equals(SearchResultType.COUNTY)) {
+						History.newItem("P" + result.get(0).getId());
+					}
+					if (result.get(0).getType().equals(SearchResultType.OSC)) {
+						History.newItem("O" + result.get(0).getId());
+					}
+					if (result.get(0).getType().equals(SearchResultType.ADDRESS)) {
+						History.newItem("A" + result.get(0).getId());
+					}
+					searchWidget.close();
+				}
+			}
+		};
+		searchService.search(criteria, LIMIT, callbackSearch);
 	}
 	
 	private void search() {
