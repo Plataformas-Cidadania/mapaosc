@@ -179,7 +179,7 @@ public class SearchWidget extends Composite {
 	
 	private HTML getHelpHtml() {
 		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<p>Para localizar uma organização da sociedade civil, digite o nome parcial ou completo da organização, ou o número parcial ou completo do CNPJ da organização. Também é possível localizar organizações buscando por nome dos municípios ou dos estados.</p>");
+		htmlBuilder.append("<p>Para localizar uma organização da sociedade civil, digite o nome parcial ou completo da organização, ou o número parcial ou completo do CNPJ (com ou sem pontuação) da organização. Também é possível localizar organizações buscando por nome dos municípios ou dos estados.</p>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
