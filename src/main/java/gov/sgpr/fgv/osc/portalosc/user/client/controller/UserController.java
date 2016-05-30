@@ -1049,11 +1049,21 @@ public class UserController {
 		slideipea.setActive(true);
 		slideipea.setVisible(true);
 		Anchor aipea = new Anchor();
-		aipea.setHref("http://www.ipea.gov.br/");
+		aipea.setHref("http://www.secretariadegoverno.gov.br/");
 		aipea.setTarget("_blank");
-		Image imgipea = new Image("imagens/logo_50anos.png");
+		Image imgipea = new Image("imagens/logo_secretaria.png");
 		imgipea.setStyleName("normal");
-		imgipea.setAltText("Ipea");
+		imgipea.setAltText("Secretaria de Governo");
+		
+		CarouselSlide slidemj = new CarouselSlide();
+		slidemj.setActive(true);
+		slidemj.setVisible(true);
+		Anchor amj = new Anchor();
+		amj.setHref("http://www.justica.gov.br/");
+		amj.setTarget("_blank");
+		Image imgmj = new Image("imagens/logo-mj.png");
+		imgmj.setStyleName("normal");
+		imgmj.setAltText("Ministério da Justiça");
 		
 		CarouselSlide slidefgv = new CarouselSlide();
 		slidefgv.setActive(false);
@@ -1085,12 +1095,15 @@ public class UserController {
 		controlnext.setNext(true);
 		
 		aipea.getElement().appendChild(imgipea.getElement());
+		amj.getElement().appendChild(imgmj.getElement());
 		afgv.getElement().appendChild(imgfgv.getElement());
 		apnud.getElement().appendChild(imgpnud.getElement());
 		slideipea.getElement().appendChild(aipea.getElement());
+		slidemj.getElement().appendChild(amj.getElement());
 		slidefgv.getElement().appendChild(afgv.getElement());
 		slidepnud.getElement().appendChild(apnud.getElement());
 		inner.getElement().appendChild(slideipea.getElement());
+		inner.getElement().appendChild(slidemj.getElement());
 		inner.getElement().appendChild(slidefgv.getElement());
 		inner.getElement().appendChild(slidepnud.getElement());
 		carousel.getElement().appendChild(inner.getElement());
