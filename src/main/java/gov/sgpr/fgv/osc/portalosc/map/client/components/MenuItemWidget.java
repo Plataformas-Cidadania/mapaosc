@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.AnchorElement;
 //import com.google.gwt.user.client.Element;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Display;
@@ -76,7 +77,7 @@ public class MenuItemWidget extends Composite {
 			htmlBuilder.append(resumedTitle);
 			htmlBuilder.append("</strong></a>");
 		} else {
-		htmlBuilder.append(resumedTitle);
+		htmlBuilder.append("<a href='#' id='popupTitle"+item.getId()+"' class='dados' >"+ resumedTitle +"</a>");
 	}
 		htmlBuilder.append("</span>");
 		htmlBuilder.append("</h4>");
@@ -206,7 +207,7 @@ public class MenuItemWidget extends Composite {
 
 		final Element btnItem = DOM.getElementById("btnItem_" + item.getId());
 		if (btnItem != null) {
-			if (item.getContent() == null) {
+			if (item.getContent() == null || item.getId().contains("O")) {
 				btnItem.getStyle().setDisplay(Display.NONE);
 			}
 			Event.sinkEvents(btnItem, Event.ONCLICK);
@@ -225,6 +226,29 @@ public class MenuItemWidget extends Composite {
 				}
 			});
 		}
+		
+		final AnchorElement popupTitle = DOM.getElementById("popupTitle" + item.getId()).cast();
+		if (popupTitle != null) {
+			if (item.getContent() == null || item.getId().contains("O")) {
+				popupTitle.getStyle().setDisplay(Display.NONE);
+			}
+			Event.sinkEvents(popupTitle, Event.ONCLICK);
+			Event.setEventListener(popupTitle, new EventListener() {
+
+				
+				public void onBrowserEvent(Event event) {
+					if (opened) {
+						popupTitle.setClassName("dados");
+						itemBody.getStyle().setDisplay(Display.NONE);
+					} else {
+						popupTitle.setClassName("dados_abertos");
+						itemBody.getStyle().setDisplay(Display.BLOCK);
+					}
+					opened = !opened;
+				}
+			});
+		}
+		
 		final Element btnHelp = DOM.getElementById("ajuda_" + item.getId());
 		int[] idFonte = { 1, 13 };
 		processFonteIndicadores(idFonte);

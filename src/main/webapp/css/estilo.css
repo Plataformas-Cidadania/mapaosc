@@ -772,6 +772,24 @@ a.ajuda {
 	display: none;
 }
 
+#mapa_navegacao h4 a.dados{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+#mapa_navegacao h4 a.dados_abertos{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
 #mapa_navegacao .organizacao {
 	position: relative;
 	display: table;
