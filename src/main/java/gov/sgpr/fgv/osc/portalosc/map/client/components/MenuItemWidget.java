@@ -239,8 +239,10 @@ public class MenuItemWidget extends Composite {
 				public void onBrowserEvent(Event event) {
 					if (opened) {
 						popupTitle.setClassName("dados");
+						btnItem.setClassName("dados");
 						itemBody.getStyle().setDisplay(Display.NONE);
 					} else {
+						btnItem.setClassName("dados_abertos");
 						popupTitle.setClassName("dados_abertos");
 						itemBody.getStyle().setDisplay(Display.BLOCK);
 					}

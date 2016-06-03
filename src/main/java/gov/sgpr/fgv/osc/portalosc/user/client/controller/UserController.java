@@ -1056,7 +1056,7 @@ public class UserController {
 		imgipea.setAltText("Secretaria de Governo");
 		
 		CarouselSlide slidemj = new CarouselSlide();
-		slidemj.setActive(true);
+		slidemj.setActive(false);
 		slidemj.setVisible(true);
 		Anchor amj = new Anchor();
 		amj.setHref("http://www.justica.gov.br/");
