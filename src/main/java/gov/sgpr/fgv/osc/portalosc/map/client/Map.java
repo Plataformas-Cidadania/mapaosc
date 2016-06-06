@@ -5,8 +5,15 @@ import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.storage.client.Storage;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
@@ -35,6 +42,13 @@ public class Map implements EntryPoint {
 					if (!result) {
 						Window.Location.assign(GWT.getHostPageBaseURL() + "manutencao.html");
 					} else {
+						
+						String session = Storage.getSessionStorageIfSupported().getItem("popup-exibida");
+						if(session == null){
+							openPopup();
+							Storage.getSessionStorageIfSupported().setItem("popup-exibida", "1");
+						}
+						
 						maps.init();
 						menu.setMap(maps.getInstance(), search.getInstance());
 						menu.init();
@@ -48,5 +62,36 @@ public class Map implements EntryPoint {
 			logger.info("Ocoreu um erro na classe " + this.getClass().getName() + ": " + e.getMessage());
 			Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
 		}
+	}
+	
+	private void openPopup(){
+		final PopupPanel popup = new PopupPanel();
+		popup.setStyleName("overlay");
+		popup.add(getHtmlPopup());
+		popup.show();
+		
+		Element ok = DOM.getElementById("fechar");
+		Event.sinkEvents(ok, Event.ONCLICK);
+		Event.setEventListener(ok, new EventListener() {
+			public void onBrowserEvent(Event event) {
+				popup.hide();
+			}
+		});
+	}
+	
+	private static HTML getHtmlPopup() {
+		StringBuilder htmlBuilder = new StringBuilder();
+		htmlBuilder.append("<div class='popup_representante'>");
+		htmlBuilder.append("<a id='fechar' class='fechar'>X</a>");
+		htmlBuilder.append("<div style='padding-top: 80px'>");
+		htmlBuilder.append("<div>As OSCs agora podem inserir dados em páginas próprias. Representante, atualize a página de sua OSC.</div>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("<div style='padding-top: 40px'>");
+		htmlBuilder.append("<div class='botoes'><a class='botao' target='_blank' href='tutorial.pdf'>Saiba Como</a><a class='botao' href='User.html'>Cadastro</a></div>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("</div>");
+			
+		HTML html = new HTML(htmlBuilder.toString());
+		return html;
 	}
 }
