@@ -66,28 +66,51 @@ public class Map implements EntryPoint {
 	
 	private void openPopup(){
 		final PopupPanel popup = new PopupPanel();
-		popup.setStyleName("overlay");
 		popup.add(getHtmlPopup());
 		popup.show();
 		
-		Element ok = DOM.getElementById("fechar");
-		Event.sinkEvents(ok, Event.ONCLICK);
-		Event.setEventListener(ok, new EventListener() {
+		addClose(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				popup.hide();
 			}
 		});
+		
+		addStopPropagation(new EventListener() {
+			public void onBrowserEvent(Event event) {
+				event.stopPropagation();
+			}
+		});
+	}
+	
+	private void addClose(EventListener listener){
+		Element fechar = DOM.getElementById("fechar");
+		Element nInteresse = DOM.getElementById("nInteresse");
+		Element overlay = DOM.getElementById("overlay");
+		Event.sinkEvents(fechar, Event.ONCLICK);
+		Event.sinkEvents(nInteresse, Event.ONCLICK);
+		Event.sinkEvents(overlay, Event.ONCLICK);
+		Event.setEventListener(fechar, listener);	
+		Event.setEventListener(nInteresse, listener);
+		Event.setEventListener(overlay, listener);
+	}
+	
+	private void addStopPropagation(EventListener listener){
+		Element pop = DOM.getElementById("popup");
+		Event.sinkEvents(pop, Event.ONCLICK);
+		Event.setEventListener(pop, listener);
 	}
 	
 	private static HTML getHtmlPopup() {
 		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<div class='popup_representante'>");
+		htmlBuilder.append("<div id='overlay' class='overlay'>");
+		htmlBuilder.append("<div id='popup' class='popup_representante'>");
 		htmlBuilder.append("<a id='fechar' class='fechar'>X</a>");
 		htmlBuilder.append("<div style='padding-top: 80px'>");
 		htmlBuilder.append("<div>As OSCs agora podem inserir dados em páginas próprias. Representante, atualize a página de sua OSC.</div>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div style='padding-top: 40px'>");
-		htmlBuilder.append("<div class='botoes'><a class='botao' target='_blank' href='tutorial.pdf'>Saiba Como</a><a class='botao' href='User.html'>Cadastro</a></div>");
+		htmlBuilder.append("<div class='botoes'><a class='botao' target='_blank' href='tutorial.pdf'>Saiba Como</a><a class='botao' id='nInteresse' >Não tenho interesse</a></div>");
+		htmlBuilder.append("</div>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("</div>");
 			
