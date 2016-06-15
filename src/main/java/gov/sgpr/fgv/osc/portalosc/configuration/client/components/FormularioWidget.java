@@ -30,6 +30,7 @@ public class FormularioWidget extends Composite {
 	protected void onAttach() {
 		super.onAttach();
 		searchTextField = DOM.getElementById("enome");
+		captcha();
 	}
 	
 	private HTML getHTML(Boolean userNet){
@@ -65,6 +66,9 @@ public class FormularioWidget extends Composite {
 			htmlBuilder.append("</div>");
 			htmlBuilder.append("</div>");
 		}
+		htmlBuilder.append("<div style='width: 20px; margin: 0 40px 10px;' > Verificação:");
+		htmlBuilder.append("<div id='html_element' style='margin-top: 10px;'></div>");
+		htmlBuilder.append("</div>");
 		htmlBuilder.append("				</fieldset>");
 		htmlBuilder.append("				<div>");
 		htmlBuilder.append("				<div id='divrepres' >");
@@ -90,7 +94,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("			</div>");
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("		<div id='floatingLoginErrorList'></div>");
-		htmlBuilder.append("		<div class='botoes'><a href='#' class='cancelar' id='btnCancelar'>Cancelar</a> ou <input type='button' id='btnSalvar' name='btnSalvar' value='Salvar alterações' class='salvar'/></div>");
+		htmlBuilder.append("		<div class='botoes'><a href='#' class='cancelar' id='btnCancelar'>Cancelar</a> ou <input type='button' id='btnSalvar' name='btnSalvar' value='Salvar alterações' class='salvar disabled'/></div>");
 		htmlBuilder.append("	</form>");
 		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
@@ -421,5 +425,9 @@ public class FormularioWidget extends Composite {
 				notEqual : "Senha inválida"
 			}
 		});
+	}-*/;
+	
+	public native void captcha() /*-{
+		$wnd.onloadCallback("html_element");
 	}-*/;
 }
