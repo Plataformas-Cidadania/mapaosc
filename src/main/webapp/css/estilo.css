@@ -3716,9 +3716,8 @@ background-color:#E7AB37;
 #mapa.organizacao form > .botoes {
 width:100%;
 background-color:#ccc;
-height:80px;
+min-height:100px;
 line-height:80px;
-text-align:center;
 font-size:1.2em;
 margin:0;
 z-index:1;
@@ -4750,4 +4749,19 @@ float: right;
 .popup_representante a.botao {
 	padding: 10px 20px;
 	height: 40px;
+}
+
+.disabled {
+	cursor: not-allowed;
+    pointer-events: none;
+    opacity: .45;
+}
+
+#html_element {
+	display: inline-block;
+    vertical-align: middle;
+}
+
+.botoes .col-md-6:last-child {
+	text-align: left;
 }
