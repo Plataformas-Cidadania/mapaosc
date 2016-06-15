@@ -162,7 +162,7 @@ public class RepresentantFormWidget extends Composite {
 		htmlBuilder.append("			<div>");
 		htmlBuilder.append("				<form>");
 		htmlBuilder.append("					Verifique se a organização já está cadastrada no Mapa, informando o nome ou CNPJ: ");
-		htmlBuilder.append("					<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade' required='required' class='entidade' />");
+		htmlBuilder.append("					<input type='text' name='enome' id='enome' placeholder='Nome ou CNPJ da entidade' required='required' class='entidade' style='margin: 20px 25px 0px 0px; width: 300px;' />");
 		htmlBuilder.append("					<div class='botoes'>");
 		htmlBuilder.append("						<label><strong><span id='oscCode' name='oscCode'></span></strong></label>");
 		htmlBuilder.append("					</div>");
@@ -201,9 +201,12 @@ public class RepresentantFormWidget extends Composite {
 		htmlBuilder.append("				<div>Desejo receber email sobre as novidades do Mapa das Organizações da Sociedade Civil.</div>");
 		htmlBuilder.append("			</div>");
 		htmlBuilder.append("		</div>");
+		htmlBuilder.append("<div id='verify' style='display: none; margin-left: 20px;' >Verificação:");
+		htmlBuilder.append("<div id='html_element' style='margin-left: -55px;margin-top: 10px;' ></div>");
+		htmlBuilder.append("</div>");
 		htmlBuilder.append("		<div class='botoes'>");
 		htmlBuilder.append("			<a href='#' class='cancelar' name= 'btnCancelar'id='btnCancelarOSC'>Cancelar</a> ou");
-		htmlBuilder.append("			<input type='button' id= 'btnCadastroOSC' name= 'btnCadastroOSC' value='Entrar' class='botao_entrar'/>");
+		htmlBuilder.append("			<input type='button' id= 'btnCadastroOSC' name= 'btnCadastroOSC' value='Entrar' class='botao_entrar disabled'/>");
 		htmlBuilder.append("		</div>");		
 		htmlBuilder.append("	</form>");
 		htmlBuilder.append("</div>");
@@ -230,6 +233,7 @@ public class RepresentantFormWidget extends Composite {
 		final Element fieldOscCode = DOM.getElementById("oscCode");
 		final Element representantName = DOM.getElementById("entity_name");
 		final Element cadastroRepresent = DOM.getElementById("cadastro_rep");
+		final Element verify = DOM.getElementById("verify");
 		fieldOscName.setInnerText(oscInfo);
 		fieldOscCode.setInnerText(oscId);
 
@@ -237,6 +241,8 @@ public class RepresentantFormWidget extends Composite {
 		searchWidget.getStyle().setDisplay(Display.NONE);
 		representantName.getStyle().setDisplay(Display.BLOCK);
 		cadastroRepresent.getStyle().setDisplay(Display.BLOCK);
+		verify.getStyle().setDisplay(Display.BLOCK);
+		captcha();
 	}
 	
 	public native void close() /*-{
@@ -396,5 +402,9 @@ public class RepresentantFormWidget extends Composite {
 				notEqualCPF : "Este CPF já esta cadastrado no Mapa"
 			}
 		});
+	}-*/;
+	
+	public native void captcha() /*-{
+		$wnd.onloadCallback("html_element");
 	}-*/;
 }

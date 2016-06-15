@@ -54,6 +54,7 @@ public class FormularioWidget extends Composite {
 		super.onAttach();
 		magneticLink(conv, "linkconv");
 		magneticLink(proj, "linkproj");
+		captcha();
 	}
 	
 	public void addResultItems(List<SearchResult> items, EventListener listener, String idElement) {
@@ -331,7 +332,7 @@ public class FormularioWidget extends Composite {
 		}else{
 			htmlBuilder.append("					<span>" + convertNumberToString(org.getTotalColaboradores()) + "</span>");
 		}
-		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial, Fonte RAIS e SUAS'></span>");
+		htmlBuilder.append("						<span class='fonte_de_dados dado_oficial' title='Dado Oficial e Fonte RAIS'></span>");
 		htmlBuilder.append("						<div id='recolherCol' class='collapse-click collapse-button' data-toggle='collapse' data-target='#recCol' ><div></div></div>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div id='recCol' class='collapse' >");
@@ -876,7 +877,10 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("		</div>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("	<div id='divbotoes' class='botoes'>");
-		htmlBuilder.append("		<a href='#O"+ org.getId().toString() +"' id='cancelar' >Cancelar</a> ou <input id='btnSalvar' type='button' value='Salvar' class='salvar' />");
+		htmlBuilder.append("<div class='col-md-6'> Verificação:");
+		htmlBuilder.append("<div id='html_element' style='margin-top: 10px;'></div>");
+		htmlBuilder.append("</div>");
+		htmlBuilder.append("		<div class='col-md-6'><a href='#O"+ org.getId().toString() +"' id='cancelar' >Cancelar</a> ou <input id='btnSalvar' type='button' value='Salvar' class='salvar disabled' /></div>");
 		htmlBuilder.append("	</div>");
 		htmlBuilder.append("</form>");
 		
@@ -1342,4 +1346,8 @@ public class FormularioWidget extends Composite {
 			}
 		}	
 	}
+	
+	public native void captcha() /*-{
+		$wnd.onloadCallback("html_element");
+	}-*/;
 }

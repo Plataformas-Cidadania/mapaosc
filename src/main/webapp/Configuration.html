@@ -22,6 +22,18 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript">document.documentElement.className += " js";</script>
 	<script type="text/javascript" src="Configuration/Configuration.nocache.js"></script>
+	<script type="text/javascript">
+	  var verifyCallback = function(response) {
+        	if(response != "")
+        		document.getElementById("btnSalvar").setAttribute('class','salvar');
+      };
+      var onloadCallback = function(element) {
+        grecaptcha.render(element, {
+          'sitekey' : '6Le2sCITAAAAAIzr5bltVOTTvPItoANjdutql0zm',
+          'callback' : verifyCallback
+        });
+      };
+    </script>
 
 </head>
 
@@ -260,6 +272,7 @@
 	<script src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/validacao_cadastro.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js" ></script>
 	
 </body>
 

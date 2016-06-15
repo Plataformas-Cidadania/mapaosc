@@ -312,6 +312,7 @@ public class ConfigurationController {
 		Event.setEventListener(ok, new EventListener() {
 			public void onBrowserEvent(Event event) {
 				popup.hide();
+				Window.Location.reload();
 			}
 		});
 	}
