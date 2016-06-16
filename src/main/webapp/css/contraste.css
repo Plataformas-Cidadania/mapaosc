@@ -436,3 +436,7 @@ background-image: url(../imagens/sprite_organizacao.png);
 .contraste_ativo #mapa{
 	background-color: #000;
 }
+
+.contraste_ativo a.documento {
+	background-image: url(../imagens/contraste/21_documento.png);
+}

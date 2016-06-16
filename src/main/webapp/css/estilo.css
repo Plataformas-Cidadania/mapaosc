@@ -4765,3 +4765,12 @@ float: right;
 .botoes .col-md-6:last-child {
 	text-align: left;
 }
+
+a.documento {
+	background-image: url(../imagens/21_documento.png);
+	background-repeat: no-repeat;
+}
+
+a.documento:hover {
+	background-image: url(../imagens/21_documento_hover.png);
+}
