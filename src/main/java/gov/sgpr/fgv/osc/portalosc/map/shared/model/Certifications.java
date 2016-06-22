@@ -284,7 +284,7 @@ public class Certifications implements Serializable,
 			value = "Válido desde " + Dtfmt.format(begin);
 		} 
 		if (Dtfmt.format(begin) == "01/01/1900") {
-			value = "Não informado";
+			value = "Validade não informada";
 		}
 		else {
 			value = "Não possui";
