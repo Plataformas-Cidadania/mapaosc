@@ -280,14 +280,14 @@ public class Certifications implements Serializable,
 
 		key = "OSCIP";
 		begin = this.oscipPublication;
-		if (Dtfmt.format(begin) == "01/01/1900") {
-			value = "Validade não informada";
-		}
 		if (begin != null || Dtfmt.format(begin) != "01/01/1900") {
 			value = "Válido desde " + Dtfmt.format(begin);
 		} 
 		else {
-			value = "Não possui";
+			if (Dtfmt.format(begin) == "01/01/1900") {
+			value = "Validade não informada";
+		}
+		else value = "Não possui";
 		}
 		content.put(key, value);
 
