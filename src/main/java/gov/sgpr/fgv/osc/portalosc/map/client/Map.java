@@ -106,7 +106,7 @@ public class Map implements EntryPoint {
 		htmlBuilder.append("<div id='popup' class='popup_representante'>");
 		htmlBuilder.append("<a id='fechar' class='fechar'>X</a>");
 		htmlBuilder.append("<div style='padding-top: 80px'>");
-		htmlBuilder.append("<div>As OSCs agora podem inserir ou editar dados em suas páginas no Mapa. Representante de OSC, aumente a transparência da sua entidade e mantenha a sua página atualizada!.</div>");
+		htmlBuilder.append("<div>As OSCs agora podem inserir ou editar dados em suas páginas no Mapa. <strong>Representante de OSC</strong>, aumente a transparência da sua entidade e mantenha a sua página atualizada!.</div>");
 		htmlBuilder.append("</div>");
 		htmlBuilder.append("<div style='padding-top: 40px'>");
 		htmlBuilder.append("<div class='botoes'><a class='botao' target='_blank' href='tutorial.pdf'>Saiba Como</a><a class='botao' id='nInteresse' >Não tenho interesse</a></div>");

@@ -4774,3 +4774,11 @@ a.documento {
 a.documento:hover {
 	background-image: url(../imagens/21_documento_hover.png);
 }
+
+button#addDiretor {
+	visibility: hidden;
+}
+
+.dados:hover button#addDiretor {
+	visibility: visible;
+}
