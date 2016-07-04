@@ -263,7 +263,7 @@ public class Certifications implements Serializable,
 		if (end != null && end.after(new Date())) {
 			value = "Válido até " + Dtfmt.format(end);
 		} else if (begin != null) {
-			value = "Válido desde " + Dtfmt.format(begin);
+			value = "Validade expirada em " + Dtfmt.format(end);
 		} else {
 			value = "Não possui";
 		}
