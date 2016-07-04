@@ -272,7 +272,12 @@ public class Certifications implements Serializable,
 		key = "CNEA";
 		begin = this.cneaPublication;
 		if (begin != null) {
+			if (Dtfmt.format(begin) == "01/01/1900") {
+			value = "Validade não informada";
+			}
+			else {
 			value = "Válido desde " + Dtfmt.format(begin);
+			}
 		} else {
 			value = "Não possui";
 		}
