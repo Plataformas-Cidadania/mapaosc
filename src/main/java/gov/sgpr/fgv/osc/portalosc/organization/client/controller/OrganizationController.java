@@ -284,14 +284,19 @@ public class OrganizationController {
 		
 		formularioWidget.addSalvarListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
-				logger.info("Salvando os Dados");
-				for (int i = 0; i<excluirDir.size(); i++)
-					removeDir(excluirDir.get(i));
-				for (int i = 0; i<excluirLocalProj.size(); i++)
-					removeLocalProj(excluirLocalProj.get(i));
-				for (int i = 0; i<excluirLocalConv.size(); i++)
-					removeLocalConv(excluirLocalConv.get(i));
-				setOrganization(formularioWidget.getOrg());
+				if(formularioWidget.resultCaptcha() != ""){
+					logger.info("Salvando os Dados");
+					for (int i = 0; i<excluirDir.size(); i++)
+						removeDir(excluirDir.get(i));
+					for (int i = 0; i<excluirLocalProj.size(); i++)
+						removeLocalProj(excluirLocalProj.get(i));
+					for (int i = 0; i<excluirLocalConv.size(); i++)
+						removeLocalConv(excluirLocalConv.get(i));
+					setOrganization(formularioWidget.getOrg());
+				}else{
+					openPopup("Página OSC", "Campo Verificação Obrigatório!", false);
+				}
+					
 			}
 		});
 		
@@ -383,8 +388,9 @@ public class OrganizationController {
 		formularioWidget.removeDir(new EventListener() {
 			public void onBrowserEvent(Event event) {
 				logger.info("Removendo Diretor");
-				Element ele = event.getCurrentTarget().getParentElement();
+				Element ele = event.getCurrentTarget().getParentElement().getParentElement();
 				Element div = ele.getParentElement();
+				logger.info("DIV: "+ div.toString());
 				div.removeAllChildren();
 				Integer id = Integer.parseInt(event.getCurrentTarget().getAttribute("value"));
 				excluirDir.add(id);
