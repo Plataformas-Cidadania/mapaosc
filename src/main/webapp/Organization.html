@@ -23,9 +23,11 @@
 	<script type="text/javascript">document.documentElement.className += " js";</script>
 	<script type="text/javascript" src="Organization/Organization.nocache.js"></script>
 	<script type="text/javascript">
+	  var resultCaptcha = "";
 	  var verifyCallback = function(response) {
         	if(response != "")
         		document.getElementById("btnSalvar").setAttribute('class','salvar');
+        	resultCaptcha = response;
       };
       var onloadCallback = function(element) {
         grecaptcha.render(element, {
