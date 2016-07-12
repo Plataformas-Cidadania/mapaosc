@@ -692,7 +692,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT cnea_dt_publicacao, cebas_mec_dt_inicio_validade, cebas_mec_dt_fim_validade, "
-				+ "cebas_saude_dt_inicio_validade, cebas_saude_dt_fim_validade, cnes_oscip_dt_publicacao, cnes_upf_dt_declaracao "
+				+ "cebas_saude_dt_inicio_validade, cebas_saude_dt_fim_validade, cnes_oscip_dt_publicacao, cnes_upf_dt_declaracao, "
+				+ "cebas_mds_dt_inicio_validade, cebas_mds_dt_fim_validade "
 				+ "FROM data.tb_osc_certificacao WHERE bosc_sq_osc = ?";
 
 		Certifications cert = new Certifications();
@@ -709,6 +710,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 						.getDate("cebas_saude_dt_inicio_validade"));
 				cert.setCebasSusEnd(rs.getDate("cebas_saude_dt_fim_validade"));
 				cert.setOscipPublication(rs.getDate("cnes_oscip_dt_publicacao"));
+				cert.setCebasMdsBeginning(rs.getDate("cebas_mds_dt_inicio_validade"));
+				cert.setCebasMdsEnd(rs.getDate("cebas_mds_dt_fim_validade"));
 				cert.setUpfDeclaration(rs.getDate("cnes_upf_dt_declaracao"));
 			}
 			int[] dsCodes = { 2, 3, 4, 7, 11, 14 };
