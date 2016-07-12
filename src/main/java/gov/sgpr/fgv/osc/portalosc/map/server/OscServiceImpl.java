@@ -833,7 +833,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			sql = "SELECT siconv_qt_parceria_finalizada,qt_parcerias_fin, siconv_qt_parceria_execucao,qt_parcerias_exe, siconv_vl_global,vl_aprovado, siconv_vl_repasse, "
 					+ "vl_pago_ate_hoje, siconv_vl_contrapartida_financeira, vl_contrapartida_financeira, siconv_vl_contrapartida_outras, siconv_vl_empenhado, siconv_vl_desembolsado, "
 					//+ "finep_qt_projetos_proponente, finep_qt_projetos_executor, finep_qt_projetos_coexecutor, "+ "finep_qt_projetos_interveniente, "
-					+ "lic_vl_solicitado, lic_vl_aprovado, lic_vl_captado "
+					//+ "lic_vl_solicitado, 
+					+ "lic_vl_aprovado, lic_vl_captado "
 					+ "FROM  data.tb_osc LEFT JOIN data.tb_osc_siconv ON (tb_osc.bosc_sq_osc = tb_osc_siconv.bosc_sq_osc) "
 					+ "LEFT JOIN data.tb_finep ON (tb_osc.bosc_sq_osc = tb_finep.bosc_sq_osc) "
 					+ "LEFT JOIN data.tb_osc_lic ON (tb_osc.bosc_sq_osc = tb_osc_lic.bosc_sq_osc) "
@@ -867,9 +868,9 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 				resources.setTechnologicalAsCoExecutor(rs
 						.getInt("finep_qt_projetos_coexecutor"));
 				resources.setTechnologicalAsIntervenient(rs
-						.getInt("finep_qt_projetos_interveniente")); */
+						.getInt("finep_qt_projetos_interveniente")); 
 				resources.setCulturalRequestedValue(rs
-						.getDouble("lic_vl_solicitado"));
+						.getDouble("lic_vl_solicitado"));*/
 				resources.setCulturalApprovedValue(rs
 						.getDouble("lic_vl_aprovado"));
 				resources
