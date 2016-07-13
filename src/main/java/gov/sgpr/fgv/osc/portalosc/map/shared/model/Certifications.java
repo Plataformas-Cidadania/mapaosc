@@ -237,7 +237,7 @@ public class Certifications implements Serializable,
 		if (end != null && end.after(new Date())) {
 			value = "Válido até " + Dtfmt.format(end);
 		} else if (begin != null) {
-			value = "Válido desde " + Dtfmt.format(begin);
+			value = "Validade expirada em " + Dtfmt.format(end);
 		} else {
 			value = "Não possui";
 		}
@@ -250,7 +250,7 @@ public class Certifications implements Serializable,
 		if (end != null && end.after(new Date())) {
 			value = "Válido até " + Dtfmt.format(end);
 		} else if (begin != null) {
-			value = "Válido desde " + Dtfmt.format(begin);
+			value = "Validade expirada em " + Dtfmt.format(end);
 		} else {
 			value = "Não possui";
 		}
@@ -263,7 +263,7 @@ public class Certifications implements Serializable,
 		if (end != null && end.after(new Date())) {
 			value = "Válido até " + Dtfmt.format(end);
 		} else if (begin != null) {
-			value = "Válido desde " + Dtfmt.format(begin);
+			value = "Validade expirada em " + Dtfmt.format(end);
 		} else {
 			value = "Não possui";
 		}
@@ -272,7 +272,12 @@ public class Certifications implements Serializable,
 		key = "CNEA";
 		begin = this.cneaPublication;
 		if (begin != null) {
+			if (Dtfmt.format(begin) == "01/01/1900") {
+			value = "Validade não informada";
+			}
+			else {
 			value = "Válido desde " + Dtfmt.format(begin);
+			}
 		} else {
 			value = "Não possui";
 		}
