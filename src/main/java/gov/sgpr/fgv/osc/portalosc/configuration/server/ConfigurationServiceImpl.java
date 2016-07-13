@@ -76,37 +76,37 @@ public class ConfigurationServiceImpl extends RemoteServiceImpl implements Confi
 			}else if(configuration.getTipoUsuario() == 2 || configuration.getTipoUsuario() == 3){
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
-						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = null, tusu_in_lista_email = ?, tusu_dt_atualizacao = ? "
+						   + "tusu_cd_senha = ?, bosc_sq_osc = null, tusu_in_lista_email = ?, tusu_dt_atualizacao = ? "
 						   + "WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
 				pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getEmail())));
 				pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getNome())));
 				pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getSenha())));
-				if(configuration.getTipoUsuario() == 3){
-					if(configuration.getCPF() != null)
-						pstmt.setLong(5, configuration.getCPF());
-				}else
-					pstmt.setLong(5, configuration.getCPF());
-				pstmt.setBoolean(6, configuration.getListaEmail());
-				pstmt.setDate(7, sqlDate);
-				pstmt.setLong(8, configuration.getId());
+//				if(configuration.getTipoUsuario() == 3){
+//					if(configuration.getCPF() != null)
+//						pstmt.setLong(5, configuration.getCPF());
+//				}else
+//					pstmt.setLong(5, configuration.getCPF());
+				pstmt.setBoolean(5, configuration.getListaEmail());
+				pstmt.setDate(6, sqlDate);
+				pstmt.setLong(7, configuration.getId());
 			}
 			else if(configuration.getTipoUsuario() == 4){
 				String sql = "UPDATE portal.tb_usuario "
 						   + "SET tpus_cd_tipo_usuario = ?, tusu_ee_email = ?, tusu_nm_usuario = ?, "
-						   + "tusu_cd_senha = ?, tusu_nr_cpf = ?, bosc_sq_osc = ?, tusu_in_lista_email = ? , tusu_dt_atualizacao = ?"
+						   + "tusu_cd_senha = ?, bosc_sq_osc = ?, tusu_in_lista_email = ? , tusu_dt_atualizacao = ?"
 						   + "WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, configuration.getTipoUsuario());
 				pstmt.setString(2, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getEmail())));
 				pstmt.setString(3, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getNome())));
 				pstmt.setString(4, SafeHtmlUtils.htmlEscape(StringUtils.defaultString(configuration.getSenha())));
-				pstmt.setLong(5, configuration.getCPF());
-				pstmt.setInt(6, configuration.getIdOsc());
-				pstmt.setBoolean(7, configuration.getListaEmail());
-				pstmt.setDate(8, sqlDate);
-				pstmt.setLong(9, configuration.getId());
+//				pstmt.setLong(5, configuration.getCPF());
+				pstmt.setInt(5, configuration.getIdOsc());
+				pstmt.setBoolean(6, configuration.getListaEmail());
+				pstmt.setDate(7, sqlDate);
+				pstmt.setLong(8, configuration.getId());
 			}
 			pstmt.execute();
 		} catch (SQLException e) {

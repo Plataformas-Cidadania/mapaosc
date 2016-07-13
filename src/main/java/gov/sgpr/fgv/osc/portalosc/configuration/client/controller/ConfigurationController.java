@@ -111,8 +111,12 @@ public class ConfigurationController {
 		
 		formularioWidget.addSalvarListener(new EventListener() {
 			public void onBrowserEvent(Event event) {
-				logger.info("Salvar configuracao");
-				validateConfiguration(formularioWidget.getUser());
+				if(formularioWidget.resultCaptcha() != ""){
+					logger.info("Salvar configuracao");
+					validateConfiguration(formularioWidget.getUser());
+				}else{
+					openPopup("Configurações", "Campo Verificação Obrigatório!", false);
+				}
 			}
 		});
 		
@@ -295,24 +299,28 @@ public class ConfigurationController {
 				if(configuration.getCPF() != null){
 					Cookies.setCookie("typeUser", "recommend_user");
 				}
-				openPopup("Dados atualizados", "Os dados foram atualizados com sucesso.");
+				openPopup("Dados atualizados", "Os dados foram atualizados com sucesso.", true);
 			}
 		};
 		configurationService.updateConfiguration(configuration, formularioWidget.getEmail(), callback);
 	}
 	
-	private void openPopup(String title, String message){
+	private void openPopup(String title, String message, Boolean reloadPage){
 		final PopupPanel popup = new PopupPanel();
 		popup.setStyleName("overlay");
 		popup.add(getHtmlPopup(title,message));
 		popup.show();
+		
+		final Boolean reload = reloadPage;
 		
 		Element ok = DOM.getElementById("ok");
 		Event.sinkEvents(ok, Event.ONCLICK);
 		Event.setEventListener(ok, new EventListener() {
 			public void onBrowserEvent(Event event) {
 				popup.hide();
-				Window.Location.reload();
+				if(reload){
+					Window.Location.reload();
+				}
 			}
 		});
 	}
