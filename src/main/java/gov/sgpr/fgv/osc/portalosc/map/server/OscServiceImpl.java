@@ -692,7 +692,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT cnea_dt_publicacao, cebas_mec_dt_inicio_validade, cebas_mec_dt_fim_validade, "
-				+ "cebas_saude_dt_inicio_validade, cebas_saude_dt_fim_validade, cnes_oscip_dt_publicacao, cnes_upf_dt_declaracao "
+				+ "cebas_saude_dt_inicio_validade, cebas_saude_dt_fim_validade, cnes_oscip_dt_publicacao, cnes_upf_dt_declaracao, "
+				+ "cebas_mds_dt_inicio_validade, cebas_mds_dt_fim_validade "
 				+ "FROM data.tb_osc_certificacao WHERE bosc_sq_osc = ?";
 
 		Certifications cert = new Certifications();
@@ -709,6 +710,8 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 						.getDate("cebas_saude_dt_inicio_validade"));
 				cert.setCebasSusEnd(rs.getDate("cebas_saude_dt_fim_validade"));
 				cert.setOscipPublication(rs.getDate("cnes_oscip_dt_publicacao"));
+				cert.setCebasMdsBeginning(rs.getDate("cebas_mds_dt_inicio_validade"));
+				cert.setCebasMdsEnd(rs.getDate("cebas_mds_dt_fim_validade"));
 				cert.setUpfDeclaration(rs.getDate("cnes_upf_dt_declaracao"));
 			}
 			int[] dsCodes = { 2, 3, 4, 7, 11, 14 };
@@ -827,12 +830,13 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
             rs.close();
             pstmt.close();
 			
-			sql = "SELECT siconv_qt_parceria_finalizada, siconv_qt_parceria_execucao, siconv_vl_global, siconv_vl_repasse, "
-					+ "siconv_vl_contrapartida_financeira, siconv_vl_contrapartida_outras, siconv_vl_empenhado, siconv_vl_desembolsado, "
-					+ "finep_qt_projetos_proponente, finep_qt_projetos_executor, finep_qt_projetos_coexecutor, "
-					+ "finep_qt_projetos_interveniente, lic_vl_solicitado, lic_vl_aprovado, lic_vl_captado "
+			sql = "SELECT siconv_qt_parceria_finalizada,qt_parcerias_fin, siconv_qt_parceria_execucao,qt_parcerias_exe, siconv_vl_global,vl_aprovado, siconv_vl_repasse, "
+					+ "vl_pago_ate_hoje, siconv_vl_contrapartida_financeira, vl_contrapartida_financeira, siconv_vl_contrapartida_outras, siconv_vl_empenhado, siconv_vl_desembolsado, "
+					//+ "finep_qt_projetos_proponente, finep_qt_projetos_executor, finep_qt_projetos_coexecutor, "+ "finep_qt_projetos_interveniente, "
+					//+ "lic_vl_solicitado, 
+					+ "lic_vl_aprovado, lic_vl_captado "
 					+ "FROM  data.tb_osc LEFT JOIN data.tb_osc_siconv ON (tb_osc.bosc_sq_osc = tb_osc_siconv.bosc_sq_osc) "
-					+ "LEFT JOIN data.tb_osc_finep ON (tb_osc.bosc_sq_osc = tb_osc_finep.bosc_sq_osc) "
+					+ "LEFT JOIN data.tb_finep ON (tb_osc.bosc_sq_osc = tb_finep.bosc_sq_osc) "
 					+ "LEFT JOIN data.tb_osc_lic ON (tb_osc.bosc_sq_osc = tb_osc_lic.bosc_sq_osc) "
 					+ "WHERE tb_osc.bosc_sq_osc = ?";
 			
@@ -843,34 +847,34 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 			PublicResources resources = new PublicResources();
 			if (rs.next()) {
 				resources.setPartnershipsEnded(rs
-						.getInt("siconv_qt_parceria_finalizada") +  parc_finalizada_projeto);
+						.getInt("siconv_qt_parceria_finalizada") + rs.getInt("qt_parcerias_fin") + parc_finalizada_projeto);
 				resources.setInExecutionPartnership(rs
-						.getInt("siconv_qt_parceria_execucao") + parc_exec_projeto);
-				resources.setGlobalValue(rs.getDouble("siconv_vl_global") + vl_global_projeto);
-				resources.setTransferValue(rs.getDouble("siconv_vl_repasse"));
+						.getInt("siconv_qt_parceria_execucao") + rs.getInt("qt_parcerias_exe") + parc_exec_projeto);
+				resources.setGlobalValue(rs.getDouble("siconv_vl_global") + rs.getDouble("vl_aprovado") + vl_global_projeto);
+				//resources.setTransferValue(rs.getDouble("siconv_vl_repasse") );
+				resources.setTransferValue(rs.getDouble("siconv_vl_desembolsado") + rs.getDouble("vl_pago_ate_hoje") );
 				resources.setFinancialCounterpartValue(rs
-						.getDouble("siconv_vl_contrapartida_financeira"));
-				resources.setOthersCounterpartValue(rs
-						.getDouble("siconv_vl_contrapartida_outras"));
+						.getDouble("siconv_vl_contrapartida_financeira") + rs.getDouble("vl_contrapartida_financeira") );
+				/*resources.setOthersCounterpartValue(rs
+						.getDouble("siconv_vl_contrapartida_outras") + rs.getDouble("") );
 				resources
 						.setCommittedValue(rs.getDouble("siconv_vl_empenhado"));
 				resources.setDisbursedValue(rs
-						.getDouble("siconv_vl_desembolsado"));
-				resources.setTechnologicalAsProposer(rs
+						.getDouble("siconv_vl_desembolsado"));*/
+				/*resources.setTechnologicalAsProposer(rs
 						.getInt("finep_qt_projetos_proponente"));
 				resources.setTechnologicalAsExecutor(rs
 						.getInt("finep_qt_projetos_executor"));
 				resources.setTechnologicalAsCoExecutor(rs
 						.getInt("finep_qt_projetos_coexecutor"));
 				resources.setTechnologicalAsIntervenient(rs
-						.getInt("finep_qt_projetos_interveniente"));
+						.getInt("finep_qt_projetos_interveniente")); 
 				resources.setCulturalRequestedValue(rs
-						.getDouble("lic_vl_solicitado"));
+						.getDouble("lic_vl_solicitado"));*/
 				resources.setCulturalApprovedValue(rs
 						.getDouble("lic_vl_aprovado"));
 				resources
 						.setCulturalRaisedValue(rs.getDouble("lic_vl_captado"));
-
 			}
 			int[] dsCodes = { 8, 12, 13 };
 			DataSource[] dataSources = getDataSources(dsCodes, oscId);
