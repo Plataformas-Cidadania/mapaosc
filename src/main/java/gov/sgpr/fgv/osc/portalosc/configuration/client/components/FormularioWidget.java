@@ -46,7 +46,7 @@ public class FormularioWidget extends Composite {
 		htmlBuilder.append("					<input type='hidden' name='cid' id='cid' class='nome' />");
 		htmlBuilder.append("					<label for='cnome'>Nome:</label> <input type='text' required='required' name='cnome' id='cnome' placeholder='Nome' class='nome' />");
 		if(userNet == false){
-			htmlBuilder.append("					<label for='rcpf'>CPF</label> <input type='text' name='rcpf' id='rcpf' placeholder='CPF' class='cpf' />");
+			htmlBuilder.append("					<label for='rcpf'>CPF</label> <input type='text' name='rcpf' id='rcpf' placeholder='CPF' disabled='disabled' class='cpf' />");
 		}
 		htmlBuilder.append("					<label for='cemail'>Email:</label> <input type='text' required='required' name='cemail' id='cemail'  placeholder='E-mail' class='email' />");
 		htmlBuilder.append("					<label for='csenha'>Senha:</label> <input required='required' type='password' name='csenha' id='csenha' placeholder='Senha' class='senha' />");
@@ -429,5 +429,9 @@ public class FormularioWidget extends Composite {
 	
 	public native void captcha() /*-{
 		$wnd.onloadCallback("html_element");
+	}-*/;
+	
+	public native String resultCaptcha() /*-{
+			return $wnd.resultCaptcha;
 	}-*/;
 }
