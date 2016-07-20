@@ -108,6 +108,13 @@ public class MatrixWidget extends Composite {
 		htmlBuilder.append("<div id=\"matrixBody\">");
 		htmlBuilder.append(breadcrumbIndicadores);
 		htmlBuilder.append("</div>");
+		htmlBuilder.append("<div style='font-size: 12px;'>");
+		htmlBuilder.append("<p>Fontes: Rais (2013) e Siconv (20 de junho de 2016). A quantidade e os valores das parcerias referem-se aos anos de 2009 a 2016.</p>");
+		htmlBuilder.append("<p style='margin-top: 10px;'>");
+		htmlBuilder.append("<i>Nota: Valores deflacionados pelo IPCA do mês corrente. Para mais informações, consultar a <a href='static.html?page=metodologia' target='_blank'>Metodologia do Mapa</a>.</i>");
+		htmlBuilder.append("</p>");
+		htmlBuilder.append("<p><i>Estamos trabalhando na inclusão de novos dados e de novas formas de visualização dos dados.</i></p>");
+		htmlBuilder.append("</div>");
 		HTML html = new HTML(htmlBuilder.toString());
 		return html;
 	}
@@ -199,7 +206,7 @@ public class MatrixWidget extends Composite {
 		int headerHeight = DOM.getElementById("barra-brasil").getClientHeight()
 				+ DOM.getElementById("topo").getClientHeight();
 		int footerHeight = DOM.getElementById("rodape").getClientHeight();
-		int height = Window.getClientHeight() - headerHeight - footerHeight - 100;
+		int height = Window.getClientHeight() - headerHeight - footerHeight - 125;
 		return height;
 	}
 

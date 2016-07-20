@@ -875,7 +875,6 @@ public class OscServiceImpl extends RemoteServiceImpl implements OscService {
 						.getDouble("lic_vl_aprovado"));
 				resources
 						.setCulturalRaisedValue(rs.getDouble("lic_vl_captado"));
-
 			}
 			int[] dsCodes = { 8, 12, 13 };
 			DataSource[] dataSources = getDataSources(dsCodes, oscId);
