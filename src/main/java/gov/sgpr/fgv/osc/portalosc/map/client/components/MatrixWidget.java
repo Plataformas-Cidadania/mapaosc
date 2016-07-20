@@ -103,8 +103,7 @@ public class MatrixWidget extends Composite {
 
 	private HTML getHtml(HTMLPanel breadcrumbIndicadores) {
 		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<h2> Matriz de Indicadores (os valores exibidos estão corrigidos pela inflação do mês e ano correntes)");
-		htmlBuilder.append("</h2>");
+		htmlBuilder.append("<h2> Matriz de Indicadores </h2>");
 		htmlBuilder.append("<div id=\"matrixBody\">");
 		htmlBuilder.append(breadcrumbIndicadores);
 		htmlBuilder.append("</div>");
