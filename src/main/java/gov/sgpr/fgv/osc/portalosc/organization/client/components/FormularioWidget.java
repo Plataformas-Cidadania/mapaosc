@@ -134,7 +134,7 @@ public class FormularioWidget extends Composite {
 			htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Nome pelo qual a organização é conhecida' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
 		else
 			htmlBuilder.append("						<input type='text' name='nome_fantasia' id='nome_fantasia' placeholder='Informação não disponível' value='" + org.getNomeFantasia() + "' " + (editable ? "" : "readonly") + "/>");
-		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado Oficial, Fonte RAIS'></span>");
+		htmlBuilder.append("						<span class='fonte_de_dados dado_organizacao' title='Dado preenchido pela Organização'></span>");
 		htmlBuilder.append("					</div>");
 		htmlBuilder.append("					<div>");
 		htmlBuilder.append("						<strong>CNPJ:</strong>");
