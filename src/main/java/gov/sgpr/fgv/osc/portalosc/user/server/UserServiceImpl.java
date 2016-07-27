@@ -109,10 +109,11 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Integer idUser = null;
+		Boolean flagUser = false;
 		
 		String sql = "";
 		try {
-			sql = "SELECT tusu_sq_usuario FROM portal.tb_token WHERE tusu_nr_cpf = ?";
+			sql = "SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, cpf);
 			rs = pstmt.executeQuery();
@@ -122,20 +123,30 @@ public class UserServiceImpl extends RemoteServiceImpl implements UserService {
 			rs.close();
 			pstmt.close();
 			
-			if(idUser == null){
-				sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES ((SELECT tusu_sq_usuario FROM portal.tb_usuario WHERE tusu_nr_cpf = ?), ?, ?);";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setLong(1, cpf);
-				pstmt.setString(2, token);
-				pstmt.setDate(3, sqlDate);
-				pstmt.execute();
-				pstmt.close();
-			}else{
+			sql = "SELECT * FROM portal.tb_token WHERE tusu_sq_usuario = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idUser);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				flagUser = true;
+			}
+			rs.close();
+			pstmt.close();
+			
+			if(flagUser){
 				sql = "UPDATE portal.tb_token SET tokn_cd_token = ?, tokn_data_token = ? WHERE tusu_sq_usuario = ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, token);
 				pstmt.setDate(2, sqlDate);
 				pstmt.setInt(3, idUser);
+				pstmt.execute();
+				pstmt.close();
+			}else{
+				sql = "INSERT INTO portal.tb_token (tusu_sq_usuario, tokn_cd_token, tokn_data_token) VALUES (?, ?, ?);";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setLong(1, idUser);
+				pstmt.setString(2, token);
+				pstmt.setDate(3, sqlDate);
 				pstmt.execute();
 				pstmt.close();
 			}
