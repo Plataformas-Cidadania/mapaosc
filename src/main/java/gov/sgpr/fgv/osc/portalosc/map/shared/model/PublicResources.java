@@ -362,7 +362,9 @@ public class PublicResources implements Serializable,
 		content.put("Parcerias finalizadas",
 				fmtNumber.format(partnershipsEnded));
 		content.put("Valor total aprovado", fmtCurrency.format(globalValue));
-		content.put("Valor de repasse", fmtCurrency.format(transferValue));
+		content.put("Valor total repassado", fmtCurrency.format(transferValue));
+		content.put("Valor total de contrapartida",fmtCurrency.format(financialCounterpartValue));
+	/*	content.put("Valor de repasse", fmtCurrency.format(transferValue));
 		content.put("Valor empenhado", fmtCurrency.format(committedValue));
 		content.put("Valor desembolsado", fmtCurrency.format(disbursedValue));
 		content.put("Contrapartida financeira",
@@ -374,7 +376,9 @@ public class PublicResources implements Serializable,
 		content.put("Valor Aprovado (Incentivo)",
 				fmtCurrency.format(culturalApprovedValue));
 		content.put("Valor Captado (Incentivo)",
-				fmtCurrency.format(culturalRaisedValue));
+				fmtCurrency.format(culturalRaisedValue));*/
+		content.put("Valor total de incentivo aprovado",fmtCurrency.format(culturalApprovedValue));
+		content.put("Valor total de incentivo captado",fmtCurrency.format(culturalRaisedValue));
 		content.put("<i style='font-size: 0.85em; line-height: 1em;'>* Nota</i>", 
 				"<i style='font-size: 0.85em; line-height: 1em;'>Valores deflacionados pelo Índice Nacional de Preços ao Consumidor Amplo (IPCA) do mês corrente.</i>");
 		
