@@ -290,13 +290,13 @@ public class Certifications implements Serializable,
 			value = "Validade não informada";
 			}
 			else {
- 			value = "Válido desde " + Dtfmt.format(begin);
+			value = "Válido desde " + Dtfmt.format(begin);
 			}
- 		} 
- 		else {
+		} 
+		else {
 			value = "Não possui";
 		}
-		
+
 		content.put(key, value);
 
 		key = "UPF";
