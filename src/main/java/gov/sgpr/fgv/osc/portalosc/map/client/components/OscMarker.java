@@ -193,11 +193,8 @@ public class OscMarker {
 
 			
 			public void onBrowserEvent(Event event) {
-				String url = Window.Location.getHref();
-				String html =url.substring(url.indexOf("8/")+2);
-				logger.info("HTML: "+ html);
 				if(embed == true)
-					Window.open("http://127.0.0.1:8888/Map.html#O"+ summary.getId(), "_blank", "");
+					Window.open("https://mapaosc.ipea.gov.br/Map.html#O"+ summary.getId(), "_blank", "");
 				else
 					History.newItem("O" + summary.getId());
 			}

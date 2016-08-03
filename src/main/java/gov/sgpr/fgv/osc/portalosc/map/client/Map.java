@@ -45,13 +45,14 @@ public class Map implements EntryPoint {
 					} else {
 						
 						String url = Window.Location.getHref();
-						String html =url.substring(url.indexOf("8/")+2);
+						String html =url.substring(url.indexOf("r/")+2);
 						if(html != "Embed.html"){
 							String session = Storage.getSessionStorageIfSupported().getItem("popup-exibida");
 							if(session == null){
 								openPopup();
 								Storage.getSessionStorageIfSupported().setItem("popup-exibida", "1");
 							}
+							OscMarker.embed = false;
 						}else{
 							OscMarker.embed = true;
 						}
