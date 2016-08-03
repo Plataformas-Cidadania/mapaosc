@@ -249,7 +249,10 @@ public class SearchWidget extends Composite {
 				helpPanel.getElement().setId("ajuda");
 				helpPanel.setWidth("210px");
 				helpPanel.setAutoHideEnabled(true);
-				helpPanel.setPopupPosition(btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(), btnHelp.getAbsoluteTop() + btnHelp.getOffsetHeight());
+				if(OscMarker.embed == true)
+					helpPanel.setPopupPosition(150, 43);
+				else
+					helpPanel.setPopupPosition(btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(), btnHelp.getAbsoluteTop() + btnHelp.getOffsetHeight());
 				DOM.setIntStyleAttribute(helpPanel.getElement(), "zIndex", 100);
 				DOM.setStyleAttribute(helpPanel.getElement(), "background", "black");
 				DOM.setStyleAttribute(helpPanel.getElement(), "color", "white");

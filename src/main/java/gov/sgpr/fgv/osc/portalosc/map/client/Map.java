@@ -15,6 +15,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
 
+import gov.sgpr.fgv.osc.portalosc.map.client.components.OscMarker;
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.MapController;
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.MenuController;
 import gov.sgpr.fgv.osc.portalosc.map.client.controller.SearchController;
@@ -43,10 +44,17 @@ public class Map implements EntryPoint {
 						Window.Location.assign(GWT.getHostPageBaseURL() + "manutencao.html");
 					} else {
 						
-						String session = Storage.getSessionStorageIfSupported().getItem("popup-exibida");
-						if(session == null){
-							openPopup();
-							Storage.getSessionStorageIfSupported().setItem("popup-exibida", "1");
+						String url = Window.Location.getHref();
+						String html =url.substring(url.indexOf("r/")+2);
+						if(html != "Embed.html"){
+							String session = Storage.getSessionStorageIfSupported().getItem("popup-exibida");
+							if(session == null){
+								openPopup();
+								Storage.getSessionStorageIfSupported().setItem("popup-exibida", "1");
+							}
+							OscMarker.embed = false;
+						}else{
+							OscMarker.embed = true;
 						}
 						
 						maps.init();

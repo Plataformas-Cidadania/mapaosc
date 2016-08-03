@@ -42,6 +42,7 @@ import gov.sgpr.fgv.osc.portalosc.map.shared.model.OscSummary;
 
 public class OscMarker {
 	private static Logger logger = Logger.getLogger(OscMarker.class.getName());
+	public static Boolean embed = false;
 
 	public static Marker create(final GoogleMap map,
 			final OscCoordinate coordinate, boolean isSelected) {
@@ -87,7 +88,11 @@ public class OscMarker {
 		VerticalPanel panel = new VerticalPanel();
 
 		PaperClipWindowInfo windowInfo = new PaperClipWindowInfo();
-		windowInfo.setCssClass("mapa_organizacao clearfix");
+		if( embed == true )
+			windowInfo.setCssClass("mapa_organizacao org_embed");
+		else{
+			windowInfo.setCssClass("mapa_organizacao clearfix");
+		}
 		windowInfo.setTitle(summary.getName());
 		windowInfo.setFooter("Fonte");
 		windowInfo.setFooterToolTip(getToolTip(summary.getDataSources()));
@@ -122,8 +127,8 @@ public class OscMarker {
 					String.valueOf(summary.getFoundationYear()));
 		}
 
-		PaperClipCheckListSection oscCertifications = new PaperClipCheckListSection();
-		oscCertifications.setSectionTitle("");
+//		PaperClipCheckListSection oscCertifications = new PaperClipCheckListSection();
+//		oscCertifications.setSectionTitle("");
 
 //		if (summary.getPartnerships() != null) {
 //			oscCertifications.addKeyValue("Projetos em curso",String.valueOf(summary.getPartnerships()));
@@ -163,7 +168,7 @@ public class OscMarker {
 
 		List<PaperClipAbstractSection> sections = new ArrayList<PaperClipAbstractSection>();
 		sections.add(oscInfo);
-		sections.add(oscCertifications);
+//		sections.add(oscCertifications);
 
 		MagnetPaperClipWidget paperclip = new MagnetPaperClipWidget(windowInfo,
 				sections);
@@ -188,7 +193,10 @@ public class OscMarker {
 
 			
 			public void onBrowserEvent(Event event) {
-				History.newItem("O" + summary.getId());
+				if(embed == true)
+					Window.open("https://mapaosc.ipea.gov.br/Map.html#O"+ summary.getId(), "_blank", "");
+				else
+					History.newItem("O" + summary.getId());
 			}
 			
 		});
