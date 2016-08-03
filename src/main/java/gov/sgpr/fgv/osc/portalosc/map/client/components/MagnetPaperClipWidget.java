@@ -49,33 +49,35 @@ public class MagnetPaperClipWidget extends Composite {
 	@Override
 	protected void onAttach() {
 		super.onAttach();
-		final Element btnHelp = DOM.getElementById("ppajuda");
-		Event.sinkEvents(btnHelp, Event.ONCLICK);
-		Event.setEventListener(btnHelp, new EventListener() {
-
-			
-			public void onBrowserEvent(Event event) {
-				PopupPanel helpPanel = new PopupPanel();
-				HTML html = new HTML(windowInfo.getFooterToolTip());
-				ScrollPanel scPanel = new ScrollPanel(html);
-				helpPanel.add(scPanel);
-				helpPanel.getElement().setId("ajuda");
-				helpPanel.setWidth("275px");
-				helpPanel.setHeight("300px");
-				helpPanel.setAutoHideEnabled(true);
-				helpPanel.setPopupPosition(
-						btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(),
-						btnHelp.getAbsoluteTop() + btnHelp.getOffsetHeight());
-				DOM.setIntStyleAttribute(helpPanel.getElement(), "zIndex", 100);
-				DOM.setStyleAttribute(helpPanel.getElement(), "background",
-						"black");
-				DOM.setStyleAttribute(helpPanel.getElement(), "color", "white");
-				DOM.setStyleAttribute(helpPanel.getElement(), "padding", "5px");
-				helpPanel.show();
-
-			}
-
-		});
+		if(OscMarker.embed != true){
+			final Element btnHelp = DOM.getElementById("ppajuda");
+			Event.sinkEvents(btnHelp, Event.ONCLICK);
+			Event.setEventListener(btnHelp, new EventListener() {
+	
+				
+				public void onBrowserEvent(Event event) {
+					PopupPanel helpPanel = new PopupPanel();
+					HTML html = new HTML(windowInfo.getFooterToolTip());
+					ScrollPanel scPanel = new ScrollPanel(html);
+					helpPanel.add(scPanel);
+					helpPanel.getElement().setId("ajuda");
+					helpPanel.setWidth("275px");
+					helpPanel.setHeight("300px");
+					helpPanel.setAutoHideEnabled(true);
+					helpPanel.setPopupPosition(
+							btnHelp.getAbsoluteLeft() + btnHelp.getOffsetWidth(),
+							btnHelp.getAbsoluteTop() + btnHelp.getOffsetHeight());
+					DOM.setIntStyleAttribute(helpPanel.getElement(), "zIndex", 100);
+					DOM.setStyleAttribute(helpPanel.getElement(), "background",
+							"black");
+					DOM.setStyleAttribute(helpPanel.getElement(), "color", "white");
+					DOM.setStyleAttribute(helpPanel.getElement(), "padding", "5px");
+					helpPanel.show();
+	
+				}
+	
+			});
+		}
 		final Element spanPopup = DOM.getElementById("spantitle");
 		final Element span = (Element) spanPopup.getFirstChildElement();
 		if (span != null) {
@@ -100,11 +102,13 @@ public class MagnetPaperClipWidget extends Composite {
 	 */
 	public void addTitleClickListener(EventListener listener) {
 		final Element title = DOM.getElementById("title");
-		final Element btnDetails = DOM.getElementById("ppdetails");
 		Event.sinkEvents(title, Event.ONCLICK);
-		Event.sinkEvents(btnDetails, Event.ONCLICK);
 		Event.setEventListener(title, listener);
-		Event.setEventListener(btnDetails, listener);
+		if(OscMarker.embed != true){
+			final Element btnDetails = DOM.getElementById("ppdetails");
+			Event.sinkEvents(btnDetails, Event.ONCLICK);
+			Event.setEventListener(btnDetails, listener);
+		}
 	}
 
 	/**
@@ -146,33 +150,36 @@ public class MagnetPaperClipWidget extends Composite {
 						+ windowInfo.getLikeCounter()
 						+ " recomendaram esta organização!\" class=\"tip_recomendacao\">"
 						+ windowInfo.getLikeCounter() + "</em></h4>");
+		
+		if(OscMarker.embed != true){
 
-		for (PaperClipAbstractSection section : sections) {
-			if (sections.indexOf(section) == 0) {
-				htmlBuilder.append("<div class=\"coluna1\">");
-			} 
-//			else {
-//				htmlBuilder.append("<div class=\"coluna2\">");
-//			}
-			
-			htmlBuilder.append("<strong>" + section.getSectionTitle()
-					+ "</strong>");
-
-			if (section instanceof PaperClipKeyValueSection) {
-				String sectionContent = getKeyValueSection((PaperClipKeyValueSection) section);
-				htmlBuilder.append(sectionContent);
-			} else if (section instanceof PaperClipListSection) {
-				String sectionContent = getListSection((PaperClipListSection) section);
-				htmlBuilder.append(sectionContent);
-			} else if (section instanceof PaperClipCheckListSection) {
-				String sectionContent = getCheckListSection((PaperClipCheckListSection) section);
-				htmlBuilder.append(sectionContent);
+			for (PaperClipAbstractSection section : sections) {
+				if (sections.indexOf(section) == 0) {
+					htmlBuilder.append("<div class=\"coluna1\">");
+				} 
+	//			else {
+	//				htmlBuilder.append("<div class=\"coluna2\">");
+	//			}
+				
+				htmlBuilder.append("<strong>" + section.getSectionTitle()
+						+ "</strong>");
+	
+				if (section instanceof PaperClipKeyValueSection) {
+					String sectionContent = getKeyValueSection((PaperClipKeyValueSection) section);
+					htmlBuilder.append(sectionContent);
+				} else if (section instanceof PaperClipListSection) {
+					String sectionContent = getListSection((PaperClipListSection) section);
+					htmlBuilder.append(sectionContent);
+				} else if (section instanceof PaperClipCheckListSection) {
+					String sectionContent = getCheckListSection((PaperClipCheckListSection) section);
+					htmlBuilder.append(sectionContent);
+				}
+				
+				htmlBuilder.append("<div  align = \"right\">"+windowInfo.getFooter());
+				htmlBuilder.append(getHelpButton()+"</div>");
+				htmlBuilder.append("</div>");
+				htmlBuilder.append("</div>");
 			}
-			
-			htmlBuilder.append("<div  align = \"right\">"+windowInfo.getFooter());
-			htmlBuilder.append(getHelpButton()+"</div>");
-			htmlBuilder.append("</div>");
-			htmlBuilder.append("</div>");
 		}
 		
 		HTML html = new HTML(htmlBuilder.toString());

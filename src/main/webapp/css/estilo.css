@@ -4782,3 +4782,74 @@ button#addDiretor {
 .dados:hover button#addDiretor {
 	visibility: visible;
 }
+
+.embed {
+	line-height: 1;
+	font-size: 0.8em;
+	min-width: 410px;
+}
+
+.style_embed{
+	display: none !important;
+}
+
+.iframe #busca {
+    margin-top: 10px;
+    left: 0px;
+}
+
+.iframe input#campobusca {
+    width: 260px;
+}
+
+.iframe #rodape .celula01 {
+	width: 40% !important;
+}
+
+.iframe #rodape .celula02 {
+	width: 50% !important;
+}
+
+.iframe #rodape>div {
+    max-width: 960px;
+    min-width: 410px;
+    margin: 0 auto;
+}
+
+.iframe #busca form {
+	padding: 4px 4px 3px 4px;
+}
+
+.iframe div#ajuda.gwt-PopupPanel{
+	left: 150px;
+    top: 43px;
+    z-index: 100;
+    color: white;
+    padding: 5px;
+    position: absolute;
+    overflow: visible;
+    background: black;
+}
+
+.org_embed {
+    left: -75px;
+    top: -200px;
+    width: 250px;
+    min-height: 0px;
+}
+
+.org_embed h3, .org_embed h4 {
+    display: none;
+}
+
+.org_embed h2 {
+	-moz-border-radius: 7px 7px 0 0;
+	-webkit-border-radius: 7px 7px 7px 7px !important;
+	border-radius: 7px 7px 0 0;
+	display: block;
+	font-family: RobotoBold, sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	width: 100%;
+	cursor: default;
+}
