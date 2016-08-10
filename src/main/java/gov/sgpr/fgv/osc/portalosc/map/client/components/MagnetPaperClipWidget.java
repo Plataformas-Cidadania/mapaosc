@@ -129,29 +129,31 @@ public class MagnetPaperClipWidget extends Composite {
 				&& !windowInfo.getSubTitle().isEmpty()) {
 			subTitle = windowInfo.getSubTitle();
 		}
-		StringBuilder htmlBuilder = new StringBuilder(
-				"<div class=\""
-						+ windowInfo.getCssClass()
-						+ "\">"
-						+ "<span id =\"spantitle\" class=\"magneticTooltip\" >"
-						+"<span id =\"\" >"
-						+windowInfo.getTitle() 
-						+"</span>"
-						+"<a id='title' title=\""
-						+ "\">"
-						+ "<h2>"
-						+ resumedTitle
-						+ "</h2>"
-						+ "</a>"
-						+ "<h3>"
-						+ subTitle
-						+ "</h3></span>"
-						+ "<h4><em title=\""
-						+ windowInfo.getLikeCounter()
-						+ " recomendaram esta organização!\" class=\"tip_recomendacao\">"
-						+ windowInfo.getLikeCounter() + "</em></h4>");
 		
+		StringBuilder htmlBuilder = new StringBuilder();
 		if(OscMarker.embed != true){
+			htmlBuilder = new StringBuilder(
+					"<div class=\""
+							+ windowInfo.getCssClass()
+							+ "\">"
+							+ "<span id =\"spantitle\" class=\"magneticTooltip\" >"
+							+"<span id =\"\" >"
+							+windowInfo.getTitle() 
+							+"</span>"
+							+"<a id='title' title=\""
+							+ "\">"
+							+ "<h2>"
+							+ resumedTitle
+							+ "</h2>"
+							+ "</a>"
+							+ "<h3>"
+							+ subTitle
+							+ "</h3></span>"
+							+ "<h4><em title=\""
+							+ windowInfo.getLikeCounter()
+							+ " recomendaram esta organização!\" class=\"tip_recomendacao\">"
+							+ windowInfo.getLikeCounter() + "</em></h4>");
+		
 
 			for (PaperClipAbstractSection section : sections) {
 				if (sections.indexOf(section) == 0) {
@@ -180,6 +182,25 @@ public class MagnetPaperClipWidget extends Composite {
 				htmlBuilder.append("</div>");
 				htmlBuilder.append("</div>");
 			}
+		}else{
+			htmlBuilder = new StringBuilder(
+					"<div class=\""
+							+ windowInfo.getCssClass()
+							+ "\">"
+							+ "<span id =\"spantitle\" class=\"magneticTooltip\" >"
+							+"<a id='title' title=\""
+							+ "\">"
+							+ "<h2>"
+							+ resumedTitle
+							+ "</h2>"
+							+ "</a>"
+							+ "<h3>"
+							+ subTitle
+							+ "</h3></span>"
+							+ "<h4><em title=\""
+							+ windowInfo.getLikeCounter()
+							+ " recomendaram esta organização!\" class=\"tip_recomendacao\">"
+							+ windowInfo.getLikeCounter() + "</em></h4>");
 		}
 		
 		HTML html = new HTML(htmlBuilder.toString());
