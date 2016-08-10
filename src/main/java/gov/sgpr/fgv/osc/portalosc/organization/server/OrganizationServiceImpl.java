@@ -352,13 +352,13 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 						certificacao.put("OSCIP", "CNES/MJ");
 					}
 				}
-				String strDateCnesUpf = rs.getString("cnes_upf_dt_declaracao");
+				/*String strDateCnesUpf = rs.getString("cnes_upf_dt_declaracao");
 				if(strDateCnesUpf != null){
 					Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDateCnesUpf);
 					if(now.after(date)){
 						certificacao.put("Utilidade Pública Federal", "CNES/MJ");
 					}
-				}
+				}*/
 				String strDateInicioCebasMds = rs.getString("cebas_mds_dt_inicio_validade");
 				String strDateFimCebasMds = rs.getString("cebas_mds_dt_fim_validade");
 				if(strDateInicioCebasMds != null && strDateFimCebasMds != null){
