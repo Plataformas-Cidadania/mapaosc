@@ -1,6 +1,6 @@
 # Mapa das Organizações da Sociedade Civil (mapaosc)
 
-O Mapa das Organizações da Sociedade Civil (mapaosc.ipea.gov.br) é uma iniciativa da Secretaria-Geral da Presidência da República do Brasil, apoiada pela Fundação Getúlio Vargas - FGV Projetos, Programa das Nações Unidas para o Desenvolvimento - PNUD e o Instituto de Pesquisa Econômica Aplicada - IPEA, que atualmente é o gestor da plataforma.
+O [Mapa das Organizações da Sociedade Civil](https://mapaosc.ipea.gov.br/) é uma iniciativa da Secretaria-Geral da Presidência da República do Brasil, apoiada pela Fundação Getúlio Vargas - FGV Projetos, Programa das Nações Unidas para o Desenvolvimento - PNUD e o Instituto de Pesquisa Econômica Aplicada - IPEA, que atualmente é o gestor da plataforma.
 
 A plataforma é uma ferramenta digital de fácil acesso e o objetivo é gradualmente torná-lo um canal que concentre informações individualizadas sobre as Organizações da Sociedade Civil (OSC) brasileiras, suas áreas de atuação, distribuição geográfica, tipos de cooperação e recursos públicos recebidos do governo federal e outros níveis de governo, quando houver disponibilidade desses dados. Nesse sentido, o Mapa visa suprir a falta de uma ferramenta de fácil acesso a dados transparentes sobre OSCs brasileiras. 
 
@@ -14,16 +14,16 @@ Por fim, ressalta-se que o MAPA será fonte de informações sistemáticas e atu
 
 Gerenciador de Tarefas: Jira Cloud - https://plataformas-cidadania.atlassian.net
 
-Plataforma de Banco de dados: Postgresql / Postgis (http://www.postgresql.org/) 
+Plataforma de Banco de dados: [Postgresql](http://www.postgresql.org/) / [Postgis](http://postgis.net/)  
 
-Framework de desenvolvimento Web: GWT versão 2.7 (http://www.gwtproject.org/) 
+Framework de desenvolvimento Web: [GWT versão 2.7](http://www.gwtproject.org/) 
 
-Linguagem de programação: Java JDK 1.8 (http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
+Linguagem de programação: [Java JDK 1.8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
 
-Gerenciador de projetos: Maven 3 (http://maven.apache.org/)
+Gerenciador de projetos: [Maven 3](http://maven.apache.org/)
 
-API do Google Maps (https://developers.google.com/maps/documentation/javascript/?hl=pt-BR)
+API do [Google Maps](https://developers.google.com/maps/documentation/javascript/?hl=pt-BR)
 
 **Wiki do projeto:**
 
-https://github.com/Plataformas-Cidadania/mapaosc/wiki
+[Acesse aqui](https://github.com/Plataformas-Cidadania/mapaosc/wiki)
