@@ -309,7 +309,7 @@ public class OrganizationServiceImpl extends RemoteServiceImpl implements Organi
 			pstmt.close();
 			
 			sql = "SELECT cnea_dt_publicacao, cebas_mec_dt_inicio_validade, cebas_mec_dt_fim_validade, cebas_saude_dt_inicio_validade, "
-				+ 		 "cebas_saude_dt_fim_validade, cnes_oscip_dt_publicacao, /*cnes_upf_dt_declaracao, */ cebas_mds_dt_inicio_validade, "
+				+ 		 "cebas_saude_dt_fim_validade, cnes_oscip_dt_publicacao, /*cnes_upf_dt_declaracao,*/ cebas_mds_dt_inicio_validade, "
 				+ 		 "cebas_mds_dt_fim_validade "
 				+ "FROM data.tb_osc_certificacao "
 				+ "WHERE bosc_sq_osc = ?";

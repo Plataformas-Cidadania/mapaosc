@@ -69,7 +69,7 @@ public class Email {
 	     "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"pt-br\" lang=\"pt-br\">"+
 			 "<head>"+
 			 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"+
-			 "<title>E-mail Informativo a OSC</title>"+
+			 "<title>E-mail Informativo à OSC</title>"+
 			 "<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic' rel='stylesheet' type='text/css'>"+
 			 "</head>"+
 			 "<body bgcolor=\"#FFFFFF\" style=\"margin: 0 auto; font-size: 16px;\">"+
@@ -87,8 +87,8 @@ public class Email {
 			 "</tr>"+
 			 "<tr>"+
 			 "<td  colspan=\"3\" bgcolor=\"#FFFFFF\" style=\"padding:20px;\">"+
-			 "<p style=\"text-indent: 2.5em;text-align: justify;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Prezados, recebemos um cadastro de representante da <b>" + nameOSC + "</b> no Mapa das Organizações da Sociedade Civil.</font> </p>"+
-			 "<p style=\"text-indent: 2.5em;text-align: justify;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Abaixo segue os dados do cadastro e caso a organização não esteja de acordo com esse cadastro, por favor entre em contato com os responsáveis do site pelo email <b>mapaosc@ipea.gov.br</b>.</font> </p>"+
+			 "<p style=\"text-indent: 2.5em;text-align: justify;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Recebemos um cadastro de representante da <b>" + nameOSC + "</b> no Mapa das Organizações da Sociedade Civil.</font> </p>"+
+			 "<p style=\"text-indent: 2.5em;text-align: justify;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Abaixo seguem os dados do cadastro. Caso esta OSC não esteja de acordo com esse cadastro, por favor entre em contato conosco pelo e-mail: <b>mapaosc@ipea.gov.br</b>.</font> </p>"+
 			 "<br/>" +
 			 "<p style=\"text-indent: 2.5em;text-align: justify;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\"><strong>Dados do Cadastro:</strong></font></p>" +
 //			 "<p style=\"text-indent: 2.5em;text-align: justify;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Nome: " + user.getNome() + "</font></p>" +
@@ -102,9 +102,10 @@ public class Email {
 			 "<img src=\"https://mapaosc.ipea.gov.br/imagens/loading.png\" height=\"71\" width=\"71\" alt=\"\"/>"+
 			 "</td>"+
 			 "<td width=\"420\" bgcolor=\"#FFFFFF\" valign=\"middle\" style=\"padding: 20px 0;\">"+
-			 "<p style=\"text-align: justify; margin: 0;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Agradecemos pelo contato,</font> </p>"+
-			 "<p style=\"text-align: justify; margin: 0;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Equipe de Desenvolvimento do Mapa das OSCs</font> </p>"+
+			 "<p style=\"text-align: justify; margin: 0;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Agradecemos o contato,</font> </p>"+
+			 "<p style=\"text-align: justify; margin: 0;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Equipe do Mapa das OSCs</font> </p>"+
 			 "<p style=\"text-align: justify; margin: 0;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\"><a href=\"https://mapaosc.ipea.gov.br\">Mapa das OSCs</a> - "+ DateFormat.getDateInstance(DateFormat.LONG).format(new Date()) +"</font> </p>"+
+			 "<p style=\"text-align: justify; margin: 0;\"> <font size=\"4\" face=\"Roboto, arial narrow, helvetica condensed, helvetica, arial, sans-serif\">Instituto de Pesquisa Econômica Aplicada - IPEA</font> </p>"+
 			 "</td>"+
 			 "</tr>"+
 			 "</tbody>"+
