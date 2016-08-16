@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 
 public class User implements EntryPoint {
@@ -16,7 +18,9 @@ public class User implements EntryPoint {
 		logger.info("Iniciando carregamento de cadastro de Usuário");
 		try{
 			user.init();
-			user.carousel();
+			Element div = DOM.getElementById("divcarousel");
+			if(div != null)
+				user.carousel();
 		}catch(Exception e){
 			logger.info("Ocoreu um erro na classe " + this.getClass().getName() + ": " + e.getMessage());
 			Window.Location.assign(GWT.getHostPageBaseURL() + "error.html");
