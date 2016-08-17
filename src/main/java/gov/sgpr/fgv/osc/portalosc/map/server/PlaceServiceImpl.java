@@ -360,6 +360,8 @@ public class PlaceServiceImpl extends RemoteServiceImpl implements PlaceService 
 		htmlBuilder.append("AND a.bosc_geometry is not null ");
 		htmlBuilder
 				.append("AND ST_Contains((SELECT edmu_geometry FROM spat.ed_municipio WHERE edmu_cd_municipio = ?), a.bosc_geometry) = true ");
+		
+		htmlBuilder.append("LIMIT 5000 ");
 
 		String sql = htmlBuilder.toString();
 
