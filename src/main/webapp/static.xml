@@ -42,4 +42,10 @@
 	  <page>release.html</page>
 	  <class>release</class>
 	</site>
+	<site>
+	  <name>Download</name>
+	  <key>download</key>
+	  <page>download.html</page>
+	  <class>download</class>
+	</site>
 </sites>

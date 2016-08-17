@@ -261,12 +261,20 @@ a:hover {
 	background: url(../imagens/07_portal.png) no-repeat center left;
 }
 
+#topo_links #download {
+    background: url(../imagens/22_download.png) no-repeat center left;
+}
+
 #topo_links #duvidas {
 	background: url(../imagens/08_faq.png) no-repeat center left;
 }
 
 #topo_links #sobre:hover {
 	background-image: url(../imagens/07_portal_hover.png);
+}
+
+#topo_links #download:hover {
+	background-image: url(../imagens/22_download_hover.png);
 }
 
 #topo_links #duvidas:hover {
@@ -1610,6 +1618,32 @@ a.b-redes,a.b-cadastro,a.b-entidade {
 
 #modal_entidade h3,a.b-entidade {
 	background-position: 0 -87px;
+}
+
+a.b-download {
+    background-color: #000;
+    font-family: RobotoRegular, sans-serif;
+    font-size: 15px;
+    color: #fff;
+    display: block;
+    height: 55px;
+    width: 150px;
+    line-height: 15px;
+    padding-top: 11px;
+    padding-left: 50px;
+    border-radius: 4px;
+    text-indent: 10px;
+    margin-left: 0px;
+    margin-top: 5px;
+    background-image: url(../imagens/22_download_white.png);
+    background-repeat: no-repeat;
+    background-position: 20px;
+    background-size: 30px;
+    margin-bottom: 150px;
+}
+
+h3.cnes {
+    text-indent: 0px !important;
 }
 
 .modal_fechar {
