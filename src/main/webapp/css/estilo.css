@@ -1626,19 +1626,18 @@ a.b-download {
     font-size: 15px;
     color: #fff;
     display: block;
-    height: 55px;
-    width: 150px;
-    line-height: 15px;
-    padding-top: 11px;
-    padding-left: 50px;
+    height: 45px;
+    width: 120px;
+    line-height: 13px;
+    padding-top: 10px;
+    padding-left: 45px;
     border-radius: 4px;
     text-indent: 10px;
     margin-left: 0px;
     margin-top: 5px;
     background-image: url(../imagens/22_download_white.png);
     background-repeat: no-repeat;
-    background-position: 20px;
-    background-size: 30px;
+    background-position: 15px;
     margin-bottom: 150px;
 }
 
