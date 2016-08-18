@@ -43,7 +43,7 @@
 	  <class>release</class>
 	</site>
 	<site>
-	  <name>Download</name>
+	  <name>Baixar bases de dados</name>
 	  <key>download</key>
 	  <page>download.html</page>
 	  <class>download</class>
