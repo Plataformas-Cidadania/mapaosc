@@ -4832,7 +4832,7 @@ button#addDiretor {
 }
 
 .iframe input#campobusca {
-    width: 260px;
+    width: 255px;
 }
 
 .iframe #rodape .celula01 {
@@ -4894,4 +4894,12 @@ button#addDiretor {
     float: left;
     margin-left: 0px;
     margin-right: 10px;
+}
+
+button.home {
+    background-image: url(../imagens/23_home.png);
+    background-position: 3px;
+    width: 20px;
+    background-repeat: no-repeat;
+    margin-left: 3px;
 }

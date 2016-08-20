@@ -11,6 +11,7 @@ import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventListener;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -214,6 +215,24 @@ public class SearchWidget extends Composite {
 	public void setOscBox(String osc){
 		InputElement busca = DOM.getElementById("campobusca").cast();
 		busca.setValue(osc);
+	}
+	
+	public void home(){
+		Element busca = DOM.getElementById("formbusca");
+		if(busca != null){
+			Element button = DOM.createElement("button");
+			button.setAttribute("type", "button");
+			button.setAttribute("name", "home");
+			button.setAttribute("class", "home");
+			button.setId("home");
+			Event.sinkEvents(button, Event.ONCLICK);
+			Event.setEventListener(button, new EventListener() {
+				public void onBrowserEvent(Event event) {
+					Window.Location.replace("http://mapaosc.ipea.gov.br/Embed.html");
+				}
+			});
+			busca.appendChild(button);
+		}
 	}
 	
 	private HTML getHtml() {
