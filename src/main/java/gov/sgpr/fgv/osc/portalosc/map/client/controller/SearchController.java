@@ -21,6 +21,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import gov.sgpr.fgv.osc.portalosc.map.client.components.OscMarker;
 import gov.sgpr.fgv.osc.portalosc.map.client.components.SearchWidget;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchService;
 import gov.sgpr.fgv.osc.portalosc.map.shared.interfaces.SearchServiceAsync;
@@ -80,6 +81,10 @@ public class SearchController {
 				clickBusca();
 			}
 		});
+		
+		if(OscMarker.embed == true){
+			searchWidget.home();
+		}
 	}
 	
 	private void clickBusca(){
