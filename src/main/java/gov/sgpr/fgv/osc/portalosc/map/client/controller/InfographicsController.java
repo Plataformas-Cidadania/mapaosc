@@ -50,7 +50,7 @@ public class InfographicsController {
 		graph1.setSvgImageContrast("infograficos/numeros/contraste/infografico_1.png");
 		graph1.setWidth(400);
 		graph1.setHeight(300);
-		graph1.setLegend("Fonte: RAIS/MTE, 2013");
+		graph1.setLegend("Fonte: MTE (2013).");
 
 		Graph graph2 = new Graph();
 		graph2.setTitle("Número e % de vínculos ativos das OSCs, por faixas de vínculos (2013)");
@@ -58,15 +58,15 @@ public class InfographicsController {
 		graph2.setSvgImageContrast("infograficos/numeros/contraste/infografico_2.png");
 		graph2.setWidth(400);
 		graph2.setHeight(300);
-		graph2.setLegend("Fonte: RAIS/MTE, 2013");
+		graph2.setLegend("Fonte: MTE (2013).");
 
 		Graph graph3 = new Graph();
-		graph3.setTitle("Número de OSCs que mantiveram relação com a administração federal, por fonte (2009-2015)");
+		graph3.setTitle("Número de OSCs que mantiveram relação com a administração federal, por fonte (2009-2016)");
 		graph3.setSvgImage("infograficos/numeros/infografico_3.png");
 		graph3.setSvgImageContrast("infograficos/numeros/contraste/infografico_3.png");
 		graph3.setWidth(400);
 		graph3.setHeight(300);
-		graph3.setLegend("Fontes: Min. Justiça, Tesouro Nacional, Finep, Min. Cultura");
+		graph3.setLegend("Fonte: MCTI (2016), MinC (2016), ME (2016), MPOG (2016), STN (2016), MJC (2016), MEC (2013), MDS (2015) e MS (2015).");
 
 		Graph graph4 = new Graph();
 		graph4.setTitle("Percentual e número de instituições por <strong>Natureza Jurídica</strong> (2013)");
@@ -74,7 +74,7 @@ public class InfographicsController {
 		graph4.setSvgImageContrast("infograficos/numeros/contraste/infografico_4.png");
 		graph4.setWidth(470);
 		graph4.setHeight(300);
-		graph4.setLegend("Fonte: RAIS/MTE, 2013");
+		graph4.setLegend("Fonte: MTE (2013).");
 
 		Graph graph5 = new Graph();
 		graph5.setTitle("% de OSCs que possuem Títulos ou certificações federais (2009-2015)");
@@ -82,16 +82,15 @@ public class InfographicsController {
 		graph5.setSvgImageContrast("infograficos/numeros/contraste/infografico_5.png");
 		graph5.setWidth(400);
 		graph5.setHeight(300);
-		graph5.setLegend("Fonte: Ministério da Justiça (2015), Ministério da Educação (2014), Ministério do Desenvolvimento Social (2016) e Ministério da Saúde (2016).");
+		graph5.setLegend("Fonte: MJC (2016), MEC (2013), MDS (2015) e MS (2015).");
 
 		Graph graph6 = new Graph();
-		graph6.setTitle("Valor dos recursos públicos destinados às OSCs, por base de origem(2009-2015)");
+		graph6.setTitle("Valor dos recursos públicos destinados às OSCs, por base de origem(2009-2016)");
 		graph6.setSvgImage("infograficos/numeros/infografico_6.png");
 		graph6.setSvgImageContrast("infograficos/numeros/contraste/infografico_6.png");
 		graph6.setWidth(400);
 		graph6.setHeight(300);
-		graph6.setLegend("Nota: trata-se de valores nominais, não corrigidos pela inflação.");
-		//graph3.setLegend("Fonte: SICONV (2009 a 2016), SIAFI (2016)");
+		graph6.setLegend("Nota: trata-se de valores nominais, não corrigidos pela inflação.<br>Fonte: MCTI (2016), MinC (2016), ME (2016), MPOG (2016), STN (2016).");
 
 		Infographics info = new Infographics(3, 2);
 		info.setTitle("OSCs em números");
@@ -171,16 +170,16 @@ public class InfographicsController {
 		graph1.setSvgImage("infograficos/natureza_juridica/infografico_1.png");
 		graph1.setSvgImageContrast("infograficos/natureza_juridica/contraste/infografico_1.png");
 		graph1.setWidth(600);
-		graph1.setHeight(410);
-		graph1.setLegend("Fonte: RAIS/MTE, 2013");
+		graph1.setHeight(368);
+		graph1.setLegend("Fonte: MTE (2013).");
 
 		Graph graph2 = new Graph();
 		graph2.setTitle("<ul id=\"info03_2\" class=\"clearfix\"><li>% e número de vínculos de trabalho das OSCs, por natureza jurídica</li></ul>");
 		graph2.setSvgImage("infograficos/natureza_juridica/infografico_2.png");
 		graph2.setSvgImageContrast("infograficos/natureza_juridica/contraste/infografico_2.png");
-		graph2.setWidth(600);
-		graph2.setHeight(410);
-		graph2.setLegend("Fonte: RAIS/MTE, 2013");
+		graph2.setWidth(550);
+		graph2.setHeight(457);
+		graph2.setLegend("Fonte: MTE (2013).");
 
 		Infographics info = new Infographics(2, 1);
 		info.setTitle("OSCs natureza jurídica / faixa de vínculos");
